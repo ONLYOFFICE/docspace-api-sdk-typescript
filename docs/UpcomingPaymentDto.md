@@ -1,20 +1,20 @@
 # UpcomingPaymentDto
 
-The upcoming payment parameters.
+One charge the portal is going to be billed for at the start of the next period.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** | The quota ID. | [optional] [default to undefined]
-**name** | **string** | The quota name. | [optional] [default to undefined]
-**title** | **string** | The quota title. | [optional] [default to undefined]
-**unitOfMeasure** | **string** | The quota unit of measure. | [optional] [default to undefined]
-**quantity** | **number** | The quantity that will be charged (the next quantity if set, otherwise the current quantity). | [optional] [default to undefined]
-**wallet** | **boolean** | The quota applies to the wallet or not. | [optional] [default to undefined]
-**dueDate** | **string** | The due date of the upcoming payment in the portal time zone. | [optional] [default to undefined]
-**amount** | **number** | The amount that will be charged (unit price multiplied by the quantity). | [optional] [default to undefined]
-**currency** | **string** | The three-character ISO 4217 currency symbol of the amount. | [optional] [default to undefined]
+**id** | **number** | The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today. | [optional] [default to undefined]
+**name** | **string** | The quota\'s stable key, which is the same identifier the wallet operations use for a service. | [optional] [default to undefined]
+**title** | **string** | The quota name in the portal language, meant to be printed on an invoice preview. | [optional] [default to undefined]
+**unitOfMeasure** | **string** | What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off. | [optional] [default to undefined]
+**quantity** | **number** | How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today\'s quantity otherwise. | [optional] [default to undefined]
+**wallet** | **boolean** | Whether the charge is paid out of the portal wallet rather than from the subscription. | [optional] [default to undefined]
+**dueDate** | [**ApiDateTime**](ApiDateTime.md) | When the charge falls due, in the portal time zone. | [optional] [default to undefined]
+**amount** | **number** | What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero. | [optional] [default to undefined]
+**currency** | **string** | The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal\'s billing  account, so every entry of one answer carries the same code. | [optional] [default to undefined]
 
 ## Example
 

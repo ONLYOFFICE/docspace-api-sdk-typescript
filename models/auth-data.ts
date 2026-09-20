@@ -23,31 +23,31 @@
 import type { OAuth20Token } from './oauth20-token';
 
 /**
- * The authentication data.
+ * The credentials of a third-party storage account. The portal takes them when an account is connected and does not  give them back afterwards.
  */
 export interface AuthData {
     /**
-     * The authentication login.
+     * The account name at the storage service.
      */
     'login'?: string | null;
     /**
-     * The authentication password.
+     * The password of the account at the storage service.
      */
     'password'?: string | null;
     /**
-     * The authentication raw token.
+     * The token of the account, kept as the raw JSON document the storage service issued it in.
      */
     'rawToken'?: string | null;
     /**
-     * The authentication URL.
+     * The address of the storage server the account lives on.
      */
     'url'?: string | null;
     /**
-     * The authentication provider.
+     * The storage service the credentials belong to, as the provider key the account was connected with.
      */
     'provider'?: string | null;
     /**
-     * The authentication token.
+     * The same token as in `rawToken`, parsed into its OAuth 2.0 fields.
      */
     'token'?: OAuth20Token;
 }

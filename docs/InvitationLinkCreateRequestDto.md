@@ -1,14 +1,14 @@
 # InvitationLinkCreateRequestDto
 
-The request parameters for creating an invitation link.
+The role a new invitation link grants, and the limits placed on it.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**employeeType** | [**EmployeeType**](EmployeeType.md) | The type of employee role for the invitation link (DocSpaceAdmin, RoomAdmin or User). | [default to undefined]
-**expiration** | **string** | The expiration date of the invitation link. | [optional] [default to undefined]
-**maxUseCount** | **number** | The maximum number of times the invitation link can be used. | [optional] [default to undefined]
+**employeeType** | [**EmployeeType**](EmployeeType.md) | The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` are accepted, and  the role cannot be changed afterwards - delete the link and create one for the other role instead. | [default to undefined]
+**expiration** | **string** | When the link stops letting anyone in, read in the portal time zone. It has to lie in the future; leaving it  out creates a link with no deadline at all. | [optional] [default to undefined]
+**maxUseCount** | **number** | How many accounts may join through the link in total. Leaving it out creates a link with no use limit; the  uses spent so far are reported as `currentUseCount`. | [optional] [default to undefined]
 
 ## Example
 

@@ -24,35 +24,35 @@
  */
 export interface OAuth20Token {
     /**
-     * Access token
+     * The token sent to the provider with every request made on behalf of the account.
      */
     'access_token'?: string | null;
     /**
-     * Refresh token
+     * The token used to obtain a new access token when the current one expires. A provider that issues no refresh  token leaves it empty, and the account then has to be connected again to keep working.
      */
     'refresh_token'?: string | null;
     /**
-     * Expires in
+     * How long the access token stays usable, in seconds counted from `timestamp`. Zero means the provider did not  say, and the token is then treated as expired.
      */
     'expires_in'?: number;
     /**
-     * Client id
+     * The OAuth 2.0 client ID of the application the token was issued to.
      */
     'client_id'?: string | null;
     /**
-     * Client secret
+     * The client secret of the application the token was issued to, needed when the token is refreshed.
      */
     'client_secret'?: string | null;
     /**
-     * Redirect uri
+     * The redirect URL the authorization code behind this token was obtained with; providers require the same value  again when the token is refreshed.
      */
     'redirect_uri'?: string | null;
     /**
-     * Timestamp
+     * When the token was issued, in UTC. This is the point `expires_in` is counted from.
      */
     'timestamp'?: string;
     /**
-     * Is expired
+     * Whether the access token can no longer be used and has to be refreshed. It is also true when the provider did  not say how long the token lives.
      */
     'isExpired'?: boolean;
 }

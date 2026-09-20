@@ -29,23 +29,23 @@ import type { WhiteLabelItemSizeDto } from './white-label-item-size-dto';
 import type { WhiteLabelLogoType } from './white-label-logo-type';
 
 /**
- * The white label item parameters.
+ * One branding logo slot of the portal: the size it is drawn at, and where its images are served from.
  */
 export interface WhiteLabelItemDto {
     /**
-     * The white label logo type.
+     * Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters.
      */
     'type'?: WhiteLabelLogoType;
     /**
-     * The white label file name.
+     * The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name.
      */
     'name'?: string | null;
     /**
-     * The white label file size.
+     * The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated.
      */
     'size'?: WhiteLabelItemSizeDto;
     /**
-     * The white label file path.
+     * The absolute URLs to render the slot from, one per theme.
      */
     'path'?: WhiteLabelItemPathDto;
 }

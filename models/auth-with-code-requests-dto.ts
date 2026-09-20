@@ -30,12 +30,12 @@ import type { RecaptchaType } from './recaptcha-type';
 
 /**
  * @type AuthWithCodeRequestsDto
- * The parameters required for the user two-factor authentication requests.
+ * The same credentials as an ordinary sign-in, plus the one-time code that completes it.
  * @export
  */
 export type AuthWithCodeRequestsDto = AuthRequestsDto &  {
     /**
-     * The code for two-factor authentication.
+     * The one-time code from the SMS the portal sent or from the authenticator app, whichever second factor the  portal has enabled for this user. It is single-use and expires; a wrong, empty or expired value fails the  sign-in and counts against the brute-force limit.
      * @type {string}
      * @memberof AuthWithCodeRequestsDto
      */

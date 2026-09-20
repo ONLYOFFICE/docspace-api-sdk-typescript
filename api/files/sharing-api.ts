@@ -62,10 +62,10 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
     
     return {
         /**
-         * Applies a password specified in the request to get the external data.
-         * @summary Apply external data password
-         * @param {string} key The unique document identifier.
-         * @param {ExternalShareRequestParam} externalShareRequestParam The external data share request parameters.
+         * Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal\'s limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
+         * @summary Unlock a password-protected link
+         * @param {string} key The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
+         * @param {ExternalShareRequestParam} externalShareRequestParam The body of the request, holding the password to check.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for applyExternalSharePassword operation
@@ -90,6 +90,12 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -105,8 +111,8 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Changes the owner of the file with the ID specified in the request.
-         * @summary Change the file owner
+         * Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal\'s  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
+         * @summary Change the room or file owner
          * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -161,9 +167,9 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the encryption keys to access a file with the ID specified in the request.
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
          * @summary Get file encryption keys
-         * @param {number} fileId The file unique identifier.
+         * @param {number} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEncryptionAccess operation
@@ -217,11 +223,67 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the external data by the key specified in the request.
-         * @summary Get the external data
-         * @param {string} key The unique key of the external shared data.
-         * @param {string} [fileId] The unique document identifier.
-         * @param {string} [folderId] The unique folder identifier.
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+         * @summary Get file encryption keys (third-party storage)
+         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionAccessThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/
+         */
+        getEncryptionAccessThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getEncryptionAccessThirdParty', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/publickeys`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account\'s own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link\'s target echoed back.
+         * @summary Resolve an external share link
+         * @param {string} key The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
+         * @param {string} [fileId] A file inside the room the link points at, echoed back in the answer\'s entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link\'s target, and passing it together  with a folder has no effect - the file wins.
+         * @param {string} [folderId] A folder inside the room the link points at, echoed back in the answer\'s entity fields. It is ignored when the  folder does not sit under the link\'s target, and when a file is passed as well.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getExternalShareData operation
@@ -244,6 +306,12 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (fileId !== undefined) {
                 localVarQueryParameter['fileId'] = fileId;
             }
@@ -264,11 +332,11 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed information about the shared file with the ID specified in the request.
-         * @summary Get the shared file information
-         * @param {number} id The file unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights
+         * @param {number} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFileSecurityInfo operation
@@ -330,11 +398,77 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed information about the shared folder with the ID specified in the request.
-         * @summary Get the shared folder information
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights (third-party storage)
+         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/
+         */
+        getFileSecurityInfoThirdParty: async (id: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFileSecurityInfoThirdParty', 'id', id)
+
+            const localVarPath = `/api/2.0/files/file/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights
+         * @param {number} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderSecurityInfo operation
@@ -396,13 +530,79 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the group members with their file security information.
-         * @summary Get file group members with security information
-         * @param {number} fileId The file ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights (third-party storage)
+         * @param {string} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/
+         */
+        getFolderSecurityInfoThirdParty: async (id: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFolderSecurityInfoThirdParty', 'id', id)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members
+         * @param {number} fileId The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsMembersWithFileSecurity operation
@@ -471,13 +671,88 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the group members with their folder security information.
-         * @summary Get folder group members with security information
-         * @param {number} folderId The folder ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members (third-party storage)
+         * @param {string} fileId The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFileSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/
+         */
+        getGroupsMembersWithFileSecurityThirdParty: async (fileId: string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFileSecurityThirdParty', 'fileId', fileId)
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFileSecurityThirdParty', 'groupId', groupId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/group/{groupId}/share`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)))
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members
+         * @param {number} folderId The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsMembersWithFolderSecurity operation
@@ -546,8 +821,83 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the sharing rights for all the files and folders specified in the request.
-         * @summary Get the sharing rights
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members (third-party storage)
+         * @param {string} folderId The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFolderSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/
+         */
+        getGroupsMembersWithFolderSecurityThirdParty: async (folderId: string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFolderSecurityThirdParty', 'folderId', folderId)
+            // verify required parameter 'groupId' is not null or undefined
+            assertParamExists('getGroupsMembersWithFolderSecurityThirdParty', 'groupId', groupId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/group/{groupId}/share`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
+                .replace(`{${"groupId"}}`, encodeURIComponent(String(groupId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller\'s own record comes first, the owner\'s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
+         * @summary Get sharing rights in batch
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -602,9 +952,9 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of users with their access rights to the file with the ID specified in the request.
-         * @summary Get user access rights by file ID
-         * @param {number} fileId The file unique identifier.
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file
+         * @param {number} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSharedUsers operation
@@ -658,8 +1008,64 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Removes the sharing rights from all the files and folders specified in the request.
-         * @summary Remove the sharing rights
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file (third-party storage)
+         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSharedUsersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/
+         */
+        getSharedUsersThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('getSharedUsersThirdParty', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/sharedusers`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller\'s own favorites, recent and unread marks. The owner\'s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account\'s  access set to `None`.
+         * @summary Remove sharing rights in batch
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -714,10 +1120,10 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
-         * @summary Send the mention message
-         * @param {number} fileId The file ID with the mention message.
-         * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users
+         * @param {number} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendEditorNotify operation
@@ -774,10 +1180,70 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the sharing settings to a file with the ID specified in the request.
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users (third-party storage)
+         * @param {string} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for sendEditorNotifyThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/
+         */
+        sendEditorNotifyThirdParty: async (fileId: string, mentionMessageWrapper?: MentionMessageWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('sendEditorNotifyThirdParty', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/sendeditornotify`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(mentionMessageWrapper, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
          * @summary Share a file
-         * @param {number} id The file ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {number} id The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the file, and whether to announce them by mail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFileSecurityInfo operation
@@ -836,10 +1302,72 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the sharing settings to a folder with the ID specified in the request.
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
+         * @summary Share a file (third-party storage)
+         * @param {string} id The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the file, and whether to announce them by mail.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/
+         */
+        setFileSecurityInfoThirdParty: async (id: string, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('setFileSecurityInfoThirdParty', 'id', id)
+            // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
+            assertParamExists('setFileSecurityInfoThirdParty', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+
+            const localVarPath = `/api/2.0/files/file/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(securityInfoSimpleRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
          * @summary Share a folder
-         * @param {number} id The folder ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {number} id The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the folder, and whether to announce them by mail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderSecurityInfo operation
@@ -898,8 +1426,70 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the sharing rights to all the files and folders specified in the request.
-         * @summary Set the sharing rights
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
+         * @summary Share a folder (third-party storage)
+         * @param {string} id The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the folder, and whether to announce them by mail.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/
+         */
+        setFolderSecurityInfoThirdParty: async (id: string, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('setFolderSecurityInfoThirdParty', 'id', id)
+            // verify required parameter 'securityInfoSimpleRequestDto' is not null or undefined
+            assertParamExists('setFolderSecurityInfoThirdParty', 'securityInfoSimpleRequestDto', securityInfoSimpleRequestDto)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/share`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(securityInfoSimpleRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal\'s own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
+         * @summary Set sharing rights in batch
          * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -964,10 +1554,10 @@ export const SharingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SharingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Applies a password specified in the request to get the external data.
-         * @summary Apply external data password
-         * @param {string} key The unique document identifier.
-         * @param {ExternalShareRequestParam} externalShareRequestParam The external data share request parameters.
+         * Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal\'s limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
+         * @summary Unlock a password-protected link
+         * @param {string} key The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
+         * @param {ExternalShareRequestParam} externalShareRequestParam The body of the request, holding the password to check.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for applyExternalSharePassword operation
@@ -980,8 +1570,8 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Changes the owner of the file with the ID specified in the request.
-         * @summary Change the file owner
+         * Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal\'s  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
+         * @summary Change the room or file owner
          * @param {ChangeOwnerRequestDto} [changeOwnerRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -995,9 +1585,9 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the encryption keys to access a file with the ID specified in the request.
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
          * @summary Get file encryption keys
-         * @param {number} fileId The file unique identifier.
+         * @param {number} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEncryptionAccess operation
@@ -1010,11 +1600,26 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the external data by the key specified in the request.
-         * @summary Get the external data
-         * @param {string} key The unique key of the external shared data.
-         * @param {string} [fileId] The unique document identifier.
-         * @param {string} [folderId] The unique folder identifier.
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+         * @summary Get file encryption keys (third-party storage)
+         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getEncryptionAccessThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/
+         */
+        async getEncryptionAccessThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionKeyArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getEncryptionAccessThirdParty(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getEncryptionAccessThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account\'s own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link\'s target echoed back.
+         * @summary Resolve an external share link
+         * @param {string} key The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
+         * @param {string} [fileId] A file inside the room the link points at, echoed back in the answer\'s entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link\'s target, and passing it together  with a folder has no effect - the file wins.
+         * @param {string} [folderId] A folder inside the room the link points at, echoed back in the answer\'s entity fields. It is ignored when the  folder does not sit under the link\'s target, and when a file is passed as well.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getExternalShareData operation
@@ -1027,11 +1632,11 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about the shared file with the ID specified in the request.
-         * @summary Get the shared file information
-         * @param {number} id The file unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights
+         * @param {number} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFileSecurityInfo operation
@@ -1044,11 +1649,28 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about the shared folder with the ID specified in the request.
-         * @summary Get the shared folder information
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights (third-party storage)
+         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/
+         */
+        async getFileSecurityInfoThirdParty(id: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileSecurityInfoThirdParty(id, count, startIndex, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getFileSecurityInfoThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights
+         * @param {number} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderSecurityInfo operation
@@ -1061,13 +1683,30 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the group members with their file security information.
-         * @summary Get file group members with security information
-         * @param {number} fileId The file ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights (third-party storage)
+         * @param {string} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/
+         */
+        async getFolderSecurityInfoThirdParty(id: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderSecurityInfoThirdParty(id, count, startIndex, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getFolderSecurityInfoThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members
+         * @param {number} fileId The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsMembersWithFileSecurity operation
@@ -1080,13 +1719,32 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the group members with their folder security information.
-         * @summary Get folder group members with security information
-         * @param {number} folderId The folder ID.
-         * @param {string} groupId The group ID.
-         * @param {number} [count] The number of items to be retrieved in the current query.
-         * @param {number} [startIndex] The starting index for the query result set.
-         * @param {string} [filterValue] The filter value used for searching or querying group members based on text input.
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members (third-party storage)
+         * @param {string} fileId The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFileSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/
+         */
+        async getGroupsMembersWithFileSecurityThirdParty(fileId: string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFileSecurityThirdParty(fileId, groupId, count, startIndex, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFileSecurityThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members
+         * @param {number} folderId The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsMembersWithFolderSecurity operation
@@ -1099,8 +1757,27 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the sharing rights for all the files and folders specified in the request.
-         * @summary Get the sharing rights
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members (third-party storage)
+         * @param {string} folderId The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {string} groupId The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+         * @param {number} [count] How many members at most to answer with.
+         * @param {number} [startIndex] How many members to skip before answering, used together with `count` to page through a large group.
+         * @param {string} [filterValue] Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGroupsMembersWithFolderSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/
+         */
+        async getGroupsMembersWithFolderSecurityThirdParty(folderId: string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFolderSecurityThirdParty(folderId, groupId, count, startIndex, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFolderSecurityThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller\'s own record comes first, the owner\'s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
+         * @summary Get sharing rights in batch
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1114,9 +1791,9 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of users with their access rights to the file with the ID specified in the request.
-         * @summary Get user access rights by file ID
-         * @param {number} fileId The file unique identifier.
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file
+         * @param {number} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSharedUsers operation
@@ -1129,8 +1806,23 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes the sharing rights from all the files and folders specified in the request.
-         * @summary Remove the sharing rights
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file (third-party storage)
+         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getSharedUsersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/
+         */
+        async getSharedUsersThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getSharedUsersThirdParty(fileId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.getSharedUsersThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller\'s own favorites, recent and unread marks. The owner\'s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account\'s  access set to `None`.
+         * @summary Remove sharing rights in batch
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1144,10 +1836,10 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
-         * @summary Send the mention message
-         * @param {number} fileId The file ID with the mention message.
-         * @param {MentionMessageWrapper} [mentionMessageWrapper] The mention message.
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users
+         * @param {number} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendEditorNotify operation
@@ -1160,10 +1852,26 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the sharing settings to a file with the ID specified in the request.
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users (third-party storage)
+         * @param {string} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for sendEditorNotifyThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/
+         */
+        async sendEditorNotifyThirdParty(fileId: string, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AceShortWrapperArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEditorNotifyThirdParty(fileId, mentionMessageWrapper, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.sendEditorNotifyThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
          * @summary Share a file
-         * @param {number} id The file ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {number} id The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the file, and whether to announce them by mail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFileSecurityInfo operation
@@ -1176,10 +1884,26 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the sharing settings to a folder with the ID specified in the request.
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
+         * @summary Share a file (third-party storage)
+         * @param {string} id The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the file, and whether to announce them by mail.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/
+         */
+        async setFileSecurityInfoThirdParty(id: string, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileSecurityInfoThirdParty(id, securityInfoSimpleRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.setFileSecurityInfoThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
          * @summary Share a folder
-         * @param {number} id The folder ID.
-         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The parameters of the security information simple request.
+         * @param {number} id The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the folder, and whether to announce them by mail.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderSecurityInfo operation
@@ -1192,8 +1916,24 @@ export const SharingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the sharing rights to all the files and folders specified in the request.
-         * @summary Set the sharing rights
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
+         * @summary Share a folder (third-party storage)
+         * @param {string} id The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {SecurityInfoSimpleRequestDto} securityInfoSimpleRequestDto The rights to apply to the folder, and whether to announce them by mail.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/
+         */
+        async setFolderSecurityInfoThirdParty(id: string, securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderSecurityInfoThirdParty(id, securityInfoSimpleRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SharingApi.setFolderSecurityInfoThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal\'s own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
+         * @summary Set sharing rights in batch
          * @param {SecurityInfoRequestDto} [securityInfoRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1217,8 +1957,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = SharingApiFp(configuration)
     return {
         /**
-         * Applies a password specified in the request to get the external data.
-         * @summary Apply external data password
+         * Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal\'s limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
+         * @summary Unlock a password-protected link
          * @param {SharingApiApplyExternalSharePasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for applyExternalSharePassword operation
@@ -1229,8 +1969,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.applyExternalSharePassword(requestParameters.key, requestParameters.externalShareRequestParam, options).then((request) => request(axios, basePath));
         },
         /**
-         * Changes the owner of the file with the ID specified in the request.
-         * @summary Change the file owner
+         * Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal\'s  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
+         * @summary Change the room or file owner
          * @param {SharingApiChangeFileOwnerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for changeFileOwner operation
@@ -1241,7 +1981,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.changeFileOwner(requestParameters.changeOwnerRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the encryption keys to access a file with the ID specified in the request.
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
          * @summary Get file encryption keys
          * @param {SharingApiGetEncryptionAccessRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1253,8 +1993,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getEncryptionAccess(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the external data by the key specified in the request.
-         * @summary Get the external data
+         * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+         * @summary Get file encryption keys (third-party storage)
+         * @param {SharingApiGetEncryptionAccessThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getEncryptionAccessThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-access-third-party/
+         * @throws {RequiredError}
+         */
+        getEncryptionAccessThirdParty(requestParameters: SharingApiGetEncryptionAccessThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EncryptionKeyArrayWrapper> {
+            return localVarFp.getEncryptionAccessThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account\'s own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link\'s target echoed back.
+         * @summary Resolve an external share link
          * @param {SharingApiGetExternalShareDataRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getExternalShareData operation
@@ -1265,8 +2017,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getExternalShareData(requestParameters.key, requestParameters.fileId, requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about the shared file with the ID specified in the request.
-         * @summary Get the shared file information
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights
          * @param {SharingApiGetFileSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFileSecurityInfo operation
@@ -1277,8 +2029,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFileSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about the shared folder with the ID specified in the request.
-         * @summary Get the shared folder information
+         * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+         * @summary Get file sharing rights (third-party storage)
+         * @param {SharingApiGetFileSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-security-info-third-party/
+         * @throws {RequiredError}
+         */
+        getFileSecurityInfoThirdParty(requestParameters: SharingApiGetFileSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFileSecurityInfoThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights
          * @param {SharingApiGetFolderSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderSecurityInfo operation
@@ -1289,8 +2053,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderSecurityInfo(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the group members with their file security information.
-         * @summary Get file group members with security information
+         * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+         * @summary Get folder sharing rights (third-party storage)
+         * @param {SharingApiGetFolderSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-security-info-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderSecurityInfoThirdParty(requestParameters: SharingApiGetFolderSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFolderSecurityInfoThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members
          * @param {SharingApiGetGroupsMembersWithFileSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsMembersWithFileSecurity operation
@@ -1301,8 +2077,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getGroupsMembersWithFileSecurity(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the group members with their folder security information.
-         * @summary Get folder group members with security information
+         * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+         * @summary Get file access of group members (third-party storage)
+         * @param {SharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getGroupsMembersWithFileSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security-third-party/
+         * @throws {RequiredError}
+         */
+        getGroupsMembersWithFileSecurityThirdParty(requestParameters: SharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFileSecurityThirdParty(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members
          * @param {SharingApiGetGroupsMembersWithFolderSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsMembersWithFolderSecurity operation
@@ -1313,8 +2101,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getGroupsMembersWithFolderSecurity(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the sharing rights for all the files and folders specified in the request.
-         * @summary Get the sharing rights
+         * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+         * @summary Get folder access of group members (third-party storage)
+         * @param {SharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getGroupsMembersWithFolderSecurityThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security-third-party/
+         * @throws {RequiredError}
+         */
+        getGroupsMembersWithFolderSecurityThirdParty(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+            return localVarFp.getGroupsMembersWithFolderSecurityThirdParty(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller\'s own record comes first, the owner\'s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
+         * @summary Get sharing rights in batch
          * @param {SharingApiGetSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSecurityInfo operation
@@ -1325,8 +2125,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of users with their access rights to the file with the ID specified in the request.
-         * @summary Get user access rights by file ID
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file
          * @param {SharingApiGetSharedUsersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getSharedUsers operation
@@ -1337,8 +2137,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getSharedUsers(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes the sharing rights from all the files and folders specified in the request.
-         * @summary Remove the sharing rights
+         * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+         * @summary Get users to mention in a file (third-party storage)
+         * @param {SharingApiGetSharedUsersThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getSharedUsersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users-third-party/
+         * @throws {RequiredError}
+         */
+        getSharedUsersThirdParty(requestParameters: SharingApiGetSharedUsersThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
+            return localVarFp.getSharedUsersThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller\'s own favorites, recent and unread marks. The owner\'s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account\'s  access set to `None`.
+         * @summary Remove sharing rights in batch
          * @param {SharingApiRemoveSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for removeSecurityInfo operation
@@ -1349,8 +2161,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.removeSecurityInfo(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sends a message to the users who are mentioned in the file with the ID specified in the request.
-         * @summary Send the mention message
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users
          * @param {SharingApiSendEditorNotifyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for sendEditorNotify operation
@@ -1361,7 +2173,19 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the sharing settings to a file with the ID specified in the request.
+         * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+         * @summary Notify mentioned users (third-party storage)
+         * @param {SharingApiSendEditorNotifyThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for sendEditorNotifyThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify-third-party/
+         * @throws {RequiredError}
+         */
+        sendEditorNotifyThirdParty(requestParameters: SharingApiSendEditorNotifyThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<AceShortWrapperArrayWrapper> {
+            return localVarFp.sendEditorNotifyThirdParty(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
          * @summary Share a file
          * @param {SharingApiSetFileSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1373,7 +2197,19 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setFileSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the sharing settings to a folder with the ID specified in the request.
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
+         * @summary Share a file (third-party storage)
+         * @param {SharingApiSetFileSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFileSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-security-info-third-party/
+         * @throws {RequiredError}
+         */
+        setFileSecurityInfoThirdParty(requestParameters: SharingApiSetFileSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFileSecurityInfoThirdParty(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
          * @summary Share a folder
          * @param {SharingApiSetFolderSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1385,8 +2221,20 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setFolderSecurityInfo(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the sharing rights to all the files and folders specified in the request.
-         * @summary Set the sharing rights
+         * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
+         * @summary Share a folder (third-party storage)
+         * @param {SharingApiSetFolderSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFolderSecurityInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-security-info-third-party/
+         * @throws {RequiredError}
+         */
+        setFolderSecurityInfoThirdParty(requestParameters: SharingApiSetFolderSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.setFolderSecurityInfoThirdParty(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal\'s own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
+         * @summary Set sharing rights in batch
          * @param {SharingApiSetSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setSecurityInfo operation
@@ -1406,14 +2254,14 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
  */
 export interface SharingApiApplyExternalSharePasswordRequest {
     /**
-     * The unique document identifier.
+     * The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
      * @type {string}
      * @memberof SharingApiApplyExternalSharePassword
      */
     readonly key: string
 
     /**
-     * The external data share request parameters.
+     * The body of the request, holding the password to check.
      * @type {ExternalShareRequestParam}
      * @memberof SharingApiApplyExternalSharePassword
      */
@@ -1441,11 +2289,25 @@ export interface SharingApiChangeFileOwnerRequest {
  */
 export interface SharingApiGetEncryptionAccessRequest {
     /**
-     * The file unique identifier.
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
      * @type {number}
      * @memberof SharingApiGetEncryptionAccess
      */
     readonly fileId: number
+}
+
+/**
+ * Request parameters for getEncryptionAccessThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetEncryptionAccessThirdPartyRequest
+ */
+export interface SharingApiGetEncryptionAccessThirdPartyRequest {
+    /**
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+     * @type {string}
+     * @memberof SharingApiGetEncryptionAccessThirdParty
+     */
+    readonly fileId: string
 }
 
 /**
@@ -1455,21 +2317,21 @@ export interface SharingApiGetEncryptionAccessRequest {
  */
 export interface SharingApiGetExternalShareDataRequest {
     /**
-     * The unique key of the external shared data.
+     * The token of the external share link, taken verbatim from the `requestToken` of a link returned by the link  operations of an entry, such as `GET api/2.0/files/rooms/{id}/link`. It is an opaque URL-safe string that  carries the link\'s own identifier, so it cannot be assembled by hand.
      * @type {string}
      * @memberof SharingApiGetExternalShareData
      */
     readonly key: string
 
     /**
-     * The unique document identifier.
+     * A file inside the room the link points at, echoed back in the answer\'s entity fields so a client can show what  was opened. The value is ignored when the file does not sit under the link\'s target, and passing it together  with a folder has no effect - the file wins.
      * @type {string}
      * @memberof SharingApiGetExternalShareData
      */
     readonly fileId?: string
 
     /**
-     * The unique folder identifier.
+     * A folder inside the room the link points at, echoed back in the answer\'s entity fields. It is ignored when the  folder does not sit under the link\'s target, and when a file is passed as well.
      * @type {string}
      * @memberof SharingApiGetExternalShareData
      */
@@ -1483,23 +2345,51 @@ export interface SharingApiGetExternalShareDataRequest {
  */
 export interface SharingApiGetFileSecurityInfoRequest {
     /**
-     * The file unique identifier.
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
      * @type {number}
      * @memberof SharingApiGetFileSecurityInfo
      */
     readonly id: number
 
     /**
-     * The number of items to retrieve in the request.
+     * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
      * @type {number}
      * @memberof SharingApiGetFileSecurityInfo
      */
     readonly count?: number
 
     /**
-     * The starting index for the query results.
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
      * @type {number}
      * @memberof SharingApiGetFileSecurityInfo
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFileSecurityInfoThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetFileSecurityInfoThirdPartyRequest
+ */
+export interface SharingApiGetFileSecurityInfoThirdPartyRequest {
+    /**
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+     * @type {string}
+     * @memberof SharingApiGetFileSecurityInfoThirdParty
+     */
+    readonly id: string
+
+    /**
+     * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
+     * @type {number}
+     * @memberof SharingApiGetFileSecurityInfoThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+     * @type {number}
+     * @memberof SharingApiGetFileSecurityInfoThirdParty
      */
     readonly startIndex?: number
 }
@@ -1511,23 +2401,51 @@ export interface SharingApiGetFileSecurityInfoRequest {
  */
 export interface SharingApiGetFolderSecurityInfoRequest {
     /**
-     * The folder unique identifier.
+     * The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiGetFolderSecurityInfo
      */
     readonly id: number
 
     /**
-     * The number of items to retrieve in the request.
+     * How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
      * @type {number}
      * @memberof SharingApiGetFolderSecurityInfo
      */
     readonly count?: number
 
     /**
-     * The starting index for the query results.
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
      * @type {number}
      * @memberof SharingApiGetFolderSecurityInfo
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFolderSecurityInfoThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetFolderSecurityInfoThirdPartyRequest
+ */
+export interface SharingApiGetFolderSecurityInfoThirdPartyRequest {
+    /**
+     * The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiGetFolderSecurityInfoThirdParty
+     */
+    readonly id: string
+
+    /**
+     * How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+     * @type {number}
+     * @memberof SharingApiGetFolderSecurityInfoThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+     * @type {number}
+     * @memberof SharingApiGetFolderSecurityInfoThirdParty
      */
     readonly startIndex?: number
 }
@@ -1539,37 +2457,79 @@ export interface SharingApiGetFolderSecurityInfoRequest {
  */
 export interface SharingApiGetGroupsMembersWithFileSecurityRequest {
     /**
-     * The file ID.
+     * The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFileSecurity
      */
     readonly fileId: number
 
     /**
-     * The group ID.
+     * The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
      * @type {string}
      * @memberof SharingApiGetGroupsMembersWithFileSecurity
      */
     readonly groupId: string
 
     /**
-     * The number of items to be retrieved in the current query.
+     * How many members at most to answer with.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFileSecurity
      */
     readonly count?: number
 
     /**
-     * The starting index for the query result set.
+     * How many members to skip before answering, used together with `count` to page through a large group.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFileSecurity
      */
     readonly startIndex?: number
 
     /**
-     * The filter value used for searching or querying group members based on text input.
+     * Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
      * @type {string}
      * @memberof SharingApiGetGroupsMembersWithFileSecurity
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getGroupsMembersWithFileSecurityThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest
+ */
+export interface SharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest {
+    /**
+     * The file whose access is being read. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurityThirdParty
+     */
+    readonly fileId: string
+
+    /**
+     * The group whose members are listed. Take it from the entries of `GET api/2.0/files/file/{id}/share` that stand  for a group; a group that holds no rights on this file is answered with an empty list.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurityThirdParty
+     */
+    readonly groupId: string
+
+    /**
+     * How many members at most to answer with.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurityThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * How many members to skip before answering, used together with `count` to page through a large group.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurityThirdParty
+     */
+    readonly startIndex?: number
+
+    /**
+     * Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFileSecurityThirdParty
      */
     readonly filterValue?: string
 }
@@ -1581,37 +2541,79 @@ export interface SharingApiGetGroupsMembersWithFileSecurityRequest {
  */
 export interface SharingApiGetGroupsMembersWithFolderSecurityRequest {
     /**
-     * The folder ID.
+     * The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFolderSecurity
      */
     readonly folderId: number
 
     /**
-     * The group ID.
+     * The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
      * @type {string}
      * @memberof SharingApiGetGroupsMembersWithFolderSecurity
      */
     readonly groupId: string
 
     /**
-     * The number of items to be retrieved in the current query.
+     * How many members at most to answer with.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFolderSecurity
      */
     readonly count?: number
 
     /**
-     * The starting index for the query result set.
+     * How many members to skip before answering, used together with `count` to page through a large group.
      * @type {number}
      * @memberof SharingApiGetGroupsMembersWithFolderSecurity
      */
     readonly startIndex?: number
 
     /**
-     * The filter value used for searching or querying group members based on text input.
+     * Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
      * @type {string}
      * @memberof SharingApiGetGroupsMembersWithFolderSecurity
+     */
+    readonly filterValue?: string
+}
+
+/**
+ * Request parameters for getGroupsMembersWithFolderSecurityThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest
+ */
+export interface SharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest {
+    /**
+     * The folder or room whose access is being read. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurityThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The group whose members are listed. Take it from the entries of `GET api/2.0/files/folder/{id}/share` that  stand for a group; a group that holds no rights on this folder is answered with an empty list.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurityThirdParty
+     */
+    readonly groupId: string
+
+    /**
+     * How many members at most to answer with.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurityThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * How many members to skip before answering, used together with `count` to page through a large group.
+     * @type {number}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurityThirdParty
+     */
+    readonly startIndex?: number
+
+    /**
+     * Keeps only the members whose first name, last name or email contains this value. The value is matched in lower  case, so an uppercase one finds nothing.
+     * @type {string}
+     * @memberof SharingApiGetGroupsMembersWithFolderSecurityThirdParty
      */
     readonly filterValue?: string
 }
@@ -1637,11 +2639,25 @@ export interface SharingApiGetSecurityInfoRequest {
  */
 export interface SharingApiGetSharedUsersRequest {
     /**
-     * The file unique identifier.
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
      * @type {number}
      * @memberof SharingApiGetSharedUsers
      */
     readonly fileId: number
+}
+
+/**
+ * Request parameters for getSharedUsersThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiGetSharedUsersThirdPartyRequest
+ */
+export interface SharingApiGetSharedUsersThirdPartyRequest {
+    /**
+     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
+     * @type {string}
+     * @memberof SharingApiGetSharedUsersThirdParty
+     */
+    readonly fileId: string
 }
 
 /**
@@ -1665,16 +2681,37 @@ export interface SharingApiRemoveSecurityInfoRequest {
  */
 export interface SharingApiSendEditorNotifyRequest {
     /**
-     * The file ID with the mention message.
+     * The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiSendEditorNotify
      */
     readonly fileId: number
 
     /**
-     * The mention message.
+     * The notification to send.
      * @type {MentionMessageWrapper}
      * @memberof SharingApiSendEditorNotify
+     */
+    readonly mentionMessageWrapper?: MentionMessageWrapper
+}
+
+/**
+ * Request parameters for sendEditorNotifyThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiSendEditorNotifyThirdPartyRequest
+ */
+export interface SharingApiSendEditorNotifyThirdPartyRequest {
+    /**
+     * The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiSendEditorNotifyThirdParty
+     */
+    readonly fileId: string
+
+    /**
+     * The notification to send.
+     * @type {MentionMessageWrapper}
+     * @memberof SharingApiSendEditorNotifyThirdParty
      */
     readonly mentionMessageWrapper?: MentionMessageWrapper
 }
@@ -1686,16 +2723,37 @@ export interface SharingApiSendEditorNotifyRequest {
  */
 export interface SharingApiSetFileSecurityInfoRequest {
     /**
-     * The file ID.
+     * The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiSetFileSecurityInfo
      */
     readonly id: number
 
     /**
-     * The parameters of the security information simple request.
+     * The rights to apply to the file, and whether to announce them by mail.
      * @type {SecurityInfoSimpleRequestDto}
      * @memberof SharingApiSetFileSecurityInfo
+     */
+    readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
+}
+
+/**
+ * Request parameters for setFileSecurityInfoThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiSetFileSecurityInfoThirdPartyRequest
+ */
+export interface SharingApiSetFileSecurityInfoThirdPartyRequest {
+    /**
+     * The file whose sharing is being changed. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiSetFileSecurityInfoThirdParty
+     */
+    readonly id: string
+
+    /**
+     * The rights to apply to the file, and whether to announce them by mail.
+     * @type {SecurityInfoSimpleRequestDto}
+     * @memberof SharingApiSetFileSecurityInfoThirdParty
      */
     readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
 }
@@ -1707,16 +2765,37 @@ export interface SharingApiSetFileSecurityInfoRequest {
  */
 export interface SharingApiSetFolderSecurityInfoRequest {
     /**
-     * The folder ID.
+     * The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
      * @type {number}
      * @memberof SharingApiSetFolderSecurityInfo
      */
     readonly id: number
 
     /**
-     * The parameters of the security information simple request.
+     * The rights to apply to the folder, and whether to announce them by mail.
      * @type {SecurityInfoSimpleRequestDto}
      * @memberof SharingApiSetFolderSecurityInfo
+     */
+    readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
+}
+
+/**
+ * Request parameters for setFolderSecurityInfoThirdParty operation in SharingApi.
+ * @export
+ * @interface SharingApiSetFolderSecurityInfoThirdPartyRequest
+ */
+export interface SharingApiSetFolderSecurityInfoThirdPartyRequest {
+    /**
+     * The folder whose sharing is being changed. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof SharingApiSetFolderSecurityInfoThirdParty
+     */
+    readonly id: string
+
+    /**
+     * The rights to apply to the folder, and whether to announce them by mail.
+     * @type {SecurityInfoSimpleRequestDto}
+     * @memberof SharingApiSetFolderSecurityInfoThirdParty
      */
     readonly securityInfoSimpleRequestDto: SecurityInfoSimpleRequestDto
 }
@@ -1743,8 +2822,8 @@ export interface SharingApiSetSecurityInfoRequest {
  */
 export class SharingApi extends BaseAPI {
     /**
-     * Applies a password specified in the request to get the external data.
-     * @summary Apply external data password
+     * Submits the password of a protected external share link and answers with the same resolved link data as  `GET api/2.0/files/share/{key}`, so this operation is called only after that one reported that a password is  required. The token in the path is the `requestToken` of the link, and the password is the one chosen by the  member who shared the entry. The call needs no authentication; a signed-in caller that may already read the  room is let through by the resolve operation itself and does not need the password at all. A correct password  is remembered for the caller, so later requests with the same token resolve without repeating it, and a wrong  one is reported in the `status` field as an invalid password rather than as an HTTP error, while the  remembered password is dropped. Attempts are counted per link and per calling address: once the portal\'s limit  is reached, further attempts are rejected until the block expires, which makes the operation unsuitable for  trying passwords in a loop. Nothing about the entry is changed by the call itself.
+     * @summary Unlock a password-protected link
      * @param {FilesSharingApiApplyExternalSharePasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1755,8 +2834,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Changes the owner of the file with the ID specified in the request.
-     * @summary Change the file owner
+     * Hands the ownership of the listed rooms and files over to a single account, and returns the entries as they  look afterwards. Among folders only rooms are accepted - take their identifiers from  `GET api/2.0/files/rooms`; a plain folder is refused. A file is accepted only while it lies in the portal\'s  common section, so a file kept inside a room or in a personal section is refused as well, and so is a file  that is locked or currently open in the editor. The new owner has to be an active account that is allowed to  manage rooms, and a private room additionally requires that this account has already set up its encryption  keys; a deactivated account, a guest or a plain member is rejected. The caller must be the creator of every  listed room, or a portal administrator. The call mutates the entries one at a time and stops at the first item  it may not touch, leaving the entries already processed changed, so a partial answer is possible; an item  whose owner is already the target account is returned untouched, which makes a repeat safe. The previous owner  keeps access to a transferred room as its manager, while a transferred file is saved as a new version authored  by the new owner. An entry that lives on a connected third-party account is quietly left out.
+     * @summary Change the room or file owner
      * @param {FilesSharingApiChangeFileOwnerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1767,7 +2846,7 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the encryption keys to access a file with the ID specified in the request.
+     * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
      * @summary Get file encryption keys
      * @param {FilesSharingApiGetEncryptionAccessRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1779,8 +2858,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the external data by the key specified in the request.
-     * @summary Get the external data
+     * Answers with the encryption keys that open one file kept in a private room: one entry per member who holds  rights on the file and has published keys, each carrying that member\'s public key, and the caller\'s own entry  carrying the encrypted private half as well. The private half of another member is never handed out. A member  who has not published keys yet is left out of the answer altogether, which is how a client tells that this  member cannot open the file until keys are published through `POST api/2.0/privacyroom/keys`; a member who  holds the file only through a group is not reported either, because group entries are skipped. The file has to  lie in a private room or in the encrypted section - a file kept anywhere else carries no keys and is rejected  as an unsupported request. The caller needs read access to the file and is answered with 403 otherwise, and a  file that does not exist is answered as missing. The call is read-only, and the answer changes as soon as a  member publishes or rotates keys, so read it again rather than caching it for a later session.
+     * @summary Get file encryption keys (third-party storage)
+     * @param {FilesSharingApiGetEncryptionAccessThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getEncryptionAccessThirdParty(requestParameters: SharingApiGetEncryptionAccessThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getEncryptionAccessThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Resolves the token of an external share link into the room or file it points at, and reports the outcome of  validating the link. The token is the `requestToken` of a link returned by the link operations of an entry,  such as `GET api/2.0/files/file/{id}/link` or `GET api/2.0/files/rooms/{id}/link`. The call needs no  authentication and answers a refused link in the `status` field rather than with an HTTP error, so that field  has to be read before anything else: a token that matches no link, and a link whose entry has been archived or  moved to the trash, both resolve as invalid; a link past its expiration date resolves as expired; a  password-protected link resolves as requiring a password, which is then submitted through  `POST api/2.0/files/share/{key}/password`; and a public link resolves as denied when the portal forbids  sharing with people outside it. The call is not read-only: for a signed-in caller the first successful  resolution puts the entry into the account\'s own lists, and for a visitor without an account it opens an  anonymous session that later requests with the same token reuse. Pass `fileId` or `folderId` to have an entry  inside the link\'s target echoed back.
+     * @summary Resolve an external share link
      * @param {FilesSharingApiGetExternalShareDataRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1791,8 +2882,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about the shared file with the ID specified in the request.
-     * @summary Get the shared file information
+     * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+     * @summary Get file sharing rights
      * @param {FilesSharingApiGetFileSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1803,8 +2894,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about the shared folder with the ID specified in the request.
-     * @summary Get the shared folder information
+     * Lists the accounts and groups that hold rights on one file, one entry per subject, with the level each of them  has, whether the caller may still change that level, and which of them owns the file. The owner comes first,  then room managers, groups, ordinary members, guests, and last the accounts that have not accepted their  invitation yet, each of those ranked by access level and by name. External links are left out and are listed  by `GET api/2.0/files/file/{id}/links` instead, while a PDF form kept in a form-filling room also reports the  link of that room, because the form is filled out through it. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. Listing takes  the right to change the sharing of the file, which its creator, the manager of its room and a portal  administrator acting as room manager have, while inside a public room reading the file is enough; a member who  may read but not share is answered with an empty list although the header still counts the subjects, and a  caller with no access, a guest included, is refused. A file that does not exist, or was deleted permanently,  is answered as missing. The call is read-only; for several entries at once use `POST api/2.0/files/share`.
+     * @summary Get file sharing rights (third-party storage)
+     * @param {FilesSharingApiGetFileSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getFileSecurityInfoThirdParty(requestParameters: SharingApiGetFileSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFileSecurityInfoThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+     * @summary Get folder sharing rights
      * @param {FilesSharingApiGetFolderSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1815,8 +2918,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the group members with their file security information.
-     * @summary Get file group members with security information
+     * Lists the accounts and groups that hold rights on one folder or room, one entry per subject, with the level  each of them has, whether the caller may still change that level, and which of them owns the entry. The owner  comes first, then room managers, groups, ordinary members, guests, and last the accounts that have not  accepted their invitation yet, each of those ranked by access level and by name. External links are left out  and are listed by `GET api/2.0/files/folder/{id}/links` instead. `startIndex` and `count` page through the  subjects, and their total number is reported in the response headers rather than in the body. For a room, and  for a folder inside a public room, read access is enough; any other folder is listed only to a caller who may  change its sharing, which the manager of its room and a portal administrator acting as room manager may, and a  member who may only read such a folder is answered with an empty list although the header still counts the  subjects. A caller with no access, a guest included, is refused, and a folder that does not exist is answered  as missing. The call is read-only. For a room prefer `GET api/2.0/files/rooms/{id}/share`, which filters the  same subjects by kind and by name.
+     * @summary Get folder sharing rights (third-party storage)
+     * @param {FilesSharingApiGetFolderSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getFolderSecurityInfoThirdParty(requestParameters: SharingApiGetFolderSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getFolderSecurityInfoThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+     * @summary Get file access of group members
      * @param {FilesSharingApiGetGroupsMembersWithFileSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1827,8 +2942,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the group members with their folder security information.
-     * @summary Get folder group members with security information
+     * Lists the members of one portal group together with the access each of them has on a file that group was  granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on that  member alone, `overridden` says which of the two applies, `owner` marks the member who created the file, and  `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier from  the group entries of `GET api/2.0/files/file/{id}/share`. `startIndex` and `count` page through the members,  `filterValue` keeps only those whose first name, last name or email contains the value - the comparison is  made in lower case, so an uppercase value matches nothing - and the number of members is reported in the  response headers. Members come back ordered by first name. A group that holds no rights on this file, a file  the caller cannot read and a file that does not exist are all answered with an empty list rather than an  error, so an empty answer does not mean that the group has no members. A guest is refused. The call is  read-only.
+     * @summary Get file access of group members (third-party storage)
+     * @param {FilesSharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getGroupsMembersWithFileSecurityThirdParty(requestParameters: SharingApiGetGroupsMembersWithFileSecurityThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFileSecurityThirdParty(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+     * @summary Get folder access of group members
      * @param {FilesSharingApiGetGroupsMembersWithFolderSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1839,8 +2966,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns the sharing rights for all the files and folders specified in the request.
-     * @summary Get the sharing rights
+     * Lists the members of one portal group together with the access each of them has on a folder or room that group  was granted rights to: `groupAccess` is the level the group itself carries, `userAccess` is the level set on  that member alone, `overridden` says which of the two applies, `owner` marks the member who created the entry,  and `canEditAccess` says whether the caller may still change that member\'s level. Take the group identifier  from the group entries of `GET api/2.0/files/folder/{id}/share`. `startIndex` and `count` page through the  members, `filterValue` keeps only those whose first name, last name or email contains the value - the  comparison is made in lower case, so an uppercase value matches nothing - and the number of members is  reported in the response headers. Members come back ordered by first name. A group that holds no rights on  this folder, a folder the caller cannot read and a folder that does not exist are all answered with an empty  list rather than an error, so an empty answer does not mean that the group has no members. A guest is refused.  The call is read-only.
+     * @summary Get folder access of group members (third-party storage)
+     * @param {FilesSharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getGroupsMembersWithFolderSecurityThirdParty(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getGroupsMembersWithFolderSecurityThirdParty(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns who has access to the files and folders listed in the request, merged into one list of subjects, and  is the batch counterpart of `GET api/2.0/files/file/{id}/share` and `GET api/2.0/files/rooms/{id}/share`.  Identifiers come from any listing operation, such as `GET api/2.0/files/{folderId}`. The caller needs read  access to every listed entry: a single entry it cannot read makes the whole call fail instead of dropping that  entry, so the list has to be filtered beforehand. Identifiers that match nothing are skipped without an error,  and an empty list of identifiers gives an empty answer. The call is read-only. Each account or group appears  once: the caller\'s own record comes first, the owner\'s record second, and the rest are ordered by display  name. When the same subject holds different rights on the listed entries, its access is reported as the  `Varies` value instead of a real level, which means the entries have to be inspected one by one to see the  difference. Records that describe external links are included only for a caller that is allowed to read the  links of the entry.
+     * @summary Get sharing rights in batch
      * @param {FilesSharingApiGetSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1851,8 +2990,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of users with their access rights to the file with the ID specified in the request.
-     * @summary Get user access rights by file ID
+     * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+     * @summary Get users to mention in a file
      * @param {FilesSharingApiGetSharedUsersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1863,8 +3002,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Removes the sharing rights from all the files and folders specified in the request.
-     * @summary Remove the sharing rights
+     * Lists the portal members who can read the file, which is what an editor client offers when somebody types a  mention. The set holds the readers of the file plus everyone who reads it by role rather than by share - the  portal owner, the DocSpace administrators and the author of the file - while the caller themselves, the  subjects standing behind external links and deactivated accounts are left out. It is ordered by display name  as the portal renders it. A guest receives a single entry, the owner of the file, because a guest is not a  portal member and may not learn who else works on the document. The caller needs read access to the file, and  an unknown file id is reported as missing. The call only reads. A caller who reached the file through an  external link instead of an account is answered with nothing at all. For the users to offer when protecting a  document use `GET api/2.0/files/file/{fileId}/protectusers`.
+     * @summary Get users to mention in a file (third-party storage)
+     * @param {FilesSharingApiGetSharedUsersThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public getSharedUsersThirdParty(requestParameters: SharingApiGetSharedUsersThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).getSharedUsersThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Revokes the access of every account and group on the files and folders listed in the request, and clears the  entries from the caller\'s own favorites, recent and unread marks. The owner\'s own record is kept, since  removing it would take the entry away from the account that owns it, and external links survive untouched -  remove those through the link operations of the entry. The caller must be allowed to change the access of each  entry, which means the creator of the room, a portal administrator, or a member with the rights to manage it;  a caller whose only access came through an external link may use this call to drop the entry from its own  list, while a directly invited member or an unrelated account is refused. The answer is always `true` and  identifiers that match nothing are skipped silently, so a successful answer is not proof that anything was  revoked - read the rights back with `POST api/2.0/files/share`. The call is destructive and safe to repeat. To  take the rights of one account away instead of all of them, call `PUT api/2.0/files/share` with that account\'s  access set to `None`.
+     * @summary Remove sharing rights in batch
      * @param {FilesSharingApiRemoveSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1875,8 +3026,8 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Sends a message to the users who are mentioned in the file with the ID specified in the request.
-     * @summary Send the mention message
+     * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+     * @summary Notify mentioned users
      * @param {FilesSharingApiSendEditorNotifyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1887,7 +3038,19 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Sets the sharing settings to a file with the ID specified in the request.
+     * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
+     * @summary Notify mentioned users (third-party storage)
+     * @param {FilesSharingApiSendEditorNotifyThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public sendEditorNotifyThirdParty(requestParameters: SharingApiSendEditorNotifyThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).sendEditorNotifyThirdParty(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
      * @summary Share a file
      * @param {FilesSharingApiSetFileSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1899,7 +3062,19 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Sets the sharing settings to a folder with the ID specified in the request.
+     * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
+     * @summary Share a file (third-party storage)
+     * @param {FilesSharingApiSetFileSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public setFileSecurityInfoThirdParty(requestParameters: SharingApiSetFileSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFileSecurityInfoThirdParty(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
      * @summary Share a folder
      * @param {FilesSharingApiSetFolderSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1911,8 +3086,20 @@ export class SharingApi extends BaseAPI {
     }
 
     /**
-     * Sets the sharing rights to all the files and folders specified in the request.
-     * @summary Set the sharing rights
+     * Grants, changes or withdraws the rights of the listed accounts and groups on one folder, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error. With `notify` set, each account named is emailed about the access  it received and `sharingMessage` is put into that mail with its markup stripped, while a message longer than  the field allows is rejected as an invalid request. The caller has to be allowed to change the sharing of the  folder, which the manager of the room it belongs to and a portal administrator acting as room manager are;  anyone else, a guest and a member with read access included, is refused. The call is mutating and safe to  repeat. For a room use `PUT api/2.0/files/rooms/{id}/share`, which invites people by email as well.
+     * @summary Share a folder (third-party storage)
+     * @param {FilesSharingApiSetFolderSecurityInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SharingApi
+     */
+    public setFolderSecurityInfoThirdParty(requestParameters: SharingApiSetFolderSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return SharingApiFp(this.configuration).setFolderSecurityInfoThirdParty(requestParameters.id, requestParameters.securityInfoSimpleRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Grants, changes or withdraws the access of the listed accounts and groups on every file and folder named in  the request at once, and returns the resulting rights. Entry identifiers come from a listing operation, and  the accounts and groups come from the portal\'s own account and group lists; an access of `None` withdraws the  rights instead of granting them. The caller must be allowed to change the access of every listed entry - the  creator of the room, a member with the rights to manage it, or a portal administrator - and a read-only member  or a guest is refused even when the payload changes nothing. A subject the caller is not allowed to share  with, such as a guest that belongs to another member, is skipped without an error, and an empty `share`  collection makes the call do nothing and answer with an empty list. Repeating the same request leaves the same  rights in place. The answer holds one record per listed subject for each entry that was actually processed, so  it is shorter than the request when something was skipped and worth comparing against it. For a single room  prefer `PUT api/2.0/files/rooms/{id}/share`, which also invites members by email.
+     * @summary Set sharing rights in batch
      * @param {FilesSharingApiSetSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

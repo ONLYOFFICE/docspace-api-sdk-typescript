@@ -1,16 +1,16 @@
 # EmbeddedConfig
 
-The configuration parameters for the embedded document type.
+The addresses the framed viewer needs. It is reported for the embedded layout only.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**embedUrl** | **string** | The absolute URL to the document serving as a source file for the document embedded into the web page. | [optional] [default to undefined]
-**saveUrl** | **string** | The absolute URL that will allow the document to be saved onto the user personal computer. | [optional] [readonly] [default to undefined]
-**shareLinkParam** | **string** | The shared URL parameter. | [optional] [default to undefined]
-**shareUrl** | **string** | The absolute URL that will allow other users to share this document. | [optional] [default to undefined]
-**toolbarDocked** | **string** | The place for the embedded viewer toolbar, can be either top or bottom. | [optional] [readonly] [default to undefined]
+**embedUrl** | **string** | The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member. | [optional] [default to undefined]
+**saveUrl** | **string** | Where the download button of the framed viewer leads. | [optional] [readonly] [default to undefined]
+**shareLinkParam** | **string** | The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built. | [optional] [default to undefined]
+**shareUrl** | **string** | The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key. | [optional] [default to undefined]
+**toolbarDocked** | **string** | Where the framed viewer puts its toolbar. The portal always asks for the top. | [optional] [readonly] [default to undefined]
 
 ## Example
 

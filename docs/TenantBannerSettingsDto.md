@@ -1,12 +1,12 @@
 # TenantBannerSettingsDto
 
-The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+Whether the portal promotional banners are hidden.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hidden** | **boolean** | The banners visibility flag. | [optional] [default to undefined]
+**hidden** | **boolean** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] [default to undefined]
 
 ## Example
 

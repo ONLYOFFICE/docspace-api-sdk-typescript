@@ -30,13 +30,13 @@ import type { BatchRequestDto } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { CheckConversionRequestDtoInteger } from '../../models';
+import type { CheckConversionRequestDto } from '../../models';
 // @ts-ignore
 import type { CheckDestFolderWrapper } from '../../models';
 // @ts-ignore
-import type { ChunkedUploadSessionResponseIntegerWrapper } from '../../models';
+import type { ChunkedUploadSessionResponseResponseWrapper } from '../../models';
 // @ts-ignore
-import type { ChunkedUploadSessionResponseWrapperIntegerWrapper } from '../../models';
+import type { ChunkedUploadSessionResponseWrapperWrapper } from '../../models';
 // @ts-ignore
 import type { ConversationResultArrayWrapper } from '../../models';
 // @ts-ignore
@@ -56,15 +56,21 @@ import type { FileOperationArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileOperationType } from '../../models';
 // @ts-ignore
-import type { FileOperationWrapper } from '../../models';
-// @ts-ignore
 import type { SessionRequest } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
+import type { ThirdPartyCheckConversionRequestDto } from '../../models';
+// @ts-ignore
+import type { ThirdPartyChunkedUploadSessionResponseResponseWrapper } from '../../models';
+// @ts-ignore
+import type { ThirdPartyChunkedUploadSessionResponseWrapperWrapper } from '../../models';
+// @ts-ignore
+import type { ThirdPartyUploadSessionResponseWrapper } from '../../models';
+// @ts-ignore
 import type { UpdateComment } from '../../models';
 // @ts-ignore
-import type { UploadSessionResponseIntegerWrapper } from '../../models';
+import type { UploadSessionResponseWrapper } from '../../models';
 /**
  * OperationsApi - axios parameter creator
  * @export
@@ -74,10 +80,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
-         * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId The session ID.
-         * @param {number} folderId The folder ID.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session
+         * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -134,7 +140,67 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Adds files and folders with the IDs specified in the request to the favorite list.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session (third-party storage)
+         * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for abortUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
+         */
+        abortUploadSessionThirdParty: async (sessionId: string, folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('abortUploadSessionThirdParty', 'sessionId', sessionId)
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('abortUploadSessionThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/session/{sessionId}`
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)))
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is `true` even  when nothing was marked, so read the outcome back from `GET api/2.0/files/@favorites` instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. `returnSingleOperation` arrives with the shared body and does nothing here. Use  `DELETE api/2.0/files/favorites` to undo, or `GET api/2.0/files/favorites/{fileId}` for a single file.
          * @summary Add favorite files and folders
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -190,7 +256,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Starts the download process of files and folders with the IDs specified in the request.
+         * Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller\'s download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
          * @summary Bulk download
          * @param {DownloadRequestDto} [downloadRequestDto] 
          * @param {*} [options] Override http request option.
@@ -212,6 +278,12 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -227,10 +299,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Checks the conversion status of a file with the ID specified in the request.
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
          * @summary Get conversion status
-         * @param {number} fileId The file ID to check conversion status.
-         * @param {boolean} [start] Specifies whether a conversion operation is started or not.
+         * @param {number} fileId The file whose conversion is asked about.
+         * @param {boolean} [start] Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkConversionStatus operation
@@ -288,9 +360,70 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Move or copy files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+         * @summary Get conversion status (third-party storage)
+         * @param {string} fileId The file whose conversion is asked about.
+         * @param {boolean} [start] Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkConversionStatusThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
+         */
+        checkConversionStatusThirdParty: async (fileId: string, start?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('checkConversionStatusThirdParty', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = start;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
+         * @summary Check move or copy conflicts
+         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyBatchItems operation
@@ -347,9 +480,9 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
+         * @summary Check the destination folder
+         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyDestFolder operation
@@ -406,8 +539,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Copy to the folder
+         * Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
+         * @summary Copy files and folders
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -462,10 +595,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
          * @summary Chunked upload
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
          * @param {*} [options] Override http request option.
          * @deprecated
          * @throws {RequiredError}
@@ -525,10 +658,73 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
-         * @summary Creates a session for uploading a file to a specific folder in chunks.
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
+         * @summary Chunked upload (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * @throws {RequiredError}
+         * REST API Reference for createUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
+         */
+        createUploadSessionThirdParty: async (folderId: string, sessionRequest: SessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('createUploadSessionThirdParty', 'folderId', folderId)
+            // verify required parameter 'sessionRequest' is not null or undefined
+            assertParamExists('createUploadSessionThirdParty', 'sessionRequest', sessionRequest)
+
+            const localVarPath = `/api/2.0/files/{folderId}/upload/create_session`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(sessionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createUploadSessionInFolder operation
@@ -587,7 +783,69 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Deletes the files and folders with the IDs specified in the request.
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createUploadSessionInFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
+         */
+        createUploadSessionInFolderThirdParty: async (folderId: string, sessionRequest: SessionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('createUploadSessionInFolderThirdParty', 'folderId', folderId)
+            // verify required parameter 'sessionRequest' is not null or undefined
+            assertParamExists('createUploadSessionInFolderThirdParty', 'sessionRequest', sessionRequest)
+
+            const localVarPath = `/api/2.0/files/{folderId}/session`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(sessionRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Queues a background job that deletes the requested files and folders, and answers with the caller\'s delete  operations, including the one just started. Poll `GET api/2.0/files/fileops` until the operation reports  `finished`, and read its `error`: a failure on a single item is reported there rather than as a status code.  With `immediately=false` the items are moved to the caller\'s Trash and can be restored from it, while  `immediately=true` removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
          * @summary Delete files and folders
          * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -643,8 +901,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
-         * @summary Delete favorite files and folders (using body parameters)
+         * Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  `GET api/2.0/files/@favorites`; to delete the entries themselves call `PUT api/2.0/files/fileops/delete`  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated `fileIds` and `folderIds`  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is `true` whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. `returnSingleOperation` arrives with the  shared body and does nothing here. Repeating the call is safe. Use `POST api/2.0/files/favorites` to mark  entries again.
+         * @summary Delete favorite files and folders
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -699,7 +957,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Deletes the file versions with the IDs specified in the request.
+         * Queues a background job that removes the listed versions from the history of one file, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`; a failure met while the job runs is reported in its `error` rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  `GET api/2.0/files/file/{fileId}/history` reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete file versions
          * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -755,7 +1013,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Duplicates all the selected files and folders.
+         * Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller\'s duplicate operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  `PUT api/2.0/files/fileops/copy`. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
          * @summary Duplicate files and folders
          * @param {DuplicateRequestDto} [duplicateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -811,10 +1069,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
+         * Queues a background job that permanently removes the content of the caller\'s own Trash, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller\'s Trash is touched. With `folderType` the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
          * @summary Empty the Trash folder
-         * @param {boolean} [single] Specifies whether to return only the current operation
-         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+         * @param {boolean} [single] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread.
+         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for emptyTrash operation
@@ -873,10 +1131,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
          * @summary Finalize an upload session
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The session ID.
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for finalizeSession operation
@@ -933,9 +1191,69 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns a list of all the active file operations.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
+         * @summary Finalize an upload session (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for finalizeSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
+         */
+        finalizeSessionThirdParty: async (folderId: string, sessionId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('finalizeSessionThirdParty', 'folderId', folderId)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('finalizeSessionThirdParty', 'sessionId', sessionId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/session/{sessionId}/finalize`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller\'s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
          * @summary Get active file operations
-         * @param {string} [id] The ID of the file operation.
+         * @param {string} [id] The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getOperationStatuses operation
@@ -955,6 +1273,12 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
             }
@@ -971,10 +1295,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Retrieves the statuses of operations filtered by the specified operation type.
-         * @summary Get file operation statuses
-         * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
-         * @param {string} [id] The ID of the file operation.
+         * Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account\'s operations.
+         * @summary Get file operations by type
+         * @param {FileOperationType} operationType The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation.
+         * @param {string} [id] The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getOperationStatusesByType operation
@@ -997,6 +1321,12 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
             }
@@ -1013,8 +1343,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Marks the files and folders with the IDs specified in the request as read.
-         * @summary Mark as read
+         * Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller\'s mark-as-read operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller\'s own badges are affected, while  other members keep theirs. To see what is currently marked as new use `GET api/2.0/files/{folderId}/news` for  one folder and `GET api/2.0/files/rooms/news` for the rooms of the caller.
+         * @summary Mark files and folders as read
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1069,8 +1399,8 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Move or copy to a folder
+         * Queues a background job that moves the requested files and folders into `destFolderId`, removing them from  where they were, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Before starting,  `GET api/2.0/files/fileops/move` reports which items already have a same-named entry at the destination and  `conflictResolveType` decides what happens to them, while `GET api/2.0/files/fileops/checkdestfolder` reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the  originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
+         * @summary Move files and folders
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1125,16 +1455,16 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Starts a conversion operation of a file with the ID specified in the request.
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
          * @summary Start file conversion
-         * @param {number} fileId The file ID to start conversion proccess.
-         * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
+         * @param {number} fileId The file to convert.
+         * @param {CheckConversionRequestDto} [checkConversionRequestDto] The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startFileConversion operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/
          */
-        startFileConversion: async (fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startFileConversion: async (fileId: number, checkConversionRequestDto?: CheckConversionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startFileConversion', 'fileId', fileId)
 
@@ -1177,7 +1507,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(checkConversionRequestDtoInteger, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(checkConversionRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1185,9 +1515,69 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Finishes an operation with the ID specified in the request or all the active operations.
-         * @summary Finish active operations
-         * @param {string} id The operation unique identifier.
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
+         * @summary Start file conversion (third-party storage)
+         * @param {string} fileId The file to convert.
+         * @param {ThirdPartyCheckConversionRequestDto} [thirdPartyCheckConversionRequestDto] The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for startFileConversionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
+         */
+        startFileConversionThirdParty: async (fileId: string, thirdPartyCheckConversionRequestDto?: ThirdPartyCheckConversionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('startFileConversionThirdParty', 'fileId', fileId)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/checkconversion`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(thirdPartyCheckConversionRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Cancels a background file operation of the caller and answers with the operations that are left. Pass the `id`  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from `GET api/2.0/files/fileops` at once, which is why  the answer here is usually empty. An id that is not among the caller\'s operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
+         * @summary Cancel file operations
+         * @param {string} id The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateTasks operation
@@ -1210,6 +1600,12 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -1222,10 +1618,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Updates a comment in a file with the ID specified in the request.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Update a comment
-         * @param {number} fileId The file ID where the comment is located.
-         * @param {UpdateComment} updateComment The parameters for updating a comment.
+         * @param {number} fileId The file whose version comment is replaced.
+         * @param {UpdateComment} updateComment The version and the comment to store on it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFileComment operation
@@ -1284,12 +1680,74 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
-         * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {number} [chunkNumber] The chunk number.
-         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
+         * @summary Update a comment (third-party storage)
+         * @param {string} fileId The file whose version comment is replaced.
+         * @param {UpdateComment} updateComment The version and the comment to store on it.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateFileCommentThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
+         */
+        updateFileCommentThirdParty: async (fileId: string, updateComment: UpdateComment, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileId' is not null or undefined
+            assertParamExists('updateFileCommentThirdParty', 'fileId', fileId)
+            // verify required parameter 'updateComment' is not null or undefined
+            assertParamExists('updateFileCommentThirdParty', 'updateComment', updateComment)
+
+            const localVarPath = `/api/2.0/files/file/{fileId}/comment`
+                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateComment, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
+         * @param {number} [chunkNumber] The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
+         * @param {File} [file] The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadAsyncSession operation
@@ -1358,11 +1816,85 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
-         * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
+         * @param {number} [chunkNumber] The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
+         * @param {File} [file] The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadAsyncSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
+         */
+        uploadAsyncSessionThirdParty: async (folderId: string, sessionId: string, chunkNumber?: number, file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('uploadAsyncSessionThirdParty', 'folderId', folderId)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('uploadAsyncSessionThirdParty', 'sessionId', sessionId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/session/{sessionId}/upload`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (chunkNumber !== undefined) {
+                localVarQueryParameter['ChunkNumber'] = chunkNumber;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
+         * @param {File} [file] The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadSession operation
@@ -1373,6 +1905,75 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             assertParamExists('uploadSession', 'folderId', folderId)
             // verify required parameter 'sessionId' is not null or undefined
             assertParamExists('uploadSession', 'sessionId', sessionId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/session/{sessionId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
+                .replace(`{${"sessionId"}}`, encodeURIComponent(String(sessionId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
+         * @param {File} [file] The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
+         */
+        uploadSessionThirdParty: async (folderId: string, sessionId: string, file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('uploadSessionThirdParty', 'folderId', folderId)
+            // verify required parameter 'sessionId' is not null or undefined
+            assertParamExists('uploadSessionThirdParty', 'sessionId', sessionId)
 
             const localVarPath = `/api/2.0/files/{folderId}/session/{sessionId}`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)))
@@ -1437,10 +2038,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OperationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
-         * @summary Aborts an in-progress file upload session.
-         * @param {string} sessionId The session ID.
-         * @param {number} folderId The folder ID.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session
+         * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -1453,7 +2054,23 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Adds files and folders with the IDs specified in the request to the favorite list.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session (third-party storage)
+         * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for abortUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
+         */
+        async abortUploadSessionThirdParty(sessionId: string, folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.abortUploadSessionThirdParty(sessionId, folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.abortUploadSessionThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is `true` even  when nothing was marked, so read the outcome back from `GET api/2.0/files/@favorites` instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. `returnSingleOperation` arrives with the shared body and does nothing here. Use  `DELETE api/2.0/files/favorites` to undo, or `GET api/2.0/files/favorites/{fileId}` for a single file.
          * @summary Add favorite files and folders
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1468,7 +2085,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Starts the download process of files and folders with the IDs specified in the request.
+         * Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller\'s download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
          * @summary Bulk download
          * @param {DownloadRequestDto} [downloadRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1483,10 +2100,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks the conversion status of a file with the ID specified in the request.
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
          * @summary Get conversion status
-         * @param {number} fileId The file ID to check conversion status.
-         * @param {boolean} [start] Specifies whether a conversion operation is started or not.
+         * @param {number} fileId The file whose conversion is asked about.
+         * @param {boolean} [start] Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkConversionStatus operation
@@ -1499,9 +2116,25 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Move or copy files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+         * @summary Get conversion status (third-party storage)
+         * @param {string} fileId The file whose conversion is asked about.
+         * @param {boolean} [start] Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkConversionStatusThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
+         */
+        async checkConversionStatusThirdParty(fileId: string, start?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkConversionStatusThirdParty(fileId, start, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.checkConversionStatusThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
+         * @summary Check move or copy conflicts
+         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyBatchItems operation
@@ -1514,9 +2147,9 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying files to a folder
-         * @param {BatchRequestDto} [inDto] The request parameters for copying/moving files.
+         * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
+         * @summary Check the destination folder
+         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyDestFolder operation
@@ -1529,8 +2162,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Copy to the folder
+         * Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
+         * @summary Copy files and folders
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1544,40 +2177,73 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
          * @summary Chunked upload
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
          * @param {*} [options] Override http request option.
          * @deprecated
          * @throws {RequiredError}
          * REST API Reference for createUploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
          */
-        async createUploadSession(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperIntegerWrapper>> {
+        async createUploadSession(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSession(folderId, sessionRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
-         * @summary Creates a session for uploading a file to a specific folder in chunks.
-         * @param {number} folderId The session folder ID.
-         * @param {SessionRequest} sessionRequest The session parameters.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
+         * @summary Chunked upload (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * @throws {RequiredError}
+         * REST API Reference for createUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
+         */
+        async createUploadSessionThirdParty(folderId: string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSessionThirdParty(folderId, sessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSessionThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createUploadSessionInFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
          */
-        async createUploadSessionInFolder(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper>> {
+        async createUploadSessionInFolder(folderId: number, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSessionInFolder(folderId, sessionRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSessionInFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes the files and folders with the IDs specified in the request.
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {SessionRequest} sessionRequest The file the session is opened for, and how a clash with an existing name is settled.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createUploadSessionInFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
+         */
+        async createUploadSessionInFolderThirdParty(folderId: string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSessionInFolderThirdParty(folderId, sessionRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSessionInFolderThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Queues a background job that deletes the requested files and folders, and answers with the caller\'s delete  operations, including the one just started. Poll `GET api/2.0/files/fileops` until the operation reports  `finished`, and read its `error`: a failure on a single item is reported there rather than as a status code.  With `immediately=false` the items are moved to the caller\'s Trash and can be restored from it, while  `immediately=true` removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
          * @summary Delete files and folders
          * @param {DeleteBatchRequestDto} [deleteBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1592,8 +2258,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
-         * @summary Delete favorite files and folders (using body parameters)
+         * Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  `GET api/2.0/files/@favorites`; to delete the entries themselves call `PUT api/2.0/files/fileops/delete`  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated `fileIds` and `folderIds`  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is `true` whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. `returnSingleOperation` arrives with the  shared body and does nothing here. Repeating the call is safe. Use `POST api/2.0/files/favorites` to mark  entries again.
+         * @summary Delete favorite files and folders
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1607,7 +2273,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes the file versions with the IDs specified in the request.
+         * Queues a background job that removes the listed versions from the history of one file, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`; a failure met while the job runs is reported in its `error` rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  `GET api/2.0/files/file/{fileId}/history` reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete file versions
          * @param {DeleteVersionBatchRequestDto} [deleteVersionBatchRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1615,14 +2281,14 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteFileVersions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions/
          */
-        async deleteFileVersions(deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
+        async deleteFileVersions(deleteVersionBatchRequestDto?: DeleteVersionBatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFileVersions(deleteVersionBatchRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.deleteFileVersions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Duplicates all the selected files and folders.
+         * Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller\'s duplicate operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  `PUT api/2.0/files/fileops/copy`. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
          * @summary Duplicate files and folders
          * @param {DuplicateRequestDto} [duplicateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1637,10 +2303,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
+         * Queues a background job that permanently removes the content of the caller\'s own Trash, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller\'s Trash is touched. With `folderType` the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
          * @summary Empty the Trash folder
-         * @param {boolean} [single] Specifies whether to return only the current operation
-         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+         * @param {boolean} [single] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread.
+         * @param {Array<EmptyTrashFolderTypeEnum>} [folderType] Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for emptyTrash operation
@@ -1653,25 +2319,41 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
          * @summary Finalize an upload session
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The session ID.
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for finalizeSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
          */
-        async finalizeSession(folderId: number, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadSessionResponseIntegerWrapper>> {
+        async finalizeSession(folderId: number, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadSessionResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.finalizeSession(folderId, sessionId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.finalizeSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the active file operations.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
+         * @summary Finalize an upload session (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for finalizeSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
+         */
+        async finalizeSessionThirdParty(folderId: string, sessionId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyUploadSessionResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.finalizeSessionThirdParty(folderId, sessionId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.finalizeSessionThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller\'s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
          * @summary Get active file operations
-         * @param {string} [id] The ID of the file operation.
+         * @param {string} [id] The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getOperationStatuses operation
@@ -1684,10 +2366,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Retrieves the statuses of operations filtered by the specified operation type.
-         * @summary Get file operation statuses
-         * @param {FileOperationType} operationType Specifies the type of file operation to be retrieved.
-         * @param {string} [id] The ID of the file operation.
+         * Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account\'s operations.
+         * @summary Get file operations by type
+         * @param {FileOperationType} operationType The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation.
+         * @param {string} [id] The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getOperationStatusesByType operation
@@ -1700,8 +2382,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Marks the files and folders with the IDs specified in the request as read.
-         * @summary Mark as read
+         * Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller\'s mark-as-read operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller\'s own badges are affected, while  other members keep theirs. To see what is currently marked as new use `GET api/2.0/files/{folderId}/news` for  one folder and `GET api/2.0/files/rooms/news` for the rooms of the caller.
+         * @summary Mark files and folders as read
          * @param {BaseBatchRequestDto} [baseBatchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1715,8 +2397,8 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Move or copy to a folder
+         * Queues a background job that moves the requested files and folders into `destFolderId`, removing them from  where they were, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Before starting,  `GET api/2.0/files/fileops/move` reports which items already have a same-named entry at the destination and  `conflictResolveType` decides what happens to them, while `GET api/2.0/files/fileops/checkdestfolder` reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the  originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
+         * @summary Move files and folders
          * @param {BatchRequestDto} [batchRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1730,25 +2412,41 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Starts a conversion operation of a file with the ID specified in the request.
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
          * @summary Start file conversion
-         * @param {number} fileId The file ID to start conversion proccess.
-         * @param {CheckConversionRequestDtoInteger} [checkConversionRequestDtoInteger] The parameters for checking file conversion.
+         * @param {number} fileId The file to convert.
+         * @param {CheckConversionRequestDto} [checkConversionRequestDto] The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startFileConversion operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion/
          */
-        async startFileConversion(fileId: number, checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startFileConversion(fileId, checkConversionRequestDtoInteger, options);
+        async startFileConversion(fileId: number, checkConversionRequestDto?: CheckConversionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startFileConversion(fileId, checkConversionRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.startFileConversion']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Finishes an operation with the ID specified in the request or all the active operations.
-         * @summary Finish active operations
-         * @param {string} id The operation unique identifier.
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
+         * @summary Start file conversion (third-party storage)
+         * @param {string} fileId The file to convert.
+         * @param {ThirdPartyCheckConversionRequestDto} [thirdPartyCheckConversionRequestDto] The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for startFileConversionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
+         */
+        async startFileConversionThirdParty(fileId: string, thirdPartyCheckConversionRequestDto?: ThirdPartyCheckConversionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConversationResultArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startFileConversionThirdParty(fileId, thirdPartyCheckConversionRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.startFileConversionThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Cancels a background file operation of the caller and answers with the operations that are left. Pass the `id`  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from `GET api/2.0/files/fileops` at once, which is why  the answer here is usually empty. An id that is not among the caller\'s operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
+         * @summary Cancel file operations
+         * @param {string} id The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateTasks operation
@@ -1761,10 +2459,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates a comment in a file with the ID specified in the request.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Update a comment
-         * @param {number} fileId The file ID where the comment is located.
-         * @param {UpdateComment} updateComment The parameters for updating a comment.
+         * @param {number} fileId The file whose version comment is replaced.
+         * @param {UpdateComment} updateComment The version and the comment to store on it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFileComment operation
@@ -1777,38 +2475,89 @@ export const OperationsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
-         * @summary Handles the upload of a chunk for an existing upload session.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {number} [chunkNumber] The chunk number.
-         * @param {File} [file] The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
+         * @summary Update a comment (third-party storage)
+         * @param {string} fileId The file whose version comment is replaced.
+         * @param {UpdateComment} updateComment The version and the comment to store on it.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateFileCommentThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
+         */
+        async updateFileCommentThirdParty(fileId: string, updateComment: UpdateComment, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileCommentThirdParty(fileId, updateComment, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.updateFileCommentThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
+         * @param {number} [chunkNumber] The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
+         * @param {File} [file] The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadAsyncSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
          */
-        async uploadAsyncSession(folderId: number, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper>> {
+        async uploadAsyncSession(folderId: number, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadAsyncSession(folderId, sessionId, chunkNumber, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.uploadAsyncSession']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
-         * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
-         * @param {number} folderId The folder ID.
-         * @param {string} sessionId The upload session ID.
-         * @param {File} [file] The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
+         * @param {number} [chunkNumber] The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
+         * @param {File} [file] The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadAsyncSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
+         */
+        async uploadAsyncSessionThirdParty(folderId: string, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadAsyncSessionThirdParty(folderId, sessionId, chunkNumber, file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.uploadAsyncSessionThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk
+         * @param {number} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
+         * @param {File} [file] The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
          */
-        async uploadSession(folderId: number, sessionId: string, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadSessionResponseIntegerWrapper>> {
+        async uploadSession(folderId: number, sessionId: string, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UploadSessionResponseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadSession(folderId, sessionId, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.uploadSession']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk (third-party storage)
+         * @param {string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {string} sessionId The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
+         * @param {File} [file] The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
+         */
+        async uploadSessionThirdParty(folderId: string, sessionId: string, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyUploadSessionResponseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadSessionThirdParty(folderId, sessionId, file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OperationsApi.uploadSessionThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -1822,8 +2571,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
     const localVarFp = OperationsApiFp(configuration)
     return {
         /**
-         * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
-         * @summary Aborts an in-progress file upload session.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session
          * @param {OperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for abortUploadSession operation
@@ -1834,7 +2583,19 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.abortUploadSession(requestParameters.sessionId, requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Adds files and folders with the IDs specified in the request to the favorite list.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * @summary Abort an upload session (third-party storage)
+         * @param {OperationsApiAbortUploadSessionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for abortUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session-third-party/
+         * @throws {RequiredError}
+         */
+        abortUploadSessionThirdParty(requestParameters: OperationsApiAbortUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.abortUploadSessionThirdParty(requestParameters.sessionId, requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is `true` even  when nothing was marked, so read the outcome back from `GET api/2.0/files/@favorites` instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. `returnSingleOperation` arrives with the shared body and does nothing here. Use  `DELETE api/2.0/files/favorites` to undo, or `GET api/2.0/files/favorites/{fileId}` for a single file.
          * @summary Add favorite files and folders
          * @param {OperationsApiAddFavoritesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1846,7 +2607,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.addFavorites(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts the download process of files and folders with the IDs specified in the request.
+         * Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller\'s download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
          * @summary Bulk download
          * @param {OperationsApiBulkDownloadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1858,7 +2619,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.bulkDownload(requestParameters.downloadRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks the conversion status of a file with the ID specified in the request.
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
          * @summary Get conversion status
          * @param {OperationsApiCheckConversionStatusRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1870,8 +2631,20 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkConversionStatus(requestParameters.fileId, requestParameters.start, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-         * @summary Move or copy files to a folder
+         * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+         * @summary Get conversion status (third-party storage)
+         * @param {OperationsApiCheckConversionStatusThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for checkConversionStatusThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-conversion-status-third-party/
+         * @throws {RequiredError}
+         */
+        checkConversionStatusThirdParty(requestParameters: OperationsApiCheckConversionStatusThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.checkConversionStatusThirdParty(requestParameters.fileId, requestParameters.start, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
+         * @summary Check move or copy conflicts
          * @param {OperationsApiCheckMoveOrCopyBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyBatchItems operation
@@ -1882,8 +2655,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkMoveOrCopyBatchItems(requestParameters.inDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if files can be moved or copied to the specified folder.
-         * @summary Check for moving or copying files to a folder
+         * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
+         * @summary Check the destination folder
          * @param {OperationsApiCheckMoveOrCopyDestFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkMoveOrCopyDestFolder operation
@@ -1894,8 +2667,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.checkMoveOrCopyDestFolder(requestParameters.inDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Copy to the folder
+         * Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
+         * @summary Copy files and folders
          * @param {OperationsApiCopyBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for copyBatchItems operation
@@ -1906,7 +2679,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.copyBatchItems(requestParameters.batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
          * @summary Chunked upload
          * @param {OperationsApiCreateUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1915,23 +2688,48 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
          * @throws {RequiredError}
          */
-        createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperIntegerWrapper> {
+        createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper> {
             return localVarFp.createUploadSession(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
-         * @summary Creates a session for uploading a file to a specific folder in chunks.
+         * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
+         * @summary Chunked upload (third-party storage)
+         * @param {OperationsApiCreateUploadSessionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @deprecated
+         * REST API Reference for createUploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-third-party/
+         * @throws {RequiredError}
+         */
+        createUploadSessionThirdParty(requestParameters: OperationsApiCreateUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper> {
+            return localVarFp.createUploadSessionThirdParty(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session
          * @param {OperationsApiCreateUploadSessionInFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createUploadSessionInFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
          * @throws {RequiredError}
          */
-        createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
+        createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper> {
             return localVarFp.createUploadSessionInFolder(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes the files and folders with the IDs specified in the request.
+         * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+         * @summary Create an upload session (third-party storage)
+         * @param {OperationsApiCreateUploadSessionInFolderThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createUploadSessionInFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder-third-party/
+         * @throws {RequiredError}
+         */
+        createUploadSessionInFolderThirdParty(requestParameters: OperationsApiCreateUploadSessionInFolderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper> {
+            return localVarFp.createUploadSessionInFolderThirdParty(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Queues a background job that deletes the requested files and folders, and answers with the caller\'s delete  operations, including the one just started. Poll `GET api/2.0/files/fileops` until the operation reports  `finished`, and read its `error`: a failure on a single item is reported there rather than as a status code.  With `immediately=false` the items are moved to the caller\'s Trash and can be restored from it, while  `immediately=true` removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
          * @summary Delete files and folders
          * @param {OperationsApiDeleteBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1943,8 +2741,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.deleteBatchItems(requestParameters.deleteBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
-         * @summary Delete favorite files and folders (using body parameters)
+         * Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  `GET api/2.0/files/@favorites`; to delete the entries themselves call `PUT api/2.0/files/fileops/delete`  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated `fileIds` and `folderIds`  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is `true` whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. `returnSingleOperation` arrives with the  shared body and does nothing here. Repeating the call is safe. Use `POST api/2.0/files/favorites` to mark  entries again.
+         * @summary Delete favorite files and folders
          * @param {OperationsApiDeleteFavoritesFromBodyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteFavoritesFromBody operation
@@ -1955,7 +2753,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.deleteFavoritesFromBody(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes the file versions with the IDs specified in the request.
+         * Queues a background job that removes the listed versions from the history of one file, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`; a failure met while the job runs is reported in its `error` rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  `GET api/2.0/files/file/{fileId}/history` reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete file versions
          * @param {OperationsApiDeleteFileVersionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1963,11 +2761,11 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-versions/
          * @throws {RequiredError}
          */
-        deleteFileVersions(requestParameters: OperationsApiDeleteFileVersionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
+        deleteFileVersions(requestParameters: OperationsApiDeleteFileVersionsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
             return localVarFp.deleteFileVersions(requestParameters.deleteVersionBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Duplicates all the selected files and folders.
+         * Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller\'s duplicate operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  `PUT api/2.0/files/fileops/copy`. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
          * @summary Duplicate files and folders
          * @param {OperationsApiDuplicateBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1979,7 +2777,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.duplicateBatchItems(requestParameters.duplicateRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
+         * Queues a background job that permanently removes the content of the caller\'s own Trash, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller\'s Trash is touched. With `folderType` the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
          * @summary Empty the Trash folder
          * @param {OperationsApiEmptyTrashRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1991,7 +2789,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.emptyTrash(requestParameters.single, requestParameters.folderType, options).then((request) => request(axios, basePath));
         },
         /**
-         * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
          * @summary Finalize an upload session
          * @param {OperationsApiFinalizeSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1999,11 +2797,23 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session/
          * @throws {RequiredError}
          */
-        finalizeSession(requestParameters: OperationsApiFinalizeSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
+        finalizeSession(requestParameters: OperationsApiFinalizeSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseWrapper> {
             return localVarFp.finalizeSession(requestParameters.folderId, requestParameters.sessionId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the active file operations.
+         * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
+         * @summary Finalize an upload session (third-party storage)
+         * @param {OperationsApiFinalizeSessionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for finalizeSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/finalize-session-third-party/
+         * @throws {RequiredError}
+         */
+        finalizeSessionThirdParty(requestParameters: OperationsApiFinalizeSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyUploadSessionResponseWrapper> {
+            return localVarFp.finalizeSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller\'s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
          * @summary Get active file operations
          * @param {OperationsApiGetOperationStatusesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2015,8 +2825,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getOperationStatuses(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Retrieves the statuses of operations filtered by the specified operation type.
-         * @summary Get file operation statuses
+         * Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account\'s operations.
+         * @summary Get file operations by type
          * @param {OperationsApiGetOperationStatusesByTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getOperationStatusesByType operation
@@ -2027,8 +2837,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getOperationStatusesByType(requestParameters.operationType, requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Marks the files and folders with the IDs specified in the request as read.
-         * @summary Mark as read
+         * Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller\'s mark-as-read operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller\'s own badges are affected, while  other members keep theirs. To see what is currently marked as new use `GET api/2.0/files/{folderId}/news` for  one folder and `GET api/2.0/files/rooms/news` for the rooms of the caller.
+         * @summary Mark files and folders as read
          * @param {OperationsApiMarkAsReadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for markAsRead operation
@@ -2039,8 +2849,8 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.markAsRead(requestParameters.baseBatchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
-         * @summary Move or copy to a folder
+         * Queues a background job that moves the requested files and folders into `destFolderId`, removing them from  where they were, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Before starting,  `GET api/2.0/files/fileops/move` reports which items already have a same-named entry at the destination and  `conflictResolveType` decides what happens to them, while `GET api/2.0/files/fileops/checkdestfolder` reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the  originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
+         * @summary Move files and folders
          * @param {OperationsApiMoveBatchItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for moveBatchItems operation
@@ -2051,7 +2861,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.moveBatchItems(requestParameters.batchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts a conversion operation of a file with the ID specified in the request.
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
          * @summary Start file conversion
          * @param {OperationsApiStartFileConversionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2060,11 +2870,23 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         startFileConversion(requestParameters: OperationsApiStartFileConversionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
-            return localVarFp.startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDtoInteger, options).then((request) => request(axios, basePath));
+            return localVarFp.startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Finishes an operation with the ID specified in the request or all the active operations.
-         * @summary Finish active operations
+         * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
+         * @summary Start file conversion (third-party storage)
+         * @param {OperationsApiStartFileConversionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for startFileConversionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-file-conversion-third-party/
+         * @throws {RequiredError}
+         */
+        startFileConversionThirdParty(requestParameters: OperationsApiStartFileConversionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConversationResultArrayWrapper> {
+            return localVarFp.startFileConversionThirdParty(requestParameters.fileId, requestParameters.thirdPartyCheckConversionRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Cancels a background file operation of the caller and answers with the operations that are left. Pass the `id`  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from `GET api/2.0/files/fileops` at once, which is why  the answer here is usually empty. An id that is not among the caller\'s operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
+         * @summary Cancel file operations
          * @param {OperationsApiTerminateTasksRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for terminateTasks operation
@@ -2075,7 +2897,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.terminateTasks(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates a comment in a file with the ID specified in the request.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Update a comment
          * @param {OperationsApiUpdateFileCommentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2087,28 +2909,64 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
             return localVarFp.updateFileComment(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(axios, basePath));
         },
         /**
-         * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
-         * @summary Handles the upload of a chunk for an existing upload session.
+         * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
+         * @summary Update a comment (third-party storage)
+         * @param {OperationsApiUpdateFileCommentThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for updateFileCommentThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment-third-party/
+         * @throws {RequiredError}
+         */
+        updateFileCommentThirdParty(requestParameters: OperationsApiUpdateFileCommentThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.updateFileCommentThirdParty(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk
          * @param {OperationsApiUploadAsyncSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadAsyncSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
          * @throws {RequiredError}
          */
-        uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseIntegerWrapper> {
+        uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper> {
             return localVarFp.uploadAsyncSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(axios, basePath));
         },
         /**
-         * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
-         * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
+         * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+         * @summary Upload a numbered chunk (third-party storage)
+         * @param {OperationsApiUploadAsyncSessionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for uploadAsyncSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session-third-party/
+         * @throws {RequiredError}
+         */
+        uploadAsyncSessionThirdParty(requestParameters: OperationsApiUploadAsyncSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper> {
+            return localVarFp.uploadAsyncSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk
          * @param {OperationsApiUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session/
          * @throws {RequiredError}
          */
-        uploadSession(requestParameters: OperationsApiUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseIntegerWrapper> {
+        uploadSession(requestParameters: OperationsApiUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<UploadSessionResponseWrapper> {
             return localVarFp.uploadSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+         * @summary Upload the next chunk (third-party storage)
+         * @param {OperationsApiUploadSessionThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for uploadSessionThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-session-third-party/
+         * @throws {RequiredError}
+         */
+        uploadSessionThirdParty(requestParameters: OperationsApiUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyUploadSessionResponseWrapper> {
+            return localVarFp.uploadSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -2120,18 +2978,39 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
  */
 export interface OperationsApiAbortUploadSessionRequest {
     /**
-     * The session ID.
+     * The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
      * @type {string}
      * @memberof OperationsApiAbortUploadSession
      */
     readonly sessionId: string
 
     /**
-     * The folder ID.
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
      * @type {number}
      * @memberof OperationsApiAbortUploadSession
      */
     readonly folderId: number
+}
+
+/**
+ * Request parameters for abortUploadSessionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiAbortUploadSessionThirdPartyRequest
+ */
+export interface OperationsApiAbortUploadSessionThirdPartyRequest {
+    /**
+     * The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+     * @type {string}
+     * @memberof OperationsApiAbortUploadSessionThirdParty
+     */
+    readonly sessionId: string
+
+    /**
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+     * @type {string}
+     * @memberof OperationsApiAbortUploadSessionThirdParty
+     */
+    readonly folderId: string
 }
 
 /**
@@ -2169,16 +3048,37 @@ export interface OperationsApiBulkDownloadRequest {
  */
 export interface OperationsApiCheckConversionStatusRequest {
     /**
-     * The file ID to check conversion status.
+     * The file whose conversion is asked about.
      * @type {number}
      * @memberof OperationsApiCheckConversionStatus
      */
     readonly fileId: number
 
     /**
-     * Specifies whether a conversion operation is started or not.
+     * Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
      * @type {boolean}
      * @memberof OperationsApiCheckConversionStatus
+     */
+    readonly start?: boolean
+}
+
+/**
+ * Request parameters for checkConversionStatusThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCheckConversionStatusThirdPartyRequest
+ */
+export interface OperationsApiCheckConversionStatusThirdPartyRequest {
+    /**
+     * The file whose conversion is asked about.
+     * @type {string}
+     * @memberof OperationsApiCheckConversionStatusThirdParty
+     */
+    readonly fileId: string
+
+    /**
+     * Whether to start the conversion as well: `true` queues it with the default output format and no password,  `false` only reports what the portal already knows.
+     * @type {boolean}
+     * @memberof OperationsApiCheckConversionStatusThirdParty
      */
     readonly start?: boolean
 }
@@ -2190,7 +3090,7 @@ export interface OperationsApiCheckConversionStatusRequest {
  */
 export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
     /**
-     * The request parameters for copying/moving files.
+     * The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
      * @type {BatchRequestDto}
      * @memberof OperationsApiCheckMoveOrCopyBatchItems
      */
@@ -2204,7 +3104,7 @@ export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
  */
 export interface OperationsApiCheckMoveOrCopyDestFolderRequest {
     /**
-     * The request parameters for copying/moving files.
+     * The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
      * @type {BatchRequestDto}
      * @memberof OperationsApiCheckMoveOrCopyDestFolder
      */
@@ -2232,16 +3132,37 @@ export interface OperationsApiCopyBatchItemsRequest {
  */
 export interface OperationsApiCreateUploadSessionRequest {
     /**
-     * The session folder ID.
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
      * @type {number}
      * @memberof OperationsApiCreateUploadSession
      */
     readonly folderId: number
 
     /**
-     * The session parameters.
+     * The file the session is opened for, and how a clash with an existing name is settled.
      * @type {SessionRequest}
      * @memberof OperationsApiCreateUploadSession
+     */
+    readonly sessionRequest: SessionRequest
+}
+
+/**
+ * Request parameters for createUploadSessionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCreateUploadSessionThirdPartyRequest
+ */
+export interface OperationsApiCreateUploadSessionThirdPartyRequest {
+    /**
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+     * @type {string}
+     * @memberof OperationsApiCreateUploadSessionThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The file the session is opened for, and how a clash with an existing name is settled.
+     * @type {SessionRequest}
+     * @memberof OperationsApiCreateUploadSessionThirdParty
      */
     readonly sessionRequest: SessionRequest
 }
@@ -2253,16 +3174,37 @@ export interface OperationsApiCreateUploadSessionRequest {
  */
 export interface OperationsApiCreateUploadSessionInFolderRequest {
     /**
-     * The session folder ID.
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
      * @type {number}
      * @memberof OperationsApiCreateUploadSessionInFolder
      */
     readonly folderId: number
 
     /**
-     * The session parameters.
+     * The file the session is opened for, and how a clash with an existing name is settled.
      * @type {SessionRequest}
      * @memberof OperationsApiCreateUploadSessionInFolder
+     */
+    readonly sessionRequest: SessionRequest
+}
+
+/**
+ * Request parameters for createUploadSessionInFolderThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiCreateUploadSessionInFolderThirdPartyRequest
+ */
+export interface OperationsApiCreateUploadSessionInFolderThirdPartyRequest {
+    /**
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+     * @type {string}
+     * @memberof OperationsApiCreateUploadSessionInFolderThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The file the session is opened for, and how a clash with an existing name is settled.
+     * @type {SessionRequest}
+     * @memberof OperationsApiCreateUploadSessionInFolderThirdParty
      */
     readonly sessionRequest: SessionRequest
 }
@@ -2330,14 +3272,14 @@ export interface OperationsApiDuplicateBatchItemsRequest {
  */
 export interface OperationsApiEmptyTrashRequest {
     /**
-     * Specifies whether to return only the current operation
+     * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread.
      * @type {boolean}
      * @memberof OperationsApiEmptyTrash
      */
     readonly single?: boolean
 
     /**
-     * The parent folder types used to empty the trash only from the items originally located in the sections of the specified types.
+     * Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms.
      * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
      * @memberof OperationsApiEmptyTrash
      */
@@ -2351,16 +3293,37 @@ export interface OperationsApiEmptyTrashRequest {
  */
 export interface OperationsApiFinalizeSessionRequest {
     /**
-     * The folder ID.
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
      * @type {number}
      * @memberof OperationsApiFinalizeSession
      */
     readonly folderId: number
 
     /**
-     * The session ID.
+     * The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
      * @type {string}
      * @memberof OperationsApiFinalizeSession
+     */
+    readonly sessionId: string
+}
+
+/**
+ * Request parameters for finalizeSessionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiFinalizeSessionThirdPartyRequest
+ */
+export interface OperationsApiFinalizeSessionThirdPartyRequest {
+    /**
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+     * @type {string}
+     * @memberof OperationsApiFinalizeSessionThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The session to assemble, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
+     * @type {string}
+     * @memberof OperationsApiFinalizeSessionThirdParty
      */
     readonly sessionId: string
 }
@@ -2372,7 +3335,7 @@ export interface OperationsApiFinalizeSessionRequest {
  */
 export interface OperationsApiGetOperationStatusesRequest {
     /**
-     * The ID of the file operation.
+     * The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
      * @type {string}
      * @memberof OperationsApiGetOperationStatuses
      */
@@ -2386,14 +3349,14 @@ export interface OperationsApiGetOperationStatusesRequest {
  */
 export interface OperationsApiGetOperationStatusesByTypeRequest {
     /**
-     * Specifies the type of file operation to be retrieved.
+     * The kind of operation the answer is limited to. Only the kinds that have a queue of their own ever carry  records — a copy, a deletion, a download, a mark-as-read and a duplication — and moves cannot be read through  this route at all, because its address belongs to another operation.
      * @type {FileOperationType}
      * @memberof OperationsApiGetOperationStatusesByType
      */
     readonly operationType: FileOperationType
 
     /**
-     * The ID of the file operation.
+     * The operation to report on, as returned in `id` when it was started; without it every operation of the caller  is reported. An id that is not among the caller\'s operations gives an empty answer rather than an error.
      * @type {string}
      * @memberof OperationsApiGetOperationStatusesByType
      */
@@ -2435,18 +3398,39 @@ export interface OperationsApiMoveBatchItemsRequest {
  */
 export interface OperationsApiStartFileConversionRequest {
     /**
-     * The file ID to start conversion proccess.
+     * The file to convert.
      * @type {number}
      * @memberof OperationsApiStartFileConversion
      */
     readonly fileId: number
 
     /**
-     * The parameters for checking file conversion.
-     * @type {CheckConversionRequestDtoInteger}
+     * The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+     * @type {CheckConversionRequestDto}
      * @memberof OperationsApiStartFileConversion
      */
-    readonly checkConversionRequestDtoInteger?: CheckConversionRequestDtoInteger
+    readonly checkConversionRequestDto?: CheckConversionRequestDto
+}
+
+/**
+ * Request parameters for startFileConversionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiStartFileConversionThirdPartyRequest
+ */
+export interface OperationsApiStartFileConversionThirdPartyRequest {
+    /**
+     * The file to convert.
+     * @type {string}
+     * @memberof OperationsApiStartFileConversionThirdParty
+     */
+    readonly fileId: string
+
+    /**
+     * The parameters of the conversion. The whole body may be omitted, in which case the defaults of the portal  apply.
+     * @type {ThirdPartyCheckConversionRequestDto}
+     * @memberof OperationsApiStartFileConversionThirdParty
+     */
+    readonly thirdPartyCheckConversionRequestDto?: ThirdPartyCheckConversionRequestDto
 }
 
 /**
@@ -2456,7 +3440,7 @@ export interface OperationsApiStartFileConversionRequest {
  */
 export interface OperationsApiTerminateTasksRequest {
     /**
-     * The operation unique identifier.
+     * The operation to cancel, as returned in `id` when it was started. A call that leaves the route segment out  cancels every operation of the caller, and an id that is not among their operations cancels nothing without  being an error.
      * @type {string}
      * @memberof OperationsApiTerminateTasks
      */
@@ -2470,16 +3454,37 @@ export interface OperationsApiTerminateTasksRequest {
  */
 export interface OperationsApiUpdateFileCommentRequest {
     /**
-     * The file ID where the comment is located.
+     * The file whose version comment is replaced.
      * @type {number}
      * @memberof OperationsApiUpdateFileComment
      */
     readonly fileId: number
 
     /**
-     * The parameters for updating a comment.
+     * The version and the comment to store on it.
      * @type {UpdateComment}
      * @memberof OperationsApiUpdateFileComment
+     */
+    readonly updateComment: UpdateComment
+}
+
+/**
+ * Request parameters for updateFileCommentThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUpdateFileCommentThirdPartyRequest
+ */
+export interface OperationsApiUpdateFileCommentThirdPartyRequest {
+    /**
+     * The file whose version comment is replaced.
+     * @type {string}
+     * @memberof OperationsApiUpdateFileCommentThirdParty
+     */
+    readonly fileId: string
+
+    /**
+     * The version and the comment to store on it.
+     * @type {UpdateComment}
+     * @memberof OperationsApiUpdateFileCommentThirdParty
      */
     readonly updateComment: UpdateComment
 }
@@ -2491,30 +3496,65 @@ export interface OperationsApiUpdateFileCommentRequest {
  */
 export interface OperationsApiUploadAsyncSessionRequest {
     /**
-     * The folder ID.
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
      * @type {number}
      * @memberof OperationsApiUploadAsyncSession
      */
     readonly folderId: number
 
     /**
-     * The upload session ID.
+     * The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
      * @type {string}
      * @memberof OperationsApiUploadAsyncSession
      */
     readonly sessionId: string
 
     /**
-     * The chunk number.
+     * The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
      * @type {number}
      * @memberof OperationsApiUploadAsyncSession
      */
     readonly chunkNumber?: number
 
     /**
-     * The file chunk to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file chunk content from the HTTP request form for chunked upload operations.  The file chunk is accessed via the IFormFile interface which provides access to the chunk content and length.
+     * The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
      * @type {File}
      * @memberof OperationsApiUploadAsyncSession
+     */
+    readonly file?: File
+}
+
+/**
+ * Request parameters for uploadAsyncSessionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUploadAsyncSessionThirdPartyRequest
+ */
+export interface OperationsApiUploadAsyncSessionThirdPartyRequest {
+    /**
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+     * @type {string}
+     * @memberof OperationsApiUploadAsyncSessionThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The session this part belongs to, as returned in `id` when it was created; a 32-character hexadecimal string.
+     * @type {string}
+     * @memberof OperationsApiUploadAsyncSessionThirdParty
+     */
+    readonly sessionId: string
+
+    /**
+     * The position of this part in the file, counted from 1. Sending the same number again replaces that part  instead of adding one, which is how a failed part is retried; leaving the number out makes the server count  the parts itself.
+     * @type {number}
+     * @memberof OperationsApiUploadAsyncSessionThirdParty
+     */
+    readonly chunkNumber?: number
+
+    /**
+     * The part of the file to store, sent as the multipart field of the same name. It is kept under the number given  beside it, and a part larger than the portal chunk size is refused.
+     * @type {File}
+     * @memberof OperationsApiUploadAsyncSessionThirdParty
      */
     readonly file?: File
 }
@@ -2526,23 +3566,51 @@ export interface OperationsApiUploadAsyncSessionRequest {
  */
 export interface OperationsApiUploadSessionRequest {
     /**
-     * The folder ID.
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
      * @type {number}
      * @memberof OperationsApiUploadSession
      */
     readonly folderId: number
 
     /**
-     * The upload session ID.
+     * The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
      * @type {string}
      * @memberof OperationsApiUploadSession
      */
     readonly sessionId: string
 
     /**
-     * The file to be uploaded as part of the multipart/form-data request.  This property represents the uploaded file content from the HTTP request form.  The file is accessed via the IFormFile interface which provides access to the file name, content type, length, and stream.
+     * The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
      * @type {File}
      * @memberof OperationsApiUploadSession
+     */
+    readonly file?: File
+}
+
+/**
+ * Request parameters for uploadSessionThirdParty operation in OperationsApi.
+ * @export
+ * @interface OperationsApiUploadSessionThirdPartyRequest
+ */
+export interface OperationsApiUploadSessionThirdPartyRequest {
+    /**
+     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+     * @type {string}
+     * @memberof OperationsApiUploadSessionThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The session this part belongs to, as returned in `id` when it was created; the parts of one session must be  sent one after another, not in parallel.
+     * @type {string}
+     * @memberof OperationsApiUploadSessionThirdParty
+     */
+    readonly sessionId: string
+
+    /**
+     * The next part of the file, sent as the multipart field of the same name. Parts are appended in the order they  arrive, and a part larger than the portal chunk size is refused.
+     * @type {File}
+     * @memberof OperationsApiUploadSessionThirdParty
      */
     readonly file?: File
 }
@@ -2555,8 +3623,8 @@ export interface OperationsApiUploadSessionRequest {
  */
 export class OperationsApi extends BaseAPI {
     /**
-     * This method allows users to cancel an ongoing upload session identified by the session ID.  Once the session is aborted, the associated resources will be cleaned up, and the session will no longer accept further uploads.
-     * @summary Aborts an in-progress file upload session.
+     * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+     * @summary Abort an upload session
      * @param {FilesOperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2567,7 +3635,19 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Adds files and folders with the IDs specified in the request to the favorite list.
+     * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+     * @summary Abort an upload session (third-party storage)
+     * @param {FilesOperationsApiAbortUploadSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public abortUploadSessionThirdParty(requestParameters: OperationsApiAbortUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).abortUploadSessionThirdParty(requestParameters.sessionId, requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Marks the listed files and folders as favorites for the calling account. The favorite list is personal:  nothing changes for other members, and the entries stay where they are stored. Read access to each item is  enough, so a room member with view-only rights and a guest may call it. Items the caller cannot read, ids that  do not exist and encrypted files of a private room are skipped without a word, and the answer is `true` even  when nothing was marked, so read the outcome back from `GET api/2.0/files/@favorites` instead of trusting it.  Numeric ids address entries stored in the portal itself, string ids entries on a connected third-party  account, and both kinds may be sent in one request. The call is mutating but safe to repeat: an item already  marked stays listed once. An entry moved to the Trash keeps its mark and is left out of the listing until it  is restored. `returnSingleOperation` arrives with the shared body and does nothing here. Use  `DELETE api/2.0/files/favorites` to undo, or `GET api/2.0/files/favorites/{fileId}` for a single file.
      * @summary Add favorite files and folders
      * @param {FilesOperationsApiAddFavoritesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2579,7 +3659,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Starts the download process of files and folders with the IDs specified in the request.
+     * Queues a background job that packs the requested files and folders into a single archive, and answers with the  caller\'s download operations, including the one just started. The archive is not ready when the response  arrives: poll `GET api/2.0/files/fileops` until the operation reports `finished`, then take the address of the  archive from its `url`. Items listed in `fileConvertIds` are converted to the format named there before they  are packed, while the items of `fileIds` are packed as they are. Read access to every listed item is required:  an item the caller may not read fails the whole call with 403, and an id that resolves to nothing is answered  as missing, so filter the selection beforehand. Only one download at a time is allowed per caller, and a  second call made while the first is still running is refused with 403 as well. An empty selection queues  nothing and simply answers with the operations that are already there. An anonymous caller may use the call  for the items covered by the external link they hold.
      * @summary Bulk download
      * @param {FilesOperationsApiBulkDownloadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2591,7 +3671,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Checks the conversion status of a file with the ID specified in the request.
+     * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
      * @summary Get conversion status
      * @param {FilesOperationsApiCheckConversionStatusRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2603,8 +3683,20 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Checks if files or folders can be moved or copied to the specified folder, moves or copies them, and returns their information.
-     * @summary Move or copy files to a folder
+     * Reports how far the conversion of a file has got, as a list that holds one entry while the portal still knows  about that conversion and nothing once it is over. Read `progress`, which counts from 0 to 100, `error` for  the reason a conversion failed, and `file`, which carries the converted file as soon as it exists. Queue the  conversion with `PUT api/2.0/files/file/{fileId}/checkconversion` and poll this operation until the entry  reaches 100 or disappears: a finished entry is handed out once and then dropped, and an entry whose conversion  stopped is discarded a few minutes later, so an empty list means either already reported or never started  rather than an error. The same empty list is the answer for an identifier no file matches. Passing  `start=true` starts the conversion as well, with the format from the portal settings and no password, which  makes that one flag mutating; without it the operation is read-only. The caller needs read access to the file,  and anyone else is refused.
+     * @summary Get conversion status (third-party storage)
+     * @param {FilesOperationsApiCheckConversionStatusThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public checkConversionStatusThirdParty(requestParameters: OperationsApiCheckConversionStatusThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).checkConversionStatusThirdParty(requestParameters.fileId, requestParameters.start, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
+     * @summary Check move or copy conflicts
      * @param {FilesOperationsApiCheckMoveOrCopyBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2615,8 +3707,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Checks if files can be moved or copied to the specified folder.
-     * @summary Check for moving or copying files to a folder
+     * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
+     * @summary Check the destination folder
      * @param {FilesOperationsApiCheckMoveOrCopyDestFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2627,8 +3719,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Copies all the selected files and folders to the folder with the ID specified in the request.
-     * @summary Copy to the folder
+     * Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
+     * @summary Copy files and folders
      * @param {FilesOperationsApiCopyBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2639,7 +3731,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Creates the session to upload large files in multiple chunks to the folder with the ID specified in the request.
+     * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
      * @summary Chunked upload
      * @param {FilesOperationsApiCreateUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2652,8 +3744,21 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * The session allows the user to upload a file in smaller chunks to the folder identified by its ID.  The file information, such as name, size, and additional metadata, must be provided in the request.  This method facilitates large file upload scenarios by enabling chunked file uploads.
-     * @summary Creates a session for uploading a file to a specific folder in chunks.
+     * Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
+     * @summary Chunked upload (third-party storage)
+     * @param {FilesOperationsApiCreateUploadSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @deprecated
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public createUploadSessionThirdParty(requestParameters: OperationsApiCreateUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).createUploadSessionThirdParty(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+     * @summary Create an upload session
      * @param {FilesOperationsApiCreateUploadSessionInFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2664,7 +3769,19 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Deletes the files and folders with the IDs specified in the request.
+     * Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
+     * @summary Create an upload session (third-party storage)
+     * @param {FilesOperationsApiCreateUploadSessionInFolderThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public createUploadSessionInFolderThirdParty(requestParameters: OperationsApiCreateUploadSessionInFolderThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).createUploadSessionInFolderThirdParty(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Queues a background job that deletes the requested files and folders, and answers with the caller\'s delete  operations, including the one just started. Poll `GET api/2.0/files/fileops` until the operation reports  `finished`, and read its `error`: a failure on a single item is reported there rather than as a status code.  With `immediately=false` the items are moved to the caller\'s Trash and can be restored from it, while  `immediately=true` removes them at once and for good; deleting a folder takes everything inside it either way.  The call is destructive and it is not a no-op on repetition — a second call with the same ids deletes whatever  has been restored in the meantime. Access is checked before the job is queued: deleting from a room requires  room manager or content-creator rights, editing or read rights are refused with 403, and an id that resolves  to nothing is answered as missing. An empty selection queues nothing and answers with the operations that are  already there. To clear the Trash itself use `PUT api/2.0/files/fileops/emptytrash`.
      * @summary Delete files and folders
      * @param {FilesOperationsApiDeleteBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2676,8 +3793,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Removes files and folders with the IDs specified in the request from the favorite list. This method uses the body parameters.
-     * @summary Delete favorite files and folders (using body parameters)
+     * Removes the favorite mark from the listed files and folders for the calling account. Nothing is deleted from  storage: the entries keep their place, their content and their sharing, and only disappear from  `GET api/2.0/files/@favorites`; to delete the entries themselves call `PUT api/2.0/files/fileops/delete`  instead. Marks of other members are untouched, and read access to each item is enough to call it. The ids go  into the JSON body documented here; the same route also accepts them as repeated `fileIds` and `folderIds`  query parameters, but only in a request that carries no JSON body at all. Numeric ids address entries stored  in the portal itself, string ids entries on a connected third-party account. The answer is `true` whenever the  request was understood, which an empty request, an id that does not exist and an item that was never marked  all achieve, so it does not report how many marks were dropped. `returnSingleOperation` arrives with the  shared body and does nothing here. Repeating the call is safe. Use `POST api/2.0/files/favorites` to mark  entries again.
+     * @summary Delete favorite files and folders
      * @param {FilesOperationsApiDeleteFavoritesFromBodyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2688,7 +3805,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Deletes the file versions with the IDs specified in the request.
+     * Queues a background job that removes the listed versions from the history of one file, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`; a failure met while the job runs is reported in its `error` rather than as a  status code. Removal is permanent — deleted versions do not travel through Trash and cannot be restored, while  the file itself stays in place with the versions that are left. Send the numbers that  `GET api/2.0/files/file/{fileId}/history` reports, and send at least one: an empty list is not an empty  request, it deletes the whole file instead. The number of the current version is refused before anything is  queued, while numbers that no longer exist are passed over without a complaint. The caller needs the rights  that deleting the file itself would need, so a member with read-only rights is refused, as are a file in an  archived room and a file that is already in Trash, and a file that does not exist is answered as missing. To  delete the file itself use `PUT api/2.0/files/fileops/delete`.
      * @summary Delete file versions
      * @param {FilesOperationsApiDeleteFileVersionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2700,7 +3817,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Duplicates all the selected files and folders.
+     * Queues a background job that copies each requested file and folder next to itself, into the folder where it  already is, and answers with the caller\'s duplicate operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. The copies keep the name of the original  with a numeric suffix, so nothing is overwritten and every repetition adds one more copy; duplicating a folder  duplicates its content as well. No destination is taken — to place a copy somewhere else use  `PUT api/2.0/files/fileops/copy`. The caller needs the rights that creating an item in that folder would need,  which inside a room means room manager or content-creator rights: read or editing rights, and an item the  caller has no access to at all, are refused with 403. An empty selection queues nothing and answers with the  operations that are already there.
      * @summary Duplicate files and folders
      * @param {FilesOperationsApiDuplicateBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2712,7 +3829,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Deletes all the files and folders from the Trash folder. If the folder types are specified, only the items originally located in the sections of these types are deleted.
+     * Queues a background job that permanently removes the content of the caller\'s own Trash, and answers with the  caller\'s delete operations, including the one just started. Poll `GET api/2.0/files/fileops` until the  operation reports `finished`. Every authenticated account may empty its own Trash and only its own: no  per-item access check takes place because nothing outside the caller\'s Trash is touched. With `folderType` the  sweep is narrowed to the items that were originally stored in sections and rooms of the named types, so  clearing what came from personal documents leaves what came from rooms untouched; without the parameter the  whole Trash is emptied. What is removed here cannot be restored afterwards, which is the difference from  `PUT api/2.0/files/fileops/delete`, where `immediately=false` puts items into Trash in the first place.  Calling it on an already empty Trash queues nothing and answers with the operations that are already there.
      * @summary Empty the Trash folder
      * @param {FilesOperationsApiEmptyTrashRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2724,7 +3841,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Finalizes the upload session by processing the uploaded file chunks and marking the upload as complete.  This method consolidates chunked uploads into a complete file if required, sends notifications about the upload event,  and performs any additional cleanup or related actions, such as socket updates and webhook publishing.
+     * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
      * @summary Finalize an upload session
      * @param {FilesOperationsApiFinalizeSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2736,7 +3853,19 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the active file operations.
+     * Assembles the parts received so far into the file the session was opened for and closes the session. What  comes out depends on how the session started: one opened against an existing file through  `POST api/2.0/files/file/{fileId}/edit_session` replaces that content in place and keeps the version number,  while one opened against a folder either creates the file or, when a file of the same name was taken over,  stores the content as its next version. A form loses its filling state on the way in. The answer arrives with  201 and carries the identifiers of the file together with the file itself. The call ends the session: the  record and the buffered parts are removed, so it cannot be repeated and there is nothing left to abort  afterwards. Running it before all the declared bytes have arrived assembles whatever is there, so read the  progress from the chunk calls first. An unknown, already closed or expired session id fails instead of  answering as missing.
+     * @summary Finalize an upload session (third-party storage)
+     * @param {FilesOperationsApiFinalizeSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public finalizeSessionThirdParty(requestParameters: OperationsApiFinalizeSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).finalizeSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the background file operations of the caller that are still running or whose finished result has not  been read yet, grouped by kind: duplications first, then moves and copies, deletions, downloads and  mark-as-read. This is the polling target for every operation in this section — an operation appears here as  soon as it is queued and carries `progress` from 0 to 100, `finished`, the `error` of a failed item and, for a  download, the address of the archive in `url`. A record is dropped once its finished state has been handed  out, so a completed operation is reported once and an empty array means there is nothing left to report rather  than that the work failed. Pass `id` to follow a single operation; an id that is not among the caller\'s  operations gives an empty array. Operations are private to the account that started them, an anonymous caller  being scoped to the session of the external link. The call changes nothing. To follow one kind only use  `GET api/2.0/files/fileops/{operationType}`.
      * @summary Get active file operations
      * @param {FilesOperationsApiGetOperationStatusesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2748,8 +3877,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Retrieves the statuses of operations filtered by the specified operation type.
-     * @summary Get file operation statuses
+     * Returns the background file operations of the caller that are of one kind, named by the number in the route:  `1` for a copy, `2` for a deletion, `3` for a download, `4` for a mark-as-read and `7` for a duplication. The  answer carries the same records as `GET api/2.0/files/fileops`, with the same rule that a finished operation  is reported once and then dropped, and `id` narrows it further to a single operation. Moves, kind `0`, cannot  be read through this route: the address `api/2.0/files/fileops/move` belongs to another operation, so read  moves from `GET api/2.0/files/fileops` and pick the records whose `operation` is `0`. A kind that has no queue  of its own — `5` for an import, `6` for a conversion — is accepted and answers with an empty array, while a  number outside the operation type is rejected as an invalid request. The call changes nothing and never shows  another account\'s operations.
+     * @summary Get file operations by type
      * @param {FilesOperationsApiGetOperationStatusesByTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2760,8 +3889,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Marks the files and folders with the IDs specified in the request as read.
-     * @summary Mark as read
+     * Queues a background job that clears the new-item badge from the requested files and folders for the calling  account, and answers with the caller\'s mark-as-read operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Marking a folder clears the badges of  everything inside it as well. Items the caller cannot read are passed over in silence rather than refused, so  the call succeeds even when the whole selection is inaccessible, and an empty selection queues nothing and  answers with the operations that are already there. Repeating the call on items that are already read changes  nothing, and nothing is opened, moved or modified by it — only the caller\'s own badges are affected, while  other members keep theirs. To see what is currently marked as new use `GET api/2.0/files/{folderId}/news` for  one folder and `GET api/2.0/files/rooms/news` for the rooms of the caller.
+     * @summary Mark files and folders as read
      * @param {FilesOperationsApiMarkAsReadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2772,8 +3901,8 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Moves or copies all the selected files and folders to the folder with the ID specified in the request.
-     * @summary Move or copy to a folder
+     * Queues a background job that moves the requested files and folders into `destFolderId`, removing them from  where they were, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`. Before starting,  `GET api/2.0/files/fileops/move` reports which items already have a same-named entry at the destination and  `conflictResolveType` decides what happens to them, while `GET api/2.0/files/fileops/checkdestfolder` reports  whether the destination accepts the files at all. The caller needs create access to the destination and the  right to take the items out of their source, which is why room members with editing or review rights are  refused with 403, and why content-creator rights inside a room allow copying an item out of it but not moving  it. A room cannot be moved this way — use `PUT api/2.0/files/rooms/{id}/archive` instead. To keep the  originals use `PUT api/2.0/files/fileops/copy`. An empty selection queues nothing.
+     * @summary Move files and folders
      * @param {FilesOperationsApiMoveBatchItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2784,7 +3913,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Starts a conversion operation of a file with the ID specified in the request.
+     * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
      * @summary Start file conversion
      * @param {FilesOperationsApiStartFileConversionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2792,12 +3921,24 @@ export class OperationsApi extends BaseAPI {
      * @memberof OperationsApi
      */
     public startFileConversion(requestParameters: OperationsApiStartFileConversionRequest, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDtoInteger, options).then((request) => request(this.axios, this.basePath));
+        return OperationsApiFp(this.configuration).startFileConversion(requestParameters.fileId, requestParameters.checkConversionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Finishes an operation with the ID specified in the request or all the active operations.
-     * @summary Finish active operations
+     * Queues the conversion of a file into the portal\'s own editable format and answers with the conversion entry  the caller is to poll. The whole body may be omitted, in which case the defaults apply. `outputType` names the  target format and, left empty, the portal\'s default for that kind of document is used; `password` unlocks a  protected source file; `version` converts an older version instead of the current one. `createNewIfExist`  decides where the result goes: with `true` a new file is created beside the source, while with `false`, the  default, the converted file that already exists is replaced. `sync=true` converts inside the request and  answers with the finished result instead of a queue entry, which is only sensible for small documents.  Otherwise poll `GET api/2.0/files/file/{fileId}/checkconversion` until `progress` reaches 100 and take the  converted file from `file`. Only formats the portal has to convert are accepted; anything already editable,  and anything it cannot convert, is answered without work being queued or rejected as an invalid request. The  caller needs read access to the file. The call is mutating and not idempotent.
+     * @summary Start file conversion (third-party storage)
+     * @param {FilesOperationsApiStartFileConversionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public startFileConversionThirdParty(requestParameters: OperationsApiStartFileConversionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).startFileConversionThirdParty(requestParameters.fileId, requestParameters.thirdPartyCheckConversionRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Cancels a background file operation of the caller and answers with the operations that are left. Pass the `id`  that was reported when the operation started to stop that one; a call that leaves the trailing route segment  out stops every operation the caller has running, of every kind. Cancelling stops the job where it stands and  does not undo it: what has already been copied, moved or deleted stays that way, so a cancelled batch can  leave part of itself at the destination and part of it at the source, and the result has to be read back  rather than assumed. The cancelled record is dropped from `GET api/2.0/files/fileops` at once, which is why  the answer here is usually empty. An id that is not among the caller\'s operations cancels nothing and is not  an error. Operations are private to the account that started them, an anonymous caller being scoped to the  session of the external link, so the call can never reach an operation of anyone else.
+     * @summary Cancel file operations
      * @param {FilesOperationsApiTerminateTasksRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2808,7 +3949,7 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * Updates a comment in a file with the ID specified in the request.
+     * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
      * @summary Update a comment
      * @param {FilesOperationsApiUpdateFileCommentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2820,8 +3961,20 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * This method allows the caller to upload a specific chunk of a file to an ongoing upload session.  The session is identified by the session ID provided in the request. The chunk can be of any size  within the limits allowed during the session initialization. Each chunk must be uploaded in the  correct order for the server to process it appropriately.  The server updates the upload session status and stores the progress information after processing  each chunk. The updated session details are returned in the response.
-     * @summary Handles the upload of a chunk for an existing upload session.
+     * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
+     * @summary Update a comment (third-party storage)
+     * @param {FilesOperationsApiUpdateFileCommentThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public updateFileCommentThirdParty(requestParameters: OperationsApiUpdateFileCommentThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).updateFileCommentThirdParty(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+     * @summary Upload a numbered chunk
      * @param {FilesOperationsApiUploadAsyncSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2832,8 +3985,20 @@ export class OperationsApi extends BaseAPI {
     }
 
     /**
-     * This method allows continuing an interrupted or partially completed file upload session by uploading subsequent data chunks.  The server will validate each uploaded chunk, update the session state, and respond with the status of the current upload. Once  the total bytes uploaded match the total file size, the file upload process is finalized and related events are triggered.  If the file is newly uploaded, the server responds with a 201 Created status upon completion. If it overwrites an existing file,  versioning information is updated accordingly. The method also triggers associated webhooks and socket notifications to reflect  the updated file state.
-     * @summary Resumes an ongoing file upload session for uploading additional chunks of data.
+     * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
+     * @summary Upload a numbered chunk (third-party storage)
+     * @param {FilesOperationsApiUploadAsyncSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public uploadAsyncSessionThirdParty(requestParameters: OperationsApiUploadAsyncSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).uploadAsyncSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+     * @summary Upload the next chunk
      * @param {FilesOperationsApiUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2841,6 +4006,18 @@ export class OperationsApi extends BaseAPI {
      */
     public uploadSession(requestParameters: OperationsApiUploadSessionRequest, options?: RawAxiosRequestConfig) {
         return OperationsApiFp(this.configuration).uploadSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sends the next part of a file into the session opened for it, as the multipart `File` field, and lets the  server keep count: parts are appended in the order they arrive, so two of these calls must never run in  parallel on one session. While bytes are still missing the answer describes the session and `uploaded` is  false; when the last part completes the declared size the file is written, its upload links are cleared, it is  marked as new for the room, and the answer comes back with 201, `uploaded` true and the whole file in `file`.  A session created for a payload smaller than `chunkUploadSize` from `GET api/2.0/files/settings` finishes on  the first such call and needs no separate finalize step. A part larger than that limit is refused. The first  part of a PDF is inspected, and a PDF that is not a fillable form is refused when the session targets a  form-filling room. The session is addressed by its id, and the folder in the path is not matched against it.
+     * @summary Upload the next chunk (third-party storage)
+     * @param {FilesOperationsApiUploadSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OperationsApi
+     */
+    public uploadSessionThirdParty(requestParameters: OperationsApiUploadSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return OperationsApiFp(this.configuration).uploadSessionThirdParty(requestParameters.folderId, requestParameters.sessionId, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

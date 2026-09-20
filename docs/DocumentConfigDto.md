@@ -1,23 +1,23 @@
 # DocumentConfigDto
 
-The document config parameters.
+The document itself as the editors address it: what to fetch, under which revision key, and what this caller may  do with it.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fileType** | **string** | The file type of the document. | [optional] [default to undefined]
-**info** | [**InfoConfigDto**](InfoConfigDto.md) | The configuration information of the document. | [optional] [default to undefined]
-**isLinkedForMe** | **boolean** | Specifies if the documnet is linked for current user. | [optional] [default to undefined]
-**key** | **string** | The document key. | [optional] [default to undefined]
-**permissions** | [**PermissionsConfig**](PermissionsConfig.md) | The document permissions. | [optional] [default to undefined]
-**sharedLinkParam** | **string** | The shared link parameter of the document. | [optional] [default to undefined]
-**sharedLinkKey** | **string** | The shared link key of the document. | [optional] [default to undefined]
-**referenceData** | [**FileReferenceData**](FileReferenceData.md) | The reference data of the document. | [optional] [default to undefined]
-**title** | **string** | The document title. | [optional] [default to undefined]
-**url** | **string** | The document url. | [optional] [default to undefined]
-**isForm** | **boolean** | Indicates whether this is a form. | [optional] [default to undefined]
-**_options** | [**Options**](Options.md) | The options of the document. | [optional] [default to undefined]
+**fileType** | **string** | The format the editors treat the content as, without the leading dot. For a file that had to be converted this  is the format it was converted to, not the one it is stored under. | [optional] [default to undefined]
+**info** | [**InfoConfigDto**](InfoConfigDto.md) | The facts the editor information panel shows about the document. | [optional] [default to undefined]
+**isLinkedForMe** | **boolean** | Whether the caller opened the original document rather than a link pointing at it, which matters only for  formats whose editing is restricted through links. | [optional] [default to undefined]
+**key** | **string** | Identifies the exact revision to the editors: everyone who receives the same key joins the same co-editing  session, and the key changes as soon as the document is saved. | [optional] [default to undefined]
+**permissions** | [**PermissionsConfig**](PermissionsConfig.md) | What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat. | [optional] [default to undefined]
+**sharedLinkParam** | **string** | The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link. | [optional] [default to undefined]
+**sharedLinkKey** | **string** | The external share key this opening runs under, empty when the caller opened the document as a portal member.  The editors pass it back on every request they make for the document. | [optional] [default to undefined]
+**referenceData** | [**FileReferenceData**](FileReferenceData.md) | How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference. | [optional] [default to undefined]
+**title** | **string** | The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets. | [optional] [default to undefined]
+**url** | **string** | Where the editors fetch the content. It is addressed to the host the document service can reach, which is not  necessarily the address a browser should follow. | [optional] [default to undefined]
+**isForm** | **boolean** | Whether the document is a fillable PDF form. A PDF that the portal has never classified is inspected while the  configuration is built, so the answer is trustworthy even for a freshly uploaded file. | [optional] [default to undefined]
+**_options** | [**Options**](Options.md) | Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark. | [optional] [default to undefined]
 
 ## Example
 

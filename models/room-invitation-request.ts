@@ -23,27 +23,27 @@
 import type { RoomInvitation } from './room-invitation';
 
 /**
- * The request parameters for inviting users to the room.
+ * One batch of membership changes for a room.
  */
 export interface RoomInvitationRequest {
     /**
-     * The collection of invitation parameters.
+     * Who is added, changed or removed, one entry per subject. The same subject named twice keeps the level of the  last entry, and an empty list is accepted and changes nothing.
      */
     'invitations'?: Array<RoomInvitation> | null;
     /**
-     * Specifies whether to notify users about the shared room or not.
+     * Whether the subjects that gained access are told about it by email. With it off the change is silent, which is  the usual choice when membership is synchronised from another system.
      */
     'notify'?: boolean;
     /**
-     * The message to send when notifying about the shared room.
+     * The line added to the invitation email. It is used only while the notification is on, and it reaches nobody  whose access was removed.
      */
     'message'?: string | null;
     /**
-     * The language of the room invitation.
+     * The language of the invitation email, as a portal culture name such as en-US. Leaving it out sends each  message in the language of its recipient.
      */
     'culture'?: string | null;
     /**
-     * Specifies whether to forcibly delete a user with form roles from the room.
+     * Whether a member who still holds a role in an unfinished form is removed anyway. With it off such a removal is  refused and reported through the error of the answer, so the form can be reassigned first.
      */
     'force'?: boolean;
 }

@@ -1,16 +1,16 @@
 # CustomerMonthlyUsageDto
 
-Aggregated customer spending for a single calendar month.
+What the portal spent from its wallet in one calendar month, added up across every service.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**year** | **number** | The calendar year. | [optional] [default to undefined]
-**month** | **number** | The calendar month (1-12). | [optional] [default to undefined]
-**currency** | **string** | The three-character ISO 4217 currency symbol of the amounts. | [optional] [default to undefined]
-**totalAmount** | **number** | The total amount charged across all services in this month. | [optional] [default to undefined]
-**operationCount** | **number** | The number of individual purchase operations in this month. | [optional] [default to undefined]
+**year** | **number** | The year the month belongs to. Months are cut in the portal time zone, so a movement at the edge of a  month falls where the portal sees it and not where UTC does. | [optional] [default to undefined]
+**month** | **number** | The month itself, January being 1. Only months that had spending appear at all, so a gap in the list is a  month with nothing in it rather than missing data. | [optional] [default to undefined]
+**currency** | **string** | The currency `totalAmount` is expressed in, as a three-letter ISO 4217 code - the accounting currency of  the wallet. | [optional] [default to undefined]
+**totalAmount** | **number** | What the month came to across every service, as a positive amount spent rather than a signed balance. | [optional] [default to undefined]
+**operationCount** | **number** | How many separate movements that total was added up from, for a client that wants to show the weight  behind a figure. The movements themselves are in `GET api/2.0/portal/payment/customer/operations`. | [optional] [default to undefined]
 
 ## Example
 

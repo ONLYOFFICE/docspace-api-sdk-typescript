@@ -18,18 +18,21 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { EditorToolCallParametersDto } from './editor-tool-call-parameters-dto';
 
 /**
- * The editor tool call state. Used to run the agent flow in the editor.
+ * A generation the editor is expected to run as soon as the document opens, left behind by an AI agent that created  the file but not its content.
  */
 export interface EditorToolCallStateDto {
     /**
-     * The tool name.
+     * Which generation to run, which also decides the shape of the parameters below.
      */
     'toolName': string | null;
     /**
-     * The tool call parameters.
+     * The arguments of the generation named above.
      */
-    'parameters': object;
+    'parameters': EditorToolCallParametersDto;
 }
 

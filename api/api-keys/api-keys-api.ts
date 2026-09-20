@@ -46,7 +46,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
     
     return {
         /**
-         * Creates a user API key with the parameters specified in the request.
+         * Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
          * @summary Create a user API key
          * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
          * @param {*} [options] Override http request option.
@@ -102,9 +102,9 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Deletes a user API key by its ID.
-         * @summary Delete a user API key
-         * @param {string} keyId The API key ID.
+         * Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
+         * @summary Delete an API key
+         * @param {string} keyId The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteApiKey operation
@@ -158,7 +158,7 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all available permissions for the API key.
+         * Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
          * @summary Get API key permissions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -210,8 +210,8 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns information about the current user\'s API key.
-         * @summary Get current user\'s API key
+         * Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
+         * @summary Get the current API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKey operation
@@ -262,8 +262,8 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all API keys for the current user.
-         * @summary Get current user\'s API keys
+         * Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
+         * @summary Get the API keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKeys operation
@@ -314,10 +314,10 @@ export const ApiKeysApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Updates an existing API key changing its name, permissions, and status.
+         * Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
          * @summary Update an API key
-         * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
+         * @param {string} keyId The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
+         * @param {UpdateApiKeyRequest} updateApiKeyRequest The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateApiKey operation
@@ -386,7 +386,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ApiKeysApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates a user API key with the parameters specified in the request.
+         * Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
          * @summary Create a user API key
          * @param {CreateApiKeyRequestDto} [createApiKeyRequestDto] 
          * @param {*} [options] Override http request option.
@@ -401,9 +401,9 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a user API key by its ID.
-         * @summary Delete a user API key
-         * @param {string} keyId The API key ID.
+         * Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
+         * @summary Delete an API key
+         * @param {string} keyId The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteApiKey operation
@@ -416,7 +416,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all available permissions for the API key.
+         * Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
          * @summary Get API key permissions
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -430,8 +430,8 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns information about the current user\'s API key.
-         * @summary Get current user\'s API key
+         * Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
+         * @summary Get the current API key
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKey operation
@@ -444,8 +444,8 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all API keys for the current user.
-         * @summary Get current user\'s API keys
+         * Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
+         * @summary Get the API keys
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getApiKeys operation
@@ -458,10 +458,10 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates an existing API key changing its name, permissions, and status.
+         * Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
          * @summary Update an API key
-         * @param {string} keyId The unique identifier of the API key to update.
-         * @param {UpdateApiKeyRequest} updateApiKeyRequest The request parameters for updating an existing API key.
+         * @param {string} keyId The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
+         * @param {UpdateApiKeyRequest} updateApiKeyRequest The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateApiKey operation
@@ -484,7 +484,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = ApiKeysApiFp(configuration)
     return {
         /**
-         * Creates a user API key with the parameters specified in the request.
+         * Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
          * @summary Create a user API key
          * @param {ApiKeysApiCreateApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -496,8 +496,8 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createApiKey(requestParameters.createApiKeyRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a user API key by its ID.
-         * @summary Delete a user API key
+         * Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
+         * @summary Delete an API key
          * @param {ApiKeysApiDeleteApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteApiKey operation
@@ -508,7 +508,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.deleteApiKey(requestParameters.keyId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all available permissions for the API key.
+         * Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
          * @summary Get API key permissions
          * @param {*} [options] Override http request option.
          * REST API Reference for getAllPermissions operation
@@ -519,8 +519,8 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns information about the current user\'s API key.
-         * @summary Get current user\'s API key
+         * Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
+         * @summary Get the current API key
          * @param {*} [options] Override http request option.
          * REST API Reference for getApiKey operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-key/
@@ -530,8 +530,8 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getApiKey(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all API keys for the current user.
-         * @summary Get current user\'s API keys
+         * Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
+         * @summary Get the API keys
          * @param {*} [options] Override http request option.
          * REST API Reference for getApiKeys operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-api-keys/
@@ -541,7 +541,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getApiKeys(options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates an existing API key changing its name, permissions, and status.
+         * Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
          * @summary Update an API key
          * @param {ApiKeysApiUpdateApiKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -576,7 +576,7 @@ export interface ApiKeysApiCreateApiKeyRequest {
  */
 export interface ApiKeysApiDeleteApiKeyRequest {
     /**
-     * The API key ID.
+     * The ID of the key to delete, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
      * @type {string}
      * @memberof ApiKeysApiDeleteApiKey
      */
@@ -590,14 +590,14 @@ export interface ApiKeysApiDeleteApiKeyRequest {
  */
 export interface ApiKeysApiUpdateApiKeyRequest {
     /**
-     * The unique identifier of the API key to update.
+     * The ID of the key to update, taken from the route. Read it from the `id` of an entry of  `GET api/2.0/keys` - it is not the secret and not the `keyPostfix`.
      * @type {string}
      * @memberof ApiKeysApiUpdateApiKey
      */
     readonly keyId: string
 
     /**
-     * The request parameters for updating an existing API key.
+     * The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
      * @type {UpdateApiKeyRequest}
      * @memberof ApiKeysApiUpdateApiKey
      */
@@ -612,7 +612,7 @@ export interface ApiKeysApiUpdateApiKeyRequest {
  */
 export class ApiKeysApi extends BaseAPI {
     /**
-     * Creates a user API key with the parameters specified in the request.
+     * Creates an API key that authenticates requests as the calling account, and is the only operation that ever  returns the secret.  Any portal member except a guest may create one; when the portal limits developer tools to administrators,  only a DocSpace administrator may call it.  The call is not idempotent - every call issues a new key - and it is throttled, so a client that retries on a  timeout can end up with several keys.  The answer carries the full secret in `key`: it is shown here and never again, later reads expose only the  last four characters in `keyPostfix`, so store it now.  Pass the scopes the key may use in `permissions`, taking the values from  `GET api/2.0/keys/permissions`; pass `*` or omit the field to record a key without scope restrictions, and set  `expiresInDays` to make it expire, otherwise it stays valid until it is deleted.  An empty `permissions` array and an unknown scope are both rejected with 400.  Send the key in the `Authorization` header as `Bearer sk-...` to use it.
      * @summary Create a user API key
      * @param {ApiKeysApiCreateApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -624,8 +624,8 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Deletes a user API key by its ID.
-     * @summary Delete a user API key
+     * Deletes the API key with the ID given in the route, so that it stops authenticating requests immediately.  The caller may delete a key they created themselves, and a DocSpace administrator may delete any key of the  portal.  The removal is permanent and cannot be undone: the secret was only ever readable at creation time, so a  deleted key cannot be restored and a new one has to be issued through `POST api/2.0/keys`.  To stop a key temporarily instead, set `isActive` to false through `PUT api/2.0/keys/{keyId}`.  The answer is a plain boolean reporting whether the key was removed.
+     * @summary Delete an API key
      * @param {ApiKeysApiDeleteApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -636,7 +636,7 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all available permissions for the API key.
+     * Returns every scope value the portal accepts in the `permissions` array of an API key.  Read it before `POST api/2.0/keys` or `PUT api/2.0/keys/{keyId}`, because any other value is rejected with  400.  Any portal member except a guest may call it, and the call is read-only.  The answer is a flat list sorted alphabetically, holding the per-area scopes such as `accounts:read`,  `files:write` and `rooms:write`, the portal-wide `*:read` and `*:write`, and `*` which stands for a key  without scope restrictions.  The list is fixed for the portal and identical for every caller, so it can be cached by the client.
      * @summary Get API key permissions
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -647,8 +647,8 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Returns information about the current user\'s API key.
-     * @summary Get current user\'s API key
+     * Returns the API key that authenticated this very request, letting the holder of a key find out what it is  allowed to do without knowing its ID.  The key is identified by the `Authorization` header of the call itself, so the request has to be sent as  `Bearer sk-...`; a session authenticated in any other way has no key to report and this operation is not  usable for it.  The call is read-only and returns one entry, with the same fields as `GET api/2.0/keys` and without the  secret - read `permissions` for the granted scopes, `expiresAt` for the expiry and `isActive` for the state.  To look at a key other than the one in use, call `GET api/2.0/keys` instead.
+     * @summary Get the current API key
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
@@ -658,8 +658,8 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all API keys for the current user.
-     * @summary Get current user\'s API keys
+     * Returns the API keys the caller is allowed to see, which is not the same set for everybody: a DocSpace  administrator gets every key of the portal, while any other member gets only the keys they created  themselves.  Any portal member except a guest may call it, and the call is read-only.  The secrets are not returned - each entry identifies its key by `id` and by the last four characters in  `keyPostfix`, and a secret can only be read once, at the moment `POST api/2.0/keys` creates it.  Expired and deactivated keys stay in the list, so check `expiresAt` against the current time and read  `isActive` before treating an entry as usable.  An empty list means the caller has created no keys, not that the portal has none.
+     * @summary Get the API keys
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ApiKeysApi
@@ -669,7 +669,7 @@ export class ApiKeysApi extends BaseAPI {
     }
 
     /**
-     * Updates an existing API key changing its name, permissions, and status.
+     * Renames an API key, replaces the scopes it may use, or activates and deactivates it, without changing the  secret.  The caller may update a key they created themselves, and a DocSpace administrator may update any key of the  portal.  Take the values for `permissions` from `GET api/2.0/keys/permissions`; an unknown scope or an empty array is  rejected with 400, and the fields that are left out keep their current values.  The answer is a plain boolean: true when the key was changed, and false when it was not - which is also what  an already expired key returns, because such a key is left untouched instead of being reported as an error.  Deactivating a key through `isActive` stops it from authenticating while keeping it in the list, so use it  when the key may be needed again and `DELETE api/2.0/keys/{keyId}` when it may not.
      * @summary Update an API key
      * @param {ApiKeysApiUpdateApiKeyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

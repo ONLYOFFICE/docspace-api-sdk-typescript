@@ -20,66 +20,73 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { OperationType } from './operation-type';
 
 /**
- * Represents an operation.
+ * One movement on the portal wallet: what it was for, who caused it, and how much money it moved.
  */
 export interface OperationDto {
     /**
-     * The date when the operation took place.
+     * When the movement was booked, in the portal time zone - the same zone the `startDate` and `endDate`  filters are read in, so the two do line up here.
      */
-    'date'?: string | null;
+    'date'?: ApiDateTime;
     /**
-     * The service related to the operation.
+     * The wallet service the movement belongs to, by its stable key. It is what the `serviceName` filter  matches on, and it is empty for a movement that belongs to no service, such as a top-up.
      */
     'service'?: string | null;
     /**
-     * The brief operation description.
+     * A one-line summary of the movement in the portal language, already composed from the service and the  quantity - meant to be printed as it is rather than parsed.
      */
     'description'?: string | null;
     /**
-     * The detailed information about the operation.
+     * The longer explanation of the same movement, where the service recorded one. It is empty for a movement  that has nothing to add to `description`.
      */
     'details'?: string | null;
     /**
-     * The service unit.
+     * What `quantity` counts for this service, in the portal language. AI consumption is reported in tokens  here rather than in the AI credits the service is sold in.
      */
     'serviceUnit'?: string | null;
     /**
-     * The quantity of the service used.
+     * How many units the movement covers, in the unit named by `serviceUnit`. It is `0` for a movement that  moves money without consuming a service.
      */
     'quantity'?: number;
     /**
-     * The three-character ISO 4217 currency symbol of the operation.
+     * The currency `credit` and `debit` are expressed in, as a three-letter ISO 4217 code. It is the accounting  currency of the wallet, which need not be the currency the subscription is priced in.
      */
     'currency'?: string | null;
     /**
-     * The credit amount of the operation.
+     * The amount that went into the wallet. It is `0` on a movement that only took money out, so the pair of  `credit` and `debit` is what shows which way the money went; the `credit` and `debit` filters of the  operation select the two directions by exactly this.
      */
     'credit'?: number;
     /**
-     * The debit amount of the operation.
+     * The amount that was taken out of the wallet, `0` on a movement that put money in.
      */
     'debit'?: number;
     /**
-     * The participant original name.
+     * Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
      */
     'participantName'?: string | null;
     /**
-     * The participant display name.
+     * The same person as their portal display name. It falls back to `participantName` when the name belongs to  no portal account, so it is never empty while `participantName` is filled.
      */
     'participantDisplayName'?: string | null;
     /**
-     * AI Agent id.
+     * What kind of thing an AI operation was run on - an agent, a file, a folder, a room or a form. It is empty  on any movement that is not an AI charge.
      */
-    'agentId'?: string | null;
+    'sourceType'?: string | null;
     /**
-     * AI Agent name.
+     * The title that thing had when the operation ran, kept as recorded, so it does not follow a later rename.  Empty under the same conditions as `sourceType`.
      */
-    'agentTitle'?: string | null;
+    'sourceTitle'?: string | null;
     /**
-     * Type of the operation
+     * The identifier of that thing, to look it up in the module it belongs to. Empty under the same conditions  as `sourceType`.
+     */
+    'sourceId'?: string | null;
+    /**
+     * What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.
      */
     'type'?: OperationType;
 }

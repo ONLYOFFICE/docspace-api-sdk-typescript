@@ -36,6 +36,8 @@ import type { AiProfileMutationResult } from '../../models';
 // @ts-ignore
 import type { AiProfilesGetById200Response } from '../../models';
 // @ts-ignore
+import type { AiProfilesListProviderModels400Response } from '../../models';
+// @ts-ignore
 import type { AiProfilesListProviderModelsRequest } from '../../models';
 // @ts-ignore
 import type { AiProfilesTestConnection200Response } from '../../models';
@@ -50,8 +52,8 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
     
     return {
         /**
-         * Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal\'s first profile also takes the `Default` assignment slot.
-         * @summary Create
+         * Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal\'s first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
+         * @summary Create a provider profile
          * @param {AiCreateProfileInput} aiCreateProfileInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -74,6 +76,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -89,9 +97,9 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
-         * @summary Delete
-         * @param {string} body 
+         * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
+         * @summary Delete a provider profile
+         * @param {string} body The ID of the profile to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesDelete operation
@@ -113,6 +121,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -128,8 +142,8 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns one AI provider profile, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
+         * @summary Get a provider profile
          * @param {string} id The AI provider profile identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -152,6 +166,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
             }
@@ -168,8 +188,8 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Lists the portal\'s AI provider profiles.
-         * @summary List
+         * Lists the portal\'s AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway\'s own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round\'s `profileId` accept.
+         * @summary List provider profiles
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesList operation
@@ -189,6 +209,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -201,7 +227,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Lists the models the given profile\'s provider offers, as reported by the provider itself.
+         * Lists the models a stored profile\'s provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider\'s own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
          * @summary List models
          * @param {string} profileId The AI provider profile identifier.
          * @param {*} [options] Override http request option.
@@ -225,6 +251,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (profileId !== undefined) {
                 localVarQueryParameter['profileId'] = profileId;
             }
@@ -241,7 +273,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+         * Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway\'s catalogue, which carries richer capability data than the provider\'s own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
          * @summary List provider models
          * @param {AiProfilesListProviderModelsRequest} aiProfilesListProviderModelsRequest 
          * @param {*} [options] Override http request option.
@@ -265,6 +297,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -280,9 +318,9 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Checks a stored profile\'s credentials against its provider and reports the provider\'s own error when the call fails. Nothing is written.
-         * @summary Test connection
-         * @param {string} body 
+         * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+         * @summary Test a profile\'s provider
+         * @param {string} body The ID of the profile to probe, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesTestConnection operation
@@ -304,6 +342,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -319,8 +363,8 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
-         * @summary Update
+         * Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
+         * @summary Update a provider profile
          * @param {AiProfile} aiProfile 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -342,6 +386,12 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -368,8 +418,8 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ProfilesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal\'s first profile also takes the `Default` assignment slot.
-         * @summary Create
+         * Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal\'s first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
+         * @summary Create a provider profile
          * @param {AiCreateProfileInput} aiCreateProfileInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -383,9 +433,9 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
-         * @summary Delete
-         * @param {string} body 
+         * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
+         * @summary Delete a provider profile
+         * @param {string} body The ID of the profile to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesDelete operation
@@ -398,8 +448,8 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns one AI provider profile, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
+         * @summary Get a provider profile
          * @param {string} id The AI provider profile identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -413,8 +463,8 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Lists the portal\'s AI provider profiles.
-         * @summary List
+         * Lists the portal\'s AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway\'s own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round\'s `profileId` accept.
+         * @summary List provider profiles
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesList operation
@@ -427,7 +477,7 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Lists the models the given profile\'s provider offers, as reported by the provider itself.
+         * Lists the models a stored profile\'s provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider\'s own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
          * @summary List models
          * @param {string} profileId The AI provider profile identifier.
          * @param {*} [options] Override http request option.
@@ -442,7 +492,7 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+         * Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway\'s catalogue, which carries richer capability data than the provider\'s own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
          * @summary List provider models
          * @param {AiProfilesListProviderModelsRequest} aiProfilesListProviderModelsRequest 
          * @param {*} [options] Override http request option.
@@ -457,9 +507,9 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks a stored profile\'s credentials against its provider and reports the provider\'s own error when the call fails. Nothing is written.
-         * @summary Test connection
-         * @param {string} body 
+         * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+         * @summary Test a profile\'s provider
+         * @param {string} body The ID of the profile to probe, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesTestConnection operation
@@ -472,8 +522,8 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
-         * @summary Update
+         * Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
+         * @summary Update a provider profile
          * @param {AiProfile} aiProfile 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -497,8 +547,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = ProfilesApiFp(configuration)
     return {
         /**
-         * Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal\'s first profile also takes the `Default` assignment slot.
-         * @summary Create
+         * Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal\'s first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
+         * @summary Create a provider profile
          * @param {ProfilesApiAiProfilesCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesCreate operation
@@ -509,8 +559,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesCreate(requestParameters.aiCreateProfileInput, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
-         * @summary Delete
+         * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
+         * @summary Delete a provider profile
          * @param {ProfilesApiAiProfilesDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesDelete operation
@@ -521,8 +571,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesDelete(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns one AI provider profile, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
+         * @summary Get a provider profile
          * @param {ProfilesApiAiProfilesGetByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesGetById operation
@@ -533,8 +583,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesGetById(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the portal\'s AI provider profiles.
-         * @summary List
+         * Lists the portal\'s AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway\'s own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round\'s `profileId` accept.
+         * @summary List provider profiles
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-list/
@@ -544,7 +594,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesList(options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the models the given profile\'s provider offers, as reported by the provider itself.
+         * Lists the models a stored profile\'s provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider\'s own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
          * @summary List models
          * @param {ProfilesApiAiProfilesListModelsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -556,7 +606,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesListModels(requestParameters.profileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+         * Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway\'s catalogue, which carries richer capability data than the provider\'s own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
          * @summary List provider models
          * @param {ProfilesApiAiProfilesListProviderModelsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -568,8 +618,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesListProviderModels(requestParameters.aiProfilesListProviderModelsRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks a stored profile\'s credentials against its provider and reports the provider\'s own error when the call fails. Nothing is written.
-         * @summary Test connection
+         * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+         * @summary Test a profile\'s provider
          * @param {ProfilesApiAiProfilesTestConnectionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesTestConnection operation
@@ -580,8 +630,8 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiProfilesTestConnection(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
-         * @summary Update
+         * Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
+         * @summary Update a provider profile
          * @param {ProfilesApiAiProfilesUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiProfilesUpdate operation
@@ -615,7 +665,7 @@ export interface ProfilesApiAiProfilesCreateRequest {
  */
 export interface ProfilesApiAiProfilesDeleteRequest {
     /**
-     * 
+     * The ID of the profile to delete, as a bare JSON string.
      * @type {string}
      * @memberof ProfilesApiAiProfilesDelete
      */
@@ -671,7 +721,7 @@ export interface ProfilesApiAiProfilesListProviderModelsRequest {
  */
 export interface ProfilesApiAiProfilesTestConnectionRequest {
     /**
-     * 
+     * The ID of the profile to probe, as a bare JSON string.
      * @type {string}
      * @memberof ProfilesApiAiProfilesTestConnection
      */
@@ -700,8 +750,8 @@ export interface ProfilesApiAiProfilesUpdateRequest {
  */
 export class ProfilesApi extends BaseAPI {
     /**
-     * Creates an AI provider profile. The name must be unique and the credentials are validated against the provider before the profile is stored; the portal\'s first profile also takes the `Default` assignment slot.
-     * @summary Create
+     * Creates an AI provider profile - the endpoint, credentials and model that a chat round runs on - and returns it. The name has to be unique, the credentials are probed against the live provider before anything is stored, and the portal\'s first profile also takes the `Default` assignment slot. Two inputs are refused outright: a `baseUrl` pointing at a private network address, and `providerType: external`, which delegates transport to the host application and therefore cannot work for a profile the server manages. On a portal running the AI gateway, profiles are managed centrally and this operation answers 403.
+     * @summary Create a provider profile
      * @param {AIProfilesApiAiProfilesCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -712,8 +762,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Deletes an AI provider profile and cleans up the assignments pointing at it - the `Default` slot moves to the first remaining profile, the other slots are unbound.
-     * @summary Delete
+     * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
+     * @summary Delete a provider profile
      * @param {AIProfilesApiAiProfilesDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -724,8 +774,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Returns one AI provider profile, or an empty result when the identifier is unknown.
-     * @summary Get by id
+     * Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
+     * @summary Get a provider profile
      * @param {AIProfilesApiAiProfilesGetByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -736,8 +786,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Lists the portal\'s AI provider profiles.
-     * @summary List
+     * Lists the portal\'s AI provider profiles with their secrets stripped, the same way the single-profile read does. It takes no parameters and is not paginated, because a portal holds few profiles. On a portal running the AI gateway the answer is synthesised from the gateway\'s own catalogue rather than from stored records. The IDs in the answer are what the assignment operations and every round\'s `profileId` accept.
+     * @summary List provider profiles
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProfilesApi
@@ -747,7 +797,7 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Lists the models the given profile\'s provider offers, as reported by the provider itself.
+     * Lists the models a stored profile\'s provider currently offers, asking the provider itself rather than reading a cached list. `profileId` is required and is read from the query. A failure is reported with the provider\'s own verdict: an unusable key comes back as 400 and a provider that is unreachable or broken as 502, while a missing profile or a caller without access keeps the status the portal gave it. Use `POST api/2.0/ai/profiles/list-provider-models` to probe an endpoint that has no profile yet.
      * @summary List models
      * @param {AIProfilesApiAiProfilesListModelsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -759,7 +809,7 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Lists the models a provider offers for the supplied endpoint and key, before any profile is created from them.
+     * Lists the models an endpoint offers for credentials supplied in the request, before any profile exists - this is what a provider-setup form calls to fill its model picker. `providerType` and `baseUrl` are both required, and a 400 for either names the offending input in a `field` member so the form can highlight it; a `baseUrl` pointing at a private network address is refused as well. For `providerType: onlyoffice` the answer comes from the portal gateway\'s catalogue, which carries richer capability data than the provider\'s own listing and matches what `GET api/2.0/ai/profiles/list` reports; a portal without that gateway falls back to asking the provider. A provider that is unreachable or broken is reported as 502, and one that rejects the key as 400.
      * @summary List provider models
      * @param {AIProfilesApiAiProfilesListProviderModelsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -771,8 +821,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Checks a stored profile\'s credentials against its provider and reports the provider\'s own error when the call fails. Nothing is written.
-     * @summary Test connection
+     * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
+     * @summary Test a profile\'s provider
      * @param {AIProfilesApiAiProfilesTestConnectionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -783,8 +833,8 @@ export class ProfilesApi extends BaseAPI {
     }
 
     /**
-     * Updates an AI provider profile, re-checking name uniqueness and the provider credentials.
-     * @summary Update
+     * Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
+     * @summary Update a provider profile
      * @param {AIProfilesApiAiProfilesUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -1,17 +1,17 @@
 # PaymentSettingsDto
 
-The payment settings parameters.
+Where to buy or extend the portal\'s subscription, and what the subscription in force looks like.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**salesEmail** | **string** | The email address for sales inquiries and support. | [default to undefined]
-**feedbackAndSupportUrl** | **string** | The URL for accessing the feedback and support resources. | [optional] [default to undefined]
-**buyUrl** | **string** | The URL for purchasing or upgrading the product. | [default to undefined]
-**standalone** | **boolean** | Indicates whether the system is running in standalone mode. | [default to undefined]
-**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) | The current license information. | [default to undefined]
-**max** | **number** | The maximum quota quantity. | [default to undefined]
+**salesEmail** | **string** | The vendor mailbox to write to about buying, extending or changing the subscription, picked for the portal  language. It is not the portal\'s own support address. | [default to undefined]
+**feedbackAndSupportUrl** | **string** | Not populated: nothing fills this field in, so it always comes back empty. The help and support addresses  live in `externalResources` of `GET api/2.0/settings` instead. | [optional] [default to undefined]
+**buyUrl** | **string** | The vendor page for buying or extending the subscription, chosen for the licence kind the installation was  built for and for the portal language. It is a page for a person to open, not an API to call. | [default to undefined]
+**standalone** | **boolean** | Whether this is a server installation someone administers themselves rather than a portal in the cloud,  which decides whether payment means uploading a licence file or a subscription in the vendor\'s store. | [default to undefined]
+**currentLicense** | [**CurrentLicenseInfo**](CurrentLicenseInfo.md) | The subscription in force, reduced to the two facts a payment page needs. | [default to undefined]
+**max** | **number** | The largest quantity of a paid item - members, storage - that may be bought in one go, `999` unless the  installation configures another cap. It bounds a single purchase, not the total a portal may hold. | [default to undefined]
 
 ## Example
 

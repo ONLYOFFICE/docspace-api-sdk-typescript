@@ -36,7 +36,7 @@ export const AccessToDevToolsApiAxiosParamCreator = function (configuration?: Co
     
     return {
         /**
-         * Returns the Developer Tools access settings for the portal.
+         * Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
          * @summary Get the Developer Tools access settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -98,7 +98,7 @@ export const AccessToDevToolsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AccessToDevToolsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the Developer Tools access settings for the portal.
+         * Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
          * @summary Get the Developer Tools access settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -122,7 +122,7 @@ export const AccessToDevToolsApiFactory = function (configuration?: Configuratio
     const localVarFp = AccessToDevToolsApiFp(configuration)
     return {
         /**
-         * Returns the Developer Tools access settings for the portal.
+         * Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
          * @summary Get the Developer Tools access settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantAccessDevToolsSettings operation
@@ -143,7 +143,7 @@ export const AccessToDevToolsApiFactory = function (configuration?: Configuratio
  */
 export class AccessToDevToolsApi extends BaseAPI {
     /**
-     * Returns the Developer Tools access settings for the portal.
+     * Returns whether the portal currently restricts the `User` role from using the developer tools (API keys, OAuth  apps, webhooks). Requires an authenticated session; every role can read the restriction, even though it only  limits what a `User` may do, not what a `RoomAdmin` or `DocSpaceAdmin` may do. This is a read-only, idempotent  call. Change the restriction with `POST api/2.0/security/devtoolsaccess`, which requires the  EditPortalSettings permission.
      * @summary Get the Developer Tools access settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -27,18 +27,18 @@ import type { FileShare } from './file-share';
 
 /**
  * @type RoomInvitation
- * The room invitation parameters.
+ * One membership change in a room: an account or an email address, and the access level it is given.
  * @export
  */
 export type RoomInvitation = EmailInvitationDto &  {
     /**
-     * The ID of the user to share a room with.
+     * The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to invite somebody who has no account yet.
      * @type {string}
      * @memberof RoomInvitation
      */
     'id'?: string;
     /**
-     * The room sharing rights.
+     * What the subject may do in the room. The value 0 removes the subject from the room, and the levels on offer  depend on the kind of room.
      * @type {FileShare}
      * @memberof RoomInvitation
      */

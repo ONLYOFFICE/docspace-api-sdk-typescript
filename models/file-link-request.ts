@@ -20,42 +20,45 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { FileShare } from './file-share';
 
 /**
- * The external link request parameters.
+ * The settings of an external link to a file.
  */
 export interface FileLinkRequest {
     /**
-     * The external link ID.
+     * The link to rewrite, as reported by `GET api/2.0/files/file/{id}/links`. An identifier that is not yet in use,  the empty one included, creates a link instead.
      */
     'linkId'?: string;
     /**
-     * The link sharing rights.
+     * The rights the link grants to whoever follows it. The value that denies everything revokes the link.
      */
     'access'?: FileShare;
     /**
-     * The link expiration date.
+     * The moment the link stops working, read in the time zone of the portal. A date more than a few years ahead is  rejected as an invalid request; left out, the link does not expire on its own.
      */
-    'expirationDate'?: string | null;
+    'expirationDate'?: ApiDateTime;
     /**
-     * The link name.
+     * The name the link carries in the sharing list of the file, for the people who manage it; it is not shown to  whoever follows the link.
      */
     'title'?: string | null;
     /**
-     * The link scope, whether it is internal or not.
+     * Who may follow the link: `true` admits only accounts that are signed in to the portal, `false` admits anybody  who has the address.
      */
     'internal'?: boolean;
     /**
-     * Specifies whether the file link is primary or not.
+     * Whether this link becomes the primary link of the file - the one the Copy link action of a client hands out.  A file has one primary link at a time.
      */
     'primary'?: boolean;
     /**
-     * Specifies whether to deny downloading the file or not.
+     * What a visitor may do with the content: `true` leaves them with viewing in the browser, `false` lets them  download and print it as their rights allow.
      */
     'denyDownload'?: boolean;
     /**
-     * Password for access via link.
+     * The secret a visitor has to type before the file opens; left out, the link opens without one.
      */
     'password'?: string | null;
 }

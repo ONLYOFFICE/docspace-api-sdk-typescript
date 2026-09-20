@@ -18,45 +18,48 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ApiDateTime } from './api-date-time';
 
 /**
- * The upcoming payment parameters.
+ * One charge the portal is going to be billed for at the start of the next period.
  */
 export interface UpcomingPaymentDto {
     /**
-     * The quota ID.
+     * The quota that is going to be charged. When a switch to another quota is scheduled, this is the quota  being switched to, so it can differ from what `GET api/2.0/portal/tariff` reports for today.
      */
     'id'?: number;
     /**
-     * The quota name.
+     * The quota\'s stable key, which is the same identifier the wallet operations use for a service.
      */
     'name'?: string | null;
     /**
-     * The quota title.
+     * The quota name in the portal language, meant to be printed on an invoice preview.
      */
     'title'?: string | null;
     /**
-     * The quota unit of measure.
+     * What `quantity` counts, in the portal language - seats, administrators, gigabytes. It is empty for a quota  that is simply on or off.
      */
     'unitOfMeasure'?: string | null;
     /**
-     * The quantity that will be charged (the next quantity if set, otherwise the current quantity).
+     * How much is going to be charged for, which is the quantity scheduled for the next period when one has been  scheduled and today\'s quantity otherwise.
      */
     'quantity'?: number;
     /**
-     * The quota applies to the wallet or not.
+     * Whether the charge is paid out of the portal wallet rather than from the subscription.
      */
     'wallet'?: boolean;
     /**
-     * The due date of the upcoming payment in the portal time zone.
+     * When the charge falls due, in the portal time zone.
      */
-    'dueDate'?: string | null;
+    'dueDate'?: ApiDateTime;
     /**
-     * The amount that will be charged (unit price multiplied by the quantity).
+     * What the charge comes to: the unit price of the quota multiplied by `quantity`. Taxes are not part of it,  and a quota with no price of its own is not listed at all rather than listed with a zero.
      */
     'amount'?: number;
     /**
-     * The three-character ISO 4217 currency symbol of the amount.
+     * The currency `amount` is expressed in, as a three-letter ISO 4217 code. It follows the portal\'s billing  account, so every entry of one answer carries the same code.
      */
     'currency'?: string | null;
 }

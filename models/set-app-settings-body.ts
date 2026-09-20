@@ -23,7 +23,7 @@
 import type { SetAppSettingsBodySettings } from './set-app-settings-body-settings';
 
 /**
- * Request body for saving application-specific settings.
+ * The configuration document a portal application keeps.
  */
 export interface SetAppSettingsBody {
     'settings'?: SetAppSettingsBodySettings;

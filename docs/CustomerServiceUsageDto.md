@@ -1,20 +1,20 @@
 # CustomerServiceUsageDto
 
-Aggregated customer usage statistics for a service over a period.
+What one wallet service was consumed and cost over the requested period, added up rather than listed.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**service** | **string** | The name of the service. | [optional] [default to undefined]
-**title** | **string** | The title of the service. | [optional] [default to undefined]
-**serviceUnit** | **string** | The unit of measurement for the service. | [optional] [default to undefined]
-**currency** | **string** | The three-character ISO 4217 currency symbol of the amounts. | [optional] [default to undefined]
-**totalQuantity** | **number** | The total number of units consumed. | [optional] [default to undefined]
-**totalAmount** | **number** | The total amount charged for the service. | [optional] [default to undefined]
-**operationCount** | **number** | The number of individual purchase operations. | [optional] [default to undefined]
-**price** | **number** | The price of the service. | [optional] [default to undefined]
-**subscription** | **boolean** | Indicates whether the service is subscription-based. | [optional] [default to undefined]
+**service** | **string** | The stable key of the service, which is what the `serviceName` filter of this operation matches on and  what `GET api/2.0/portal/payment/walletservice` looks a service up by. | [optional] [default to undefined]
+**title** | **string** | The service name in the portal language, for printing rather than matching. | [optional] [default to undefined]
+**serviceUnit** | **string** | What `totalQuantity` counts, in the portal language. AI consumption is reported in tokens here rather  than in the AI credits the service is sold in, so it does not line up with the price list. | [optional] [default to undefined]
+**currency** | **string** | The currency `totalAmount` and `price` are expressed in, as a three-letter ISO 4217 code. | [optional] [default to undefined]
+**totalQuantity** | **number** | How many units of the service were consumed over the period, in the unit named by `serviceUnit`. | [optional] [default to undefined]
+**totalAmount** | **number** | What that consumption cost over the period. It is what was actually charged, so it can differ from  `price` times `totalQuantity` when the price changed inside the period. | [optional] [default to undefined]
+**operationCount** | **number** | How many separate charges the total was added up from. The charges themselves are in  `GET api/2.0/portal/payment/customer/operations`. | [optional] [default to undefined]
+**price** | **number** | What one unit of the service costs today, not what it cost during the period. It is `0` when the service  is no longer on the installation\'s price list. | [optional] [default to undefined]
+**subscription** | **boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today\'s price list, so it describes the service as it is sold now. | [optional] [default to undefined]
 
 ## Example
 

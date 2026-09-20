@@ -1,12 +1,12 @@
 # WebhookRetryRequestsDto
 
-The parameters for requesting the webhook delivery retries.
+Which past webhook deliveries are sent again.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ids** | **Array&lt;number&gt;** | The list of webhook delivery IDs to retry. | [optional] [default to undefined]
+**ids** | **Array&lt;number&gt;** | The delivery records to send again, by the identifiers `GET api/2.0/settings/webhooks/log` reports. An  identifier that exists nowhere, and one belonging to another member subscription when the caller is not a  DocSpace administrator, is skipped in silence rather than failing the call, so compare the number of records  that come back against the number sent. An empty list is accepted and queues nothing. | [optional] [default to undefined]
 
 ## Example
 

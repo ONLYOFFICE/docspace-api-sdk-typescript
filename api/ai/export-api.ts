@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AiErrorResponse } from '../../models';
 // @ts-ignore
-import type { AiExportTextToDocx200Response } from '../../models';
+import type { AiExportTextToDocx202Response } from '../../models';
 // @ts-ignore
 import type { AiExportTextToDocxRequest } from '../../models';
 /**
@@ -38,7 +38,7 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
     
     return {
         /**
-         * Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+         * Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
          * @summary Start markdown → docx export
          * @param {AiExportTextToDocxRequest} aiExportTextToDocxRequest 
          * @param {*} [options] Override http request option.
@@ -61,6 +61,12 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -87,7 +93,7 @@ export const ExportApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ExportApiAxiosParamCreator(configuration)
     return {
         /**
-         * Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+         * Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
          * @summary Start markdown → docx export
          * @param {AiExportTextToDocxRequest} aiExportTextToDocxRequest 
          * @param {*} [options] Override http request option.
@@ -95,7 +101,7 @@ export const ExportApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiExportTextToDocx operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx/
          */
-        async aiExportTextToDocx(aiExportTextToDocxRequest: AiExportTextToDocxRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiExportTextToDocx200Response>> {
+        async aiExportTextToDocx(aiExportTextToDocxRequest: AiExportTextToDocxRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiExportTextToDocx202Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiExportTextToDocx(aiExportTextToDocxRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ExportApi.aiExportTextToDocx']?.[localVarOperationServerIndex]?.url;
@@ -112,7 +118,7 @@ export const ExportApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = ExportApiFp(configuration)
     return {
         /**
-         * Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+         * Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
          * @summary Start markdown → docx export
          * @param {ExportApiAiExportTextToDocxRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -120,7 +126,7 @@ export const ExportApiFactory = function (configuration?: Configuration, basePat
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-export-text-to-docx/
          * @throws {RequiredError}
          */
-        aiExportTextToDocx(requestParameters: ExportApiAiExportTextToDocxRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiExportTextToDocx200Response> {
+        aiExportTextToDocx(requestParameters: ExportApiAiExportTextToDocxRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiExportTextToDocx202Response> {
             return localVarFp.aiExportTextToDocx(requestParameters.aiExportTextToDocxRequest, options).then((request) => request(axios, basePath));
         },
     };
@@ -148,7 +154,7 @@ export interface ExportApiAiExportTextToDocxRequest {
  */
 export class ExportApi extends BaseAPI {
     /**
-     * Starts an asynchronous markdown-to-docx export. The response only acknowledges the task: the AI Worker converts the content and saves the .docx into the target folder (an agent room resolves to its result-storage subfolder), and completion reaches the client as the usual folder-modified socket event.
+     * Queues a markdown-to-docx export and answers 202 as soon as the job is accepted, without waiting for it. `title`, `content` and `folderId` are all required, and a `content` of only whitespace counts as missing even though it is not empty. The conversion runs in the AI worker, which saves the .docx into the target folder - an agent room resolves to its own result-storage subfolder - so there is nothing to poll here: completion arrives as the ordinary folder-modified socket event. This route accepts a body of up to 15 MB rather than the 100 KB the rest of the API allows, because a whole thread transcript is sent in one request.
      * @summary Start markdown → docx export
      * @param {AIExportApiAiExportTextToDocxRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

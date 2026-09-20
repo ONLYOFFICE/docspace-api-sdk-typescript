@@ -26,15 +26,15 @@ import type { CheckDestFolderResult } from './check-dest-folder-result';
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
- * The result of checking whether files can be moved or copied to the specified folder.
+ * The verdict on placing the requested files in the destination folder.
  */
 export interface CheckDestFolderDto {
     /**
-     * The result of the validation operation.
+     * Whether the destination folder accepts all of the requested files, only some of them or none at all.
      */
     'result'?: CheckDestFolderResult;
     /**
-     * The list of files in the destination folder.
+     * The requested files the destination accepts, each with the information it was listed under. The files it  rejects are absent, so an empty list means that none of them is accepted.
      */
     'files'?: Array<FileEntryBaseDto> | null;
 }

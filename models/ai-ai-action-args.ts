@@ -23,20 +23,26 @@
 import type { AiAiActionArgsPrompt } from './ai-ai-action-args-prompt';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AiAiReasoningLevel } from './ai-ai-reasoning-level';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { AiTMCPItem } from './ai-tmcpitem';
 
-/**
- * Wire-serializable subset of the engine\'s `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
- */
 export interface AiAiActionArgs {
     /**
      * Extra tools offered to the model for this request.
      */
     'tools'?: Array<AiTMCPItem>;
     /**
-     * Enable extended thinking / reasoning for this request.
+     * Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set.
      */
     'isReasoning'?: boolean;
+    /**
+     * Depth of extended thinking for the round; providers clamp it to what the model accepts.
+     */
+    'reasoningLevel'?: AiAiReasoningLevel;
     'prompt'?: AiAiActionArgsPrompt;
 }
+
+
 

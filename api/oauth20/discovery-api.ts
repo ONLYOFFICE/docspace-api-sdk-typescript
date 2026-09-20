@@ -32,7 +32,8 @@ export const DiscoveryApiAxiosParamCreator = function (configuration?: Configura
     
     return {
         /**
-         * 
+         * Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
+         * @summary Probe the discovery endpoint
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for handleOptions operation
@@ -51,6 +52,12 @@ export const DiscoveryApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions = { method: 'OPTIONS', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -74,13 +81,14 @@ export const DiscoveryApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DiscoveryApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
+         * @summary Probe the discovery endpoint
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for handleOptions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options/
          */
-        async handleOptions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async handleOptions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.handleOptions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DiscoveryApi.handleOptions']?.[localVarOperationServerIndex]?.url;
@@ -97,13 +105,14 @@ export const DiscoveryApiFactory = function (configuration?: Configuration, base
     const localVarFp = DiscoveryApiFp(configuration)
     return {
         /**
-         * 
+         * Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
+         * @summary Probe the discovery endpoint
          * @param {*} [options] Override http request option.
          * REST API Reference for handleOptions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/handle-options/
          * @throws {RequiredError}
          */
-        handleOptions(options?: RawAxiosRequestConfig): AxiosPromise<object> {
+        handleOptions(options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.handleOptions(options).then((request) => request(axios, basePath));
         },
     };
@@ -117,7 +126,8 @@ export const DiscoveryApiFactory = function (configuration?: Configuration, base
  */
 export class DiscoveryApi extends BaseAPI {
     /**
-     * 
+     * Answers the CORS preflight for the OAuth 2.0 Authorization Server metadata endpoint. The endpoint needs no authentication and reads nothing from the request: it always answers 200 with an empty body, and the CORS headers are added by the surrounding filter chain rather than by this handler. It changes no state, and it does not return the authorization server metadata document - issue a GET against the same path for that.
+     * @summary Probe the discovery endpoint
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DiscoveryApi

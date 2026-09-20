@@ -20,27 +20,27 @@
 
 
 /**
- * The Access Control external sharing settings request parameters.
+ * The complete external sharing policy of the portal. Every field is written, so an omitted one is stored as  false.
  */
 export interface ExternalSharingSettingsRequestDto {
     /**
-     * Specifies whether external (public) link creation is allowed.
+     * Whether links that open a file or a room without a portal account may be created at all. This is the master  switch of the policy: while it is false the portal keeps the default link type internal, turns sharing on  social networks off, and applies the three restriction fields below.
      */
     'externalShare'?: boolean;
     /**
-     * Specifies the default sharing link type: true = DocSpace users only, false = Anyone with the link.  Relevant only when ExternalShare is true.
+     * The kind of link offered first when a new one is created: true offers a link only accounts of this portal can  open, false one that anyone holding it can open. The portal keeps it at true while external sharing is  switched off.
      */
     'defaultShareLinkInternal'?: boolean;
     /**
-     * When external sharing is restricted, specifies whether to apply the restriction to the My Documents section.  Relevant only when ExternalShare is false.
+     * Whether the restriction reaches personal documents: with true, no external link can be created for an entry in  the caller\'s own documents while external sharing is off. It has no effect while external sharing is allowed.
      */
     'externalShareApplyToDocuments'?: boolean;
     /**
-     * When external sharing is restricted, specifies whether to apply the restriction to the Rooms section.  Relevant only when ExternalShare is false.
+     * Whether the restriction reaches rooms: with true, no external link can be created for a room or its content  while external sharing is off, and a new room cannot be made public. It has no effect while external sharing  is allowed.
      */
     'externalShareApplyToRooms'?: boolean;
     /**
-     * When external sharing is restricted, specifies whether to block existing public links immediately.  Relevant only when ExternalShare is false.
+     * What happens to the links that already exist once external sharing is switched off: with true they stop  opening for the sections named above, with false they keep working and only new ones are refused. This is the  field that changes access to data that is already shared.
      */
     'blockExistingLinksOnRestrict'?: boolean;
 }

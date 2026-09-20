@@ -1,14 +1,14 @@
 # RecentConfig
 
-The presence or absence of the documents in the Open Recent... menu option.
+One entry of the recent-documents list the editor offers.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**folder** | **string** | The folder where the document is stored. | [optional] [default to undefined]
-**title** | **string** | The document title that will be displayed in the Open Recent... menu option. | [optional] [default to undefined]
-**url** | **string** | The absolute URL to the document where it is stored. | [optional] [default to undefined]
+**folder** | **string** | The folder shown next to the entry, as a readable name rather than an id. | [optional] [default to undefined]
+**title** | **string** | The name shown for the entry. | [optional] [default to undefined]
+**url** | **string** | Where the entry opens. | [optional] [default to undefined]
 
 ## Example
 

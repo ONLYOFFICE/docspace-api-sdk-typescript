@@ -20,6 +20,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { AIConfig } from './aiconfig';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { AnonymousConfigDto } from './anonymous-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -44,52 +47,56 @@ import type { StartFillingForm } from './start-filling-form';
 import type { SubmitForm } from './submit-form';
 
 /**
- * The customization config parameters.
+ * How the editor interface is dressed: branding, the buttons that lead back into the portal, and the behaviour of  review, mentions and form submission.
  */
 export interface CustomizationConfigDto {
     /**
-     * Specifies if the customization is about.
+     * Whether the About entry of the editor menu is shown.
      */
     'about'?: boolean;
     /**
-     * The customization customer configuration.
+     * The branding of the organization running the portal. It is filled in on a server installation only and is  empty in the cloud.
      */
     'customer'?: CustomerConfigDto;
     /**
-     * The anonymous configuration of the customization.
+     * How an anonymous participant is treated in this session.
      */
     'anonymous'?: AnonymousConfigDto;
     /**
-     * The feedback configuration of the customization.
+     * The support link the editor offers behind its feedback button.
      */
     'feedback'?: FeedbackConfig;
     /**
-     * Specifies if the customization should be force saved.
+     * Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.
      */
     'forcesave'?: boolean | null;
     /**
-     * The go back configuration of the customization.
+     * Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.
      */
     'goback'?: GobackConfig;
     /**
-     * The review configuration of the customization.
+     * How tracked changes are displayed when the document opens; it depends on whether this session may write.
      */
     'review'?: ReviewConfig;
     /**
-     * The logo of the customization.
+     * The logo the editor shows, in the variants the current layout and file type need.
      */
     'logo'?: LogoConfigDto;
     /**
-     * Specifies if the share should be mentioned.
+     * Whether mentioning a user who cannot yet open the document offers to share it with them, instead of silently  notifying nobody.
      */
     'mentionShare'?: boolean;
     /**
-     * The Complete & Submit button settings.
+     * The submit button of a form: whether it is shown and what it says.
      */
     'submitForm'?: SubmitForm;
     /**
-     * The parameters of the button that starts filling out the form.
+     * The button that starts filling out the form. It is empty when this opening offers no such button.
      */
     'startFillingForm'?: StartFillingForm;
+    /**
+     * The AI configuration settings.
+     */
+    'ai'?: AIConfig;
 }
 

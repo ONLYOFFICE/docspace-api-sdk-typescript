@@ -23,15 +23,15 @@
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 
 /**
- * The room new items information.
+ * The unseen entries of one room inside a day group.
  */
 export interface RoomNewItemsDto {
     /**
-     * The room file entry.
+     * The room the entries were found in, in its short form: only the identifier, the title, the room type and the  logo are filled in.
      */
     'room'?: FileEntryBaseDto;
     /**
-     * The list of file entry items.
+     * The files of that room the caller has not opened yet, the most recently changed first. Reading them here does  not clear the badges; opening the room itself does.
      */
     'items'?: Array<FileEntryBaseDto> | null;
 }

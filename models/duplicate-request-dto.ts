@@ -30,18 +30,18 @@ import type { FileOperationRequestBaseDto } from './file-operation-request-base-
 
 /**
  * @type DuplicateRequestDto
- * The request parameters for duplicating files and fodlers.
+ * The files and folders to duplicate.
  * @export
  */
 export type DuplicateRequestDto = FileOperationRequestBaseDto &  {
     /**
-     * The list of folder IDs.
+     * The folders to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list.
      * @type {Array<DuplicateRequestDtoAllOfFolderIds>}
      * @memberof DuplicateRequestDto
      */
     'folderIds'?: Array<DuplicateRequestDtoAllOfFolderIds> | null;
     /**
-     * The list of file IDs.
+     * The files to duplicate, by id; the copy of each one is created in the folder that already holds it. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list.
      * @type {Array<DuplicateRequestDtoAllOfFileIds>}
      * @memberof DuplicateRequestDto
      */

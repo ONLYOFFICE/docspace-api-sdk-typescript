@@ -6,9 +6,9 @@ The parameters for updating the type of the user or guest when reassigning rooms
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**EmployeeType**](EmployeeType.md) | The new user type. | [optional] [default to undefined]
-**userId** | **string** | The user ID. | [optional] [default to undefined]
-**reassignUserId** | **string** | The user ID to reassign. | [optional] [default to undefined]
+**type** | [**EmployeeType**](EmployeeType.md) | The type to convert the account to. Only `Guest` and `User` are accepted, because they are the types that  cannot own rooms; `RoomAdmin`, `DocSpaceAdmin` and `All` are rejected here and belong to  `PUT api/2.0/people/type/{type}`. | [optional] [default to undefined]
+**userId** | **string** | The ID of the account being converted. It has to be an active account other than the caller, and only the  portal owner may pass the ID of a DocSpace administrator. | [optional] [default to undefined]
+**reassignUserId** | **string** | The ID of the administrator who receives the rooms and the shared files of the converted account. It has to be  an active room admin or DocSpace admin other than the converted account, and when it is omitted the data goes  to the caller. | [optional] [default to undefined]
 
 ## Example
 

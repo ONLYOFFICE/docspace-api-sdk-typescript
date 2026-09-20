@@ -20,18 +20,21 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { RoomNewItemsDto } from './room-new-items-dto';
 
 /**
- * The new item parameters.
+ * One day of the entries the caller has not opened yet, the groups running from the most recent day backwards.
  */
 export interface NewItemsDtoRoomNewItemsDto {
     /**
-     * The date and time when the new item was created.
+     * The day the grouped entries were last changed, written with the offset of the portal time zone. The time part  is the moment of the newest entry of the group.
      */
-    'date': string | null;
+    'date': ApiDateTime;
     /**
-     * The list of items.
+     * What changed on that day, the most recent first. Folders are left out of it, so an entry here is always a file  or a room that holds them.
      */
     'items': Array<RoomNewItemsDto> | null;
 }

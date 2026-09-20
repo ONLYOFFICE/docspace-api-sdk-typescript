@@ -34,12 +34,12 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
     
     return {
         /**
-         * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 Authorization Endpoint
-         * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
-         * @param {string} clientId The client identifier issued to the client during registration.
-         * @param {string} redirectUri The URL to redirect to after authorization is complete.
-         * @param {string} scope The space-separated list of requested scope permissions.
+         * Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client\'s redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
+         * @summary Start the authorization flow
+         * @param {string} responseType The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.
+         * @param {string} clientId The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.
+         * @param {string} redirectUri Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.
+         * @param {string} scope The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for authorizeOAuth operation
@@ -97,13 +97,13 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Exchange authorization code for access token
-         * @summary OAuth2 Token Endpoint
-         * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
-         * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
-         * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [clientSecret] The client secret issued to the client during registration.
+         * Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
+         * @summary Exchange the authorization code
+         * @param {string} [grantType] Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
+         * @param {string} [code] The authorization code returned by the authorization endpoint. It may be redeemed once.
+         * @param {string} [redirectUri] The same redirect URI that was used to obtain the code. The exchange fails when it differs.
+         * @param {string} [clientId] The identifier of the client redeeming the code.
+         * @param {string} [clientSecret] The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for exchangeToken operation
@@ -123,6 +123,12 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new URLSearchParams();
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
             if (grantType !== undefined) { 
@@ -159,11 +165,11 @@ export const AuthorizationApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Sends consent approval
-         * @summary OAuth2 consent endpoint
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
-         * @param {string} [scope] The space-separated list of requested scope permissions.
+         * Submits the user\'s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client\'s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
+         * @summary Submit the consent decision
+         * @param {string} [clientId] The client the consent is being given to. It has to be the same client the authorization request named.
+         * @param {string} [state] The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
+         * @param {string} [scope] The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for submitConsent operation
@@ -223,12 +229,12 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthorizationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 Authorization Endpoint
-         * @param {string} responseType The OAuth 2.0 response type, must be \'code\' for authorization code flow.
-         * @param {string} clientId The client identifier issued to the client during registration.
-         * @param {string} redirectUri The URL to redirect to after authorization is complete.
-         * @param {string} scope The space-separated list of requested scope permissions.
+         * Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client\'s redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
+         * @summary Start the authorization flow
+         * @param {string} responseType The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.
+         * @param {string} clientId The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.
+         * @param {string} redirectUri Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.
+         * @param {string} scope The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for authorizeOAuth operation
@@ -241,13 +247,13 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Exchange authorization code for access token
-         * @summary OAuth2 Token Endpoint
-         * @param {string} [grantType] The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
-         * @param {string} [code] A temporary authorization code that is sent to the client to be exchanged for a token.
-         * @param {string} [redirectUri] The URL where the user will be redirected after successful or unsuccessful authentication.
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [clientSecret] The client secret issued to the client during registration.
+         * Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
+         * @summary Exchange the authorization code
+         * @param {string} [grantType] Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
+         * @param {string} [code] The authorization code returned by the authorization endpoint. It may be redeemed once.
+         * @param {string} [redirectUri] The same redirect URI that was used to obtain the code. The exchange fails when it differs.
+         * @param {string} [clientId] The identifier of the client redeeming the code.
+         * @param {string} [clientSecret] The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for exchangeToken operation
@@ -260,11 +266,11 @@ export const AuthorizationApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sends consent approval
-         * @summary OAuth2 consent endpoint
-         * @param {string} [clientId] The client identifier issued to the client during registration.
-         * @param {string} [state] The random string used to solve the CSRF vulnerability problem.
-         * @param {string} [scope] The space-separated list of requested scope permissions.
+         * Submits the user\'s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client\'s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
+         * @summary Submit the consent decision
+         * @param {string} [clientId] The client the consent is being given to. It has to be the same client the authorization request named.
+         * @param {string} [state] The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
+         * @param {string} [scope] The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for submitConsent operation
@@ -287,8 +293,8 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
     const localVarFp = AuthorizationApiFp(configuration)
     return {
         /**
-         * Initiates the OAuth2 authorization flow.
-         * @summary OAuth2 Authorization Endpoint
+         * Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client\'s redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
+         * @summary Start the authorization flow
          * @param {AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for authorizeOAuth operation
@@ -299,8 +305,8 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
             return localVarFp.authorizeOAuth(requestParameters.responseType, requestParameters.clientId, requestParameters.redirectUri, requestParameters.scope, options).then((request) => request(axios, basePath));
         },
         /**
-         * Exchange authorization code for access token
-         * @summary OAuth2 Token Endpoint
+         * Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
+         * @summary Exchange the authorization code
          * @param {AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for exchangeToken operation
@@ -311,8 +317,8 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
             return localVarFp.exchangeToken(requestParameters.grantType, requestParameters.code, requestParameters.redirectUri, requestParameters.clientId, requestParameters.clientSecret, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sends consent approval
-         * @summary OAuth2 consent endpoint
+         * Submits the user\'s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client\'s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
+         * @summary Submit the consent decision
          * @param {AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for submitConsent operation
@@ -332,28 +338,28 @@ export const AuthorizationApiFactory = function (configuration?: Configuration, 
  */
 export interface AuthorizationApiAuthorizeOAuthRequest {
     /**
-     * The OAuth 2.0 response type, must be \'code\' for authorization code flow.
+     * The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint.
      * @type {string}
      * @memberof AuthorizationApiAuthorizeOAuth
      */
     readonly responseType: string
 
     /**
-     * The client identifier issued to the client during registration.
+     * The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against.
      * @type {string}
      * @memberof AuthorizationApiAuthorizeOAuth
      */
     readonly clientId: string
 
     /**
-     * The URL to redirect to after authorization is complete.
+     * Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused.
      * @type {string}
      * @memberof AuthorizationApiAuthorizeOAuth
      */
     readonly redirectUri: string
 
     /**
-     * The space-separated list of requested scope permissions.
+     * The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these.
      * @type {string}
      * @memberof AuthorizationApiAuthorizeOAuth
      */
@@ -367,35 +373,35 @@ export interface AuthorizationApiAuthorizeOAuthRequest {
  */
 export interface AuthorizationApiExchangeTokenRequest {
     /**
-     * The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow.
+     * Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */
     readonly grantType?: string
 
     /**
-     * A temporary authorization code that is sent to the client to be exchanged for a token.
+     * The authorization code returned by the authorization endpoint. It may be redeemed once.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */
     readonly code?: string
 
     /**
-     * The URL where the user will be redirected after successful or unsuccessful authentication.
+     * The same redirect URI that was used to obtain the code. The exchange fails when it differs.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */
     readonly redirectUri?: string
 
     /**
-     * The client identifier issued to the client during registration.
+     * The identifier of the client redeeming the code.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */
     readonly clientId?: string
 
     /**
-     * The client secret issued to the client during registration.
+     * The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead.
      * @type {string}
      * @memberof AuthorizationApiExchangeToken
      */
@@ -409,21 +415,21 @@ export interface AuthorizationApiExchangeTokenRequest {
  */
 export interface AuthorizationApiSubmitConsentRequest {
     /**
-     * The client identifier issued to the client during registration.
+     * The client the consent is being given to. It has to be the same client the authorization request named.
      * @type {string}
      * @memberof AuthorizationApiSubmitConsent
      */
     readonly clientId?: string
 
     /**
-     * The random string used to solve the CSRF vulnerability problem.
+     * The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request.
      * @type {string}
      * @memberof AuthorizationApiSubmitConsent
      */
     readonly state?: string
 
     /**
-     * The space-separated list of requested scope permissions.
+     * The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested.
      * @type {string}
      * @memberof AuthorizationApiSubmitConsent
      */
@@ -438,8 +444,8 @@ export interface AuthorizationApiSubmitConsentRequest {
  */
 export class AuthorizationApi extends BaseAPI {
     /**
-     * Initiates the OAuth2 authorization flow.
-     * @summary OAuth2 Authorization Endpoint
+     * Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client\'s redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
+     * @summary Start the authorization flow
      * @param {OAuth20AuthorizationApiAuthorizeOAuthRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -450,8 +456,8 @@ export class AuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Exchange authorization code for access token
-     * @summary OAuth2 Token Endpoint
+     * Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
+     * @summary Exchange the authorization code
      * @param {OAuth20AuthorizationApiExchangeTokenRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -462,8 +468,8 @@ export class AuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Sends consent approval
-     * @summary OAuth2 consent endpoint
+     * Submits the user\'s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client\'s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
+     * @summary Submit the consent decision
      * @param {OAuth20AuthorizationApiSubmitConsentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

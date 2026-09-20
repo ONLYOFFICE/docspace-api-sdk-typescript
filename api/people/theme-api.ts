@@ -38,7 +38,7 @@ export const ThemeApiAxiosParamCreator = function (configuration?: Configuration
     
     return {
         /**
-         * Changes the current portal theme.
+         * Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
          * @summary Change the portal theme
          * @param {DarkThemeSettingsRequestDto} [darkThemeSettingsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -94,7 +94,7 @@ export const ThemeApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a theme which is set to the current portal.
+         * Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
          * @summary Get the portal theme
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -156,7 +156,7 @@ export const ThemeApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ThemeApiAxiosParamCreator(configuration)
     return {
         /**
-         * Changes the current portal theme.
+         * Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
          * @summary Change the portal theme
          * @param {DarkThemeSettingsRequestDto} [darkThemeSettingsRequestDto] 
          * @param {*} [options] Override http request option.
@@ -171,7 +171,7 @@ export const ThemeApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a theme which is set to the current portal.
+         * Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
          * @summary Get the portal theme
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -195,7 +195,7 @@ export const ThemeApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = ThemeApiFp(configuration)
     return {
         /**
-         * Changes the current portal theme.
+         * Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
          * @summary Change the portal theme
          * @param {ThemeApiChangePortalThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -207,7 +207,7 @@ export const ThemeApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.changePortalTheme(requestParameters.darkThemeSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a theme which is set to the current portal.
+         * Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
          * @summary Get the portal theme
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalTheme operation
@@ -242,7 +242,7 @@ export interface ThemeApiChangePortalThemeRequest {
  */
 export class ThemeApi extends BaseAPI {
     /**
-     * Changes the current portal theme.
+     * Sets the interface theme of the calling account to `Base` for the light theme, `Dark` for the dark one, or  `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it changes  nothing for anybody else and cannot be set on another account.  It needs no permission, takes effect at once and is idempotent - sending the theme that is already in use  changes nothing.  The answer echoes the theme that was stored, which is the value the request asked for.  The same value is reported as `theme` by `GET api/2.0/people/@self`.
      * @summary Change the portal theme
      * @param {PeopleThemeApiChangePortalThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -254,7 +254,7 @@ export class ThemeApi extends BaseAPI {
     }
 
     /**
-     * Returns a theme which is set to the current portal.
+     * Returns the interface theme the calling account has chosen: `Base` for the light theme, `Dark` for the dark  one, or `System` to follow whatever the operating system asks for.  The setting belongs to the account and not to the portal, despite the name of the route, so it describes the  caller alone and cannot be read for anybody else.  It needs no permission and is read-only.  A caller that has never chosen a theme gets the portal default rather than an empty answer.  The same value is also reported as `theme` by `GET api/2.0/people/@self`, so a client that reads the profile  on start-up does not need this operation as well.
      * @summary Get the portal theme
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

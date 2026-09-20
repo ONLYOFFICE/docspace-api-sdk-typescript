@@ -24,6 +24,9 @@ import type { AiBuiltinProviderType } from './ai-builtin-provider-type';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiProviderType } from './ai-provider-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiReasoningSupport } from './ai-reasoning-support';
 
 /**
  * Complete AI provider + model configuration saved by the user. Profiles are the primary way users save and reuse provider configurations.
@@ -65,6 +68,10 @@ export interface AiProfile {
      * Whether extended thinking is enabled for this profile\'s model.
      */
     'reasoning'?: boolean;
+    /**
+     * Extended-thinking capabilities of the selected model as reported by the provider\'s catalogue at save time (see `Model.reasoningSupport`). When present the composer\'s Effort row follows it exactly; when absent the provider\'s id-based table answers. Hosts persist it with the rest of the profile.
+     */
+    'reasoningSupport'?: AiReasoningSupport;
     /**
      * Bitmask of capabilities supported by the selected model.
      */

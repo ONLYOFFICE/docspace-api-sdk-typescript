@@ -1,13 +1,13 @@
 # AiAiActionArgs
 
-Wire-serializable subset of the engine\'s `ActionArgs` — drops the engine-injected `signal`/`fetch`; `profile`/`messages` are owned by the engine and never sent by the caller.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **tools** | [**Array&lt;AiTMCPItem&gt;**](AiTMCPItem.md) | Extra tools offered to the model for this request. | [optional] [default to undefined]
-**isReasoning** | **boolean** | Enable extended thinking / reasoning for this request. | [optional] [default to undefined]
+**isReasoning** | **boolean** | Legacy extended-thinking switch; stands for `medium`. `reasoningLevel` wins when both are set. | [optional] [default to undefined]
+**reasoningLevel** | [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | Depth of extended thinking for the round; providers clamp it to what the model accepts. | [optional] [default to undefined]
 **prompt** | [**AiAiActionArgsPrompt**](AiAiActionArgsPrompt.md) |  | [optional] [default to undefined]
 
 ## Example
@@ -18,6 +18,7 @@ import { AiAiActionArgs } from '@onlyoffice/docspace-api-sdk';
 const instance: AiAiActionArgs = {
     tools,
     isReasoning,
+    reasoningLevel,
     prompt,
 };
 ```

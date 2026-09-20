@@ -1,16 +1,16 @@
 # UserConfig
 
-The configuration parameters of the user currently viewing or editing the document.
+The account the editors attribute the changes of this session to.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The user ID. | [optional] [default to undefined]
-**name** | **string** | The full name of the user. | [optional] [default to undefined]
-**image** | **string** | The path to the user\'s avatar. | [optional] [default to undefined]
-**roles** | **Array&lt;string&gt;** | Roles | [optional] [default to undefined]
-**customerId** | **string** | Customer identifier associated with the user. | [optional] [default to undefined]
+**id** | **string** | The account the changes are recorded under. Two sessions carrying the same value are taken by the editors for  the same person. | [optional] [default to undefined]
+**name** | **string** | The name shown next to the changes and in the list of participants. | [optional] [default to undefined]
+**image** | **string** | An absolute address of the avatar shown for this participant. | [optional] [default to undefined]
+**roles** | **Array&lt;string&gt;** | The filling roles this participant holds in the form being filled out. It is set only for a form in a virtual  data room, where the role decides which fields open for them. | [optional] [default to undefined]
+**customerId** | **string** | Identifies the paying customer this participant belongs to, on deployments where the editors are licensed per  customer. | [optional] [default to undefined]
 
 ## Example
 

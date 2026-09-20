@@ -1,13 +1,13 @@
 # FeatureUsedDto
 
-The used space parameters of the tenant quota feature.
+How much of one quota feature the portal has already consumed.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **value** | **any** |  | [default to undefined]
-**title** | **string** | The used space title. | [optional] [default to undefined]
+**title** | **string** | The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature. | [optional] [default to undefined]
 
 ## Example
 

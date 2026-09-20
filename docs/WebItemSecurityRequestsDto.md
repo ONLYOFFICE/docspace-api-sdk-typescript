@@ -1,14 +1,14 @@
 # WebItemSecurityRequestsDto
 
-The request parameters for configuring security settings of a single web module.
+The access rule stored for one portal module: whether it may be opened, and by whom.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The module ID. | [default to undefined]
-**enabled** | **boolean** | Controls whether the security restrictions are enforced for this module. | [optional] [default to undefined]
-**subjects** | **Array&lt;string&gt;** | The collection of user and group identifiers granted access to the module. | [optional] [default to undefined]
+**id** | **string** | The module the rule applies to, given as a GUID. A value that is not a GUID fails the request as invalid. | [default to undefined]
+**enabled** | **boolean** | Whether the module may be opened. It decides the outcome only while `subjects` names somebody: an empty  `subjects` array is stored as access for everyone whatever this flag says. | [optional] [default to undefined]
+**subjects** | **Array&lt;string&gt;** | The users and groups the rule is stored for, given by their IDs. This is the whole allow-list that is to hold  afterwards and not a list of additions - what was stored before is dropped. Leaving it out applies `enabled`  to everyone and skips the audit trail entry, while sending it empty stores access for everyone. | [optional] [default to undefined]
 
 ## Example
 

@@ -20,6 +20,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { ApiDateTime } from './api-date-time';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Contact } from './contact';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -90,10 +93,10 @@ export type EmployeeFullDto = EmployeeDto &  {
     'activationStatus'?: EmployeeActivationStatus;
     /**
      * The date when the user account was terminated.
-     * @type {string}
+     * @type {ApiDateTime}
      * @memberof EmployeeFullDto
      */
-    'terminated'?: string | null;
+    'terminated'?: ApiDateTime;
     /**
      * The user department.
      * @type {string}
@@ -234,10 +237,10 @@ export type EmployeeFullDto = EmployeeDto &  {
     'createdBy'?: EmployeeDto;
     /**
      * The user registration date.
-     * @type {string}
+     * @type {ApiDateTime}
      * @memberof EmployeeFullDto
      */
-    'registrationDate'?: string | null;
+    'registrationDate'?: ApiDateTime;
     /**
      * Specifies if the user has a personal folder or not.
      * @type {boolean}

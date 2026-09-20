@@ -24,9 +24,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { AiAiReasoningLevel } from '../../models';
+// @ts-ignore
 import type { AiErrorResponse } from '../../models';
 // @ts-ignore
 import type { AiPreferencesSetDeepModeRequest } from '../../models';
+// @ts-ignore
+import type { AiPreferencesSetReasoningLevelRequest } from '../../models';
 // @ts-ignore
 import type { AiSuccessResponse } from '../../models';
 /**
@@ -38,9 +42,9 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
     
     return {
         /**
-         * Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
+         * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
          * @summary Clear deep mode
-         * @param {string} body 
+         * @param {string} body The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPreferencesClearDeepMode operation
@@ -62,6 +66,12 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -77,7 +87,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -99,6 +109,12 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
             }
@@ -115,7 +131,51 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * @summary Get reasoning level
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesGetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
+         */
+        aiPreferencesGetReasoningLevel: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/preferences/get-reasoning-level`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (entityId !== undefined) {
+                localVarQueryParameter['entityId'] = entityId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -137,6 +197,12 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
             }
@@ -153,7 +219,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
+         * Stores the deep-mode toggle of a scope. `false` stores the `off` depth; `true` keeps the depth already stored and falls back to the default depth (`medium`) when none is. `value` has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. `entityId` picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
          * @summary Set deep mode
          * @param {AiPreferencesSetDeepModeRequest} aiPreferencesSetDeepModeRequest 
          * @param {*} [options] Override http request option.
@@ -177,6 +243,12 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -185,6 +257,51 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(aiPreferencesSetDeepModeRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, `off` turns it off and replaces the stored depth (a later deep-mode `true` without a depth lands on `medium`). `entityId` picks a room and omitting it writes the portal-wide preference. Idempotent.
+         * @summary Set reasoning level
+         * @param {AiPreferencesSetReasoningLevelRequest} aiPreferencesSetReasoningLevelRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesSetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-reasoning-level/
+         */
+        aiPreferencesSetReasoningLevel: async (aiPreferencesSetReasoningLevelRequest: AiPreferencesSetReasoningLevelRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPreferencesSetReasoningLevelRequest' is not null or undefined
+            assertParamExists('aiPreferencesSetReasoningLevel', 'aiPreferencesSetReasoningLevelRequest', aiPreferencesSetReasoningLevelRequest)
+
+            const localVarPath = `/api/2.0/ai/preferences/set-reasoning-level`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPreferencesSetReasoningLevelRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -202,9 +319,9 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PreferencesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
+         * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
          * @summary Clear deep mode
-         * @param {string} body 
+         * @param {string} body The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPreferencesClearDeepMode operation
@@ -217,7 +334,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -232,7 +349,22 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * @summary Get reasoning level
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesGetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
+         */
+        async aiPreferencesGetReasoningLevel(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAiReasoningLevel>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesGetReasoningLevel(entityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesGetReasoningLevel']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -247,7 +379,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
+         * Stores the deep-mode toggle of a scope. `false` stores the `off` depth; `true` keeps the depth already stored and falls back to the default depth (`medium`) when none is. `value` has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. `entityId` picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
          * @summary Set deep mode
          * @param {AiPreferencesSetDeepModeRequest} aiPreferencesSetDeepModeRequest 
          * @param {*} [options] Override http request option.
@@ -261,6 +393,21 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesSetDeepMode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, `off` turns it off and replaces the stored depth (a later deep-mode `true` without a depth lands on `medium`). `entityId` picks a room and omitting it writes the portal-wide preference. Idempotent.
+         * @summary Set reasoning level
+         * @param {AiPreferencesSetReasoningLevelRequest} aiPreferencesSetReasoningLevelRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesSetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-reasoning-level/
+         */
+        async aiPreferencesSetReasoningLevel(aiPreferencesSetReasoningLevelRequest: AiPreferencesSetReasoningLevelRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesSetReasoningLevel(aiPreferencesSetReasoningLevelRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesSetReasoningLevel']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -272,7 +419,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
     const localVarFp = PreferencesApiFp(configuration)
     return {
         /**
-         * Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
+         * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
          * @summary Clear deep mode
          * @param {PreferencesApiAiPreferencesClearDeepModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -284,7 +431,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesClearDeepMode(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {PreferencesApiAiPreferencesGetDeepModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -296,7 +443,19 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesGetDeepMode(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * @summary Get reasoning level
+         * @param {PreferencesApiAiPreferencesGetReasoningLevelRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiPreferencesGetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
+         * @throws {RequiredError}
+         */
+        aiPreferencesGetReasoningLevel(requestParameters: PreferencesApiAiPreferencesGetReasoningLevelRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiAiReasoningLevel> {
+            return localVarFp.aiPreferencesGetReasoningLevel(requestParameters.entityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {PreferencesApiAiPreferencesIsDeepModeSetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -308,7 +467,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesIsDeepModeSet(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
+         * Stores the deep-mode toggle of a scope. `false` stores the `off` depth; `true` keeps the depth already stored and falls back to the default depth (`medium`) when none is. `value` has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. `entityId` picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
          * @summary Set deep mode
          * @param {PreferencesApiAiPreferencesSetDeepModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -318,6 +477,18 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
          */
         aiPreferencesSetDeepMode(requestParameters: PreferencesApiAiPreferencesSetDeepModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
             return localVarFp.aiPreferencesSetDeepMode(requestParameters.aiPreferencesSetDeepModeRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, `off` turns it off and replaces the stored depth (a later deep-mode `true` without a depth lands on `medium`). `entityId` picks a room and omitting it writes the portal-wide preference. Idempotent.
+         * @summary Set reasoning level
+         * @param {PreferencesApiAiPreferencesSetReasoningLevelRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiPreferencesSetReasoningLevel operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-reasoning-level/
+         * @throws {RequiredError}
+         */
+        aiPreferencesSetReasoningLevel(requestParameters: PreferencesApiAiPreferencesSetReasoningLevelRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiPreferencesSetReasoningLevel(requestParameters.aiPreferencesSetReasoningLevelRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -329,7 +500,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
  */
 export interface PreferencesApiAiPreferencesClearDeepModeRequest {
     /**
-     * 
+     * The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
      * @type {string}
      * @memberof PreferencesApiAiPreferencesClearDeepMode
      */
@@ -346,6 +517,20 @@ export interface PreferencesApiAiPreferencesGetDeepModeRequest {
      * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof PreferencesApiAiPreferencesGetDeepMode
+     */
+    readonly entityId?: string
+}
+
+/**
+ * Request parameters for aiPreferencesGetReasoningLevel operation in PreferencesApi.
+ * @export
+ * @interface PreferencesApiAiPreferencesGetReasoningLevelRequest
+ */
+export interface PreferencesApiAiPreferencesGetReasoningLevelRequest {
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof PreferencesApiAiPreferencesGetReasoningLevel
      */
     readonly entityId?: string
 }
@@ -379,6 +564,20 @@ export interface PreferencesApiAiPreferencesSetDeepModeRequest {
 }
 
 /**
+ * Request parameters for aiPreferencesSetReasoningLevel operation in PreferencesApi.
+ * @export
+ * @interface PreferencesApiAiPreferencesSetReasoningLevelRequest
+ */
+export interface PreferencesApiAiPreferencesSetReasoningLevelRequest {
+    /**
+     * 
+     * @type {AiPreferencesSetReasoningLevelRequest}
+     * @memberof PreferencesApiAiPreferencesSetReasoningLevel
+     */
+    readonly aiPreferencesSetReasoningLevelRequest: AiPreferencesSetReasoningLevelRequest
+}
+
+/**
  * PreferencesApi - object-oriented interface
  * @export
  * @class PreferencesApi
@@ -386,7 +585,7 @@ export interface PreferencesApiAiPreferencesSetDeepModeRequest {
  */
 export class PreferencesApi extends BaseAPI {
     /**
-     * Drops the persisted deep-mode toggle of the scope, so later reads fall back to the configured default.
+     * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
      * @summary Clear deep mode
      * @param {AIPreferencesApiAiPreferencesClearDeepModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -398,7 +597,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Returns the deep-mode toggle of the scope, falling back to the configured default when nothing has been persisted.
+     * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
      * @summary Get deep mode
      * @param {AIPreferencesApiAiPreferencesGetDeepModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -410,7 +609,19 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Tells whether the scope has an explicitly persisted deep-mode value, whichever way that value is set.
+     * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+     * @summary Get reasoning level
+     * @param {AIPreferencesApiAiPreferencesGetReasoningLevelRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PreferencesApi
+     */
+    public aiPreferencesGetReasoningLevel(requestParameters: PreferencesApiAiPreferencesGetReasoningLevelRequest = {}, options?: RawAxiosRequestConfig) {
+        return PreferencesApiFp(this.configuration).aiPreferencesGetReasoningLevel(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
      * @summary Is deep mode set
      * @param {AIPreferencesApiAiPreferencesIsDeepModeSetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -422,7 +633,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Persists the deep-mode toggle of the scope. Idempotent - there is no need to check whether a value already exists.
+     * Stores the deep-mode toggle of a scope. `false` stores the `off` depth; `true` keeps the depth already stored and falls back to the default depth (`medium`) when none is. `value` has to be a real boolean: a string, a number or an absent value is rejected rather than coerced, so the string false cannot silently switch the setting on and an empty request cannot silently switch it off. `entityId` picks a room and omitting it writes the portal-wide preference. It is idempotent, so there is no need to read the current value first.
      * @summary Set deep mode
      * @param {AIPreferencesApiAiPreferencesSetDeepModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -431,6 +642,18 @@ export class PreferencesApi extends BaseAPI {
      */
     public aiPreferencesSetDeepMode(requestParameters: PreferencesApiAiPreferencesSetDeepModeRequest, options?: RawAxiosRequestConfig) {
         return PreferencesApiFp(this.configuration).aiPreferencesSetDeepMode(requestParameters.aiPreferencesSetDeepModeRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Persists the extended-thinking depth of the scope as its single stored value: a depth turns deep mode on at that depth, `off` turns it off and replaces the stored depth (a later deep-mode `true` without a depth lands on `medium`). `entityId` picks a room and omitting it writes the portal-wide preference. Idempotent.
+     * @summary Set reasoning level
+     * @param {AIPreferencesApiAiPreferencesSetReasoningLevelRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PreferencesApi
+     */
+    public aiPreferencesSetReasoningLevel(requestParameters: PreferencesApiAiPreferencesSetReasoningLevelRequest, options?: RawAxiosRequestConfig) {
+        return PreferencesApiFp(this.configuration).aiPreferencesSetReasoningLevel(requestParameters.aiPreferencesSetReasoningLevelRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

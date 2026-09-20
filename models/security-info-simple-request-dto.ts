@@ -23,19 +23,19 @@
 import type { FileShareParams } from './file-share-params';
 
 /**
- * The parameters of the security information request.
+ * The rights to apply to a single file or folder, and how to announce them.
  */
 export interface SecurityInfoSimpleRequestDto {
     /**
-     * The collection of sharing parameters.
+     * One record per account or group whose rights are being set, each naming the subject and the level it gets; a  level of `None` takes the access away. An empty collection makes the call change nothing.
      */
     'share'?: Array<FileShareParams> | null;
     /**
-     * Specifies whether to notify users about the shared file or not.
+     * Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone.
      */
     'notify'?: boolean;
     /**
-     * The message to send when notifying about the shared file.
+     * The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives.
      */
     'sharingMessage'?: string | null;
 }

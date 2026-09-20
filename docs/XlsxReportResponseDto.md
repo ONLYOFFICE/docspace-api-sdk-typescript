@@ -1,14 +1,14 @@
 # XlsxReportResponseDto
 
-The XLSX report task response parameters.
+The answer to a report generation request: the queued task, the form whose answers are collected, and whether the  report file is being created or refreshed.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**form** | [**FileDtoInteger**](FileDtoInteger.md) | The original form file information. | [optional] [default to undefined]
-**task** | [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) | The Document Builder task information. | [optional] [default to undefined]
-**isNewFile** | **boolean** | Specifies whether the XLSX report file is newly created or an existing file will be updated. | [optional] [default to undefined]
+**form** | [**FileDto**](FileDto.md) | The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion. | [optional] [default to undefined]
+**task** | [**DocumentBuilderTaskDto**](DocumentBuilderTaskDto.md) | The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then. | [optional] [default to undefined]
+**isNewFile** | **boolean** | True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it. | [optional] [default to undefined]
 
 ## Example
 

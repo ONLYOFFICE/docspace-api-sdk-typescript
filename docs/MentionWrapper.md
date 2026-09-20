@@ -1,17 +1,17 @@
 # MentionWrapper
 
-The parameters of a user mentioned in a message.
+A user the editor may offer: to be mentioned in a comment, or to be picked when protecting a document.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | [**UserInfo**](UserInfo.md) | The user information. | [optional] [default to undefined]
-**email** | **string** | The user email address. | [optional] [readonly] [default to undefined]
-**id** | **string** | The user unique identification. | [optional] [readonly] [default to undefined]
-**image** | **string** | The path to the user\'s avatar. | [optional] [readonly] [default to undefined]
-**hasAccess** | **boolean** | Specifies whether the user has the access to the file where they are mentioned. | [optional] [readonly] [default to undefined]
-**name** | **string** | The user full name. | [optional] [readonly] [default to undefined]
+**user** | [**UserInfo**](UserInfo.md) | The account itself, in the shape the people listings use. | [optional] [default to undefined]
+**email** | **string** | Where a mention notification for this user is delivered. | [optional] [readonly] [default to undefined]
+**id** | **string** | The account id as text, the same value the account object carries; it is what identifies the user in a sharing  request built from this list. | [optional] [readonly] [default to undefined]
+**image** | **string** | An absolute address of the medium-sized avatar. A generated default avatar is reported when the user never  uploaded one, so the field is never empty. | [optional] [readonly] [default to undefined]
+**hasAccess** | **boolean** | Not filled in by the operations that return this list: it always comes back false. Whether a user can already  open the document has to be read from the sharing settings of the file. | [optional] [readonly] [default to undefined]
+**name** | **string** | The name to display, assembled the way the portal is configured to show names. | [optional] [readonly] [default to undefined]
 
 ## Example
 

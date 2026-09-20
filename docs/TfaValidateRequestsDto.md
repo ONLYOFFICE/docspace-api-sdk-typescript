@@ -1,13 +1,13 @@
 # TfaValidateRequestsDto
 
-The request parameters for validating the two-factor authentication codes.
+The one-time code that completes a pending two-factor step, and how long the resulting sign-in lasts.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**code** | **string** | The verification code provided by the user. | [default to undefined]
-**session** | **boolean** | Specifies whether the authentication is session-based. | [optional] [default to undefined]
+**code** | **string** | The code to check - either one from the authenticator application or one of the account\'s unused backup  codes, which is spent by the check. A wrong code is refused with 400 and counts against the portal login  attempt limit. | [default to undefined]
+**session** | **boolean** | Whether the sign-in that follows is tied to the browser session. When it is, the session ends with the  browser rather than lasting for the portal session lifetime. | [optional] [default to undefined]
 
 ## Example
 

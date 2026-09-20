@@ -36,18 +36,18 @@ import type { FileOperationRequestBaseDto } from './file-operation-request-base-
 
 /**
  * @type BatchRequestDto
- * The request parameters for copying/moving files.
+ * The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
  * @export
  */
 export type BatchRequestDto = FileOperationRequestBaseDto &  {
     /**
-     * The list of folder IDs to be copied/moved.
+     * The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
      * @type {Array<BatchRequestDtoAllOfFolderIds>}
      * @memberof BatchRequestDto
      */
     'folderIds'?: Array<BatchRequestDtoAllOfFolderIds> | null;
     /**
-     * The list of file IDs to be copied/moved.
+     * The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
      * @type {Array<BatchRequestDtoAllOfFileIds>}
      * @memberof BatchRequestDto
      */
@@ -59,25 +59,25 @@ export type BatchRequestDto = FileOperationRequestBaseDto &  {
      */
     'destFolderId'?: BatchRequestDtoAllOfDestFolderId;
     /**
-     * The overwriting behavior of the file copying or moving.
+     * What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
      * @type {FileConflictResolveType}
      * @memberof BatchRequestDto
      */
     'conflictResolveType'?: FileConflictResolveType;
     /**
-     * Specifies whether to delete the source files/folders after they are moved or copied to the destination folder.
+     * Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
      * @type {boolean}
      * @memberof BatchRequestDto
      */
     'deleteAfter'?: boolean;
     /**
-     * Specifies whether to copy or move the folder content or not.
+     * What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
      * @type {boolean}
      * @memberof BatchRequestDto
      */
     'content'?: boolean;
     /**
-     * Specifies whether the file is copied for filling out
+     * Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
      * @type {boolean}
      * @memberof BatchRequestDto
      */

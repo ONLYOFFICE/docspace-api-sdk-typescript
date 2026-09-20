@@ -44,7 +44,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
     
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -96,7 +96,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
          * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
          * @param {*} [options] Override http request option.
@@ -152,7 +152,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
          * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
          * @param {*} [options] Override http request option.
@@ -218,7 +218,7 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = SettingsAuthorizationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -232,7 +232,7 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
          * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
          * @param {*} [options] Override http request option.
@@ -247,7 +247,7 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
          * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
          * @param {*} [options] Override http request option.
@@ -272,7 +272,7 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
     const localVarFp = SettingsAuthorizationApiFp(configuration)
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuthServices operation
@@ -283,7 +283,7 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
             return localVarFp.getAuthServices(options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
          * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -295,7 +295,7 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
             return localVarFp.saveAuthKeys(requestParameters.authServiceRequestsDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
          * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -345,7 +345,7 @@ export interface SettingsAuthorizationApiTestExternalDatabaseConnectionRequest {
  */
 export class SettingsAuthorizationApi extends BaseAPI {
     /**
-     * Returns the authorization services.
+     * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
      * @summary Get the authorization services
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -356,7 +356,7 @@ export class SettingsAuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Saves the authorization keys.
+     * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
      * @summary Save the authorization keys
      * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -368,7 +368,7 @@ export class SettingsAuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Tests an external database connection with the provided settings without saving them.
+     * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
      * @summary Test external database connection
      * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

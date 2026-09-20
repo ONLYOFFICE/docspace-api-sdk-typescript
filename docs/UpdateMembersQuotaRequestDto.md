@@ -6,7 +6,7 @@ The request parameters for updating a user quota.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userIds** | **Array&lt;string&gt;** | The list of user IDs. | [optional] [default to undefined]
+**userIds** | **Array&lt;string&gt;** | The accounts the operation applies to. System accounts are dropped from the list without an error. | [optional] [default to undefined]
 **quota** | [**UpdateMembersQuotaRequestDtoQuota**](UpdateMembersQuotaRequestDtoQuota.md) |  | [optional] [default to undefined]
 
 ## Example

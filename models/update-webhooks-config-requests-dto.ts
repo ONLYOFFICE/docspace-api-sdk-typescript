@@ -27,12 +27,12 @@ import type { WebhookTrigger } from './webhook-trigger';
 
 /**
  * @type UpdateWebhooksConfigRequestsDto
- * The request parameters for updating the webhook configuration.
+ * The webhook subscription being changed, with the parameters it is to have afterwards.
  * @export
  */
 export type UpdateWebhooksConfigRequestsDto = CreateWebhooksConfigRequestsDto &  {
     /**
-     * The webhook configuration ID.
+     * The subscription to act on, by the `id` that `GET api/2.0/settings/webhook` reports. It travels in the body  rather than in the path, and an id that exists in no portal subscription answers 404.
      * @type {number}
      * @memberof UpdateWebhooksConfigRequestsDto
      */

@@ -20,7 +20,7 @@
 
 
 /**
- * Optional entity hint (lib 0.5.64): only `entityId` is read; the pair is re-resolved server-side before reaching the provider as metadata.
+ * Optional entity hint (lib 0.5.64): only `entityId` is read; the source (`source_id` / `source_type` / `source_title`) is re-resolved server-side before reaching the provider as metadata.
  */
 export interface AiThreadsOpenOrCreateRequestEntityMeta {
     'entityId'?: string;

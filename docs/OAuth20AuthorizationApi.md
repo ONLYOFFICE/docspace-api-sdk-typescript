@@ -4,14 +4,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | OAuth2 Authorization Endpoint|
-|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | OAuth2 Token Endpoint|
-|[**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | OAuth2 consent endpoint|
+|[**authorizeOAuth**](#authorizeoauth) | **GET** /oauth2/authorize | Start the authorization flow|
+|[**exchangeToken**](#exchangetoken) | **POST** /oauth2/token | Exchange the authorization code|
+|[**submitConsent**](#submitconsent) | **POST** /oauth2/authorize | Submit the consent decision|
 
 # **authorizeOAuth**
 > authorizeOAuth()
 
-Initiates the OAuth2 authorization flow.
+Starts the OAuth2 authorization code flow for the client named by client_id. The caller has to present the portal signature cookie, and a request without a valid one is not refused with 401 or 403 but redirected to the portal login page, carrying the client ID so the flow can resume after signing in. When the user has not yet consented to the requested scopes the browser is redirected to the consent page; once the consent exists the browser is redirected to the client\'s redirect URI with the authorization code and, when one was sent, the original state. A caller that cannot follow redirects may send the X-Disable-Redirect header, and then the response is 200 with an empty body and the target URL in the X-Redirect-URI header. The code returned here is exchanged for tokens at the token endpoint.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/authorize-oauth/).
 
@@ -19,10 +19,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **responseType** | [**string**] | The OAuth 2.0 response type, must be \'code\' for authorization code flow. | defaults to undefined|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | defaults to undefined|
-| **redirectUri** | [**string**] | The URL to redirect to after authorization is complete. | defaults to undefined|
-| **scope** | [**string**] | The space-separated list of requested scope permissions. | defaults to undefined|
+| **responseType** | [**string**] | The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. | defaults to undefined|
+| **clientId** | [**string**] | The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. | defaults to undefined|
+| **redirectUri** | [**string**] | Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. | defaults to undefined|
+| **scope** | [**string**] | The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. | defaults to undefined|
 
 
 ### Return type
@@ -44,10 +44,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
 
-let responseType: string; //The OAuth 2.0 response type, must be \'code\' for authorization code flow. (default to undefined)
-let clientId: string; //The client identifier issued to the client during registration. (default to undefined)
-let redirectUri: string; //The URL to redirect to after authorization is complete. (default to undefined)
-let scope: string; //The space-separated list of requested scope permissions. (default to undefined)
+let responseType: string; //The OAuth 2.0 response type. Only code is supported: this server issues an authorization code, never a token, from this endpoint. (default to undefined)
+let clientId: string; //The identifier the client was given when it was registered. It selects both the client shown on the consent screen and the set of redirect URIs the request is checked against. (default to undefined)
+let redirectUri: string; //Where to send the user once authorization is complete. It has to be one of the redirect URIs registered for the client, otherwise the request is refused. (default to undefined)
+let scope: string; //The permissions being asked for, as a space-separated list. Every scope has to be one the client is registered for, and the consent screen lists exactly these. (default to undefined)
 
 const { status, data } = await apiInstance.authorizeOAuth(
     responseType,
@@ -66,7 +66,8 @@ const { status, data } = await apiInstance.authorizeOAuth(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Authorization page |  -  |
+|**302** | Redirect to the login page, to the consent page, or back to the client\'s redirect URI with an authorization code |  -  |
+|**200** | Returned instead of the redirect when the request carries the X-Disable-Redirect header: the target URL is sent in the X-Redirect-URI response header and the body is empty |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -74,7 +75,7 @@ const { status, data } = await apiInstance.authorizeOAuth(
 # **exchangeToken**
 > ExchangeToken200Response exchangeToken()
 
-Exchange authorization code for access token
+Exchanges an authorization code for an access token. The request is form-encoded and has to carry the grant type, the code, the same redirect URI that was used to obtain the code, and the client credentials: the client authenticates itself here rather than through the portal signature cookie the authorization endpoint uses. The response carries the access token, its type and its lifetime in seconds, plus a refresh token when the client is configured for the refresh token grant. Client authentication that fails is answered with 401, while a malformed, unknown or expired code is answered with 400. The code is single use, so replaying it fails.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/exchange-token/).
 
@@ -82,11 +83,11 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **grantType** | [**string**] | The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. | (optional) defaults to undefined|
-| **code** | [**string**] | A temporary authorization code that is sent to the client to be exchanged for a token. | (optional) defaults to undefined|
-| **redirectUri** | [**string**] | The URL where the user will be redirected after successful or unsuccessful authentication. | (optional) defaults to undefined|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
-| **clientSecret** | [**string**] | The client secret issued to the client during registration. | (optional) defaults to undefined|
+| **grantType** | [**string**] | Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token. | (optional) defaults to undefined|
+| **code** | [**string**] | The authorization code returned by the authorization endpoint. It may be redeemed once. | (optional) defaults to undefined|
+| **redirectUri** | [**string**] | The same redirect URI that was used to obtain the code. The exchange fails when it differs. | (optional) defaults to undefined|
+| **clientId** | [**string**] | The identifier of the client redeeming the code. | (optional) defaults to undefined|
+| **clientSecret** | [**string**] | The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -95,7 +96,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -108,11 +109,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
 
-let grantType: string; //The OAuth2 grant type, must be \\\'authorization_code\\\' for the authorization code flow. (optional) (default to undefined)
-let code: string; //A temporary authorization code that is sent to the client to be exchanged for a token. (optional) (default to undefined)
-let redirectUri: string; //The URL where the user will be redirected after successful or unsuccessful authentication. (optional) (default to undefined)
-let clientId: string; //The client identifier issued to the client during registration. (optional) (default to undefined)
-let clientSecret: string; //The client secret issued to the client during registration. (optional) (default to undefined)
+let grantType: string; //Which exchange is being performed: authorization_code to redeem a code, refresh_token to renew an access token. (optional) (default to undefined)
+let code: string; //The authorization code returned by the authorization endpoint. It may be redeemed once. (optional) (default to undefined)
+let redirectUri: string; //The same redirect URI that was used to obtain the code. The exchange fails when it differs. (optional) (default to undefined)
+let clientId: string; //The identifier of the client redeeming the code. (optional) (default to undefined)
+let clientSecret: string; //The secret of the client redeeming the code. It is omitted by a public client, which proves itself with a PKCE code verifier instead. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.exchangeToken(
     grantType,
@@ -134,13 +135,14 @@ const { status, data } = await apiInstance.exchangeToken(
 |-------------|-------------|------------------|
 |**200** | Successfully exchanged authorization code for access token |  -  |
 |**400** | Invalid request parameters |  -  |
+|**401** | Client authentication failed: the client ID is unknown or the client secret does not match |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submitConsent**
 > submitConsent()
 
-Sends consent approval
+Submits the user\'s consent decision for the scopes an authorization request asked for. It is the form post the consent page makes, so it carries the client ID, the state and the agreed scopes as multipart form data, along with the same portal signature cookie the authorization request needed. On success the browser is redirected to the client\'s redirect URI with an authorization code, or, when the request carries the X-Disable-Redirect header, answered 200 with that URL in the X-Redirect-URI header. The consent is stored per user and client, so a later authorization request for the same scopes no longer stops at the consent page.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/submit-consent/).
 
@@ -148,9 +150,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **clientId** | [**string**] | The client identifier issued to the client during registration. | (optional) defaults to undefined|
-| **state** | [**string**] | The random string used to solve the CSRF vulnerability problem. | (optional) defaults to undefined|
-| **scope** | [**string**] | The space-separated list of requested scope permissions. | (optional) defaults to undefined|
+| **clientId** | [**string**] | The client the consent is being given to. It has to be the same client the authorization request named. | (optional) defaults to undefined|
+| **state** | [**string**] | The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request. | (optional) defaults to undefined|
+| **scope** | [**string**] | The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -172,9 +174,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new OAuth20AuthorizationApi(configuration);
 
-let clientId: string; //The client identifier issued to the client during registration. (optional) (default to undefined)
-let state: string; //The random string used to solve the CSRF vulnerability problem. (optional) (default to undefined)
-let scope: string; //The space-separated list of requested scope permissions. (optional) (default to undefined)
+let clientId: string; //The client the consent is being given to. It has to be the same client the authorization request named. (optional) (default to undefined)
+let state: string; //The opaque value carried through from the authorization request, returned unchanged on the redirect so the client can match the answer to its request. (optional) (default to undefined)
+let scope: string; //The scopes the user agreed to, as a space-separated list. Anything the user declined is left out, so this may be narrower than what was requested. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.submitConsent(
     clientId,
@@ -193,6 +195,7 @@ const { status, data } = await apiInstance.submitConsent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**302** | Redirect to the client\'s redirect URI with authorization code |  -  |
+|**200** | Returned instead of the redirect when the request carries the X-Disable-Redirect header: the target URL is sent in the X-Redirect-URI response header and the body is empty |  -  |
 |**400** | Invalid request parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

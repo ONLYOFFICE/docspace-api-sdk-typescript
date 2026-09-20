@@ -20,23 +20,20 @@
 
 
 /**
- * The response containing paginated data.
+ * One page of results together with the cursor that asks for the next page.
  */
 export interface PageableResponse {
+    'data'?: any;
     /**
-     * The paginated data.
-     */
-    'data'?: object;
-    /**
-     * The maximum number of results returned per page.
+     * The page size that was applied to this request, between 1 and 50.
      */
     'limit'?: number;
     /**
-     * The identifier of the last retrieved client.
+     * The cursor to send back as last_client_id to ask for the next page, together with last_created_on. It is null when the page is empty.
      */
     'last_client_id'?: string;
     /**
-     * The creation date of the last retrieved client.
+     * The cursor to send back as last_created_on to ask for the next page, together with last_client_id. It is null when the page is empty.
      */
     'last_created_on'?: string;
 }

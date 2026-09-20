@@ -20,31 +20,31 @@
 
 
 /**
- * The customer config parameters.
+ * The branding of the organization running the portal, as the editor About panel shows it. It is reported on a  server installation only.
  */
 export interface CustomerConfigDto {
     /**
-     * The address of the customer configuration.
+     * The postal address from the portal branding settings; empty when none was entered.
      */
     'address'?: string | null;
     /**
-     * The logo of the customer configuration.
+     * The About-panel logo of the organization.
      */
     'logo'?: string | null;
     /**
-     * The dark logo of the customer configuration.
+     * The About-panel logo for a dark interface theme.
      */
     'logoDark'?: string | null;
     /**
-     * The mail address of the customer configuration.
+     * The contact address from the portal branding settings.
      */
     'mail'?: string | null;
     /**
-     * The name of the customer configuration.
+     * The organization name shown in the editor.
      */
     'name'?: string | null;
     /**
-     * The site web address of the customer configuration.
+     * The website of the organization.
      */
     'www'?: string | null;
 }

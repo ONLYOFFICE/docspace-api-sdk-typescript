@@ -20,11 +20,11 @@
 
 
 /**
- * The parameters for setting the Custom Filter editing mode.
+ * The Custom Filter state a spreadsheet is to be put into.
  */
 export interface CustomFilterParameters {
     /**
-     * Specifies whether the Custom Filter editing mode is enabled or not.
+     * The state to reach: `true` turns the mode on, so that the sorting and filtering each person applies stays  visible to that person alone, and drops the others out of a running editing session; `false` turns it off and  makes filtering shared again.
      */
     'enabled'?: boolean;
 }

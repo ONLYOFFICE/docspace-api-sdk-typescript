@@ -21,6 +21,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiProviderType } from './ai-provider-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiReasoningSupport } from './ai-reasoning-support';
 
 /**
  * AI model metadata. Describes a single model available from a provider.
@@ -42,6 +45,10 @@ export interface AiModel {
      * Whether this model supports extended thinking / chain-of-thought reasoning.
      */
     'reasoning'?: boolean;
+    /**
+     * What the model can do with extended thinking, when the provider\'s catalogue says so (OpenRouter and the ONLYOFFICE route report a per-model `reasoning` object). Copied onto the profile at save time; absent, the widget falls back to the provider\'s id-based table.
+     */
+    'reasoningSupport'?: AiReasoningSupport;
     /**
      * Bitmask of model capabilities (Chat, Image, Vision, Tools, etc.). Used to filter models per `ActionType`.
      */

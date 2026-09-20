@@ -38,7 +38,7 @@ export const SecurityBannersVisibilityApiAxiosParamCreator = function (configura
     
     return {
         /**
-         * Sets the visibility settings of the promotional banners in the portal.
+         * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
          * @summary Set the banners visibility
          * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
          * @param {*} [options] Override http request option.
@@ -104,7 +104,7 @@ export const SecurityBannersVisibilityApiFp = function(configuration?: Configura
     const localVarAxiosParamCreator = SecurityBannersVisibilityApiAxiosParamCreator(configuration)
     return {
         /**
-         * Sets the visibility settings of the promotional banners in the portal.
+         * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
          * @summary Set the banners visibility
          * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
          * @param {*} [options] Override http request option.
@@ -129,7 +129,7 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
     const localVarFp = SecurityBannersVisibilityApiFp(configuration)
     return {
         /**
-         * Sets the visibility settings of the promotional banners in the portal.
+         * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
          * @summary Set the banners visibility
          * @param {SecurityBannersVisibilityApiSetTenantBannerSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -165,7 +165,7 @@ export interface SecurityBannersVisibilityApiSetTenantBannerSettingsRequest {
  */
 export class SecurityBannersVisibilityApi extends BaseAPI {
     /**
-     * Sets the visibility settings of the promotional banners in the portal.
+     * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
      * @summary Set the banners visibility
      * @param {SecurityBannersVisibilityApiSetTenantBannerSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

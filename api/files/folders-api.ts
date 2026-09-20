@@ -38,11 +38,9 @@ import type { DocumentBuilderTaskWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
+import type { FileArrayWrapper } from '../../models';
+// @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
-// @ts-ignore
-import type { FileIntegerArrayWrapper } from '../../models';
-// @ts-ignore
-import type { FileIntegerWrapper } from '../../models';
 // @ts-ignore
 import type { FileOperationArrayWrapper } from '../../models';
 // @ts-ignore
@@ -50,17 +48,19 @@ import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareWrapper } from '../../models';
 // @ts-ignore
+import type { FileWrapper } from '../../models';
+// @ts-ignore
 import type { FilesStatisticsResultWrapper } from '../../models';
 // @ts-ignore
 import type { FilterType } from '../../models';
 // @ts-ignore
-import type { FolderContentIntegerArrayWrapper } from '../../models';
+import type { FolderContentArrayWrapper } from '../../models';
 // @ts-ignore
-import type { FolderContentIntegerWrapper } from '../../models';
-// @ts-ignore
-import type { FolderIntegerWrapper } from '../../models';
+import type { FolderContentWrapper } from '../../models';
 // @ts-ignore
 import type { FolderLinkRequest } from '../../models';
+// @ts-ignore
+import type { FolderWrapper } from '../../models';
 // @ts-ignore
 import type { FormsItemArrayWrapper } from '../../models';
 // @ts-ignore
@@ -75,6 +75,14 @@ import type { STRINGArrayWrapper } from '../../models';
 import type { SearchArea } from '../../models';
 // @ts-ignore
 import type { SortOrder } from '../../models';
+// @ts-ignore
+import type { ThirdPartyFileArrayWrapper } from '../../models';
+// @ts-ignore
+import type { ThirdPartyFileWrapper } from '../../models';
+// @ts-ignore
+import type { ThirdPartyFolderContentWrapper } from '../../models';
+// @ts-ignore
+import type { ThirdPartyFolderWrapper } from '../../models';
 // @ts-ignore
 import type { XlsxReportResponseWrapper } from '../../models';
 /**
@@ -92,10 +100,10 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             useAtRecent = true;
         },
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
-         * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts
+         * @param {number} folderId The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
+         * @param {CheckUploadRequest} checkUploadRequest The names to test against the files the folder already holds.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkUpload operation
@@ -154,10 +162,72 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts (third-party storage)
+         * @param {string} folderId The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
+         * @param {CheckUploadRequest} checkUploadRequest The names to test against the files the folder already holds.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUploadThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload-third-party/
+         */
+        checkUploadThirdParty: async (folderId: string, checkUploadRequest: CheckUploadRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('checkUploadThirdParty', 'folderId', folderId)
+            // verify required parameter 'checkUploadRequest' is not null or undefined
+            assertParamExists('checkUploadThirdParty', 'checkUploadRequest', checkUploadRequest)
+
+            const localVarPath = `/api/2.0/files/{folderId}/upload/check`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(checkUploadRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
          * @summary Create a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {number} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolder operation
@@ -216,10 +286,72 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
+         * @summary Create a folder (third-party storage)
+         * @param {string} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-third-party/
+         */
+        createFolderThirdParty: async (folderId: string, createFolder: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('createFolderThirdParty', 'folderId', folderId)
+            // verify required parameter 'createFolder' is not null or undefined
+            assertParamExists('createFolderThirdParty', 'createFolder', createFolder)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFolder, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link
+         * @param {number} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolderPrimaryExternalLink operation
@@ -278,12 +410,74 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link (third-party storage)
+         * @param {string} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link-third-party/
+         */
+        createFolderPrimaryExternalLinkThirdParty: async (id: string, folderLinkRequest: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('createFolderPrimaryExternalLinkThirdParty', 'id', id)
+            // verify required parameter 'folderLinkRequest' is not null or undefined
+            assertParamExists('createFolderPrimaryExternalLinkThirdParty', 'folderLinkRequest', folderLinkRequest)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/link`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(folderLinkRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
          * @summary Start the folder history report generation
-         * @param {number} folderId The folder ID whose history is exported.
-         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
-         * @param {string} [from] The start date of the history period to export.
-         * @param {string} [to] The end date of the history period to export.
+         * @param {number} folderId The folder whose history is exported; the report covers the folder itself and the entries inside it.
+         * @param {AuditReportFormat} [format] The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
+         * @param {string} [from] The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
+         * @param {string} [to] The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createReportFolderHistory operation
@@ -353,10 +547,10 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Deletes a folder with the ID specified in the request.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete a folder
-         * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
+         * @param {number} folderId The folder to delete, together with everything it holds.
+         * @param {DeleteFolder} deleteFolder How the deletion is to be carried out.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFolder operation
@@ -415,9 +609,71 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
+         * @summary Delete a folder (third-party storage)
+         * @param {string} folderId The folder to delete, together with everything it holds.
+         * @param {DeleteFolder} deleteFolder How the deletion is to be carried out.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder-third-party/
+         */
+        deleteFolderThirdParty: async (folderId: string, deleteFolder: DeleteFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('deleteFolderThirdParty', 'folderId', folderId)
+            // verify required parameter 'deleteFolder' is not null or undefined
+            assertParamExists('deleteFolderThirdParty', 'deleteFolder', deleteFolder)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(deleteFolder, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
          * @summary Generate XLSX report by folder
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for generateXlsxByFolder operation
@@ -471,15 +727,15 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the Favorites section.
+         * Returns the caller\'s own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
          * @summary Get the Favorites section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFavoritesFolder operation
@@ -561,7 +817,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the used space of files in the root folders.
+         * Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
          * @summary Get used space of files
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -613,9 +869,9 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
+         * Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
          * @summary Get folder form filter
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolder operation
@@ -638,6 +894,12 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -650,27 +912,27 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
          * @summary Get a folder by ID
-         * @param {number} folderId The folder ID.
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [roomId] The room ID.
-         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] The parent folder types used to filter the folder contents by folder type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
-         * @param {boolean} [withSubFolders] Specifies whether to include files from subfolders in the results.
-         * @param {string} [extension] Specifies whether to search for the specific file extension.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {string} [formsItemKey] The forms item key.
-         * @param {string} [formsItemType] The forms item type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
-         * @param {string} [sortBy] The property used for sorting the folder request results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
-         * @param {Location} [location] The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+         * @param {number} folderId The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {string} [sharedBy] Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
+         * @param {number} [roomId] Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+         * @param {boolean} [excludeSubject] Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {boolean} [withSubFolders] Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
+         * @param {string} [extension] Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
+         * @param {SearchArea} [searchArea] Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
+         * @param {string} [formsItemKey] Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
+         * @param {string} [formsItemType] The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
+         * @param {Location} [location] Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderByFolderId operation
@@ -692,6 +954,12 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (userIdOrGroupId !== undefined) {
                 localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
@@ -777,13 +1045,146 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+         * @summary Get a folder by ID (third-party storage)
+         * @param {string} folderId The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {string} [sharedBy] Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
+         * @param {string} [roomId] Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+         * @param {Array<GetFolderByFolderIdThirdPartyFolderTypeEnum>} [folderType] Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+         * @param {boolean} [excludeSubject] Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {boolean} [withSubFolders] Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
+         * @param {string} [extension] Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
+         * @param {SearchArea} [searchArea] Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
+         * @param {string} [formsItemKey] Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
+         * @param {string} [formsItemType] The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
+         * @param {Location} [location] Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderByFolderIdThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id-third-party/
+         */
+        getFolderByFolderIdThirdParty: async (folderId: string, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: string, folderType?: Array<GetFolderByFolderIdThirdPartyFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getFolderByFolderIdThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (userIdOrGroupId !== undefined) {
+                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
+            }
+
+            if (sharedBy !== undefined) {
+                localVarQueryParameter['sharedBy'] = sharedBy;
+            }
+
+            if (filterType !== undefined) {
+                localVarQueryParameter['filterType'] = filterType;
+            }
+
+            if (roomId !== undefined) {
+                localVarQueryParameter['roomId'] = roomId;
+            }
+
+            if (folderType) {
+                localVarQueryParameter['folderType'] = folderType;
+            }
+
+            if (excludeSubject !== undefined) {
+                localVarQueryParameter['excludeSubject'] = excludeSubject;
+            }
+
+            if (applyFilterOption !== undefined) {
+                localVarQueryParameter['applyFilterOption'] = applyFilterOption;
+            }
+
+            if (withSubFolders !== undefined) {
+                localVarQueryParameter['withSubFolders'] = withSubFolders;
+            }
+
+            if (extension !== undefined) {
+                localVarQueryParameter['extension'] = extension;
+            }
+
+            if (searchArea !== undefined) {
+                localVarQueryParameter['searchArea'] = searchArea;
+            }
+
+            if (formsItemKey !== undefined) {
+                localVarQueryParameter['formsItemKey'] = formsItemKey;
+            }
+
+            if (formsItemType !== undefined) {
+                localVarQueryParameter['formsItemType'] = formsItemType;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+            if (location !== undefined) {
+                localVarQueryParameter['Location'] = location;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
          * @summary Get folder history
-         * @param {number} folderId The folder ID of the history request.
-         * @param {string} [fromDate] The start date of the history request.
-         * @param {string} [toDate] The end date of the history request.
-         * @param {number} [count] The number of records to retrieve for the folder history.
-         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
+         * @param {number} folderId The folder whose activity log is read; the log covers the folder itself and the entries inside it.
+         * @param {string} [fromDate] The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
+         * @param {string} [toDate] The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
+         * @param {number} [count] How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
+         * @param {number} [startIndex] How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderHistory operation
@@ -857,9 +1258,9 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
          * @summary Get folder information
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderInfo operation
@@ -882,6 +1283,12 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -894,9 +1301,52 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
-         * @param {number} id The folder ID.
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
+         * @summary Get folder information (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info-third-party/
+         */
+        getFolderInfoThirdParty: async (folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getFolderInfoThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links
+         * @param {number} id The folder or room whose external links are listed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderLinks operation
@@ -950,9 +1400,65 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links (third-party storage)
+         * @param {string} id The folder or room whose external links are listed.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderLinksThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links-third-party/
+         */
+        getFolderLinksThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFolderLinksThirdParty', 'id', id)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/links`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
          * @summary Get the folder path
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderPath operation
@@ -1006,11 +1512,67 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
+         * @summary Get the folder path (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderPathThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path-third-party/
+         */
+        getFolderPathThirdParty: async (folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getFolderPathThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/path`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link
+         * @param {number} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderPrimaryExternalLink operation
@@ -1033,6 +1595,12 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (count !== undefined) {
                 localVarQueryParameter['count'] = count;
             }
@@ -1053,9 +1621,62 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link (third-party storage)
+         * @param {string} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link-third-party/
+         */
+        getFolderPrimaryExternalLinkThirdParty: async (id: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getFolderPrimaryExternalLinkThirdParty', 'id', id)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/link`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
          * @summary Get subfolders
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolders operation
@@ -1109,15 +1730,71 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
+         * @summary Get subfolders (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFoldersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders-third-party/
+         */
+        getFoldersThirdParty: async (folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getFoldersThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/subfolders`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
          * @summary Get the Forms section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFormsFolder operation
@@ -1199,16 +1876,16 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the My documents section.
+         * Returns the contents of the caller\'s My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
          * @summary Get the My documents section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getMyFolder operation
@@ -1294,9 +1971,9 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
          * @summary Get new folder items
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewFolderItems operation
@@ -1350,19 +2027,75 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
+         * @summary Get new folder items (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getNewFolderItemsThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items-third-party/
+         */
+        getNewFolderItemsThirdParty: async (folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('getNewFolderItemsThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/news`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
          * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
+         * @param {boolean} [excludeSubject] Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
+         * @param {SearchArea} [searchArea] The area a listing is taken from. The Recent section is assembled from the caller\'s own open history rather  than from an area, so the value does not change which files are returned.
+         * @param {Array<string>} [extension] The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
+         * @param {string} [filterValue] The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRecentFolder operation
@@ -1461,9 +2194,9 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the status of generating the folder history report.
+         * Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
          * @summary Get the folder history report generation status
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getReportFolderHistory operation
@@ -1517,16 +2250,16 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
+         * Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
          * @summary Get filtered sections
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
+         * @param {boolean} [withoutTrash] Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
+         * @param {number} [count] The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
+         * @param {number} [startIndex] The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRootFolders operation
@@ -1612,16 +2345,16 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the detailed list of files and folders located in the Trash section.
+         * Returns the caller\'s Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
          * @summary Get the Trash section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTrashFolder operation
@@ -1707,13 +2440,13 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
          * @summary Insert a file
-         * @param {number} folderId The folder ID for inserting a file.
-         * @param {File} [insertFileFile] The file to be inserted.
-         * @param {string} [insertFileTitle] The file title to be inserted.
-         * @param {boolean} [insertFileCreateNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [insertFileKeepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {File} [insertFileFile] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [insertFileTitle] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [insertFileCreateNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [insertFileKeepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
          * @param {boolean} [insertFileStreamCanRead] 
          * @param {boolean} [insertFileStreamCanWrite] 
          * @param {boolean} [insertFileStreamCanSeek] 
@@ -1827,12 +2560,132 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Inserts a file specified in the request to the My documents section by single file uploading.
-         * @summary Insert a file to the My documents section
-         * @param {File} [file] The file to be inserted.
-         * @param {string} [title] The file title to be inserted.
-         * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
+         * @summary Insert a file (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {File} [insertFileFile] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [insertFileTitle] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [insertFileCreateNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [insertFileKeepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {boolean} [insertFileStreamCanRead] 
+         * @param {boolean} [insertFileStreamCanWrite] 
+         * @param {boolean} [insertFileStreamCanSeek] 
+         * @param {boolean} [insertFileStreamCanTimeout] 
+         * @param {number} [insertFileStreamLength] 
+         * @param {number} [insertFileStreamPosition] 
+         * @param {number} [insertFileStreamReadTimeout] 
+         * @param {number} [insertFileStreamWriteTimeout] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for insertFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-third-party/
+         */
+        insertFileThirdParty: async (folderId: string, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('insertFileThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/insert`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+            if (insertFileFile !== undefined) { 
+                localVarFormParams.append('InsertFile.File', insertFileFile as any);
+            }
+    
+            if (insertFileTitle !== undefined) { 
+                localVarFormParams.append('InsertFile.Title', insertFileTitle as any);
+            }
+    
+            if (insertFileCreateNewIfExist !== undefined) { 
+                localVarFormParams.append('InsertFile.CreateNewIfExist', String(insertFileCreateNewIfExist) as any);
+            }
+    
+            if (insertFileKeepConvertStatus !== undefined) { 
+                localVarFormParams.append('InsertFile.KeepConvertStatus', String(insertFileKeepConvertStatus) as any);
+            }
+    
+            if (insertFileStreamCanRead !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.CanRead', String(insertFileStreamCanRead) as any);
+            }
+    
+            if (insertFileStreamCanWrite !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.CanWrite', String(insertFileStreamCanWrite) as any);
+            }
+    
+            if (insertFileStreamCanSeek !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.CanSeek', String(insertFileStreamCanSeek) as any);
+            }
+    
+            if (insertFileStreamCanTimeout !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.CanTimeout', String(insertFileStreamCanTimeout) as any);
+            }
+    
+            if (insertFileStreamLength !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.Length', insertFileStreamLength as any);
+            }
+    
+            if (insertFileStreamPosition !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.Position', insertFileStreamPosition as any);
+            }
+    
+            if (insertFileStreamReadTimeout !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.ReadTimeout', insertFileStreamReadTimeout as any);
+            }
+    
+            if (insertFileStreamWriteTimeout !== undefined) { 
+                localVarFormParams.append('InsertFile.Stream.WriteTimeout', insertFileStreamWriteTimeout as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Stores one file in the caller\'s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account\'s storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
+         * @summary Insert a file into My documents
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [title] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
          * @param {boolean} [streamCanRead] 
          * @param {boolean} [streamCanWrite] 
          * @param {boolean} [streamCanSeek] 
@@ -1943,10 +2796,10 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
          * @summary Rename a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {number} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for renameFolder operation
@@ -2005,10 +2858,72 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the order of a folder with ID specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
+         * @summary Rename a folder (third-party storage)
+         * @param {string} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for renameFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder-third-party/
+         */
+        renameFolderThirdParty: async (folderId: string, createFolder: CreateFolder, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('renameFolderThirdParty', 'folderId', folderId)
+            // verify required parameter 'createFolder' is not null or undefined
+            assertParamExists('renameFolderThirdParty', 'createFolder', createFolder)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFolder, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
          * @summary Set folder order
-         * @param {number} folderId The folder unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The folder order information.
+         * @param {number} folderId The folder to move.
+         * @param {OrderRequestDto} [orderRequestDto] The position the folder is to take.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderOrder operation
@@ -2065,10 +2980,70 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
+         * @summary Set folder order (third-party storage)
+         * @param {string} folderId The folder to move.
+         * @param {OrderRequestDto} [orderRequestDto] The position the folder is to take.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderOrderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order-third-party/
+         */
+        setFolderOrderThirdParty: async (folderId: string, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('setFolderOrderThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/folder/{folderId}/order`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(orderRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
          * @summary Set the folder external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * @param {number} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderPrimaryExternalLink operation
@@ -2127,9 +3102,71 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Terminates generating the folder history report.
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
+         * @summary Set the folder external link (third-party storage)
+         * @param {string} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link-third-party/
+         */
+        setFolderPrimaryExternalLinkThirdParty: async (id: string, folderLinkRequest: FolderLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('setFolderPrimaryExternalLinkThirdParty', 'id', id)
+            // verify required parameter 'folderLinkRequest' is not null or undefined
+            assertParamExists('setFolderPrimaryExternalLinkThirdParty', 'folderLinkRequest', folderLinkRequest)
+
+            const localVarPath = `/api/2.0/files/folder/{id}/links`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(folderLinkRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
          * @summary Terminate the folder history report generation
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateReportFolderHistory operation
@@ -2183,13 +3220,13 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
          * @summary Upload a file
-         * @param {number} folderId The folder ID to upload a file.
-         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
-         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {File} [file] The file to be uploaded.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFile operation
@@ -2263,12 +3300,92 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
-         * @summary Upload a file to the My documents section
-         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
-         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {File} [file] The file to be uploaded.
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+         * @summary Upload a file (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-third-party/
+         */
+        uploadFileThirdParty: async (folderId: string, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'folderId' is not null or undefined
+            assertParamExists('uploadFileThirdParty', 'folderId', folderId)
+
+            const localVarPath = `/api/2.0/files/{folderId}/upload`
+                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (createNewIfExist !== undefined) {
+                localVarQueryParameter['createNewIfExist'] = createNewIfExist;
+            }
+
+            if (storeOriginalFile !== undefined) {
+                localVarQueryParameter['storeOriginalFile'] = storeOriginalFile;
+            }
+
+            if (keepConvertStatus !== undefined) {
+                localVarQueryParameter['keepConvertStatus'] = keepConvertStatus;
+            }
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Uploads one file into the caller\'s own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account\'s  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
+         * @summary Upload a file to My documents
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFileToMy operation
@@ -2349,10 +3466,10 @@ export const FoldersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = FoldersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
-         * @param {number} folderId The folder ID.
-         * @param {CheckUploadRequest} checkUploadRequest The request parameters for checking file uploads.
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts
+         * @param {number} folderId The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
+         * @param {CheckUploadRequest} checkUploadRequest The names to test against the files the folder already holds.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkUpload operation
@@ -2365,26 +3482,58 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts (third-party storage)
+         * @param {string} folderId The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
+         * @param {CheckUploadRequest} checkUploadRequest The names to test against the files the folder already holds.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for checkUploadThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload-third-party/
+         */
+        async checkUploadThirdParty(folderId: string, checkUploadRequest: CheckUploadRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkUploadThirdParty(folderId, checkUploadRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.checkUploadThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
          * @summary Create a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {number} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          */
-        async createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async createFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFolder(folderId, createFolder, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.createFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
+         * @summary Create a folder (third-party storage)
+         * @param {string} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-third-party/
+         */
+        async createFolderThirdParty(folderId: string, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFolderThirdParty(folderId, createFolder, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.createFolderThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link
+         * @param {number} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFolderPrimaryExternalLink operation
@@ -2397,12 +3546,28 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link (third-party storage)
+         * @param {string} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link-third-party/
+         */
+        async createFolderPrimaryExternalLinkThirdParty(id: string, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFolderPrimaryExternalLinkThirdParty(id, folderLinkRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.createFolderPrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
          * @summary Start the folder history report generation
-         * @param {number} folderId The folder ID whose history is exported.
-         * @param {AuditReportFormat} [format] The output file format of the report. Defaults to XLSX.
-         * @param {string} [from] The start date of the history period to export.
-         * @param {string} [to] The end date of the history period to export.
+         * @param {number} folderId The folder whose history is exported; the report covers the folder itself and the entries inside it.
+         * @param {AuditReportFormat} [format] The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
+         * @param {string} [from] The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
+         * @param {string} [to] The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createReportFolderHistory operation
@@ -2415,10 +3580,10 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a folder with the ID specified in the request.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete a folder
-         * @param {number} folderId The folder ID to delete.
-         * @param {DeleteFolder} deleteFolder The parameters for deleting a folder.
+         * @param {number} folderId The folder to delete, together with everything it holds.
+         * @param {DeleteFolder} deleteFolder How the deletion is to be carried out.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFolder operation
@@ -2431,9 +3596,25 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
+         * @summary Delete a folder (third-party storage)
+         * @param {string} folderId The folder to delete, together with everything it holds.
+         * @param {DeleteFolder} deleteFolder How the deletion is to be carried out.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder-third-party/
+         */
+        async deleteFolderThirdParty(folderId: string, deleteFolder: DeleteFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFolderThirdParty(folderId, deleteFolder, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.deleteFolderThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
          * @summary Generate XLSX report by folder
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for generateXlsxByFolder operation
@@ -2446,28 +3627,28 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the Favorites section.
+         * Returns the caller\'s own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
          * @summary Get the Favorites section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFavoritesFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
          */
-        async getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getFavoritesFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFavoritesFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFavoritesFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the used space of files in the root folders.
+         * Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
          * @summary Get used space of files
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2481,9 +3662,9 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
+         * Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
          * @summary Get folder form filter
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolder operation
@@ -2496,46 +3677,79 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
          * @summary Get a folder by ID
-         * @param {number} folderId The folder ID.
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {string} [sharedBy] The identifier of the user who shared the folder or file.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [roomId] The room ID.
-         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] The parent folder types used to filter the folder contents by folder type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders, or all elements from the specified folder.
-         * @param {boolean} [withSubFolders] Specifies whether to include files from subfolders in the results.
-         * @param {string} [extension] Specifies whether to search for the specific file extension.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {string} [formsItemKey] The forms item key.
-         * @param {string} [formsItemType] The forms item type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated request.
-         * @param {string} [sortBy] The property used for sorting the folder request results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text value used as a filter parameter for folder content queries.
-         * @param {Location} [location] The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+         * @param {number} folderId The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {string} [sharedBy] Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
+         * @param {number} [roomId] Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+         * @param {Array<GetFolderByFolderIdFolderTypeEnum>} [folderType] Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+         * @param {boolean} [excludeSubject] Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {boolean} [withSubFolders] Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
+         * @param {string} [extension] Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
+         * @param {SearchArea} [searchArea] Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
+         * @param {string} [formsItemKey] Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
+         * @param {string} [formsItemType] The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
+         * @param {Location} [location] Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderByFolderId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/
          */
-        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, folderType?: Array<GetFolderByFolderIdFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getFolderByFolderId(folderId: number, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: number, folderType?: Array<GetFolderByFolderIdFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderId(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderByFolderId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+         * @summary Get a folder by ID (third-party storage)
+         * @param {string} folderId The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {string} [sharedBy] Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
+         * @param {string} [roomId] Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+         * @param {Array<GetFolderByFolderIdThirdPartyFolderTypeEnum>} [folderType] Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+         * @param {boolean} [excludeSubject] Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {boolean} [withSubFolders] Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
+         * @param {string} [extension] Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
+         * @param {SearchArea} [searchArea] Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
+         * @param {string} [formsItemKey] Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
+         * @param {string} [formsItemType] The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
+         * @param {Location} [location] Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderByFolderIdThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id-third-party/
+         */
+        async getFolderByFolderIdThirdParty(folderId: string, userIdOrGroupId?: string, sharedBy?: string, filterType?: FilterType, roomId?: string, folderType?: Array<GetFolderByFolderIdThirdPartyFolderTypeEnum>, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, withSubFolders?: boolean, extension?: string, searchArea?: SearchArea, formsItemKey?: string, formsItemType?: string, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, location?: Location, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderContentWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderByFolderIdThirdParty(folderId, userIdOrGroupId, sharedBy, filterType, roomId, folderType, excludeSubject, applyFilterOption, withSubFolders, extension, searchArea, formsItemKey, formsItemType, count, startIndex, sortBy, sortOrder, filterValue, location, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderByFolderIdThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
          * @summary Get folder history
-         * @param {number} folderId The folder ID of the history request.
-         * @param {string} [fromDate] The start date of the history request.
-         * @param {string} [toDate] The end date of the history request.
-         * @param {number} [count] The number of records to retrieve for the folder history.
-         * @param {number} [startIndex] The starting index from which the history records are retrieved in the request.
+         * @param {number} folderId The folder whose activity log is read; the log covers the folder itself and the entries inside it.
+         * @param {string} [fromDate] The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
+         * @param {string} [toDate] The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
+         * @param {number} [count] How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
+         * @param {number} [startIndex] How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderHistory operation
@@ -2548,24 +3762,39 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
          * @summary Get folder information
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info/
          */
-        async getFolderInfo(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async getFolderInfo(folderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderInfo(folderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderInfo']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
-         * @param {number} id The folder ID.
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
+         * @summary Get folder information (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info-third-party/
+         */
+        async getFolderInfoThirdParty(folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderInfoThirdParty(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderInfoThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links
+         * @param {number} id The folder or room whose external links are listed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderLinks operation
@@ -2578,9 +3807,24 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links (third-party storage)
+         * @param {string} id The folder or room whose external links are listed.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderLinksThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links-third-party/
+         */
+        async getFolderLinksThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderLinksThirdParty(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderLinksThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
          * @summary Get the folder path
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderPath operation
@@ -2593,11 +3837,26 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
-         * @param {number} id The folder unique identifier.
-         * @param {number} [count] The number of items to retrieve in the request.
-         * @param {number} [startIndex] The starting index for the query results.
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
+         * @summary Get the folder path (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderPathThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path-third-party/
+         */
+        async getFolderPathThirdParty(folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderPathThirdParty(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderPathThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link
+         * @param {number} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolderPrimaryExternalLink operation
@@ -2610,9 +3869,26 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link (third-party storage)
+         * @param {string} id The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+         * @param {number} [count] How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link-third-party/
+         */
+        async getFolderPrimaryExternalLinkThirdParty(id: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFolderPrimaryExternalLinkThirdParty(id, count, startIndex, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFolderPrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
          * @summary Get subfolders
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFolders operation
@@ -2625,52 +3901,67 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
+         * @summary Get subfolders (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getFoldersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders-third-party/
+         */
+        async getFoldersThirdParty(folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFoldersThirdParty(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFoldersThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
          * @summary Get the Forms section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {number} [count] The maximum number of items to retrieve in the request.
-         * @param {number} [startIndex] The zero-based index of the first item to retrieve in a paginated list.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter or search criterion for folder content queries.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getFormsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
          */
-        async getFormsFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getFormsFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFormsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getFormsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the My documents section.
+         * Returns the contents of the caller\'s My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
          * @summary Get the My documents section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getMyFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
          */
-        async getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getMyFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getMyFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getMyFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
          * @summary Get new folder items
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getNewFolderItems operation
@@ -2683,34 +3974,49 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
+         * @summary Get new folder items (third-party storage)
+         * @param {string} folderId The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getNewFolderItemsThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items-third-party/
+         */
+        async getNewFolderItemsThirdParty(folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNewFolderItemsThirdParty(folderId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getNewFolderItemsThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
          * @summary Get the Recent section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [excludeSubject] Specifies whether to exclude search by user or group ID.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {SearchArea} [searchArea] The search area.
-         * @param {Array<string>} [extension] Specifies whether to search for a specific file extension in the Recent folder.
-         * @param {number} [count] The maximum number of items to return.
-         * @param {number} [startIndex] The starting position of the results to be returned in the query response.
-         * @param {string} [sortBy] Specifies the sorting criteria for the folder request.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
+         * @param {boolean} [excludeSubject] Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
+         * @param {SearchArea} [searchArea] The area a listing is taken from. The Recent section is assembled from the caller\'s own open history rather  than from an area, so the value does not change which files are returned.
+         * @param {Array<string>} [extension] The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
+         * @param {string} [filterValue] The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRecentFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/
          */
-        async getRecentFolder(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getRecentFolder(userIdOrGroupId?: string, filterType?: FilterType, excludeSubject?: boolean, applyFilterOption?: ApplyFilterOption, searchArea?: SearchArea, extension?: Array<string>, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRecentFolder(userIdOrGroupId, filterType, excludeSubject, applyFilterOption, searchArea, extension, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getRecentFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the status of generating the folder history report.
+         * Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
          * @summary Get the folder history report generation status
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getReportFolderHistory operation
@@ -2723,57 +4029,57 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
+         * Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
          * @summary Get filtered sections
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {boolean} [withoutTrash] Specifies whether to return the Trash section or not.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] Specifies the field by which the folder content should be sorted.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used as a filter for searching or retrieving folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
+         * @param {boolean} [withoutTrash] Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
+         * @param {number} [count] The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
+         * @param {number} [startIndex] The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRootFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/
          */
-        async getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerArrayWrapper>> {
+        async getRootFolders(userIdOrGroupId?: string, filterType?: FilterType, withoutTrash?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRootFolders(userIdOrGroupId, filterType, withoutTrash, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getRootFolders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed list of files and folders located in the Trash section.
+         * Returns the caller\'s Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
          * @summary Get the Trash section
-         * @param {string} [userIdOrGroupId] The user or group ID.
-         * @param {FilterType} [filterType] The filter type.
-         * @param {ApplyFilterOption} [applyFilterOption] Specifies whether to return only files, only folders or all elements.
-         * @param {number} [count] The maximum number of items to retrieve in the response.
-         * @param {number} [startIndex] The starting position of the items to be retrieved.
-         * @param {string} [sortBy] The property used to specify the sorting criteria for folder contents.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching folder contents.
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {ApplyFilterOption} [applyFilterOption] Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTrashFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
          */
-        async getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentIntegerWrapper>> {
+        async getTrashFolder(userIdOrGroupId?: string, filterType?: FilterType, applyFilterOption?: ApplyFilterOption, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTrashFolder(userIdOrGroupId, filterType, applyFilterOption, count, startIndex, sortBy, sortOrder, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.getTrashFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
          * @summary Insert a file
-         * @param {number} folderId The folder ID for inserting a file.
-         * @param {File} [insertFileFile] The file to be inserted.
-         * @param {string} [insertFileTitle] The file title to be inserted.
-         * @param {boolean} [insertFileCreateNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [insertFileKeepConvertStatus] Specifies whether to keep the file converting status or not.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {File} [insertFileFile] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [insertFileTitle] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [insertFileCreateNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [insertFileKeepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
          * @param {boolean} [insertFileStreamCanRead] 
          * @param {boolean} [insertFileStreamCanWrite] 
          * @param {boolean} [insertFileStreamCanSeek] 
@@ -2787,19 +4093,46 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * REST API Reference for insertFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file/
          */
-        async insertFile(folderId: number, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+        async insertFile(folderId: number, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.insertFile(folderId, insertFileFile, insertFileTitle, insertFileCreateNewIfExist, insertFileKeepConvertStatus, insertFileStreamCanRead, insertFileStreamCanWrite, insertFileStreamCanSeek, insertFileStreamCanTimeout, insertFileStreamLength, insertFileStreamPosition, insertFileStreamReadTimeout, insertFileStreamWriteTimeout, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.insertFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Inserts a file specified in the request to the My documents section by single file uploading.
-         * @summary Insert a file to the My documents section
-         * @param {File} [file] The file to be inserted.
-         * @param {string} [title] The file title to be inserted.
-         * @param {boolean} [createNewIfExist] Specifies whether to create a new file if it already exists or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
+         * @summary Insert a file (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {File} [insertFileFile] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [insertFileTitle] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [insertFileCreateNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [insertFileKeepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {boolean} [insertFileStreamCanRead] 
+         * @param {boolean} [insertFileStreamCanWrite] 
+         * @param {boolean} [insertFileStreamCanSeek] 
+         * @param {boolean} [insertFileStreamCanTimeout] 
+         * @param {number} [insertFileStreamLength] 
+         * @param {number} [insertFileStreamPosition] 
+         * @param {number} [insertFileStreamReadTimeout] 
+         * @param {number} [insertFileStreamWriteTimeout] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for insertFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-third-party/
+         */
+        async insertFileThirdParty(folderId: string, insertFileFile?: File, insertFileTitle?: string, insertFileCreateNewIfExist?: boolean, insertFileKeepConvertStatus?: boolean, insertFileStreamCanRead?: boolean, insertFileStreamCanWrite?: boolean, insertFileStreamCanSeek?: boolean, insertFileStreamCanTimeout?: boolean, insertFileStreamLength?: number, insertFileStreamPosition?: number, insertFileStreamReadTimeout?: number, insertFileStreamWriteTimeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.insertFileThirdParty(folderId, insertFileFile, insertFileTitle, insertFileCreateNewIfExist, insertFileKeepConvertStatus, insertFileStreamCanRead, insertFileStreamCanWrite, insertFileStreamCanSeek, insertFileStreamCanTimeout, insertFileStreamLength, insertFileStreamPosition, insertFileStreamReadTimeout, insertFileStreamWriteTimeout, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.insertFileThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Stores one file in the caller\'s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account\'s storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
+         * @summary Insert a file into My documents
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+         * @param {string} [title] The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
          * @param {boolean} [streamCanRead] 
          * @param {boolean} [streamCanWrite] 
          * @param {boolean} [streamCanSeek] 
@@ -2813,49 +4146,81 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * REST API Reference for insertFileToMyFromBody operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/
          */
-        async insertFileToMyFromBody(file?: File, title?: string, createNewIfExist?: boolean, keepConvertStatus?: boolean, streamCanRead?: boolean, streamCanWrite?: boolean, streamCanSeek?: boolean, streamCanTimeout?: boolean, streamLength?: number, streamPosition?: number, streamReadTimeout?: number, streamWriteTimeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerWrapper>> {
+        async insertFileToMyFromBody(file?: File, title?: string, createNewIfExist?: boolean, keepConvertStatus?: boolean, streamCanRead?: boolean, streamCanWrite?: boolean, streamCanSeek?: boolean, streamCanTimeout?: boolean, streamLength?: number, streamPosition?: number, streamReadTimeout?: number, streamWriteTimeout?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.insertFileToMyFromBody(file, title, createNewIfExist, keepConvertStatus, streamCanRead, streamCanWrite, streamCanSeek, streamCanTimeout, streamLength, streamPosition, streamReadTimeout, streamWriteTimeout, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.insertFileToMyFromBody']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
          * @summary Rename a folder
-         * @param {number} folderId The folder ID for the folder creation.
-         * @param {CreateFolder} createFolder The parameters for creating a folder.
+         * @param {number} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for renameFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          */
-        async renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async renameFolder(folderId: number, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.renameFolder(folderId, createFolder, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.renameFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the order of a folder with ID specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
+         * @summary Rename a folder (third-party storage)
+         * @param {string} folderId The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+         * @param {CreateFolder} createFolder The title carried by the request body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for renameFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder-third-party/
+         */
+        async renameFolderThirdParty(folderId: string, createFolder: CreateFolder, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.renameFolderThirdParty(folderId, createFolder, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.renameFolderThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
          * @summary Set folder order
-         * @param {number} folderId The folder unique identifier.
-         * @param {OrderRequestDto} [orderRequestDto] The folder order information.
+         * @param {number} folderId The folder to move.
+         * @param {OrderRequestDto} [orderRequestDto] The position the folder is to take.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderOrder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order/
          */
-        async setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderIntegerWrapper>> {
+        async setFolderOrder(folderId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderOrder(folderId, orderRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.setFolderOrder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
+         * @summary Set folder order (third-party storage)
+         * @param {string} folderId The folder to move.
+         * @param {OrderRequestDto} [orderRequestDto] The position the folder is to take.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderOrderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order-third-party/
+         */
+        async setFolderOrderThirdParty(folderId: string, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderOrderThirdParty(folderId, orderRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.setFolderOrderThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
          * @summary Set the folder external link
-         * @param {number} id The folder ID.
-         * @param {FolderLinkRequest} folderLinkRequest The folder link parameters.
+         * @param {number} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setFolderPrimaryExternalLink operation
@@ -2868,9 +4233,25 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Terminates generating the folder history report.
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
+         * @summary Set the folder external link (third-party storage)
+         * @param {string} id The folder or room the link belongs to.
+         * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link-third-party/
+         */
+        async setFolderPrimaryExternalLinkThirdParty(id: string, folderLinkRequest: FolderLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setFolderPrimaryExternalLinkThirdParty(id, folderLinkRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.setFolderPrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
          * @summary Terminate the folder history report generation
-         * @param {number} folderId The folder unique identifier.
+         * @param {number} folderId The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for terminateReportFolderHistory operation
@@ -2883,37 +4264,56 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
          * @summary Upload a file
-         * @param {number} folderId The folder ID to upload a file.
-         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
-         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {File} [file] The file to be uploaded.
+         * @param {number} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          */
-        async uploadFile(folderId: number, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
+        async uploadFile(folderId: number, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(folderId, createNewIfExist, storeOriginalFile, keepConvertStatus, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.uploadFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
-         * @summary Upload a file to the My documents section
-         * @param {boolean} [createNewIfExist] Specifies whether to create the new file if it already exists or not.
-         * @param {boolean} [storeOriginalFile] Specifies whether to upload documents in the original formats as well or not.
-         * @param {boolean} [keepConvertStatus] Specifies whether to keep the file converting status or not.
-         * @param {File} [file] The file to be uploaded.
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+         * @summary Upload a file (third-party storage)
+         * @param {string} folderId The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for uploadFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-third-party/
+         */
+        async uploadFileThirdParty(folderId: string, createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFileThirdParty(folderId, createNewIfExist, storeOriginalFile, keepConvertStatus, file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.uploadFileThirdParty']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Uploads one file into the caller\'s own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account\'s  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
+         * @summary Upload a file to My documents
+         * @param {boolean} [createNewIfExist] Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+         * @param {boolean} [storeOriginalFile] Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+         * @param {boolean} [keepConvertStatus] Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+         * @param {File} [file] The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadFileToMy operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          */
-        async uploadFileToMy(createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileIntegerArrayWrapper>> {
+        async uploadFileToMy(createNewIfExist?: boolean, storeOriginalFile?: boolean, keepConvertStatus?: boolean, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFileToMy(createNewIfExist, storeOriginalFile, keepConvertStatus, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.uploadFileToMy']?.[localVarOperationServerIndex]?.url;
@@ -2930,8 +4330,8 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = FoldersApiFp(configuration)
     return {
         /**
-         * Checks the file uploads to the folder with the ID specified in the request.
-         * @summary Check file uploads
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts
          * @param {FoldersApiCheckUploadRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for checkUpload operation
@@ -2942,7 +4342,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.checkUpload(requestParameters.folderId, requestParameters.checkUploadRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+         * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+         * @summary Check for upload conflicts (third-party storage)
+         * @param {FoldersApiCheckUploadThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for checkUploadThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload-third-party/
+         * @throws {RequiredError}
+         */
+        checkUploadThirdParty(requestParameters: FoldersApiCheckUploadThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+            return localVarFp.checkUploadThirdParty(requestParameters.folderId, requestParameters.checkUploadRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
          * @summary Create a folder
          * @param {FoldersApiCreateFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2950,12 +4362,24 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder/
          * @throws {RequiredError}
          */
-        createFolder(requestParameters: FoldersApiCreateFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        createFolder(requestParameters: FoldersApiCreateFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
             return localVarFp.createFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a primary external link by the identifier specified in the request.
-         * @summary Create primary external link
+         * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
+         * @summary Create a folder (third-party storage)
+         * @param {FoldersApiCreateFolderThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-third-party/
+         * @throws {RequiredError}
+         */
+        createFolderThirdParty(requestParameters: FoldersApiCreateFolderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
+            return localVarFp.createFolderThirdParty(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link
          * @param {FoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for createFolderPrimaryExternalLink operation
@@ -2966,7 +4390,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * @summary Create the folder primary external link (third-party storage)
+         * @param {FoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link-third-party/
+         * @throws {RequiredError}
+         */
+        createFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.createFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
          * @summary Start the folder history report generation
          * @param {FoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2978,7 +4414,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createReportFolderHistory(requestParameters.folderId, requestParameters.format, requestParameters.from, requestParameters.to, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a folder with the ID specified in the request.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete a folder
          * @param {FoldersApiDeleteFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2990,7 +4426,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.deleteFolder(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Triggers asynchronous XLSX report generation for the specified form results folder.
+         * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
+         * @summary Delete a folder (third-party storage)
+         * @param {FoldersApiDeleteFolderThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for deleteFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder-third-party/
+         * @throws {RequiredError}
+         */
+        deleteFolderThirdParty(requestParameters: FoldersApiDeleteFolderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
+            return localVarFp.deleteFolderThirdParty(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
          * @summary Generate XLSX report by folder
          * @param {FoldersApiGenerateXlsxByFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3002,7 +4450,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.generateXlsxByFolder(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the Favorites section.
+         * Returns the caller\'s own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
          * @summary Get the Favorites section
          * @param {FoldersApiGetFavoritesFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3010,11 +4458,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-favorites-folder/
          * @throws {RequiredError}
          */
-        getFavoritesFolder(requestParameters: FoldersApiGetFavoritesFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getFavoritesFolder(requestParameters: FoldersApiGetFavoritesFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getFavoritesFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the used space of files in the root folders.
+         * Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
          * @summary Get used space of files
          * @param {*} [options] Override http request option.
          * REST API Reference for getFilesUsedSpace operation
@@ -3025,7 +4473,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFilesUsedSpace(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the form filter of a folder with the ID specified in the request.
+         * Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
          * @summary Get folder form filter
          * @param {FoldersApiGetFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3037,7 +4485,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolder(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
          * @summary Get a folder by ID
          * @param {FoldersApiGetFolderByFolderIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3045,11 +4493,23 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id/
          * @throws {RequiredError}
          */
-        getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getFolderByFolderId(requestParameters: FoldersApiGetFolderByFolderIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getFolderByFolderId(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.folderType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the activity history of a folder with a specified identifier.
+         * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+         * @summary Get a folder by ID (third-party storage)
+         * @param {FoldersApiGetFolderByFolderIdThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderByFolderIdThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderByFolderIdThirdParty(requestParameters: FoldersApiGetFolderByFolderIdThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderContentWrapper> {
+            return localVarFp.getFolderByFolderIdThirdParty(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.folderType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
          * @summary Get folder history
          * @param {FoldersApiGetFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3061,7 +4521,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderHistory(requestParameters.folderId, requestParameters.fromDate, requestParameters.toDate, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about a folder with the ID specified in the request.
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
          * @summary Get folder information
          * @param {FoldersApiGetFolderInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3069,12 +4529,24 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info/
          * @throws {RequiredError}
          */
-        getFolderInfo(requestParameters: FoldersApiGetFolderInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        getFolderInfo(requestParameters: FoldersApiGetFolderInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
             return localVarFp.getFolderInfo(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the links of the folder with the ID specified in the request.
-         * @summary Get the folder links
+         * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
+         * @summary Get folder information (third-party storage)
+         * @param {FoldersApiGetFolderInfoThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderInfoThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderInfoThirdParty(requestParameters: FoldersApiGetFolderInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
+            return localVarFp.getFolderInfoThirdParty(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links
          * @param {FoldersApiGetFolderLinksRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderLinks operation
@@ -3085,7 +4557,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderLinks(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a path to the folder with the ID specified in the request.
+         * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+         * @summary Get folder external links (third-party storage)
+         * @param {FoldersApiGetFolderLinksThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderLinksThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderLinksThirdParty(requestParameters: FoldersApiGetFolderLinksThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
+            return localVarFp.getFolderLinksThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
          * @summary Get the folder path
          * @param {FoldersApiGetFolderPathRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3097,8 +4581,20 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderPath(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the primary external link by the identifier specified in the request.
-         * @summary Get primary external link
+         * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
+         * @summary Get the folder path (third-party storage)
+         * @param {FoldersApiGetFolderPathThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderPathThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderPathThirdParty(requestParameters: FoldersApiGetFolderPathThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getFolderPathThirdParty(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link
          * @param {FoldersApiGetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getFolderPrimaryExternalLink operation
@@ -3109,7 +4605,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolderPrimaryExternalLink(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the subfolders from a folder with the ID specified in the request.
+         * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+         * @summary Get the folder primary external link (third-party storage)
+         * @param {FoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link-third-party/
+         * @throws {RequiredError}
+         */
+        getFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.getFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
          * @summary Get subfolders
          * @param {FoldersApiGetFoldersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3121,7 +4629,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getFolders(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+         * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
+         * @summary Get subfolders (third-party storage)
+         * @param {FoldersApiGetFoldersThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getFoldersThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders-third-party/
+         * @throws {RequiredError}
+         */
+        getFoldersThirdParty(requestParameters: FoldersApiGetFoldersThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getFoldersThirdParty(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
          * @summary Get the Forms section
          * @param {FoldersApiGetFormsFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3129,11 +4649,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-forms-folder/
          * @throws {RequiredError}
          */
-        getFormsFolder(requestParameters: FoldersApiGetFormsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getFormsFolder(requestParameters: FoldersApiGetFormsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getFormsFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the My documents section.
+         * Returns the contents of the caller\'s My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
          * @summary Get the My documents section
          * @param {FoldersApiGetMyFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3141,11 +4661,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-my-folder/
          * @throws {RequiredError}
          */
-        getMyFolder(requestParameters: FoldersApiGetMyFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getMyFolder(requestParameters: FoldersApiGetMyFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getMyFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the new items from a folder with the ID specified in the request.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
          * @summary Get new folder items
          * @param {FoldersApiGetNewFolderItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3157,7 +4677,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getNewFolderItems(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files located in the Recent section.
+         * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
+         * @summary Get new folder items (third-party storage)
+         * @param {FoldersApiGetNewFolderItemsThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getNewFolderItemsThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items-third-party/
+         * @throws {RequiredError}
+         */
+        getNewFolderItemsThirdParty(requestParameters: FoldersApiGetNewFolderItemsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
+            return localVarFp.getNewFolderItemsThirdParty(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
          * @summary Get the Recent section
          * @param {FoldersApiGetRecentFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3165,11 +4697,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-recent-folder/
          * @throws {RequiredError}
          */
-        getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getRecentFolder(requestParameters: FoldersApiGetRecentFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getRecentFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.searchArea, requestParameters.extension, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the status of generating the folder history report.
+         * Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
          * @summary Get the folder history report generation status
          * @param {FoldersApiGetReportFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3181,7 +4713,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns all the sections matching the parameters specified in the request.
+         * Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
          * @summary Get filtered sections
          * @param {FoldersApiGetRootFoldersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3189,11 +4721,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-root-folders/
          * @throws {RequiredError}
          */
-        getRootFolders(requestParameters: FoldersApiGetRootFoldersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerArrayWrapper> {
+        getRootFolders(requestParameters: FoldersApiGetRootFoldersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentArrayWrapper> {
             return localVarFp.getRootFolders(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.withoutTrash, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed list of files and folders located in the Trash section.
+         * Returns the caller\'s Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
          * @summary Get the Trash section
          * @param {FoldersApiGetTrashFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3201,11 +4733,11 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-trash-folder/
          * @throws {RequiredError}
          */
-        getTrashFolder(requestParameters: FoldersApiGetTrashFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentIntegerWrapper> {
+        getTrashFolder(requestParameters: FoldersApiGetTrashFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
             return localVarFp.getTrashFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.applyFilterOption, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Inserts a file specified in the request to the selected folder by single file uploading.
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
          * @summary Insert a file
          * @param {FoldersApiInsertFileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3213,23 +4745,35 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file/
          * @throws {RequiredError}
          */
-        insertFile(requestParameters: FoldersApiInsertFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+        insertFile(requestParameters: FoldersApiInsertFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
             return localVarFp.insertFile(requestParameters.folderId, requestParameters.insertFileFile, requestParameters.insertFileTitle, requestParameters.insertFileCreateNewIfExist, requestParameters.insertFileKeepConvertStatus, requestParameters.insertFileStreamCanRead, requestParameters.insertFileStreamCanWrite, requestParameters.insertFileStreamCanSeek, requestParameters.insertFileStreamCanTimeout, requestParameters.insertFileStreamLength, requestParameters.insertFileStreamPosition, requestParameters.insertFileStreamReadTimeout, requestParameters.insertFileStreamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
-         * Inserts a file specified in the request to the My documents section by single file uploading.
-         * @summary Insert a file to the My documents section
+         * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
+         * @summary Insert a file (third-party storage)
+         * @param {FoldersApiInsertFileThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for insertFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-third-party/
+         * @throws {RequiredError}
+         */
+        insertFileThirdParty(requestParameters: FoldersApiInsertFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
+            return localVarFp.insertFileThirdParty(requestParameters.folderId, requestParameters.insertFileFile, requestParameters.insertFileTitle, requestParameters.insertFileCreateNewIfExist, requestParameters.insertFileKeepConvertStatus, requestParameters.insertFileStreamCanRead, requestParameters.insertFileStreamCanWrite, requestParameters.insertFileStreamCanSeek, requestParameters.insertFileStreamCanTimeout, requestParameters.insertFileStreamLength, requestParameters.insertFileStreamPosition, requestParameters.insertFileStreamReadTimeout, requestParameters.insertFileStreamWriteTimeout, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Stores one file in the caller\'s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account\'s storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
+         * @summary Insert a file into My documents
          * @param {FoldersApiInsertFileToMyFromBodyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for insertFileToMyFromBody operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-to-my-from-body/
          * @throws {RequiredError}
          */
-        insertFileToMyFromBody(requestParameters: FoldersApiInsertFileToMyFromBodyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerWrapper> {
+        insertFileToMyFromBody(requestParameters: FoldersApiInsertFileToMyFromBodyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
             return localVarFp.insertFileToMyFromBody(requestParameters.file, requestParameters.title, requestParameters.createNewIfExist, requestParameters.keepConvertStatus, requestParameters.streamCanRead, requestParameters.streamCanWrite, requestParameters.streamCanSeek, requestParameters.streamCanTimeout, requestParameters.streamLength, requestParameters.streamPosition, requestParameters.streamReadTimeout, requestParameters.streamWriteTimeout, options).then((request) => request(axios, basePath));
         },
         /**
-         * Renames the selected folder with a new title specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
          * @summary Rename a folder
          * @param {FoldersApiRenameFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3237,11 +4781,23 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder/
          * @throws {RequiredError}
          */
-        renameFolder(requestParameters: FoldersApiRenameFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        renameFolder(requestParameters: FoldersApiRenameFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
             return localVarFp.renameFolder(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the order of a folder with ID specified in the request.
+         * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
+         * @summary Rename a folder (third-party storage)
+         * @param {FoldersApiRenameFolderThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for renameFolderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder-third-party/
+         * @throws {RequiredError}
+         */
+        renameFolderThirdParty(requestParameters: FoldersApiRenameFolderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
+            return localVarFp.renameFolderThirdParty(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
          * @summary Set folder order
          * @param {FoldersApiSetFolderOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3249,11 +4805,23 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order/
          * @throws {RequiredError}
          */
-        setFolderOrder(requestParameters: FoldersApiSetFolderOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderIntegerWrapper> {
+        setFolderOrder(requestParameters: FoldersApiSetFolderOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
             return localVarFp.setFolderOrder(requestParameters.folderId, requestParameters.orderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the folder external link with the ID specified in the request.
+         * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
+         * @summary Set folder order (third-party storage)
+         * @param {FoldersApiSetFolderOrderThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFolderOrderThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order-third-party/
+         * @throws {RequiredError}
+         */
+        setFolderOrderThirdParty(requestParameters: FoldersApiSetFolderOrderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
+            return localVarFp.setFolderOrderThirdParty(requestParameters.folderId, requestParameters.orderRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
          * @summary Set the folder external link
          * @param {FoldersApiSetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3265,7 +4833,19 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.setFolderPrimaryExternalLink(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Terminates generating the folder history report.
+         * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
+         * @summary Set the folder external link (third-party storage)
+         * @param {FoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setFolderPrimaryExternalLinkThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link-third-party/
+         * @throws {RequiredError}
+         */
+        setFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
+            return localVarFp.setFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
          * @summary Terminate the folder history report generation
          * @param {FoldersApiTerminateReportFolderHistoryRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3277,7 +4857,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.terminateReportFolderHistory(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
          * @summary Upload a file
          * @param {FoldersApiUploadFileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3285,19 +4865,31 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file/
          * @throws {RequiredError}
          */
-        uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
+        uploadFile(requestParameters: FoldersApiUploadFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper> {
             return localVarFp.uploadFile(requestParameters.folderId, requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
-         * @summary Upload a file to the My documents section
+         * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+         * @summary Upload a file (third-party storage)
+         * @param {FoldersApiUploadFileThirdPartyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for uploadFileThirdParty operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-third-party/
+         * @throws {RequiredError}
+         */
+        uploadFileThirdParty(requestParameters: FoldersApiUploadFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper> {
+            return localVarFp.uploadFileThirdParty(requestParameters.folderId, requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Uploads one file into the caller\'s own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account\'s  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
+         * @summary Upload a file to My documents
          * @param {FoldersApiUploadFileToMyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for uploadFileToMy operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-to-my/
          * @throws {RequiredError}
          */
-        uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileIntegerArrayWrapper> {
+        uploadFileToMy(requestParameters: FoldersApiUploadFileToMyRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper> {
             return localVarFp.uploadFileToMy(requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(axios, basePath));
         },
     };
@@ -3310,16 +4902,37 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
  */
 export interface FoldersApiCheckUploadRequest {
     /**
-     * The folder ID.
+     * The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
      * @type {number}
      * @memberof FoldersApiCheckUpload
      */
     readonly folderId: number
 
     /**
-     * The request parameters for checking file uploads.
+     * The names to test against the files the folder already holds.
      * @type {CheckUploadRequest}
      * @memberof FoldersApiCheckUpload
+     */
+    readonly checkUploadRequest: CheckUploadRequest
+}
+
+/**
+ * Request parameters for checkUploadThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCheckUploadThirdPartyRequest
+ */
+export interface FoldersApiCheckUploadThirdPartyRequest {
+    /**
+     * The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`.
+     * @type {string}
+     * @memberof FoldersApiCheckUploadThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The names to test against the files the folder already holds.
+     * @type {CheckUploadRequest}
+     * @memberof FoldersApiCheckUploadThirdParty
      */
     readonly checkUploadRequest: CheckUploadRequest
 }
@@ -3331,16 +4944,37 @@ export interface FoldersApiCheckUploadRequest {
  */
 export interface FoldersApiCreateFolderRequest {
     /**
-     * The folder ID for the folder creation.
+     * The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
      * @type {number}
      * @memberof FoldersApiCreateFolder
      */
     readonly folderId: number
 
     /**
-     * The parameters for creating a folder.
+     * The title carried by the request body.
      * @type {CreateFolder}
      * @memberof FoldersApiCreateFolder
+     */
+    readonly createFolder: CreateFolder
+}
+
+/**
+ * Request parameters for createFolderThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCreateFolderThirdPartyRequest
+ */
+export interface FoldersApiCreateFolderThirdPartyRequest {
+    /**
+     * The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+     * @type {string}
+     * @memberof FoldersApiCreateFolderThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The title carried by the request body.
+     * @type {CreateFolder}
+     * @memberof FoldersApiCreateFolderThirdParty
      */
     readonly createFolder: CreateFolder
 }
@@ -3352,16 +4986,37 @@ export interface FoldersApiCreateFolderRequest {
  */
 export interface FoldersApiCreateFolderPrimaryExternalLinkRequest {
     /**
-     * The folder ID.
+     * The folder or room the link belongs to.
      * @type {number}
      * @memberof FoldersApiCreateFolderPrimaryExternalLink
      */
     readonly id: number
 
     /**
-     * The folder link parameters.
+     * The link and the way it is to be shaped.
      * @type {FolderLinkRequest}
      * @memberof FoldersApiCreateFolderPrimaryExternalLink
+     */
+    readonly folderLinkRequest: FolderLinkRequest
+}
+
+/**
+ * Request parameters for createFolderPrimaryExternalLinkThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest
+ */
+export interface FoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest {
+    /**
+     * The folder or room the link belongs to.
+     * @type {string}
+     * @memberof FoldersApiCreateFolderPrimaryExternalLinkThirdParty
+     */
+    readonly id: string
+
+    /**
+     * The link and the way it is to be shaped.
+     * @type {FolderLinkRequest}
+     * @memberof FoldersApiCreateFolderPrimaryExternalLinkThirdParty
      */
     readonly folderLinkRequest: FolderLinkRequest
 }
@@ -3373,28 +5028,28 @@ export interface FoldersApiCreateFolderPrimaryExternalLinkRequest {
  */
 export interface FoldersApiCreateReportFolderHistoryRequest {
     /**
-     * The folder ID whose history is exported.
+     * The folder whose history is exported; the report covers the folder itself and the entries inside it.
      * @type {number}
      * @memberof FoldersApiCreateReportFolderHistory
      */
     readonly folderId: number
 
     /**
-     * The output file format of the report. Defaults to XLSX.
+     * The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier.
      * @type {AuditReportFormat}
      * @memberof FoldersApiCreateReportFolderHistory
      */
     readonly format?: AuditReportFormat
 
     /**
-     * The start date of the history period to export.
+     * The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps.
      * @type {string}
      * @memberof FoldersApiCreateReportFolderHistory
      */
     readonly from?: string
 
     /**
-     * The end date of the history period to export.
+     * The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry.
      * @type {string}
      * @memberof FoldersApiCreateReportFolderHistory
      */
@@ -3408,16 +5063,37 @@ export interface FoldersApiCreateReportFolderHistoryRequest {
  */
 export interface FoldersApiDeleteFolderRequest {
     /**
-     * The folder ID to delete.
+     * The folder to delete, together with everything it holds.
      * @type {number}
      * @memberof FoldersApiDeleteFolder
      */
     readonly folderId: number
 
     /**
-     * The parameters for deleting a folder.
+     * How the deletion is to be carried out.
      * @type {DeleteFolder}
      * @memberof FoldersApiDeleteFolder
+     */
+    readonly deleteFolder: DeleteFolder
+}
+
+/**
+ * Request parameters for deleteFolderThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiDeleteFolderThirdPartyRequest
+ */
+export interface FoldersApiDeleteFolderThirdPartyRequest {
+    /**
+     * The folder to delete, together with everything it holds.
+     * @type {string}
+     * @memberof FoldersApiDeleteFolderThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * How the deletion is to be carried out.
+     * @type {DeleteFolder}
+     * @memberof FoldersApiDeleteFolderThirdParty
      */
     readonly deleteFolder: DeleteFolder
 }
@@ -3429,7 +5105,7 @@ export interface FoldersApiDeleteFolderRequest {
  */
 export interface FoldersApiGenerateXlsxByFolderRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGenerateXlsxByFolder
      */
@@ -3443,49 +5119,49 @@ export interface FoldersApiGenerateXlsxByFolderRequest {
  */
 export interface FoldersApiGetFavoritesFolderRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
      * @type {FilterType}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly filterType?: FilterType
 
     /**
-     * The maximum number of items to retrieve in the request.
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly count?: number
 
     /**
-     * The zero-based index of the first item to retrieve in a paginated list.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly startIndex?: number
 
     /**
-     * Specifies the field by which the folder content should be sorted.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetFavoritesFolder
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used as a filter or search criterion for folder content queries.
+     * The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
      * @type {string}
      * @memberof FoldersApiGetFavoritesFolder
      */
@@ -3499,7 +5175,7 @@ export interface FoldersApiGetFavoritesFolderRequest {
  */
 export interface FoldersApiGetFolderRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetFolder
      */
@@ -3513,135 +5189,275 @@ export interface FoldersApiGetFolderRequest {
  */
 export interface FoldersApiGetFolderByFolderIdRequest {
     /**
-     * The folder ID.
+     * The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
      * @type {number}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly folderId: number
 
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The identifier of the user who shared the folder or file.
+     * Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly sharedBy?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
      * @type {FilterType}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly filterType?: FilterType
 
     /**
-     * The room ID.
+     * Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
      * @type {number}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly roomId?: number
 
     /**
-     * The parent folder types used to filter the folder contents by folder type.
+     * Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
      * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly folderType?: Array<GetFolderByFolderIdFolderTypeEnum>
 
     /**
-     * Specifies whether to exclude search by user or group ID.
+     * Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
      * @type {boolean}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly excludeSubject?: boolean
 
     /**
-     * Specifies whether to return only files, only folders, or all elements from the specified folder.
+     * Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
      * @type {ApplyFilterOption}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly applyFilterOption?: ApplyFilterOption
 
     /**
-     * Specifies whether to include files from subfolders in the results.
+     * Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
      * @type {boolean}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly withSubFolders?: boolean
 
     /**
-     * Specifies whether to search for the specific file extension.
+     * Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly extension?: string
 
     /**
-     * The search area.
+     * Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
      * @type {SearchArea}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly searchArea?: SearchArea
 
     /**
-     * The forms item key.
+     * Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly formsItemKey?: string
 
     /**
-     * The forms item type.
+     * The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly formsItemType?: string
 
     /**
-     * The maximum number of items to retrieve in the request.
+     * The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly count?: number
 
     /**
-     * The zero-based index of the first item to retrieve in a paginated request.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly startIndex?: number
 
     /**
-     * The property used for sorting the folder request results.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text value used as a filter parameter for folder content queries.
+     * The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
      * @type {string}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly filterValue?: string
 
     /**
-     * The location context of the request, specifying the area  where the operation is performed, such as a room, documents, or a link.
+     * Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
      * @type {Location}
      * @memberof FoldersApiGetFolderByFolderId
+     */
+    readonly location?: Location
+}
+
+/**
+ * Request parameters for getFolderByFolderIdThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderByFolderIdThirdPartyRequest
+ */
+export interface FoldersApiGetFolderByFolderIdThirdPartyRequest {
+    /**
+     * The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly sharedBy?: string
+
+    /**
+     * Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds.
+     * @type {FilterType}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly roomId?: string
+
+    /**
+     * Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly folderType?: Array<GetFolderByFolderIdThirdPartyFolderTypeEnum>
+
+    /**
+     * Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept.
+     * @type {boolean}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly excludeSubject?: boolean
+
+    /**
+     * Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
+     * @type {ApplyFilterOption}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly applyFilterOption?: ApplyFilterOption
+
+    /**
+     * Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone.
+     * @type {boolean}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly withSubFolders?: boolean
+
+    /**
+     * Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly extension?: string
+
+    /**
+     * Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter.
+     * @type {SearchArea}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly searchArea?: SearchArea
+
+    /**
+     * Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly formsItemKey?: string
+
+    /**
+     * The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly formsItemType?: string
+
+    /**
+     * The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+     * @type {number}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly startIndex?: number
+
+    /**
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly sortBy?: string
+
+    /**
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered.
+     * @type {string}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
+     */
+    readonly filterValue?: string
+
+    /**
+     * Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder.
+     * @type {Location}
+     * @memberof FoldersApiGetFolderByFolderIdThirdParty
      */
     readonly location?: Location
 }
@@ -3653,35 +5469,35 @@ export interface FoldersApiGetFolderByFolderIdRequest {
  */
 export interface FoldersApiGetFolderHistoryRequest {
     /**
-     * The folder ID of the history request.
+     * The folder whose activity log is read; the log covers the folder itself and the entries inside it.
      * @type {number}
      * @memberof FoldersApiGetFolderHistory
      */
     readonly folderId: number
 
     /**
-     * The start date of the history request.
+     * The earliest moment an entry may have, read in the time zone of the portal; left out, the log starts at the  oldest entry the portal still keeps.
      * @type {string}
      * @memberof FoldersApiGetFolderHistory
      */
     readonly fromDate?: string
 
     /**
-     * The end date of the history request.
+     * The latest moment an entry may have, read in the time zone of the portal; left out, the log ends at the newest  entry.
      * @type {string}
      * @memberof FoldersApiGetFolderHistory
      */
     readonly toDate?: string
 
     /**
-     * The number of records to retrieve for the folder history.
+     * How many entries one page holds. The number of entries that match the query is reported in the response  headers, not in the body.
      * @type {number}
      * @memberof FoldersApiGetFolderHistory
      */
     readonly count?: number
 
     /**
-     * The starting index from which the history records are retrieved in the request.
+     * How many entries to skip before the page begins, counted from the newest one, so pages are taken by adding the  page size to it.
      * @type {number}
      * @memberof FoldersApiGetFolderHistory
      */
@@ -3695,11 +5511,25 @@ export interface FoldersApiGetFolderHistoryRequest {
  */
 export interface FoldersApiGetFolderInfoRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetFolderInfo
      */
     readonly folderId: number
+}
+
+/**
+ * Request parameters for getFolderInfoThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderInfoThirdPartyRequest
+ */
+export interface FoldersApiGetFolderInfoThirdPartyRequest {
+    /**
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof FoldersApiGetFolderInfoThirdParty
+     */
+    readonly folderId: string
 }
 
 /**
@@ -3709,11 +5539,25 @@ export interface FoldersApiGetFolderInfoRequest {
  */
 export interface FoldersApiGetFolderLinksRequest {
     /**
-     * The folder ID.
+     * The folder or room whose external links are listed.
      * @type {number}
      * @memberof FoldersApiGetFolderLinks
      */
     readonly id: number
+}
+
+/**
+ * Request parameters for getFolderLinksThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderLinksThirdPartyRequest
+ */
+export interface FoldersApiGetFolderLinksThirdPartyRequest {
+    /**
+     * The folder or room whose external links are listed.
+     * @type {string}
+     * @memberof FoldersApiGetFolderLinksThirdParty
+     */
+    readonly id: string
 }
 
 /**
@@ -3723,11 +5567,25 @@ export interface FoldersApiGetFolderLinksRequest {
  */
 export interface FoldersApiGetFolderPathRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetFolderPath
      */
     readonly folderId: number
+}
+
+/**
+ * Request parameters for getFolderPathThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderPathThirdPartyRequest
+ */
+export interface FoldersApiGetFolderPathThirdPartyRequest {
+    /**
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof FoldersApiGetFolderPathThirdParty
+     */
+    readonly folderId: string
 }
 
 /**
@@ -3737,23 +5595,51 @@ export interface FoldersApiGetFolderPathRequest {
  */
 export interface FoldersApiGetFolderPrimaryExternalLinkRequest {
     /**
-     * The folder unique identifier.
+     * The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetFolderPrimaryExternalLink
      */
     readonly id: number
 
     /**
-     * The number of items to retrieve in the request.
+     * How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
      * @type {number}
      * @memberof FoldersApiGetFolderPrimaryExternalLink
      */
     readonly count?: number
 
     /**
-     * The starting index for the query results.
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
      * @type {number}
      * @memberof FoldersApiGetFolderPrimaryExternalLink
+     */
+    readonly startIndex?: number
+}
+
+/**
+ * Request parameters for getFolderPrimaryExternalLinkThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest
+ */
+export interface FoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest {
+    /**
+     * The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof FoldersApiGetFolderPrimaryExternalLinkThirdParty
+     */
+    readonly id: string
+
+    /**
+     * How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPrimaryExternalLinkThirdParty
+     */
+    readonly count?: number
+
+    /**
+     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
+     * @type {number}
+     * @memberof FoldersApiGetFolderPrimaryExternalLinkThirdParty
      */
     readonly startIndex?: number
 }
@@ -3765,11 +5651,25 @@ export interface FoldersApiGetFolderPrimaryExternalLinkRequest {
  */
 export interface FoldersApiGetFoldersRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetFolders
      */
     readonly folderId: number
+}
+
+/**
+ * Request parameters for getFoldersThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetFoldersThirdPartyRequest
+ */
+export interface FoldersApiGetFoldersThirdPartyRequest {
+    /**
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof FoldersApiGetFoldersThirdParty
+     */
+    readonly folderId: string
 }
 
 /**
@@ -3779,49 +5679,49 @@ export interface FoldersApiGetFoldersRequest {
  */
 export interface FoldersApiGetFormsFolderRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
      * @type {FilterType}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly filterType?: FilterType
 
     /**
-     * The maximum number of items to retrieve in the request.
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly count?: number
 
     /**
-     * The zero-based index of the first item to retrieve in a paginated list.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly startIndex?: number
 
     /**
-     * Specifies the field by which the folder content should be sorted.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetFormsFolder
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used as a filter or search criterion for folder content queries.
+     * The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
      * @type {string}
      * @memberof FoldersApiGetFormsFolder
      */
@@ -3835,56 +5735,56 @@ export interface FoldersApiGetFormsFolderRequest {
  */
 export interface FoldersApiGetMyFolderRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetMyFolder
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
      * @type {FilterType}
      * @memberof FoldersApiGetMyFolder
      */
     readonly filterType?: FilterType
 
     /**
-     * Specifies whether to return only files, only folders or all elements.
+     * Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
      * @type {ApplyFilterOption}
      * @memberof FoldersApiGetMyFolder
      */
     readonly applyFilterOption?: ApplyFilterOption
 
     /**
-     * The maximum number of items to retrieve in the response.
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetMyFolder
      */
     readonly count?: number
 
     /**
-     * The starting position of the items to be retrieved.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetMyFolder
      */
     readonly startIndex?: number
 
     /**
-     * The property used to specify the sorting criteria for folder contents.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetMyFolder
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetMyFolder
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used for filtering or searching folder contents.
+     * The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
      * @type {string}
      * @memberof FoldersApiGetMyFolder
      */
@@ -3898,11 +5798,25 @@ export interface FoldersApiGetMyFolderRequest {
  */
 export interface FoldersApiGetNewFolderItemsRequest {
     /**
-     * The folder unique identifier.
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
      * @type {number}
      * @memberof FoldersApiGetNewFolderItems
      */
     readonly folderId: number
+}
+
+/**
+ * Request parameters for getNewFolderItemsThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetNewFolderItemsThirdPartyRequest
+ */
+export interface FoldersApiGetNewFolderItemsThirdPartyRequest {
+    /**
+     * The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string.
+     * @type {string}
+     * @memberof FoldersApiGetNewFolderItemsThirdParty
+     */
+    readonly folderId: string
 }
 
 /**
@@ -3912,77 +5826,77 @@ export interface FoldersApiGetNewFolderItemsRequest {
  */
 export interface FoldersApiGetRecentFolderRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
      * @type {string}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of file, such as documents, spreadsheets or images. Omit it to list every  kind the history holds.
      * @type {FilterType}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly filterType?: FilterType
 
     /**
-     * Specifies whether to exclude search by user or group ID.
+     * Inverts `userIdOrGroupId`: with `true` the files of that member or group are the ones left out of the listing  instead of the only ones kept.
      * @type {boolean}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly excludeSubject?: boolean
 
     /**
-     * Specifies whether to return only files, only folders or all elements.
+     * Chooses which half of a listing `filterType` and `filterValue` are applied to. The Recent section holds  files only, so the value does not change what comes back.
      * @type {ApplyFilterOption}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly applyFilterOption?: ApplyFilterOption
 
     /**
-     * The search area.
+     * The area a listing is taken from. The Recent section is assembled from the caller\'s own open history rather  than from an area, so the value does not change which files are returned.
      * @type {SearchArea}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly searchArea?: SearchArea
 
     /**
-     * Specifies whether to search for a specific file extension in the Recent folder.
+     * The file extensions the listing is limited to, matched against the end of the file name. The leading dot is  optional, and the parameter is repeated once per extension.
      * @type {Array<string>}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly extension?: Array<string>
 
     /**
-     * The maximum number of items to return.
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly count?: number
 
     /**
-     * The starting position of the results to be returned in the query response.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly startIndex?: number
 
     /**
-     * Specifies the sorting criteria for the folder request.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing.
      * @type {string}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing.
      * @type {SortOrder}
      * @memberof FoldersApiGetRecentFolder
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used for filtering or searching folder contents.
+     * The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history.
      * @type {string}
      * @memberof FoldersApiGetRecentFolder
      */
@@ -3996,7 +5910,7 @@ export interface FoldersApiGetRecentFolderRequest {
  */
 export interface FoldersApiGetReportFolderHistoryRequest {
     /**
-     * The folder unique identifier.
+     * The folder whose history report is being polled. It is the folder that was              passed to the operation that started the report.
      * @type {number}
      * @memberof FoldersApiGetReportFolderHistory
      */
@@ -4010,56 +5924,56 @@ export interface FoldersApiGetReportFolderHistoryRequest {
  */
 export interface FoldersApiGetRootFoldersRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetRootFolders
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the content listed inside every returned section to a single kind of entry, such as documents, images  or one type of room. Omit it to list every kind the sections hold.
      * @type {FilterType}
      * @memberof FoldersApiGetRootFolders
      */
     readonly filterType?: FilterType
 
     /**
-     * Specifies whether to return the Trash section or not.
+     * Set it to `true` to leave the Trash section out of the returned set of sections; with `false`, or when the  parameter is omitted, the section is returned whenever the account has one of its own.
      * @type {boolean}
      * @memberof FoldersApiGetRootFolders
      */
     readonly withoutTrash?: boolean
 
     /**
-     * The maximum number of items to retrieve in the response.
+     * The size of the content page returned for each section separately, so a value of 1 yields one entry per  section rather than one entry in total.
      * @type {number}
      * @memberof FoldersApiGetRootFolders
      */
     readonly count?: number
 
     /**
-     * The starting position of the items to be retrieved.
+     * The number of matching entries skipped in each section before its page begins; add `count` to it to ask for  the next page of every section.
      * @type {number}
      * @memberof FoldersApiGetRootFolders
      */
     readonly startIndex?: number
 
     /**
-     * Specifies the field by which the folder content should be sorted.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetRootFolders
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetRootFolders
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used as a filter for searching or retrieving folder contents.
+     * The search string the content of every section is filtered by: it is matched as a substring of entry titles  and, for files, against the indexed document content as well. Omit it to list the sections unfiltered.
      * @type {string}
      * @memberof FoldersApiGetRootFolders
      */
@@ -4073,56 +5987,56 @@ export interface FoldersApiGetRootFoldersRequest {
  */
 export interface FoldersApiGetTrashFolderRequest {
     /**
-     * The user or group ID.
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
      * @type {string}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly userIdOrGroupId?: string
 
     /**
-     * The filter type.
+     * Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
      * @type {FilterType}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly filterType?: FilterType
 
     /**
-     * Specifies whether to return only files, only folders or all elements.
+     * Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered.
      * @type {ApplyFilterOption}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly applyFilterOption?: ApplyFilterOption
 
     /**
-     * The maximum number of items to retrieve in the response.
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
      * @type {number}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly count?: number
 
     /**
-     * The starting position of the items to be retrieved.
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
      * @type {number}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly startIndex?: number
 
     /**
-     * The property used to specify the sorting criteria for folder contents.
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
      * @type {string}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
      * @type {SortOrder}
      * @memberof FoldersApiGetTrashFolder
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used for filtering or searching folder contents.
+     * The search string the section is filtered by, matched as a substring of entry titles. Omit it to list the  section unfiltered.
      * @type {string}
      * @memberof FoldersApiGetTrashFolder
      */
@@ -4136,35 +6050,35 @@ export interface FoldersApiGetTrashFolderRequest {
  */
 export interface FoldersApiInsertFileRequest {
     /**
-     * The folder ID for inserting a file.
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
      * @type {number}
      * @memberof FoldersApiInsertFile
      */
     readonly folderId: number
 
     /**
-     * The file to be inserted.
+     * The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
      * @type {File}
      * @memberof FoldersApiInsertFile
      */
     readonly insertFileFile?: File
 
     /**
-     * The file title to be inserted.
+     * The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
      * @type {string}
      * @memberof FoldersApiInsertFile
      */
     readonly insertFileTitle?: string
 
     /**
-     * Specifies whether to create a new file if it already exists or not.
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
      * @type {boolean}
      * @memberof FoldersApiInsertFile
      */
     readonly insertFileCreateNewIfExist?: boolean
 
     /**
-     * Specifies whether to keep the file converting status or not.
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
      * @type {boolean}
      * @memberof FoldersApiInsertFile
      */
@@ -4228,34 +6142,132 @@ export interface FoldersApiInsertFileRequest {
 }
 
 /**
+ * Request parameters for insertFileThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiInsertFileThirdPartyRequest
+ */
+export interface FoldersApiInsertFileThirdPartyRequest {
+    /**
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+     * @type {string}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
+     * @type {File}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileFile?: File
+
+    /**
+     * The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
+     * @type {string}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileTitle?: string
+
+    /**
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileCreateNewIfExist?: boolean
+
+    /**
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileKeepConvertStatus?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamCanRead?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamCanWrite?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamCanSeek?: boolean
+
+    /**
+     * 
+     * @type {boolean}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamCanTimeout?: boolean
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamLength?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamPosition?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamReadTimeout?: number
+
+    /**
+     * 
+     * @type {number}
+     * @memberof FoldersApiInsertFileThirdParty
+     */
+    readonly insertFileStreamWriteTimeout?: number
+}
+
+/**
  * Request parameters for insertFileToMyFromBody operation in FoldersApi.
  * @export
  * @interface FoldersApiInsertFileToMyFromBodyRequest
  */
 export interface FoldersApiInsertFileToMyFromBodyRequest {
     /**
-     * The file to be inserted.
+     * The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins.
      * @type {File}
      * @memberof FoldersApiInsertFileToMyFromBody
      */
     readonly file?: File
 
     /**
-     * The file title to be inserted.
+     * The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored.
      * @type {string}
      * @memberof FoldersApiInsertFileToMyFromBody
      */
     readonly title?: string
 
     /**
-     * Specifies whether to create a new file if it already exists or not.
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
      * @type {boolean}
      * @memberof FoldersApiInsertFileToMyFromBody
      */
     readonly createNewIfExist?: boolean
 
     /**
-     * Specifies whether to keep the file converting status or not.
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
      * @type {boolean}
      * @memberof FoldersApiInsertFileToMyFromBody
      */
@@ -4325,16 +6337,37 @@ export interface FoldersApiInsertFileToMyFromBodyRequest {
  */
 export interface FoldersApiRenameFolderRequest {
     /**
-     * The folder ID for the folder creation.
+     * The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
      * @type {number}
      * @memberof FoldersApiRenameFolder
      */
     readonly folderId: number
 
     /**
-     * The parameters for creating a folder.
+     * The title carried by the request body.
      * @type {CreateFolder}
      * @memberof FoldersApiRenameFolder
+     */
+    readonly createFolder: CreateFolder
+}
+
+/**
+ * Request parameters for renameFolderThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiRenameFolderThirdPartyRequest
+ */
+export interface FoldersApiRenameFolderThirdPartyRequest {
+    /**
+     * The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title.
+     * @type {string}
+     * @memberof FoldersApiRenameFolderThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The title carried by the request body.
+     * @type {CreateFolder}
+     * @memberof FoldersApiRenameFolderThirdParty
      */
     readonly createFolder: CreateFolder
 }
@@ -4346,16 +6379,37 @@ export interface FoldersApiRenameFolderRequest {
  */
 export interface FoldersApiSetFolderOrderRequest {
     /**
-     * The folder unique identifier.
+     * The folder to move.
      * @type {number}
      * @memberof FoldersApiSetFolderOrder
      */
     readonly folderId: number
 
     /**
-     * The folder order information.
+     * The position the folder is to take.
      * @type {OrderRequestDto}
      * @memberof FoldersApiSetFolderOrder
+     */
+    readonly orderRequestDto?: OrderRequestDto
+}
+
+/**
+ * Request parameters for setFolderOrderThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiSetFolderOrderThirdPartyRequest
+ */
+export interface FoldersApiSetFolderOrderThirdPartyRequest {
+    /**
+     * The folder to move.
+     * @type {string}
+     * @memberof FoldersApiSetFolderOrderThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * The position the folder is to take.
+     * @type {OrderRequestDto}
+     * @memberof FoldersApiSetFolderOrderThirdParty
      */
     readonly orderRequestDto?: OrderRequestDto
 }
@@ -4367,16 +6421,37 @@ export interface FoldersApiSetFolderOrderRequest {
  */
 export interface FoldersApiSetFolderPrimaryExternalLinkRequest {
     /**
-     * The folder ID.
+     * The folder or room the link belongs to.
      * @type {number}
      * @memberof FoldersApiSetFolderPrimaryExternalLink
      */
     readonly id: number
 
     /**
-     * The folder link parameters.
+     * The link and the way it is to be shaped.
      * @type {FolderLinkRequest}
      * @memberof FoldersApiSetFolderPrimaryExternalLink
+     */
+    readonly folderLinkRequest: FolderLinkRequest
+}
+
+/**
+ * Request parameters for setFolderPrimaryExternalLinkThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest
+ */
+export interface FoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest {
+    /**
+     * The folder or room the link belongs to.
+     * @type {string}
+     * @memberof FoldersApiSetFolderPrimaryExternalLinkThirdParty
+     */
+    readonly id: string
+
+    /**
+     * The link and the way it is to be shaped.
+     * @type {FolderLinkRequest}
+     * @memberof FoldersApiSetFolderPrimaryExternalLinkThirdParty
      */
     readonly folderLinkRequest: FolderLinkRequest
 }
@@ -4388,7 +6463,7 @@ export interface FoldersApiSetFolderPrimaryExternalLinkRequest {
  */
 export interface FoldersApiTerminateReportFolderHistoryRequest {
     /**
-     * The folder unique identifier.
+     * The folder whose running history report is to be given up. It is the folder that              was passed to the operation that started the report.
      * @type {number}
      * @memberof FoldersApiTerminateReportFolderHistory
      */
@@ -4402,37 +6477,79 @@ export interface FoldersApiTerminateReportFolderHistoryRequest {
  */
 export interface FoldersApiUploadFileRequest {
     /**
-     * The folder ID to upload a file.
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
      * @type {number}
      * @memberof FoldersApiUploadFile
      */
     readonly folderId: number
 
     /**
-     * Specifies whether to create the new file if it already exists or not.
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
      * @type {boolean}
      * @memberof FoldersApiUploadFile
      */
     readonly createNewIfExist?: boolean
 
     /**
-     * Specifies whether to upload documents in the original formats as well or not.
+     * Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
      * @type {boolean}
      * @memberof FoldersApiUploadFile
      */
     readonly storeOriginalFile?: boolean
 
     /**
-     * Specifies whether to keep the file converting status or not.
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
      * @type {boolean}
      * @memberof FoldersApiUploadFile
      */
     readonly keepConvertStatus?: boolean
 
     /**
-     * The file to be uploaded.
+     * The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
      * @type {File}
      * @memberof FoldersApiUploadFile
+     */
+    readonly file?: File
+}
+
+/**
+ * Request parameters for uploadFileThirdParty operation in FoldersApi.
+ * @export
+ * @interface FoldersApiUploadFileThirdPartyRequest
+ */
+export interface FoldersApiUploadFileThirdPartyRequest {
+    /**
+     * The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not.
+     * @type {string}
+     * @memberof FoldersApiUploadFileThirdParty
+     */
+    readonly folderId: string
+
+    /**
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFileThirdParty
+     */
+    readonly createNewIfExist?: boolean
+
+    /**
+     * Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFileThirdParty
+     */
+    readonly storeOriginalFile?: boolean
+
+    /**
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
+     * @type {boolean}
+     * @memberof FoldersApiUploadFileThirdParty
+     */
+    readonly keepConvertStatus?: boolean
+
+    /**
+     * The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
+     * @type {File}
+     * @memberof FoldersApiUploadFileThirdParty
      */
     readonly file?: File
 }
@@ -4444,28 +6561,28 @@ export interface FoldersApiUploadFileRequest {
  */
 export interface FoldersApiUploadFileToMyRequest {
     /**
-     * Specifies whether to create the new file if it already exists or not.
+     * Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title.
      * @type {boolean}
      * @memberof FoldersApiUploadFileToMy
      */
     readonly createNewIfExist?: boolean
 
     /**
-     * Specifies whether to upload documents in the original formats as well or not.
+     * Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has.
      * @type {boolean}
      * @memberof FoldersApiUploadFileToMy
      */
     readonly storeOriginalFile?: boolean
 
     /**
-     * Specifies whether to keep the file converting status or not.
+     * Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing.
      * @type {boolean}
      * @memberof FoldersApiUploadFileToMy
      */
     readonly keepConvertStatus?: boolean
 
     /**
-     * The file to be uploaded.
+     * The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid.
      * @type {File}
      * @memberof FoldersApiUploadFileToMy
      */
@@ -4480,8 +6597,8 @@ export interface FoldersApiUploadFileToMyRequest {
  */
 export class FoldersApi extends BaseAPI {
     /**
-     * Checks the file uploads to the folder with the ID specified in the request.
-     * @summary Check file uploads
+     * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+     * @summary Check for upload conflicts
      * @param {FilesFoldersApiCheckUploadRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4492,7 +6609,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Creates a new folder with the title specified in the request. The parent folder ID can be also specified.
+     * Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
+     * @summary Check for upload conflicts (third-party storage)
+     * @param {FilesFoldersApiCheckUploadThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public checkUploadThirdParty(requestParameters: FoldersApiCheckUploadThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).checkUploadThirdParty(requestParameters.folderId, requestParameters.checkUploadRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
      * @summary Create a folder
      * @param {FilesFoldersApiCreateFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4504,8 +6633,20 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Creates a primary external link by the identifier specified in the request.
-     * @summary Create primary external link
+     * Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
+     * @summary Create a folder (third-party storage)
+     * @param {FilesFoldersApiCreateFolderThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public createFolderThirdParty(requestParameters: FoldersApiCreateFolderThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).createFolderThirdParty(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+     * @summary Create the folder primary external link
      * @param {FilesFoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4516,7 +6657,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Starts generating the activity history report of a folder (XLSX by default, or CSV) and saves it to My documents.
+     * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+     * @summary Create the folder primary external link (third-party storage)
+     * @param {FilesFoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public createFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiCreateFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).createFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
      * @summary Start the folder history report generation
      * @param {FilesFoldersApiCreateReportFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4528,7 +6681,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Deletes a folder with the ID specified in the request.
+     * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
      * @summary Delete a folder
      * @param {FilesFoldersApiDeleteFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4540,7 +6693,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Triggers asynchronous XLSX report generation for the specified form results folder.
+     * Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
+     * @summary Delete a folder (third-party storage)
+     * @param {FilesFoldersApiDeleteFolderThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public deleteFolderThirdParty(requestParameters: FoldersApiDeleteFolderThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).deleteFolderThirdParty(requestParameters.folderId, requestParameters.deleteFolder, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Rebuilds the spreadsheet that gathers the answers submitted to a form, starting from the Complete folder  that holds the filled copies. The answer names the original form the results belong to, says in `isNewFile`  whether the spreadsheet is being created or an existing one rewritten in place, and carries the queued job in  `task`; the file itself is not ready yet, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the identifier  of the form until the task reports completion. The folder has to be the Complete folder of a form-filling  room and has to hold at least one submitted copy whose original form still exists, and the caller needs the  right to maintain that form, which the room manager has. A folder that does not exist, or one that holds  nothing to report on, is answered with 404, and a folder of the wrong kind or a caller without those rights  with 403. The call is mutating: it writes the results file of the form.
      * @summary Generate XLSX report by folder
      * @param {FilesFoldersApiGenerateXlsxByFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4552,7 +6717,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the Favorites section.
+     * Returns the caller\'s own Favorites section: the files and folders this account has marked as favorite,  together with the section folder itself. Favorites are per-account, so the entries another member marked are  not listed here, and a guest sees only their own, usually empty, list. Mark a single file with  `GET api/2.0/files/favorites/{fileId}`, or add and remove batches of files and folders with  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`. Nothing in the section is modified,  though passing `sortBy` saves the requested order as the default order for this account. Entries the caller  can no longer read, and entries that have been moved to the Trash section, drop out of the listing even  though their favorite mark stays, so the section can shrink without an explicit unmark. `folders` and `files`  hold one page of the section, `total` counts the entries matching the request before `count` and `startIndex`  are applied, and `current` describes the section folder itself.
      * @summary Get the Favorites section
      * @param {FilesFoldersApiGetFavoritesFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4564,7 +6729,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the used space of files in the root folders.
+     * Reports how much storage the portal spends on documents, split by section - My documents, Trash, Rooms,  Archive and, where the feature is on, AI agents - each entry naming the section and the space it takes in  bytes. The figures cover the whole portal rather than the calling account, and moving an entry between  sections moves its space with it, which is why deleting a file to the Trash does not free anything until the  Trash is emptied. Only a caller who may change portal settings, that is the owner and the portal  administrators, is allowed here; a room administrator, an ordinary member and a guest are all refused. The  call is read-only, takes no parameters and answers with the sections in a fixed order. The quota of the portal  as a whole, storage outside documents included, is not part of this answer.
      * @summary Get used space of files
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4575,7 +6740,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the form filter of a folder with the ID specified in the request.
+     * Lists the fields the completed forms of a form-filling room carry, each of them a key and the kind of value  behind it, so that a client can offer them as filters. Feed a pair from this list back as `formsItemKey` and  `formsItemType` of `GET api/2.0/files/{folderId}` to keep only the completed forms whose field of that name  holds a value. The fields are read from the search index of one of the forms already gathered, so they appear  once indexing has caught up with the first submission. Only the Complete folder of a form-filling room  carries such fields: for any other folder, for a folder that does not exist and for one that has been deleted  the answer is an empty list rather than a refusal, and the same holds while nothing has been submitted yet.  The operation reads the index alone, changes nothing and needs no authorization.
      * @summary Get folder form filter
      * @param {FilesFoldersApiGetFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4587,7 +6752,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the folder with the ID specified in the request.
+     * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
      * @summary Get a folder by ID
      * @param {FilesFoldersApiGetFolderByFolderIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4599,7 +6764,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the activity history of a folder with a specified identifier.
+     * Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
+     * @summary Get a folder by ID (third-party storage)
+     * @param {FilesFoldersApiGetFolderByFolderIdThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFolderByFolderIdThirdParty(requestParameters: FoldersApiGetFolderByFolderIdThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderByFolderIdThirdParty(requestParameters.folderId, requestParameters.userIdOrGroupId, requestParameters.sharedBy, requestParameters.filterType, requestParameters.roomId, requestParameters.folderType, requestParameters.excludeSubject, requestParameters.applyFilterOption, requestParameters.withSubFolders, requestParameters.extension, requestParameters.searchArea, requestParameters.formsItemKey, requestParameters.formsItemType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.location, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists what has happened to a folder and to the entries inside it - creations, renames, uploads, moves,  deletions and changes of access - each record naming the action, the moment it happened and the member behind  it. Records that belong to one action are grouped, so a batch arrives as a single entry carrying the rest of  itself in `related`, and the list runs from the most recent record backwards. `fromDate` and `toDate` narrow  the period, `startIndex` and `count` page through the result, and the number of records matching the request  is reported in the response headers rather than in the body. Any member who can read the folder may read its  history; a caller without access is answered with 403 and a folder that does not exist with 404. When the  folder is a form-filling folder the caller reached through a filling invitation, the history is narrowed to  what that caller may see. The call is read-only. To take the same history away as a spreadsheet, start a  report with `POST api/2.0/files/folder/{folderId}/log/report`.
      * @summary Get folder history
      * @param {FilesFoldersApiGetFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4611,7 +6788,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about a folder with the ID specified in the request.
+     * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
      * @summary Get folder information
      * @param {FilesFoldersApiGetFolderInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4623,8 +6800,20 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the links of the folder with the ID specified in the request.
-     * @summary Get the folder links
+     * Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
+     * @summary Get folder information (third-party storage)
+     * @param {FilesFoldersApiGetFolderInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFolderInfoThirdParty(requestParameters: FoldersApiGetFolderInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderInfoThirdParty(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+     * @summary Get folder external links
      * @param {FilesFoldersApiGetFolderLinksRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4635,7 +6824,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a path to the folder with the ID specified in the request.
+     * Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
+     * @summary Get folder external links (third-party storage)
+     * @param {FilesFoldersApiGetFolderLinksThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFolderLinksThirdParty(requestParameters: FoldersApiGetFolderLinksThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderLinksThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
      * @summary Get the folder path
      * @param {FilesFoldersApiGetFolderPathRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4647,8 +6848,20 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the primary external link by the identifier specified in the request.
-     * @summary Get primary external link
+     * Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
+     * @summary Get the folder path (third-party storage)
+     * @param {FilesFoldersApiGetFolderPathThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFolderPathThirdParty(requestParameters: FoldersApiGetFolderPathThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderPathThirdParty(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+     * @summary Get the folder primary external link
      * @param {FilesFoldersApiGetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4659,7 +6872,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the subfolders from a folder with the ID specified in the request.
+     * Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
+     * @summary Get the folder primary external link (third-party storage)
+     * @param {FilesFoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiGetFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
      * @summary Get subfolders
      * @param {FilesFoldersApiGetFoldersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4671,7 +6896,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of rooms used for filling out forms located in the Forms section.
+     * Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
+     * @summary Get subfolders (third-party storage)
+     * @param {FilesFoldersApiGetFoldersThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getFoldersThirdParty(requestParameters: FoldersApiGetFoldersThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getFoldersThirdParty(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the Forms section: the flat list of form-filling rooms the caller may read. Such rooms are stored  under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of the active  area and lists them when `searchArea` names the forms area instead. The section is not expanded into room  content, so `folders` carries the rooms while `files` comes back empty; to read what is inside one of them,  call `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy`  saves the requested order as the default order for this account. `filterType`, `filterValue`,  `userIdOrGroupId` and the sorting parameters narrow and order the room list, `count` and `startIndex` page  through it, `total` reports how many rooms match the request in full, and `current` describes the section  folder itself.
      * @summary Get the Forms section
      * @param {FilesFoldersApiGetFormsFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4683,7 +6920,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the My documents section.
+     * Returns the contents of the caller\'s My documents section, the personal storage that belongs to this account  alone and stays invisible to other members until something in it is shared explicitly. Any authenticated  member that has a personal section can read it; guest accounts are not given one, and the call then answers  404. Nothing in the section is modified, though passing `sortBy` saves the requested order as the default  order for this account. Without a filter only the top level of the section is listed; as soon as `filterType`,  `userIdOrGroupId` or `filterValue` narrows the request, the search descends through the whole subtree.  `filterValue` is matched against titles and against indexed document content, and the index is written  asynchronously, so a file uploaded a moment ago can be missing from a search for a short while. `folders` and  `files` hold one page of the result, `total` counts everything that matches before `count` and `startIndex`  are applied, and `current` describes the section folder. To open a folder inside the section, call  `GET api/2.0/files/{folderId}` with its identifier.
      * @summary Get the My documents section
      * @param {FilesFoldersApiGetMyFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4695,7 +6932,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the new items from a folder with the ID specified in the request.
+     * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
      * @summary Get new folder items
      * @param {FilesFoldersApiGetNewFolderItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4707,7 +6944,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files located in the Recent section.
+     * Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
+     * @summary Get new folder items (third-party storage)
+     * @param {FilesFoldersApiGetNewFolderItemsThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getNewFolderItemsThirdParty(requestParameters: FoldersApiGetNewFolderItemsThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getNewFolderItemsThirdParty(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
      * @summary Get the Recent section
      * @param {FilesFoldersApiGetRecentFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4719,7 +6968,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the status of generating the folder history report.
+     * Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
      * @summary Get the folder history report generation status
      * @param {FilesFoldersApiGetReportFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4731,7 +6980,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns all the sections matching the parameters specified in the request.
+     * Returns every top-level section the calling account can see in one response, each of them a full section  object carrying its own first page of content: Favorites, Recent, Shared with me, My documents,  Trash, Rooms, Forms, Archive and, while AI access is enabled for the portal, AI agents. A section is  left out when the account has none of it, which is why a guest gets no personal section, and Recent is  listed only while it is switched on with `PUT api/2.0/files/displayrecent`. Pass `withoutTrash=true` to drop  the Trash section. The filters, `count` and `startIndex` are applied to each section separately, so  `count=1` returns one entry per section and every section reports its own `total`. Because it builds the  content of all of them, this is the most expensive listing in the module: when a single section is enough,  read it directly, for example with `GET api/2.0/files/@my`. The call modifies nothing in the sections and  leaves their new-item badges untouched, though passing `sortBy` saves the requested order as the default order  for this account.
      * @summary Get filtered sections
      * @param {FilesFoldersApiGetRootFoldersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4743,7 +6992,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed list of files and folders located in the Trash section.
+     * Returns the caller\'s Trash section: the files and folders this account has deleted, kept there until they  are restored or discarded. Each member has a Trash of their own and sees only what they deleted themselves.  Restore an entry by moving it back with `PUT api/2.0/files/fileops/move`, or discard the whole section with  `PUT api/2.0/files/fileops/emptytrash`; both start a background operation that is polled through  `GET api/2.0/files/fileops`. This call itself modifies nothing, though passing `sortBy` saves the requested  order as the default order for this account. Only the top level of the section is listed, so the contents of a  deleted folder are not expanded into it, and `filterValue` is matched against titles alone here rather than  against document content. `folders` and `files` hold one page of the result, `total` counts everything that  matches before `count` and `startIndex` are applied, and `current` describes the section folder. An account  that is given no Trash of its own, an outsider for instance, receives 404.
      * @summary Get the Trash section
      * @param {FilesFoldersApiGetTrashFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4755,7 +7004,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Inserts a file specified in the request to the selected folder by single file uploading.
+     * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
      * @summary Insert a file
      * @param {FilesFoldersApiInsertFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4767,8 +7016,20 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Inserts a file specified in the request to the My documents section by single file uploading.
-     * @summary Insert a file to the My documents section
+     * Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
+     * @summary Insert a file (third-party storage)
+     * @param {FilesFoldersApiInsertFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public insertFileThirdParty(requestParameters: FoldersApiInsertFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).insertFileThirdParty(requestParameters.folderId, requestParameters.insertFileFile, requestParameters.insertFileTitle, requestParameters.insertFileCreateNewIfExist, requestParameters.insertFileKeepConvertStatus, requestParameters.insertFileStreamCanRead, requestParameters.insertFileStreamCanWrite, requestParameters.insertFileStreamCanSeek, requestParameters.insertFileStreamCanTimeout, requestParameters.insertFileStreamLength, requestParameters.insertFileStreamPosition, requestParameters.insertFileStreamReadTimeout, requestParameters.insertFileStreamWriteTimeout, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Stores one file in the caller\'s own My documents section, the personal storage every portal member has, and  returns the stored file. The destination takes no identifier: it is resolved from the calling account and  created on first use, while a guest account has none and is answered as missing (404). Send the content as a  `multipart/form-data` part or as the raw request body, and name it with `title`, which wins over the name of  the uploaded part and has invalid characters replaced before storing. The call is not idempotent: by default a  file of the same title is overwritten as a new version, while `createNewIfExist=true` stores a separate copy  under a title made unique with a numeric suffix; a title held by a file that is locked or open in the editor  cannot be overwritten either, and a second file appears under the same title. Formats listed in  `extsMustConvert` of `GET api/2.0/files/settings` are converted after the response is sent;  `keepConvertStatus=true` keeps that result readable through `GET api/2.0/files/file/{fileId}/checkconversion`,  which otherwise drops it. Files over the single-request size limit or the account\'s storage quota are refused:  send those through `POST api/2.0/files/{folderId}/upload/create_session`, and use  `POST api/2.0/files/{folderId}/insert` for any other destination.
+     * @summary Insert a file into My documents
      * @param {FilesFoldersApiInsertFileToMyFromBodyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4779,7 +7040,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Renames the selected folder with a new title specified in the request.
+     * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
      * @summary Rename a folder
      * @param {FilesFoldersApiRenameFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4791,7 +7052,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Sets the order of a folder with ID specified in the request.
+     * Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
+     * @summary Rename a folder (third-party storage)
+     * @param {FilesFoldersApiRenameFolderThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public renameFolderThirdParty(requestParameters: FoldersApiRenameFolderThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).renameFolderThirdParty(requestParameters.folderId, requestParameters.createFolder, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
      * @summary Set folder order
      * @param {FilesFoldersApiSetFolderOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4803,7 +7076,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Sets the folder external link with the ID specified in the request.
+     * Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
+     * @summary Set folder order (third-party storage)
+     * @param {FilesFoldersApiSetFolderOrderThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public setFolderOrderThirdParty(requestParameters: FoldersApiSetFolderOrderThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).setFolderOrderThirdParty(requestParameters.folderId, requestParameters.orderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
      * @summary Set the folder external link
      * @param {FilesFoldersApiSetFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4815,7 +7100,19 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Terminates generating the folder history report.
+     * Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
+     * @summary Set the folder external link (third-party storage)
+     * @param {FilesFoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public setFolderPrimaryExternalLinkThirdParty(requestParameters: FoldersApiSetFolderPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).setFolderPrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.folderLinkRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
      * @summary Terminate the folder history report generation
      * @param {FilesFoldersApiTerminateReportFolderHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4827,7 +7124,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Uploads a file specified in the request to the selected folder by single file uploading or standart multipart/form-data method.
+     * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
      * @summary Upload a file
      * @param {FilesFoldersApiUploadFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4839,8 +7136,20 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Uploads a file specified in the request to the My documents section by single file uploading or standart multipart/form-data method.
-     * @summary Upload a file to the My documents section
+     * Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
+     * @summary Upload a file (third-party storage)
+     * @param {FilesFoldersApiUploadFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public uploadFileThirdParty(requestParameters: FoldersApiUploadFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).uploadFileThirdParty(requestParameters.folderId, requestParameters.createNewIfExist, requestParameters.storeOriginalFile, requestParameters.keepConvertStatus, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Uploads one file into the caller\'s own My documents section and returns it inside a single-element array; one  request stores exactly one file. The destination takes no identifier: it is resolved from the calling account  and created on first use, while a guest account has none and is answered as missing (404). The body has to be  `multipart/form-data` carrying the file part; a request without it is rejected as invalid, and the stored name  comes from that part, since unlike `POST api/2.0/files/@my/insert` there is no separate title. The call is not  idempotent: by default a file of the same title is overwritten as a new version, while `createNewIfExist=true`  stores a separate copy under a title made unique with a numeric suffix. `storeOriginalFile` is not a  per-request switch: it writes the same account setting as `PUT api/2.0/files/storeoriginal`, which decides  what happens to the formats listed in `extsMustConvert` of `GET api/2.0/files/settings` when they are  converted after the response - false replaces the uploaded file with the converted one, true keeps both;  `keepConvertStatus=true` keeps that conversion result readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. Files over the single-request size limit or the account\'s  storage quota are refused; send those through `POST api/2.0/files/{folderId}/upload/create_session`.
+     * @summary Upload a file to My documents
      * @param {FilesFoldersApiUploadFileToMyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4887,3 +7196,39 @@ export const GetFolderByFolderIdFolderTypeEnum = {
     Forms: 36
 } as const;
 export type GetFolderByFolderIdFolderTypeEnum = typeof GetFolderByFolderIdFolderTypeEnum[keyof typeof GetFolderByFolderIdFolderTypeEnum];
+/**
+ * @export
+ */
+export const GetFolderByFolderIdThirdPartyFolderTypeEnum = {
+    DEFAULT: 0,
+    COMMON: 1,
+    BUNCH: 2,
+    TRASH: 3,
+    USER: 5,
+    SHARE: 6,
+    Projects: 8,
+    Favorites: 10,
+    Recent: 11,
+    Templates: 12,
+    Privacy: 13,
+    VirtualRooms: 14,
+    FillingFormsRoom: 15,
+    EditingRoom: 16,
+    CustomRoom: 19,
+    Archive: 20,
+    ThirdpartyBackup: 21,
+    PublicRoom: 22,
+    ReadyFormFolder: 25,
+    InProcessFormFolder: 26,
+    FormFillingFolderDone: 27,
+    FormFillingFolderInProgress: 28,
+    VirtualDataRoom: 29,
+    RoomTemplates: 30,
+    AiRoom: 31,
+    Knowledge: 32,
+    ResultStorage: 33,
+    AiAgents: 34,
+    DefaultTemplates: 35,
+    Forms: 36
+} as const;
+export type GetFolderByFolderIdThirdPartyFolderTypeEnum = typeof GetFolderByFolderIdThirdPartyFolderTypeEnum[keyof typeof GetFolderByFolderIdThirdPartyFolderTypeEnum];

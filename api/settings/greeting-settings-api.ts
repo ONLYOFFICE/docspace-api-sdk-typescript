@@ -30,8 +30,6 @@ import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { GreetingSettingsRequestsDto } from '../../models';
 // @ts-ignore
-import type { ObjectWrapper } from '../../models';
-// @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
  * GreetingSettingsApi - axios parameter creator
@@ -42,7 +40,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
     
     return {
         /**
-         * Returns the greeting settings for the current portal.
+         * Returns the greeting title of the current portal - the caption shown as the welcome heading on the sign-in  page, kept as the portal name. Any authenticated user may call it and no administrative right is needed; the  call is read-only. The title comes back as a bare string and is never empty: when the portal has no title of  its own, the built-in default caption is returned instead, localized to the caller\'s language. Because of that  fallback this operation cannot tell a saved title from the default one - call  `GET api/2.0/settings/greetingsettings/isdefault` when that distinction matters. The same string is part of  the portal settings answer as the `greetingSettings` field of `GET api/2.0/settings`, so a client that already  reads the settings needs no separate call. The value is a caption only: it is neither the portal address nor  the white-label logo text of the header, which is returned by `GET api/2.0/settings/whitelabel/logotext`.
          * @summary Get greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -94,7 +92,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Checks if the greeting settings of the current portal are set to default or not.
+         * Reports whether the current portal still shows the built-in greeting caption instead of a title of its own.  The check is read-only and open to any authenticated user, with no administrative right required. It answers  `true` while no title is stored for the portal - the state after  `POST api/2.0/settings/greetingsettings/restore` on an installation that configures no portal name, and also  after saving an empty `title` - and `false` as soon as a non-empty title has been saved. Use it together with  `GET api/2.0/settings/greetingsettings`: that operation substitutes the localized default caption for a  missing title, so only these two calls together separate a default greeting from a custom one that happens to  repeat the default wording. The answer covers the greeting title alone; whether the white-label logos and logo  text are still the default ones is reported by `GET api/2.0/settings/whitelabel/logos/isdefault` and  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -146,7 +144,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Restores the current portal greeting settings.
+         * Drops the custom greeting title of the current portal and puts back the title configured for the installation,  which is an empty value unless the installation defines a portal name of its own. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The change is immediate for  every user of the portal and a second call changes nothing, so a retry after a failed attempt is safe. The  answer is the greeting in force afterwards: the configured title when there is one, and the localized default  caption when the stored title ends up empty - in that case `GET api/2.0/settings/greetingsettings/isdefault`  starts answering `true`. Only the caption is touched: the portal logos and the white-label logo text keep  their values and are reset separately by `PUT api/2.0/settings/whitelabel/logos/restore` and  `PUT api/2.0/settings/whitelabel/logotext/restore`. To set a title instead of the default one use  `POST api/2.0/settings/greetingsettings`.
          * @summary Restore the greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -198,7 +196,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
             };
         },
         /**
-         * Saves the greeting settings specified in the request to the current portal.
+         * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
          * @summary Save the greeting settings
          * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
          * @param {*} [options] Override http request option.
@@ -264,21 +262,21 @@ export const GreetingSettingsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = GreetingSettingsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the greeting settings for the current portal.
+         * Returns the greeting title of the current portal - the caption shown as the welcome heading on the sign-in  page, kept as the portal name. Any authenticated user may call it and no administrative right is needed; the  call is read-only. The title comes back as a bare string and is never empty: when the portal has no title of  its own, the built-in default caption is returned instead, localized to the caller\'s language. Because of that  fallback this operation cannot tell a saved title from the default one - call  `GET api/2.0/settings/greetingsettings/isdefault` when that distinction matters. The same string is part of  the portal settings answer as the `greetingSettings` field of `GET api/2.0/settings`, so a client that already  reads the settings needs no separate call. The value is a caption only: it is neither the portal address nor  the white-label logo text of the header, which is returned by `GET api/2.0/settings/whitelabel/logotext`.
          * @summary Get greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGreetingSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-greeting-settings/
          */
-        async getGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async getGreetingSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGreetingSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.getGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the greeting settings of the current portal are set to default or not.
+         * Reports whether the current portal still shows the built-in greeting caption instead of a title of its own.  The check is read-only and open to any authenticated user, with no administrative right required. It answers  `true` while no title is stored for the portal - the state after  `POST api/2.0/settings/greetingsettings/restore` on an installation that configures no portal name, and also  after saving an empty `title` - and `false` as soon as a non-empty title has been saved. Use it together with  `GET api/2.0/settings/greetingsettings`: that operation substitutes the localized default caption for a  missing title, so only these two calls together separate a default greeting from a custom one that happens to  repeat the default wording. The answer covers the greeting title alone; whether the white-label logos and logo  text are still the default ones is reported by `GET api/2.0/settings/whitelabel/logos/isdefault` and  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -292,7 +290,7 @@ export const GreetingSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Restores the current portal greeting settings.
+         * Drops the custom greeting title of the current portal and puts back the title configured for the installation,  which is an empty value unless the installation defines a portal name of its own. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The change is immediate for  every user of the portal and a second call changes nothing, so a retry after a failed attempt is safe. The  answer is the greeting in force afterwards: the configured title when there is one, and the localized default  caption when the stored title ends up empty - in that case `GET api/2.0/settings/greetingsettings/isdefault`  starts answering `true`. Only the caption is touched: the portal logos and the white-label logo text keep  their values and are reset separately by `PUT api/2.0/settings/whitelabel/logos/restore` and  `PUT api/2.0/settings/whitelabel/logotext/restore`. To set a title instead of the default one use  `POST api/2.0/settings/greetingsettings`.
          * @summary Restore the greeting settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -306,7 +304,7 @@ export const GreetingSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the greeting settings specified in the request to the current portal.
+         * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
          * @summary Save the greeting settings
          * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
          * @param {*} [options] Override http request option.
@@ -331,18 +329,18 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
     const localVarFp = GreetingSettingsApiFp(configuration)
     return {
         /**
-         * Returns the greeting settings for the current portal.
+         * Returns the greeting title of the current portal - the caption shown as the welcome heading on the sign-in  page, kept as the portal name. Any authenticated user may call it and no administrative right is needed; the  call is read-only. The title comes back as a bare string and is never empty: when the portal has no title of  its own, the built-in default caption is returned instead, localized to the caller\'s language. Because of that  fallback this operation cannot tell a saved title from the default one - call  `GET api/2.0/settings/greetingsettings/isdefault` when that distinction matters. The same string is part of  the portal settings answer as the `greetingSettings` field of `GET api/2.0/settings`, so a client that already  reads the settings needs no separate call. The value is a caption only: it is neither the portal address nor  the white-label logo text of the header, which is returned by `GET api/2.0/settings/whitelabel/logotext`.
          * @summary Get greeting settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getGreetingSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-greeting-settings/
          * @throws {RequiredError}
          */
-        getGreetingSettings(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        getGreetingSettings(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.getGreetingSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if the greeting settings of the current portal are set to default or not.
+         * Reports whether the current portal still shows the built-in greeting caption instead of a title of its own.  The check is read-only and open to any authenticated user, with no administrative right required. It answers  `true` while no title is stored for the portal - the state after  `POST api/2.0/settings/greetingsettings/restore` on an installation that configures no portal name, and also  after saving an empty `title` - and `false` as soon as a non-empty title has been saved. Use it together with  `GET api/2.0/settings/greetingsettings`: that operation substitutes the localized default caption for a  missing title, so only these two calls together separate a default greeting from a custom one that happens to  repeat the default wording. The answer covers the greeting title alone; whether the white-label logos and logo  text are still the default ones is reported by `GET api/2.0/settings/whitelabel/logos/isdefault` and  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default greeting settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsDefaultGreetingSettings operation
@@ -353,7 +351,7 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
             return localVarFp.getIsDefaultGreetingSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Restores the current portal greeting settings.
+         * Drops the custom greeting title of the current portal and puts back the title configured for the installation,  which is an empty value unless the installation defines a portal name of its own. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The change is immediate for  every user of the portal and a second call changes nothing, so a retry after a failed attempt is safe. The  answer is the greeting in force afterwards: the configured title when there is one, and the localized default  caption when the stored title ends up empty - in that case `GET api/2.0/settings/greetingsettings/isdefault`  starts answering `true`. Only the caption is touched: the portal logos and the white-label logo text keep  their values and are reset separately by `PUT api/2.0/settings/whitelabel/logos/restore` and  `PUT api/2.0/settings/whitelabel/logotext/restore`. To set a title instead of the default one use  `POST api/2.0/settings/greetingsettings`.
          * @summary Restore the greeting settings
          * @param {*} [options] Override http request option.
          * REST API Reference for restoreGreetingSettings operation
@@ -364,7 +362,7 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
             return localVarFp.restoreGreetingSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the greeting settings specified in the request to the current portal.
+         * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
          * @summary Save the greeting settings
          * @param {GreetingSettingsApiSaveGreetingSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -400,7 +398,7 @@ export interface GreetingSettingsApiSaveGreetingSettingsRequest {
  */
 export class GreetingSettingsApi extends BaseAPI {
     /**
-     * Returns the greeting settings for the current portal.
+     * Returns the greeting title of the current portal - the caption shown as the welcome heading on the sign-in  page, kept as the portal name. Any authenticated user may call it and no administrative right is needed; the  call is read-only. The title comes back as a bare string and is never empty: when the portal has no title of  its own, the built-in default caption is returned instead, localized to the caller\'s language. Because of that  fallback this operation cannot tell a saved title from the default one - call  `GET api/2.0/settings/greetingsettings/isdefault` when that distinction matters. The same string is part of  the portal settings answer as the `greetingSettings` field of `GET api/2.0/settings`, so a client that already  reads the settings needs no separate call. The value is a caption only: it is neither the portal address nor  the white-label logo text of the header, which is returned by `GET api/2.0/settings/whitelabel/logotext`.
      * @summary Get greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -411,7 +409,7 @@ export class GreetingSettingsApi extends BaseAPI {
     }
 
     /**
-     * Checks if the greeting settings of the current portal are set to default or not.
+     * Reports whether the current portal still shows the built-in greeting caption instead of a title of its own.  The check is read-only and open to any authenticated user, with no administrative right required. It answers  `true` while no title is stored for the portal - the state after  `POST api/2.0/settings/greetingsettings/restore` on an installation that configures no portal name, and also  after saving an empty `title` - and `false` as soon as a non-empty title has been saved. Use it together with  `GET api/2.0/settings/greetingsettings`: that operation substitutes the localized default caption for a  missing title, so only these two calls together separate a default greeting from a custom one that happens to  repeat the default wording. The answer covers the greeting title alone; whether the white-label logos and logo  text are still the default ones is reported by `GET api/2.0/settings/whitelabel/logos/isdefault` and  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
      * @summary Check the default greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -422,7 +420,7 @@ export class GreetingSettingsApi extends BaseAPI {
     }
 
     /**
-     * Restores the current portal greeting settings.
+     * Drops the custom greeting title of the current portal and puts back the title configured for the installation,  which is an empty value unless the installation defines a portal name of its own. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. The change is immediate for  every user of the portal and a second call changes nothing, so a retry after a failed attempt is safe. The  answer is the greeting in force afterwards: the configured title when there is one, and the localized default  caption when the stored title ends up empty - in that case `GET api/2.0/settings/greetingsettings/isdefault`  starts answering `true`. Only the caption is touched: the portal logos and the white-label logo text keep  their values and are reset separately by `PUT api/2.0/settings/whitelabel/logos/restore` and  `PUT api/2.0/settings/whitelabel/logotext/restore`. To set a title instead of the default one use  `POST api/2.0/settings/greetingsettings`.
      * @summary Restore the greeting settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -433,7 +431,7 @@ export class GreetingSettingsApi extends BaseAPI {
     }
 
     /**
-     * Saves the greeting settings specified in the request to the current portal.
+     * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
      * @summary Save the greeting settings
      * @param {SettingsGreetingSettingsApiSaveGreetingSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

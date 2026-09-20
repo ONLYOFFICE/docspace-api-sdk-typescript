@@ -20,19 +20,19 @@
 
 
 /**
- * The presence or absence of the documents in the Open Recent... menu option.
+ * One entry of the recent-documents list the editor offers.
  */
 export interface RecentConfig {
     /**
-     * The folder where the document is stored.
+     * The folder shown next to the entry, as a readable name rather than an id.
      */
     'folder'?: string | null;
     /**
-     * The document title that will be displayed in the Open Recent... menu option.
+     * The name shown for the entry.
      */
     'title'?: string | null;
     /**
-     * The absolute URL to the document where it is stored.
+     * Where the entry opens.
      */
     'url'?: string | null;
 }

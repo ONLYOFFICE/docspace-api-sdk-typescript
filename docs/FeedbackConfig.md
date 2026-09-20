@@ -7,7 +7,7 @@ The settings for the Feedback & Support menu button.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **url** | **string** | The absolute URL to the website address which will be opened when clicking the Feedback & Support menu button. | [optional] [default to undefined]
-**visible** | **boolean** | Shows or hides the Feedback & Support menu button. | [optional] [readonly] [default to undefined]
+**visible** | **boolean** | Whether the support button is shown. The portal always asks for it to be shown. | [optional] [readonly] [default to undefined]
 
 ## Example
 

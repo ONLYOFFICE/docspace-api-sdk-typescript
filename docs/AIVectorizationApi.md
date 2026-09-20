@@ -7,9 +7,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**aiVectorizationStartTask**](#aivectorizationstarttask) | **POST** /api/2.0/ai/vectorization/tasks | Start a vectorization task|
 
 # **aiVectorizationStartTask**
-> AiSuccessResponse aiVectorizationStartTask(requestBody)
+> AiVectorizationStartTask200Response aiVectorizationStartTask(aiVectorizationStartTaskRequest)
 
-Starts a vectorization task over the supplied portal files. The indexing itself runs asynchronously on the .NET side.
+Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/).
 
@@ -17,32 +17,33 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **{ [key: string]: any; }**|  | |
+| **aiVectorizationStartTaskRequest** | **AiVectorizationStartTaskRequest**| The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape. | |
 
 
 ### Return type
 
-**AiSuccessResponse**
+**AiVectorizationStartTask200Response**
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
 ```typescript
 import {
     AIVectorizationApi,
-    Configuration
+    Configuration,
+    AiVectorizationStartTaskRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIVectorizationApi(configuration);
 
-let requestBody: { [key: string]: any; }; //
+let aiVectorizationStartTaskRequest: AiVectorizationStartTaskRequest; //The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
 
 const { status, data } = await apiInstance.aiVectorizationStartTask(
-    requestBody
+    aiVectorizationStartTaskRequest
 );
 ```
 
@@ -55,8 +56,11 @@ const { status, data } = await apiInstance.aiVectorizationStartTask(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Success. |  -  |
+|**200** | Confirms the indexing was queued. It carries no job handle, so there is nothing to poll. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

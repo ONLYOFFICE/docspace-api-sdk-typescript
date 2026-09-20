@@ -1,13 +1,13 @@
 # RoomsNotificationsSettingsRequestDto
 
-The request parameters for configuring notification settings for the chat or collaboration rooms.
+Which single room the calling user silences, and which way.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **roomsId** | **any** |  | [optional] [default to undefined]
-**mute** | **boolean** | Specifies whether the notifications will be delivered to the specified room or not. | [optional] [default to undefined]
+**mute** | **boolean** | Which way the room goes: `true` adds it to the caller silenced list, `false` takes it off again. While a room  is silenced its activity is left out of the hourly and daily digests, the letters it would send at once are  not sent, and its new-item counters are hidden. | [optional] [default to undefined]
 
 ## Example
 
