@@ -21,6 +21,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-all-of-file-ids';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { SearchArea } from './search-area';
 
 /**
  * The name, the icon and the rooms of a room group to create.
@@ -38,5 +41,11 @@ export interface RoomGroupRequestDto {
      * The rooms to gather in the group, each given as a number for a room stored in the portal or as a string for a  room on a connected third-party account. Every identifier has to name a room the caller can read; repeats are  collapsed, and an element of any other shape - a decimal number, a number sent as a string, null - is refused.
      */
     'rooms': Array<DuplicateRequestDtoAllOfFileIds>;
+    /**
+     * The section the group belongs to: Active for Rooms and Forms for Forms. Active when omitted.
+     */
+    'searchArea'?: SearchArea;
 }
+
+
 

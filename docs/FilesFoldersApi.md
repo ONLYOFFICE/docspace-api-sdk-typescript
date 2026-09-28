@@ -5,51 +5,35 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**checkUpload**](#checkupload) | **POST** /api/2.0/files/{folderId}/upload/check | Check for upload conflicts|
-|[**checkUploadThirdParty**](#checkuploadthirdparty) | **POST** /api/2.0/files/{folderId}/upload/check | Check for upload conflicts (third-party storage)|
 |[**createFolder**](#createfolder) | **POST** /api/2.0/files/folder/{folderId} | Create a folder|
-|[**createFolderThirdParty**](#createfolderthirdparty) | **POST** /api/2.0/files/folder/{folderId} | Create a folder (third-party storage)|
 |[**createFolderPrimaryExternalLink**](#createfolderprimaryexternallink) | **POST** /api/2.0/files/folder/{id}/link | Create the folder primary external link|
-|[**createFolderPrimaryExternalLinkThirdParty**](#createfolderprimaryexternallinkthirdparty) | **POST** /api/2.0/files/folder/{id}/link | Create the folder primary external link (third-party storage)|
 |[**createReportFolderHistory**](#createreportfolderhistory) | **POST** /api/2.0/files/folder/{folderId}/log/report | Start the folder history report generation|
 |[**deleteFolder**](#deletefolder) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder|
-|[**deleteFolderThirdParty**](#deletefolderthirdparty) | **DELETE** /api/2.0/files/folder/{folderId} | Delete a folder (third-party storage)|
 |[**generateXlsxByFolder**](#generatexlsxbyfolder) | **POST** /api/2.0/files/folder/{folderId}/xlsx | Generate XLSX report by folder|
 |[**getFavoritesFolder**](#getfavoritesfolder) | **GET** /api/2.0/files/@favorites | Get the Favorites section|
 |[**getFilesUsedSpace**](#getfilesusedspace) | **GET** /api/2.0/files/filesusedspace | Get used space of files|
 |[**getFolder**](#getfolder) | **GET** /api/2.0/files/{folderId}/formfilter | Get folder form filter|
 |[**getFolderByFolderId**](#getfolderbyfolderid) | **GET** /api/2.0/files/{folderId} | Get a folder by ID|
-|[**getFolderByFolderIdThirdParty**](#getfolderbyfolderidthirdparty) | **GET** /api/2.0/files/{folderId} | Get a folder by ID (third-party storage)|
 |[**getFolderHistory**](#getfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log | Get folder history|
 |[**getFolderInfo**](#getfolderinfo) | **GET** /api/2.0/files/folder/{folderId} | Get folder information|
-|[**getFolderInfoThirdParty**](#getfolderinfothirdparty) | **GET** /api/2.0/files/folder/{folderId} | Get folder information (third-party storage)|
 |[**getFolderLinks**](#getfolderlinks) | **GET** /api/2.0/files/folder/{id}/links | Get folder external links|
-|[**getFolderLinksThirdParty**](#getfolderlinksthirdparty) | **GET** /api/2.0/files/folder/{id}/links | Get folder external links (third-party storage)|
 |[**getFolderPath**](#getfolderpath) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path|
-|[**getFolderPathThirdParty**](#getfolderpaththirdparty) | **GET** /api/2.0/files/folder/{folderId}/path | Get the folder path (third-party storage)|
 |[**getFolderPrimaryExternalLink**](#getfolderprimaryexternallink) | **GET** /api/2.0/files/folder/{id}/link | Get the folder primary external link|
-|[**getFolderPrimaryExternalLinkThirdParty**](#getfolderprimaryexternallinkthirdparty) | **GET** /api/2.0/files/folder/{id}/link | Get the folder primary external link (third-party storage)|
 |[**getFolders**](#getfolders) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders|
-|[**getFoldersThirdParty**](#getfoldersthirdparty) | **GET** /api/2.0/files/{folderId}/subfolders | Get subfolders (third-party storage)|
 |[**getFormsFolder**](#getformsfolder) | **GET** /api/2.0/files/@forms | Get the Forms section|
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the My documents section|
 |[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
-|[**getNewFolderItemsThirdParty**](#getnewfolderitemsthirdparty) | **GET** /api/2.0/files/{folderId}/news | Get new folder items (third-party storage)|
 |[**getRecentFolder**](#getrecentfolder) | **GET** /api/2.0/files/recent | Get the Recent section|
 |[**getReportFolderHistory**](#getreportfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log/report | Get the folder history report generation status|
 |[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
 |[**getTrashFolder**](#gettrashfolder) | **GET** /api/2.0/files/@trash | Get the Trash section|
 |[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file|
-|[**insertFileThirdParty**](#insertfilethirdparty) | **POST** /api/2.0/files/{folderId}/insert | Insert a file (third-party storage)|
 |[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file into My documents|
 |[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder|
-|[**renameFolderThirdParty**](#renamefolderthirdparty) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder (third-party storage)|
 |[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order|
-|[**setFolderOrderThirdParty**](#setfolderorderthirdparty) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order (third-party storage)|
 |[**setFolderPrimaryExternalLink**](#setfolderprimaryexternallink) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link|
-|[**setFolderPrimaryExternalLinkThirdParty**](#setfolderprimaryexternallinkthirdparty) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link (third-party storage)|
 |[**terminateReportFolderHistory**](#terminatereportfolderhistory) | **DELETE** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation|
 |[**uploadFile**](#uploadfile) | **POST** /api/2.0/files/{folderId}/upload | Upload a file|
-|[**uploadFileThirdParty**](#uploadfilethirdparty) | **POST** /api/2.0/files/{folderId}/upload | Upload a file (third-party storage)|
 |[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to My documents|
 
 # **checkUpload**
@@ -70,6 +54,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **STRINGArrayWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string`.
 
 ### Authorization
 
@@ -115,69 +103,6 @@ const { status, data } = await apiInstance.checkUpload(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **checkUploadThirdParty**
-> STRINGArrayWrapper checkUploadThirdParty(checkUploadRequest)
-
-Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/check-upload-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **checkUploadRequest** | **CheckUploadRequest**| The names to test against the files the folder already holds. | |
-| **folderId** | [**string**] | The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. | defaults to undefined|
-
-
-### Return type
-
-**STRINGArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    CheckUploadRequest
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder whose contents the names are tested against; take the id from a listing such as  `GET api/2.0/files/@root`. (default to undefined)
-let checkUploadRequest: CheckUploadRequest; //The names to test against the files the folder already holds.
-
-const { status, data } = await apiInstance.checkUploadThirdParty(
-    folderId,
-    checkUploadRequest
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The submitted titles that already belong to a file in the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **createFolder**
 > FolderWrapper createFolder(createFolder)
 
@@ -196,6 +121,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FolderWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFolderWrapper**.
 
 ### Authorization
 
@@ -241,69 +170,6 @@ const { status, data } = await apiInstance.createFolder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **createFolderThirdParty**
-> ThirdPartyFolderWrapper createFolderThirdParty(createFolder)
-
-Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The title carried by the request body. | |
-| **folderId** | [**string**] | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFolderWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    CreateFolder
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (default to undefined)
-let createFolder: CreateFolder; //The title carried by the request body.
-
-const { status, data } = await apiInstance.createFolderThirdParty(
-    folderId,
-    createFolder
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The folder that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **createFolderPrimaryExternalLink**
 > FileShareWrapper createFolderPrimaryExternalLink(folderLinkRequest)
 
@@ -322,6 +188,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileShareWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string`.
 
 ### Authorization
 
@@ -343,71 +213,6 @@ let id: number; //The folder or room the link belongs to. (default to undefined)
 let folderLinkRequest: FolderLinkRequest; //The link and the way it is to be shaped.
 
 const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
-    id,
-    folderLinkRequest
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not manage the links of this folder |  -  |
-|**404** | The folder does not exist |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **createFolderPrimaryExternalLinkThirdParty**
-> FileShareWrapper createFolderPrimaryExternalLinkThirdParty(folderLinkRequest)
-
-Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderLinkRequest** | **FolderLinkRequest**| The link and the way it is to be shaped. | |
-| **id** | [**string**] | The folder or room the link belongs to. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    FolderLinkRequest
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let id: string; //The folder or room the link belongs to. (default to undefined)
-let folderLinkRequest: FolderLinkRequest; //The link and the way it is to be shaped.
-
-const { status, data } = await apiInstance.createFolderPrimaryExternalLinkThirdParty(
     id,
     folderLinkRequest
 );
@@ -523,6 +328,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FileOperationArrayWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string`.
+
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
@@ -543,69 +352,6 @@ let folderId: number; //The folder to delete, together with everything it holds.
 let deleteFolder: DeleteFolder; //How the deletion is to be carried out.
 
 const { status, data } = await apiInstance.deleteFolder(
-    folderId,
-    deleteFolder
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **deleteFolderThirdParty**
-> FileOperationArrayWrapper deleteFolderThirdParty(deleteFolder)
-
-Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-folder-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **deleteFolder** | **DeleteFolder**| How the deletion is to be carried out. | |
-| **folderId** | [**string**] | The folder to delete, together with everything it holds. | defaults to undefined|
-
-
-### Return type
-
-**FileOperationArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    DeleteFolder
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder to delete, together with everything it holds. (default to undefined)
-let deleteFolder: DeleteFolder; //How the deletion is to be carried out.
-
-const { status, data } = await apiInstance.deleteFolderThirdParty(
     folderId,
     deleteFolder
 );
@@ -915,6 +661,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FolderContentWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` `roomId: string` and the answer is **ThirdPartyFolderContentWrapper**.
+
 ### Authorization
 
 [cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
@@ -951,120 +701,6 @@ let filterValue: string; //The search string the listing is filtered by: it is m
 let location: Location; //Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderByFolderId(
-    folderId,
-    userIdOrGroupId,
-    sharedBy,
-    filterType,
-    roomId,
-    folderType,
-    excludeSubject,
-    applyFilterOption,
-    withSubFolders,
-    extension,
-    searchArea,
-    formsItemKey,
-    formsItemType,
-    count,
-    startIndex,
-    sortBy,
-    sortOrder,
-    filterValue,
-    location
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | One page of the folder contents, with the folder itself and the chain of its parents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
-|**404** | The folder does not exist |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getFolderByFolderIdThirdParty**
-> ThirdPartyFolderContentWrapper getFolderByFolderIdThirdParty()
-
-Returns one page of the contents of a folder - its subfolders in `folders`, its files in `files`, the folder  itself in `current` and the chain of parents in `pathParts` - and is the operation a client browses the file  tree with. `filterType`, `filterValue`, `extension`, `userIdOrGroupId`, `sharedBy` and `folderType` narrow  what is listed, `applyFilterOption` decides whether those filters bite on the files, on the folders or on  both, and `withSubFolders`, which is on unless it is switched off, lets a narrowed request descend through the  whole subtree instead of the top level alone. `filterValue` is matched against titles and against indexed  document content, and indexing is asynchronous, so a file uploaded a moment ago can be missing from a search  for a short while. `count` and `startIndex` page through the result while `total` counts everything that  matches, and `sortBy` with `sortOrder` both order the page and are saved as the default order of the account.  Reading a room or an ordinary folder clears its new-item marks for the caller. A caller who may not read the  folder is answered with 403, and a folder that does not exist with 404.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-by-folder-id-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. | defaults to undefined|
-| **userIdOrGroupId** | [**string**] | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | (optional) defaults to undefined|
-| **sharedBy** | [**string**] | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | (optional) defaults to undefined|
-| **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | (optional) defaults to undefined|
-| **roomId** | [**string**] | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | (optional) defaults to undefined|
-| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36>** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | (optional) defaults to undefined|
-| **excludeSubject** | [**boolean**] | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | (optional) defaults to undefined|
-| **applyFilterOption** | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | (optional) defaults to undefined|
-| **withSubFolders** | [**boolean**] | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | (optional) defaults to undefined|
-| **extension** | [**string**] | Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional. | (optional) defaults to undefined|
-| **searchArea** | **SearchArea** | Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter. | (optional) defaults to undefined|
-| **formsItemKey** | [**string**] | Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room. | (optional) defaults to undefined|
-| **formsItemType** | [**string**] | The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together. | (optional) defaults to undefined|
-| **count** | [**number**] | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | (optional) defaults to undefined|
-| **location** | **Location** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFolderContentWrapper**
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder whose contents are listed. Each section root has an operation of its own, such as  `GET api/2.0/files/@my`, and every other folder is opened by the identifier a listing gave for it. (default to undefined)
-let userIdOrGroupId: string; //Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. (optional) (default to undefined)
-let sharedBy: string; //Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. (optional) (default to undefined)
-let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. (optional) (default to undefined)
-let roomId: string; //Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. (optional) (default to undefined)
-let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>; //Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. (optional) (default to undefined)
-let excludeSubject: boolean; //Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. (optional) (default to undefined)
-let applyFilterOption: ApplyFilterOption; //Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. (optional) (default to undefined)
-let withSubFolders: boolean; //Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. (optional) (default to undefined)
-let extension: string; //Keeps only the files carrying one of these extensions, several of them separated by commas; the leading dot is  optional. (optional) (default to undefined)
-let searchArea: SearchArea; //Which area a listing that spans several of them is taken from - the active rooms, the archive, the room  templates or the form-filling rooms. A folder that belongs to one area only settles the area itself and  ignores the parameter. (optional) (default to undefined)
-let formsItemKey: string; //Keeps only the completed forms whose form field of this name holds a value. Take the name from  `GET api/2.0/files/{folderId}/formfilter`, and use it in the folder that gathers the completed copies of a  form-filling room. (optional) (default to undefined)
-let formsItemType: string; //The kind of the form field named by `formsItemKey`, taken from the same list; the two are sent together. (optional) (default to undefined)
-let count: number; //The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. (optional) (default to undefined)
-let startIndex: number; //The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional) (default to undefined)
-let sortBy: string; //The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional) (default to undefined)
-let sortOrder: SortOrder; //The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional) (default to undefined)
-let filterValue: string; //The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. (optional) (default to undefined)
-let location: Location; //Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getFolderByFolderIdThirdParty(
     folderId,
     userIdOrGroupId,
     sharedBy,
@@ -1198,6 +834,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FolderWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFolderWrapper**.
+
 ### Authorization
 
 [cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
@@ -1229,65 +869,7 @@ const { status, data } = await apiInstance.getFolderInfo(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getFolderInfoThirdParty**
-> ThirdPartyFolderWrapper getFolderInfoThirdParty()
-
-Returns one folder as an object - its title, its parent, the moments it was created and last changed, the  access the caller has to it, the number of items that are new for them, and the room settings when the folder  is a room - without listing anything inside it. Use it to resolve a folder identifier into something  displayable, and `GET api/2.0/files/{folderId}` when the contents are what is wanted; unlike that operation,  this one leaves the new-item marks of the folder alone. Any member who can read the folder may call it, and an  anonymous caller only through an external link that grants access, everybody else being refused; a folder that  does not exist is answered as not found. The call is read-only. The chain of parents above the folder is not  part of the answer and is read with `GET api/2.0/files/folder/{folderId}/path`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-info-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFolderWrapper**
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
-
-const { status, data } = await apiInstance.getFolderInfoThirdParty(
-    folderId
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**200** | The folder itself - its title, its parent, the moments it was created and changed, the access the caller has to it, how many items in it are new for them, and the room settings when the folder is a room; nothing about the items it holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -1313,6 +895,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileShareArrayWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string`.
 
 ### Authorization
 
@@ -1355,65 +941,6 @@ const { status, data } = await apiInstance.getFolderLinks(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getFolderLinksThirdParty**
-> FileShareArrayWrapper getFolderLinksThirdParty()
-
-Lists the external links of a folder or a room, each with its identifier, title, address, rights, expiration  date, password flag and download restriction, the primary link among them once it exists. At most the first  hundred links are answered and the number returned is reported in the response headers; there are no paging  parameters here. A folder that has never been shared by link answers with an empty list, and so does a member  who may read the folder but not manage its links - the empty answer therefore means nothing to show you  rather than no links exist. A member without access to the room is refused, an anonymous caller is rejected,  and a folder that does not exist is answered as not found. The call is read-only. Take an identifier from here  to `PUT api/2.0/files/folder/{id}/links` to change or remove that link, and read the primary one alone with  `GET api/2.0/files/folder/{id}/link`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-links-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The folder or room whose external links are listed. | defaults to undefined|
-
-
-### Return type
-
-**FileShareArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let id: string; //The folder or room whose external links are listed. (default to undefined)
-
-const { status, data } = await apiInstance.getFolderLinksThirdParty(
-    id
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The external links of the folder the caller may manage |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getFolderPath**
 > FileEntryBaseArrayWrapper getFolderPath()
 
@@ -1431,6 +958,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileEntryBaseArrayWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string`.
 
 ### Authorization
 
@@ -1474,66 +1005,6 @@ const { status, data } = await apiInstance.getFolderPath(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getFolderPathThirdParty**
-> FileEntryBaseArrayWrapper getFolderPathThirdParty()
-
-Returns the chain of folders that leads to the folder named in the path, ordered from the section root down to  the folder itself, which is the last entry. It is what a breadcrumb trail is built from, and it also tells a  client which section - a room, the personal section, the archive - a bare folder identifier belongs to. Only  the folders the caller may see are part of the chain, so a member who was given access to a folder deep inside  a room gets a shorter path than the room manager does. The caller needs read access to the folder and is  otherwise answered with 403, while a folder that does not exist is answered as not found. The call is  read-only and takes no paging parameters. To go the other way, from a folder down into its contents, call  `GET api/2.0/files/{folderId}`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-path-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryBaseArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
-
-const { status, data } = await apiInstance.getFolderPathThirdParty(
-    folderId
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The chain of folders leading to the folder, the section root first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getFolderPrimaryExternalLink**
 > FileShareWrapper getFolderPrimaryExternalLink()
 
@@ -1553,6 +1024,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileShareWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string`.
 
 ### Authorization
 
@@ -1600,72 +1075,6 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getFolderPrimaryExternalLinkThirdParty**
-> FileShareWrapper getFolderPrimaryExternalLinkThirdParty()
-
-Answers with the primary external link of a folder or a room - the one the Copy link action of a client  hands out - with its address in `sharedTo.shareLink`, its rights in `access`, and its title, expiration date,  password flag and download restriction beside them. The link is created on the first read if the folder has  none, with read rights, no password and no expiry, so this operation mutates on that first call and is a plain  read afterwards; repeated calls answer with the same link identifier. The caller needs the right to manage the  links of the room the folder belongs to, which its manager and a portal administrator acting as room manager  have; a member with read access alone is refused with 403 and an anonymous caller is rejected, while a link  that was deliberately revoked is answered with 404 rather than being recreated. The paging parameters are  accepted for compatibility and leave the single link answered here unchanged. Every external link of the same  folder is listed by `GET api/2.0/files/folder/{id}/links`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folder-primary-external-link-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **id** | [**string**] | The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. | defaults to undefined|
-| **count** | [**number**] | How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. | (optional) defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let id: string; //The folder or room the operation addresses. A folder stored on the portal is numbered, while a folder in a  connected third-party account is named by an opaque string. (default to undefined)
-let count: number; //How many entries at most to answer with, in the operations of this folder that return a list; an operation  that answers with a single object is not affected by it. (optional) (default to undefined)
-let startIndex: number; //How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.getFolderPrimaryExternalLinkThirdParty(
-    id,
-    count,
-    startIndex
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not manage the links of this folder |  -  |
-|**404** | The folder does not exist, or its primary link was revoked |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **getFolders**
 > FileEntryBaseArrayWrapper getFolders()
 
@@ -1683,6 +1092,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileEntryBaseArrayWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string`.
 
 ### Authorization
 
@@ -1702,66 +1115,6 @@ const apiInstance = new FilesFoldersApi(configuration);
 let folderId: number; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
 
 const { status, data } = await apiInstance.getFolders(
-    folderId
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The direct subfolders of the folder, ordered by title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getFoldersThirdParty**
-> FileEntryBaseArrayWrapper getFoldersThirdParty()
-
-Lists the folders that sit directly inside the folder named in the path, ordered by title, without their own  contents and without the files that lie beside them. The whole list arrives at once - there are no paging or  filtering parameters here - so for a large folder, or when the files are wanted as well, use  `GET api/2.0/files/{folderId}`, which pages and filters. A folder that holds no subfolders answers with an  empty list. The caller needs read access to the folder, and only the subfolders they may see are listed, so a  member of a room can get fewer entries than its manager; a caller without access is answered with 403, and a  folder that does not exist, or one that has been deleted for good, is answered as not found. The call is  read-only and leaves the new-item marks of the folder alone.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-folders-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryBaseArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
-
-const { status, data } = await apiInstance.getFoldersThirdParty(
     folderId
 );
 ```
@@ -1965,6 +1318,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FileEntryBaseArrayWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string`.
+
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
@@ -1983,66 +1340,6 @@ const apiInstance = new FilesFoldersApi(configuration);
 let folderId: number; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
 
 const { status, data } = await apiInstance.getNewFolderItems(
-    folderId
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The entries of the folder that are new for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **getNewFolderItemsThirdParty**
-> FileEntryBaseArrayWrapper getNewFolderItemsThirdParty()
-
-Lists the entries of a folder that are new for the calling member - the files and folders created or changed  there since they last opened it - ordered from the most recently changed backwards. It is what the badge of a  room is filled from, and it is personal: two members of the same room get different answers. Reading this list  does not clear the marks, so the same entries come back until the folder itself is opened with  `GET api/2.0/files/{folderId}`, which does clear them. A folder with nothing new answers with an empty list,  and marks disappear on their own when the entry behind them is deleted or moved out of reach. The caller needs  read access to the folder and is otherwise answered with 403. The whole list arrives at once, without paging  or filtering, and the call is read-only.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-folder-items-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. | defaults to undefined|
-
-
-### Return type
-
-**FileEntryBaseArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the operation acts on. Take the identifier from a listing such as `GET api/2.0/files/@root` or  `GET api/2.0/files/{folderId}`: a folder stored in the portal is numbered, while a folder in a connected  third-party account is named by an opaque string. (default to undefined)
-
-const { status, data } = await apiInstance.getNewFolderItemsThirdParty(
     folderId
 );
 ```
@@ -2413,6 +1710,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FileWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFileWrapper**.
+
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
@@ -2468,104 +1769,7 @@ const { status, data } = await apiInstance.insertFile(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The stored file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot add content to this folder |  -  |
-|**404** | No folder with the specified ID |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **insertFileThirdParty**
-> ThirdPartyFileWrapper insertFileThirdParty()
-
-Stores a file in the folder named by the path in a single request, taking its name from `title` rather than  from the uploaded part, which is what separates it from `POST api/2.0/files/{folderId}/upload`. The content  may arrive either as a multipart part or as the raw request body. The name is stripped of characters a title  cannot hold and truncated, and `createNewIfExist` settles the clash: false adds a new version to the file that  already carries the name, true keeps both by giving the new one a numeric suffix. The caller needs the right  to add content to the folder, so a reader, an editor and a guest get 403, a section root and an archived room  are refused as well, and an unknown folder gives 404. Formats the portal converts are converted afterwards in  the background; pass `keepConvertStatus` to keep the outcome readable through  `GET api/2.0/files/file/{fileId}/checkconversion`. The answer is the stored file. A large payload belongs in a  chunked session instead.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/insert-file-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | defaults to undefined|
-| **insertFileFile** | [**File**] | The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. | (optional) defaults to undefined|
-| **insertFileTitle** | [**string**] | The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. | (optional) defaults to undefined|
-| **insertFileCreateNewIfExist** | [**boolean**] | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | (optional) defaults to undefined|
-| **insertFileKeepConvertStatus** | [**boolean**] | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | (optional) defaults to undefined|
-| **insertFileStreamCanRead** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanWrite** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanSeek** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamCanTimeout** | [**boolean**] |  | (optional) defaults to undefined|
-| **insertFileStreamLength** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamPosition** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamReadTimeout** | [**number**] |  | (optional) defaults to undefined|
-| **insertFileStreamWriteTimeout** | [**number**] |  | (optional) defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFileWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (default to undefined)
-let insertFileFile: File; //The content to store, sent as a `multipart/form-data` part. The same content may instead be sent as the raw  request body, which is what a client that cannot build a form does; when both are present the form part wins. (optional) (default to undefined)
-let insertFileTitle: string; //The name to store the file under, extension included. It wins over the name of the uploaded part, which is the  reason to choose this operation over the plain upload, and it is the only name available when the content  arrives as a raw body. Characters a title cannot hold are replaced with underscores and the name is cut to 170  characters before the file is stored. (optional) (default to undefined)
-let insertFileCreateNewIfExist: boolean; //Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. (optional) (default to undefined)
-let insertFileKeepConvertStatus: boolean; //Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. (optional) (default to undefined)
-let insertFileStreamCanRead: boolean; // (optional) (default to undefined)
-let insertFileStreamCanWrite: boolean; // (optional) (default to undefined)
-let insertFileStreamCanSeek: boolean; // (optional) (default to undefined)
-let insertFileStreamCanTimeout: boolean; // (optional) (default to undefined)
-let insertFileStreamLength: number; // (optional) (default to undefined)
-let insertFileStreamPosition: number; // (optional) (default to undefined)
-let insertFileStreamReadTimeout: number; // (optional) (default to undefined)
-let insertFileStreamWriteTimeout: number; // (optional) (default to undefined)
-
-const { status, data } = await apiInstance.insertFileThirdParty(
-    folderId,
-    insertFileFile,
-    insertFileTitle,
-    insertFileCreateNewIfExist,
-    insertFileKeepConvertStatus,
-    insertFileStreamCanRead,
-    insertFileStreamCanWrite,
-    insertFileStreamCanSeek,
-    insertFileStreamCanTimeout,
-    insertFileStreamLength,
-    insertFileStreamPosition,
-    insertFileStreamReadTimeout,
-    insertFileStreamWriteTimeout
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The stored file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**200** | The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller cannot add content to this folder |  -  |
 |**404** | No folder with the specified ID |  -  |
 |**401** | Unauthorized |  -  |
@@ -2690,6 +1894,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FolderWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFolderWrapper**.
+
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
@@ -2735,70 +1943,6 @@ const { status, data } = await apiInstance.renameFolder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **renameFolderThirdParty**
-> ThirdPartyFolderWrapper renameFolderThirdParty(createFolder)
-
-Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/rename-folder-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The title carried by the request body. | |
-| **folderId** | [**string**] | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFolderWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    CreateFolder
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (default to undefined)
-let createFolder: CreateFolder; //The title carried by the request body.
-
-const { status, data } = await apiInstance.renameFolderThirdParty(
-    folderId,
-    createFolder
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The folder with its new title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not rename this folder |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **setFolderOrder**
 > FolderWrapper setFolderOrder()
 
@@ -2817,6 +1961,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FolderWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFolderWrapper**.
 
 ### Authorization
 
@@ -2862,69 +2010,6 @@ const { status, data } = await apiInstance.setFolderOrder(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **setFolderOrderThirdParty**
-> ThirdPartyFolderWrapper setFolderOrderThirdParty()
-
-Puts a folder at a given position among the entries of its parent and answers with the folder, its `order`  reporting where it now stands. Positions count from 1, and the entry that held the wanted position, together  with everything after it, is shifted to make room, so the numbering of the parent stays without gaps; a  position beyond the end places the folder last. The value may also be sent as a dotted path, as in 1.2.3, in  which case only its last segment is read. Ordering is what the manual arrangement of a room is built on, and  it only means something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The  caller needs edit access to the folder, which room managers and content creators have, and a member without it  is refused, while a folder that does not exist is answered as not found. The call is mutating and idempotent.  To move several entries in one go use `PUT api/2.0/files/order`.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-order-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **orderRequestDto** | **OrderRequestDto**| The position the folder is to take. | |
-| **folderId** | [**string**] | The folder to move. | defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFolderWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    OrderRequestDto
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder to move. (default to undefined)
-let orderRequestDto: OrderRequestDto; //The position the folder is to take. (optional)
-
-const { status, data } = await apiInstance.setFolderOrderThirdParty(
-    folderId,
-    orderRequestDto
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The folder with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **setFolderPrimaryExternalLink**
 > FileShareWrapper setFolderPrimaryExternalLink(folderLinkRequest)
 
@@ -2943,6 +2028,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 ### Return type
 
 **FileShareWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string`.
 
 ### Authorization
 
@@ -2964,69 +2053,6 @@ let id: number; //The folder or room the link belongs to. (default to undefined)
 let folderLinkRequest: FolderLinkRequest; //The link and the way it is to be shaped.
 
 const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
-    id,
-    folderLinkRequest
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **setFolderPrimaryExternalLinkThirdParty**
-> FileShareWrapper setFolderPrimaryExternalLinkThirdParty(folderLinkRequest)
-
-Creates an external link to a folder or a room, or changes or revokes an existing one, and answers with the  link as it now stands. `linkId` decides which: an identifier that is not yet in use, the empty one included,  creates a link, while the identifier of an existing link rewrites it, so the whole set of parameters is  applied every time and a field left out is reset rather than kept. `access` carries the rights the link  grants, and `access` set to the value that denies everything revokes the link instead - the answer is then  empty, and a revoked primary link is not recreated by a later read. `title` names the link for the people who  manage it, `expirationDate` limits its lifetime and is ignored when it lies in the past, `password` asks  visitors for a secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members  alone, and `primary=true` makes it the primary link of the folder. The caller needs the right to manage the  links of the room, which its manager and a portal administrator acting as room manager have; anyone else is  refused and an unknown folder is answered as not found. The call is mutating.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-folder-primary-external-link-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderLinkRequest** | **FolderLinkRequest**| The link and the way it is to be shaped. | |
-| **id** | [**string**] | The folder or room the link belongs to. | defaults to undefined|
-
-
-### Return type
-
-**FileShareWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration,
-    FolderLinkRequest
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let id: string; //The folder or room the link belongs to. (default to undefined)
-let folderLinkRequest: FolderLinkRequest; //The link and the way it is to be shaped.
-
-const { status, data } = await apiInstance.setFolderPrimaryExternalLinkThirdParty(
     id,
     folderLinkRequest
 );
@@ -3134,6 +2160,10 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 **FileArrayWrapper**
 
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFileArrayWrapper**.
+
 ### Authorization
 
 [Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
@@ -3156,79 +2186,6 @@ let keepConvertStatus: boolean; //Decides whether the outcome of the background 
 let file: File; //The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.uploadFile(
-    folderId,
-    createNewIfExist,
-    storeOriginalFile,
-    keepConvertStatus,
-    file
-);
-```
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-|**200** | The stored file, as a list with one element |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot add content to this folder |  -  |
-|**404** | No folder with the specified ID |  -  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **uploadFileThirdParty**
-> ThirdPartyFileArrayWrapper uploadFileThirdParty()
-
-Stores a file in the folder named by the path in a single multipart request, taking its name from the uploaded  part; use `POST api/2.0/files/{folderId}/insert` when the name has to be given separately or the content is  sent as a raw body. The answer is a list that always holds exactly one file. `createNewIfExist` settles the  clash: false adds a new version to the file that already carries the name, true keeps both by giving the new  one a numeric suffix. `storeOriginalFile` reaches further than this call, because it saves the setting on the  calling account, the same one `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later  uploads. The caller needs the right to add content to the folder, so a reader, an editor and a guest get 403,  a section root and an archived room are refused as well, and an unknown folder gives 404. A request without a  file is rejected as invalid, and a payload above the portal upload limit is refused.
-
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-file-third-party/).
-
-### Parameters
-
-|Name | Type | Description  | Notes|
-|------------- | ------------- | ------------- | -------------|
-| **folderId** | [**string**] | The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. | defaults to undefined|
-| **createNewIfExist** | [**boolean**] | Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. | (optional) defaults to undefined|
-| **storeOriginalFile** | [**boolean**] | Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. | (optional) defaults to undefined|
-| **keepConvertStatus** | [**boolean**] | Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. | (optional) defaults to undefined|
-| **file** | [**File**] | The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. | (optional) defaults to undefined|
-
-
-### Return type
-
-**ThirdPartyFileArrayWrapper**
-
-### Authorization
-
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
-
-### Example
-
-```typescript
-import {
-    FilesFoldersApi,
-    Configuration
-} from '@onlyoffice/docspace-api-sdk';
-
-const configuration = new Configuration();
-const apiInstance = new FilesFoldersApi(configuration);
-
-let folderId: string; //The folder that receives the file; take the id from a listing such as `GET api/2.0/files/@root`. A room or an  ordinary folder inside one is accepted, a section root is not. (default to undefined)
-let createNewIfExist: boolean; //Settles the clash with a file already carrying that title: left out, the content is written as the next  version of that file; set to true, both survive and the new one gets a numeric suffix in its title. (optional) (default to undefined)
-let storeOriginalFile: boolean; //Reaches further than this request: it writes a setting on the calling account, the same one  `PUT api/2.0/files/storeoriginal` writes, and it stays in force for later uploads. True keeps both the  uploaded file and the copy the portal converts it into, false replaces the uploaded file with the converted  one, and leaving it out keeps whatever the account already has. (optional) (default to undefined)
-let keepConvertStatus: boolean; //Decides whether the outcome of the background conversion outlives the conversion itself. True keeps the queue  record, so `GET api/2.0/files/file/{fileId}/checkconversion` can still report the result or the error; left  out, the record is cleared the moment the conversion ends and that call finds nothing. (optional) (default to undefined)
-let file: File; //The content to store, sent as a `multipart/form-data` part; the name of that part becomes the title of the  stored file, with characters a title cannot hold replaced and the name cut to 170 characters. A request  without it is rejected as invalid. (optional) (default to undefined)
-
-const { status, data } = await apiInstance.uploadFileThirdParty(
     folderId,
     createNewIfExist,
     storeOriginalFile,

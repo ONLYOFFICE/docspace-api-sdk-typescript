@@ -18,14 +18,11 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { SetAppSettingsBodySettings } from './set-app-settings-body-settings';
 
 /**
  * The configuration document a portal application keeps.
  */
 export interface SetAppSettingsBody {
-    'settings'?: SetAppSettingsBodySettings;
+    'settings'?: any;
 }
 

@@ -32,7 +32,7 @@ import type { DocsCloudStats } from './docs-cloud-stats';
 import type { DocsCloudUsersLimit } from './docs-cloud-users-limit';
 
 /**
- * Represents the license and server information of a DocsCloud tenant, with usage statistics for the current period.
+ * Represents the license and server information of a Docs Connect tenant, with usage statistics for the current period.
  */
 export interface DocsCloudTenantInfo {
     /**
@@ -40,7 +40,7 @@ export interface DocsCloudTenantInfo {
      */
     'license'?: DocsCloudLicenseInfo;
     /**
-     * The DocsCloud server information.
+     * The Docs Connect server information.
      */
     'server'?: DocsCloudServerInfo;
     /**

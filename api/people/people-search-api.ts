@@ -79,125 +79,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getAccountsEntriesWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/
          */
-        getAccountsEntriesWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountsEntriesWithFilesShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithFilesShared', 'id', id)
-
-            const localVarPath = `/api/2.0/accounts/file/{id}/search`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a file (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared-third-party/
-         */
-        getAccountsEntriesWithFilesSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getAccountsEntriesWithFilesSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/accounts/file/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -311,125 +195,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getAccountsEntriesWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/
          */
-        getAccountsEntriesWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountsEntriesWithFoldersShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithFoldersShared', 'id', id)
-
-            const localVarPath = `/api/2.0/accounts/folder/{id}/search`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a folder (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared-third-party/
-         */
-        getAccountsEntriesWithFoldersSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getAccountsEntriesWithFoldersSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/accounts/folder/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -543,125 +311,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getAccountsEntriesWithRoomsShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/
          */
-        getAccountsEntriesWithRoomsShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAccountsEntriesWithRoomsShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAccountsEntriesWithRoomsShared', 'id', id)
-
-            const localVarPath = `/api/2.0/accounts/room/{id}/search`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a room (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithRoomsSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared-third-party/
-         */
-        getAccountsEntriesWithRoomsSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getAccountsEntriesWithRoomsSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/accounts/room/{id}/search`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -996,125 +648,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getUsersWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/
          */
-        getUsersWithFilesShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersWithFilesShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithFilesShared', 'id', id)
-
-            const localVarPath = `/api/2.0/people/file/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the accounts that are relevant to the file with the ID given in the route, and reports for each of  them whether it already has access to that file.  The caller only needs read access to the file, not the right to manage its access, but a guest may not call  it at all; an ID that matches no file answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/file/{id}/search` instead.
-         * @summary Search users for a file (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared-third-party/
-         */
-        getUsersWithFilesSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getUsersWithFilesSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/people/file/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1228,125 +764,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getUsersWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/
          */
-        getUsersWithFoldersShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersWithFoldersShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithFoldersShared', 'id', id)
-
-            const localVarPath = `/api/2.0/people/folder/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
-         * @summary Search users for a folder (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared-third-party/
-         */
-        getUsersWithFoldersSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getUsersWithFoldersSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/people/folder/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1460,125 +880,9 @@ export const PeopleSearchApiAxiosParamCreator = function (configuration?: Config
          * REST API Reference for getUsersWithRoomShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared/
          */
-        getUsersWithRoomShared: async (id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersWithRoomShared: async (id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getUsersWithRoomShared', 'id', id)
-
-            const localVarPath = `/api/2.0/people/room/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (employeeStatus !== undefined) {
-                localVarQueryParameter['employeeStatus'] = employeeStatus;
-            }
-
-            if (activationStatus !== undefined) {
-                localVarQueryParameter['activationStatus'] = activationStatus;
-            }
-
-            if (excludeShared !== undefined) {
-                localVarQueryParameter['excludeShared'] = excludeShared;
-            }
-
-            if (includeShared !== undefined) {
-                localVarQueryParameter['includeShared'] = includeShared;
-            }
-
-            if (invitedByMe !== undefined) {
-                localVarQueryParameter['invitedByMe'] = invitedByMe;
-            }
-
-            if (inviterId !== undefined) {
-                localVarQueryParameter['inviterId'] = inviterId;
-            }
-
-            if (area !== undefined) {
-                localVarQueryParameter['area'] = area;
-            }
-
-            if (employeeTypes) {
-                localVarQueryParameter['employeeTypes'] = employeeTypes;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterSeparator !== undefined) {
-                localVarQueryParameter['filterSeparator'] = filterSeparator;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
-         * @summary Search users for a room (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithRoomSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared-third-party/
-         */
-        getUsersWithRoomSharedThirdParty: async (id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getUsersWithRoomSharedThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/people/room/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1985,37 +1289,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAccountsEntriesWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared/
          */
-        async getAccountsEntriesWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
+        async getAccountsEntriesWithFilesShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFilesShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a file (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared-third-party/
-         */
-        async getAccountsEntriesWithFilesSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFilesSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFilesSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2039,37 +1316,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAccountsEntriesWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared/
          */
-        async getAccountsEntriesWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
+        async getAccountsEntriesWithFoldersShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFoldersShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a folder (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared-third-party/
-         */
-        async getAccountsEntriesWithFoldersSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithFoldersSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithFoldersSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2093,37 +1343,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAccountsEntriesWithRoomsShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared/
          */
-        async getAccountsEntriesWithRoomsShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
+        async getAccountsEntriesWithRoomsShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithRoomsShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithRoomsShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a room (third-party storage)
-         * @param {string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-         * @param {boolean} [invitedByMe] Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAccountsEntriesWithRoomsSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared-third-party/
-         */
-        async getAccountsEntriesWithRoomsSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IAccountEntryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountsEntriesWithRoomsSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getAccountsEntriesWithRoomsSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2198,37 +1421,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getUsersWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared/
          */
-        async getUsersWithFilesShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async getUsersWithFilesShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFilesShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFilesShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the accounts that are relevant to the file with the ID given in the route, and reports for each of  them whether it already has access to that file.  The caller only needs read access to the file, not the right to manage its access, but a guest may not call  it at all; an ID that matches no file answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/file/{id}/search` instead.
-         * @summary Search users for a file (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared-third-party/
-         */
-        async getUsersWithFilesSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFilesSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFilesSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2252,37 +1448,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getUsersWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared/
          */
-        async getUsersWithFoldersShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async getUsersWithFoldersShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFoldersShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFoldersShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
-         * @summary Search users for a folder (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared-third-party/
-         */
-        async getUsersWithFoldersSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithFoldersSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithFoldersSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2306,37 +1475,10 @@ export const PeopleSearchApiFp = function(configuration?: Configuration) {
          * REST API Reference for getUsersWithRoomShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared/
          */
-        async getUsersWithRoomShared(id: number, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
+        async getUsersWithRoomShared(id: number | string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithRoomShared(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithRoomShared']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
-         * @summary Search users for a room (third-party storage)
-         * @param {string} id The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-         * @param {EmployeeStatus} [employeeStatus] Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-         * @param {EmployeeActivationStatus} [activationStatus] Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-         * @param {boolean} [excludeShared] Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-         * @param {boolean} [includeShared] Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-         * @param {boolean} [invitedByMe] Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-         * @param {string} [inviterId] Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-         * @param {Area} [area] The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-         * @param {Array<EmployeeType>} [employeeTypes] Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-         * @param {number} [startIndex] The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-         * @param {string} [filterSeparator] The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-         * @param {string} [filterValue] The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getUsersWithRoomSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared-third-party/
-         */
-        async getUsersWithRoomSharedThirdParty(id: string, employeeStatus?: EmployeeStatus, activationStatus?: EmployeeActivationStatus, excludeShared?: boolean, includeShared?: boolean, invitedByMe?: boolean, inviterId?: string, area?: Area, employeeTypes?: Array<EmployeeType>, count?: number, startIndex?: number, filterSeparator?: string, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUsersWithRoomSharedThirdParty(id, employeeStatus, activationStatus, excludeShared, includeShared, invitedByMe, inviterId, area, employeeTypes, count, startIndex, filterSeparator, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeopleSearchApi.getUsersWithRoomSharedThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2429,18 +1571,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
             return localVarFp.getAccountsEntriesWithFilesShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a file (third-party storage)
-         * @param {PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getAccountsEntriesWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-files-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getAccountsEntriesWithFilesSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<IAccountEntryArrayWrapper> {
-            return localVarFp.getAccountsEntriesWithFilesSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
          * @summary Search accounts for a folder
          * @param {PeopleSearchApiGetAccountsEntriesWithFoldersSharedRequest} requestParameters Request parameters.
@@ -2453,18 +1583,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
             return localVarFp.getAccountsEntriesWithFoldersShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a folder (third-party storage)
-         * @param {PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getAccountsEntriesWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-folders-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getAccountsEntriesWithFoldersSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<IAccountEntryArrayWrapper> {
-            return localVarFp.getAccountsEntriesWithFoldersSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
          * @summary Search accounts for a room
          * @param {PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest} requestParameters Request parameters.
@@ -2475,18 +1593,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          */
         getAccountsEntriesWithRoomsShared(requestParameters: PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest, options?: RawAxiosRequestConfig): AxiosPromise<IAccountEntryArrayWrapper> {
             return localVarFp.getAccountsEntriesWithRoomsShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-         * @summary Search accounts for a room (third-party storage)
-         * @param {PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getAccountsEntriesWithRoomsSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounts-entries-with-rooms-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getAccountsEntriesWithRoomsSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<IAccountEntryArrayWrapper> {
-            return localVarFp.getAccountsEntriesWithRoomsSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Searches the active accounts of the portal by a term taken from the path, and is the same search as  `GET api/2.0/people/search`, which takes the term in the query string instead.  Only a DocSpace administrator may call it; every other account, including a room admin, gets 403.  Only accounts with the `Active` status are searched, so a pending invitation and a disabled account are never  found - use `GET api/2.0/people/filter` to search across states.  The call is read-only and is not paged: every match is streamed, without a total.  `filterBy` set to `group` turns `text` into a group ID and keeps only the members of that group, so `text`  then has to be a valid identifier.  The answer holds full profiles.
@@ -2525,18 +1631,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
             return localVarFp.getUsersWithFilesShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the accounts that are relevant to the file with the ID given in the route, and reports for each of  them whether it already has access to that file.  The caller only needs read access to the file, not the right to manage its access, but a guest may not call  it at all; an ID that matches no file answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/file/{id}/search` instead.
-         * @summary Search users for a file (third-party storage)
-         * @param {PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getUsersWithFilesSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-files-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getUsersWithFilesSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getUsersWithFilesSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
          * @summary Search users for a folder
          * @param {PeopleSearchApiGetUsersWithFoldersSharedRequest} requestParameters Request parameters.
@@ -2549,18 +1643,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
             return localVarFp.getUsersWithFoldersShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
-         * @summary Search users for a folder (third-party storage)
-         * @param {PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getUsersWithFoldersSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-folders-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getUsersWithFoldersSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getUsersWithFoldersSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
          * @summary Search users for a room
          * @param {PeopleSearchApiGetUsersWithRoomSharedRequest} requestParameters Request parameters.
@@ -2571,18 +1653,6 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
          */
         getUsersWithRoomShared(requestParameters: PeopleSearchApiGetUsersWithRoomSharedRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
             return localVarFp.getUsersWithRoomShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
-         * @summary Search users for a room (third-party storage)
-         * @param {PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getUsersWithRoomSharedThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-users-with-room-shared-third-party/
-         * @throws {RequiredError}
-         */
-        getUsersWithRoomSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullArrayWrapper> {
-            return localVarFp.getUsersWithRoomSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a page of portal accounts selected by the full set of account filters, with the complete profile of  each of them.  The caller has to be a room admin, a DocSpace admin or a People module admin; a member or a guest gets 403,  and a DocSpace admin additionally sees the accounts an ordinary admin does not.  The call is read-only, paged by `count` and `startIndex`, ordered by `sortBy` and `sortOrder`, and reports  the number of matches in the total count of the response.  Filters combine as conditions that all have to hold, with three interactions worth knowing: `withoutGroup`  makes `groupId` irrelevant, `employeeType` wins over `employeeTypes` when both are sent, and `area` set to  `Guests` or `People` cancels the type filters that contradict it.  `GET api/2.0/people/simple/filter` accepts exactly the same filters and returns the short profile instead, so  use that one for pickers and lists and this one when the full profile is really needed.  It is available on an unpaid portal.
@@ -2631,10 +1701,10 @@ export const PeopleSearchApiFactory = function (configuration?: Configuration, b
 export interface PeopleSearchApiGetAccountsEntriesWithFilesSharedRequest {
     /**
      * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithFilesShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
@@ -2717,104 +1787,6 @@ export interface PeopleSearchApiGetAccountsEntriesWithFilesSharedRequest {
      * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
      * @type {string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithFilesShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getAccountsEntriesWithFilesSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -2827,10 +1799,10 @@ export interface PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyReque
 export interface PeopleSearchApiGetAccountsEntriesWithFoldersSharedRequest {
     /**
      * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
@@ -2913,104 +1885,6 @@ export interface PeopleSearchApiGetAccountsEntriesWithFoldersSharedRequest {
      * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
      * @type {string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getAccountsEntriesWithFoldersSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -3023,10 +1897,10 @@ export interface PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyReq
 export interface PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest {
     /**
      * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
@@ -3109,104 +1983,6 @@ export interface PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest {
      * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
      * @type {string}
      * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getAccountsEntriesWithRoomsSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the users in the given account state: `Active` for a working account, `Terminated` for a disabled  one and `Pending` for one that has not accepted its invitation yet. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the users whose activation is in the given state: `NotActivated` for an account that has never  been activated, `Activated` for one that completed the activation, `Pending` for one whose invitation is  still open, and `AutoGenerated` for an account created by the portal itself. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when adding new  members. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to search for, matched case-insensitively against the first name, the last name and the email. It is  required in practice: while it is empty the search returns nothing at all rather than every account.
-     * @type {string}
-     * @memberof PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -3394,10 +2170,10 @@ export interface PeopleSearchApiGetSimpleByFilterRequest {
 export interface PeopleSearchApiGetUsersWithFilesSharedRequest {
     /**
      * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetUsersWithFilesShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
@@ -3480,104 +2256,6 @@ export interface PeopleSearchApiGetUsersWithFilesSharedRequest {
      * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
      * @type {string}
      * @memberof PeopleSearchApiGetUsersWithFilesShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getUsersWithFilesSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFilesSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -3590,10 +2268,10 @@ export interface PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest {
 export interface PeopleSearchApiGetUsersWithFoldersSharedRequest {
     /**
      * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetUsersWithFoldersShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
@@ -3676,104 +2354,6 @@ export interface PeopleSearchApiGetUsersWithFoldersSharedRequest {
      * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
      * @type {string}
      * @memberof PeopleSearchApiGetUsersWithFoldersShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getUsersWithFoldersSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithFoldersSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -3786,10 +2366,10 @@ export interface PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest {
 export interface PeopleSearchApiGetUsersWithRoomSharedRequest {
     /**
      * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {number}
+     * @type {number | string}
      * @memberof PeopleSearchApiGetUsersWithRoomShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
@@ -3872,104 +2452,6 @@ export interface PeopleSearchApiGetUsersWithRoomSharedRequest {
      * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
      * @type {string}
      * @memberof PeopleSearchApiGetUsersWithRoomShared
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getUsersWithRoomSharedThirdParty operation in PeopleSearchApi.
- * @export
- * @interface PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest
- */
-export interface PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest {
-    /**
-     * The ID of the room, folder or file the search is run against, taken from the route. It is an integer for an  entry stored in DocSpace and a provider-specific string for an entry in a connected third-party storage.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Keeps only the accounts in the given state: `Active` for working accounts, `Terminated` for disabled ones  and `Pending` for open invitations. Omit it to search every state.
-     * @type {EmployeeStatus}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly employeeStatus?: EmployeeStatus
-
-    /**
-     * Keeps only the accounts whose activation is in the given state: `NotActivated`, `Activated`, `Pending` or  `AutoGenerated`. Omit it to search every state.
-     * @type {EmployeeActivationStatus}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly activationStatus?: EmployeeActivationStatus
-
-    /**
-     * Keeps only the accounts that do not have access to the entry yet, which is the set to offer when granting  access. It takes precedence over `includeShared`, and every returned entry has `shared` set to false.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly excludeShared?: boolean
-
-    /**
-     * Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly includeShared?: boolean
-
-    /**
-     * Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation.
-     * @type {boolean}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly invitedByMe?: boolean
-
-    /**
-     * Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly inviterId?: string
-
-    /**
-     * The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to.
-     * @type {Area}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly area?: Area
-
-    /**
-     * Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type.
-     * @type {Array<EmployeeType>}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly employeeTypes?: Array<EmployeeType>
-
-    /**
-     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response.
-     * @type {number}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * The character that splits `filterValue` into several terms, of which any one may match. Omit it to split the  value on spaces instead, in which case every term has to match.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
-     */
-    readonly filterSeparator?: string
-
-    /**
-     * The text to match against the first name, the last name and the email, case-insensitively. Omit it to get  every account the caller may offer access to.
-     * @type {string}
-     * @memberof PeopleSearchApiGetUsersWithRoomSharedThirdParty
      */
     readonly filterValue?: string
 }
@@ -4190,18 +2672,6 @@ export class PeopleSearchApi extends BaseAPI {
     }
 
     /**
-     * Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-     * @summary Search accounts for a file (third-party storage)
-     * @param {PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getAccountsEntriesWithFilesSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithFilesSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithFilesSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
      * @summary Search accounts for a folder
      * @param {PeopleSearchApiGetAccountsEntriesWithFoldersSharedRequest} requestParameters Request parameters.
@@ -4214,18 +2684,6 @@ export class PeopleSearchApi extends BaseAPI {
     }
 
     /**
-     * Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-     * @summary Search accounts for a folder (third-party storage)
-     * @param {PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getAccountsEntriesWithFoldersSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithFoldersSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithFoldersSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
      * @summary Search accounts for a room
      * @param {PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest} requestParameters Request parameters.
@@ -4235,18 +2693,6 @@ export class PeopleSearchApi extends BaseAPI {
      */
     public getAccountsEntriesWithRoomsShared(requestParameters: PeopleSearchApiGetAccountsEntriesWithRoomsSharedRequest, options?: RawAxiosRequestConfig) {
         return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithRoomsShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
-     * @summary Search accounts for a room (third-party storage)
-     * @param {PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getAccountsEntriesWithRoomsSharedThirdParty(requestParameters: PeopleSearchApiGetAccountsEntriesWithRoomsSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getAccountsEntriesWithRoomsSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4286,18 +2732,6 @@ export class PeopleSearchApi extends BaseAPI {
     }
 
     /**
-     * Returns the accounts that are relevant to the file with the ID given in the route, and reports for each of  them whether it already has access to that file.  The caller only needs read access to the file, not the right to manage its access, but a guest may not call  it at all; an ID that matches no file answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/file/{id}/search` instead.
-     * @summary Search users for a file (third-party storage)
-     * @param {PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getUsersWithFilesSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithFilesSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getUsersWithFilesSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
      * @summary Search users for a folder
      * @param {PeopleSearchApiGetUsersWithFoldersSharedRequest} requestParameters Request parameters.
@@ -4310,18 +2744,6 @@ export class PeopleSearchApi extends BaseAPI {
     }
 
     /**
-     * Returns the accounts that are relevant to the folder with the ID given in the route, and reports for each of  them whether it already has access to that folder.  The caller only needs read access to the folder, not the right to manage its access, but a guest may not call  it at all; an ID that matches no folder answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/folder/{id}/search` instead.
-     * @summary Search users for a folder (third-party storage)
-     * @param {PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getUsersWithFoldersSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithFoldersSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getUsersWithFoldersSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
      * @summary Search users for a room
      * @param {PeopleSearchApiGetUsersWithRoomSharedRequest} requestParameters Request parameters.
@@ -4331,18 +2753,6 @@ export class PeopleSearchApi extends BaseAPI {
      */
     public getUsersWithRoomShared(requestParameters: PeopleSearchApiGetUsersWithRoomSharedRequest, options?: RawAxiosRequestConfig) {
         return PeopleSearchApiFp(this.configuration).getUsersWithRoomShared(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns the accounts that are relevant to the room with the ID given in the route, and reports for each of  them whether it already has access to that room.  The caller only needs read access to the room, not the right to manage its access, but a guest may not call  it at all; an ID that matches no room answers 404.  The call is read-only, works without a filter - leaving `filterValue` empty returns every matching account  rather than nothing - and is paged by `count` and `startIndex`, with the number of matches in the total count  of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.  A DocSpace administrator additionally sees the guests that are not related to the caller.  To search users and groups together, or to build an access dialog that needs the right to manage sharing, use  `GET api/2.0/accounts/room/{id}/search` instead.
-     * @summary Search users for a room (third-party storage)
-     * @param {PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeopleSearchApi
-     */
-    public getUsersWithRoomSharedThirdParty(requestParameters: PeopleSearchApiGetUsersWithRoomSharedThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return PeopleSearchApiFp(this.configuration).getUsersWithRoomSharedThirdParty(requestParameters.id, requestParameters.employeeStatus, requestParameters.activationStatus, requestParameters.excludeShared, requestParameters.includeShared, requestParameters.invitedByMe, requestParameters.inviterId, requestParameters.area, requestParameters.employeeTypes, requestParameters.count, requestParameters.startIndex, requestParameters.filterSeparator, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

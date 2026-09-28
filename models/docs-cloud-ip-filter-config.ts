@@ -23,7 +23,7 @@
 import type { DocsCloudIpFilterRule } from './docs-cloud-ip-filter-rule';
 
 /**
- * Represents the IP filter configuration of a DocsCloud tenant.
+ * Represents the IP filter configuration of a Docs Connect tenant.
  */
 export interface DocsCloudIpFilterConfig {
     /**

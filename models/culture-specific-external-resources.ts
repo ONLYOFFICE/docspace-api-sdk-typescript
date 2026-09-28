@@ -27,6 +27,10 @@ import type { CultureSpecificExternalResource } from './culture-specific-externa
  */
 export interface CultureSpecificExternalResources {
     /**
+     * The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal.
+     */
+    'adminPanel'?: CultureSpecificExternalResource;
+    /**
      * The link to the product API.
      */
     'api'?: CultureSpecificExternalResource;

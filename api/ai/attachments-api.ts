@@ -224,6 +224,51 @@ export const AttachmentsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * 
+         * @summary Get suggested questions
+         * @param {{ [key: string]: any | null; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         */
+        aiAttachmentsGetSuggestedQuestions: async (requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('aiAttachmentsGetSuggestedQuestions', 'requestBody', requestBody)
+
+            const localVarPath = `/api/2.0/ai/attachments/suggested-questions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
          * @summary Link to message
          * @param {AiAttachmentsLinkToMessageRequest} aiAttachmentsLinkToMessageRequest 
@@ -429,6 +474,21 @@ export const AttachmentsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * 
+         * @summary Get suggested questions
+         * @param {{ [key: string]: any | null; }} requestBody 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         */
+        async aiAttachmentsGetSuggestedQuestions(requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsGetSuggestedQuestions(requestBody, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsGetSuggestedQuestions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
          * @summary Link to message
          * @param {AiAttachmentsLinkToMessageRequest} aiAttachmentsLinkToMessageRequest 
@@ -532,6 +592,18 @@ export const AttachmentsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiAttachmentsGetMany(requestParameters.requestBody, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @summary Get suggested questions
+         * @param {AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsGetSuggestedQuestions(requestParameters: AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAttachmentsGetSuggestedQuestions(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
          * @summary Link to message
          * @param {AttachmentsApiAiAttachmentsLinkToMessageRequest} requestParameters Request parameters.
@@ -624,6 +696,20 @@ export interface AttachmentsApiAiAttachmentsGetManyRequest {
      * @memberof AttachmentsApiAiAttachmentsGetMany
      */
     readonly requestBody: Array<string>
+}
+
+/**
+ * Request parameters for aiAttachmentsGetSuggestedQuestions operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest
+ */
+export interface AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest {
+    /**
+     * 
+     * @type {{ [key: string]: any | null; }}
+     * @memberof AttachmentsApiAiAttachmentsGetSuggestedQuestions
+     */
+    readonly requestBody: { [key: string]: any | null; }
 }
 
 /**
@@ -721,6 +807,18 @@ export class AttachmentsApi extends BaseAPI {
      */
     public aiAttachmentsGetMany(requestParameters: AttachmentsApiAiAttachmentsGetManyRequest, options?: RawAxiosRequestConfig) {
         return AttachmentsApiFp(this.configuration).aiAttachmentsGetMany(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get suggested questions
+     * @param {AIAttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsGetSuggestedQuestions(requestParameters: AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsGetSuggestedQuestions(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

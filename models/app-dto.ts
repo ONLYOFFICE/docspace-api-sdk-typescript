@@ -18,9 +18,6 @@
  *
  */
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AppDtoSettings } from './app-dto-settings';
 
 /**
  * One feature module of the portal: whether it is switched on here, and the settings stored for it.
@@ -34,6 +31,6 @@ export interface AppDto {
      * Whether the application is switched on for this portal. It is the portal\'s own flag where one has been  saved, and the default the installation configuration gives the application otherwise.
      */
     'enabled'?: boolean;
-    'settings'?: AppDtoSettings;
+    'settings'?: any;
 }
 

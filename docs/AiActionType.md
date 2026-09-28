@@ -22,4 +22,6 @@ The AI action a request or an assignment applies to. Each action has its own ass
 
 * `Vision` (value: `'Vision'`)
 
+* `FormAnalysis` (value: `'FormAnalysis'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

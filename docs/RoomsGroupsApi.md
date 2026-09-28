@@ -186,7 +186,7 @@ const { status, data } = await apiInstance.deleteRoomGroup(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | OK |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**200** | The room group no longer exists; the body is empty and the rooms it gathered are left as they were |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -270,6 +270,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **includeMembers** | [**boolean**] | Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. | (optional) defaults to undefined|
+| **searchArea** | **SearchArea** | The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -292,9 +293,11 @@ const configuration = new Configuration();
 const apiInstance = new RoomsGroupsApi(configuration);
 
 let includeMembers: boolean; //Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`. (optional) (default to undefined)
+let searchArea: SearchArea; //The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRoomGroups(
-    includeMembers
+    includeMembers,
+    searchArea
 );
 ```
 

@@ -34,6 +34,8 @@ import type { RoomGroupRequestDto } from '../../models';
 // @ts-ignore
 import type { RoomGroupWrapper } from '../../models';
 // @ts-ignore
+import type { SearchArea } from '../../models';
+// @ts-ignore
 import type { UpdateRoomGroupRequest } from '../../models';
 /**
  * GroupsApi - axios parameter creator
@@ -285,12 +287,13 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
          * Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
          * @summary List room groups
          * @param {boolean} [includeMembers] Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+         * @param {SearchArea} [searchArea] The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          */
-        getRoomGroups: async (includeMembers?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomGroups: async (includeMembers?: boolean, searchArea?: SearchArea, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/group`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -325,6 +328,10 @@ export const GroupsApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (includeMembers !== undefined) {
                 localVarQueryParameter['includeMembers'] = includeMembers;
+            }
+
+            if (searchArea !== undefined) {
+                localVarQueryParameter['searchArea'] = searchArea;
             }
 
 
@@ -477,13 +484,14 @@ export const GroupsApiFp = function(configuration?: Configuration) {
          * Returns every room group of the calling account, each with the rooms it gathers. Only groups the caller  created are listed: groups of other members never appear here, and an account that has never made one gets an  empty array back. Set `includeMembers` to false to leave the `rooms` array out of every entry and keep the  name, the icon and `totalRooms` alone, which is the cheaper form when the list is only being shown as a menu.  Archived rooms are skipped in both the `rooms` array and the `totalRooms` count, and reappear once the room is  taken out of the archive. The listing is neither paged nor filtered - it always carries the whole set - and  the order of the entries is not contractual, so sort them on the client when the order matters. The call is  read-only. Use `GET api/2.0/files/group/{id}` when the identifier of a single group is already known, and  `POST api/2.0/files/group` to add one.
          * @summary List room groups
          * @param {boolean} [includeMembers] Whether the rooms of each group are listed in the answer: true fills the `rooms` array of every entry, false  leaves it out and reports only how many there are in `totalRooms`.
+         * @param {SearchArea} [searchArea] The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomGroups operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-groups/
          */
-        async getRoomGroups(includeMembers?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomGroupArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomGroups(includeMembers, options);
+        async getRoomGroups(includeMembers?: boolean, searchArea?: SearchArea, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomGroupArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomGroups(includeMembers, searchArea, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupsApi.getRoomGroups']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -572,7 +580,7 @@ export const GroupsApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RoomGroupArrayWrapper> {
-            return localVarFp.getRoomGroups(requestParameters.includeMembers, options).then((request) => request(axios, basePath));
+            return localVarFp.getRoomGroups(requestParameters.includeMembers, requestParameters.searchArea, options).then((request) => request(axios, basePath));
         },
         /**
          * Applies changes to one of the caller\'s own room groups: a new name, rooms to attach, rooms to detach, or any  combination of the three in a single call. A body that carries none of the three (`{}`) is accepted and  changes nothing, while a body that names them and leaves every one of them empty asks for an update that  cannot be performed and is rejected as an invalid request. `roomsToAdd` is resolved the way creation resolves  its list: every identifier has to name a room the caller can read, repeats and rooms already in the group are  collapsed, and when only part of the list resolves the rest is still attached and the call is reported as  failed. `roomsToRemove` works the other way round - a room already in the group is always detached, even when  the caller has since lost access to it, whereas an identifier that is not in the group is resolved first and  refused when it names nothing. The steps are applied in order and are not rolled back when a later one fails.  A group of another account is answered as missing. The answer is the group as stored after the call.
@@ -678,6 +686,13 @@ export interface GroupsApiGetRoomGroupsRequest {
      * @memberof GroupsApiGetRoomGroups
      */
     readonly includeMembers?: boolean
+
+    /**
+     * The section to list the groups of: Active for Rooms and Forms for Forms. Active when omitted.
+     * @type {SearchArea}
+     * @memberof GroupsApiGetRoomGroups
+     */
+    readonly searchArea?: SearchArea
 }
 
 /**
@@ -765,7 +780,7 @@ export class GroupsApi extends BaseAPI {
      * @memberof GroupsApi
      */
     public getRoomGroups(requestParameters: GroupsApiGetRoomGroupsRequest = {}, options?: RawAxiosRequestConfig) {
-        return GroupsApiFp(this.configuration).getRoomGroups(requestParameters.includeMembers, options).then((request) => request(this.axios, this.basePath));
+        return GroupsApiFp(this.configuration).getRoomGroups(requestParameters.includeMembers, requestParameters.searchArea, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

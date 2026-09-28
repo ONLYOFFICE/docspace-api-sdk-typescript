@@ -20,7 +20,7 @@
 
 
 /**
- * Represents the security configuration of a DocsCloud tenant.
+ * Represents the security configuration of a Docs Connect tenant.
  */
 export interface DocsCloudSecurityConfig {
     /**

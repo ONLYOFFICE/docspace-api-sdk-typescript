@@ -45,6 +45,9 @@ import type { GroupSummaryDto } from './group-summary-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { MobilePhoneActivationStatus } from './mobile-phone-activation-status';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GroupDto } from './group-dto';
 
 /**
  * @type IAccountEntryDto

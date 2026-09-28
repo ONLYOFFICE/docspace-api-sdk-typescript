@@ -132,69 +132,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for addRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
          */
-        addRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addRoomTags: async (id: number | string, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('addRoomTags', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/tags`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(batchTagsRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-         * @summary Attach tags to a room (third-party storage)
-         * @param {string} id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The names to attach or to detach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for addRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-         */
-        addRoomTagsThirdParty: async (id: string, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('addRoomTagsThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -252,69 +192,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for archiveRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room/
          */
-        archiveRoom: async (id: number, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        archiveRoom: async (id: number | string, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('archiveRoom', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/archive`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(archiveRoomRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-         * @summary Archive a room (third-party storage)
-         * @param {string} id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ArchiveRoomRequest} [archiveRoomRequest] The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for archiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-         */
-        archiveRoomThirdParty: async (id: string, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('archiveRoomThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/archive`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -372,73 +252,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for changeRoomCover operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover/
          */
-        changeRoomCover: async (id: number, coverRequestDto: CoverRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeRoomCover: async (id: number | string, coverRequestDto: CoverRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('changeRoomCover', 'id', id)
             // verify required parameter 'coverRequestDto' is not null or undefined
             assertParamExists('changeRoomCover', 'coverRequestDto', coverRequestDto)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/cover`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(coverRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-         * @summary Change the room cover (third-party storage)
-         * @param {string} id The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {CoverRequestDto} coverRequestDto The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for changeRoomCoverThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-         */
-        changeRoomCoverThirdParty: async (id: string, coverRequestDto: CoverRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('changeRoomCoverThirdParty', 'id', id)
-            // verify required parameter 'coverRequestDto' is not null or undefined
-            assertParamExists('changeRoomCoverThirdParty', 'coverRequestDto', coverRequestDto)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/cover`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -608,73 +426,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo/
          */
-        createRoomLogo: async (id: number, logoRequest: LogoRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRoomLogo: async (id: number | string, logoRequest: LogoRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('createRoomLogo', 'id', id)
             // verify required parameter 'logoRequest' is not null or undefined
             assertParamExists('createRoomLogo', 'logoRequest', logoRequest)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/logo`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(logoRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-         * @summary Set the room logo (third-party storage)
-         * @param {string} id The room the logo is set on.
-         * @param {LogoRequest} logoRequest The uploaded picture and the piece of it to use.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-         */
-        createRoomLogoThirdParty: async (id: string, logoRequest: LogoRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('createRoomLogoThirdParty', 'id', id)
-            // verify required parameter 'logoRequest' is not null or undefined
-            assertParamExists('createRoomLogoThirdParty', 'logoRequest', logoRequest)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/logo`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -962,73 +718,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for deleteRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room/
          */
-        deleteRoom: async (id: number, deleteRoomRequest: DeleteRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteRoom: async (id: number | string, deleteRoomRequest: DeleteRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteRoom', 'id', id)
             // verify required parameter 'deleteRoomRequest' is not null or undefined
             assertParamExists('deleteRoom', 'deleteRoomRequest', deleteRoomRequest)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(deleteRoomRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-         * @summary Remove a room (third-party storage)
-         * @param {string} id The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {DeleteRoomRequest} deleteRoomRequest The body of the request. It is required even though the deletion does not depend on what it holds.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-         */
-        deleteRoomThirdParty: async (id: string, deleteRoomRequest: DeleteRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteRoomThirdParty', 'id', id)
-            // verify required parameter 'deleteRoomRequest' is not null or undefined
-            assertParamExists('deleteRoomThirdParty', 'deleteRoomRequest', deleteRoomRequest)
 
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1085,65 +779,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for deleteRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
          */
-        deleteRoomLogo: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteRoomLogo: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteRoomLogo', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/logo`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-         * @summary Remove a room logo (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-         */
-        deleteRoomLogoThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteRoomLogoThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/logo`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1198,69 +836,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for deleteRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
          */
-        deleteRoomTags: async (id: number, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteRoomTags: async (id: number | string, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteRoomTags', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/tags`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(batchTagsRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-         * @summary Detach tags from a room (third-party storage)
-         * @param {string} id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The names to attach or to detach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-         */
-        deleteRoomTagsThirdParty: async (id: string, batchTagsRequestDto?: BatchTagsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteRoomTagsThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/tags`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1373,65 +951,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getNewRoomItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
          */
-        getNewRoomItems: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getNewRoomItems: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getNewRoomItems', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/news`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-         * @summary Get new items in a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getNewRoomItemsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-         */
-        getNewRoomItemsThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getNewRoomItemsThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/news`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1697,52 +1219,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getRoomInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
          */
-        getRoomInfo: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomInfo: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomInfo', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-         * @summary Get room information (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-         */
-        getRoomInfoThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getRoomInfoThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1784,70 +1263,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getRoomLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links/
          */
-        getRoomLinks: async (id: number, type?: LinkType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomLinks: async (id: number | string, type?: LinkType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomLinks', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/links`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (type !== undefined) {
-                localVarQueryParameter['type'] = type;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-         * @summary Get the room links (third-party storage)
-         * @param {string} id The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {LinkType} [type] Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-         */
-        getRoomLinksThirdParty: async (id: string, type?: LinkType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getRoomLinksThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1909,85 +1327,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getRoomSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info/
          */
-        getRoomSecurityInfo: async (id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomSecurityInfo: async (id: number | string, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomSecurityInfo', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/share`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (filterType !== undefined) {
-                localVarQueryParameter['filterType'] = filterType;
-            }
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-            if (filterValue !== undefined) {
-                localVarQueryParameter['filterValue'] = filterValue;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-         * @summary Get the room access rights (third-party storage)
-         * @param {string} id The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ShareFilterType} [filterType] What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-         * @param {number} [count] How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-         * @param {number} [startIndex] How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-         * @param {string} [filterValue] Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomSecurityInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-         */
-        getRoomSecurityInfoThirdParty: async (id: string, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getRoomSecurityInfoThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2371,65 +1713,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getRoomsPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
          */
-        getRoomsPrimaryExternalLink: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsPrimaryExternalLink: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getRoomsPrimaryExternalLink', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/link`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-         * @summary Get the room primary external link (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomsPrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-         */
-        getRoomsPrimaryExternalLinkThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getRoomsPrimaryExternalLinkThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2544,65 +1830,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for pinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
          */
-        pinRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        pinRoom: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('pinRoom', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/pin`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-         * @summary Pin a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for pinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-         */
-        pinRoomThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('pinRoomThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/pin`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2656,65 +1886,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for reorderRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
          */
-        reorderRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        reorderRoom: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('reorderRoom', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/reorder`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-         * @summary Reorder room contents (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for reorderRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-         */
-        reorderRoomThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('reorderRoomThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/reorder`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2769,73 +1943,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for resendEmailInvitations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations/
          */
-        resendEmailInvitations: async (id: number, userInvitation: UserInvitation, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        resendEmailInvitations: async (id: number | string, userInvitation: UserInvitation, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('resendEmailInvitations', 'id', id)
             // verify required parameter 'userInvitation' is not null or undefined
             assertParamExists('resendEmailInvitations', 'userInvitation', userInvitation)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/resend`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(userInvitation, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-         * @summary Resend the room invitations (third-party storage)
-         * @param {string} id The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {UserInvitation} userInvitation Which pending invitations to send again.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for resendEmailInvitationsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-         */
-        resendEmailInvitationsThirdParty: async (id: string, userInvitation: UserInvitation, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('resendEmailInvitationsThirdParty', 'id', id)
-            // verify required parameter 'userInvitation' is not null or undefined
-            assertParamExists('resendEmailInvitationsThirdParty', 'userInvitation', userInvitation)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/resend`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2949,73 +2061,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setRoomLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link/
          */
-        setRoomLink: async (id: number, roomLinkRequest: RoomLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setRoomLink: async (id: number | string, roomLinkRequest: RoomLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setRoomLink', 'id', id)
             // verify required parameter 'roomLinkRequest' is not null or undefined
             assertParamExists('setRoomLink', 'roomLinkRequest', roomLinkRequest)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/links`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(roomLinkRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-         * @summary Set the room external or invitation link (third-party storage)
-         * @param {string} id The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {RoomLinkRequest} roomLinkRequest The link to create, change or revoke.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setRoomLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-         */
-        setRoomLinkThirdParty: async (id: string, roomLinkRequest: RoomLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('setRoomLinkThirdParty', 'id', id)
-            // verify required parameter 'roomLinkRequest' is not null or undefined
-            assertParamExists('setRoomLinkThirdParty', 'roomLinkRequest', roomLinkRequest)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -3073,73 +2123,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setRoomSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security/
          */
-        setRoomSecurity: async (id: number, roomInvitationRequest: RoomInvitationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setRoomSecurity: async (id: number | string, roomInvitationRequest: RoomInvitationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setRoomSecurity', 'id', id)
             // verify required parameter 'roomInvitationRequest' is not null or undefined
             assertParamExists('setRoomSecurity', 'roomInvitationRequest', roomInvitationRequest)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/share`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(roomInvitationRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-         * @summary Set the room access rights (third-party storage)
-         * @param {string} id The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {RoomInvitationRequest} roomInvitationRequest The membership changes to apply, together with how the people concerned are notified.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setRoomSecurityThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-         */
-        setRoomSecurityThirdParty: async (id: string, roomInvitationRequest: RoomInvitationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('setRoomSecurityThirdParty', 'id', id)
-            // verify required parameter 'roomInvitationRequest' is not null or undefined
-            assertParamExists('setRoomSecurityThirdParty', 'roomInvitationRequest', roomInvitationRequest)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/share`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -3361,69 +2349,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for unarchiveRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room/
          */
-        unarchiveRoom: async (id: number, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        unarchiveRoom: async (id: number | string, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('unarchiveRoom', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/unarchive`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(archiveRoomRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-         * @summary Unarchive a room (third-party storage)
-         * @param {string} id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ArchiveRoomRequest} [archiveRoomRequest] The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for unarchiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-         */
-        unarchiveRoomThirdParty: async (id: string, archiveRoomRequest?: ArchiveRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('unarchiveRoomThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/unarchive`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -3480,65 +2408,9 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for unpinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
          */
-        unpinRoom: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        unpinRoom: async (id: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('unpinRoom', 'id', id)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}/unpin`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-         * @summary Unpin a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for unpinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-         */
-        unpinRoomThirdParty: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('unpinRoomThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/rooms/{id}/unpin`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -3593,73 +2465,11 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for updateRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room/
          */
-        updateRoom: async (id: number, updateRoomRequest: UpdateRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateRoom: async (id: number | string, updateRoomRequest: UpdateRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateRoom', 'id', id)
             // verify required parameter 'updateRoomRequest' is not null or undefined
             assertParamExists('updateRoom', 'updateRoomRequest', updateRoomRequest)
-
-            const localVarPath = `/api/2.0/files/rooms/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateRoomRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-         * @summary Update a room (third-party storage)
-         * @param {string} id The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {UpdateRoomRequest} updateRoomRequest The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for updateRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-         */
-        updateRoomThirdParty: async (id: string, updateRoomRequest: UpdateRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateRoomThirdParty', 'id', id)
-            // verify required parameter 'updateRoomRequest' is not null or undefined
-            assertParamExists('updateRoomThirdParty', 'updateRoomRequest', updateRoomRequest)
 
             const localVarPath = `/api/2.0/files/rooms/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -3844,26 +2654,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for addRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
          */
-        async addRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async addRoomTags(id: number | string, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.addRoomTags']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-         * @summary Attach tags to a room (third-party storage)
-         * @param {string} id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The names to attach or to detach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for addRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-         */
-        async addRoomTagsThirdParty(id: string, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addRoomTagsThirdParty(id, batchTagsRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.addRoomTagsThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3876,26 +2670,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for archiveRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room/
          */
-        async archiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
+        async archiveRoom(id: number | string, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.archiveRoom(id, archiveRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.archiveRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-         * @summary Archive a room (third-party storage)
-         * @param {string} id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ArchiveRoomRequest} [archiveRoomRequest] The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for archiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-         */
-        async archiveRoomThirdParty(id: string, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.archiveRoomThirdParty(id, archiveRoomRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.archiveRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3908,26 +2686,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for changeRoomCover operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover/
          */
-        async changeRoomCover(id: number, coverRequestDto: CoverRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async changeRoomCover(id: number | string, coverRequestDto: CoverRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeRoomCover(id, coverRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.changeRoomCover']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-         * @summary Change the room cover (third-party storage)
-         * @param {string} id The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {CoverRequestDto} coverRequestDto The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for changeRoomCoverThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-         */
-        async changeRoomCoverThirdParty(id: string, coverRequestDto: CoverRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeRoomCoverThirdParty(id, coverRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.changeRoomCoverThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3970,26 +2732,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for createRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo/
          */
-        async createRoomLogo(id: number, logoRequest: LogoRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async createRoomLogo(id: number | string, logoRequest: LogoRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomLogo(id, logoRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomLogo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-         * @summary Set the room logo (third-party storage)
-         * @param {string} id The room the logo is set on.
-         * @param {LogoRequest} logoRequest The uploaded picture and the piece of it to use.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-         */
-        async createRoomLogoThirdParty(id: string, logoRequest: LogoRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomLogoThirdParty(id, logoRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomLogoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4063,26 +2809,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room/
          */
-        async deleteRoom(id: number, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
+        async deleteRoom(id: number | string, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoom(id, deleteRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-         * @summary Remove a room (third-party storage)
-         * @param {string} id The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {DeleteRoomRequest} deleteRoomRequest The body of the request. It is required even though the deletion does not depend on what it holds.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-         */
-        async deleteRoomThirdParty(id: string, deleteRoomRequest: DeleteRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomThirdParty(id, deleteRoomRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4094,25 +2824,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteRoomLogo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
          */
-        async deleteRoomLogo(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async deleteRoomLogo(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomLogo(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomLogo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-         * @summary Remove a room logo (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-         */
-        async deleteRoomLogoThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomLogoThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomLogoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4125,26 +2840,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteRoomTags operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
          */
-        async deleteRoomTags(id: number, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async deleteRoomTags(id: number | string, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomTags(id, batchTagsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomTags']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-         * @summary Detach tags from a room (third-party storage)
-         * @param {string} id The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {BatchTagsRequestDto} [batchTagsRequestDto] The names to attach or to detach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-         */
-        async deleteRoomTagsThirdParty(id: string, batchTagsRequestDto?: BatchTagsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteRoomTagsThirdParty(id, batchTagsRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.deleteRoomTagsThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4171,25 +2870,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getNewRoomItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items/
          */
-        async getNewRoomItems(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsFileEntryBaseArrayWrapper>> {
+        async getNewRoomItems(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsFileEntryBaseArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getNewRoomItems(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getNewRoomItems']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-         * @summary Get new items in a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getNewRoomItemsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-         */
-        async getNewRoomItemsThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewItemsFileEntryBaseArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getNewRoomItemsThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getNewRoomItemsThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4258,25 +2942,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
          */
-        async getRoomInfo(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async getRoomInfo(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomInfo(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-         * @summary Get room information (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-         */
-        async getRoomInfoThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomInfoThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4289,26 +2958,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links/
          */
-        async getRoomLinks(id: number, type?: LinkType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+        async getRoomLinks(id: number | string, type?: LinkType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomLinks(id, type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomLinks']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-         * @summary Get the room links (third-party storage)
-         * @param {string} id The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {LinkType} [type] Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-         */
-        async getRoomLinksThirdParty(id: string, type?: LinkType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomLinksThirdParty(id, type, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomLinksThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4324,29 +2977,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomSecurityInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info/
          */
-        async getRoomSecurityInfo(id: number, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+        async getRoomSecurityInfo(id: number | string, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomSecurityInfo(id, filterType, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomSecurityInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-         * @summary Get the room access rights (third-party storage)
-         * @param {string} id The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ShareFilterType} [filterType] What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-         * @param {number} [count] How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-         * @param {number} [startIndex] How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-         * @param {string} [filterValue] Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomSecurityInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-         */
-        async getRoomSecurityInfoThirdParty(id: string, filterType?: ShareFilterType, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomSecurityInfoThirdParty(id, filterType, count, startIndex, filterValue, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomSecurityInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4434,25 +3068,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomsPrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link/
          */
-        async getRoomsPrimaryExternalLink(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async getRoomsPrimaryExternalLink(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsPrimaryExternalLink(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsPrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-         * @summary Get the room primary external link (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getRoomsPrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-         */
-        async getRoomsPrimaryExternalLinkThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsPrimaryExternalLinkThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsPrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4480,25 +3099,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for pinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
          */
-        async pinRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async pinRoom(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.pinRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.pinRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-         * @summary Pin a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for pinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-         */
-        async pinRoomThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.pinRoomThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.pinRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4510,25 +3114,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for reorderRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
          */
-        async reorderRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async reorderRoom(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reorderRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.reorderRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-         * @summary Reorder room contents (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for reorderRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-         */
-        async reorderRoomThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.reorderRoomThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.reorderRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4541,26 +3130,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for resendEmailInvitations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations/
          */
-        async resendEmailInvitations(id: number, userInvitation: UserInvitation, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async resendEmailInvitations(id: number | string, userInvitation: UserInvitation, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resendEmailInvitations(id, userInvitation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.resendEmailInvitations']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-         * @summary Resend the room invitations (third-party storage)
-         * @param {string} id The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {UserInvitation} userInvitation Which pending invitations to send again.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for resendEmailInvitationsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-         */
-        async resendEmailInvitationsThirdParty(id: string, userInvitation: UserInvitation, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.resendEmailInvitationsThirdParty(id, userInvitation, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.resendEmailInvitationsThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4588,26 +3161,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for setRoomLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link/
          */
-        async setRoomLink(id: number, roomLinkRequest: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async setRoomLink(id: number | string, roomLinkRequest: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomLink(id, roomLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-         * @summary Set the room external or invitation link (third-party storage)
-         * @param {string} id The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {RoomLinkRequest} roomLinkRequest The link to create, change or revoke.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setRoomLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-         */
-        async setRoomLinkThirdParty(id: string, roomLinkRequest: RoomLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomLinkThirdParty(id, roomLinkRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomLinkThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4620,26 +3177,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for setRoomSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security/
          */
-        async setRoomSecurity(id: number, roomInvitationRequest: RoomInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomSecurityWrapper>> {
+        async setRoomSecurity(id: number | string, roomInvitationRequest: RoomInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomSecurityWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomSecurity(id, roomInvitationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomSecurity']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-         * @summary Set the room access rights (third-party storage)
-         * @param {string} id The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {RoomInvitationRequest} roomInvitationRequest The membership changes to apply, together with how the people concerned are notified.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setRoomSecurityThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-         */
-        async setRoomSecurityThirdParty(id: string, roomInvitationRequest: RoomInvitationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomSecurityWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setRoomSecurityThirdParty(id, roomInvitationRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.setRoomSecurityThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4696,26 +3237,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for unarchiveRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room/
          */
-        async unarchiveRoom(id: number, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
+        async unarchiveRoom(id: number | string, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unarchiveRoom(id, archiveRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.unarchiveRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-         * @summary Unarchive a room (third-party storage)
-         * @param {string} id The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {ArchiveRoomRequest} [archiveRoomRequest] The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for unarchiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-         */
-        async unarchiveRoomThirdParty(id: string, archiveRoomRequest?: ArchiveRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unarchiveRoomThirdParty(id, archiveRoomRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.unarchiveRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4727,25 +3252,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for unpinRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
          */
-        async unpinRoom(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async unpinRoom(id: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.unpinRoom(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.unpinRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-         * @summary Unpin a room (third-party storage)
-         * @param {string} id The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for unpinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-         */
-        async unpinRoomThirdParty(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unpinRoomThirdParty(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.unpinRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4758,26 +3268,10 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for updateRoom operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room/
          */
-        async updateRoom(id: number, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper>> {
+        async updateRoom(id: number | string, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateRoom(id, updateRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.updateRoom']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-         * @summary Update a room (third-party storage)
-         * @param {string} id The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-         * @param {UpdateRoomRequest} updateRoomRequest The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for updateRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-         */
-        async updateRoomThirdParty(id: string, updateRoomRequest: UpdateRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateRoomThirdParty(id, updateRoomRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RoomsApi.updateRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -4829,20 +3323,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags/
          * @throws {RequiredError}
          */
-        addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.addRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
-         * @summary Attach tags to a room (third-party storage)
-         * @param {RoomsApiAddRoomTagsThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for addRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-room-tags-third-party/
-         * @throws {RequiredError}
-         */
-        addRoomTagsThirdParty(requestParameters: RoomsApiAddRoomTagsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.addRoomTagsThirdParty(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
@@ -4857,18 +3339,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.archiveRoom(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-         * @summary Archive a room (third-party storage)
-         * @param {RoomsApiArchiveRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for archiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room-third-party/
-         * @throws {RequiredError}
-         */
-        archiveRoomThirdParty(requestParameters: RoomsApiArchiveRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.archiveRoomThirdParty(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
          * @summary Change the room cover
          * @param {RoomsApiChangeRoomCoverRequest} requestParameters Request parameters.
@@ -4877,20 +3347,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover/
          * @throws {RequiredError}
          */
-        changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.changeRoomCover(requestParameters.id, requestParameters.coverRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
-         * @summary Change the room cover (third-party storage)
-         * @param {RoomsApiChangeRoomCoverThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for changeRoomCoverThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-room-cover-third-party/
-         * @throws {RequiredError}
-         */
-        changeRoomCoverThirdParty(requestParameters: RoomsApiChangeRoomCoverThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.changeRoomCoverThirdParty(requestParameters.id, requestParameters.coverRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a room in the portal Rooms section and returns it. `roomType` decides which sharing links, member  roles and form features the room offers, and it cannot be changed afterwards, so a room of the wrong kind has  to be recreated. The caller must be the portal owner, a portal administrator or a room administrator; a user  or a guest is refused, and so is a public room while the portal forbids external sharing. `title` is required  and must not be blank: characters a folder name cannot hold are replaced with underscores and the rest is  truncated, so the stored title can differ from the one sent and two rooms can share it. `quota` is accepted  only while the per-room quota feature is on and must stay within the portal quota, `cover` only for an id  returned by `GET api/2.0/files/rooms/covers`, and `color` as six hexadecimal digits with no leading number  sign. Tag names the portal does not know yet are added to the tag catalogue. `share` is not implemented and  any non-empty value is rejected, so invite members afterwards with `PUT api/2.0/files/rooms/{id}/share`.  Passing the portal room limit ends the call as a billing refusal and creates nothing.
@@ -4925,20 +3383,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo/
          * @throws {RequiredError}
          */
-        createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.createRoomLogo(requestParameters.id, requestParameters.logoRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
-         * @summary Set the room logo (third-party storage)
-         * @param {RoomsApiCreateRoomLogoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-logo-third-party/
-         * @throws {RequiredError}
-         */
-        createRoomLogoThirdParty(requestParameters: RoomsApiCreateRoomLogoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.createRoomLogoThirdParty(requestParameters.id, requestParameters.logoRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds a custom tag to the portal-wide catalog of room tags and answers with the stored name. Tags are shared by  the whole portal instead of belonging to the caller: once the tag exists, every room manager can attach it to  their own rooms with `PUT api/2.0/files/rooms/{id}/tags`, and that call also creates a tag it does not find.  Creating a name that is already in the catalog returns the existing tag unchanged rather than a duplicate or  an error, so repeating the call after a timeout is safe. A blank name, or one longer than the published limit,  is rejected as an invalid request. Only a room manager or a portal administrator may create a tag, and a user  or a guest is refused. The answer is the name as stored, and that name is the value to send in the `tags`  filter of `GET api/2.0/files/rooms` and in the room tag calls. The catalog itself is read with  `GET api/2.0/files/tags`.
@@ -5001,18 +3447,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.deleteRoom(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-         * @summary Remove a room (third-party storage)
-         * @param {RoomsApiDeleteRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for deleteRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-third-party/
-         * @throws {RequiredError}
-         */
-        deleteRoomThirdParty(requestParameters: RoomsApiDeleteRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.deleteRoomThirdParty(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
          * @summary Remove a room logo
          * @param {RoomsApiDeleteRoomLogoRequest} requestParameters Request parameters.
@@ -5021,20 +3455,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo/
          * @throws {RequiredError}
          */
-        deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.deleteRoomLogo(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
-         * @summary Remove a room logo (third-party storage)
-         * @param {RoomsApiDeleteRoomLogoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for deleteRoomLogoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-logo-third-party/
-         * @throws {RequiredError}
-         */
-        deleteRoomLogoThirdParty(requestParameters: RoomsApiDeleteRoomLogoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.deleteRoomLogoThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
@@ -5045,20 +3467,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags/
          * @throws {RequiredError}
          */
-        deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.deleteRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
-         * @summary Detach tags from a room (third-party storage)
-         * @param {RoomsApiDeleteRoomTagsThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for deleteRoomTagsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-room-tags-third-party/
-         * @throws {RequiredError}
-         */
-        deleteRoomTagsThirdParty(requestParameters: RoomsApiDeleteRoomTagsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.deleteRoomTagsThirdParty(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the record of the external database export job of a form filling room, or an empty body when the room  has no job at all. The room must be a form filling room and the caller must be able to edit it, otherwise the  call is refused; an unknown room is answered with 404. This is the polling target of  `POST api/2.0/files/rooms/{id}/externaldbsync`: repeat it until `isCompleted` is true, and then read `forms`,  which lists one entry per original form with its own `success` and `error` and is empty while the job is still  running. `percentage` advances as forms are processed, `status` distinguishes a job that is queued, running,  finished or failed, and `error` carries the message of a job that stopped as a whole. The record belongs to  the room rather than to the account that started the job, so any member who can edit the room sees the same  answer. The call changes nothing and is safe to repeat.
@@ -5083,18 +3493,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         getNewRoomItems(requestParameters: RoomsApiGetNewRoomItemsRequest, options?: RawAxiosRequestConfig): AxiosPromise<NewItemsFileEntryBaseArrayWrapper> {
             return localVarFp.getNewRoomItems(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-         * @summary Get new items in a room (third-party storage)
-         * @param {RoomsApiGetNewRoomItemsThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getNewRoomItemsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-new-room-items-third-party/
-         * @throws {RequiredError}
-         */
-        getNewRoomItemsThirdParty(requestParameters: RoomsApiGetNewRoomItemsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<NewItemsFileEntryBaseArrayWrapper> {
-            return localVarFp.getNewRoomItemsThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Reports whether the room template addressed by `id` is shared with everyone or is reachable only by the  accounts it was explicitly shared with. True means the Everyone group holds read access, so any member allowed  to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; false means only  the owner and the named recipients can. The identifier has to belong to a room template — take it from  `templateId` of `GET api/2.0/files/roomtemplate/status`, or from the folder list of `GET api/2.0/files/rooms`  called with `searchArea` set to 4 — while an ordinary room, a deleted template or an unknown value is answered  as missing. The caller needs read access to the template, so somebody else\'s private template is refused even  for a portal administrator, and members who cannot reach the Templates section at all are refused whatever the  template\'s state. The call only reads state; use `PUT api/2.0/files/roomtemplate/public` to change it.
@@ -5150,20 +3548,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info/
          * @throws {RequiredError}
          */
-        getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.getRoomInfo(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
-         * @summary Get room information (third-party storage)
-         * @param {RoomsApiGetRoomInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getRoomInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-info-third-party/
-         * @throws {RequiredError}
-         */
-        getRoomInfoThirdParty(requestParameters: RoomsApiGetRoomInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.getRoomInfoThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
@@ -5178,18 +3564,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getRoomLinks(requestParameters.id, requestParameters.type, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-         * @summary Get the room links (third-party storage)
-         * @param {RoomsApiGetRoomLinksThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getRoomLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-links-third-party/
-         * @throws {RequiredError}
-         */
-        getRoomLinksThirdParty(requestParameters: RoomsApiGetRoomLinksThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getRoomLinksThirdParty(requestParameters.id, requestParameters.type, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
          * @summary Get the room access rights
          * @param {RoomsApiGetRoomSecurityInfoRequest} requestParameters Request parameters.
@@ -5200,18 +3574,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         getRoomSecurityInfo(requestParameters: RoomsApiGetRoomSecurityInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
             return localVarFp.getRoomSecurityInfo(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-         * @summary Get the room access rights (third-party storage)
-         * @param {RoomsApiGetRoomSecurityInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getRoomSecurityInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-security-info-third-party/
-         * @throws {RequiredError}
-         */
-        getRoomSecurityInfoThirdParty(requestParameters: RoomsApiGetRoomSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getRoomSecurityInfoThirdParty(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the custom room tags available to the caller as a flat array of names, not of objects. What the array  holds depends on the account: a portal administrator gets the whole catalog, including tags that no room uses  yet, while every other account gets only the tags attached to rooms it can see, with duplicates removed. An  empty answer therefore means that this caller sees no tagged room, not that the portal has no tags.  `filterValue` keeps the names that contain the given text, ignoring case, while `count` and `startIndex` page  the result; no total is returned, so a page shorter than `count` is the signal that the list is exhausted. The  names are exactly the values accepted by the `tags` filter of `GET api/2.0/files/rooms` and by the room tag  calls, which makes this the call to fill a tag picker with. Add a tag with `POST api/2.0/files/tags` and check  whether one is still in use with `GET api/2.0/files/tags/{tagName}/haslinks`.
@@ -5272,18 +3634,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getRoomsPrimaryExternalLink(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-         * @summary Get the room primary external link (third-party storage)
-         * @param {RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getRoomsPrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-primary-external-link-third-party/
-         * @throws {RequiredError}
-         */
-        getRoomsPrimaryExternalLinkThirdParty(requestParameters: RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.getRoomsPrimaryExternalLinkThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
          * @summary Check room tag usage
          * @param {RoomsApiHasTagLinksRequest} requestParameters Request parameters.
@@ -5304,20 +3654,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/
          * @throws {RequiredError}
          */
-        pinRoom(requestParameters: RoomsApiPinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        pinRoom(requestParameters: RoomsApiPinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.pinRoom(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
-         * @summary Pin a room (third-party storage)
-         * @param {RoomsApiPinRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for pinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room-third-party/
-         * @throws {RequiredError}
-         */
-        pinRoomThirdParty(requestParameters: RoomsApiPinRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.pinRoomThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
@@ -5328,20 +3666,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room/
          * @throws {RequiredError}
          */
-        reorderRoom(requestParameters: RoomsApiReorderRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        reorderRoom(requestParameters: RoomsApiReorderRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.reorderRoom(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
-         * @summary Reorder room contents (third-party storage)
-         * @param {RoomsApiReorderRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for reorderRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reorder-room-third-party/
-         * @throws {RequiredError}
-         */
-        reorderRoomThirdParty(requestParameters: RoomsApiReorderRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.reorderRoomThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
@@ -5354,18 +3680,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         resendEmailInvitations(requestParameters: RoomsApiResendEmailInvitationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.resendEmailInvitations(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-         * @summary Resend the room invitations (third-party storage)
-         * @param {RoomsApiResendEmailInvitationsThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for resendEmailInvitationsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/resend-email-invitations-third-party/
-         * @throws {RequiredError}
-         */
-        resendEmailInvitationsThirdParty(requestParameters: RoomsApiResendEmailInvitationsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.resendEmailInvitationsThirdParty(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(axios, basePath));
         },
         /**
          * Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
@@ -5392,18 +3706,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.setRoomLink(requestParameters.id, requestParameters.roomLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-         * @summary Set the room external or invitation link (third-party storage)
-         * @param {RoomsApiSetRoomLinkThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setRoomLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-link-third-party/
-         * @throws {RequiredError}
-         */
-        setRoomLinkThirdParty(requestParameters: RoomsApiSetRoomLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.setRoomLinkThirdParty(requestParameters.id, requestParameters.roomLinkRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
          * @summary Set the room access rights
          * @param {RoomsApiSetRoomSecurityRequest} requestParameters Request parameters.
@@ -5414,18 +3716,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         setRoomSecurity(requestParameters: RoomsApiSetRoomSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomSecurityWrapper> {
             return localVarFp.setRoomSecurity(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-         * @summary Set the room access rights (third-party storage)
-         * @param {RoomsApiSetRoomSecurityThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setRoomSecurityThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-room-security-third-party/
-         * @throws {RequiredError}
-         */
-        setRoomSecurityThirdParty(requestParameters: RoomsApiSetRoomSecurityThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomSecurityWrapper> {
-            return localVarFp.setRoomSecurityThirdParty(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Queues a background job that re-exports the collected data of every original form of a form filling room into  the external database configured for the portal, and returns the job record. The room must be a form filling  room and the caller must be able to edit it, otherwise the call is refused with 403; an unknown room is  answered with 404. The export is not done when the response arrives: poll  `GET api/2.0/files/rooms/{id}/externaldbsync` until `isCompleted` is true, then read `forms` for the per-form  outcome, which stays empty while the job is running. Starting the job again while it is still running returns  the same record instead of a second job, so a retry is safe; a finished job is replaced by the new one. One  job is kept per room. A form whose data cannot be exported does not stop the others: it comes back in `forms`  with `success` false and its own `error`. When the portal has no external database configured the call fails  and nothing is queued.
@@ -5475,18 +3765,6 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.unarchiveRoom(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-         * @summary Unarchive a room (third-party storage)
-         * @param {RoomsApiUnarchiveRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for unarchiveRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unarchive-room-third-party/
-         * @throws {RequiredError}
-         */
-        unarchiveRoomThirdParty(requestParameters: RoomsApiUnarchiveRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationWrapper> {
-            return localVarFp.unarchiveRoomThirdParty(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
          * @summary Unpin a room
          * @param {RoomsApiUnpinRoomRequest} requestParameters Request parameters.
@@ -5495,20 +3773,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room/
          * @throws {RequiredError}
          */
-        unpinRoom(requestParameters: RoomsApiUnpinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        unpinRoom(requestParameters: RoomsApiUnpinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.unpinRoom(requestParameters.id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
-         * @summary Unpin a room (third-party storage)
-         * @param {RoomsApiUnpinRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for unpinRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/unpin-room-third-party/
-         * @throws {RequiredError}
-         */
-        unpinRoomThirdParty(requestParameters: RoomsApiUnpinRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.unpinRoomThirdParty(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
@@ -5519,20 +3785,8 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room/
          * @throws {RequiredError}
          */
-        updateRoom(requestParameters: RoomsApiUpdateRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper> {
+        updateRoom(requestParameters: RoomsApiUpdateRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper> {
             return localVarFp.updateRoom(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
-         * @summary Update a room (third-party storage)
-         * @param {RoomsApiUpdateRoomThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for updateRoomThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-room-third-party/
-         * @throws {RequiredError}
-         */
-        updateRoomThirdParty(requestParameters: RoomsApiUpdateRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.updateRoomThirdParty(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Renames a custom room tag in the portal catalog. The rename follows the tag everywhere it is used: every room  that carries it keeps it and shows the new name, so nothing has to be re-attached afterwards. Only a portal  administrator may rename a tag, and a room manager who is allowed to create tags is still refused here. The  old name is matched exactly as it is stored rather than searched for, and a name that is not in the catalog is  answered as missing. A new name that another tag already occupies is rejected as an invalid request, because  tag names are unique across the portal; both names must be non-blank and within the published length limit.  The answer is the new name. Stored queries are not updated for the caller: a `tags` filter of  `GET api/2.0/files/rooms` that still names the old value stops matching anything. The catalog is read with  `GET api/2.0/files/tags`.
@@ -5569,36 +3823,15 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
 export interface RoomsApiAddRoomTagsRequest {
     /**
      * The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiAddRoomTags
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The names to attach or to detach.
      * @type {BatchTagsRequestDto}
      * @memberof RoomsApiAddRoomTags
-     */
-    readonly batchTagsRequestDto?: BatchTagsRequestDto
-}
-
-/**
- * Request parameters for addRoomTagsThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiAddRoomTagsThirdPartyRequest
- */
-export interface RoomsApiAddRoomTagsThirdPartyRequest {
-    /**
-     * The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiAddRoomTagsThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The names to attach or to detach.
-     * @type {BatchTagsRequestDto}
-     * @memberof RoomsApiAddRoomTagsThirdParty
      */
     readonly batchTagsRequestDto?: BatchTagsRequestDto
 }
@@ -5611,36 +3844,15 @@ export interface RoomsApiAddRoomTagsThirdPartyRequest {
 export interface RoomsApiArchiveRoomRequest {
     /**
      * The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiArchiveRoom
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
      * @type {ArchiveRoomRequest}
      * @memberof RoomsApiArchiveRoom
-     */
-    readonly archiveRoomRequest?: ArchiveRoomRequest
-}
-
-/**
- * Request parameters for archiveRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiArchiveRoomThirdPartyRequest
- */
-export interface RoomsApiArchiveRoomThirdPartyRequest {
-    /**
-     * The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiArchiveRoomThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-     * @type {ArchiveRoomRequest}
-     * @memberof RoomsApiArchiveRoomThirdParty
      */
     readonly archiveRoomRequest?: ArchiveRoomRequest
 }
@@ -5653,36 +3865,15 @@ export interface RoomsApiArchiveRoomThirdPartyRequest {
 export interface RoomsApiChangeRoomCoverRequest {
     /**
      * The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiChangeRoomCover
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
      * @type {CoverRequestDto}
      * @memberof RoomsApiChangeRoomCover
-     */
-    readonly coverRequestDto: CoverRequestDto
-}
-
-/**
- * Request parameters for changeRoomCoverThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiChangeRoomCoverThirdPartyRequest
- */
-export interface RoomsApiChangeRoomCoverThirdPartyRequest {
-    /**
-     * The room to change, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiChangeRoomCoverThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The cover and the colour to apply. Either half may be sent on its own, and an empty object leaves the room as  it is.
-     * @type {CoverRequestDto}
-     * @memberof RoomsApiChangeRoomCoverThirdParty
      */
     readonly coverRequestDto: CoverRequestDto
 }
@@ -5723,36 +3914,15 @@ export interface RoomsApiCreateRoomFromTemplateRequest {
 export interface RoomsApiCreateRoomLogoRequest {
     /**
      * The room the logo is set on.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiCreateRoomLogo
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The uploaded picture and the piece of it to use.
      * @type {LogoRequest}
      * @memberof RoomsApiCreateRoomLogo
-     */
-    readonly logoRequest: LogoRequest
-}
-
-/**
- * Request parameters for createRoomLogoThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiCreateRoomLogoThirdPartyRequest
- */
-export interface RoomsApiCreateRoomLogoThirdPartyRequest {
-    /**
-     * The room the logo is set on.
-     * @type {string}
-     * @memberof RoomsApiCreateRoomLogoThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The uploaded picture and the piece of it to use.
-     * @type {LogoRequest}
-     * @memberof RoomsApiCreateRoomLogoThirdParty
      */
     readonly logoRequest: LogoRequest
 }
@@ -5828,36 +3998,15 @@ export interface RoomsApiDeleteCustomTagsRequest {
 export interface RoomsApiDeleteRoomRequest {
     /**
      * The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiDeleteRoom
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The body of the request. It is required even though the deletion does not depend on what it holds.
      * @type {DeleteRoomRequest}
      * @memberof RoomsApiDeleteRoom
-     */
-    readonly deleteRoomRequest: DeleteRoomRequest
-}
-
-/**
- * Request parameters for deleteRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiDeleteRoomThirdPartyRequest
- */
-export interface RoomsApiDeleteRoomThirdPartyRequest {
-    /**
-     * The room to delete, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiDeleteRoomThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The body of the request. It is required even though the deletion does not depend on what it holds.
-     * @type {DeleteRoomRequest}
-     * @memberof RoomsApiDeleteRoomThirdParty
      */
     readonly deleteRoomRequest: DeleteRoomRequest
 }
@@ -5870,24 +4019,10 @@ export interface RoomsApiDeleteRoomThirdPartyRequest {
 export interface RoomsApiDeleteRoomLogoRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiDeleteRoomLogo
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for deleteRoomLogoThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiDeleteRoomLogoThirdPartyRequest
- */
-export interface RoomsApiDeleteRoomLogoThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiDeleteRoomLogoThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -5898,36 +4033,15 @@ export interface RoomsApiDeleteRoomLogoThirdPartyRequest {
 export interface RoomsApiDeleteRoomTagsRequest {
     /**
      * The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiDeleteRoomTags
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The names to attach or to detach.
      * @type {BatchTagsRequestDto}
      * @memberof RoomsApiDeleteRoomTags
-     */
-    readonly batchTagsRequestDto?: BatchTagsRequestDto
-}
-
-/**
- * Request parameters for deleteRoomTagsThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiDeleteRoomTagsThirdPartyRequest
- */
-export interface RoomsApiDeleteRoomTagsThirdPartyRequest {
-    /**
-     * The room whose tags are changed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiDeleteRoomTagsThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The names to attach or to detach.
-     * @type {BatchTagsRequestDto}
-     * @memberof RoomsApiDeleteRoomTagsThirdParty
      */
     readonly batchTagsRequestDto?: BatchTagsRequestDto
 }
@@ -5954,24 +4068,10 @@ export interface RoomsApiGetExternalDbSyncStatusRequest {
 export interface RoomsApiGetNewRoomItemsRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiGetNewRoomItems
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for getNewRoomItemsThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiGetNewRoomItemsThirdPartyRequest
- */
-export interface RoomsApiGetNewRoomItemsThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiGetNewRoomItemsThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -5996,24 +4096,10 @@ export interface RoomsApiGetPublicSettingsRequest {
 export interface RoomsApiGetRoomInfoRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiGetRoomInfo
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for getRoomInfoThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiGetRoomInfoThirdPartyRequest
- */
-export interface RoomsApiGetRoomInfoThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiGetRoomInfoThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -6024,36 +4110,15 @@ export interface RoomsApiGetRoomInfoThirdPartyRequest {
 export interface RoomsApiGetRoomLinksRequest {
     /**
      * The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiGetRoomLinks
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
      * @type {LinkType}
      * @memberof RoomsApiGetRoomLinks
-     */
-    readonly type?: LinkType
-}
-
-/**
- * Request parameters for getRoomLinksThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiGetRoomLinksThirdPartyRequest
- */
-export interface RoomsApiGetRoomLinksThirdPartyRequest {
-    /**
-     * The room whose links are listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiGetRoomLinksThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Narrows the answer to one kind of link: invitation links, which turn whoever opens them into a member, or  external links, which open the room without an account. Leaving it out returns both kinds together.
-     * @type {LinkType}
-     * @memberof RoomsApiGetRoomLinksThirdParty
      */
     readonly type?: LinkType
 }
@@ -6066,10 +4131,10 @@ export interface RoomsApiGetRoomLinksThirdPartyRequest {
 export interface RoomsApiGetRoomSecurityInfoRequest {
     /**
      * The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiGetRoomSecurityInfo
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
@@ -6096,48 +4161,6 @@ export interface RoomsApiGetRoomSecurityInfoRequest {
      * Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
      * @type {string}
      * @memberof RoomsApiGetRoomSecurityInfo
-     */
-    readonly filterValue?: string
-}
-
-/**
- * Request parameters for getRoomSecurityInfoThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiGetRoomSecurityInfoThirdPartyRequest
- */
-export interface RoomsApiGetRoomSecurityInfoThirdPartyRequest {
-    /**
-     * The room whose access list is read, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiGetRoomSecurityInfoThirdParty
-     */
-    readonly id: string
-
-    /**
-     * What kind of access entries to list. The default covers accounts and groups and leaves the sharing links of  the room out; those are read with `GET api/2.0/files/rooms/{id}/links`.
-     * @type {ShareFilterType}
-     * @memberof RoomsApiGetRoomSecurityInfoThirdParty
-     */
-    readonly filterType?: ShareFilterType
-
-    /**
-     * How many entries to return in one answer. The total number of matching entries comes back in the response  headers, so it is what tells the caller whether another page is needed.
-     * @type {number}
-     * @memberof RoomsApiGetRoomSecurityInfoThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * How many matching entries to skip before the page starts. Together with the page size it walks the list, which  is ordered by role and then by name and is therefore stable between calls.
-     * @type {number}
-     * @memberof RoomsApiGetRoomSecurityInfoThirdParty
-     */
-    readonly startIndex?: number
-
-    /**
-     * Keeps only the entries whose displayed name contains this text. An invitation that has not been accepted yet  is listed under the email address it was sent to, so that is what has to be searched for.
-     * @type {string}
-     * @memberof RoomsApiGetRoomSecurityInfoThirdParty
      */
     readonly filterValue?: string
 }
@@ -6304,24 +4327,10 @@ export interface RoomsApiGetRoomsFolderRequest {
 export interface RoomsApiGetRoomsPrimaryExternalLinkRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiGetRoomsPrimaryExternalLink
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for getRoomsPrimaryExternalLinkThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest
- */
-export interface RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiGetRoomsPrimaryExternalLinkThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -6353,24 +4362,10 @@ export interface RoomsApiHasTagLinksRequest {
 export interface RoomsApiPinRoomRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiPinRoom
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for pinRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiPinRoomThirdPartyRequest
- */
-export interface RoomsApiPinRoomThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiPinRoomThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -6381,24 +4376,10 @@ export interface RoomsApiPinRoomThirdPartyRequest {
 export interface RoomsApiReorderRoomRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiReorderRoom
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for reorderRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiReorderRoomThirdPartyRequest
- */
-export interface RoomsApiReorderRoomThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiReorderRoomThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -6409,36 +4390,15 @@ export interface RoomsApiReorderRoomThirdPartyRequest {
 export interface RoomsApiResendEmailInvitationsRequest {
     /**
      * The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiResendEmailInvitations
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * Which pending invitations to send again.
      * @type {UserInvitation}
      * @memberof RoomsApiResendEmailInvitations
-     */
-    readonly userInvitation: UserInvitation
-}
-
-/**
- * Request parameters for resendEmailInvitationsThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiResendEmailInvitationsThirdPartyRequest
- */
-export interface RoomsApiResendEmailInvitationsThirdPartyRequest {
-    /**
-     * The room whose invitations are resent, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiResendEmailInvitationsThirdParty
-     */
-    readonly id: string
-
-    /**
-     * Which pending invitations to send again.
-     * @type {UserInvitation}
-     * @memberof RoomsApiResendEmailInvitationsThirdParty
      */
     readonly userInvitation: UserInvitation
 }
@@ -6465,36 +4425,15 @@ export interface RoomsApiSetPublicSettingsRequest {
 export interface RoomsApiSetRoomLinkRequest {
     /**
      * The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiSetRoomLink
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The link to create, change or revoke.
      * @type {RoomLinkRequest}
      * @memberof RoomsApiSetRoomLink
-     */
-    readonly roomLinkRequest: RoomLinkRequest
-}
-
-/**
- * Request parameters for setRoomLinkThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiSetRoomLinkThirdPartyRequest
- */
-export interface RoomsApiSetRoomLinkThirdPartyRequest {
-    /**
-     * The room the link belongs to, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiSetRoomLinkThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The link to create, change or revoke.
-     * @type {RoomLinkRequest}
-     * @memberof RoomsApiSetRoomLinkThirdParty
      */
     readonly roomLinkRequest: RoomLinkRequest
 }
@@ -6507,36 +4446,15 @@ export interface RoomsApiSetRoomLinkThirdPartyRequest {
 export interface RoomsApiSetRoomSecurityRequest {
     /**
      * The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiSetRoomSecurity
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The membership changes to apply, together with how the people concerned are notified.
      * @type {RoomInvitationRequest}
      * @memberof RoomsApiSetRoomSecurity
-     */
-    readonly roomInvitationRequest: RoomInvitationRequest
-}
-
-/**
- * Request parameters for setRoomSecurityThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiSetRoomSecurityThirdPartyRequest
- */
-export interface RoomsApiSetRoomSecurityThirdPartyRequest {
-    /**
-     * The room whose membership changes, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiSetRoomSecurityThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The membership changes to apply, together with how the people concerned are notified.
-     * @type {RoomInvitationRequest}
-     * @memberof RoomsApiSetRoomSecurityThirdParty
      */
     readonly roomInvitationRequest: RoomInvitationRequest
 }
@@ -6577,36 +4495,15 @@ export interface RoomsApiStartRoomIndexExportRequest {
 export interface RoomsApiUnarchiveRoomRequest {
     /**
      * The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiUnarchiveRoom
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
      * @type {ArchiveRoomRequest}
      * @memberof RoomsApiUnarchiveRoom
-     */
-    readonly archiveRoomRequest?: ArchiveRoomRequest
-}
-
-/**
- * Request parameters for unarchiveRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiUnarchiveRoomThirdPartyRequest
- */
-export interface RoomsApiUnarchiveRoomThirdPartyRequest {
-    /**
-     * The room to move, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiUnarchiveRoomThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The body of the request. It carries only the lifetime of the job record, so an empty object is a normal  request.
-     * @type {ArchiveRoomRequest}
-     * @memberof RoomsApiUnarchiveRoomThirdParty
      */
     readonly archiveRoomRequest?: ArchiveRoomRequest
 }
@@ -6619,24 +4516,10 @@ export interface RoomsApiUnarchiveRoomThirdPartyRequest {
 export interface RoomsApiUnpinRoomRequest {
     /**
      * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiUnpinRoom
      */
-    readonly id: number
-}
-
-/**
- * Request parameters for unpinRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiUnpinRoomThirdPartyRequest
- */
-export interface RoomsApiUnpinRoomThirdPartyRequest {
-    /**
-     * The room to act on, named by the identifier that `GET api/2.0/files/rooms` reports for it. Rooms kept in the  portal itself use whole numbers, while a room backed by a connected third-party account uses the string form  of the same listing.
-     * @type {string}
-     * @memberof RoomsApiUnpinRoomThirdParty
-     */
-    readonly id: string
+    readonly id: number | string
 }
 
 /**
@@ -6647,36 +4530,15 @@ export interface RoomsApiUnpinRoomThirdPartyRequest {
 export interface RoomsApiUpdateRoomRequest {
     /**
      * The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {number}
+     * @type {number | string}
      * @memberof RoomsApiUpdateRoom
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
      * @type {UpdateRoomRequest}
      * @memberof RoomsApiUpdateRoom
-     */
-    readonly updateRoomRequest: UpdateRoomRequest
-}
-
-/**
- * Request parameters for updateRoomThirdParty operation in RoomsApi.
- * @export
- * @interface RoomsApiUpdateRoomThirdPartyRequest
- */
-export interface RoomsApiUpdateRoomThirdPartyRequest {
-    /**
-     * The room to update, named by the identifier that `GET api/2.0/files/rooms` reports for it.
-     * @type {string}
-     * @memberof RoomsApiUpdateRoomThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The fields to change. Only the properties present in the object are applied, and a property that the object  does not define is rejected instead of being ignored.
-     * @type {UpdateRoomRequest}
-     * @memberof RoomsApiUpdateRoomThirdParty
      */
     readonly updateRoomRequest: UpdateRoomRequest
 }
@@ -6724,20 +4586,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).addRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Attaches the named tags to a room and returns the room with its whole tag set. Tags are portal-wide labels  shared by every room, and a name that the catalogue does not hold yet is created there by this call, so  attaching is also the short way of adding a tag to the portal. Names already attached to the room are kept as  they are, and repeating the call changes nothing, which makes it safe to retry. An empty list is accepted and  does nothing, while a blank or overlong name is rejected as an invalid request. The caller must be a manager  of the room or an administrator of the portal, and a room in the Archive section is refused with 403. A tag  has no identifier of its own and is addressed by name, so `GET api/2.0/files/tags` is what shows which names  already exist. Use `DELETE api/2.0/files/rooms/{id}/tags` to detach them again, which leaves the tags  themselves in the catalogue.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Attach tags to a room (third-party storage)
-     * @param {RoomsApiAddRoomTagsThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiAddRoomTagsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public addRoomTagsThirdParty(requestParameters: RoomsApiAddRoomTagsThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).addRoomTagsThirdParty(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public addRoomTags(requestParameters: RoomsApiAddRoomTagsRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).addRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6753,18 +4614,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.
-     * @summary Archive a room (third-party storage)
-     * @param {RoomsApiArchiveRoomThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public archiveRoomThirdParty(requestParameters: RoomsApiArchiveRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).archiveRoomThirdParty(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
      * @summary Change the room cover
      * @param {RoomsApiChangeRoomCoverRequest} requestParameters Request parameters.
@@ -6772,20 +4621,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).changeRoomCover(requestParameters.id, requestParameters.coverRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Sets the cover picture and the background colour a room is shown with, and returns the whole room afterwards.  `cover` accepts only an identifier listed by `GET api/2.0/files/rooms/covers`, and `color` only six  hexadecimal digits with no leading number sign, so anything else is rejected as an invalid request. Either  field may be sent on its own, an empty `cover` clears the picture, an empty `color` restores the default one,  and an empty body leaves the room untouched. The cover is what the room shows while it has no uploaded logo:  setting a logo with `POST api/2.0/files/rooms/{id}/logo` hides the cover without erasing it, and deleting that  logo brings it back. The caller must be a manager of the room, an archived room is refused with 403, and an  unknown or deleted room is answered with 404. Repeating the same request is harmless, and the cover survives  archiving and unarchiving.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Change the room cover (third-party storage)
-     * @param {RoomsApiChangeRoomCoverThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiChangeRoomCoverRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public changeRoomCoverThirdParty(requestParameters: RoomsApiChangeRoomCoverThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).changeRoomCoverThirdParty(requestParameters.id, requestParameters.coverRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public changeRoomCover(requestParameters: RoomsApiChangeRoomCoverRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).changeRoomCover(requestParameters.id, requestParameters.coverRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6820,20 +4668,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createRoomLogo(requestParameters.id, requestParameters.logoRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Turns an image already uploaded to the portal into the logo of a room and returns the room with the addresses  of the four logo sizes. This is the second half of a two-step flow: upload the picture with  `POST api/2.0/files/logos` first and pass the path it returns as `tmpFile`, because the image itself is never  sent here. The temporary file belongs to the account that uploaded it and is consumed by this call, so it  cannot be reused for a second room and a path somebody else uploaded is refused. `x`, `y`, `width` and  `height` crop the picture; sending a position without a size is rejected as an invalid request, while a size  without a position is accepted. An empty `tmpFile` leaves the room as it is. A logo replaces the cover in the  interface without erasing it, and removing the logo brings the cover back. The caller must be a manager of the  room, an archived room is refused, and an unknown room is answered with 404.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Set the room logo (third-party storage)
-     * @param {RoomsApiCreateRoomLogoThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiCreateRoomLogoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public createRoomLogoThirdParty(requestParameters: RoomsApiCreateRoomLogoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createRoomLogoThirdParty(requestParameters.id, requestParameters.logoRequest, options).then((request) => request(this.axios, this.basePath));
+    public createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public createRoomLogo(requestParameters: RoomsApiCreateRoomLogoRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).createRoomLogo(requestParameters.id, requestParameters.logoRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6897,18 +4744,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Queues a background job that deletes one room with everything inside it, and returns the operation record of  that job. Deleting a room is destructive and has no trash step: the room and its files are gone once the job  finishes, unlike a file or a folder, which is moved to the trash first. The right to delete is checked before  the job is queued, so a caller who may not delete the room is refused straight away and an unknown room is  answered as missing; the same checks run again when the job starts, which is why the `error` of the finished  operation still has to be read. Poll `GET api/2.0/files/fileops` until `finished` is true, or read the  returned record again by its `id`. The record is kept until it is read once, so one poll after completion  still sees it. `deleteAfter` in the body is required by the contract but has no effect on the job. An archived  room is deleted the same way, and a second delete of the same id reports that the room is missing.
-     * @summary Remove a room (third-party storage)
-     * @param {RoomsApiDeleteRoomThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public deleteRoomThirdParty(requestParameters: RoomsApiDeleteRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteRoomThirdParty(requestParameters.id, requestParameters.deleteRoomRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
      * @summary Remove a room logo
      * @param {RoomsApiDeleteRoomLogoRequest} requestParameters Request parameters.
@@ -6916,20 +4751,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteRoomLogo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Removes the uploaded logo of a room and returns the room with empty logo addresses. What the room falls back  to is its cover and colour, which the logo only hid: if a cover was set before the logo, it is shown again,  and `POST api/2.0/files/rooms/{id}/cover` is what changes it. Nothing else about the room is touched, so  membership, tags, links and settings are preserved. A room that has no logo is accepted and answered with 200,  and repeating the call is therefore harmless. The caller must be a manager of the room; a member invited even  with editing rights is refused, and so is a room in the Archive section. A room that does not exist or was  deleted is answered as missing. After the logo is removed a new one can be set again through  `POST api/2.0/files/logos` followed by `POST api/2.0/files/rooms/{id}/logo`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Remove a room logo (third-party storage)
-     * @param {RoomsApiDeleteRoomLogoThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiDeleteRoomLogoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public deleteRoomLogoThirdParty(requestParameters: RoomsApiDeleteRoomLogoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteRoomLogoThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public deleteRoomLogo(requestParameters: RoomsApiDeleteRoomLogoRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).deleteRoomLogo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6940,20 +4774,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Detaches the named tags from a room and returns the room with its remaining tag set. Only the link between the  room and the tag is removed: the tag stays in the portal catalogue and keeps working for every other room, and  `DELETE api/2.0/files/tags` is what removes it from the portal itself. Names that are not in the catalogue, or  not attached to this room, are skipped without an error, so a successful answer does not prove that anything  was detached; compare the returned tag set instead. An empty list is accepted and does nothing, while a null  entry in the list is rejected as an invalid request. The caller must be a manager of the room or an  administrator of the portal, and a room in the Archive section is refused with 403. A tag that loses its last  room stays in the catalogue, and only deleting that room takes the tag with it.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Detach tags from a room (third-party storage)
-     * @param {RoomsApiDeleteRoomTagsThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiDeleteRoomTagsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public deleteRoomTagsThirdParty(requestParameters: RoomsApiDeleteRoomTagsThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).deleteRoomTagsThirdParty(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public deleteRoomTags(requestParameters: RoomsApiDeleteRoomTagsRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).deleteRoomTags(requestParameters.id, requestParameters.batchTagsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6978,18 +4811,6 @@ export class RoomsApi extends BaseAPI {
      */
     public getNewRoomItems(requestParameters: RoomsApiGetNewRoomItemsRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).getNewRoomItems(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns what is new for the calling account in one room, grouped by the day the entry was last changed, with  the newest day first and the entries inside a day ordered from the most recent. Only files are reported: a  folder somebody else created is not an entry of its own, while a file created inside it is, however deep it  lies. What the caller changed is never new for the caller, and a file that was deleted afterwards disappears  from the answer. Reading this list leaves the badges alone, which is what makes it the operation to call  before `GET api/2.0/files/rooms/{id}`, since opening the room clears them. An empty array therefore means that  there is nothing new, not that the badges were already read. The caller needs access to the room; somebody who  is not a member is refused, and an unknown or deleted room is answered as missing. Use  `GET api/2.0/files/rooms/news` for the same report across every room at once.
-     * @summary Get new items in a room (third-party storage)
-     * @param {RoomsApiGetNewRoomItemsThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getNewRoomItemsThirdParty(requestParameters: RoomsApiGetNewRoomItemsThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getNewRoomItemsThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7045,20 +4866,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomInfo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Returns one room with its type, title, tags, logo, cover, colour, quota and virtual data room settings,  together with the access level the caller has in it. Reading the room is not a side-effect-free call: it  clears the caller new-item badges for that room, and `newForMe` comes back as 0, so read  `GET api/2.0/files/rooms/{id}/news` first when the new items matter. The caller needs read access to the room;  portal administrators can read a room they were never invited to, while a member without access is refused.  The operation also answers an anonymous caller, but only in the context of a valid external share link of that  room, and a plain anonymous request is rejected as unauthenticated. A room that never existed, was deleted, or  lives in a section the caller cannot see is answered as missing. Archived rooms are returned as well and are  recognised by their root section rather than by a separate flag. Use `GET api/2.0/files/rooms` to search and  page through rooms instead of guessing ids.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Get room information (third-party storage)
-     * @param {RoomsApiGetRoomInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiGetRoomInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public getRoomInfoThirdParty(requestParameters: RoomsApiGetRoomInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomInfoThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public getRoomInfo(requestParameters: RoomsApiGetRoomInfoRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomInfo(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7074,18 +4894,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Returns the sharing links of a room, with the invitation and the external links mixed together unless `type`  narrows it to one kind. Each entry carries the link address, its title, access level, expiration, the flag  that marks the primary external link of the room and, for invitation links, how many times it may still be  used. Public and form filling rooms come with an external link created for them, so an empty answer there  means that the link was revoked rather than that the room is private; rooms of the other kinds start with no  links at all and only gain one when somebody creates it, which for a collaboration room and a virtual data  room can be an invitation link alone. The caller needs access to the room and the right to see its links: a  member invited without that right gets an empty list rather than an error, while somebody who is not in the  room at all is refused. Paging parameters are not honoured here: the first hundred links are returned and the  reported count is the number of entries actually sent.
-     * @summary Get the room links (third-party storage)
-     * @param {RoomsApiGetRoomLinksThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getRoomLinksThirdParty(requestParameters: RoomsApiGetRoomLinksThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomLinksThirdParty(requestParameters.id, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
      * @summary Get the room access rights
      * @param {RoomsApiGetRoomSecurityInfoRequest} requestParameters Request parameters.
@@ -7095,18 +4903,6 @@ export class RoomsApi extends BaseAPI {
      */
     public getRoomSecurityInfo(requestParameters: RoomsApiGetRoomSecurityInfoRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).getRoomSecurityInfo(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns one page of the access list of a room: the owner first, then the managers, the groups, the ordinary  members, the guests and finally the invitations nobody has accepted yet, with the total in the response  headers. `filterType` selects what is listed and defaults to accounts and groups, which leaves the sharing  links of the room out; those are read with `GET api/2.0/files/rooms/{id}/links`. `filterValue` matches the  displayed name of the subject, and an invitation that is still pending is listed under the email address it  was sent to. Paging is done with `count` and `startIndex`, and the order is stable between calls. Any member  who can read the room sees the accounts and the groups, so the list is not limited to the managers, and portal  administrators can read the list of a room they were never invited to; somebody who is not in the room at all  is refused. Asking for the link entries instead needs the right to see the links of the room, and a member  without it gets an empty page rather than an error.
-     * @summary Get the room access rights (third-party storage)
-     * @param {RoomsApiGetRoomSecurityInfoThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getRoomSecurityInfoThirdParty(requestParameters: RoomsApiGetRoomSecurityInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomSecurityInfoThirdParty(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7168,18 +4964,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Returns the primary external link of a room, which is the one address meant to be handed out to people outside  the portal. A public room and a form filling room get such a link when they are created, and asking for it  again returns the same link rather than a new one, so the answer is stable. In a room that has no primary link  yet this call creates one instead of reporting nothing, which needs the right to manage the links of the room:  a member invited with a lower level is refused with 403, and so is anybody who is not in the room at all. A  link that was explicitly revoked stays revoked and is reported as missing rather than recreated, and an  unknown room is answered with 404 as well. An archived public room still reports its link. The answer is the  same entry that `GET api/2.0/files/rooms/{id}/links` returns with the primary flag set, including the request  token that has to travel with the address.
-     * @summary Get the room primary external link (third-party storage)
-     * @param {RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public getRoomsPrimaryExternalLinkThirdParty(requestParameters: RoomsApiGetRoomsPrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomsPrimaryExternalLinkThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Reports whether any room still carries the named tag, which is the check to run before the tag is deleted from  the catalog. Only a portal administrator may call it, and every other account is refused. The name is matched  exactly against the catalog, and a name that is not in it is answered with 404. That also tells the two ways a  tag stops being used apart: taking the tag off the last room that carried it leaves the tag in the catalog and  turns the answer to false, while deleting that last room removes the tag itself, after which the call answers  404. A true answer means at least one room, active or archived, still references the tag, so deleting it with  `DELETE api/2.0/files/tags` would strip it from those rooms. The handler reads the tag name from the query  string, so the value has to be sent twice: in the path segment and as the `tagName` query parameter.
      * @summary Check room tag usage
      * @param {RoomsApiHasTagLinksRequest} requestParameters Request parameters.
@@ -7199,20 +4983,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public pinRoom(requestParameters: RoomsApiPinRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).pinRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public pinRoom(requestParameters: RoomsApiPinRoomRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Pin a room (third-party storage)
-     * @param {RoomsApiPinRoomThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiPinRoomRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public pinRoomThirdParty(requestParameters: RoomsApiPinRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).pinRoomThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public pinRoom(requestParameters: RoomsApiPinRoomRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public pinRoom(requestParameters: RoomsApiPinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public pinRoom(requestParameters: RoomsApiPinRoomRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).pinRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7223,20 +5006,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public reorderRoom(requestParameters: RoomsApiReorderRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).reorderRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public reorderRoom(requestParameters: RoomsApiReorderRoomRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Renumbers the manual order of the items lying directly in a room so that they run from one upwards with no  gaps and no duplicates, and returns the room. The order of the items relative to each other is preserved: only  the numbers are compacted, and nothing is moved, renamed, duplicated or deleted. Files and folders share one  sequence. Nested folders keep their own numbering and are not touched, so each level is compacted on its own.  The operation is meant for a room with indexing turned on, where the manual order is what listings follow; a  room without indexing accepts it and simply has nothing that depends on the result. Running it twice changes  nothing the second time, and an already dense sequence is left as it is, which makes the call safe to retry.  The caller must be a manager of the room; a member invited with any other level is refused, an archived room  is rejected, and an unknown or deleted room is answered as missing.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Reorder room contents (third-party storage)
-     * @param {RoomsApiReorderRoomThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiReorderRoomRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public reorderRoomThirdParty(requestParameters: RoomsApiReorderRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).reorderRoomThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public reorderRoom(requestParameters: RoomsApiReorderRoomRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public reorderRoom(requestParameters: RoomsApiReorderRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public reorderRoom(requestParameters: RoomsApiReorderRoomRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).reorderRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7249,18 +5031,6 @@ export class RoomsApi extends BaseAPI {
      */
     public resendEmailInvitations(requestParameters: RoomsApiResendEmailInvitationsRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).resendEmailInvitations(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Sends the room invitation email again to members who were invited but have not joined yet. `resendAll` covers  every pending invitation of the room and makes `usersIds` irrelevant, while an explicit list without that flag  is limited to the named accounts. An account that has already accepted the invitation, is not a member of the  room, or is invisible to the caller is skipped without an error, and a request that names nobody and does not  set the flag does nothing, so a successful answer never proves that a message went out. Nothing about the room  or its membership changes, and the operation can be repeated. The caller must be a manager of the room, an  archived room is refused, a room template is answered as missing, and a malformed account id is rejected as an  invalid request. The call is rate limited, so a client that loops over members should send one batch instead.  The response carries no body.
-     * @summary Resend the room invitations (third-party storage)
-     * @param {RoomsApiResendEmailInvitationsThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public resendEmailInvitationsThirdParty(requestParameters: RoomsApiResendEmailInvitationsThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).resendEmailInvitationsThirdParty(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7288,18 +5058,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Creates, updates or deletes one sharing link of a room and returns it. `linkType` chooses the kind: an  invitation link makes whoever opens it a member with the given access level, while an external link opens the  room without an account. Omitting `linkId` creates a link, passing the id of an existing one updates it, and  an unknown id is created with that id; the kind of an existing link cannot be changed afterwards. An access  level of 0 deletes the link, and deleting the primary external link of a public or form filling room  immediately replaces it with a fresh one, so such a room is never left without one. A room keeps at most one  invitation link, and a second one is refused; form filling rooms take no invitation links, and collaboration,  form filling and virtual data rooms take no external links. An expiration date in the past is dropped silently  for an external link and rejected for an invitation link. `password`, `denyDownload` and `internal` apply to  external links only.
-     * @summary Set the room external or invitation link (third-party storage)
-     * @param {RoomsApiSetRoomLinkThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public setRoomLinkThirdParty(requestParameters: RoomsApiSetRoomLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).setRoomLinkThirdParty(requestParameters.id, requestParameters.roomLinkRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
      * @summary Set the room access rights
      * @param {RoomsApiSetRoomSecurityRequest} requestParameters Request parameters.
@@ -7309,18 +5067,6 @@ export class RoomsApi extends BaseAPI {
      */
     public setRoomSecurity(requestParameters: RoomsApiSetRoomSecurityRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).setRoomSecurity(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Adds, changes and removes room members in one batch, and returns the resulting access list of the named  subjects. Each entry names either an account or a group of the portal, or the email address of somebody who  has no account yet, together with the access level to grant; an access of 0 removes the subject from the room.  An entry without an access level is ignored, the same subject listed twice keeps the last level, and an empty  list is accepted and changes nothing. The caller must be a manager of the room, so an invitation sent by a  user or a guest is refused, and an account that is a portal user or a guest cannot be made a room manager.  Inviting by email also needs the portal to allow guest invitations. A subject the caller is not allowed to see  is dropped without an error, which is why the answer has to be compared with the request. Removing a member  who still holds a form role is refused through `error` unless `force` is set. `notify` sends the invitation  email with the optional `message`.
-     * @summary Set the room access rights (third-party storage)
-     * @param {RoomsApiSetRoomSecurityThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public setRoomSecurityThirdParty(requestParameters: RoomsApiSetRoomSecurityThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).setRoomSecurityThirdParty(requestParameters.id, requestParameters.roomInvitationRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7371,18 +5117,6 @@ export class RoomsApi extends BaseAPI {
     }
 
     /**
-     * Queues a background job that moves one room from the Archive section back to the Rooms section, and returns  the operation record of that job. The room becomes writable again with the membership, tags, logo and links it  had before, while the pinned state of its members is not restored and has to be set again with  `PUT api/2.0/files/rooms/{id}/pin`. The caller must be a manager of the room; a member who was only invited to  it is refused, a room template is answered as missing, and a room that was never archived simply stays where  it is. The room is not moved when the response arrives: poll `GET api/2.0/files/fileops` until `finished` is  true, and expect a room that is still archived until then. `deleteAfter` decides only how long the finished  record survives. Calling the operation twice in a row does not corrupt the room, and a deleted or unknown room  id is reported as missing.
-     * @summary Unarchive a room (third-party storage)
-     * @param {RoomsApiUnarchiveRoomThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RoomsApi
-     */
-    public unarchiveRoomThirdParty(requestParameters: RoomsApiUnarchiveRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).unarchiveRoomThirdParty(requestParameters.id, requestParameters.archiveRoomRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
      * @summary Unpin a room
      * @param {RoomsApiUnpinRoomRequest} requestParameters Request parameters.
@@ -7390,20 +5124,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public unpinRoom(requestParameters: RoomsApiUnpinRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).unpinRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public unpinRoom(requestParameters: RoomsApiUnpinRoomRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Removes a room from the pinned group of the calling account and returns the room with the pinned flag cleared.  Only the personal ordering of the caller changes: the room itself, its members, their roles and its contents  are left exactly as they were, and the room stays in the list, simply among the unpinned ones. Unpinning frees  one of the pin slots of the account, which AI rooms count separately, so it is the way out of a refused  `PUT api/2.0/files/rooms/{id}/pin`. Unpinning a room that was never pinned is accepted and changes nothing, so  the call can be repeated safely and its answer does not prove that anything was pinned before. Anybody who can  read the room may unpin it, while somebody who is not in the room at all is refused and an unknown or deleted  room is answered as missing. An archived room cannot be unpinned.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Unpin a room (third-party storage)
-     * @param {RoomsApiUnpinRoomThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiUnpinRoomRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public unpinRoomThirdParty(requestParameters: RoomsApiUnpinRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).unpinRoomThirdParty(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public unpinRoom(requestParameters: RoomsApiUnpinRoomRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public unpinRoom(requestParameters: RoomsApiUnpinRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public unpinRoom(requestParameters: RoomsApiUnpinRoomRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).unpinRoom(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -7414,20 +5147,19 @@ export class RoomsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public updateRoom(requestParameters: RoomsApiUpdateRoomRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).updateRoom(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public updateRoom(requestParameters: RoomsApiUpdateRoomRequest & { id: number }, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper>;
     /**
-     * Applies a partial change to one room and returns the whole room as it is after it. Only the fields present in  the body are touched, an empty body changes nothing, and a property the body does not define is rejected as an  invalid request instead of being ignored. The caller must be a manager of this room: portal administrators do  not get in without an invitation, and an archived room is refused. `title` is trimmed, sanitised the way a  room title is sanitised at creation, and a blank value is treated as no change. `tags` replaces the whole tag  set and an empty array clears it, an empty `color` restores the default and an empty `cover` removes the  cover. A `quota` of -1 switches the room back to no custom limit, any other negative value restores the portal  default, and a positive one is accepted only while the per-room quota feature is on. Turning `indexing` on  renumbers the room contents. `chatSettings` belongs to an AI room and is rejected anywhere else. Use  `POST api/2.0/files/rooms/{id}/logo` for logo cropping.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Update a room (third-party storage)
-     * @param {RoomsApiUpdateRoomThirdPartyRequest} requestParameters Request parameters.
+     * @param {RoomsApiUpdateRoomRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RoomsApi
      */
-    public updateRoomThirdParty(requestParameters: RoomsApiUpdateRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).updateRoomThirdParty(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
+    public updateRoom(requestParameters: RoomsApiUpdateRoomRequest & { id: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper>;
+    public updateRoom(requestParameters: RoomsApiUpdateRoomRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderWrapper | ThirdPartyFolderWrapper>;
+    public updateRoom(requestParameters: RoomsApiUpdateRoomRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).updateRoom(requestParameters.id, requestParameters.updateRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

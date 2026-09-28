@@ -257,7 +257,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | defaults to undefined|
+| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | defaults to undefined|
 
 
 ### Return type
@@ -279,7 +279,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAssignmentsApi(configuration);
 
-let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (default to undefined)
+let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (default to undefined)
 
 const { status, data } = await apiInstance.aiAssignmentsGetAssignment(
     actionType
@@ -314,7 +314,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | defaults to undefined|
+| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | defaults to undefined|
 | **entityId** | [**string**] | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | (optional) defaults to undefined|
 
 
@@ -337,7 +337,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAssignmentsApi(configuration);
 
-let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (default to undefined)
+let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (default to undefined)
 let entityId: string; //The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.aiAssignmentsResolveForAction(
@@ -374,7 +374,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. | defaults to undefined|
+| **actionType** | [**string**] | The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. | defaults to undefined|
 | **entityId** | [**string**] | The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. | (optional) defaults to undefined|
 
 
@@ -397,7 +397,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAssignmentsApi(configuration);
 
-let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision. (default to undefined)
+let actionType: string; //The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis. (default to undefined)
 let entityId: string; //The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.aiAssignmentsTryResolveForAction(

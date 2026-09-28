@@ -30,11 +30,11 @@ import type { AppWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
+import type { JsonValueWrapper } from '../../models';
+// @ts-ignore
 import type { SetAppEnabledBody } from '../../models';
 // @ts-ignore
 import type { SetAppSettingsBody } from '../../models';
-// @ts-ignore
-import type { UnknownNullableWrapper } from '../../models';
 /**
  * AppsApi - axios parameter creator
  * @export
@@ -379,7 +379,7 @@ export const AppsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-settings/
          */
-        async getSettings(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UnknownNullableWrapper>> {
+        async getSettings(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JsonValueWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSettings(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AppsApi.getSettings']?.[localVarOperationServerIndex]?.url;
@@ -459,7 +459,7 @@ export const AppsApiFactory = function (configuration?: Configuration, basePath?
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-settings/
          * @throws {RequiredError}
          */
-        getSettings(requestParameters: AppsApiGetSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<UnknownNullableWrapper> {
+        getSettings(requestParameters: AppsApiGetSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<JsonValueWrapper> {
             return localVarFp.getSettings(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**

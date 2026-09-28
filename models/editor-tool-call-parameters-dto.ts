@@ -18,6 +18,15 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GenerateDocxToolCallParametersDto } from './generate-docx-tool-call-parameters-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GenerateFormToolCallParametersDto } from './generate-form-tool-call-parameters-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GeneratePresentationToolCallParametersDto } from './generate-presentation-tool-call-parameters-dto';
 
 /**
  * @type EditorToolCallParametersDto

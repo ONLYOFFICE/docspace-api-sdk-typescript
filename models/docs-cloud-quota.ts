@@ -23,7 +23,7 @@
 import type { DocsCloudQuotaUser } from './docs-cloud-quota-user';
 
 /**
- * Represents the current user quota of a DocsCloud tenant.
+ * Represents the current user quota of a Docs Connect tenant.
  */
 export interface DocsCloudQuota {
     /**

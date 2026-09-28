@@ -197,7 +197,7 @@ export type FileDto = FileEntryDto &  {
      */
     'formFillingStatus'?: FormFillingStatus;
     /**
-     * Whether the PDF is a fillable form rather than a plain document. When the stored classification does not say,  the portal opens the file to find out, so the answer is reliable for a PDF and null for anything else.
+     * Whether the file is a PDF, and so offered as a fillable form. It is null for any other file type.
      * @type {boolean}
      * @memberof FileDto
      */

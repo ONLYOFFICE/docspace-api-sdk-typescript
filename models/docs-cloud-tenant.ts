@@ -23,7 +23,7 @@
 import type { DocsCloudPayment } from './docs-cloud-payment';
 
 /**
- * Represents a DocsCloud tenant of a portal.
+ * Represents a Docs Connect tenant of a portal.
  */
 export interface DocsCloudTenant {
     /**

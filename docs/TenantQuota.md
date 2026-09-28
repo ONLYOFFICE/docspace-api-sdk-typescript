@@ -49,9 +49,9 @@ Name | Type | Description | Notes
 **countAIAgent** | **number** | The number of AI agents. | [optional] [default to undefined]
 **aiTools** | **boolean** | Specifies if the AI tools enabled as a wallet service or not. | [optional] [default to undefined]
 **aiSearch** | **boolean** | Specifies if the AI search enabled as a wallet service or not. | [optional] [default to undefined]
-**docsCloud** | **number** | The number of DocsCloud users. | [optional] [default to undefined]
-**docsCloudDevPack** | **boolean** | Specifies if the DocsCloudDevPack enabled or not. | [optional] [default to undefined]
-**docsCloudTrial** | **boolean** | Specifies if the DocsCloudTrial enabled or not. | [optional] [default to undefined]
+**docsCloud** | **number** | The number of Docs Connect users. | [optional] [default to undefined]
+**docsCloudDevPack** | **boolean** | Specifies if the Docs Connect Dev Pack enabled or not. | [optional] [default to undefined]
+**docsCloudTrial** | **boolean** | Specifies if the Docs Connect trial enabled or not. | [optional] [default to undefined]
 
 ## Example
 

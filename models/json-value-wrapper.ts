@@ -23,9 +23,9 @@
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response.
+ * The successful API response containing an arbitrary JSON value.
  */
-export interface UnknownNullableWrapper {
+export interface JsonValueWrapper {
     'response'?: any;
     /**
      * The total number of items in the response

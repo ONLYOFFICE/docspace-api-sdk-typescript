@@ -144,65 +144,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for addFileToRecent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
          */
-        addFileToRecent: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        addFileToRecent: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('addFileToRecent', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/recent`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Stamps the file as just used by the calling account and puts it at the top of that account\'s Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  `GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among  the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
-         * @summary Add a file to Recent (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for addFileToRecentThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent-third-party/
-         */
-        addFileToRecentThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('addFileToRecentThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/recent`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -313,73 +257,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for changeVersionHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          */
-        changeVersionHistory: async (fileId: number, changeHistory: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeVersionHistory: async (fileId: number | string, changeHistory: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('changeVersionHistory', 'fileId', fileId)
             // verify required parameter 'changeHistory' is not null or undefined
             assertParamExists('changeVersionHistory', 'changeHistory', changeHistory)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/history`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(changeHistory, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
-         * @summary Change version history (third-party storage)
-         * @param {string} fileId The file whose version history is changed.
-         * @param {ChangeHistory} changeHistory The change to make to the revision group.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for changeVersionHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history-third-party/
-         */
-        changeVersionHistoryThirdParty: async (fileId: string, changeHistory: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('changeVersionHistoryThirdParty', 'fileId', fileId)
-            // verify required parameter 'changeHistory' is not null or undefined
-            assertParamExists('changeVersionHistoryThirdParty', 'changeHistory', changeHistory)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -437,60 +319,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for checkFillFormDraft operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
          */
-        checkFillFormDraft: async (fileId: number, checkFillFormDraft: CheckFillFormDraft, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkFillFormDraft: async (fileId: number | string, checkFillFormDraft: CheckFillFormDraft, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('checkFillFormDraft', 'fileId', fileId)
             // verify required parameter 'checkFillFormDraft' is not null or undefined
             assertParamExists('checkFillFormDraft', 'checkFillFormDraft', checkFillFormDraft)
-
-            const localVarPath = `/api/2.0/files/masterform/{fileId}/checkfillformdraft`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(checkFillFormDraft, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
-         * @summary Open a form draft for filling (third-party storage)
-         * @param {string} fileId The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-         * @param {CheckFillFormDraft} checkFillFormDraft The revision of the form to open and what the caller intends to do with it.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for checkFillFormDraftThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft-third-party/
-         */
-        checkFillFormDraftThirdParty: async (fileId: string, checkFillFormDraft: CheckFillFormDraft, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('checkFillFormDraftThirdParty', 'fileId', fileId)
-            // verify required parameter 'checkFillFormDraft' is not null or undefined
-            assertParamExists('checkFillFormDraftThirdParty', 'checkFillFormDraft', checkFillFormDraft)
 
             const localVarPath = `/api/2.0/files/masterform/{fileId}/checkfillformdraft`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -535,73 +368,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for copyFileAs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
          */
-        copyFileAs: async (fileId: number, copyAsJsonElement: CopyAsJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        copyFileAs: async (fileId: number | string, copyAsJsonElement: CopyAsJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('copyFileAs', 'fileId', fileId)
             // verify required parameter 'copyAsJsonElement' is not null or undefined
             assertParamExists('copyFileAs', 'copyAsJsonElement', copyAsJsonElement)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/copyas`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(copyAsJsonElement, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
-         * @summary Copy a file (third-party storage)
-         * @param {string} fileId The file to copy.
-         * @param {CopyAsJsonElement} copyAsJsonElement The title, the destination and the conversion options of the copy.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for copyFileAsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as-third-party/
-         */
-        copyFileAsThirdParty: async (fileId: string, copyAsJsonElement: CopyAsJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('copyFileAsThirdParty', 'fileId', fileId)
-            // verify required parameter 'copyAsJsonElement' is not null or undefined
-            assertParamExists('copyFileAsThirdParty', 'copyAsJsonElement', copyAsJsonElement)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/copyas`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -659,70 +430,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createEditSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/
          */
-        createEditSession: async (fileId: number, fileSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createEditSession: async (fileId: number | string, fileSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('createEditSession', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/edit_session`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (fileSize !== undefined) {
-                localVarQueryParameter['fileSize'] = fileSize;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
-         * @summary Create the editing session (third-party storage)
-         * @param {string} fileId The file whose content the session will replace; take the id from a folder listing or from the file itself.
-         * @param {number} [fileSize] The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createEditSessionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session-third-party/
-         */
-        createEditSessionThirdParty: async (fileId: string, fileSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('createEditSessionThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/edit_session`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -781,73 +491,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
          */
-        createFile: async (folderId: number, createFileJsonElement: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFile: async (folderId: number | string, createFileJsonElement: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createFile', 'folderId', folderId)
             // verify required parameter 'createFileJsonElement' is not null or undefined
             assertParamExists('createFile', 'createFileJsonElement', createFileJsonElement)
-
-            const localVarPath = `/api/2.0/files/{folderId}/file`
-                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createFileJsonElement, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
-         * @summary Create a file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateFileJsonElement} createFileJsonElement The title of the new file and the source of its content.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-third-party/
-         */
-        createFileThirdParty: async (folderId: string, createFileJsonElement: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('createFileThirdParty', 'folderId', folderId)
-            // verify required parameter 'createFileJsonElement' is not null or undefined
-            assertParamExists('createFileThirdParty', 'createFileJsonElement', createFileJsonElement)
 
             const localVarPath = `/api/2.0/files/{folderId}/file`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -961,73 +609,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createFilePrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/
          */
-        createFilePrimaryExternalLink: async (id: number, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFilePrimaryExternalLink: async (id: number | string, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('createFilePrimaryExternalLink', 'id', id)
             // verify required parameter 'fileLinkRequest' is not null or undefined
             assertParamExists('createFilePrimaryExternalLink', 'fileLinkRequest', fileLinkRequest)
-
-            const localVarPath = `/api/2.0/files/file/{id}/link`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(fileLinkRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
-         * @summary Create the file primary external link (third-party storage)
-         * @param {string} id The file the link points at.
-         * @param {FileLinkRequest} fileLinkRequest The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link-third-party/
-         */
-        createFilePrimaryExternalLinkThirdParty: async (id: string, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('createFilePrimaryExternalLinkThirdParty', 'id', id)
-            // verify required parameter 'fileLinkRequest' is not null or undefined
-            assertParamExists('createFilePrimaryExternalLinkThirdParty', 'fileLinkRequest', fileLinkRequest)
 
             const localVarPath = `/api/2.0/files/file/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1085,73 +671,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createHtmlFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
          */
-        createHtmlFile: async (folderId: number, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createHtmlFile: async (folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createHtmlFile', 'folderId', folderId)
             // verify required parameter 'createTextOrHtmlFile' is not null or undefined
             assertParamExists('createHtmlFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
-
-            const localVarPath = `/api/2.0/files/{folderId}/html`
-                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
-         * @summary Create an HTML file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createHtmlFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-third-party/
-         */
-        createHtmlFileThirdParty: async (folderId: string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('createHtmlFileThirdParty', 'folderId', folderId)
-            // verify required parameter 'createTextOrHtmlFile' is not null or undefined
-            assertParamExists('createHtmlFileThirdParty', 'createTextOrHtmlFile', createTextOrHtmlFile)
 
             const localVarPath = `/api/2.0/files/{folderId}/html`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -1265,73 +789,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for createTextFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
          */
-        createTextFile: async (folderId: number, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createTextFile: async (folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createTextFile', 'folderId', folderId)
             // verify required parameter 'createTextOrHtmlFile' is not null or undefined
             assertParamExists('createTextFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
-
-            const localVarPath = `/api/2.0/files/{folderId}/text`
-                .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
-         * @summary Create a text file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createTextFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-third-party/
-         */
-        createTextFileThirdParty: async (folderId: string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('createTextFileThirdParty', 'folderId', folderId)
-            // verify required parameter 'createTextOrHtmlFile' is not null or undefined
-            assertParamExists('createTextFileThirdParty', 'createTextOrHtmlFile', createTextOrHtmlFile)
 
             const localVarPath = `/api/2.0/files/{folderId}/text`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -1489,78 +951,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for deleteFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
          */
-        deleteFile: async (fileId: number, _delete: Delete, returnSingleOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteFile: async (fileId: number | string, _delete: Delete, returnSingleOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('deleteFile', 'fileId', fileId)
             // verify required parameter '_delete' is not null or undefined
             assertParamExists('deleteFile', '_delete', _delete)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (returnSingleOperation !== undefined) {
-                localVarQueryParameter['ReturnSingleOperation'] = returnSingleOperation;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(_delete, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
-         * @summary Delete a file (third-party storage)
-         * @param {string} fileId The file to delete.
-         * @param {Delete} _delete When and how the file is deleted.
-         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-third-party/
-         */
-        deleteFileThirdParty: async (fileId: string, _delete: Delete, returnSingleOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('deleteFileThirdParty', 'fileId', fileId)
-            // verify required parameter '_delete' is not null or undefined
-            assertParamExists('deleteFileThirdParty', '_delete', _delete)
 
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -1789,65 +1184,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getAllFormRoles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles/
          */
-        getAllFormRoles: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllFormRoles: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getAllFormRoles', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/formroles`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
-         * @summary Get form roles (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAllFormRolesThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles-third-party/
-         */
-        getAllFormRolesThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getAllFormRolesThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/formroles`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -1902,57 +1241,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getEditDiffUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url/
          */
-        getEditDiffUrl: async (fileId: number, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEditDiffUrl: async (fileId: number | string, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getEditDiffUrl', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/edit/diff`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (version !== undefined) {
-                localVarQueryParameter['version'] = version;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
-         * @summary Get changes URL (third-party storage)
-         * @param {string} fileId The file whose changes are read.
-         * @param {number} [version] The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEditDiffUrlThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url-third-party/
-         */
-        getEditDiffUrlThirdParty: async (fileId: string, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getEditDiffUrlThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/edit/diff`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -1997,52 +1288,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getEditHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history/
          */
-        getEditHistory: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEditHistory: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getEditHistory', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/edit/history`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
-         * @summary Get version history (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEditHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history-third-party/
-         */
-        getEditHistoryThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getEditHistoryThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/edit/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2083,65 +1331,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getEncryptionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info/
          */
-        getEncryptionInfo: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getEncryptionInfo: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getEncryptionInfo', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/{fileId}/access`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
-         * @summary Get file encryption information (third-party storage)
-         * @param {string} fileId The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info-third-party/
-         */
-        getEncryptionInfoThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getEncryptionInfoThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/{fileId}/access`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2276,57 +1468,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getFileInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info/
          */
-        getFileInfo: async (fileId: number, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFileInfo: async (fileId: number | string, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileInfo', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (version !== undefined) {
-                localVarQueryParameter['version'] = version;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. `version` picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person\'s own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
-         * @summary Get file information (third-party storage)
-         * @param {string} fileId The file to read.
-         * @param {number} [version] The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info-third-party/
-         */
-        getFileInfoThirdParty: async (fileId: string, version?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getFileInfoThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2373,75 +1517,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getFileLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links/
          */
-        getFileLinks: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFileLinks: async (id: number | string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFileLinks', 'id', id)
-
-            const localVarPath = `/api/2.0/files/file/{id}/links`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
-         * @summary Get file external links (third-party storage)
-         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links-third-party/
-         */
-        getFileLinksThirdParty: async (id: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getFileLinksThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/file/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2505,62 +1583,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getFilePrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link/
          */
-        getFilePrimaryExternalLink: async (id: number, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFilePrimaryExternalLink: async (id: number | string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getFilePrimaryExternalLink', 'id', id)
-
-            const localVarPath = `/api/2.0/files/file/{id}/link`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (count !== undefined) {
-                localVarQueryParameter['count'] = count;
-            }
-
-            if (startIndex !== undefined) {
-                localVarQueryParameter['startIndex'] = startIndex;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
-         * @summary Get the file primary external link (third-party storage)
-         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link-third-party/
-         */
-        getFilePrimaryExternalLinkThirdParty: async (id: string, count?: number, startIndex?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('getFilePrimaryExternalLinkThirdParty', 'id', id)
 
             const localVarPath = `/api/2.0/files/file/{id}/link`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2609,52 +1634,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getFileVersionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
          */
-        getFileVersionInfo: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFileVersionInfo: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getFileVersionInfo', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/history`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
-         * @summary Get file versions (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileVersionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info-third-party/
-         */
-        getFileVersionInfoThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getFileVersionInfoThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2795,65 +1777,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getPresignedFileUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri/
          */
-        getPresignedFileUri: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPresignedFileUri: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getPresignedFileUri', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/presigned`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal\'s file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
-         * @summary Get a signed download address (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPresignedFileUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri-third-party/
-         */
-        getPresignedFileUriThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getPresignedFileUriThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/presigned`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2907,65 +1833,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getPresignedUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri/
          */
-        getPresignedUri: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getPresignedUri: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getPresignedUri', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/presigneduri`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
-         * @summary Get file download link (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPresignedUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri-third-party/
-         */
-        getPresignedUriThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getPresignedUriThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/presigneduri`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3019,65 +1889,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for getProtectedFileUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
          */
-        getProtectedFileUsers: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProtectedFileUsers: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('getProtectedFileUsers', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/protectusers`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
-         * @summary Get users for document protection (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getProtectedFileUsersThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users-third-party/
-         */
-        getProtectedFileUsersThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('getProtectedFileUsersThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/protectusers`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3243,65 +2057,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for isFormPDF operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf/
          */
-        isFormPDF: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        isFormPDF: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('isFormPDF', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/isformpdf`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is `true` only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without  being read. Use it before offering the form-filling operations on a file, because a document that answers  `false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
-         * @summary Check the PDF file (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for isFormPDFThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdfthird-party/
-         */
-        isFormPDFThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('isFormPDFThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/isformpdf`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3356,73 +2114,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for lockFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
          */
-        lockFile: async (fileId: number, lockFileParameters: LockFileParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lockFile: async (fileId: number | string, lockFileParameters: LockFileParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('lockFile', 'fileId', fileId)
             // verify required parameter 'lockFileParameters' is not null or undefined
             assertParamExists('lockFile', 'lockFileParameters', lockFileParameters)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/lock`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(lockFileParameters, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
-         * @summary Lock a file (third-party storage)
-         * @param {string} fileId The file to lock or unlock.
-         * @param {LockFileParameters} lockFileParameters The lock state to reach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for lockFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file-third-party/
-         */
-        lockFileThirdParty: async (fileId: string, lockFileParameters: LockFileParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('lockFileThirdParty', 'fileId', fileId)
-            // verify required parameter 'lockFileParameters' is not null or undefined
-            assertParamExists('lockFileThirdParty', 'lockFileParameters', lockFileParameters)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/lock`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3544,77 +2240,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for openEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/
          */
-        openEditFile: async (fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        openEditFile: async (fileId: number | string, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('openEditFile', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/openedit`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (version !== undefined) {
-                localVarQueryParameter['version'] = version;
-            }
-
-            if (view !== undefined) {
-                localVarQueryParameter['view'] = view;
-            }
-
-            if (editorType !== undefined) {
-                localVarQueryParameter['editorType'] = editorType;
-            }
-
-            if (edit !== undefined) {
-                localVarQueryParameter['edit'] = edit;
-            }
-
-            if (fill !== undefined) {
-                localVarQueryParameter['fill'] = fill;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
-         * @summary Get the editor configuration (third-party storage)
-         * @param {string} fileId The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
-         * @param {number} [version] Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file.
-         * @param {boolean} [view] Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller\'s  rights and the room the file lies in allow.
-         * @param {EditorType} [editorType] Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page.
-         * @param {boolean} [edit] Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling.
-         * @param {boolean} [fill] Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for openEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file-third-party/
-         */
-        openEditFileThirdParty: async (fileId: string, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('openEditFileThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/openedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3677,62 +2305,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for restoreFileVersion operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version/
          */
-        restoreFileVersion: async (fileId: number, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        restoreFileVersion: async (fileId: number | string, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('restoreFileVersion', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/restoreversion`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (version !== undefined) {
-                localVarQueryParameter['version'] = version;
-            }
-
-            if (url !== undefined) {
-                localVarQueryParameter['url'] = url;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
-         * @summary Restore a file version (third-party storage)
-         * @param {string} fileId The file whose version is restored.
-         * @param {number} [version] The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one.
-         * @param {string} [url] The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for restoreFileVersionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version-third-party/
-         */
-        restoreFileVersionThirdParty: async (fileId: string, version?: number, url?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('restoreFileVersionThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/restoreversion`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3785,89 +2360,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for saveEditingFileFromForm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          */
-        saveEditingFileFromForm: async (fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveEditingFileFromForm: async (fileId: number | string, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('saveEditingFileFromForm', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/saveediting`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (downloadUri !== undefined) {
-                localVarQueryParameter['DownloadUri'] = downloadUri;
-            }
-
-
-            if (fileExtension !== undefined) { 
-                localVarFormParams.append('FileExtension', fileExtension as any);
-            }
-    
-            if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
-            }
-    
-            if (forcesave !== undefined) { 
-                localVarFormParams.append('Forcesave', String(forcesave) as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
-         * @summary Save edited file content (third-party storage)
-         * @param {string} fileId The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
-         * @param {string} [downloadUri] An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given.
-         * @param {string} [fileExtension] The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed.
-         * @param {File} [file] The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file.
-         * @param {boolean} [forcesave] Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for saveEditingFileFromFormThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form-third-party/
-         */
-        saveEditingFileFromFormThirdParty: async (fileId: string, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('saveEditingFileFromFormThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/saveediting`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3942,7 +2437,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for saveFileAsPdf operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
          */
-        saveFileAsPdf: async (id: number, saveAsPdf: SaveAsPdf, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveFileAsPdf: async (id: number | string, saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('saveFileAsPdf', 'id', id)
             // verify required parameter 'saveAsPdf' is not null or undefined
@@ -3988,68 +2483,6 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(saveAsPdf, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
-         * @summary Save a file as PDF (third-party storage)
-         * @param {string} id The file to convert; it is left untouched.
-         * @param {ThirdPartySaveAsPdf} thirdPartySaveAsPdf The destination folder and the name of the PDF.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for saveFileAsPdfThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf-third-party/
-         */
-        saveFileAsPdfThirdParty: async (id: string, thirdPartySaveAsPdf: ThirdPartySaveAsPdf, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('saveFileAsPdfThirdParty', 'id', id)
-            // verify required parameter 'thirdPartySaveAsPdf' is not null or undefined
-            assertParamExists('saveFileAsPdfThirdParty', 'thirdPartySaveAsPdf', thirdPartySaveAsPdf)
-
-            const localVarPath = `/api/2.0/files/file/{id}/saveaspdf`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(thirdPartySaveAsPdf, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4126,73 +2559,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setCustomFilterTag operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
          */
-        setCustomFilterTag: async (fileId: number, customFilterParameters: CustomFilterParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setCustomFilterTag: async (fileId: number | string, customFilterParameters: CustomFilterParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('setCustomFilterTag', 'fileId', fileId)
             // verify required parameter 'customFilterParameters' is not null or undefined
             assertParamExists('setCustomFilterTag', 'customFilterParameters', customFilterParameters)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/customfilter`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customFilterParameters, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
-         * @summary Set the Custom Filter editing mode (third-party storage)
-         * @param {string} fileId The spreadsheet whose Custom Filter mode is switched.
-         * @param {CustomFilterParameters} customFilterParameters The Custom Filter state to reach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setCustomFilterTagThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag-third-party/
-         */
-        setCustomFilterTagThirdParty: async (fileId: string, customFilterParameters: CustomFilterParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('setCustomFilterTagThirdParty', 'fileId', fileId)
-            // verify required parameter 'customFilterParameters' is not null or undefined
-            assertParamExists('setCustomFilterTagThirdParty', 'customFilterParameters', customFilterParameters)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/customfilter`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -4250,69 +2621,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setEncryptionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/
          */
-        setEncryptionInfo: async (fileId: number, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setEncryptionInfo: async (fileId: number | string, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('setEncryptionInfo', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/{fileId}/access`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(accessRequestKeyDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
-         * @summary Set file encryption information (third-party storage)
-         * @param {string} fileId The file the keys are issued for; it has to lie in a private room.
-         * @param {Array<AccessRequestKeyDto>} [accessRequestKeyDto] One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person\'s key.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info-third-party/
-         */
-        setEncryptionInfoThirdParty: async (fileId: string, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('setEncryptionInfoThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/{fileId}/access`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -4370,73 +2681,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setFileExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/
          */
-        setFileExternalLink: async (id: number, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setFileExternalLink: async (id: number | string, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setFileExternalLink', 'id', id)
             // verify required parameter 'fileLinkRequest' is not null or undefined
             assertParamExists('setFileExternalLink', 'fileLinkRequest', fileLinkRequest)
-
-            const localVarPath = `/api/2.0/files/file/{id}/links`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(fileLinkRequest, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
-         * @summary Set a file external link (third-party storage)
-         * @param {string} id The file the link points at.
-         * @param {FileLinkRequest} fileLinkRequest The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setFileExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link-third-party/
-         */
-        setFileExternalLinkThirdParty: async (id: string, fileLinkRequest: FileLinkRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('setFileExternalLinkThirdParty', 'id', id)
-            // verify required parameter 'fileLinkRequest' is not null or undefined
-            assertParamExists('setFileExternalLinkThirdParty', 'fileLinkRequest', fileLinkRequest)
 
             const localVarPath = `/api/2.0/files/file/{id}/links`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -4494,69 +2743,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for setFileOrder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order/
          */
-        setFileOrder: async (fileId: number, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setFileOrder: async (fileId: number | string, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('setFileOrder', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/{fileId}/order`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(orderRequestDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
-         * @summary Set file order (third-party storage)
-         * @param {string} fileId The file to move.
-         * @param {OrderRequestDto} [orderRequestDto] The position the file is to take.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setFileOrderThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order-third-party/
-         */
-        setFileOrderThirdParty: async (fileId: string, orderRequestDto?: OrderRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('setFileOrderThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/{fileId}/order`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -4670,60 +2859,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for startEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
          */
-        startEditFile: async (fileId: number, startEdit: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startEditFile: async (fileId: number | string, startEdit: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startEditFile', 'fileId', fileId)
             // verify required parameter 'startEdit' is not null or undefined
             assertParamExists('startEditFile', 'startEdit', startEdit)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/startedit`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(startEdit, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
-         * @summary Open an editing session (third-party storage)
-         * @param {string} fileId The file to open the editing session on. The caller needs edit access to it.
-         * @param {StartEdit} startEdit The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for startEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file-third-party/
-         */
-        startEditFileThirdParty: async (fileId: string, startEdit: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('startEditFileThirdParty', 'fileId', fileId)
-            // verify required parameter 'startEdit' is not null or undefined
-            assertParamExists('startEditFileThirdParty', 'startEdit', startEdit)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/startedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -4767,65 +2907,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for startFillingFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/
          */
-        startFillingFile: async (fileId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startFillingFile: async (fileId: number | string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startFillingFile', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/startfilling`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
-         * @summary Start filling a form (third-party storage)
-         * @param {string} fileId The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for startFillingFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file-third-party/
-         */
-        startFillingFileThirdParty: async (fileId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('startFillingFileThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/startfilling`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -4880,70 +2964,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for toggleFileFavorite operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite/
          */
-        toggleFileFavorite: async (fileId: number, favorite?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        toggleFileFavorite: async (fileId: number | string, favorite?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('toggleFileFavorite', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/favorites/{fileId}`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
-
-            if (favorite !== undefined) {
-                localVarQueryParameter['favorite'] = favorite;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
-         * @summary Set the file favorite status (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {boolean} [favorite] Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for toggleFileFavoriteThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite-third-party/
-         */
-        toggleFileFavoriteThirdParty: async (fileId: string, favorite?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('toggleFileFavoriteThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/favorites/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -5004,67 +3027,9 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for trackEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file/
          */
-        trackEditFile: async (fileId: number, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        trackEditFile: async (fileId: number | string, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('trackEditFile', 'fileId', fileId)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}/trackeditfile`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            if (tabId !== undefined) {
-                localVarQueryParameter['tabId'] = tabId;
-            }
-
-            if (docKeyForTrack !== undefined) {
-                localVarQueryParameter['docKeyForTrack'] = docKeyForTrack;
-            }
-
-            if (isFinish !== undefined) {
-                localVarQueryParameter['isFinish'] = isFinish;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
-         * @summary Track an editing session (third-party storage)
-         * @param {string} fileId The file whose editing session is being tracked.
-         * @param {string} [tabId] The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor.
-         * @param {string} [docKeyForTrack] The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file\'s current key on every call, so a key left over from an older revision is refused.
-         * @param {boolean} [isFinish] Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for trackEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file-third-party/
-         */
-        trackEditFileThirdParty: async (fileId: string, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('trackEditFileThirdParty', 'fileId', fileId)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/trackeditfile`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -5118,60 +3083,11 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * REST API Reference for updateFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
          */
-        updateFile: async (fileId: number, updateFile: UpdateFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFile: async (fileId: number | string, updateFile: UpdateFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('updateFile', 'fileId', fileId)
             // verify required parameter 'updateFile' is not null or undefined
             assertParamExists('updateFile', 'updateFile', updateFile)
-
-            const localVarPath = `/api/2.0/files/file/{fileId}`
-                .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication cookieAuth required
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateFile, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
-         * @summary Update a file (third-party storage)
-         * @param {string} fileId The file to update.
-         * @param {UpdateFile} updateFile The new title and the version to restore.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for updateFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-third-party/
-         */
-        updateFileThirdParty: async (fileId: string, updateFile: UpdateFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'fileId' is not null or undefined
-            assertParamExists('updateFileThirdParty', 'fileId', fileId)
-            // verify required parameter 'updateFile' is not null or undefined
-            assertParamExists('updateFileThirdParty', 'updateFile', updateFile)
 
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -5225,25 +3141,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for addFileToRecent operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
          */
-        async addFileToRecent(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async addFileToRecent(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.addFileToRecent(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.addFileToRecent']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Stamps the file as just used by the calling account and puts it at the top of that account\'s Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  `GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among  the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
-         * @summary Add a file to Recent (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for addFileToRecentThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent-third-party/
-         */
-        async addFileToRecentThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addFileToRecentThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.addFileToRecentThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5271,26 +3172,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for changeVersionHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          */
-        async changeVersionHistory(fileId: number, changeHistory: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper>> {
+        async changeVersionHistory(fileId: number | string, changeHistory: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistory(fileId, changeHistory, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.changeVersionHistory']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
-         * @summary Change version history (third-party storage)
-         * @param {string} fileId The file whose version history is changed.
-         * @param {ChangeHistory} changeHistory The change to make to the revision group.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for changeVersionHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history-third-party/
-         */
-        async changeVersionHistoryThirdParty(fileId: string, changeHistory: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistoryThirdParty(fileId, changeHistory, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.changeVersionHistoryThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5303,26 +3188,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for checkFillFormDraft operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
          */
-        async checkFillFormDraft(fileId: number, checkFillFormDraft: CheckFillFormDraft, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+        async checkFillFormDraft(fileId: number | string, checkFillFormDraft: CheckFillFormDraft, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkFillFormDraft(fileId, checkFillFormDraft, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.checkFillFormDraft']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
-         * @summary Open a form draft for filling (third-party storage)
-         * @param {string} fileId The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-         * @param {CheckFillFormDraft} checkFillFormDraft The revision of the form to open and what the caller intends to do with it.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for checkFillFormDraftThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft-third-party/
-         */
-        async checkFillFormDraftThirdParty(fileId: string, checkFillFormDraft: CheckFillFormDraft, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.checkFillFormDraftThirdParty(fileId, checkFillFormDraft, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.checkFillFormDraftThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5335,26 +3204,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for copyFileAs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
          */
-        async copyFileAs(fileId: number, copyAsJsonElement: CopyAsJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseWrapper>> {
+        async copyFileAs(fileId: number | string, copyAsJsonElement: CopyAsJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.copyFileAs(fileId, copyAsJsonElement, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.copyFileAs']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
-         * @summary Copy a file (third-party storage)
-         * @param {string} fileId The file to copy.
-         * @param {CopyAsJsonElement} copyAsJsonElement The title, the destination and the conversion options of the copy.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for copyFileAsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as-third-party/
-         */
-        async copyFileAsThirdParty(fileId: string, copyAsJsonElement: CopyAsJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.copyFileAsThirdParty(fileId, copyAsJsonElement, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.copyFileAsThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5367,26 +3220,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createEditSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/
          */
-        async createEditSession(fileId: number, fileSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper>> {
+        async createEditSession(fileId: number | string, fileSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createEditSession(fileId, fileSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createEditSession']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
-         * @summary Create the editing session (third-party storage)
-         * @param {string} fileId The file whose content the session will replace; take the id from a folder listing or from the file itself.
-         * @param {number} [fileSize] The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createEditSessionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session-third-party/
-         */
-        async createEditSessionThirdParty(fileId: string, fileSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createEditSessionThirdParty(fileId, fileSize, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createEditSessionThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5399,26 +3236,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
          */
-        async createFile(folderId: number, createFileJsonElement: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async createFile(folderId: number | string, createFileJsonElement: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFile(folderId, createFileJsonElement, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
-         * @summary Create a file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateFileJsonElement} createFileJsonElement The title of the new file and the source of its content.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-third-party/
-         */
-        async createFileThirdParty(folderId: string, createFileJsonElement: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createFileThirdParty(folderId, createFileJsonElement, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5446,26 +3267,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createFilePrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/
          */
-        async createFilePrimaryExternalLink(id: number, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async createFilePrimaryExternalLink(id: number | string, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createFilePrimaryExternalLink(id, fileLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createFilePrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
-         * @summary Create the file primary external link (third-party storage)
-         * @param {string} id The file the link points at.
-         * @param {FileLinkRequest} fileLinkRequest The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link-third-party/
-         */
-        async createFilePrimaryExternalLinkThirdParty(id: string, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createFilePrimaryExternalLinkThirdParty(id, fileLinkRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createFilePrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5478,26 +3283,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createHtmlFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
          */
-        async createHtmlFile(folderId: number, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async createHtmlFile(folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFile(folderId, createTextOrHtmlFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createHtmlFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
-         * @summary Create an HTML file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createHtmlFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-third-party/
-         */
-        async createHtmlFileThirdParty(folderId: string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileThirdParty(folderId, createTextOrHtmlFile, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createHtmlFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5525,26 +3314,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createTextFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
          */
-        async createTextFile(folderId: number, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async createTextFile(folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFile(folderId, createTextOrHtmlFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createTextFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
-         * @summary Create a text file (third-party storage)
-         * @param {string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for createTextFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-third-party/
-         */
-        async createTextFileThirdParty(folderId: string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFileThirdParty(folderId, createTextOrHtmlFile, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.createTextFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5588,27 +3361,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for deleteFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
          */
-        async deleteFile(fileId: number, _delete: Delete, returnSingleOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+        async deleteFile(fileId: number | string, _delete: Delete, returnSingleOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFile(fileId, _delete, returnSingleOperation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.deleteFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
-         * @summary Delete a file (third-party storage)
-         * @param {string} fileId The file to delete.
-         * @param {Delete} _delete When and how the file is deleted.
-         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for deleteFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-third-party/
-         */
-        async deleteFileThirdParty(fileId: string, _delete: Delete, returnSingleOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFileThirdParty(fileId, _delete, returnSingleOperation, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.deleteFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5665,25 +3421,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAllFormRoles operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles/
          */
-        async getAllFormRoles(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FormRoleArrayWrapper>> {
+        async getAllFormRoles(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FormRoleArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllFormRoles(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getAllFormRoles']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
-         * @summary Get form roles (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getAllFormRolesThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles-third-party/
-         */
-        async getAllFormRolesThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FormRoleArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllFormRolesThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getAllFormRolesThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5696,26 +3437,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getEditDiffUrl operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url/
          */
-        async getEditDiffUrl(fileId: number, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryDataWrapper>> {
+        async getEditDiffUrl(fileId: number | string, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryDataWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEditDiffUrl(fileId, version, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getEditDiffUrl']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
-         * @summary Get changes URL (third-party storage)
-         * @param {string} fileId The file whose changes are read.
-         * @param {number} [version] The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEditDiffUrlThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url-third-party/
-         */
-        async getEditDiffUrlThirdParty(fileId: string, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryDataWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEditDiffUrlThirdParty(fileId, version, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getEditDiffUrlThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5727,25 +3452,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getEditHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history/
          */
-        async getEditHistory(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
+        async getEditHistory(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEditHistory(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getEditHistory']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
-         * @summary Get version history (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEditHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history-third-party/
-         */
-        async getEditHistoryThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEditHistoryThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getEditHistoryThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5757,25 +3467,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getEncryptionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info/
          */
-        async getEncryptionInfo(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEncryptionInfoWrapper>> {
+        async getEncryptionInfo(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEncryptionInfoWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEncryptionInfo(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getEncryptionInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
-         * @summary Get file encryption information (third-party storage)
-         * @param {string} fileId The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info-third-party/
-         */
-        async getEncryptionInfoThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEncryptionInfoWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getEncryptionInfoThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getEncryptionInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5807,26 +3502,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFileInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info/
          */
-        async getFileInfo(fileId: number, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async getFileInfo(fileId: number | string, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFileInfo(fileId, version, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. `version` picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person\'s own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
-         * @summary Get file information (third-party storage)
-         * @param {string} fileId The file to read.
-         * @param {number} [version] The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info-third-party/
-         */
-        async getFileInfoThirdParty(fileId: string, version?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileInfoThirdParty(fileId, version, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5840,27 +3519,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFileLinks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links/
          */
-        async getFileLinks(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
+        async getFileLinks(id: number | string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFileLinks(id, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileLinks']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
-         * @summary Get file external links (third-party storage)
-         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links-third-party/
-         */
-        async getFileLinksThirdParty(id: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileLinksThirdParty(id, count, startIndex, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileLinksThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5874,27 +3536,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFilePrimaryExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link/
          */
-        async getFilePrimaryExternalLink(id: number, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async getFilePrimaryExternalLink(id: number | string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFilePrimaryExternalLink(id, count, startIndex, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getFilePrimaryExternalLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
-         * @summary Get the file primary external link (third-party storage)
-         * @param {string} id The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {number} [count] How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-         * @param {number} [startIndex] How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link-third-party/
-         */
-        async getFilePrimaryExternalLinkThirdParty(id: string, count?: number, startIndex?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFilePrimaryExternalLinkThirdParty(id, count, startIndex, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getFilePrimaryExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5906,25 +3551,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getFileVersionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
          */
-        async getFileVersionInfo(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper>> {
+        async getFileVersionInfo(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getFileVersionInfo(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileVersionInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
-         * @summary Get file versions (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getFileVersionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info-third-party/
-         */
-        async getFileVersionInfoThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileVersionInfoThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getFileVersionInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5966,25 +3596,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getPresignedFileUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri/
          */
-        async getPresignedFileUri(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileLinkWrapper>> {
+        async getPresignedFileUri(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileLinkWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPresignedFileUri(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getPresignedFileUri']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal\'s file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
-         * @summary Get a signed download address (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPresignedFileUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri-third-party/
-         */
-        async getPresignedFileUriThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileLinkWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPresignedFileUriThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getPresignedFileUriThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -5996,25 +3611,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getPresignedUri operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri/
          */
-        async getPresignedUri(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+        async getPresignedUri(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPresignedUri(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getPresignedUri']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
-         * @summary Get file download link (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getPresignedUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri-third-party/
-         */
-        async getPresignedUriThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getPresignedUriThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getPresignedUriThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6026,25 +3626,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getProtectedFileUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
          */
-        async getProtectedFileUsers(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
+        async getProtectedFileUsers(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProtectedFileUsers(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getProtectedFileUsers']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
-         * @summary Get users for document protection (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for getProtectedFileUsersThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users-third-party/
-         */
-        async getProtectedFileUsersThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProtectedFileUsersThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.getProtectedFileUsersThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6086,25 +3671,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for isFormPDF operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdf/
          */
-        async isFormPDF(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+        async isFormPDF(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.isFormPDF(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.isFormPDF']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is `true` only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without  being read. Use it before offering the form-filling operations on a file, because a document that answers  `false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
-         * @summary Check the PDF file (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for isFormPDFThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdfthird-party/
-         */
-        async isFormPDFThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.isFormPDFThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.isFormPDFThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6117,26 +3687,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for lockFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
          */
-        async lockFile(fileId: number, lockFileParameters: LockFileParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async lockFile(fileId: number | string, lockFileParameters: LockFileParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.lockFile(fileId, lockFileParameters, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.lockFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
-         * @summary Lock a file (third-party storage)
-         * @param {string} fileId The file to lock or unlock.
-         * @param {LockFileParameters} lockFileParameters The lock state to reach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for lockFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file-third-party/
-         */
-        async lockFileThirdParty(fileId: string, lockFileParameters: LockFileParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lockFileThirdParty(fileId, lockFileParameters, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.lockFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6169,30 +3723,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for openEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/
          */
-        async openEditFile(fileId: number, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfigurationWrapper>> {
+        async openEditFile(fileId: number | string, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConfigurationWrapper | ThirdPartyConfigurationWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.openEditFile(fileId, version, view, editorType, edit, fill, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.openEditFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
-         * @summary Get the editor configuration (third-party storage)
-         * @param {string} fileId The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
-         * @param {number} [version] Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file.
-         * @param {boolean} [view] Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller\'s  rights and the room the file lies in allow.
-         * @param {EditorType} [editorType] Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page.
-         * @param {boolean} [edit] Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling.
-         * @param {boolean} [fill] Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for openEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file-third-party/
-         */
-        async openEditFileThirdParty(fileId: string, version?: number, view?: boolean, editorType?: EditorType, edit?: boolean, fill?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyConfigurationWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.openEditFileThirdParty(fileId, version, view, editorType, edit, fill, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.openEditFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6206,27 +3740,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for restoreFileVersion operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version/
          */
-        async restoreFileVersion(fileId: number, version?: number, url?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
+        async restoreFileVersion(fileId: number | string, version?: number, url?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.restoreFileVersion(fileId, version, url, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.restoreFileVersion']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
-         * @summary Restore a file version (third-party storage)
-         * @param {string} fileId The file whose version is restored.
-         * @param {number} [version] The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one.
-         * @param {string} [url] The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for restoreFileVersionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version-third-party/
-         */
-        async restoreFileVersionThirdParty(fileId: string, version?: number, url?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EditHistoryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreFileVersionThirdParty(fileId, version, url, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.restoreFileVersionThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6242,29 +3759,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for saveEditingFileFromForm operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          */
-        async saveEditingFileFromForm(fileId: number, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async saveEditingFileFromForm(fileId: number | string, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFileFromForm(fileId, downloadUri, fileExtension, file, forcesave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.saveEditingFileFromForm']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
-         * @summary Save edited file content (third-party storage)
-         * @param {string} fileId The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
-         * @param {string} [downloadUri] An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given.
-         * @param {string} [fileExtension] The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed.
-         * @param {File} [file] The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file.
-         * @param {boolean} [forcesave] Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for saveEditingFileFromFormThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form-third-party/
-         */
-        async saveEditingFileFromFormThirdParty(fileId: string, downloadUri?: string, fileExtension?: string, file?: File, forcesave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveEditingFileFromFormThirdParty(fileId, downloadUri, fileExtension, file, forcesave, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.saveEditingFileFromFormThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6277,26 +3775,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for saveFileAsPdf operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
          */
-        async saveFileAsPdf(id: number, saveAsPdf: SaveAsPdf, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async saveFileAsPdf(id: number | string, saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saveFileAsPdf(id, saveAsPdf, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.saveFileAsPdf']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
-         * @summary Save a file as PDF (third-party storage)
-         * @param {string} id The file to convert; it is left untouched.
-         * @param {ThirdPartySaveAsPdf} thirdPartySaveAsPdf The destination folder and the name of the PDF.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for saveFileAsPdfThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf-third-party/
-         */
-        async saveFileAsPdfThirdParty(id: string, thirdPartySaveAsPdf: ThirdPartySaveAsPdf, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveFileAsPdfThirdParty(id, thirdPartySaveAsPdf, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.saveFileAsPdfThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6325,26 +3807,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for setCustomFilterTag operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
          */
-        async setCustomFilterTag(fileId: number, customFilterParameters: CustomFilterParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async setCustomFilterTag(fileId: number | string, customFilterParameters: CustomFilterParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setCustomFilterTag(fileId, customFilterParameters, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setCustomFilterTag']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
-         * @summary Set the Custom Filter editing mode (third-party storage)
-         * @param {string} fileId The spreadsheet whose Custom Filter mode is switched.
-         * @param {CustomFilterParameters} customFilterParameters The Custom Filter state to reach.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setCustomFilterTagThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag-third-party/
-         */
-        async setCustomFilterTagThirdParty(fileId: string, customFilterParameters: CustomFilterParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setCustomFilterTagThirdParty(fileId, customFilterParameters, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.setCustomFilterTagThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6357,26 +3823,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for setEncryptionInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/
          */
-        async setEncryptionInfo(fileId: number, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async setEncryptionInfo(fileId: number | string, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setEncryptionInfo(fileId, accessRequestKeyDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setEncryptionInfo']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
-         * @summary Set file encryption information (third-party storage)
-         * @param {string} fileId The file the keys are issued for; it has to lie in a private room.
-         * @param {Array<AccessRequestKeyDto>} [accessRequestKeyDto] One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person\'s key.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info-third-party/
-         */
-        async setEncryptionInfoThirdParty(fileId: string, accessRequestKeyDto?: Array<AccessRequestKeyDto>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setEncryptionInfoThirdParty(fileId, accessRequestKeyDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.setEncryptionInfoThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6389,26 +3839,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for setFileExternalLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link/
          */
-        async setFileExternalLink(id: number, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
+        async setFileExternalLink(id: number | string, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setFileExternalLink(id, fileLinkRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setFileExternalLink']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
-         * @summary Set a file external link (third-party storage)
-         * @param {string} id The file the link points at.
-         * @param {FileLinkRequest} fileLinkRequest The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setFileExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link-third-party/
-         */
-        async setFileExternalLinkThirdParty(id: string, fileLinkRequest: FileLinkRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileExternalLinkThirdParty(id, fileLinkRequest, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.setFileExternalLinkThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6421,26 +3855,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for setFileOrder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order/
          */
-        async setFileOrder(fileId: number, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async setFileOrder(fileId: number | string, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setFileOrder(fileId, orderRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setFileOrder']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
-         * @summary Set file order (third-party storage)
-         * @param {string} fileId The file to move.
-         * @param {OrderRequestDto} [orderRequestDto] The position the file is to take.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for setFileOrderThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order-third-party/
-         */
-        async setFileOrderThirdParty(fileId: string, orderRequestDto?: OrderRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setFileOrderThirdParty(fileId, orderRequestDto, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.setFileOrderThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6468,26 +3886,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for startEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
          */
-        async startEditFile(fileId: number, startEdit: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+        async startEditFile(fileId: number | string, startEdit: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startEditFile(fileId, startEdit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.startEditFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
-         * @summary Open an editing session (third-party storage)
-         * @param {string} fileId The file to open the editing session on. The caller needs edit access to it.
-         * @param {StartEdit} startEdit The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for startEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file-third-party/
-         */
-        async startEditFileThirdParty(fileId: string, startEdit: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startEditFileThirdParty(fileId, startEdit, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.startEditFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6499,25 +3901,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for startFillingFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/
          */
-        async startFillingFile(fileId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async startFillingFile(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.startFillingFile(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.startFillingFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
-         * @summary Start filling a form (third-party storage)
-         * @param {string} fileId The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for startFillingFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file-third-party/
-         */
-        async startFillingFileThirdParty(fileId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startFillingFileThirdParty(fileId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.startFillingFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6530,26 +3917,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for toggleFileFavorite operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite/
          */
-        async toggleFileFavorite(fileId: number, favorite?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+        async toggleFileFavorite(fileId: number | string, favorite?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.toggleFileFavorite(fileId, favorite, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.toggleFileFavorite']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
-         * @summary Set the file favorite status (third-party storage)
-         * @param {string} fileId The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-         * @param {boolean} [favorite] Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for toggleFileFavoriteThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite-third-party/
-         */
-        async toggleFileFavoriteThirdParty(fileId: string, favorite?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.toggleFileFavoriteThirdParty(fileId, favorite, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.toggleFileFavoriteThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6564,28 +3935,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for trackEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file/
          */
-        async trackEditFile(fileId: number, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ItemKeyValuePairBooleanStringWrapper>> {
+        async trackEditFile(fileId: number | string, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ItemKeyValuePairBooleanStringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.trackEditFile(fileId, tabId, docKeyForTrack, isFinish, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.trackEditFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
-         * @summary Track an editing session (third-party storage)
-         * @param {string} fileId The file whose editing session is being tracked.
-         * @param {string} [tabId] The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor.
-         * @param {string} [docKeyForTrack] The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file\'s current key on every call, so a key left over from an older revision is refused.
-         * @param {boolean} [isFinish] Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for trackEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file-third-party/
-         */
-        async trackEditFileThirdParty(fileId: string, tabId?: string, docKeyForTrack?: string, isFinish?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ItemKeyValuePairBooleanStringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.trackEditFileThirdParty(fileId, tabId, docKeyForTrack, isFinish, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.trackEditFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -6598,26 +3951,10 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for updateFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
          */
-        async updateFile(fileId: number, updateFile: UpdateFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+        async updateFile(fileId: number | string, updateFile: UpdateFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateFile(fileId, updateFile, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.updateFile']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
-         * @summary Update a file (third-party storage)
-         * @param {string} fileId The file to update.
-         * @param {UpdateFile} updateFile The new title and the version to restore.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * REST API Reference for updateFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-third-party/
-         */
-        async updateFileThirdParty(fileId: string, updateFile: UpdateFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileThirdParty(fileId, updateFile, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FilesApi.updateFileThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -6639,20 +3976,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent/
          * @throws {RequiredError}
          */
-        addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.addFileToRecent(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Stamps the file as just used by the calling account and puts it at the top of that account\'s Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  `GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among  the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
-         * @summary Add a file to Recent (third-party storage)
-         * @param {FilesApiAddFileToRecentThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for addFileToRecentThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/add-file-to-recent-third-party/
-         * @throws {RequiredError}
-         */
-        addFileToRecentThirdParty(requestParameters: FilesApiAddFileToRecentThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.addFileToRecentThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds the listed files to the personal template list of the calling account, the set the portal offers when a  new document is started from an existing one. The list belongs to the account and no other member sees it.  Every authenticated member type may manage their own list, a guest is refused, and read access to each file is  required. Only formats the portal treats as template documents survive: the accepted extensions arrive in  `extsWebTemplate` of `GET api/2.0/files/settings`, and a file of any other format is dropped silently. Only  numeric ids are accepted, so a file on a connected third-party account cannot become a template. The answer is  `true` whenever the request was understood, which an empty list, an id that does not exist and an unreadable  file all achieve, so it confirms nothing about what was added; no operation of this document reads the list  back. Repeating the call is safe. Use `DELETE api/2.0/files/templates` to drop a file again.
@@ -6675,20 +4000,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          * @throws {RequiredError}
          */
-        changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper> {
+        changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper> {
             return localVarFp.changeVersionHistory(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
-         * @summary Change version history (third-party storage)
-         * @param {FilesApiChangeVersionHistoryThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for changeVersionHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history-third-party/
-         * @throws {RequiredError}
-         */
-        changeVersionHistoryThirdParty(requestParameters: FilesApiChangeVersionHistoryThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper> {
-            return localVarFp.changeVersionHistoryThirdParty(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(axios, basePath));
         },
         /**
          * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
@@ -6703,18 +4016,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.checkFillFormDraft(requestParameters.fileId, requestParameters.checkFillFormDraft, options).then((request) => request(axios, basePath));
         },
         /**
-         * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
-         * @summary Open a form draft for filling (third-party storage)
-         * @param {FilesApiCheckFillFormDraftThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for checkFillFormDraftThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft-third-party/
-         * @throws {RequiredError}
-         */
-        checkFillFormDraftThirdParty(requestParameters: FilesApiCheckFillFormDraftThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.checkFillFormDraftThirdParty(requestParameters.fileId, requestParameters.checkFillFormDraft, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
          * @summary Copy a file
          * @param {FilesApiCopyFileAsRequest} requestParameters Request parameters.
@@ -6727,18 +4028,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.copyFileAs(requestParameters.fileId, requestParameters.copyAsJsonElement, options).then((request) => request(axios, basePath));
         },
         /**
-         * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
-         * @summary Copy a file (third-party storage)
-         * @param {FilesApiCopyFileAsThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for copyFileAsThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as-third-party/
-         * @throws {RequiredError}
-         */
-        copyFileAsThirdParty(requestParameters: FilesApiCopyFileAsThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseWrapper> {
-            return localVarFp.copyFileAsThirdParty(requestParameters.fileId, requestParameters.copyAsJsonElement, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
          * @summary Create the editing session
          * @param {FilesApiCreateEditSessionRequest} requestParameters Request parameters.
@@ -6747,20 +4036,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/
          * @throws {RequiredError}
          */
-        createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper> {
+        createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper> {
             return localVarFp.createEditSession(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
-         * @summary Create the editing session (third-party storage)
-         * @param {FilesApiCreateEditSessionThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createEditSessionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session-third-party/
-         * @throws {RequiredError}
-         */
-        createEditSessionThirdParty(requestParameters: FilesApiCreateEditSessionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper> {
-            return localVarFp.createEditSessionThirdParty(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
@@ -6771,20 +4048,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
          * @throws {RequiredError}
          */
-        createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.createFile(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
-         * @summary Create a file (third-party storage)
-         * @param {FilesApiCreateFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-third-party/
-         * @throws {RequiredError}
-         */
-        createFileThirdParty(requestParameters: FilesApiCreateFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.createFileThirdParty(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a file in the caller\'s own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
@@ -6811,18 +4076,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.createFilePrimaryExternalLink(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
-         * @summary Create the file primary external link (third-party storage)
-         * @param {FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link-third-party/
-         * @throws {RequiredError}
-         */
-        createFilePrimaryExternalLinkThirdParty(requestParameters: FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.createFilePrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
          * @summary Create an HTML file
          * @param {FilesApiCreateHtmlFileRequest} requestParameters Request parameters.
@@ -6831,20 +4084,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
          * @throws {RequiredError}
          */
-        createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
-         * @summary Create an HTML file (third-party storage)
-         * @param {FilesApiCreateHtmlFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createHtmlFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-third-party/
-         * @throws {RequiredError}
-         */
-        createHtmlFileThirdParty(requestParameters: FilesApiCreateHtmlFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.createHtmlFileThirdParty(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates an HTML file in the caller\'s own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
@@ -6867,20 +4108,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
          * @throws {RequiredError}
          */
-        createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
-         * @summary Create a text file (third-party storage)
-         * @param {FilesApiCreateTextFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for createTextFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-third-party/
-         * @throws {RequiredError}
-         */
-        createTextFileThirdParty(requestParameters: FilesApiCreateTextFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.createTextFileThirdParty(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a text file in the caller\'s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
@@ -6917,18 +4146,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
             return localVarFp.deleteFile(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
-         * @summary Delete a file (third-party storage)
-         * @param {FilesApiDeleteFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for deleteFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file-third-party/
-         * @throws {RequiredError}
-         */
-        deleteFileThirdParty(requestParameters: FilesApiDeleteFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.deleteFileThirdParty(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member\'s history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
@@ -6979,18 +4196,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getAllFormRoles(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
-         * @summary Get form roles (third-party storage)
-         * @param {FilesApiGetAllFormRolesThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getAllFormRolesThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-form-roles-third-party/
-         * @throws {RequiredError}
-         */
-        getAllFormRolesThirdParty(requestParameters: FilesApiGetAllFormRolesThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FormRoleArrayWrapper> {
-            return localVarFp.getAllFormRolesThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Get changes URL
          * @param {FilesApiGetEditDiffUrlRequest} requestParameters Request parameters.
@@ -7001,18 +4206,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         getEditDiffUrl(requestParameters: FilesApiGetEditDiffUrlRequest, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryDataWrapper> {
             return localVarFp.getEditDiffUrl(requestParameters.fileId, requestParameters.version, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
-         * @summary Get changes URL (third-party storage)
-         * @param {FilesApiGetEditDiffUrlThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getEditDiffUrlThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-diff-url-third-party/
-         * @throws {RequiredError}
-         */
-        getEditDiffUrlThirdParty(requestParameters: FilesApiGetEditDiffUrlThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryDataWrapper> {
-            return localVarFp.getEditDiffUrlThirdParty(requestParameters.fileId, requestParameters.version, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
@@ -7027,18 +4220,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getEditHistory(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
-         * @summary Get version history (third-party storage)
-         * @param {FilesApiGetEditHistoryThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getEditHistoryThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-edit-history-third-party/
-         * @throws {RequiredError}
-         */
-        getEditHistoryThirdParty(requestParameters: FilesApiGetEditHistoryThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryArrayWrapper> {
-            return localVarFp.getEditHistoryThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
          * @summary Get file encryption information
          * @param {FilesApiGetEncryptionInfoRequest} requestParameters Request parameters.
@@ -7049,18 +4230,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         getEncryptionInfo(requestParameters: FilesApiGetEncryptionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEncryptionInfoWrapper> {
             return localVarFp.getEncryptionInfo(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
-         * @summary Get file encryption information (third-party storage)
-         * @param {FilesApiGetEncryptionInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-encryption-info-third-party/
-         * @throws {RequiredError}
-         */
-        getEncryptionInfoThirdParty(requestParameters: FilesApiGetEncryptionInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEncryptionInfoWrapper> {
-            return localVarFp.getEncryptionInfoThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the activity log of a single file - who renamed, moved, shared, converted, locked or edited it, and  when - as the portal recorded it in its audit trail. Entries arrive newest first, and the events that belong  to one action are folded into a single entry whose `related` list carries the rest of them. `fromDate` and  `toDate` are read in the portal\'s time zone and narrow the range; `startIndex` and `count` page through the  result, and the number of matching entries is reported in the response headers rather than in the body. The  caller needs read access to the file, so a member of the room it lies in, the admin of that room and a  DocSpace admin all see the same log, while a caller without access to the room is refused with 403 and an  unknown id is answered with 404. The operation is read-only. Only files stored in the portal itself have a log  here - a file kept in a connected third-party storage has none. For the log of a folder or a room use  `GET api/2.0/files/folder/{folderId}/log`.
@@ -7083,20 +4252,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info/
          * @throws {RequiredError}
          */
-        getFileInfo(requestParameters: FilesApiGetFileInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        getFileInfo(requestParameters: FilesApiGetFileInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.getFileInfo(requestParameters.fileId, requestParameters.version, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. `version` picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person\'s own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
-         * @summary Get file information (third-party storage)
-         * @param {FilesApiGetFileInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getFileInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-info-third-party/
-         * @throws {RequiredError}
-         */
-        getFileInfoThirdParty(requestParameters: FilesApiGetFileInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.getFileInfoThirdParty(requestParameters.fileId, requestParameters.version, options).then((request) => request(axios, basePath));
         },
         /**
          * Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
@@ -7111,18 +4268,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getFileLinks(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
-         * @summary Get file external links (third-party storage)
-         * @param {FilesApiGetFileLinksThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getFileLinksThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-links-third-party/
-         * @throws {RequiredError}
-         */
-        getFileLinksThirdParty(requestParameters: FilesApiGetFileLinksThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareArrayWrapper> {
-            return localVarFp.getFileLinksThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
          * @summary Get the file primary external link
          * @param {FilesApiGetFilePrimaryExternalLinkRequest} requestParameters Request parameters.
@@ -7135,18 +4280,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getFilePrimaryExternalLink(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
         },
         /**
-         * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
-         * @summary Get the file primary external link (third-party storage)
-         * @param {FilesApiGetFilePrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getFilePrimaryExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-primary-external-link-third-party/
-         * @throws {RequiredError}
-         */
-        getFilePrimaryExternalLinkThirdParty(requestParameters: FilesApiGetFilePrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.getFilePrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
          * @summary Get file versions
          * @param {FilesApiGetFileVersionInfoRequest} requestParameters Request parameters.
@@ -7155,20 +4288,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info/
          * @throws {RequiredError}
          */
-        getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper> {
+        getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper> {
             return localVarFp.getFileVersionInfo(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
-         * @summary Get file versions (third-party storage)
-         * @param {FilesApiGetFileVersionInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getFileVersionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-file-version-info-third-party/
-         * @throws {RequiredError}
-         */
-        getFileVersionInfoThirdParty(requestParameters: FilesApiGetFileVersionInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper> {
-            return localVarFp.getFileVersionInfoThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Answers with the outcome of one completed form-filling session: the filled copy of the form, the original form  it was made from, the number this submission was given inside the room, the identifier of the room and the  account that started the filling. `isRoomMember` says whether the caller is a member of that room, which a  client uses to decide whether the room can be offered for opening. The session is named by `fillingSessionId`,  the value the document service reports when the filling ends; the portal remembers it only for a while after  that, so a session that was never completed, one already forgotten and a value of the wrong shape are all  answered as not found, while omitting the parameter is rejected as an invalid request. The operation is  read-only and needs no sign-in: it is meant for the caller that has just finished filling the form through an  external link, and the session identifier is the only secret involved. The filled copy itself is an ordinary  file - read it with `GET api/2.0/files/file/{fileId}`.
@@ -7207,18 +4328,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getPresignedFileUri(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal\'s file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
-         * @summary Get a signed download address (third-party storage)
-         * @param {FilesApiGetPresignedFileUriThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getPresignedFileUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-file-uri-third-party/
-         * @throws {RequiredError}
-         */
-        getPresignedFileUriThirdParty(requestParameters: FilesApiGetPresignedFileUriThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileLinkWrapper> {
-            return localVarFp.getPresignedFileUriThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
          * @summary Get file download link
          * @param {FilesApiGetPresignedUriRequest} requestParameters Request parameters.
@@ -7231,18 +4340,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getPresignedUri(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
-         * @summary Get file download link (third-party storage)
-         * @param {FilesApiGetPresignedUriThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getPresignedUriThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-presigned-uri-third-party/
-         * @throws {RequiredError}
-         */
-        getPresignedUriThirdParty(requestParameters: FilesApiGetPresignedUriThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getPresignedUriThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
          * @summary Get users for document protection
          * @param {FilesApiGetProtectedFileUsersRequest} requestParameters Request parameters.
@@ -7253,18 +4350,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          */
         getProtectedFileUsers(requestParameters: FilesApiGetProtectedFileUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
             return localVarFp.getProtectedFileUsers(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
-         * @summary Get users for document protection (third-party storage)
-         * @param {FilesApiGetProtectedFileUsersThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for getProtectedFileUsersThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users-third-party/
-         * @throws {RequiredError}
-         */
-        getProtectedFileUsersThirdParty(requestParameters: FilesApiGetProtectedFileUsersThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
-            return localVarFp.getProtectedFileUsersThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Resolves a reference that a formula in one spreadsheet makes to another document, and answers with the  descriptor the document service needs in order to read it: the title, the download address, the file type, the  document key of the co-editing session, the web editor link and the signature token. Three ways of naming the  target are tried in order, and the first that resolves wins: `fileKey` as a file id inside the portal named by  `instanceId`, then `path` looked up among the files sitting next to `sourceFileId`, then `link`, short links  included, from which the file id is read out. A link that points outside this portal is not resolved at all  and comes back unchanged as the address to follow. The caller needs read access to the source file and to its  folder, otherwise the call is refused. The call only reads. A reference that resolves to nothing is still  answered with 200, with the error text filled in and the rest of the descriptor empty, so read the error  before using any other field.
@@ -7303,18 +4388,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.isFormPDF(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is `true` only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without  being read. Use it before offering the form-filling operations on a file, because a document that answers  `false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
-         * @summary Check the PDF file (third-party storage)
-         * @param {FilesApiIsFormPDFThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for isFormPDFThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/is-form-pdfthird-party/
-         * @throws {RequiredError}
-         */
-        isFormPDFThirdParty(requestParameters: FilesApiIsFormPDFThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.isFormPDFThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
          * @summary Lock a file
          * @param {FilesApiLockFileRequest} requestParameters Request parameters.
@@ -7323,20 +4396,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
          * @throws {RequiredError}
          */
-        lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.lockFile(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
-         * @summary Lock a file (third-party storage)
-         * @param {FilesApiLockFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for lockFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file-third-party/
-         * @throws {RequiredError}
-         */
-        lockFileThirdParty(requestParameters: FilesApiLockFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.lockFileThirdParty(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read  with `GET api/2.0/files/file/{fileId}/formroles`.
@@ -7359,20 +4420,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/
          * @throws {RequiredError}
          */
-        openEditFile(requestParameters: FilesApiOpenEditFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationWrapper> {
+        openEditFile(requestParameters: FilesApiOpenEditFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationWrapper | ThirdPartyConfigurationWrapper> {
             return localVarFp.openEditFile(requestParameters.fileId, requestParameters.version, requestParameters.view, requestParameters.editorType, requestParameters.edit, requestParameters.fill, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
-         * @summary Get the editor configuration (third-party storage)
-         * @param {FilesApiOpenEditFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for openEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file-third-party/
-         * @throws {RequiredError}
-         */
-        openEditFileThirdParty(requestParameters: FilesApiOpenEditFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyConfigurationWrapper> {
-            return localVarFp.openEditFileThirdParty(requestParameters.fileId, requestParameters.version, requestParameters.view, requestParameters.editorType, requestParameters.edit, requestParameters.fill, options).then((request) => request(axios, basePath));
         },
         /**
          * Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
@@ -7387,18 +4436,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.restoreFileVersion(requestParameters.fileId, requestParameters.version, requestParameters.url, options).then((request) => request(axios, basePath));
         },
         /**
-         * Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
-         * @summary Restore a file version (third-party storage)
-         * @param {FilesApiRestoreFileVersionThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for restoreFileVersionThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/restore-file-version-third-party/
-         * @throws {RequiredError}
-         */
-        restoreFileVersionThirdParty(requestParameters: FilesApiRestoreFileVersionThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<EditHistoryArrayWrapper> {
-            return localVarFp.restoreFileVersionThirdParty(requestParameters.fileId, requestParameters.version, requestParameters.url, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
          * @summary Save edited file content
          * @param {FilesApiSaveEditingFileFromFormRequest} requestParameters Request parameters.
@@ -7407,20 +4444,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form/
          * @throws {RequiredError}
          */
-        saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.saveEditingFileFromForm(requestParameters.fileId, requestParameters.downloadUri, requestParameters.fileExtension, requestParameters.file, requestParameters.forcesave, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
-         * @summary Save edited file content (third-party storage)
-         * @param {FilesApiSaveEditingFileFromFormThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for saveEditingFileFromFormThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-editing-file-from-form-third-party/
-         * @throws {RequiredError}
-         */
-        saveEditingFileFromFormThirdParty(requestParameters: FilesApiSaveEditingFileFromFormThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.saveEditingFileFromFormThirdParty(requestParameters.fileId, requestParameters.downloadUri, requestParameters.fileExtension, requestParameters.file, requestParameters.forcesave, options).then((request) => request(axios, basePath));
         },
         /**
          * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
@@ -7431,20 +4456,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
          * @throws {RequiredError}
          */
-        saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdf, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
-         * @summary Save a file as PDF (third-party storage)
-         * @param {FilesApiSaveFileAsPdfThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for saveFileAsPdfThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf-third-party/
-         * @throws {RequiredError}
-         */
-        saveFileAsPdfThirdParty(requestParameters: FilesApiSaveFileAsPdfThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.saveFileAsPdfThirdParty(requestParameters.id, requestParameters.thirdPartySaveAsPdf, options).then((request) => request(axios, basePath));
         },
         /**
          * Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  `GET api/2.0/files/file/{fileId}/formroles`.
@@ -7467,20 +4480,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
          * @throws {RequiredError}
          */
-        setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
-         * @summary Set the Custom Filter editing mode (third-party storage)
-         * @param {FilesApiSetCustomFilterTagThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setCustomFilterTagThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag-third-party/
-         * @throws {RequiredError}
-         */
-        setCustomFilterTagThirdParty(requestParameters: FilesApiSetCustomFilterTagThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.setCustomFilterTagThirdParty(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
@@ -7495,18 +4496,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.setEncryptionInfo(requestParameters.fileId, requestParameters.accessRequestKeyDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
-         * @summary Set file encryption information (third-party storage)
-         * @param {FilesApiSetEncryptionInfoThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setEncryptionInfoThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info-third-party/
-         * @throws {RequiredError}
-         */
-        setEncryptionInfoThirdParty(requestParameters: FilesApiSetEncryptionInfoThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.setEncryptionInfoThirdParty(requestParameters.fileId, requestParameters.accessRequestKeyDto, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
          * @summary Set a file external link
          * @param {FilesApiSetFileExternalLinkRequest} requestParameters Request parameters.
@@ -7519,18 +4508,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.setFileExternalLink(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
-         * @summary Set a file external link (third-party storage)
-         * @param {FilesApiSetFileExternalLinkThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setFileExternalLinkThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-external-link-third-party/
-         * @throws {RequiredError}
-         */
-        setFileExternalLinkThirdParty(requestParameters: FilesApiSetFileExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileShareWrapper> {
-            return localVarFp.setFileExternalLinkThirdParty(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
          * @summary Set file order
          * @param {FilesApiSetFileOrderRequest} requestParameters Request parameters.
@@ -7539,20 +4516,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order/
          * @throws {RequiredError}
          */
-        setFileOrder(requestParameters: FilesApiSetFileOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        setFileOrder(requestParameters: FilesApiSetFileOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.setFileOrder(requestParameters.fileId, requestParameters.orderRequestDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
-         * @summary Set file order (third-party storage)
-         * @param {FilesApiSetFileOrderThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for setFileOrderThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-file-order-third-party/
-         * @throws {RequiredError}
-         */
-        setFileOrderThirdParty(requestParameters: FilesApiSetFileOrderThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.setFileOrderThirdParty(requestParameters.fileId, requestParameters.orderRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Puts several files and folders at given positions in one go and answers with the entries that were moved, each  with the position it now holds. Every item of `items` names an entry by its identifier and its kind - a file  or a folder - and the position it is to take, counting from 1; a position may also be sent as a dotted path,  as in 1.2.3, of which only the last segment is read. The items are applied one after another in the order  they are sent, and each of them shifts its neighbours, so the result depends on that order; the whole request  is not one transaction, and a failure in the middle leaves the items before it moved. Every item has to lie in  a room the caller may administer, which the room admin and a DocSpace admin acting as room manager do:  read-only access, a guest and an anonymous caller are refused, and an identifier that matches nothing is  answered as not found. Ordering only means something in rooms whose contents are indexed. The call is  mutating. For a single file use `PUT api/2.0/files/{fileId}/order`.
@@ -7579,18 +4544,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.startEditFile(requestParameters.fileId, requestParameters.startEdit, options).then((request) => request(axios, basePath));
         },
         /**
-         * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
-         * @summary Open an editing session (third-party storage)
-         * @param {FilesApiStartEditFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for startEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file-third-party/
-         * @throws {RequiredError}
-         */
-        startEditFileThirdParty(requestParameters: FilesApiStartEditFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.startEditFileThirdParty(requestParameters.fileId, requestParameters.startEdit, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
          * @summary Start filling a form
          * @param {FilesApiStartFillingFileRequest} requestParameters Request parameters.
@@ -7599,20 +4552,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/
          * @throws {RequiredError}
          */
-        startFillingFile(requestParameters: FilesApiStartFillingFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        startFillingFile(requestParameters: FilesApiStartFillingFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.startFillingFile(requestParameters.fileId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
-         * @summary Start filling a form (third-party storage)
-         * @param {FilesApiStartFillingFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for startFillingFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file-third-party/
-         * @throws {RequiredError}
-         */
-        startFillingFileThirdParty(requestParameters: FilesApiStartFillingFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.startFillingFileThirdParty(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
@@ -7627,18 +4568,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.toggleFileFavorite(requestParameters.fileId, requestParameters.favorite, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
-         * @summary Set the file favorite status (third-party storage)
-         * @param {FilesApiToggleFileFavoriteThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for toggleFileFavoriteThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/toggle-file-favorite-third-party/
-         * @throws {RequiredError}
-         */
-        toggleFileFavoriteThirdParty(requestParameters: FilesApiToggleFileFavoriteThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.toggleFileFavoriteThirdParty(requestParameters.fileId, requestParameters.favorite, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
          * @summary Track an editing session
          * @param {FilesApiTrackEditFileRequest} requestParameters Request parameters.
@@ -7651,18 +4580,6 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.trackEditFile(requestParameters.fileId, requestParameters.tabId, requestParameters.docKeyForTrack, requestParameters.isFinish, options).then((request) => request(axios, basePath));
         },
         /**
-         * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
-         * @summary Track an editing session (third-party storage)
-         * @param {FilesApiTrackEditFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for trackEditFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/track-edit-file-third-party/
-         * @throws {RequiredError}
-         */
-        trackEditFileThirdParty(requestParameters: FilesApiTrackEditFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ItemKeyValuePairBooleanStringWrapper> {
-            return localVarFp.trackEditFileThirdParty(requestParameters.fileId, requestParameters.tabId, requestParameters.docKeyForTrack, requestParameters.isFinish, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
          * @summary Update a file
          * @param {FilesApiUpdateFileRequest} requestParameters Request parameters.
@@ -7671,20 +4588,8 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
          * @throws {RequiredError}
          */
-        updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
+        updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
             return localVarFp.updateFile(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
-         * @summary Update a file (third-party storage)
-         * @param {FilesApiUpdateFileThirdPartyRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * REST API Reference for updateFileThirdParty operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-third-party/
-         * @throws {RequiredError}
-         */
-        updateFileThirdParty(requestParameters: FilesApiUpdateFileThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper> {
-            return localVarFp.updateFileThirdParty(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -7697,24 +4602,10 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
 export interface FilesApiAddFileToRecentRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiAddFileToRecent
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for addFileToRecentThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiAddFileToRecentThirdPartyRequest
- */
-export interface FilesApiAddFileToRecentThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiAddFileToRecentThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -7739,36 +4630,15 @@ export interface FilesApiAddTemplatesRequest {
 export interface FilesApiChangeVersionHistoryRequest {
     /**
      * The file whose version history is changed.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiChangeVersionHistory
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The change to make to the revision group.
      * @type {ChangeHistory}
      * @memberof FilesApiChangeVersionHistory
-     */
-    readonly changeHistory: ChangeHistory
-}
-
-/**
- * Request parameters for changeVersionHistoryThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiChangeVersionHistoryThirdPartyRequest
- */
-export interface FilesApiChangeVersionHistoryThirdPartyRequest {
-    /**
-     * The file whose version history is changed.
-     * @type {string}
-     * @memberof FilesApiChangeVersionHistoryThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The change to make to the revision group.
-     * @type {ChangeHistory}
-     * @memberof FilesApiChangeVersionHistoryThirdParty
      */
     readonly changeHistory: ChangeHistory
 }
@@ -7781,36 +4651,15 @@ export interface FilesApiChangeVersionHistoryThirdPartyRequest {
 export interface FilesApiCheckFillFormDraftRequest {
     /**
      * The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCheckFillFormDraft
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The revision of the form to open and what the caller intends to do with it.
      * @type {CheckFillFormDraft}
      * @memberof FilesApiCheckFillFormDraft
-     */
-    readonly checkFillFormDraft: CheckFillFormDraft
-}
-
-/**
- * Request parameters for checkFillFormDraftThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCheckFillFormDraftThirdPartyRequest
- */
-export interface FilesApiCheckFillFormDraftThirdPartyRequest {
-    /**
-     * The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-     * @type {string}
-     * @memberof FilesApiCheckFillFormDraftThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The revision of the form to open and what the caller intends to do with it.
-     * @type {CheckFillFormDraft}
-     * @memberof FilesApiCheckFillFormDraftThirdParty
      */
     readonly checkFillFormDraft: CheckFillFormDraft
 }
@@ -7823,36 +4672,15 @@ export interface FilesApiCheckFillFormDraftThirdPartyRequest {
 export interface FilesApiCopyFileAsRequest {
     /**
      * The file to copy.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCopyFileAs
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The title, the destination and the conversion options of the copy.
      * @type {CopyAsJsonElement}
      * @memberof FilesApiCopyFileAs
-     */
-    readonly copyAsJsonElement: CopyAsJsonElement
-}
-
-/**
- * Request parameters for copyFileAsThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCopyFileAsThirdPartyRequest
- */
-export interface FilesApiCopyFileAsThirdPartyRequest {
-    /**
-     * The file to copy.
-     * @type {string}
-     * @memberof FilesApiCopyFileAsThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The title, the destination and the conversion options of the copy.
-     * @type {CopyAsJsonElement}
-     * @memberof FilesApiCopyFileAsThirdParty
      */
     readonly copyAsJsonElement: CopyAsJsonElement
 }
@@ -7865,36 +4693,15 @@ export interface FilesApiCopyFileAsThirdPartyRequest {
 export interface FilesApiCreateEditSessionRequest {
     /**
      * The file whose content the session will replace; take the id from a folder listing or from the file itself.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCreateEditSession
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
      * @type {number}
      * @memberof FilesApiCreateEditSession
-     */
-    readonly fileSize?: number
-}
-
-/**
- * Request parameters for createEditSessionThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCreateEditSessionThirdPartyRequest
- */
-export interface FilesApiCreateEditSessionThirdPartyRequest {
-    /**
-     * The file whose content the session will replace; take the id from a folder listing or from the file itself.
-     * @type {string}
-     * @memberof FilesApiCreateEditSessionThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The number of bytes the new content will take. It is checked against the portal limit for chunked uploads  before the session opens, and a session left at 0 takes the whole content in a single part.
-     * @type {number}
-     * @memberof FilesApiCreateEditSessionThirdParty
      */
     readonly fileSize?: number
 }
@@ -7907,36 +4714,15 @@ export interface FilesApiCreateEditSessionThirdPartyRequest {
 export interface FilesApiCreateFileRequest {
     /**
      * The folder the file is created in.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCreateFile
      */
-    readonly folderId: number
+    readonly folderId: number | string
 
     /**
      * The title of the new file and the source of its content.
      * @type {CreateFileJsonElement}
      * @memberof FilesApiCreateFile
-     */
-    readonly createFileJsonElement: CreateFileJsonElement
-}
-
-/**
- * Request parameters for createFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCreateFileThirdPartyRequest
- */
-export interface FilesApiCreateFileThirdPartyRequest {
-    /**
-     * The folder the file is created in.
-     * @type {string}
-     * @memberof FilesApiCreateFileThirdParty
-     */
-    readonly folderId: string
-
-    /**
-     * The title of the new file and the source of its content.
-     * @type {CreateFileJsonElement}
-     * @memberof FilesApiCreateFileThirdParty
      */
     readonly createFileJsonElement: CreateFileJsonElement
 }
@@ -7963,36 +4749,15 @@ export interface FilesApiCreateFileInMyDocumentsRequest {
 export interface FilesApiCreateFilePrimaryExternalLinkRequest {
     /**
      * The file the link points at.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCreateFilePrimaryExternalLink
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The settings of the link. They are applied in full, so a field left out is reset rather than kept.
      * @type {FileLinkRequest}
      * @memberof FilesApiCreateFilePrimaryExternalLink
-     */
-    readonly fileLinkRequest: FileLinkRequest
-}
-
-/**
- * Request parameters for createFilePrimaryExternalLinkThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest
- */
-export interface FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest {
-    /**
-     * The file the link points at.
-     * @type {string}
-     * @memberof FilesApiCreateFilePrimaryExternalLinkThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-     * @type {FileLinkRequest}
-     * @memberof FilesApiCreateFilePrimaryExternalLinkThirdParty
      */
     readonly fileLinkRequest: FileLinkRequest
 }
@@ -8005,36 +4770,15 @@ export interface FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest {
 export interface FilesApiCreateHtmlFileRequest {
     /**
      * The folder the file is created in.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCreateHtmlFile
      */
-    readonly folderId: number
+    readonly folderId: number | string
 
     /**
      * The title, the content and the collision behaviour of the new file.
      * @type {CreateTextOrHtmlFile}
      * @memberof FilesApiCreateHtmlFile
-     */
-    readonly createTextOrHtmlFile: CreateTextOrHtmlFile
-}
-
-/**
- * Request parameters for createHtmlFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCreateHtmlFileThirdPartyRequest
- */
-export interface FilesApiCreateHtmlFileThirdPartyRequest {
-    /**
-     * The folder the file is created in.
-     * @type {string}
-     * @memberof FilesApiCreateHtmlFileThirdParty
-     */
-    readonly folderId: string
-
-    /**
-     * The title, the content and the collision behaviour of the new file.
-     * @type {CreateTextOrHtmlFile}
-     * @memberof FilesApiCreateHtmlFileThirdParty
      */
     readonly createTextOrHtmlFile: CreateTextOrHtmlFile
 }
@@ -8061,36 +4805,15 @@ export interface FilesApiCreateHtmlFileInMyDocumentsRequest {
 export interface FilesApiCreateTextFileRequest {
     /**
      * The folder the file is created in.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiCreateTextFile
      */
-    readonly folderId: number
+    readonly folderId: number | string
 
     /**
      * The title, the content and the collision behaviour of the new file.
      * @type {CreateTextOrHtmlFile}
      * @memberof FilesApiCreateTextFile
-     */
-    readonly createTextOrHtmlFile: CreateTextOrHtmlFile
-}
-
-/**
- * Request parameters for createTextFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiCreateTextFileThirdPartyRequest
- */
-export interface FilesApiCreateTextFileThirdPartyRequest {
-    /**
-     * The folder the file is created in.
-     * @type {string}
-     * @memberof FilesApiCreateTextFileThirdParty
-     */
-    readonly folderId: string
-
-    /**
-     * The title, the content and the collision behaviour of the new file.
-     * @type {CreateTextOrHtmlFile}
-     * @memberof FilesApiCreateTextFileThirdParty
      */
     readonly createTextOrHtmlFile: CreateTextOrHtmlFile
 }
@@ -8131,10 +4854,10 @@ export interface FilesApiCreateThumbnailsRequest {
 export interface FilesApiDeleteFileRequest {
     /**
      * The file to delete.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiDeleteFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * When and how the file is deleted.
@@ -8147,34 +4870,6 @@ export interface FilesApiDeleteFileRequest {
      * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
      * @type {boolean}
      * @memberof FilesApiDeleteFile
-     */
-    readonly returnSingleOperation?: boolean
-}
-
-/**
- * Request parameters for deleteFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiDeleteFileThirdPartyRequest
- */
-export interface FilesApiDeleteFileThirdPartyRequest {
-    /**
-     * The file to delete.
-     * @type {string}
-     * @memberof FilesApiDeleteFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * When and how the file is deleted.
-     * @type {Delete}
-     * @memberof FilesApiDeleteFileThirdParty
-     */
-    readonly _delete: Delete
-
-    /**
-     * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-     * @type {boolean}
-     * @memberof FilesApiDeleteFileThirdParty
      */
     readonly returnSingleOperation?: boolean
 }
@@ -8229,24 +4924,10 @@ export interface FilesApiGenerateXlsxRequest {
 export interface FilesApiGetAllFormRolesRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetAllFormRoles
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getAllFormRolesThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetAllFormRolesThirdPartyRequest
- */
-export interface FilesApiGetAllFormRolesThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetAllFormRolesThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8257,36 +4938,15 @@ export interface FilesApiGetAllFormRolesThirdPartyRequest {
 export interface FilesApiGetEditDiffUrlRequest {
     /**
      * The file whose changes are read.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetEditDiffUrl
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version.
      * @type {number}
      * @memberof FilesApiGetEditDiffUrl
-     */
-    readonly version?: number
-}
-
-/**
- * Request parameters for getEditDiffUrlThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetEditDiffUrlThirdPartyRequest
- */
-export interface FilesApiGetEditDiffUrlThirdPartyRequest {
-    /**
-     * The file whose changes are read.
-     * @type {string}
-     * @memberof FilesApiGetEditDiffUrlThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The version to show the changes of, as reported by `GET api/2.0/files/file/{fileId}/edit/history`; 0 means the  current version.
-     * @type {number}
-     * @memberof FilesApiGetEditDiffUrlThirdParty
      */
     readonly version?: number
 }
@@ -8299,24 +4959,10 @@ export interface FilesApiGetEditDiffUrlThirdPartyRequest {
 export interface FilesApiGetEditHistoryRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetEditHistory
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getEditHistoryThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetEditHistoryThirdPartyRequest
- */
-export interface FilesApiGetEditHistoryThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetEditHistoryThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8327,24 +4973,10 @@ export interface FilesApiGetEditHistoryThirdPartyRequest {
 export interface FilesApiGetEncryptionInfoRequest {
     /**
      * The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetEncryptionInfo
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getEncryptionInfoThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetEncryptionInfoThirdPartyRequest
- */
-export interface FilesApiGetEncryptionInfoThirdPartyRequest {
-    /**
-     * The file whose encryption keys are read. Only a file in an end-to-end encrypted              private room has any.
-     * @type {string}
-     * @memberof FilesApiGetEncryptionInfoThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8397,36 +5029,15 @@ export interface FilesApiGetFileHistoryRequest {
 export interface FilesApiGetFileInfoRequest {
     /**
      * The file to read.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetFileInfo
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version.
      * @type {number}
      * @memberof FilesApiGetFileInfo
-     */
-    readonly version?: number
-}
-
-/**
- * Request parameters for getFileInfoThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetFileInfoThirdPartyRequest
- */
-export interface FilesApiGetFileInfoThirdPartyRequest {
-    /**
-     * The file to read.
-     * @type {string}
-     * @memberof FilesApiGetFileInfoThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The version to read, as reported by `GET api/2.0/files/file/{fileId}/history`; -1, the default, reads the  current version.
-     * @type {number}
-     * @memberof FilesApiGetFileInfoThirdParty
      */
     readonly version?: number
 }
@@ -8439,10 +5050,10 @@ export interface FilesApiGetFileInfoThirdPartyRequest {
 export interface FilesApiGetFileLinksRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetFileLinks
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
@@ -8455,34 +5066,6 @@ export interface FilesApiGetFileLinksRequest {
      * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
      * @type {number}
      * @memberof FilesApiGetFileLinks
-     */
-    readonly startIndex?: number
-}
-
-/**
- * Request parameters for getFileLinksThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetFileLinksThirdPartyRequest
- */
-export interface FilesApiGetFileLinksThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetFileLinksThirdParty
-     */
-    readonly id: string
-
-    /**
-     * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-     * @type {number}
-     * @memberof FilesApiGetFileLinksThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-     * @type {number}
-     * @memberof FilesApiGetFileLinksThirdParty
      */
     readonly startIndex?: number
 }
@@ -8495,10 +5078,10 @@ export interface FilesApiGetFileLinksThirdPartyRequest {
 export interface FilesApiGetFilePrimaryExternalLinkRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetFilePrimaryExternalLink
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
@@ -8511,34 +5094,6 @@ export interface FilesApiGetFilePrimaryExternalLinkRequest {
      * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
      * @type {number}
      * @memberof FilesApiGetFilePrimaryExternalLink
-     */
-    readonly startIndex?: number
-}
-
-/**
- * Request parameters for getFilePrimaryExternalLinkThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetFilePrimaryExternalLinkThirdPartyRequest
- */
-export interface FilesApiGetFilePrimaryExternalLinkThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetFilePrimaryExternalLinkThirdParty
-     */
-    readonly id: string
-
-    /**
-     * How many entries at most to answer with, in the operations of this file that return a list; an operation that  answers with a single object is not affected by it.
-     * @type {number}
-     * @memberof FilesApiGetFilePrimaryExternalLinkThirdParty
-     */
-    readonly count?: number
-
-    /**
-     * How many entries of such a list to skip before answering, used together with `count` to walk through it page  by page.
-     * @type {number}
-     * @memberof FilesApiGetFilePrimaryExternalLinkThirdParty
      */
     readonly startIndex?: number
 }
@@ -8551,24 +5106,10 @@ export interface FilesApiGetFilePrimaryExternalLinkThirdPartyRequest {
 export interface FilesApiGetFileVersionInfoRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetFileVersionInfo
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getFileVersionInfoThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetFileVersionInfoThirdPartyRequest
- */
-export interface FilesApiGetFileVersionInfoThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetFileVersionInfoThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8607,24 +5148,10 @@ export interface FilesApiGetFormSubmissionsRequest {
 export interface FilesApiGetPresignedFileUriRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetPresignedFileUri
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getPresignedFileUriThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetPresignedFileUriThirdPartyRequest
- */
-export interface FilesApiGetPresignedFileUriThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetPresignedFileUriThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8635,24 +5162,10 @@ export interface FilesApiGetPresignedFileUriThirdPartyRequest {
 export interface FilesApiGetPresignedUriRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetPresignedUri
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getPresignedUriThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetPresignedUriThirdPartyRequest
- */
-export interface FilesApiGetPresignedUriThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetPresignedUriThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8663,24 +5176,10 @@ export interface FilesApiGetPresignedUriThirdPartyRequest {
 export interface FilesApiGetProtectedFileUsersRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiGetProtectedFileUsers
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for getProtectedFileUsersThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiGetProtectedFileUsersThirdPartyRequest
- */
-export interface FilesApiGetProtectedFileUsersThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiGetProtectedFileUsersThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8719,24 +5218,10 @@ export interface FilesApiGetXlsxRequest {
 export interface FilesApiIsFormPDFRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiIsFormPDF
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for isFormPDFThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiIsFormPDFThirdPartyRequest
- */
-export interface FilesApiIsFormPDFThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiIsFormPDFThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -8747,36 +5232,15 @@ export interface FilesApiIsFormPDFThirdPartyRequest {
 export interface FilesApiLockFileRequest {
     /**
      * The file to lock or unlock.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiLockFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The lock state to reach.
      * @type {LockFileParameters}
      * @memberof FilesApiLockFile
-     */
-    readonly lockFileParameters: LockFileParameters
-}
-
-/**
- * Request parameters for lockFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiLockFileThirdPartyRequest
- */
-export interface FilesApiLockFileThirdPartyRequest {
-    /**
-     * The file to lock or unlock.
-     * @type {string}
-     * @memberof FilesApiLockFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The lock state to reach.
-     * @type {LockFileParameters}
-     * @memberof FilesApiLockFileThirdParty
      */
     readonly lockFileParameters: LockFileParameters
 }
@@ -8810,10 +5274,10 @@ export interface FilesApiManageFormFillingRequest {
 export interface FilesApiOpenEditFileRequest {
     /**
      * The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiOpenEditFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file.
@@ -8847,55 +5311,6 @@ export interface FilesApiOpenEditFileRequest {
      * Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form.
      * @type {boolean}
      * @memberof FilesApiOpenEditFile
-     */
-    readonly fill?: boolean
-}
-
-/**
- * Request parameters for openEditFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiOpenEditFileThirdPartyRequest
- */
-export interface FilesApiOpenEditFileThirdPartyRequest {
-    /**
-     * The file the editor configuration is built for. Take the id from a folder listing such as  `GET api/2.0/files/{folderId}`.
-     * @type {string}
-     * @memberof FilesApiOpenEditFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file.
-     * @type {number}
-     * @memberof FilesApiOpenEditFileThirdParty
-     */
-    readonly version?: number
-
-    /**
-     * Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller\'s  rights and the room the file lies in allow.
-     * @type {boolean}
-     * @memberof FilesApiOpenEditFileThirdParty
-     */
-    readonly view?: boolean
-
-    /**
-     * Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page.
-     * @type {EditorType}
-     * @memberof FilesApiOpenEditFileThirdParty
-     */
-    readonly editorType?: EditorType
-
-    /**
-     * Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling.
-     * @type {boolean}
-     * @memberof FilesApiOpenEditFileThirdParty
-     */
-    readonly edit?: boolean
-
-    /**
-     * Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form.
-     * @type {boolean}
-     * @memberof FilesApiOpenEditFileThirdParty
      */
     readonly fill?: boolean
 }
@@ -8908,10 +5323,10 @@ export interface FilesApiOpenEditFileThirdPartyRequest {
 export interface FilesApiRestoreFileVersionRequest {
     /**
      * The file whose version is restored.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiRestoreFileVersion
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one.
@@ -8924,34 +5339,6 @@ export interface FilesApiRestoreFileVersionRequest {
      * The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used.
      * @type {string}
      * @memberof FilesApiRestoreFileVersion
-     */
-    readonly url?: string
-}
-
-/**
- * Request parameters for restoreFileVersionThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiRestoreFileVersionThirdPartyRequest
- */
-export interface FilesApiRestoreFileVersionThirdPartyRequest {
-    /**
-     * The file whose version is restored.
-     * @type {string}
-     * @memberof FilesApiRestoreFileVersionThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The version to restore, as reported by `GET api/2.0/files/file/{fileId}/edit/history`. It has to name an  existing version that is not the current one.
-     * @type {number}
-     * @memberof FilesApiRestoreFileVersionThirdParty
-     */
-    readonly version?: number
-
-    /**
-     * The address the content of the new version is fetched from instead of the stored version, which is how the  document service hands back a document with a set of changes rolled back; left out, the stored version is  used.
-     * @type {string}
-     * @memberof FilesApiRestoreFileVersionThirdParty
      */
     readonly url?: string
 }
@@ -8964,10 +5351,10 @@ export interface FilesApiRestoreFileVersionThirdPartyRequest {
 export interface FilesApiSaveEditingFileFromFormRequest {
     /**
      * The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSaveEditingFileFromForm
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given.
@@ -8994,48 +5381,6 @@ export interface FilesApiSaveEditingFileFromFormRequest {
      * Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history.
      * @type {boolean}
      * @memberof FilesApiSaveEditingFileFromForm
-     */
-    readonly forcesave?: boolean
-}
-
-/**
- * Request parameters for saveEditingFileFromFormThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSaveEditingFileFromFormThirdPartyRequest
- */
-export interface FilesApiSaveEditingFileFromFormThirdPartyRequest {
-    /**
-     * The file whose content is replaced. The submitted content is written onto this file, so it has to be the file  the editing session was opened on rather than a copy of it.
-     * @type {string}
-     * @memberof FilesApiSaveEditingFileFromFormThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * An address the document service saved the document at. This operation does not fetch the content from it - the  content always comes from the request body - and reads it only for the extension, when no file extension is  given.
-     * @type {string}
-     * @memberof FilesApiSaveEditingFileFromFormThirdParty
-     */
-    readonly downloadUri?: string
-
-    /**
-     * The format the submitted content is in, with the leading dot, as in `.docx`. When it differs from the format  the file is stored in, the portal converts the content before saving it. Left empty, the extension is read off  the download address, and failing that the stored format is assumed.
-     * @type {string}
-     * @memberof FilesApiSaveEditingFileFromFormThirdParty
-     */
-    readonly fileExtension?: string
-
-    /**
-     * The edited content, sent as the `File` part of a `multipart/form-data` body. When the part is missing the raw  request body is saved as the content instead, so an empty body empties the file.
-     * @type {File}
-     * @memberof FilesApiSaveEditingFileFromFormThirdParty
-     */
-    readonly file?: File
-
-    /**
-     * Records the write as an editor autosave: the file keeps its running editing session and the previous autosave  revision is overwritten. Left off, the write closes the solo editing session, is refused while somebody else  has the file open, and adds a version to the history.
-     * @type {boolean}
-     * @memberof FilesApiSaveEditingFileFromFormThirdParty
      */
     readonly forcesave?: boolean
 }
@@ -9048,38 +5393,17 @@ export interface FilesApiSaveEditingFileFromFormThirdPartyRequest {
 export interface FilesApiSaveFileAsPdfRequest {
     /**
      * The file to convert; it is left untouched.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSaveFileAsPdf
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The destination folder and the name of the PDF.
-     * @type {SaveAsPdf}
+     * @type {SaveAsPdf | ThirdPartySaveAsPdf}
      * @memberof FilesApiSaveFileAsPdf
      */
-    readonly saveAsPdf: SaveAsPdf
-}
-
-/**
- * Request parameters for saveFileAsPdfThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSaveFileAsPdfThirdPartyRequest
- */
-export interface FilesApiSaveFileAsPdfThirdPartyRequest {
-    /**
-     * The file to convert; it is left untouched.
-     * @type {string}
-     * @memberof FilesApiSaveFileAsPdfThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The destination folder and the name of the PDF.
-     * @type {ThirdPartySaveAsPdf}
-     * @memberof FilesApiSaveFileAsPdfThirdParty
-     */
-    readonly thirdPartySaveAsPdf: ThirdPartySaveAsPdf
+    readonly saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf
 }
 
 /**
@@ -9111,36 +5435,15 @@ export interface FilesApiSaveFormRoleMappingRequest {
 export interface FilesApiSetCustomFilterTagRequest {
     /**
      * The spreadsheet whose Custom Filter mode is switched.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSetCustomFilterTag
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The Custom Filter state to reach.
      * @type {CustomFilterParameters}
      * @memberof FilesApiSetCustomFilterTag
-     */
-    readonly customFilterParameters: CustomFilterParameters
-}
-
-/**
- * Request parameters for setCustomFilterTagThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSetCustomFilterTagThirdPartyRequest
- */
-export interface FilesApiSetCustomFilterTagThirdPartyRequest {
-    /**
-     * The spreadsheet whose Custom Filter mode is switched.
-     * @type {string}
-     * @memberof FilesApiSetCustomFilterTagThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The Custom Filter state to reach.
-     * @type {CustomFilterParameters}
-     * @memberof FilesApiSetCustomFilterTagThirdParty
      */
     readonly customFilterParameters: CustomFilterParameters
 }
@@ -9153,36 +5456,15 @@ export interface FilesApiSetCustomFilterTagThirdPartyRequest {
 export interface FilesApiSetEncryptionInfoRequest {
     /**
      * The file the keys are issued for; it has to lie in a private room.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSetEncryptionInfo
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person\'s key.
      * @type {Array<AccessRequestKeyDto>}
      * @memberof FilesApiSetEncryptionInfo
-     */
-    readonly accessRequestKeyDto?: Array<AccessRequestKeyDto>
-}
-
-/**
- * Request parameters for setEncryptionInfoThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSetEncryptionInfoThirdPartyRequest
- */
-export interface FilesApiSetEncryptionInfoThirdPartyRequest {
-    /**
-     * The file the keys are issued for; it has to lie in a private room.
-     * @type {string}
-     * @memberof FilesApiSetEncryptionInfoThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * One key per account that is to open the file. The keys of the accounts named here are replaced and the keys of  everybody else are left as they are, so sending no entry for a person does not revoke that person\'s key.
-     * @type {Array<AccessRequestKeyDto>}
-     * @memberof FilesApiSetEncryptionInfoThirdParty
      */
     readonly accessRequestKeyDto?: Array<AccessRequestKeyDto>
 }
@@ -9195,36 +5477,15 @@ export interface FilesApiSetEncryptionInfoThirdPartyRequest {
 export interface FilesApiSetFileExternalLinkRequest {
     /**
      * The file the link points at.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSetFileExternalLink
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
      * The settings of the link. They are applied in full, so a field left out is reset rather than kept.
      * @type {FileLinkRequest}
      * @memberof FilesApiSetFileExternalLink
-     */
-    readonly fileLinkRequest: FileLinkRequest
-}
-
-/**
- * Request parameters for setFileExternalLinkThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSetFileExternalLinkThirdPartyRequest
- */
-export interface FilesApiSetFileExternalLinkThirdPartyRequest {
-    /**
-     * The file the link points at.
-     * @type {string}
-     * @memberof FilesApiSetFileExternalLinkThirdParty
-     */
-    readonly id: string
-
-    /**
-     * The settings of the link. They are applied in full, so a field left out is reset rather than kept.
-     * @type {FileLinkRequest}
-     * @memberof FilesApiSetFileExternalLinkThirdParty
      */
     readonly fileLinkRequest: FileLinkRequest
 }
@@ -9237,36 +5498,15 @@ export interface FilesApiSetFileExternalLinkThirdPartyRequest {
 export interface FilesApiSetFileOrderRequest {
     /**
      * The file to move.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiSetFileOrder
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The position the file is to take.
      * @type {OrderRequestDto}
      * @memberof FilesApiSetFileOrder
-     */
-    readonly orderRequestDto?: OrderRequestDto
-}
-
-/**
- * Request parameters for setFileOrderThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiSetFileOrderThirdPartyRequest
- */
-export interface FilesApiSetFileOrderThirdPartyRequest {
-    /**
-     * The file to move.
-     * @type {string}
-     * @memberof FilesApiSetFileOrderThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The position the file is to take.
-     * @type {OrderRequestDto}
-     * @memberof FilesApiSetFileOrderThirdParty
      */
     readonly orderRequestDto?: OrderRequestDto
 }
@@ -9293,36 +5533,15 @@ export interface FilesApiSetFilesOrderRequest {
 export interface FilesApiStartEditFileRequest {
     /**
      * The file to open the editing session on. The caller needs edit access to it.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiStartEditFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
      * @type {StartEdit}
      * @memberof FilesApiStartEditFile
-     */
-    readonly startEdit: StartEdit
-}
-
-/**
- * Request parameters for startEditFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiStartEditFileThirdPartyRequest
- */
-export interface FilesApiStartEditFileThirdPartyRequest {
-    /**
-     * The file to open the editing session on. The caller needs edit access to it.
-     * @type {string}
-     * @memberof FilesApiStartEditFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-     * @type {StartEdit}
-     * @memberof FilesApiStartEditFileThirdParty
      */
     readonly startEdit: StartEdit
 }
@@ -9335,24 +5554,10 @@ export interface FilesApiStartEditFileThirdPartyRequest {
 export interface FilesApiStartFillingFileRequest {
     /**
      * The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiStartFillingFile
      */
-    readonly fileId: number
-}
-
-/**
- * Request parameters for startFillingFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiStartFillingFileThirdPartyRequest
- */
-export interface FilesApiStartFillingFileThirdPartyRequest {
-    /**
-     * The PDF form to open for filling. It has to be the form as it lies in the form-filling room itself, not a copy  kept elsewhere and not a submitted result.
-     * @type {string}
-     * @memberof FilesApiStartFillingFileThirdParty
-     */
-    readonly fileId: string
+    readonly fileId: number | string
 }
 
 /**
@@ -9363,36 +5568,15 @@ export interface FilesApiStartFillingFileThirdPartyRequest {
 export interface FilesApiToggleFileFavoriteRequest {
     /**
      * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiToggleFileFavorite
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it.
      * @type {boolean}
      * @memberof FilesApiToggleFileFavorite
-     */
-    readonly favorite?: boolean
-}
-
-/**
- * Request parameters for toggleFileFavoriteThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiToggleFileFavoriteThirdPartyRequest
- */
-export interface FilesApiToggleFileFavoriteThirdPartyRequest {
-    /**
-     * The file the operation addresses. Take the identifier from a listing such as `GET api/2.0/files/{folderId}`: a  file stored on the portal is numbered, while a file in a connected third-party account is named by an opaque  string.
-     * @type {string}
-     * @memberof FilesApiToggleFileFavoriteThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * Which state to put the mark in: `true` adds the file to the favorites of the calling account, `false` removes  it from them. Leaving the field out of the request removes the mark rather than setting it.
-     * @type {boolean}
-     * @memberof FilesApiToggleFileFavoriteThirdParty
      */
     readonly favorite?: boolean
 }
@@ -9405,10 +5589,10 @@ export interface FilesApiToggleFileFavoriteThirdPartyRequest {
 export interface FilesApiTrackEditFileRequest {
     /**
      * The file whose editing session is being tracked.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiTrackEditFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor.
@@ -9428,41 +5612,6 @@ export interface FilesApiTrackEditFileRequest {
      * Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited.
      * @type {boolean}
      * @memberof FilesApiTrackEditFile
-     */
-    readonly isFinish?: boolean
-}
-
-/**
- * Request parameters for trackEditFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiTrackEditFileThirdPartyRequest
- */
-export interface FilesApiTrackEditFileThirdPartyRequest {
-    /**
-     * The file whose editing session is being tracked.
-     * @type {string}
-     * @memberof FilesApiTrackEditFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The client tab that holds the session, a value the client makes up once and repeats on every call about that  tab. Two tabs sending different values are tracked as two sessions on the same file, while the all-zero value  belongs to a session claimed for a single editor.
-     * @type {string}
-     * @memberof FilesApiTrackEditFileThirdParty
-     */
-    readonly tabId?: string
-
-    /**
-     * The document key of the revision being edited, as `POST api/2.0/files/file/{fileId}/startedit` returned it. It  is checked against the file\'s current key on every call, so a key left over from an older revision is refused.
-     * @type {string}
-     * @memberof FilesApiTrackEditFileThirdParty
-     */
-    readonly docKeyForTrack?: string
-
-    /**
-     * Ends the session for this tab and tells the other clients that editing has stopped. Left off, the session is  refreshed and the file stays marked as being edited.
-     * @type {boolean}
-     * @memberof FilesApiTrackEditFileThirdParty
      */
     readonly isFinish?: boolean
 }
@@ -9475,36 +5624,15 @@ export interface FilesApiTrackEditFileThirdPartyRequest {
 export interface FilesApiUpdateFileRequest {
     /**
      * The file to update.
-     * @type {number}
+     * @type {number | string}
      * @memberof FilesApiUpdateFile
      */
-    readonly fileId: number
+    readonly fileId: number | string
 
     /**
      * The new title and the version to restore.
      * @type {UpdateFile}
      * @memberof FilesApiUpdateFile
-     */
-    readonly updateFile: UpdateFile
-}
-
-/**
- * Request parameters for updateFileThirdParty operation in FilesApi.
- * @export
- * @interface FilesApiUpdateFileThirdPartyRequest
- */
-export interface FilesApiUpdateFileThirdPartyRequest {
-    /**
-     * The file to update.
-     * @type {string}
-     * @memberof FilesApiUpdateFileThirdParty
-     */
-    readonly fileId: string
-
-    /**
-     * The new title and the version to restore.
-     * @type {UpdateFile}
-     * @memberof FilesApiUpdateFileThirdParty
      */
     readonly updateFile: UpdateFile
 }
@@ -9524,20 +5652,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).addFileToRecent(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Stamps the file as just used by the calling account and puts it at the top of that account\'s Recent section,  then answers with the file as it stands now. The list is personal: no other member sees the change, and the  file itself is untouched. Read access is enough, so a room member with view-only rights and an invited guest  may call it, and a visitor who reaches the file through an external link is recorded against that link. A  caller without read access is refused with 403, and an identifier that resolves to nothing answers 404.  Repeating the call is safe: the file keeps a single entry and only moves back to the top. The section holds  the 1000 newest entries of an account and drops the oldest beyond that on its own; folders never enter it, and  an encrypted file of a private room is answered normally but never recorded. Read the section back with  `GET api/2.0/files/recent` and drop entries with `DELETE api/2.0/files/recent`; whether it is offered among  the sections of `GET api/2.0/files/@root` is decided by `PUT api/2.0/files/displayrecent`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Add a file to Recent (third-party storage)
-     * @param {FilesFilesApiAddFileToRecentThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiAddFileToRecentRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public addFileToRecentThirdParty(requestParameters: FilesApiAddFileToRecentThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).addFileToRecentThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    public addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public addFileToRecent(requestParameters: FilesApiAddFileToRecentRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).addFileToRecent(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9560,20 +5687,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).changeVersionHistory(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper>;
     /**
-     * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Change version history (third-party storage)
-     * @param {FilesFilesApiChangeVersionHistoryThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiChangeVersionHistoryRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public changeVersionHistoryThirdParty(requestParameters: FilesApiChangeVersionHistoryThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).changeVersionHistoryThirdParty(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(this.axios, this.basePath));
+    public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper>;
+    public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>;
+    public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).changeVersionHistory(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9589,18 +5715,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
-     * @summary Open a form draft for filling (third-party storage)
-     * @param {FilesFilesApiCheckFillFormDraftThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public checkFillFormDraftThirdParty(requestParameters: FilesApiCheckFillFormDraftThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).checkFillFormDraftThirdParty(requestParameters.fileId, requestParameters.checkFillFormDraft, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
      * @summary Copy a file
      * @param {FilesFilesApiCopyFileAsRequest} requestParameters Request parameters.
@@ -9613,18 +5727,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
-     * @summary Copy a file (third-party storage)
-     * @param {FilesFilesApiCopyFileAsThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public copyFileAsThirdParty(requestParameters: FilesApiCopyFileAsThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).copyFileAsThirdParty(requestParameters.fileId, requestParameters.copyAsJsonElement, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
      * @summary Create the editing session
      * @param {FilesFilesApiCreateEditSessionRequest} requestParameters Request parameters.
@@ -9632,20 +5734,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createEditSession(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper>;
     /**
-     * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create the editing session (third-party storage)
-     * @param {FilesFilesApiCreateEditSessionThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiCreateEditSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createEditSessionThirdParty(requestParameters: FilesApiCreateEditSessionThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createEditSessionThirdParty(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(this.axios, this.basePath));
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).createEditSession(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9656,20 +5757,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createFile(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public createFile(requestParameters: FilesApiCreateFileRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create a file (third-party storage)
-     * @param {FilesFilesApiCreateFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiCreateFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createFileThirdParty(requestParameters: FilesApiCreateFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createFileThirdParty(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
+    public createFile(requestParameters: FilesApiCreateFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).createFile(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9697,18 +5797,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
-     * @summary Create the file primary external link (third-party storage)
-     * @param {FilesFilesApiCreateFilePrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public createFilePrimaryExternalLinkThirdParty(requestParameters: FilesApiCreateFilePrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createFilePrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
      * @summary Create an HTML file
      * @param {FilesFilesApiCreateHtmlFileRequest} requestParameters Request parameters.
@@ -9716,20 +5804,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create an HTML file (third-party storage)
-     * @param {FilesFilesApiCreateHtmlFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiCreateHtmlFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createHtmlFileThirdParty(requestParameters: FilesApiCreateHtmlFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createHtmlFileThirdParty(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+    public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9752,20 +5839,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public createTextFile(requestParameters: FilesApiCreateTextFileRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create a text file (third-party storage)
-     * @param {FilesFilesApiCreateTextFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiCreateTextFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createTextFileThirdParty(requestParameters: FilesApiCreateTextFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createTextFileThirdParty(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+    public createTextFile(requestParameters: FilesApiCreateTextFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9802,18 +5888,6 @@ export class FilesApi extends BaseAPI {
      */
     public deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).deleteFile(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
-     * @summary Delete a file (third-party storage)
-     * @param {FilesFilesApiDeleteFileThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public deleteFileThirdParty(requestParameters: FilesApiDeleteFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).deleteFileThirdParty(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9865,18 +5939,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Returns the roles of a PDF form together with the state each of them is in, which is how a client shows who is  expected to fill the form next. Every entry carries the name of the role, the account holding it, the sequence  number that decides the turn and a status: the roles of earlier turns are reported as complete, those of later  turns as waiting, and the role whose turn it is as either yours to fill or already in progress, depending on  whether that person has opened the form; when the filling has been stopped, the role it was interrupted at is  reported as stopped instead. A form whose filling was never started answers with an empty list. The file has  to be a PDF form, or the completed copy of one, and anything else is refused. Read access to the form is  enough, so every member of the room sees the roles, while a caller without access to the room and a guest  outside it are refused with 403 and an unknown file is answered with 404. The operation is read-only. The  assignment itself is written by `POST api/2.0/files/file/{fileId}/formrolemapping`.
-     * @summary Get form roles (third-party storage)
-     * @param {FilesFilesApiGetAllFormRolesThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getAllFormRolesThirdParty(requestParameters: FilesApiGetAllFormRolesThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getAllFormRolesThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
      * @summary Get changes URL
      * @param {FilesFilesApiGetEditDiffUrlRequest} requestParameters Request parameters.
@@ -9886,18 +5948,6 @@ export class FilesApi extends BaseAPI {
      */
     public getEditDiffUrl(requestParameters: FilesApiGetEditDiffUrlRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getEditDiffUrl(requestParameters.fileId, requestParameters.version, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Answers with everything an editor needs in order to show what changed in one version of a file: the address of  the version itself, its document key and format, the address of the recorded changes, the same trio for the  version it is compared against, and a token that signs the whole answer for the document service. `version`  picks the version, and 0, the default, means the current one. `changesUrl` and `previous` are filled in only  when the portal has stored the changes of that version, which is the case for versions written by an editing  session; for a version uploaded as a whole they stay empty and only the file itself can be shown. The  addresses are meant for the document service and carry their own time-limited keys. The caller needs the right  to read the history of the file, which editing access and above grant: read-only access, commenting access, a  guest and an anonymous caller are all refused, as is a file kept in a connected third-party storage. The  operation is read-only. For the list of versions themselves use  `GET api/2.0/files/file/{fileId}/edit/history`.
-     * @summary Get changes URL (third-party storage)
-     * @param {FilesFilesApiGetEditDiffUrlThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getEditDiffUrlThirdParty(requestParameters: FilesApiGetEditDiffUrlThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getEditDiffUrlThirdParty(requestParameters.fileId, requestParameters.version, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9913,18 +5963,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Returns the editing revisions of a file, oldest first, as the document service understands them: each entry  carries the version and the revision group it belongs to, the account that saved it, when it was saved, the  comment left on it, the document key of that revision and, where the portal stored them, the changes it  introduced. Only the revisions a person saved are listed - the autosaves an editing session writes in between  are left out, which is what separates this list from the plain version list of  `GET api/2.0/files/file/{fileId}/history`. The caller needs the right to read the history of the file, which  editing access and above grant: commenting access, read-only access, a guest, a member without access to the  room and an anonymous caller are all refused, and so is a file kept in a connected third-party storage, which  keeps no history in the portal. The operation is read-only. Take one entry to  `GET api/2.0/files/file/{fileId}/edit/diff` to show its changes, or to  `POST api/2.0/files/file/{fileId}/restoreversion` to bring it back.
-     * @summary Get version history (third-party storage)
-     * @param {FilesFilesApiGetEditHistoryThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getEditHistoryThirdParty(requestParameters: FilesApiGetEditHistoryThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getEditHistoryThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
      * @summary Get file encryption information
      * @param {FilesFilesApiGetEncryptionInfoRequest} requestParameters Request parameters.
@@ -9934,18 +5972,6 @@ export class FilesApi extends BaseAPI {
      */
     public getEncryptionInfo(requestParameters: FilesApiGetEncryptionInfoRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getEncryptionInfo(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns what the caller needs in order to decrypt one file of an end-to-end encrypted private room: `userKeys`  holds the key pairs of the calling account, the private half of each of them encrypted with that person\'s own  password, and `fileKeys` holds the file keys that were issued to this account for this file, each naming the  public key it was encrypted for. Only the keys of the calling account are ever returned, never those of the  other people in the room. An account that holds no key pair yet, and a file no key was issued for, answer with  empty lists rather than with an error, so an empty `fileKeys` means the caller cannot open that file rather  than that the file is unencrypted. The caller needs read access to the file; a caller without it, and a file  that does not exist, are both refused with 403. The operation is read-only. Keys are issued by  `PUT api/2.0/files/{fileId}/access`, and the personal key pairs are managed under `api/2.0/privacyroom/keys`.
-     * @summary Get file encryption information (third-party storage)
-     * @param {FilesFilesApiGetEncryptionInfoThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getEncryptionInfoThirdParty(requestParameters: FilesApiGetEncryptionInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getEncryptionInfoThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9968,20 +5994,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getFileInfo(requestParameters: FilesApiGetFileInfoRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFileInfo(requestParameters.fileId, requestParameters.version, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public getFileInfo(requestParameters: FilesApiGetFileInfoRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Returns one file as the portal stores it, together with the state it has for the caller: the title, the folder  it lies in, the size, the current version and revision group, the addresses for viewing and editing it, the  actions the caller is allowed to perform on it, the sharing rights it was reached through, and the thumbnail  state. `version` picks an older version instead of the current one; the default of -1 means the current  version. When the file belongs to another person\'s own section and the caller cannot read the folder holding  it, the answer reports the Shared with me section as its folder, so that a client can show it in a place the  caller can actually open. The caller needs read access to the file, which any member of the room it lies in  has; a caller without access to the room is refused and an anonymous caller without an external share link is  rejected. The operation is read-only. For every version at once use `GET api/2.0/files/file/{fileId}/history`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Get file information (third-party storage)
-     * @param {FilesFilesApiGetFileInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiGetFileInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getFileInfoThirdParty(requestParameters: FilesApiGetFileInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFileInfoThirdParty(requestParameters.fileId, requestParameters.version, options).then((request) => request(this.axios, this.basePath));
+    public getFileInfo(requestParameters: FilesApiGetFileInfoRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public getFileInfo(requestParameters: FilesApiGetFileInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public getFileInfo(requestParameters: FilesApiGetFileInfoRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).getFileInfo(requestParameters.fileId, requestParameters.version, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9997,18 +6022,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Lists the external links of a file, each with its identifier, title, address, rights, expiration date and  download restriction. `startIndex` and `count` page through the list, and the total number of links is  reported in the response headers rather than in the body. A file that has never been shared by link answers  with an empty list; the primary link is part of this list once it exists, and it is the only one that is  created on demand, by `GET api/2.0/files/file/{id}/link`. For a PDF form kept in a form-filling room the link  of the room is appended to the answer, because that is the address through which the form is filled out. The  caller needs the right to share the file, which its creator, the room admin and a DocSpace admin acting as  room manager have; a caller without access to the file is refused and an anonymous caller is rejected. The  operation is read-only. Take an identifier from here to `PUT api/2.0/files/file/{id}/links` to change or  remove that link.
-     * @summary Get file external links (third-party storage)
-     * @param {FilesFilesApiGetFileLinksThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getFileLinksThirdParty(requestParameters: FilesApiGetFileLinksThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFileLinksThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
      * @summary Get the file primary external link
      * @param {FilesFilesApiGetFilePrimaryExternalLinkRequest} requestParameters Request parameters.
@@ -10021,18 +6034,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Answers with the primary external link of a file - the one the Copy link action of a client hands out - with  its address in `sharedTo.shareLink`, its rights in `access`, and its expiration date, password flag and  download restriction beside them. The link is created on the first read if the file has none, with read  rights, no password and no expiry, so this operation mutates on that first call and is a plain read  afterwards; repeated calls answer with the same link identifier. A PDF form in a form-filling room is answered  with the link of that room, carried over to the form. The caller needs the right to share the file, which its  creator, the room admin and a DocSpace admin acting as room manager have; a caller without access to the file  is refused with 403 and an anonymous caller is rejected, while a link that was deliberately revoked is  answered with 404 rather than being recreated. The custom links of the same file, the primary one excepted,  are listed by `GET api/2.0/files/file/{id}/links`.
-     * @summary Get the file primary external link (third-party storage)
-     * @param {FilesFilesApiGetFilePrimaryExternalLinkThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getFilePrimaryExternalLinkThirdParty(requestParameters: FilesApiGetFilePrimaryExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFilePrimaryExternalLinkThirdParty(requestParameters.id, requestParameters.count, requestParameters.startIndex, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
      * @summary Get file versions
      * @param {FilesFilesApiGetFileVersionInfoRequest} requestParameters Request parameters.
@@ -10040,20 +6041,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFileVersionInfo(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper>;
     /**
-     * Returns every stored version of a file, newest first, each of them shaped like the file itself - the version  and the revision group it belongs to, the size, the comment saved with it, the addresses for viewing it, and  the thumbnail and lock state. Unlike the editing revisions of `GET api/2.0/files/file/{fileId}/edit/history`,  this list also holds the autosave revisions an editing session writes, so it is the fuller of the two, and it  is the shape a client already knows how to render. The caller needs the right to read the history of the file,  which is a stricter rule than reading the file: in a room only its managers and content creators may read the  history, and in a personal section editing access is enough, so a member with read access to somebody else\'s  file, and even a DocSpace admin in that position, are refused, as is an anonymous caller. The operation is  read-only. To restore one of the versions use `POST api/2.0/files/file/{fileId}/restoreversion`, and to close  or reopen a revision group `PUT api/2.0/files/file/{fileId}/history`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Get file versions (third-party storage)
-     * @param {FilesFilesApiGetFileVersionInfoThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiGetFileVersionInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public getFileVersionInfoThirdParty(requestParameters: FilesApiGetFileVersionInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getFileVersionInfoThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    public getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper>;
+    public getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>;
+    public getFileVersionInfo(requestParameters: FilesApiGetFileVersionInfoRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).getFileVersionInfo(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10093,18 +6093,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Returns a direct download address for the current content of the file together with the signature token that  the document service validates, which is what the portal hands over when the editors have to fetch the  document themselves. The address points at the portal\'s file stream endpoint and is rewritten to the host the  document service can reach, so on a deployment where the editors sit behind a private address it is not the  address a browser should follow. The answer also carries the extension of the stored document, leading dot  included. The caller needs read access to the file, and an unknown file id is reported as missing. The call  only reads, and each call mints a fresh address and token rather than reusing the previous one, so the value  is worth requesting again once a token has expired. For a link meant for a person, a plain address with no  token to put behind a download button, use `GET api/2.0/files/file/{fileId}/presigneduri` instead.
-     * @summary Get a signed download address (third-party storage)
-     * @param {FilesFilesApiGetPresignedFileUriThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getPresignedFileUriThirdParty(requestParameters: FilesApiGetPresignedFileUriThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getPresignedFileUriThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
      * @summary Get file download link
      * @param {FilesFilesApiGetPresignedUriRequest} requestParameters Request parameters.
@@ -10117,18 +6105,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Builds a download address for the current version of a file and answers with it as a plain string. The address  points at the portal\'s own file handler and carries the file identifier, the version it was built for and a  time-limited authentication key, so it can be handed to a downloader that cannot sign in to the portal itself;  it stops working once that key has expired, and it keeps naming the version that was current when it was built  rather than following later edits. The caller needs read access to the file: a member of the room it lies in  gets an address, a caller without access to the room is refused, an unknown identifier is answered as not  found and an anonymous caller is rejected. The operation is read-only and safe to repeat, though every call  mints a new key. Nothing is downloaded here - follow the address to fetch the bytes. For the variant the  document service signs, which comes back as an object with the file type and a token, use  `GET api/2.0/files/file/{fileId}/presigned`.
-     * @summary Get file download link (third-party storage)
-     * @param {FilesFilesApiGetPresignedUriThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getPresignedUriThirdParty(requestParameters: FilesApiGetPresignedUriThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getPresignedUriThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
      * @summary Get users for document protection
      * @param {FilesFilesApiGetProtectedFileUsersRequest} requestParameters Request parameters.
@@ -10138,18 +6114,6 @@ export class FilesApi extends BaseAPI {
      */
     public getProtectedFileUsers(requestParameters: FilesApiGetProtectedFileUsersRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).getProtectedFileUsers(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
-     * @summary Get users for document protection (third-party storage)
-     * @param {FilesFilesApiGetProtectedFileUsersThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public getProtectedFileUsersThirdParty(requestParameters: FilesApiGetProtectedFileUsersThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).getProtectedFileUsersThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10189,18 +6153,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Tells whether a file is a PDF form that can be filled out in the portal, and answers with a single boolean.  The check is by content, not by extension: the beginning of the file is read and the answer is `true` only  when it carries the marker the editors write into the forms they produce, so an ordinary PDF, and a PDF form  made in other software, both answer `false`. A file whose name is not a PDF at all answers `false` without  being read. Use it before offering the form-filling operations on a file, because a document that answers  `false` cannot be started for filling. The caller needs read access to the file, and read access is enough - a  member of the room with read-only rights gets the answer; a caller without access to the room is refused and  an anonymous caller is rejected. The operation is read-only and idempotent. It says nothing about the state of  the filling - for that read `GET api/2.0/files/file/{fileId}/formroles`.
-     * @summary Check the PDF file (third-party storage)
-     * @param {FilesFilesApiIsFormPDFThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public isFormPDFThirdParty(requestParameters: FilesApiIsFormPDFThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).isFormPDFThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
      * @summary Lock a file
      * @param {FilesFilesApiLockFileRequest} requestParameters Request parameters.
@@ -10208,20 +6160,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).lockFile(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public lockFile(requestParameters: FilesApiLockFileRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Lock a file (third-party storage)
-     * @param {FilesFilesApiLockFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiLockFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public lockFileThirdParty(requestParameters: FilesApiLockFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).lockFileThirdParty(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(this.axios, this.basePath));
+    public lockFile(requestParameters: FilesApiLockFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).lockFile(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10244,20 +6195,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public openEditFile(requestParameters: FilesApiOpenEditFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).openEditFile(requestParameters.fileId, requestParameters.version, requestParameters.view, requestParameters.editorType, requestParameters.edit, requestParameters.fill, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public openEditFile(requestParameters: FilesApiOpenEditFileRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationWrapper>;
     /**
-     * Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Get the editor configuration (third-party storage)
-     * @param {FilesFilesApiOpenEditFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiOpenEditFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public openEditFileThirdParty(requestParameters: FilesApiOpenEditFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).openEditFileThirdParty(requestParameters.fileId, requestParameters.version, requestParameters.view, requestParameters.editorType, requestParameters.edit, requestParameters.fill, options).then((request) => request(this.axios, this.basePath));
+    public openEditFile(requestParameters: FilesApiOpenEditFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyConfigurationWrapper>;
+    public openEditFile(requestParameters: FilesApiOpenEditFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<ConfigurationWrapper | ThirdPartyConfigurationWrapper>;
+    public openEditFile(requestParameters: FilesApiOpenEditFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).openEditFile(requestParameters.fileId, requestParameters.version, requestParameters.view, requestParameters.editorType, requestParameters.edit, requestParameters.fill, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10273,18 +6223,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Brings an earlier version of a file back and answers with the editing revisions of the file after the restore.  Nothing is overwritten: the content of the chosen version is stored again as a new version on top of the  history, carrying a comment that says which version it was reverted to, so the intervening versions stay  readable. `url` changes the source - with it the content is fetched from that address, which is how the  document service returns a document with a set of changes rolled back, and the new version records that  instead. Any links that pointed at drafts of the file are dropped, and the file is marked as new for the other  people who can read it. `version` has to name an existing version and is refused with 400 when it is missing  or already the current one. The caller needs the right to edit the history of the file and is otherwise  refused with 403, an anonymous caller included. The call is mutating and not idempotent. A locked file, one in  Trash, one being edited, an encrypted one and one kept in a connected third-party storage are all refused.
-     * @summary Restore a file version (third-party storage)
-     * @param {FilesFilesApiRestoreFileVersionThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public restoreFileVersionThirdParty(requestParameters: FilesApiRestoreFileVersionThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).restoreFileVersionThirdParty(requestParameters.fileId, requestParameters.version, requestParameters.url, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
      * @summary Save edited file content
      * @param {FilesFilesApiSaveEditingFileFromFormRequest} requestParameters Request parameters.
@@ -10292,20 +6230,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveEditingFileFromForm(requestParameters.fileId, requestParameters.downloadUri, requestParameters.fileExtension, requestParameters.file, requestParameters.forcesave, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Replaces the content of an existing file with an edited copy and answers with the file as it now stands. The  content is the `File` part of a `multipart/form-data` body, and when no such part is sent the raw request body  is saved instead, so an empty body empties the file. The `DownloadUri` query parameter does not supply content  here; it is only read for the extension when `FileExtension` is empty. `fileExtension` names the format of the  content being sent, and when it differs from the stored format the portal converts the content, or keeps it  under a renamed copy when a third-party storage cannot convert it. The caller needs edit access to the file.  The call is mutating and not idempotent: an ordinary call adds a version to the file history, while  `forcesave=true` records an editor autosave, which overwrites the previous autosave revision instead of adding  another version and leaves a running editing session in place. It is refused with 403 when the file is locked,  lies in Trash, or is open in an editing session started by somebody else, and an unknown file id is reported  as missing. For content too large to post in one request use `POST api/2.0/files/file/{fileId}/edit_session`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Save edited file content (third-party storage)
-     * @param {FilesFilesApiSaveEditingFileFromFormThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiSaveEditingFileFromFormRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveEditingFileFromFormThirdParty(requestParameters: FilesApiSaveEditingFileFromFormThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveEditingFileFromFormThirdParty(requestParameters.fileId, requestParameters.downloadUri, requestParameters.fileExtension, requestParameters.file, requestParameters.forcesave, options).then((request) => request(this.axios, this.basePath));
+    public saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public saveEditingFileFromForm(requestParameters: FilesApiSaveEditingFileFromFormRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).saveEditingFileFromForm(requestParameters.fileId, requestParameters.downloadUri, requestParameters.fileExtension, requestParameters.file, requestParameters.forcesave, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10316,20 +6253,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdf, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: number; saveAsPdf: SaveAsPdf }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Save a file as PDF (third-party storage)
-     * @param {FilesFilesApiSaveFileAsPdfThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiSaveFileAsPdfRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveFileAsPdfThirdParty(requestParameters: FilesApiSaveFileAsPdfThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveFileAsPdfThirdParty(requestParameters.id, requestParameters.thirdPartySaveAsPdf, options).then((request) => request(this.axios, this.basePath));
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: string; saveAsPdf: ThirdPartySaveAsPdf }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdf, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10352,20 +6288,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Set the Custom Filter editing mode (third-party storage)
-     * @param {FilesFilesApiSetCustomFilterTagThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiSetCustomFilterTagRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public setCustomFilterTagThirdParty(requestParameters: FilesApiSetCustomFilterTagThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setCustomFilterTagThirdParty(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(this.axios, this.basePath));
+    public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10381,18 +6316,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
-     * @summary Set file encryption information (third-party storage)
-     * @param {FilesFilesApiSetEncryptionInfoThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public setEncryptionInfoThirdParty(requestParameters: FilesApiSetEncryptionInfoThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setEncryptionInfoThirdParty(requestParameters.fileId, requestParameters.accessRequestKeyDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
      * @summary Set a file external link
      * @param {FilesFilesApiSetFileExternalLinkRequest} requestParameters Request parameters.
@@ -10405,18 +6328,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Creates an external link to a file, or changes or revokes an existing one, and answers with the link as it now  stands. `linkId` decides which: an identifier that is not yet in use, the empty one included, creates a link,  while the identifier of an existing link rewrites it, so the whole set of parameters is applied every time and  a field left out is reset rather than kept. `access` carries the rights the link grants, and `access` set to  the value that denies everything revokes the link instead - the answer is then empty, and a revoked primary  link is not recreated by a later read. `title` names the link for the people who manage it, `expirationDate`  limits its lifetime and is refused when it lies more than a few years ahead, `password` asks visitors for a  secret, `denyDownload` leaves them with viewing only, `internal` admits signed-in members alone, and  `primary=true` makes it the primary link of the file. The caller needs the right to share the file and is  otherwise refused, an unknown file being answered as not found. The call is mutating.
-     * @summary Set a file external link (third-party storage)
-     * @param {FilesFilesApiSetFileExternalLinkThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public setFileExternalLinkThirdParty(requestParameters: FilesApiSetFileExternalLinkThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setFileExternalLinkThirdParty(requestParameters.id, requestParameters.fileLinkRequest, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
      * @summary Set file order
      * @param {FilesFilesApiSetFileOrderRequest} requestParameters Request parameters.
@@ -10424,20 +6335,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public setFileOrder(requestParameters: FilesApiSetFileOrderRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setFileOrder(requestParameters.fileId, requestParameters.orderRequestDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public setFileOrder(requestParameters: FilesApiSetFileOrderRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Puts a file at a given position inside its folder and answers with the file, its `order` reporting where it  now stands. Positions count from 1, and the file that held the wanted position, together with everything after  it, is shifted to make room, so the numbering of a folder stays without gaps; a position beyond the end of the  folder places the file last. The value may also be sent as a dotted path, as in 1.2.3, in which case only  its last segment is read. Ordering is what the manual sorting of a room is built on, and it only means  something in rooms whose contents are indexed - elsewhere the value is stored and ignored. The caller needs  edit access to the file, which room managers, content creators and members with editing rights have; a member  acting on somebody else\'s file, a guest and an anonymous caller are refused with 403, and an unknown file is  answered with 404. The call is mutating and idempotent. To move several items in one go use  `PUT api/2.0/files/order`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Set file order (third-party storage)
-     * @param {FilesFilesApiSetFileOrderThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiSetFileOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public setFileOrderThirdParty(requestParameters: FilesApiSetFileOrderThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setFileOrderThirdParty(requestParameters.fileId, requestParameters.orderRequestDto, options).then((request) => request(this.axios, this.basePath));
+    public setFileOrder(requestParameters: FilesApiSetFileOrderRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public setFileOrder(requestParameters: FilesApiSetFileOrderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public setFileOrder(requestParameters: FilesApiSetFileOrderRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).setFileOrder(requestParameters.fileId, requestParameters.orderRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10465,18 +6375,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
-     * @summary Open an editing session (third-party storage)
-     * @param {FilesFilesApiStartEditFileThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public startEditFileThirdParty(requestParameters: FilesApiStartEditFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).startEditFileThirdParty(requestParameters.fileId, requestParameters.startEdit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
      * @summary Start filling a form
      * @param {FilesFilesApiStartFillingFileRequest} requestParameters Request parameters.
@@ -10484,20 +6382,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public startFillingFile(requestParameters: FilesApiStartFillingFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).startFillingFile(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public startFillingFile(requestParameters: FilesApiStartFillingFileRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Start filling a form (third-party storage)
-     * @param {FilesFilesApiStartFillingFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiStartFillingFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public startFillingFileThirdParty(requestParameters: FilesApiStartFillingFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).startFillingFileThirdParty(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
+    public startFillingFile(requestParameters: FilesApiStartFillingFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public startFillingFile(requestParameters: FilesApiStartFillingFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public startFillingFile(requestParameters: FilesApiStartFillingFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).startFillingFile(requestParameters.fileId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10513,18 +6410,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Sets or clears the favorite mark of one file for the calling account: `true` adds the file to the favorites,  `false` takes it out again. The call changes stored state even though it is a GET, so it is not one to issue  speculatively; repeating it with the same value changes nothing further. The mark is personal, no other member  sees it, and the file stays where it is stored. Read access is enough, so a room member with view-only rights  and a guest may call it. The answer only echoes the value that was asked for: an identifier that resolves to  nothing and a file the caller cannot read are skipped without a word, an encrypted file of a private room is  never marked, and the requested value still comes back, so read the outcome from  `GET api/2.0/files/@favorites` instead. A file moved to the Trash keeps its mark and is left out of that  listing until it is restored. To mark several entries at once, or to mark folders, use  `POST api/2.0/files/favorites` and `DELETE api/2.0/files/favorites`.
-     * @summary Set the file favorite status (third-party storage)
-     * @param {FilesFilesApiToggleFileFavoriteThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public toggleFileFavoriteThirdParty(requestParameters: FilesApiToggleFileFavoriteThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).toggleFileFavoriteThirdParty(requestParameters.fileId, requestParameters.favorite, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
      * @summary Track an editing session
      * @param {FilesFilesApiTrackEditFileRequest} requestParameters Request parameters.
@@ -10537,18 +6422,6 @@ export class FilesApi extends BaseAPI {
     }
 
     /**
-     * Keeps an editing session on the file alive, or ends it; an editor client calls it repeatedly while a document  is open. `docKeyForTrack` has to be the document key of the file as it currently stands, the value  `POST api/2.0/files/file/{fileId}/startedit` returned, and a key matching neither the current revision nor the  one being edited is refused with 403. `tabId` names the client tab that holds the session, so several tabs and  several users are tracked on one file independently. Refreshing an entry requires one of the editing rights on  the file - editing, reviewing, commenting, filling or filter editing - so a reader is refused. With  `isFinish=false` the entry is refreshed and the file stays marked as being edited; with `isFinish=true` the  entry for that tab is dropped and the other clients are told that editing has stopped. The call changes the  tracking state and never the document, and repeating it is safe. It answers `key` true with an empty `value`  whenever it succeeds, so a failure arrives as an error rather than as a false key. An anonymous caller is  accepted only through an external share link.
-     * @summary Track an editing session (third-party storage)
-     * @param {FilesFilesApiTrackEditFileThirdPartyRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof FilesApi
-     */
-    public trackEditFileThirdParty(requestParameters: FilesApiTrackEditFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).trackEditFileThirdParty(requestParameters.fileId, requestParameters.tabId, requestParameters.docKeyForTrack, requestParameters.isFinish, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
      * @summary Update a file
      * @param {FilesFilesApiUpdateFileRequest} requestParameters Request parameters.
@@ -10556,20 +6429,19 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).updateFile(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(this.axios, this.basePath));
-    }
-
+    public updateFile(requestParameters: FilesApiUpdateFileRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
-     * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
+     * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Update a file (third-party storage)
-     * @param {FilesFilesApiUpdateFileThirdPartyRequest} requestParameters Request parameters.
+     * @param {FilesFilesApiUpdateFileRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public updateFileThirdParty(requestParameters: FilesApiUpdateFileThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).updateFileThirdParty(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(this.axios, this.basePath));
+    public updateFile(requestParameters: FilesApiUpdateFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
+    public updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).updateFile(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

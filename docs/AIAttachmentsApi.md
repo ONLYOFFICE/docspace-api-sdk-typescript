@@ -8,6 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**aiAttachmentsDeleteMany**](#aiattachmentsdeletemany) | **DELETE** /api/2.0/ai/attachments/delete-many | Delete many|
 |[**aiAttachmentsGet**](#aiattachmentsget) | **POST** /api/2.0/ai/attachments/get | Get one attachment|
 |[**aiAttachmentsGetMany**](#aiattachmentsgetmany) | **POST** /api/2.0/ai/attachments/get-many | Get many|
+|[**aiAttachmentsGetSuggestedQuestions**](#aiattachmentsgetsuggestedquestions) | **POST** /api/2.0/ai/attachments/suggested-questions | Get suggested questions|
 |[**aiAttachmentsLinkToMessage**](#aiattachmentslinktomessage) | **POST** /api/2.0/ai/attachments/link-to-message | Link to message|
 |[**aiAttachmentsSaveFile**](#aiattachmentssavefile) | **POST** /api/2.0/ai/attachments/save-file | Save file|
 |[**aiAttachmentsSaveFilesMany**](#aiattachmentssavefilesmany) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many|
@@ -235,6 +236,62 @@ const { status, data } = await apiInstance.aiAttachmentsGetMany(
 |-------------|-------------|------------------|
 |**200** | The attachments, aligned by position with the IDs that were sent. A missing one leaves its slot empty. |  -  |
 |**400** | The list of attachment IDs is malformed. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **aiAttachmentsGetSuggestedQuestions**
+> AiSuccessResponse aiAttachmentsGetSuggestedQuestions(requestBody)
+
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **requestBody** | **{ [key: string]: any | null; }**|  | |
+
+
+### Return type
+
+**AiSuccessResponse**
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### Example
+
+```typescript
+import {
+    AIAttachmentsApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new AIAttachmentsApi(configuration);
+
+let requestBody: { [key: string]: any | null; }; //
+
+const { status, data } = await apiInstance.aiAttachmentsGetSuggestedQuestions(
+    requestBody
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Success. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 |**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |

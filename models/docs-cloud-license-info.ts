@@ -20,7 +20,7 @@
 
 
 /**
- * Represents the license information of a DocsCloud tenant.
+ * Represents the license information of a Docs Connect tenant.
  */
 export interface DocsCloudLicenseInfo {
     /**

@@ -1,6 +1,6 @@
-# UnknownNullableWrapper
+# JsonValueWrapper
 
-The successful API response.
+The successful API response containing an arbitrary JSON value.
 
 ## Properties
 
@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { UnknownNullableWrapper } from '@onlyoffice/docspace-api-sdk';
+import { JsonValueWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: UnknownNullableWrapper = {
+const instance: JsonValueWrapper = {
     response,
     count,
     links,

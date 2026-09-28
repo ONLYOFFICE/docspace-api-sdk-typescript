@@ -229,7 +229,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
          * @summary Get assignment
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsGetAssignment operation
@@ -275,7 +275,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
          * @summary Resolve for action
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -326,7 +326,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
          * @summary Try resolve for action
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -492,7 +492,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
         /**
          * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
          * @summary Get assignment
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsGetAssignment operation
@@ -507,7 +507,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
         /**
          * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room, and a room with no assignment of its own degrades to the portal-wide one. This fails when neither slot is set or the bound profile is gone, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
          * @summary Resolve for action
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -523,7 +523,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
         /**
          * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
          * @summary Try resolve for action
-         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -723,7 +723,7 @@ export interface AssignmentsApiAiAssignmentsGetAllAssignmentsRequest {
  */
 export interface AssignmentsApiAiAssignmentsGetAssignmentRequest {
     /**
-     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsGetAssignment
      */
@@ -737,7 +737,7 @@ export interface AssignmentsApiAiAssignmentsGetAssignmentRequest {
  */
 export interface AssignmentsApiAiAssignmentsResolveForActionRequest {
     /**
-     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsResolveForAction
      */
@@ -758,7 +758,7 @@ export interface AssignmentsApiAiAssignmentsResolveForActionRequest {
  */
 export interface AssignmentsApiAiAssignmentsTryResolveForActionRequest {
     /**
-     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision.
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsTryResolveForAction
      */
