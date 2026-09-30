@@ -1,18 +1,18 @@
 # CreateWebhooksConfigRequestsDto
 
-The request parameters for creating the webhook configuration.
+The target a webhook subscription calls, the events it listens for, and the secret it signs with.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **string** | The human-readable name of the webhook configuration. | [default to undefined]
-**uri** | **string** | The destination URL where the webhook events will be sent. | [default to undefined]
-**secretKey** | **string** | The webhook secret key used to sign the webhook payloads for the security verification. | [optional] [default to undefined]
-**enabled** | **boolean** | Specifies whether the webhook configuration is active or not. | [optional] [default to undefined]
-**ssl** | **boolean** | Specifies whether the SSL certificate verification is required or not. | [optional] [default to undefined]
-**triggers** | [**WebhookTrigger**](WebhookTrigger.md) | Defines which events will trigger webhook notifications. | [optional] [default to undefined]
-**targetId** | **string** | Target ID | [optional] [default to undefined]
+**name** | **string** | The label the subscription is listed under. It is for the administrator reading the list and is never sent to  the target; it does not have to be unique. | [default to undefined]
+**uri** | **string** | The address the portal posts the event payload to. It has to be an absolute `http` or `https` address outside  the installation own network, and it is probed before anything is stored: it must answer a HEAD request with  a success code, and a redirect does not count as one. | [default to undefined]
+**secretKey** | **string** | The shared secret the payload signature is computed with, so the receiver can tell a genuine call from a  forged one. It has to satisfy the portal password rules published by  `GET api/2.0/settings/security/password`, and it is never echoed back by any operation. On an update an empty  value keeps the secret already stored. | [optional] [default to undefined]
+**enabled** | **boolean** | Whether the subscription delivers at all. While it is off the matching events are dropped rather than queued,  so nothing from that period arrives once it is switched on again. | [optional] [default to undefined]
+**ssl** | **boolean** | Whether the target certificate is verified. Setting it demands an `https` target with a valid certificate;  leaving it off delivers without checking the certificate at all. | [optional] [default to undefined]
+**triggers** | [**WebhookTrigger**](WebhookTrigger.md) | The events the subscription listens for, as a bitmask combining the flags; 0 subscribes to all of them. Take  the flags the caller role is allowed to use from `GET api/2.0/settings/webhook/triggers`, since a flag beyond  that set is refused with 400. A subscription still only fires for events its creator may see. | [optional] [default to undefined]
+**targetId** | **string** | The single entity the subscription is narrowed to, by its identifier - a room or a file, for instance.  Leaving it out delivers events about every entity the subscribed triggers cover. | [optional] [default to undefined]
 
 ## Example
 

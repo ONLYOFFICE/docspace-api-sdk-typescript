@@ -196,15 +196,15 @@ export interface TenantQuota {
      */
     'aiSearch'?: boolean;
     /**
-     * The number of DocsCloud users.
+     * The number of Docs Connect users.
      */
     'docsCloud'?: number;
     /**
-     * Specifies if the DocsCloudDevPack enabled or not.
+     * Specifies if the Docs Connect Dev Pack enabled or not.
      */
     'docsCloudDevPack'?: boolean;
     /**
-     * Specifies if the DocsCloudTrial enabled or not.
+     * Specifies if the Docs Connect trial enabled or not.
      */
     'docsCloudTrial'?: boolean;
 }

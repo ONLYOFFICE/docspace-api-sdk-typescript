@@ -1,17 +1,17 @@
 # LogoConfigDto
 
-The logo config parameters.
+The logo the editor shows, resolved for the file type and the layout of this opening.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | **string** | The image of the logo. | [optional] [default to undefined]
-**imageDark** | **string** | The dark image of the logo. | [optional] [default to undefined]
-**imageLight** | **string** | The light image of the logo. | [optional] [default to undefined]
-**imageEmbedded** | **string** | The embedded image of the logo. | [optional] [default to undefined]
-**url** | **string** | The url link of the logo. | [optional] [default to undefined]
-**visible** | **boolean** | Specifies if the logo is visible. | [optional] [default to undefined]
+**image** | **string** | The logo for the current layout and file type, as the portal branding defines it. | [optional] [default to undefined]
+**imageDark** | **string** | The variant for a dark interface theme. | [optional] [default to undefined]
+**imageLight** | **string** | The variant for a light interface theme. | [optional] [default to undefined]
+**imageEmbedded** | **string** | The variant for the framed viewer. It is empty in every layout but the embedded one. | [optional] [default to undefined]
+**url** | **string** | Where clicking the logo takes the user. | [optional] [default to undefined]
+**visible** | **boolean** | Whether the logo is shown at all; the mobile layout hides it. | [optional] [default to undefined]
 
 ## Example
 

@@ -1,21 +1,21 @@
 # RoomLinkRequest
 
-The room link parameters.
+The link of a room to create, change or revoke.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**linkId** | **string** | The room link ID. | [optional] [default to undefined]
-**access** | [**FileShare**](FileShare.md) | The link sharing rights. | [optional] [default to undefined]
-**expirationDate** | **string** | The link expiration date. | [optional] [default to undefined]
-**internal** | **boolean** | The link scope, whether it is internal or not. | [optional] [default to undefined]
-**title** | **string** | The link name. | [optional] [default to undefined]
-**linkType** | [**LinkType**](LinkType.md) | The link type. | [optional] [default to undefined]
-**password** | **string** | The link password. | [optional] [default to undefined]
-**denyDownload** | **boolean** | Specifies if downloading the file from the link is disabled or not. | [optional] [default to undefined]
-**maxUseCount** | **number** | The maximum number of times the invitation link can be used. | [optional] [default to undefined]
-**currentUseCount** | **number** | The current number of times the invitation link has been used. | [optional] [default to undefined]
+**linkId** | **string** | Which link to change, taken from `GET api/2.0/files/rooms/{id}/links`. Leaving it out creates a link, and an  identifier the room does not know creates a link carrying that identifier. | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | What whoever opens the link may do in the room. The value 0 revokes the link instead of changing it, and the  levels a room accepts depend on its kind. | [optional] [default to undefined]
+**expirationDate** | [**ApiDateTime**](ApiDateTime.md) | When the link stops working, written with the offset of the portal time zone. A date already past is dropped  silently for an external link and refused for an invitation link, and a date further ahead than the portal  allows is refused as well; leaving it out means the link does not expire. | [optional] [default to undefined]
+**internal** | **boolean** | Whether the external link works only for people already signed in to the portal. With it off the link opens  the room for anyone who has the address, subject to the password. | [optional] [default to undefined]
+**title** | **string** | The name the link is shown under in the room. An empty value is accepted and the portal names the link itself,  so the answer is what tells the caller the name in use. | [optional] [default to undefined]
+**linkType** | [**LinkType**](LinkType.md) | Which kind of link to create: an invitation link makes whoever opens it a member of the room, while an  external link opens the room without an account. It is fixed when the link is created and is ignored on later  changes. | [optional] [default to undefined]
+**password** | **string** | The password an external link asks for before it opens the room. An empty value leaves the link open to anyone  who has the address, and the password is never returned when links are listed. | [optional] [default to undefined]
+**denyDownload** | **boolean** | Whether people arriving through the link are stopped from downloading and printing what they open. They can  still read the documents in the editor. | [optional] [default to undefined]
+**maxUseCount** | **number** | How many people an invitation link may still let in before it stops working. A value below the number of  people who already used it is refused, and leaving it out puts no ceiling on the link. | [optional] [default to undefined]
+**currentUseCount** | **number** | How many people have already joined through this invitation link. The value is kept by the portal: it is  reported back when links are listed and anything sent here is ignored. | [optional] [default to undefined]
 
 ## Example
 

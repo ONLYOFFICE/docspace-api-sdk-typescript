@@ -1,19 +1,19 @@
 # WatermarkRequestDto
 
-The request parameters for adding watermarks.
+The watermark drawn over the documents of a room.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **boolean** | Specifies whether watermarks are on or off. | [optional] [default to undefined]
-**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) | Specifies whether to display the following addditional information or not: username, user email, user IP address, current date and room name. | [optional] [default to undefined]
-**text** | **string** | The watermark text. | [optional] [default to undefined]
-**rotate** | **number** | The watermark text and image rotate angle. | [optional] [default to undefined]
-**imageScale** | **number** | The watermark image scale. | [optional] [default to undefined]
-**imageUrl** | **string** | The path to the temporary image file. | [optional] [default to undefined]
-**imageHeight** | **number** | The watermark image height. | [optional] [default to undefined]
-**imageWidth** | **number** | The watermark image width. | [optional] [default to undefined]
+**enabled** | **boolean** | Whether the room draws a watermark at all. Sending the object with this turned off removes the watermark the  room has, and the rest of the fields are then irrelevant. | [optional] [default to undefined]
+**additions** | [**WatermarkAdditions**](WatermarkAdditions.md) | Which details of the reader and of the room are stamped into the watermark alongside the text. The values  combine, so several of them can be added together to stamp more than one. | [optional] [default to undefined]
+**text** | **string** | The fixed line drawn over the document, shown before the details selected alongside it. It is the whole  watermark when no details are added. | [optional] [default to undefined]
+**rotate** | **number** | How far the watermark is turned, in degrees, with negative values turning it anticlockwise. Zero draws it  horizontally across the page. | [optional] [default to undefined]
+**imageScale** | **number** | How large the watermark image is drawn, as a percentage of its own size. It applies to the image form of the  watermark only. | [optional] [default to undefined]
+**imageUrl** | **string** | The picture to use instead of a text watermark, named by the path that `POST api/2.0/files/logos` returned for  an image uploaded beforehand. The portal copies it into the room when the setting is saved. | [optional] [default to undefined]
+**imageHeight** | **number** | The height the watermark image is drawn with, in pixels, used together with the width to keep its proportions. | [optional] [default to undefined]
+**imageWidth** | **number** | The width the watermark image is drawn with, in pixels, used together with the height to keep its proportions. | [optional] [default to undefined]
 
 ## Example
 

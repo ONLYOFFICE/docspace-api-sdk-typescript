@@ -1,14 +1,14 @@
 # CoEditingConfig
 
-The co-editing configuration parameters.
+How co-editing is preset when the document opens, and whether the user may switch it afterwards.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**change** | **boolean** | Specifies if the co-editing mode can be changed in the editor interface or not. | [optional] [default to undefined]
-**fast** | **boolean** | Specifies if the co-editing mode is fast. | [optional] [default to undefined]
-**mode** | [**CoEditingConfigMode**](CoEditingConfigMode.md) | The co-editing mode (fast or strict). | [optional] [default to undefined]
+**change** | **boolean** | Whether the user may switch between the two co-editing modes from the editor interface, or is held to the one  the portal preset. | [optional] [default to undefined]
+**fast** | **boolean** | Whether other participants see each change as it is typed. Left off, changes are exchanged only when a  participant saves, and the paragraph being edited is locked for the others meanwhile. | [optional] [default to undefined]
+**mode** | [**CoEditingConfigMode**](CoEditingConfigMode.md) | The mode the two settings above amount to, as the editors name it. | [optional] [default to undefined]
 
 ## Example
 

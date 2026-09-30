@@ -1,6 +1,6 @@
 # DocsCloudQuotaUser
 
-Represents a single user entry of a DocsCloud quota.
+Represents a single user entry of a Docs Connect quota.
 
 ## Properties
 

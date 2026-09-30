@@ -53,7 +53,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             fields = f;
         },
         /**
-         * Adds a new group with the group manager, name, and members specified in the request.
+         * Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
          * @summary Add a new group
          * @param {GroupRequestDto} [groupRequestDto] 
          * @param {*} [options] Override http request option.
@@ -109,10 +109,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Adds new group members to the group with the ID specified in the request.
+         * Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
          * @summary Add group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addMembersTo operation
@@ -171,9 +171,9 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Deletes a group with the ID specified in the request from the list of groups on the portal.
+         * Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
          * @summary Delete a group
-         * @param {string} id The group ID.
+         * @param {string} id The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteGroup operation
@@ -227,10 +227,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the detailed information about the selected group.
+         * Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
          * @summary Get a group
-         * @param {string} id The group ID.
-         * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
+         * @param {string} id The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.
+         * @param {boolean} [includeMembers] Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroup operation
@@ -288,9 +288,9 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
+         * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
          * @summary Get user groups
-         * @param {string} userid The user ID.
+         * @param {string} userid The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupByUserId operation
@@ -344,15 +344,15 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
          * @summary Get groups
-         * @param {string} [userId] The user ID.
-         * @param {boolean} [manager] Specifies if the user is a manager or not.
-         * @param {number} [count] The number of records to retrieve.
-         * @param {number} [startIndex] The starting index for paginated results.
-         * @param {string} [sortBy] Specifies the property used to sort the query results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching group data.
+         * @param {string} [userId] Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
+         * @param {boolean} [manager] Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [sortBy] What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
+         * @param {SortOrder} [sortOrder] The direction of the ordering: `Ascending`, which is the default, or `Descending`.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroups operation
@@ -434,10 +434,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Moves all the members from the selected group to another one specified in the request.
+         * Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
+         * @param {string} fromId The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.
+         * @param {string} toId The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for moveMembersTo operation
@@ -494,10 +494,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Removes the group members specified in the request from the selected group.
+         * Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
          * @summary Remove group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for removeMembersFrom operation
@@ -556,10 +556,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Sets a user with the ID specified in the request as a group manager.
+         * Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
          * @summary Set a group manager
-         * @param {string} id The group ID.
-         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
+         * @param {string} id The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {SetManagerRequest} setManagerRequest The account to make the manager of the group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setGroupManager operation
@@ -618,10 +618,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Replaces the group members with those specified in the request.
+         * Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Replace group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setMembersTo operation
@@ -680,10 +680,10 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Updates the existing group changing the group manager, name, and/or members.
+         * Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
          * @summary Update a group
-         * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
+         * @param {string} id The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.
+         * @param {UpdateGroupRequest} updateGroupRequest The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateGroup operation
@@ -752,7 +752,7 @@ export const GroupApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = GroupApiAxiosParamCreator(configuration)
     return {
         /**
-         * Adds a new group with the group manager, name, and members specified in the request.
+         * Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
          * @summary Add a new group
          * @param {GroupRequestDto} [groupRequestDto] 
          * @param {*} [options] Override http request option.
@@ -767,10 +767,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Adds new group members to the group with the ID specified in the request.
+         * Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
          * @summary Add group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for addMembersTo operation
@@ -783,9 +783,9 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a group with the ID specified in the request from the list of groups on the portal.
+         * Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
          * @summary Delete a group
-         * @param {string} id The group ID.
+         * @param {string} id The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteGroup operation
@@ -798,10 +798,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the detailed information about the selected group.
+         * Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
          * @summary Get a group
-         * @param {string} id The group ID.
-         * @param {boolean} [includeMembers] Specifies whether to include the group members or not.
+         * @param {string} id The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.
+         * @param {boolean} [includeMembers] Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroup operation
@@ -814,9 +814,9 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
+         * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
          * @summary Get user groups
-         * @param {string} userid The user ID.
+         * @param {string} userid The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupByUserId operation
@@ -829,15 +829,15 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
          * @summary Get groups
-         * @param {string} [userId] The user ID.
-         * @param {boolean} [manager] Specifies if the user is a manager or not.
-         * @param {number} [count] The number of records to retrieve.
-         * @param {number} [startIndex] The starting index for paginated results.
-         * @param {string} [sortBy] Specifies the property used to sort the query results.
-         * @param {SortOrder} [sortOrder] The order in which the results are sorted.
-         * @param {string} [filterValue] The text used for filtering or searching group data.
+         * @param {string} [userId] Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
+         * @param {boolean} [manager] Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [sortBy] What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
+         * @param {SortOrder} [sortOrder] The direction of the ordering: `Ascending`, which is the default, or `Descending`.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroups operation
@@ -850,10 +850,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Moves all the members from the selected group to another one specified in the request.
+         * Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Move group members
-         * @param {string} fromId The group ID to move from.
-         * @param {string} toId The group ID to move to.
+         * @param {string} fromId The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.
+         * @param {string} toId The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for moveMembersTo operation
@@ -866,10 +866,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes the group members specified in the request from the selected group.
+         * Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
          * @summary Remove group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for removeMembersFrom operation
@@ -882,10 +882,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets a user with the ID specified in the request as a group manager.
+         * Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
          * @summary Set a group manager
-         * @param {string} id The group ID.
-         * @param {SetManagerRequest} setManagerRequest The request for setting a group manager.
+         * @param {string} id The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {SetManagerRequest} setManagerRequest The account to make the manager of the group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setGroupManager operation
@@ -898,10 +898,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Replaces the group members with those specified in the request.
+         * Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Replace group members
-         * @param {string} id The group ID.
-         * @param {MembersRequest} membersRequest The member request.
+         * @param {string} id The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
+         * @param {MembersRequest} membersRequest The accounts to add, replace with, or remove.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setMembersTo operation
@@ -914,10 +914,10 @@ export const GroupApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the existing group changing the group manager, name, and/or members.
+         * Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
          * @summary Update a group
-         * @param {string} id The group ID.
-         * @param {UpdateGroupRequest} updateGroupRequest The request for updating a group.
+         * @param {string} id The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.
+         * @param {UpdateGroupRequest} updateGroupRequest The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateGroup operation
@@ -940,7 +940,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = GroupApiFp(configuration)
     return {
         /**
-         * Adds a new group with the group manager, name, and members specified in the request.
+         * Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
          * @summary Add a new group
          * @param {GroupApiAddGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -952,7 +952,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.addGroup(requestParameters.groupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Adds new group members to the group with the ID specified in the request.
+         * Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
          * @summary Add group members
          * @param {GroupApiAddMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -964,7 +964,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.addMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a group with the ID specified in the request from the list of groups on the portal.
+         * Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
          * @summary Delete a group
          * @param {GroupApiDeleteGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -976,7 +976,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.deleteGroup(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detailed information about the selected group.
+         * Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
          * @summary Get a group
          * @param {GroupApiGetGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -988,7 +988,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getGroup(requestParameters.id, requestParameters.includeMembers, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of groups for the user with the ID specified in the request.
+         * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
          * @summary Get user groups
          * @param {GroupApiGetGroupByUserIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1000,7 +1000,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getGroupByUserId(requestParameters.userid, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the general information about all the groups, such as group ID and group manager.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
          * @summary Get groups
          * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1012,7 +1012,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getGroups(requestParameters.userId, requestParameters.manager, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Moves all the members from the selected group to another one specified in the request.
+         * Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Move group members
          * @param {GroupApiMoveMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1024,7 +1024,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.moveMembersTo(requestParameters.fromId, requestParameters.toId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes the group members specified in the request from the selected group.
+         * Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
          * @summary Remove group members
          * @param {GroupApiRemoveMembersFromRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1036,7 +1036,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.removeMembersFrom(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets a user with the ID specified in the request as a group manager.
+         * Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
          * @summary Set a group manager
          * @param {GroupApiSetGroupManagerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1048,7 +1048,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.setGroupManager(requestParameters.id, requestParameters.setManagerRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Replaces the group members with those specified in the request.
+         * Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
          * @summary Replace group members
          * @param {GroupApiSetMembersToRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1060,7 +1060,7 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.setMembersTo(requestParameters.id, requestParameters.membersRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the existing group changing the group manager, name, and/or members.
+         * Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
          * @summary Update a group
          * @param {GroupApiUpdateGroupRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1095,14 +1095,14 @@ export interface GroupApiAddGroupRequest {
  */
 export interface GroupApiAddMembersToRequest {
     /**
-     * The group ID.
+     * The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiAddMembersTo
      */
     readonly id: string
 
     /**
-     * The member request.
+     * The accounts to add, replace with, or remove.
      * @type {MembersRequest}
      * @memberof GroupApiAddMembersTo
      */
@@ -1116,7 +1116,7 @@ export interface GroupApiAddMembersToRequest {
  */
 export interface GroupApiDeleteGroupRequest {
     /**
-     * The group ID.
+     * The ID of the group to delete, taken from the route. It has to be a group that has not been deleted already,  otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiDeleteGroup
      */
@@ -1130,14 +1130,14 @@ export interface GroupApiDeleteGroupRequest {
  */
 export interface GroupApiGetGroupRequest {
     /**
-     * The group ID.
+     * The ID of the group to read, taken from the route. It has to be a group that has not been deleted, otherwise  the operation answers 404.
      * @type {string}
      * @memberof GroupApiGetGroup
      */
     readonly id: string
 
     /**
-     * Specifies whether to include the group members or not.
+     * Whether to fill in the member list of the group. It defaults to true, so set it to false when only the name  and the manager are needed and the group may be large.
      * @type {boolean}
      * @memberof GroupApiGetGroup
      */
@@ -1151,7 +1151,7 @@ export interface GroupApiGetGroupRequest {
  */
 export interface GroupApiGetGroupByUserIdRequest {
     /**
-     * The user ID.
+     * The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
      * @type {string}
      * @memberof GroupApiGetGroupByUserId
      */
@@ -1165,49 +1165,49 @@ export interface GroupApiGetGroupByUserIdRequest {
  */
 export interface GroupApiGetGroupsRequest {
     /**
-     * The user ID.
+     * Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
      * @type {string}
      * @memberof GroupApiGetGroups
      */
     readonly userId?: string
 
     /**
-     * Specifies if the user is a manager or not.
+     * Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
      * @type {boolean}
      * @memberof GroupApiGetGroups
      */
     readonly manager?: boolean
 
     /**
-     * The number of records to retrieve.
+     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
      * @type {number}
      * @memberof GroupApiGetGroups
      */
     readonly count?: number
 
     /**
-     * The starting index for paginated results.
+     * The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
      * @type {number}
      * @memberof GroupApiGetGroups
      */
     readonly startIndex?: number
 
     /**
-     * Specifies the property used to sort the query results.
+     * What to order the groups by: `Title`, `Manager` or `MembersCount`, compared without regard to case. Any other  value, and omitting the field, orders by title.
      * @type {string}
      * @memberof GroupApiGetGroups
      */
     readonly sortBy?: string
 
     /**
-     * The order in which the results are sorted.
+     * The direction of the ordering: `Ascending`, which is the default, or `Descending`.
      * @type {SortOrder}
      * @memberof GroupApiGetGroups
      */
     readonly sortOrder?: SortOrder
 
     /**
-     * The text used for filtering or searching group data.
+     * The text to match against the group name. Omit it to get every group.
      * @type {string}
      * @memberof GroupApiGetGroups
      */
@@ -1221,14 +1221,14 @@ export interface GroupApiGetGroupsRequest {
  */
 export interface GroupApiMoveMembersToRequest {
     /**
-     * The group ID to move from.
+     * The ID of the group the members are taken from. It is emptied but not deleted, and it has to be a group that  has not been deleted already.
      * @type {string}
      * @memberof GroupApiMoveMembersTo
      */
     readonly fromId: string
 
     /**
-     * The group ID to move to.
+     * The ID of the group the members are moved into. It is the group the answer describes, and it has to be a  group that has not been deleted already.
      * @type {string}
      * @memberof GroupApiMoveMembersTo
      */
@@ -1242,14 +1242,14 @@ export interface GroupApiMoveMembersToRequest {
  */
 export interface GroupApiRemoveMembersFromRequest {
     /**
-     * The group ID.
+     * The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiRemoveMembersFrom
      */
     readonly id: string
 
     /**
-     * The member request.
+     * The accounts to add, replace with, or remove.
      * @type {MembersRequest}
      * @memberof GroupApiRemoveMembersFrom
      */
@@ -1263,14 +1263,14 @@ export interface GroupApiRemoveMembersFromRequest {
  */
 export interface GroupApiSetGroupManagerRequest {
     /**
-     * The group ID.
+     * The ID of the group whose manager is set, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiSetGroupManager
      */
     readonly id: string
 
     /**
-     * The request for setting a group manager.
+     * The account to make the manager of the group.
      * @type {SetManagerRequest}
      * @memberof GroupApiSetGroupManager
      */
@@ -1284,14 +1284,14 @@ export interface GroupApiSetGroupManagerRequest {
  */
 export interface GroupApiSetMembersToRequest {
     /**
-     * The group ID.
+     * The ID of the group whose members are changed, taken from the route. It has to be a group that has not been  deleted, otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiSetMembersTo
      */
     readonly id: string
 
     /**
-     * The member request.
+     * The accounts to add, replace with, or remove.
      * @type {MembersRequest}
      * @memberof GroupApiSetMembersTo
      */
@@ -1305,14 +1305,14 @@ export interface GroupApiSetMembersToRequest {
  */
 export interface GroupApiUpdateGroupRequest {
     /**
-     * The group ID.
+     * The ID of the group to update, taken from the route. It has to be a group that has not been deleted,  otherwise the operation answers 404.
      * @type {string}
      * @memberof GroupApiUpdateGroup
      */
     readonly id: string
 
     /**
-     * The request for updating a group.
+     * The fields to change. Every field is optional and the ones that are left out keep their current values, so an  empty object changes nothing.
      * @type {UpdateGroupRequest}
      * @memberof GroupApiUpdateGroup
      */
@@ -1327,7 +1327,7 @@ export interface GroupApiUpdateGroupRequest {
  */
 export class GroupApi extends BaseAPI {
     /**
-     * Adds a new group with the group manager, name, and members specified in the request.
+     * Creates a group with the given name and, optionally, a manager and a first set of members.  The caller needs the permissions to edit groups and to add and remove users.  The name is required and cannot be blank, and unlike the operations that add members later, this one checks  every listed account upfront and rejects the whole call with 400 if any of them is unusable - a guest, a  disabled account or an ID that matches nobody.  The call is not idempotent: names are not unique, so repeating it creates a second group with the same name.  Creating a group raises a `GroupCreated` webhook, and the answer holds the new group with its members  included.  Members can be changed afterwards through `PUT api/2.0/group/{id}` or the dedicated member operations.
      * @summary Add a new group
      * @param {GroupApiAddGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1339,7 +1339,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Adds new group members to the group with the ID specified in the request.
+     * Adds the listed accounts to a group, keeping the members it already has.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Accounts that cannot be group members - a guest, a disabled account or an ID that matches nobody - are  silently skipped instead of failing the call, so compare the members in the answer with what was sent to see  what was actually applied.  The call is idempotent for an account that is already a member, and it does not change who manages the group;  use `PUT api/2.0/group/{id}/manager` for that.  The answer is the group with its members after the addition.  To replace the whole list instead of extending it, use `POST api/2.0/group/{id}/members`.
      * @summary Add group members
      * @param {GroupApiAddMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1351,7 +1351,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Deletes a group with the ID specified in the request from the list of groups on the portal.
+     * Deletes a group and withdraws the access it had been granted to rooms, folders and files.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The removal is permanent and cannot be undone, and it affects sharing: everything that was shared with the  group loses that share, so members who had access only through this group lose it too.  The accounts themselves are kept - only their membership disappears.  The call answers 204 with no body and raises a `GroupDeleted` webhook; a second call with the same ID answers  404 rather than succeeding again.  To empty a group without deleting it, move its members away with  `PUT api/2.0/group/{fromId}/members/{toId}` or remove them through `DELETE api/2.0/group/{id}/members`.
      * @summary Delete a group
      * @param {GroupApiDeleteGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1363,7 +1363,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns the detailed information about the selected group.
+     * Returns one group by its ID, with its name, its manager and - when asked for - the accounts that belong to  it.  The caller needs the permission to read groups, and the ID has to belong to a group that has not been  deleted, otherwise the operation answers 404.  The call is read-only, and the member list is left out unless `includeMembers` is set to true, so ask for it  only when the members are actually needed.  Use `GET api/2.0/group` to look a group up by name or to page through them all.
      * @summary Get a group
      * @param {GroupApiGetGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1375,7 +1375,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of groups for the user with the ID specified in the request.
+     * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
      * @summary Get user groups
      * @param {GroupApiGetGroupByUserIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1387,7 +1387,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Returns the general information about all the groups, such as group ID and group manager.
+     * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
      * @summary Get groups
      * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1399,7 +1399,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Moves all the members from the selected group to another one specified in the request.
+     * Moves every member of one group into another group, emptying the first one.  The caller needs the permissions to edit groups and to add and remove users, and both IDs have to belong to  groups that have not been deleted, otherwise the operation answers 404.  The source group is kept, only without members, so delete it separately through  `DELETE api/2.0/group/{id}` if it is no longer needed.  Members that cannot be group members any more are silently skipped rather than failing the call, and an  account that already belongs to the destination is simply left there.  The answer is the destination group with its members, not the source one.  To move a chosen few instead of everybody, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
      * @summary Move group members
      * @param {GroupApiMoveMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1411,7 +1411,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Removes the group members specified in the request from the selected group.
+     * Removes the listed accounts from a group, leaving the rest of its members in place.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  The accounts themselves are kept; only their membership in this group ends, together with the access they had  through it.  The call is idempotent and forgiving: an ID that is not a member, and one that matches no account at all, are  both skipped without an error, and an empty list simply changes nothing.  The answer is the group with the members that remain.  Emptying a group cannot be done through `POST api/2.0/group/{id}/members`, which needs at least one valid  account, so list every member here, or move them away with `PUT api/2.0/group/{fromId}/members/{toId}`.
      * @summary Remove group members
      * @param {GroupApiRemoveMembersFromRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1423,7 +1423,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Sets a user with the ID specified in the request as a group manager.
+     * Makes an account the manager of a group, replacing whoever managed it before.  The caller needs the permissions to edit groups and to add and remove users.  Both the group and the account have to exist: the operation answers 404 when the ID in the route matches no  live group and also when `userId` matches no account, so the message of the error says which of the two was  not found.  The account is added to the group at the same time, so a manager does not have to be a member beforehand, and  the previous manager stays in the group as an ordinary member.  A group has one manager, which makes the call idempotent when it names the account that manages it already.  The answer is the group with its new manager.  To change the members rather than the manager, use `PUT api/2.0/group/{id}/members`.
      * @summary Set a group manager
      * @param {GroupApiSetGroupManagerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1435,7 +1435,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Replaces the group members with those specified in the request.
+     * Replaces the whole member list of a group with the accounts given in the request, removing everybody who is  not in that list.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  At least one of the listed accounts has to be usable as a group member, otherwise the call is rejected with  400 and the group is left untouched; the accounts that cannot be members - a guest, a disabled account or an  ID that matches nobody - are then silently skipped while the rest are applied.  The replacement is not atomic: the current members are removed first and the new ones added afterwards, so a  failure in between can leave the group empty.  The answer is the group with the members it ends up with, which is why it should be read instead of assuming  the request was applied verbatim.  To add or remove a few accounts without touching the others, use `PUT api/2.0/group/{id}/members` and  `DELETE api/2.0/group/{id}/members`.
      * @summary Replace group members
      * @param {GroupApiSetMembersToRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1447,7 +1447,7 @@ export class GroupApi extends BaseAPI {
     }
 
     /**
-     * Updates the existing group changing the group manager, name, and/or members.
+     * Changes the name and the manager of a group and adds or removes members, in one call.  The caller needs the permissions to edit groups and to add and remove users, and the ID has to belong to a  group that has not been deleted, otherwise the operation answers 404.  Every field is optional and the ones that are left out are kept: omitting `groupName` keeps the current name,  and omitting `groupManager` keeps the current manager rather than clearing it.  Accounts in `membersToAdd` that cannot be group members - a guest, a disabled account or an ID that matches  nobody - are silently skipped instead of failing the call, so compare the members in the answer with what was  sent to see what was actually applied.  Members are added first and removed afterwards, an account listed in both lists therefore ends up removed,  and removing an account that is not a member changes nothing.  The change raises a `GroupUpdated` webhook, and the answer holds the group as it is after the update.
      * @summary Update a group
      * @param {GroupApiUpdateGroupRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

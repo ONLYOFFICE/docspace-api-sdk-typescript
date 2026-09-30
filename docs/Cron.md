@@ -1,14 +1,14 @@
 # Cron
 
-The backup cron parameters.
+The request parameters for the time the scheduled backup runs.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**period** | [**BackupPeriod**](BackupPeriod.md) | The backup period type. | [optional] [default to undefined]
-**hour** | **number** | The time of the day to start the backup process. | [optional] [default to undefined]
-**day** | **number** | The day of the week to start the backup process. | [optional] [default to undefined]
+**period** | [**BackupPeriod**](BackupPeriod.md) | How often the backup runs: `EveryDay`, `EveryWeek` or `EveryMonth`. It defaults to `EveryDay`. | [optional] [default to undefined]
+**hour** | **number** | The hour of the day the backup starts at, from 0 to 23. Minutes cannot be chosen - it always starts  on the hour. | [optional] [default to undefined]
+**day** | **number** | The day the backup runs on: the day of the week from 1 to 7, Sunday being 1, for `EveryWeek`, and the  day of the month from 1 to 31 for `EveryMonth`. Leave it out for `EveryDay` only - an omitted value is  stored as 0, which neither of the other two periods accepts, so a weekly or monthly schedule sent  without it fails. | [optional] [default to undefined]
 
 ## Example
 

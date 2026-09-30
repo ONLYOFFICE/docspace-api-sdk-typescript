@@ -27,18 +27,18 @@ import type { FileShare } from './file-share';
 
 /**
  * @type FileShareParams
- * The collection of file sharing parameters.
+ * One sharing entry: an account, a group or an email address, and the access level it is given.
  * @export
  */
 export type FileShareParams = EmailInvitationDto &  {
     /**
-     * The ID of the user to whom the file will be shared.
+     * The account or the group the entry is about, taken from the portal people and group listings. Leave it out and  give an email address instead to share with somebody who has no account yet.
      * @type {string}
      * @memberof FileShareParams
      */
     'shareTo'?: string;
     /**
-     * The sharing access rights.
+     * What the subject may do with the shared item. The value 0 takes the access away again, and which of the other  levels are accepted depends on what is being shared.
      * @type {FileShare}
      * @memberof FileShareParams
      */

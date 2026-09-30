@@ -20,11 +20,11 @@
 
 
 /**
- * The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+ * Whether the portal promotional banners are hidden.
  */
 export interface TenantBannerSettingsDto {
     /**
-     * The banners visibility flag.
+     * Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here.
      */
     'hidden'?: boolean;
 }

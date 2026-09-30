@@ -20,15 +20,15 @@
 
 
 /**
- * The parameters for changing version history.
+ * The change to make to a revision group of a file.
  */
 export interface ChangeHistory {
     /**
-     * The file version of the change history.
+     * The version the change applies to; 0 means the current version of the file.
      */
     'version': number;
     /**
-     * Specifies whether to start a new version or continue revision of the change history.
+     * What to do with the revision group: `false` completes the named version, storing its content again as a fresh  version that opens a new group, while `true` folds the last group back into the group before it, so the next  save continues that revision.
      */
     'continueVersion'?: boolean;
 }

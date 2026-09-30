@@ -6,6 +6,7 @@ The external resources settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**adminPanel** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the administration panel. It is returned only to the full administrators of a licensed (Enterprise) server (standalone) portal. | [optional] [default to undefined]
 **api** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the product API. | [optional] [default to undefined]
 **common** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the common product information. | [optional] [default to undefined]
 **forum** | [**CultureSpecificExternalResource**](CultureSpecificExternalResource.md) | The link to the forum. | [optional] [default to undefined]
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 import { CultureSpecificExternalResources } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CultureSpecificExternalResources = {
+    adminPanel,
     api,
     common,
     forum,

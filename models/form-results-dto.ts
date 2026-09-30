@@ -23,15 +23,15 @@
 import type { FormsItemData } from './forms-item-data';
 
 /**
- * A single filled-in form submission.
+ * One completed copy of a form, with the values that were entered into it.
  */
 export interface FormResultsDto {
     /**
-     * The date and time when the form was created.
+     * When the portal recorded this copy, in UTC: the moment the filled copy was completed and its data indexed, not  the moment the form itself was made.
      */
     'createOn'?: string;
     /**
-     * The list of forms data.
+     * The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank.
      */
     'formsData'?: Array<FormsItemData> | null;
 }

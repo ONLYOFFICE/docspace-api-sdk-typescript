@@ -36,9 +36,9 @@ export const PortalGuestsApiAxiosParamCreator = function (configuration?: Config
     
     return {
         /**
-         * Returns a link to share a guest with another user.
+         * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
          * @summary Get a guest sharing link
-         * @param {string} userid The user ID.
+         * @param {string} userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGuestSharingLink operation
@@ -102,9 +102,9 @@ export const PortalGuestsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PortalGuestsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a link to share a guest with another user.
+         * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
          * @summary Get a guest sharing link
-         * @param {string} userid The user ID.
+         * @param {string} userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGuestSharingLink operation
@@ -127,7 +127,7 @@ export const PortalGuestsApiFactory = function (configuration?: Configuration, b
     const localVarFp = PortalGuestsApiFp(configuration)
     return {
         /**
-         * Returns a link to share a guest with another user.
+         * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
          * @summary Get a guest sharing link
          * @param {PortalGuestsApiGetGuestSharingLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -148,7 +148,7 @@ export const PortalGuestsApiFactory = function (configuration?: Configuration, b
  */
 export interface PortalGuestsApiGetGuestSharingLinkRequest {
     /**
-     * The user ID.
+     * The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
      * @type {string}
      * @memberof PortalGuestsApiGetGuestSharingLink
      */
@@ -163,7 +163,7 @@ export interface PortalGuestsApiGetGuestSharingLinkRequest {
  */
 export class PortalGuestsApi extends BaseAPI {
     /**
-     * Returns a link to share a guest with another user.
+     * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
      * @summary Get a guest sharing link
      * @param {PortalGuestsApiGetGuestSharingLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -27,7 +27,7 @@ import type { UpdateMembersQuotaRequestDtoQuota } from './update-members-quota-r
  */
 export interface UpdateMembersQuotaRequestDto {
     /**
-     * The list of user IDs.
+     * The accounts the operation applies to. System accounts are dropped from the list without an error.
      */
     'userIds'?: Array<string> | null;
     'quota'?: UpdateMembersQuotaRequestDtoQuota;

@@ -1,13 +1,13 @@
 # RoomNewItemsDto
 
-The room new items information.
+The unseen entries of one room inside a day group.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) | The room file entry. | [optional] [default to undefined]
-**items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The list of file entry items. | [optional] [default to undefined]
+**room** | [**FileEntryBaseDto**](FileEntryBaseDto.md) | The room the entries were found in, in its short form: only the identifier, the title, the room type and the  logo are filled in. | [optional] [default to undefined]
+**items** | [**Array&lt;FileEntryBaseDto&gt;**](FileEntryBaseDto.md) | The files of that room the caller has not opened yet, the most recently changed first. Reading them here does  not clear the badges; opening the room itself does. | [optional] [default to undefined]
 
 ## Example
 

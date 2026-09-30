@@ -23,16 +23,16 @@
 import type { DownloadRequestItemDtoKey } from './download-request-item-dto-key';
 
 /**
- * The download request item with conversion parameters and security settings.
+ * One file of a bulk download, together with the format it is converted to.
  */
 export interface DownloadRequestItemDto {
     'key': DownloadRequestItemDtoKey;
     /**
-     * The target format or conversion type for the file download.
+     * The format the file is converted to before it is packed, as a file extension without a leading dot.
      */
     'value': string | null;
     /**
-     * The optional password for accessing protected files.
+     * The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it.
      */
     'password'?: string | null;
 }

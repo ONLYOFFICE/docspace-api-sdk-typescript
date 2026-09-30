@@ -32,8 +32,8 @@ export interface AiProfilesListProviderModelsRequest {
      */
     'baseUrl': string;
     /**
-     * Provider API key.
+     * Provider API key. Omit it for a provider that needs none; the request is then made without one.
      */
-    'apiKey': string;
+    'apiKey'?: string;
 }
 

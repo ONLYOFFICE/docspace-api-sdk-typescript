@@ -20,7 +20,7 @@
 
 
 /**
- * Represents the usage statistics of a DocsCloud tenant.
+ * Represents the usage statistics of a Docs Connect tenant.
  */
 export interface DocsCloudUsage {
     /**

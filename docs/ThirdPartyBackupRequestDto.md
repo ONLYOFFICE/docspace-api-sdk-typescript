@@ -1,17 +1,17 @@
 # ThirdPartyBackupRequestDto
 
-The third-party backup request parameters.
+The credentials and the title of the third-party storage account the portal writes its backups to.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**url** | **string** | The connection URL for the sharepoint. | [optional] [default to undefined]
-**login** | **string** | The login. | [optional] [default to undefined]
-**password** | **string** | The password. | [optional] [default to undefined]
-**token** | **string** | The authentication token. | [optional] [default to undefined]
-**customerTitle** | **string** | The customer title. | [optional] [default to undefined]
-**providerKey** | **string** | The provider key. | [optional] [default to undefined]
+**url** | **string** | The address of the storage server to connect to. It is needed by the WebDAV presets whose server is not known  in advance (`WebDav`, `Nextcloud`, `ownCloud`), where it points at the WebDAV endpoint of that server, and by  `SharePoint`; the presets with a fixed address and the OAuth services ignore it. | [optional] [default to undefined]
+**login** | **string** | The account name at the storage service, used by the services that authenticate by login and password. A login  sent without a password is rejected as an invalid request. | [optional] [default to undefined]
+**password** | **string** | The password, or the application password, for `login` at the storage service. Either this or `token` has to  be sent, and the credentials are verified against the service before the account is saved. | [optional] [default to undefined]
+**token** | **string** | The OAuth 2.0 authorization code from the consent screen of `Box`, `DropboxV2`, `GoogleDrive` or `OneDrive` -  not an access token: the portal exchanges the code for its own token and keeps that. The client ID and  redirect URL the consent screen URL is built from come from `GET api/2.0/files/thirdparty/capabilities`. | [optional] [default to undefined]
+**customerTitle** | **string** | The name the backup account is shown under in the portal. Characters that a folder title cannot hold are  replaced and the value is truncated; on the first connection a title that comes out of that empty is refused. | [optional] [default to undefined]
+**providerKey** | **string** | The storage service to connect, as the `key` of `GET api/2.0/files/thirdparty/providers`; the value is matched  case-insensitively. `Nextcloud` and `ownCloud` are presets over WebDAV and are stored and reported back as  `WebDav`. | [optional] [default to undefined]
 
 ## Example
 

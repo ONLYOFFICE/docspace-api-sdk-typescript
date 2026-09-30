@@ -36,18 +36,18 @@ import type { TenantQuotaSettings } from './tenant-quota-settings';
 
 /**
  * @type WalletServiceDto
- * The wallet service information.
+ * One service the portal can pay for out of its wallet: a quota sold per unit rather than per period.
  * @export
  */
 export type WalletServiceDto = QuotaDto &  {
     /**
-     * The list of inner services.
+     * The variants of this service that are folded into it, so a client renders one card per group instead of  one per variant. It is empty when the service has no variants, and always empty in the answer of  `GET api/2.0/portal/payment/walletservice`, which looks one service up on its own.
      * @type {Array<WalletServiceDto>}
      * @memberof WalletServiceDto
      */
     'innerServices'?: Array<WalletServiceDto> | null;
     /**
-     * The service name.
+     * The stable key of the service, which is what the wallet operations take as their `service` argument and  what the usage reports key their entries by.
      * @type {string}
      * @memberof WalletServiceDto
      */

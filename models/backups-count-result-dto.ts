@@ -20,15 +20,15 @@
 
 
 /**
- * The number of backups.
+ * The backups of a portal, split by who paid for them.
  */
 export interface BackupsCountResultDto {
     /**
-     * The number of free backups.
+     * The number of backups covered by the free monthly allowance.
      */
     'free'?: number;
     /**
-     * The number of paid backups.
+     * The number of backups charged to the portal wallet.
      */
     'paid'?: number;
 }

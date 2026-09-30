@@ -36,19 +36,19 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
     
     return {
         /**
-         * Returns groups with their sharing settings for a file with the ID specified in request.
-         * @summary Get groups with file sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
+         * @summary Search groups for a file
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-files-shared/
          */
-        getGroupsWithFilesShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroupsWithFilesShared: async (id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithFilesShared', 'id', id)
 
@@ -112,19 +112,19 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns groups with their sharing settings in a folder with the ID specified in request.
-         * @summary Get groups with folder sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
+         * @summary Search groups for a folder
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-folders-shared/
          */
-        getGroupsWithFoldersShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroupsWithFoldersShared: async (id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithFoldersShared', 'id', id)
 
@@ -188,19 +188,19 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns groups with their sharing settings in a room with the ID specified in request.
-         * @summary Get groups with room sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
+         * @summary Search groups for a room
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithRoomsShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-rooms-shared/
          */
-        getGroupsWithRoomsShared: async (id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGroupsWithRoomsShared: async (id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getGroupsWithRoomsShared', 'id', id)
 
@@ -274,57 +274,57 @@ export const SearchApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SearchApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns groups with their sharing settings for a file with the ID specified in request.
-         * @summary Get groups with file sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
+         * @summary Search groups for a file
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithFilesShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-files-shared/
          */
-        async getGroupsWithFilesShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+        async getGroupsWithFilesShared(id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithFilesShared(id, excludeShared, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SearchApi.getGroupsWithFilesShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns groups with their sharing settings in a folder with the ID specified in request.
-         * @summary Get groups with folder sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
+         * @summary Search groups for a folder
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithFoldersShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-folders-shared/
          */
-        async getGroupsWithFoldersShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+        async getGroupsWithFoldersShared(id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithFoldersShared(id, excludeShared, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SearchApi.getGroupsWithFoldersShared']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns groups with their sharing settings in a room with the ID specified in request.
-         * @summary Get groups with room sharing settings
-         * @param {number} id The group ID.
-         * @param {boolean} [excludeShared] Specifies whether to exclude the group sharing settings from the response.
-         * @param {number} [count] The number of groups to retrieve in the request.
-         * @param {number} [startIndex] The starting index from which to begin retrieving groups with their sharing settings.
-         * @param {string} [filterValue] The text used as a filter for retrieving groups with their sharing settings.
+         * Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
+         * @summary Search groups for a room
+         * @param {number | string} id The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+         * @param {boolean} [excludeShared] Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
+         * @param {number} [count] The size of the page. It defaults to 100, which is also the largest value the operation accepts.
+         * @param {number} [startIndex] The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
+         * @param {string} [filterValue] The text to match against the group name. Omit it to get every group the caller may grant access to.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupsWithRoomsShared operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-with-rooms-shared/
          */
-        async getGroupsWithRoomsShared(id: number, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
+        async getGroupsWithRoomsShared(id: number | string, excludeShared?: boolean, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsWithRoomsShared(id, excludeShared, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SearchApi.getGroupsWithRoomsShared']?.[localVarOperationServerIndex]?.url;
@@ -341,8 +341,8 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = SearchApiFp(configuration)
     return {
         /**
-         * Returns groups with their sharing settings for a file with the ID specified in request.
-         * @summary Get groups with file sharing settings
+         * Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
+         * @summary Search groups for a file
          * @param {SearchApiGetGroupsWithFilesSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithFilesShared operation
@@ -353,8 +353,8 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getGroupsWithFilesShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns groups with their sharing settings in a folder with the ID specified in request.
-         * @summary Get groups with folder sharing settings
+         * Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
+         * @summary Search groups for a folder
          * @param {SearchApiGetGroupsWithFoldersSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithFoldersShared operation
@@ -365,8 +365,8 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
             return localVarFp.getGroupsWithFoldersShared(requestParameters.id, requestParameters.excludeShared, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns groups with their sharing settings in a room with the ID specified in request.
-         * @summary Get groups with room sharing settings
+         * Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
+         * @summary Search groups for a room
          * @param {SearchApiGetGroupsWithRoomsSharedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getGroupsWithRoomsShared operation
@@ -386,35 +386,35 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
  */
 export interface SearchApiGetGroupsWithFilesSharedRequest {
     /**
-     * The group ID.
-     * @type {number}
+     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+     * @type {number | string}
      * @memberof SearchApiGetGroupsWithFilesShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
-     * Specifies whether to exclude the group sharing settings from the response.
+     * Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
      * @type {boolean}
      * @memberof SearchApiGetGroupsWithFilesShared
      */
     readonly excludeShared?: boolean
 
     /**
-     * The number of groups to retrieve in the request.
+     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
      * @type {number}
      * @memberof SearchApiGetGroupsWithFilesShared
      */
     readonly count?: number
 
     /**
-     * The starting index from which to begin retrieving groups with their sharing settings.
+     * The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
      * @type {number}
      * @memberof SearchApiGetGroupsWithFilesShared
      */
     readonly startIndex?: number
 
     /**
-     * The text used as a filter for retrieving groups with their sharing settings.
+     * The text to match against the group name. Omit it to get every group the caller may grant access to.
      * @type {string}
      * @memberof SearchApiGetGroupsWithFilesShared
      */
@@ -428,35 +428,35 @@ export interface SearchApiGetGroupsWithFilesSharedRequest {
  */
 export interface SearchApiGetGroupsWithFoldersSharedRequest {
     /**
-     * The group ID.
-     * @type {number}
+     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+     * @type {number | string}
      * @memberof SearchApiGetGroupsWithFoldersShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
-     * Specifies whether to exclude the group sharing settings from the response.
+     * Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
      * @type {boolean}
      * @memberof SearchApiGetGroupsWithFoldersShared
      */
     readonly excludeShared?: boolean
 
     /**
-     * The number of groups to retrieve in the request.
+     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
      * @type {number}
      * @memberof SearchApiGetGroupsWithFoldersShared
      */
     readonly count?: number
 
     /**
-     * The starting index from which to begin retrieving groups with their sharing settings.
+     * The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
      * @type {number}
      * @memberof SearchApiGetGroupsWithFoldersShared
      */
     readonly startIndex?: number
 
     /**
-     * The text used as a filter for retrieving groups with their sharing settings.
+     * The text to match against the group name. Omit it to get every group the caller may grant access to.
      * @type {string}
      * @memberof SearchApiGetGroupsWithFoldersShared
      */
@@ -470,35 +470,35 @@ export interface SearchApiGetGroupsWithFoldersSharedRequest {
  */
 export interface SearchApiGetGroupsWithRoomsSharedRequest {
     /**
-     * The group ID.
-     * @type {number}
+     * The ID of the room, folder or file whose access the search is run against, taken from the route. It is an  integer for an entry stored in DocSpace and a provider-specific string for an entry in a connected  third-party storage.
+     * @type {number | string}
      * @memberof SearchApiGetGroupsWithRoomsShared
      */
-    readonly id: number
+    readonly id: number | string
 
     /**
-     * Specifies whether to exclude the group sharing settings from the response.
+     * Keeps only the groups that do not have access to the entry yet, which is the set to offer when granting  access. Every returned entry then has `shared` set to false; without the flag every matching group comes back  and `shared` tells them apart.
      * @type {boolean}
      * @memberof SearchApiGetGroupsWithRoomsShared
      */
     readonly excludeShared?: boolean
 
     /**
-     * The number of groups to retrieve in the request.
+     * The size of the page. It defaults to 100, which is also the largest value the operation accepts.
      * @type {number}
      * @memberof SearchApiGetGroupsWithRoomsShared
      */
     readonly count?: number
 
     /**
-     * The starting index from which to begin retrieving groups with their sharing settings.
+     * The number of matching groups to skip before the page starts. It defaults to 0, and the total number of  matches is reported in the total count of the response.
      * @type {number}
      * @memberof SearchApiGetGroupsWithRoomsShared
      */
     readonly startIndex?: number
 
     /**
-     * The text used as a filter for retrieving groups with their sharing settings.
+     * The text to match against the group name. Omit it to get every group the caller may grant access to.
      * @type {string}
      * @memberof SearchApiGetGroupsWithRoomsShared
      */
@@ -513,8 +513,8 @@ export interface SearchApiGetGroupsWithRoomsSharedRequest {
  */
 export class SearchApi extends BaseAPI {
     /**
-     * Returns groups with their sharing settings for a file with the ID specified in request.
-     * @summary Get groups with file sharing settings
+     * Returns the groups that can be given access to the file with the ID given in the route, and reports for each  of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the file yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/file/{id}/search`.
+     * @summary Search groups for a file
      * @param {GroupSearchApiGetGroupsWithFilesSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -525,8 +525,8 @@ export class SearchApi extends BaseAPI {
     }
 
     /**
-     * Returns groups with their sharing settings in a folder with the ID specified in request.
-     * @summary Get groups with folder sharing settings
+     * Returns the groups that can be given access to the folder with the ID given in the route, and reports for  each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the folder yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/folder/{id}/search`.
+     * @summary Search groups for a folder
      * @param {GroupSearchApiGetGroupsWithFoldersSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -537,8 +537,8 @@ export class SearchApi extends BaseAPI {
     }
 
     /**
-     * Returns groups with their sharing settings in a room with the ID specified in request.
-     * @summary Get groups with room sharing settings
+     * Returns the groups that can be given access to the room with the ID given in the route, and reports for each  of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The call is read-only and, unlike the account search, works without a filter: leaving `filterValue` empty  returns every group instead of nothing, and a value narrows the result by group name.  The result is paged by `count` and `startIndex`, with the number of matching groups in the total count of the  response.  Pass `excludeShared` to keep only the groups that have no access to the room yet, which is the set to offer  when adding new ones; without it every matching group comes back and `shared` tells them apart.  To search users and groups together, use `GET api/2.0/accounts/room/{id}/search`.
+     * @summary Search groups for a room
      * @param {GroupSearchApiGetGroupsWithRoomsSharedRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

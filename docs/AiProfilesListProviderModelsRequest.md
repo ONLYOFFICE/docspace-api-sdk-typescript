@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **providerType** | [**AiProviderType**](AiProviderType.md) | Provider whose catalog to list. | [default to undefined]
 **baseUrl** | **string** | Provider API base URL. | [default to undefined]
-**apiKey** | **string** | Provider API key. | [default to undefined]
+**apiKey** | **string** | Provider API key. Omit it for a provider that needs none; the request is then made without one. | [optional] [default to undefined]
 
 ## Example
 

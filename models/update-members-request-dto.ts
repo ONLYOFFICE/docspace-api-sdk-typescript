@@ -24,11 +24,11 @@
  */
 export interface UpdateMembersRequestDto {
     /**
-     * The list of user IDs.
+     * The accounts the operation applies to. System accounts are dropped from the list without an error, and the  remaining ones are processed in the order they are given.
      */
     'userIds'?: Array<string> | null;
     /**
-     * Specifies whether to resend invitation letters to all the users or not.
+     * Reaches every pending account of the portal instead of the ones in `userIds`. It is read only by  `PUT api/2.0/people/invite` and is ignored by every other operation that binds this body.
      */
     'resendAll'?: boolean;
 }

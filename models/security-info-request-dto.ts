@@ -26,27 +26,27 @@ import type { DuplicateRequestDtoAllOfFileIds } from './duplicate-request-dto-al
 import type { FileShareParams } from './file-share-params';
 
 /**
- * The security information request parameters.
+ * The entries whose sharing rights are being changed, and the rights to apply to them.
  */
 export interface SecurityInfoRequestDto {
     /**
-     * The list of the shared folder IDs.
+     * The folders and rooms whose rights are being changed, identified as a listing operation returns them - a  number on the portal, a string on a connected third-party account.
      */
     'folderIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
-     * The list of the shared file IDs.
+     * The files whose rights are being changed, identified as a listing operation returns them - a number on the  portal, a string on a connected third-party account.
      */
     'fileIds'?: Array<DuplicateRequestDtoAllOfFileIds> | null;
     /**
-     * The collection of sharing parameters.
+     * One record per account or group whose rights are being set, each naming the subject and the level it gets on  all of the listed entries; a level of `None` takes the access away. An empty collection makes the call change  nothing.
      */
     'share'?: Array<FileShareParams> | null;
     /**
-     * Specifies whether to notify users about the shared file or not.
+     * Set to true to have every account named in `share` emailed about the access it just received; false changes  the rights without telling anyone.
      */
     'notify'?: boolean;
     /**
-     * The message to send when notifying about the shared file.
+     * The text put into that email, ignored while `notify` is false. Markup is stripped before sending, so only the  plain text of the value survives.
      */
     'sharingMessage'?: string | null;
 }

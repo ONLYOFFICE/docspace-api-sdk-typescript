@@ -28,7 +28,7 @@ export interface FeedbackConfig {
      */
     'url'?: string | null;
     /**
-     * Shows or hides the Feedback & Support menu button.
+     * Whether the support button is shown. The portal always asks for it to be shown.
      */
     'visible'?: boolean;
 }

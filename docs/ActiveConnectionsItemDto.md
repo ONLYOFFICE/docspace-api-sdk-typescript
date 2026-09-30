@@ -1,22 +1,22 @@
 # ActiveConnectionsItemDto
 
-The active connection item parameters.
+One open connection of a user: where the sign-in behind it came from, and the ID it can be closed by.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **number** | The active connection ID. | [default to undefined]
-**tenantId** | **number** | The tenant ID. | [default to undefined]
-**userId** | **string** | The user ID. | [default to undefined]
-**mobile** | **boolean** | Specifies if the active connection has a mobile phone or not. | [optional] [default to undefined]
-**ip** | **string** | The IP address of the active connection. | [optional] [default to undefined]
-**country** | **string** | The active connection country. | [optional] [default to undefined]
-**city** | **string** | The active connection city. | [optional] [default to undefined]
-**browser** | **string** | The active connection browser. | [optional] [default to undefined]
-**platform** | **string** | The active connection platform. | [optional] [default to undefined]
-**date** | **string** | The active connection date. | [optional] [default to undefined]
-**page** | **string** | The active connection page. | [optional] [default to undefined]
+**id** | **number** | The ID of the sign-in this connection was opened by. Pass it as `loginEventId` to  `PUT api/2.0/security/activeconnections/logout/{loginEventId}` to end this one connection; the item whose  value equals `loginEvent` is the connection the current request uses. | [default to undefined]
+**tenantId** | **number** | The portal the sign-in was made on. The operation never crosses portals, so it is the current one on every  item. | [default to undefined]
+**userId** | **string** | The user the connection belongs to, which is the calling user on every item - the operation cannot report  anyone else\'s connections. | [default to undefined]
+**mobile** | **boolean** | Whether the sign-in came from a mobile client. No mobile marker is stored with a connection, so the value  is `false` on every item and tells a caller nothing about the device. | [optional] [default to undefined]
+**ip** | **string** | The IP address the sign-in came from, with the port stripped off. On the item that matches `loginEvent` it  is taken from the address the current request arrives from instead of the one stored at sign-in. | [optional] [default to undefined]
+**country** | **string** | The English name of the country the IP address is located in. It is empty when the address cannot be  located, which is the normal outcome for private and loopback addresses. | [optional] [default to undefined]
+**city** | **string** | The city the IP address is located in, empty under the same conditions as `country`. | [optional] [default to undefined]
+**browser** | **string** | The browser and its version as parsed from the user agent of the sign-in, empty when the client sent no  recognisable one. It is refreshed from the current request on the item that matches `loginEvent`. | [optional] [default to undefined]
+**platform** | **string** | The operating system as parsed from the user agent of the sign-in, refreshed and left empty under the same  conditions as `browser`. | [optional] [default to undefined]
+**date** | [**ApiDateTime**](ApiDateTime.md) | When the sign-in happened, in the portal time zone rather than in UTC. | [optional] [default to undefined]
+**page** | **string** | Where in the portal the sign-in was made from: the referrer of the request that created it, or that  request\'s own path when it carried no referrer. Long values are cut off at 512 characters. | [optional] [default to undefined]
 
 ## Example
 

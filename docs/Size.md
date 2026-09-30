@@ -1,13 +1,13 @@
 # Size
 
-Represents dimensions with width and height values.
+A pixel size measured on the image itself.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**height** | **number** | Gets or sets the height dimension of an object, typically measured in pixels or other unit.  It defines the vertical size of the object. | [optional] [default to undefined]
-**width** | **number** | Gets or sets the width dimension of an object, typically measured in pixels or other unit. | [optional] [default to undefined]
+**height** | **number** | The height of the image in pixels, read from the stored file rather than from any display setting. | [optional] [default to undefined]
+**width** | **number** | The width of the image in pixels, read from the stored file rather than from any display setting. | [optional] [default to undefined]
 
 ## Example
 

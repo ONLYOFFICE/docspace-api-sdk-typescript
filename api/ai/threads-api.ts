@@ -34,11 +34,15 @@ import type { AiThread } from '../../models';
 // @ts-ignore
 import type { AiThreadMessageLike } from '../../models';
 // @ts-ignore
+import type { AiThreadsAppendUserMessage200Response } from '../../models';
+// @ts-ignore
 import type { AiThreadsAppendUserMessageRequest } from '../../models';
 // @ts-ignore
 import type { AiThreadsCreateRequest } from '../../models';
 // @ts-ignore
 import type { AiThreadsOpenOrCreateRequest } from '../../models';
+// @ts-ignore
+import type { AiThreadsRegenerateTitle200Response } from '../../models';
 // @ts-ignore
 import type { AiThreadsRegenerateTitleRequest } from '../../models';
 // @ts-ignore
@@ -59,7 +63,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             fields = f;
         },
         /**
-         * Persists a user message in a thread and bumps the thread\'s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+         * Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message\'s ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
          * @summary Append user message
          * @param {AiThreadsAppendUserMessageRequest} aiThreadsAppendUserMessageRequest 
          * @param {*} [options] Override http request option.
@@ -83,6 +87,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -98,9 +108,9 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+         * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
          * @summary Clear messages
-         * @param {string} body 
+         * @param {string} body The ID of the thread to empty, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsClearMessages operation
@@ -122,6 +132,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -137,8 +153,8 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
-         * @summary Create
+         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * @summary Create a chat thread
          * @param {AiThreadsCreateRequest} aiThreadsCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -161,6 +177,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -176,9 +198,9 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Deletes a chat thread together with its messages.
-         * @summary Delete
-         * @param {string} body 
+         * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
+         * @summary Delete a chat thread
+         * @param {string} body The ID of the thread to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDelete operation
@@ -200,6 +222,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -215,9 +243,9 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Deletes one chat message, leaving the rest of the thread untouched.
+         * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
          * @summary Delete message
-         * @param {string} body 
+         * @param {string} body The ID of the message to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDeleteMessage operation
@@ -239,6 +267,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -254,8 +288,8 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns one chat thread, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread\'s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
+         * @summary Get a chat thread
          * @param {string} threadId The chat thread identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -278,6 +312,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (threadId !== undefined) {
                 localVarQueryParameter['threadId'] = threadId;
             }
@@ -294,8 +334,8 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns one chat message by its globally unique identifier.
-         * @summary Get message by id
+         * Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+         * @summary Get one chat message
          * @param {string} messageId The globally unique chat message identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -318,6 +358,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (messageId !== undefined) {
                 localVarQueryParameter['messageId'] = messageId;
             }
@@ -334,10 +380,10 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
-         * @summary List
+         * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
+         * @summary List chat threads
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
-         * @param {string} [count] The maximum number of items to return in one page.
+         * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [query] The full-text query the thread list is filtered by.
          * @param {*} [options] Override http request option.
@@ -345,7 +391,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for aiThreadsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-list/
          */
-        aiThreadsList: async (entityId?: string, count?: string, cursor?: string, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiThreadsList: async (entityId?: string, count?: number, cursor?: string, query?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/threads/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -358,6 +404,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
@@ -390,7 +442,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
          * @summary Open or create
          * @param {AiThreadsOpenOrCreateRequest} aiThreadsOpenOrCreateRequest 
          * @param {*} [options] Override http request option.
@@ -414,6 +466,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -429,10 +487,10 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Reads the messages of a thread, with the same cursor pagination as the thread list.
+         * Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
          * @summary Read messages
          * @param {string} threadId The chat thread identifier.
-         * @param {string} [count] The maximum number of items to return in one page.
+         * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [direction] The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
          * @param {*} [options] Override http request option.
@@ -440,7 +498,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
          * REST API Reference for aiThreadsReadMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/
          */
-        aiThreadsReadMessages: async (threadId: string, count?: string, cursor?: string, direction?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiThreadsReadMessages: async (threadId: string, count?: number, cursor?: string, direction?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'threadId' is not null or undefined
             assertParamExists('aiThreadsReadMessages', 'threadId', threadId)
 
@@ -455,6 +513,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (threadId !== undefined) {
                 localVarQueryParameter['threadId'] = threadId;
@@ -487,7 +551,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Generates a fresh title from the thread\'s first user message and persists it. Fails when the thread has no user message yet.
+         * Asks the model to produce a title from the thread\'s first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller\'s credentials, so a client cannot attribute the call to somebody else\'s room.
          * @summary Regenerate title
          * @param {AiThreadsRegenerateTitleRequest} aiThreadsRegenerateTitleRequest 
          * @param {*} [options] Override http request option.
@@ -511,6 +575,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -526,8 +596,8 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
-         * @summary Rename
+         * Replaces a thread\'s title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
+         * @summary Rename a chat thread
          * @param {AiThreadsRenameRequest} aiThreadsRenameRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -550,6 +620,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -565,8 +641,8 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Bumps a thread\'s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
-         * @summary Touch
+         * Bumps a thread\'s last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
+         * @summary Bump a thread\'s activity
          * @param {AiThreadsTouchRequest} aiThreadsTouchRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -589,6 +665,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -604,7 +686,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+         * Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
          * @summary Update message
          * @param {AiThreadsUpdateMessageRequest} aiThreadsUpdateMessageRequest 
          * @param {*} [options] Override http request option.
@@ -627,6 +709,12 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -653,7 +741,7 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ThreadsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Persists a user message in a thread and bumps the thread\'s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+         * Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message\'s ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
          * @summary Append user message
          * @param {AiThreadsAppendUserMessageRequest} aiThreadsAppendUserMessageRequest 
          * @param {*} [options] Override http request option.
@@ -661,16 +749,16 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiThreadsAppendUserMessage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/
          */
-        async aiThreadsAppendUserMessage(aiThreadsAppendUserMessageRequest: AiThreadsAppendUserMessageRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadMessageLike>> {
+        async aiThreadsAppendUserMessage(aiThreadsAppendUserMessageRequest: AiThreadsAppendUserMessageRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadsAppendUserMessage200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsAppendUserMessage(aiThreadsAppendUserMessageRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsAppendUserMessage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+         * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
          * @summary Clear messages
-         * @param {string} body 
+         * @param {string} body The ID of the thread to empty, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsClearMessages operation
@@ -683,8 +771,8 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
-         * @summary Create
+         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * @summary Create a chat thread
          * @param {AiThreadsCreateRequest} aiThreadsCreateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -698,9 +786,9 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes a chat thread together with its messages.
-         * @summary Delete
-         * @param {string} body 
+         * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
+         * @summary Delete a chat thread
+         * @param {string} body The ID of the thread to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDelete operation
@@ -713,9 +801,9 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes one chat message, leaving the rest of the thread untouched.
+         * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
          * @summary Delete message
-         * @param {string} body 
+         * @param {string} body The ID of the message to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDeleteMessage operation
@@ -728,8 +816,8 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns one chat thread, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread\'s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
+         * @summary Get a chat thread
          * @param {string} threadId The chat thread identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -743,8 +831,8 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns one chat message by its globally unique identifier.
-         * @summary Get message by id
+         * Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+         * @summary Get one chat message
          * @param {string} messageId The globally unique chat message identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -758,10 +846,10 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
-         * @summary List
+         * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
+         * @summary List chat threads
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
-         * @param {string} [count] The maximum number of items to return in one page.
+         * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [query] The full-text query the thread list is filtered by.
          * @param {*} [options] Override http request option.
@@ -769,14 +857,14 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiThreadsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-list/
          */
-        async aiThreadsList(entityId?: string, count?: string, cursor?: string, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiThread>>> {
+        async aiThreadsList(entityId?: string, count?: number, cursor?: string, query?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiThread>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsList(entityId, count, cursor, query, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
          * @summary Open or create
          * @param {AiThreadsOpenOrCreateRequest} aiThreadsOpenOrCreateRequest 
          * @param {*} [options] Override http request option.
@@ -791,10 +879,10 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Reads the messages of a thread, with the same cursor pagination as the thread list.
+         * Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
          * @summary Read messages
          * @param {string} threadId The chat thread identifier.
-         * @param {string} [count] The maximum number of items to return in one page.
+         * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [direction] The order the message page is read in. Only desc turns the read around and pages back from the newest message; omit for the forward read.
          * @param {*} [options] Override http request option.
@@ -802,14 +890,14 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiThreadsReadMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-read-messages/
          */
-        async aiThreadsReadMessages(threadId: string, count?: string, cursor?: string, direction?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiThreadMessageLike>>> {
+        async aiThreadsReadMessages(threadId: string, count?: number, cursor?: string, direction?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiThreadMessageLike>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsReadMessages(threadId, count, cursor, direction, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsReadMessages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Generates a fresh title from the thread\'s first user message and persists it. Fails when the thread has no user message yet.
+         * Asks the model to produce a title from the thread\'s first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller\'s credentials, so a client cannot attribute the call to somebody else\'s room.
          * @summary Regenerate title
          * @param {AiThreadsRegenerateTitleRequest} aiThreadsRegenerateTitleRequest 
          * @param {*} [options] Override http request option.
@@ -817,15 +905,15 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiThreadsRegenerateTitle operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-regenerate-title/
          */
-        async aiThreadsRegenerateTitle(aiThreadsRegenerateTitleRequest: AiThreadsRegenerateTitleRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+        async aiThreadsRegenerateTitle(aiThreadsRegenerateTitleRequest: AiThreadsRegenerateTitleRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadsRegenerateTitle200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsRegenerateTitle(aiThreadsRegenerateTitleRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsRegenerateTitle']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
-         * @summary Rename
+         * Replaces a thread\'s title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
+         * @summary Rename a chat thread
          * @param {AiThreadsRenameRequest} aiThreadsRenameRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -839,8 +927,8 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Bumps a thread\'s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
-         * @summary Touch
+         * Bumps a thread\'s last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
+         * @summary Bump a thread\'s activity
          * @param {AiThreadsTouchRequest} aiThreadsTouchRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -854,7 +942,7 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+         * Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
          * @summary Update message
          * @param {AiThreadsUpdateMessageRequest} aiThreadsUpdateMessageRequest 
          * @param {*} [options] Override http request option.
@@ -879,7 +967,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = ThreadsApiFp(configuration)
     return {
         /**
-         * Persists a user message in a thread and bumps the thread\'s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+         * Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message\'s ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
          * @summary Append user message
          * @param {ThreadsApiAiThreadsAppendUserMessageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -887,11 +975,11 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-append-user-message/
          * @throws {RequiredError}
          */
-        aiThreadsAppendUserMessage(requestParameters: ThreadsApiAiThreadsAppendUserMessageRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadMessageLike> {
+        aiThreadsAppendUserMessage(requestParameters: ThreadsApiAiThreadsAppendUserMessageRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadsAppendUserMessage200Response> {
             return localVarFp.aiThreadsAppendUserMessage(requestParameters.aiThreadsAppendUserMessageRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+         * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
          * @summary Clear messages
          * @param {ThreadsApiAiThreadsClearMessagesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -903,8 +991,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsClearMessages(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
-         * @summary Create
+         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * @summary Create a chat thread
          * @param {ThreadsApiAiThreadsCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsCreate operation
@@ -915,8 +1003,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsCreate(requestParameters.aiThreadsCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a chat thread together with its messages.
-         * @summary Delete
+         * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
+         * @summary Delete a chat thread
          * @param {ThreadsApiAiThreadsDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsDelete operation
@@ -927,7 +1015,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsDelete(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes one chat message, leaving the rest of the thread untouched.
+         * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
          * @summary Delete message
          * @param {ThreadsApiAiThreadsDeleteMessageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -939,8 +1027,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsDeleteMessage(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns one chat thread, or an empty result when the identifier is unknown.
-         * @summary Get by id
+         * Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread\'s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
+         * @summary Get a chat thread
          * @param {ThreadsApiAiThreadsGetByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsGetById operation
@@ -951,8 +1039,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsGetById(requestParameters.threadId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns one chat message by its globally unique identifier.
-         * @summary Get message by id
+         * Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+         * @summary Get one chat message
          * @param {ThreadsApiAiThreadsGetMessageByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsGetMessageById operation
@@ -963,8 +1051,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsGetMessageById(requestParameters.messageId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
-         * @summary List
+         * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
+         * @summary List chat threads
          * @param {ThreadsApiAiThreadsListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsList operation
@@ -975,7 +1063,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsList(requestParameters.entityId, requestParameters.count, requestParameters.cursor, requestParameters.query, options).then((request) => request(axios, basePath));
         },
         /**
-         * Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
          * @summary Open or create
          * @param {ThreadsApiAiThreadsOpenOrCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -987,7 +1075,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsOpenOrCreate(requestParameters.aiThreadsOpenOrCreateRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Reads the messages of a thread, with the same cursor pagination as the thread list.
+         * Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
          * @summary Read messages
          * @param {ThreadsApiAiThreadsReadMessagesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -999,7 +1087,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsReadMessages(requestParameters.threadId, requestParameters.count, requestParameters.cursor, requestParameters.direction, options).then((request) => request(axios, basePath));
         },
         /**
-         * Generates a fresh title from the thread\'s first user message and persists it. Fails when the thread has no user message yet.
+         * Asks the model to produce a title from the thread\'s first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller\'s credentials, so a client cannot attribute the call to somebody else\'s room.
          * @summary Regenerate title
          * @param {ThreadsApiAiThreadsRegenerateTitleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1007,12 +1095,12 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-regenerate-title/
          * @throws {RequiredError}
          */
-        aiThreadsRegenerateTitle(requestParameters: ThreadsApiAiThreadsRegenerateTitleRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+        aiThreadsRegenerateTitle(requestParameters: ThreadsApiAiThreadsRegenerateTitleRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadsRegenerateTitle200Response> {
             return localVarFp.aiThreadsRegenerateTitle(requestParameters.aiThreadsRegenerateTitleRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
-         * @summary Rename
+         * Replaces a thread\'s title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
+         * @summary Rename a chat thread
          * @param {ThreadsApiAiThreadsRenameRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsRename operation
@@ -1023,8 +1111,8 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsRename(requestParameters.aiThreadsRenameRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Bumps a thread\'s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
-         * @summary Touch
+         * Bumps a thread\'s last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
+         * @summary Bump a thread\'s activity
          * @param {ThreadsApiAiThreadsTouchRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiThreadsTouch operation
@@ -1035,7 +1123,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsTouch(requestParameters.aiThreadsTouchRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+         * Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
          * @summary Update message
          * @param {ThreadsApiAiThreadsUpdateMessageRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1070,7 +1158,7 @@ export interface ThreadsApiAiThreadsAppendUserMessageRequest {
  */
 export interface ThreadsApiAiThreadsClearMessagesRequest {
     /**
-     * 
+     * The ID of the thread to empty, as a bare JSON string.
      * @type {string}
      * @memberof ThreadsApiAiThreadsClearMessages
      */
@@ -1098,7 +1186,7 @@ export interface ThreadsApiAiThreadsCreateRequest {
  */
 export interface ThreadsApiAiThreadsDeleteRequest {
     /**
-     * 
+     * The ID of the thread to delete, as a bare JSON string.
      * @type {string}
      * @memberof ThreadsApiAiThreadsDelete
      */
@@ -1112,7 +1200,7 @@ export interface ThreadsApiAiThreadsDeleteRequest {
  */
 export interface ThreadsApiAiThreadsDeleteMessageRequest {
     /**
-     * 
+     * The ID of the message to delete, as a bare JSON string.
      * @type {string}
      * @memberof ThreadsApiAiThreadsDeleteMessage
      */
@@ -1162,10 +1250,10 @@ export interface ThreadsApiAiThreadsListRequest {
 
     /**
      * The maximum number of items to return in one page.
-     * @type {string}
+     * @type {number}
      * @memberof ThreadsApiAiThreadsList
      */
-    readonly count?: string
+    readonly count?: number
 
     /**
      * The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
@@ -1211,10 +1299,10 @@ export interface ThreadsApiAiThreadsReadMessagesRequest {
 
     /**
      * The maximum number of items to return in one page.
-     * @type {string}
+     * @type {number}
      * @memberof ThreadsApiAiThreadsReadMessages
      */
-    readonly count?: string
+    readonly count?: number
 
     /**
      * The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
@@ -1295,7 +1383,7 @@ export interface ThreadsApiAiThreadsUpdateMessageRequest {
  */
 export class ThreadsApi extends BaseAPI {
     /**
-     * Persists a user message in a thread and bumps the thread\'s last-edit date so it resurfaces in the sidebar. Optionally rebinds the thread to another profile when the model changed mid-conversation.
+     * Stores a user message in a thread and bumps its last-edit date so the thread resurfaces at the top of the list. The per-kind attachment cap of the composer is enforced here as well, so a direct API call cannot exceed what the UI allows. Passing `profileId` rebinds the thread to another model, which is how a mid-conversation model switch is recorded. The answer carries the new message\'s ID; the message is stored as sent and no reply is generated - run a round with `POST api/2.0/ai/ai/send-with-stream` for that.
      * @summary Append user message
      * @param {AIThreadsApiAiThreadsAppendUserMessageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1307,7 +1395,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Drops every message of a thread while keeping the thread itself, and bumps its last-edit date.
+     * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
      * @summary Clear messages
      * @param {AIThreadsApiAiThreadsClearMessagesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1319,8 +1407,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Creates a chat thread with a caller-supplied title. Use `open-or-create` instead when the title should be generated from the first user message.
-     * @summary Create
+     * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+     * @summary Create a chat thread
      * @param {AIThreadsApiAiThreadsCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1331,8 +1419,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Deletes a chat thread together with its messages.
-     * @summary Delete
+     * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
+     * @summary Delete a chat thread
      * @param {AIThreadsApiAiThreadsDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1343,7 +1431,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Deletes one chat message, leaving the rest of the thread untouched.
+     * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
      * @summary Delete message
      * @param {AIThreadsApiAiThreadsDeleteMessageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1355,8 +1443,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Returns one chat thread, or an empty result when the identifier is unknown.
-     * @summary Get by id
+     * Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread\'s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
+     * @summary Get a chat thread
      * @param {AIThreadsApiAiThreadsGetByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1367,8 +1455,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Returns one chat message by its globally unique identifier.
-     * @summary Get message by id
+     * Returns one message by its ID, wherever it sits, without needing the thread it belongs to. `messageId` is required. Unlike `GET api/2.0/ai/threads/get-by-id` an unknown ID is not reported as 404: the answer is an empty body with status 200, so a client has to treat a missing payload as no such message. Message IDs come from the thread history or from the answer of `POST api/2.0/ai/threads/append-user-message`.
+     * @summary Get one chat message
      * @param {AIThreadsApiAiThreadsGetMessageByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1379,8 +1467,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Lists the chat threads of the scope, most recently edited first. Supports cursor pagination and a server-side case-insensitive title search.
-     * @summary List
+     * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
+     * @summary List chat threads
      * @param {AIThreadsApiAiThreadsListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1391,7 +1479,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Opens a chat thread and returns its history, or creates one with a title generated from the supplied first message. That first message is not persisted - the caller decides whether to follow up with `append-user-message`.
+     * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
      * @summary Open or create
      * @param {AIThreadsApiAiThreadsOpenOrCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1403,7 +1491,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Reads the messages of a thread, with the same cursor pagination as the thread list.
+     * Reads the messages of one thread, oldest first, with the same string-encoded JSON cursor as the thread list. `direction` turns the read around, and only the exact value `desc` does so - anything else, including a misspelling, reads forward. Omitting `threadId` is not an error: the call answers 200 with an empty list, so an empty result does not distinguish a thread with no messages from a request that forgot the ID. A malformed cursor is ignored and the read starts from the beginning.
      * @summary Read messages
      * @param {AIThreadsApiAiThreadsReadMessagesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1415,7 +1503,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Generates a fresh title from the thread\'s first user message and persists it. Fails when the thread has no user message yet.
+     * Asks the model to produce a title from the thread\'s first user message, stores it, and returns the new title. Both `threadId` and a resolved `profile` object are required; a thread with no user message yet has nothing to title and fails. This costs a model call, unlike `POST api/2.0/ai/threads/rename`, which just stores the string it is given. An `entityMeta` sent with the request is only read for its `entityId` hint - the source itself is resolved server-side under the caller\'s credentials, so a client cannot attribute the call to somebody else\'s room.
      * @summary Regenerate title
      * @param {AIThreadsApiAiThreadsRegenerateTitleRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1427,8 +1515,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Renames a chat thread and bumps its last-edit date so the new title shows up in the sidebar.
-     * @summary Rename
+     * Replaces a thread\'s title with the one supplied and bumps its last-edit date. Both `threadId` and a title with at least one non-whitespace character are required - a blank title is rejected rather than silently stored, so a thread cannot end up nameless. The answer only confirms the write. To have the model produce a title instead of supplying one, use `POST api/2.0/ai/threads/regenerate-title`.
+     * @summary Rename a chat thread
      * @param {AIThreadsApiAiThreadsRenameRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1439,8 +1527,8 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Bumps a thread\'s last-edit date, and optionally rebinds it to another profile, when something other than a new message - a model switch, say - should resurface it.
-     * @summary Touch
+     * Bumps a thread\'s last-edit date without adding a message, which resurfaces it in the list. Passing `profileId` also rebinds the thread to another model, so this is the operation to call when a model switch alone should count as activity. Nothing else about the thread changes and the answer only confirms the write. It is idempotent: repeating it simply moves the date forward again.
+     * @summary Bump a thread\'s activity
      * @param {AIThreadsApiAiThreadsTouchRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1451,7 +1539,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Replaces the content of a chat message - used by the edit and regenerate flows that change a message outside the streaming lifecycle.
+     * Replaces the content of one stored message, which is how the edit and regenerate flows change a message outside the streaming lifecycle. The whole message is overwritten by the one supplied rather than merged, so send a complete object. Neither the ID nor the payload is validated here, so a malformed request surfaces as an error relayed from storage rather than as a 400. The answer only confirms the write.
      * @summary Update message
      * @param {AIThreadsApiAiThreadsUpdateMessageRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

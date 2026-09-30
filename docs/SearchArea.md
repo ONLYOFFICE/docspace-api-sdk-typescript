@@ -1,27 +1,27 @@
 # SearchArea
 
-[0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents, 8 - Forms, 9 - Form templates]
+[Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]
 
 ## Enum
 
-* `Active` (value: `0`)
+* `Active` (value: `'Active'`)
 
-* `Archive` (value: `1`)
+* `Archive` (value: `'Archive'`)
 
-* `Any` (value: `2`)
+* `Any` (value: `'Any'`)
 
-* `RecentByLinks` (value: `3`)
+* `RecentByLinks` (value: `'RecentByLinks'`)
 
-* `Templates` (value: `4`)
+* `Templates` (value: `'Templates'`)
 
-* `Knowledge` (value: `5`)
+* `Knowledge` (value: `'Knowledge'`)
 
-* `ResultStorage` (value: `6`)
+* `ResultStorage` (value: `'ResultStorage'`)
 
-* `AiAgents` (value: `7`)
+* `AiAgents` (value: `'AiAgents'`)
 
-* `Forms` (value: `8`)
+* `Forms` (value: `'Forms'`)
 
-* `FormTemplates` (value: `9`)
+* `FormTemplates` (value: `'FormTemplates'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

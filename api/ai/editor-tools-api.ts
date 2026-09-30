@@ -24,9 +24,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AiErrorResponse } from '../../models';
+import type { AiEditorToolsCall200Response } from '../../models';
 // @ts-ignore
-import type { AiSuccessResponse } from '../../models';
+import type { AiEditorToolsCallRequest } from '../../models';
+// @ts-ignore
+import type { AiEditorToolsList200Response } from '../../models';
+// @ts-ignore
+import type { AiErrorResponse } from '../../models';
 /**
  * EditorToolsApi - axios parameter creator
  * @export
@@ -36,17 +40,17 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
     
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and with the caller\'s forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
-         * @summary Execute a DocSpace tool on behalf of the editor AI plugin
-         * @param {{ [key: string]: any; }} requestBody 
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * @summary Call an editor tool
+         * @param {AiEditorToolsCallRequest} aiEditorToolsCallRequest The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool\'s input schema, and an optional `entityId` for the room to run it in.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiEditorToolsCall operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call/
          */
-        aiEditorToolsCall: async (requestBody: { [key: string]: any; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiEditorToolsCall', 'requestBody', requestBody)
+        aiEditorToolsCall: async (aiEditorToolsCallRequest: AiEditorToolsCallRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiEditorToolsCallRequest' is not null or undefined
+            assertParamExists('aiEditorToolsCall', 'aiEditorToolsCallRequest', aiEditorToolsCallRequest)
 
             const localVarPath = `/api/2.0/ai/editor-tools/call`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -60,6 +64,12 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -67,7 +77,7 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiEditorToolsCallRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -75,8 +85,8 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the sanitized catalog of DocSpace tools available to the document editor\'s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
-         * @summary Sanitized DocSpace tool catalog for the editor AI plugin
+         * Returns the catalogue of DocSpace tools the document editor\'s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
+         * @summary List editor tools
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiEditorToolsList operation
@@ -95,6 +105,12 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -118,29 +134,29 @@ export const EditorToolsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = EditorToolsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and with the caller\'s forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
-         * @summary Execute a DocSpace tool on behalf of the editor AI plugin
-         * @param {{ [key: string]: any; }} requestBody 
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * @summary Call an editor tool
+         * @param {AiEditorToolsCallRequest} aiEditorToolsCallRequest The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool\'s input schema, and an optional `entityId` for the room to run it in.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiEditorToolsCall operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call/
          */
-        async aiEditorToolsCall(requestBody: { [key: string]: any; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiEditorToolsCall(requestBody, options);
+        async aiEditorToolsCall(aiEditorToolsCallRequest: AiEditorToolsCallRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiEditorToolsCall200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiEditorToolsCall(aiEditorToolsCallRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EditorToolsApi.aiEditorToolsCall']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the sanitized catalog of DocSpace tools available to the document editor\'s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
-         * @summary Sanitized DocSpace tool catalog for the editor AI plugin
+         * Returns the catalogue of DocSpace tools the document editor\'s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
+         * @summary List editor tools
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiEditorToolsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-list/
          */
-        async aiEditorToolsList(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+        async aiEditorToolsList(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiEditorToolsList200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiEditorToolsList(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EditorToolsApi.aiEditorToolsList']?.[localVarOperationServerIndex]?.url;
@@ -157,26 +173,26 @@ export const EditorToolsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = EditorToolsApiFp(configuration)
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and with the caller\'s forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
-         * @summary Execute a DocSpace tool on behalf of the editor AI plugin
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * @summary Call an editor tool
          * @param {EditorToolsApiAiEditorToolsCallRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiEditorToolsCall operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-call/
          * @throws {RequiredError}
          */
-        aiEditorToolsCall(requestParameters: EditorToolsApiAiEditorToolsCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiEditorToolsCall(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+        aiEditorToolsCall(requestParameters: EditorToolsApiAiEditorToolsCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiEditorToolsCall200Response> {
+            return localVarFp.aiEditorToolsCall(requestParameters.aiEditorToolsCallRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the sanitized catalog of DocSpace tools available to the document editor\'s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
-         * @summary Sanitized DocSpace tool catalog for the editor AI plugin
+         * Returns the catalogue of DocSpace tools the document editor\'s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
+         * @summary List editor tools
          * @param {*} [options] Override http request option.
          * REST API Reference for aiEditorToolsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-editor-tools-list/
          * @throws {RequiredError}
          */
-        aiEditorToolsList(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+        aiEditorToolsList(options?: RawAxiosRequestConfig): AxiosPromise<AiEditorToolsList200Response> {
             return localVarFp.aiEditorToolsList(options).then((request) => request(axios, basePath));
         },
     };
@@ -189,11 +205,11 @@ export const EditorToolsApiFactory = function (configuration?: Configuration, ba
  */
 export interface EditorToolsApiAiEditorToolsCallRequest {
     /**
-     * 
-     * @type {{ [key: string]: any; }}
+     * The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool\'s input schema, and an optional `entityId` for the room to run it in.
+     * @type {AiEditorToolsCallRequest}
      * @memberof EditorToolsApiAiEditorToolsCall
      */
-    readonly requestBody: { [key: string]: any; }
+    readonly aiEditorToolsCallRequest: AiEditorToolsCallRequest
 }
 
 /**
@@ -204,20 +220,20 @@ export interface EditorToolsApiAiEditorToolsCallRequest {
  */
 export class EditorToolsApi extends BaseAPI {
     /**
-     * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and with the caller\'s forwarded credentials. Whatever the tool produced is returned for the plugin to relay to the model; a failure comes back as an error payload.
-     * @summary Execute a DocSpace tool on behalf of the editor AI plugin
+     * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+     * @summary Call an editor tool
      * @param {AIEditorToolsApiAiEditorToolsCallRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EditorToolsApi
      */
     public aiEditorToolsCall(requestParameters: EditorToolsApiAiEditorToolsCallRequest, options?: RawAxiosRequestConfig) {
-        return EditorToolsApiFp(this.configuration).aiEditorToolsCall(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return EditorToolsApiFp(this.configuration).aiEditorToolsCall(requestParameters.aiEditorToolsCallRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the sanitized catalog of DocSpace tools available to the document editor\'s AI plugin - the same composed tool set the DocSpace chat sees, minus the web-search pair the editor already has through its own passthrough. Only the name, description, parameters and approval flag of each tool are exposed; transport details never reach the browser.
-     * @summary Sanitized DocSpace tool catalog for the editor AI plugin
+     * Returns the catalogue of DocSpace tools the document editor\'s AI plugin may offer the model - the same composed set the DocSpace chat sees, minus the two web-search tools the editor already reaches through its own passthrough. `entityId` scopes the catalogue to a room, which decides the room-specific tools it contains. Each entry carries exactly four fields: the tool name, its description, its input schema, and whether calling it requires an approval dialog; nothing else is exposed, because the raw listings of system servers carry transport details that must not reach a browser. The approval flag follows the same policy the chat engine applies, and a read-only tool comes back needing none - execute a tool with `POST api/2.0/ai/editor-tools/call`, which accepts only the names this catalogue reports.
+     * @summary List editor tools
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EditorToolsApi

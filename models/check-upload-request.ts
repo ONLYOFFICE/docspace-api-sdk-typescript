@@ -20,11 +20,11 @@
 
 
 /**
- * The request parameters for checking file uploads.
+ * The names to test against the files the folder already holds.
  */
 export interface CheckUploadRequest {
     /**
-     * The list of file titles.
+     * The names to test, extensions included, spelled as they would be sent to the upload. Matching ignores case,  and a name repeated in the list is answered once.
      */
     'filesTitle'?: Array<string> | null;
 }

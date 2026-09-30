@@ -1,12 +1,12 @@
 # SetAppSettingsBody
 
-Request body for saving application-specific settings.
+The configuration document a portal application keeps.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**SetAppSettingsBodySettings**](SetAppSettingsBodySettings.md) |  | [optional] [default to undefined]
+**settings** | **any** |  | [optional] [default to undefined]
 
 ## Example
 

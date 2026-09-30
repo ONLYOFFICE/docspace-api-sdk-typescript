@@ -1,12 +1,12 @@
 # StartEdit
 
-The parameters for starting file editing.
+The body of an editing session request.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**editingAlone** | **boolean** | Specifies whether to share the file with other users for editing or not. | [optional] [default to undefined]
+**editingAlone** | **boolean** | Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it. | [optional] [default to undefined]
 
 ## Example
 

@@ -4,16 +4,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createLoginHistoryReport**](#createloginhistoryreport) | **POST** /api/2.0/security/audit/login/report | Start the login history report generation|
-|[**getLastLoginEvents**](#getlastloginevents) | **GET** /api/2.0/security/audit/login/last | Get login history|
+|[**createLoginHistoryReport**](#createloginhistoryreport) | **POST** /api/2.0/security/audit/login/report | Start login history report|
+|[**getLastLoginEvents**](#getlastloginevents) | **GET** /api/2.0/security/audit/login/last | Get recent login events|
 |[**getLoginEventsByFilter**](#getlogineventsbyfilter) | **GET** /api/2.0/security/audit/login/filter | Get filtered login events|
-|[**getLoginHistoryReport**](#getloginhistoryreport) | **GET** /api/2.0/security/audit/login/report | Get the login history report generation status|
-|[**terminateLoginHistoryReport**](#terminateloginhistoryreport) | **DELETE** /api/2.0/security/audit/login/report | Terminate the login history report generation|
+|[**getLoginHistoryReport**](#getloginhistoryreport) | **GET** /api/2.0/security/audit/login/report | Get login history report status|
+|[**terminateLoginHistoryReport**](#terminateloginhistoryreport) | **DELETE** /api/2.0/security/audit/login/report | Terminate login history report|
 
 # **createLoginHistoryReport**
 > DocumentBuilderTaskWrapper createLoginHistoryReport()
 
-Starts generating the login history report (XLSX by default, or CSV) and saves it to My documents.
+Queues a report of the portal\'s login history and returns the state of the background job that builds it. The  report covers the period reaching from now back by the login history lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/login/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/login/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/login/report` cancels it.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-login-history-report/).
 
@@ -21,7 +21,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **format** | **AuditReportFormat** | The output file format of the report. Defaults to XLSX. | (optional) defaults to undefined|
+| **format** | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -43,7 +43,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SecurityLoginHistoryApi(configuration);
 
-let format: AuditReportFormat; //The output file format of the report. Defaults to XLSX. (optional) (default to undefined)
+let format: AuditReportFormat; //The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.createLoginHistoryReport(
     format
@@ -59,9 +59,9 @@ const { status, data } = await apiInstance.createLoginHistoryReport(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Operation execution status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**402** | Your pricing plan does not support this option |  -  |
-|**403** | No permissions to perform this action |  -  |
+|**200** | The state of the queued job that builds the login history report |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The portal\'s pricing plan has no audit option, or the login history and audit trail section is not enabled |  -  |
+|**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -74,7 +74,7 @@ const { status, data } = await apiInstance.createLoginHistoryReport(
 # **getLastLoginEvents**
 > LoginEventArrayWrapper getLastLoginEvents()
 
-Returns all the latest user login activity, including successful logins and error logs.
+Returns the twenty most recent login events of the whole portal - successful sign-ins, sign-outs and failed  attempts alike - as the short summary a settings page shows before anyone asks for the full history. The  caller needs the portal-settings right of a DocSpace administrator, and in a cloud installation the login  history and audit trail section must be enabled for the portal, otherwise the call is answered with 402. The  operation is read-only and takes no parameters: the number of events is fixed at twenty, nothing can be  filtered, and events are ordered newest first. `date` is given in the portal time zone, `actionText` is the  readable sentence describing the event with every substituted value shortened to fifty characters here, and  `country` and `city` are resolved from the IP address and stay empty when it cannot be located. An empty list  means the portal has recorded no login events yet. Use `GET api/2.0/security/audit/login/filter` to filter by  user, action or period and to page through the whole history.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-last-login-events/).
 
@@ -113,9 +113,9 @@ const { status, data } = await apiInstance.getLastLoginEvents();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of login events |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**402** | Your pricing plan does not support this option |  -  |
-|**403** | No permissions to perform this action |  -  |
+|**200** | The twenty most recent login events of the portal, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The login history and audit trail section is not enabled for this portal |  -  |
+|**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -127,7 +127,7 @@ const { status, data } = await apiInstance.getLastLoginEvents();
 # **getLoginEventsByFilter**
 > LoginEventArrayWrapper getLoginEventsByFilter()
 
-Returns a list of the login events by the parameters specified in the request.
+Returns the portal\'s login events that match the filters in the query - by user, by login action and by period  - and is the operation behind the login history page. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan; when that option is missing the filters are  silently ignored and the answer is the same twenty most recent events that  `GET api/2.0/security/audit/login/last` returns, and when the login history and audit trail section is  disabled altogether the call is answered with 402. Omit a filter to match everything. `from` and `to` are read  as UTC instants while `date` comes back in the portal time zone, `count` defaults to 100 and cannot exceed it,  `startIndex` skips events from the newest end, and the page window is applied to the log before the filters,  so a page can hold fewer items than `count` while older matches still exist. The operation is read-only; take  the values accepted by `action` from `GET api/2.0/security/audit/types`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-events-by-filter/).
 
@@ -135,12 +135,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userId** | [**string**] | The ID of the user whose login events are being queried. | (optional) defaults to undefined|
-| **action** | **MessageAction** | The login-related action to filter events by. | (optional) defaults to undefined|
-| **from** | [**string**] | The starting date and time for filtering login events. | (optional) defaults to undefined|
-| **to** | [**string**] | The ending date and time for filtering login events. | (optional) defaults to undefined|
-| **count** | [**number**] | The number of login events to retrieve in the query. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The starting index for fetching a subset of login events from the query results. | (optional) defaults to undefined|
+| **userId** | [**string**] | The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. | (optional) defaults to undefined|
+| **action** | **MessageAction** | The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. | (optional) defaults to undefined|
+| **from** | [**string**] | The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. | (optional) defaults to undefined|
+| **to** | [**string**] | The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. | (optional) defaults to undefined|
+| **count** | [**number**] | How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -162,12 +162,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SecurityLoginHistoryApi(configuration);
 
-let userId: string; //The ID of the user whose login events are being queried. (optional) (default to undefined)
-let action: MessageAction; //The login-related action to filter events by. (optional) (default to undefined)
-let from: string; //The starting date and time for filtering login events. (optional) (default to undefined)
-let to: string; //The ending date and time for filtering login events. (optional) (default to undefined)
-let count: number; //The number of login events to retrieve in the query. (optional) (default to undefined)
-let startIndex: number; //The starting index for fetching a subset of login events from the query results. (optional) (default to undefined)
+let userId: string; //The user whose sign-in attempts are kept, given by portal user ID. Leave it at the empty GUID to keep the  events of every user. (optional) (default to undefined)
+let action: MessageAction; //The sign-in action recorded, spelled as `GET api/2.0/security/audit/types` lists it under `actions` - a  successful login, a failed one, a logout. The default value keeps every action. (optional) (default to undefined)
+let from: string; //The earliest moment an event may have been recorded at, read as a UTC instant. The `date` of the events that  come back is in the portal time zone instead, so the two do not line up on a portal that is not on UTC. (optional) (default to undefined)
+let to: string; //The latest moment an event may have been recorded at, read as a UTC instant in the same way as `from`. (optional) (default to undefined)
+let count: number; //How many events one page may hold. The maximum is also the default, so a client that wants shorter pages has  to ask for them. (optional) (default to undefined)
+let startIndex: number; //How many events to skip before the page begins, counting from the newest. It is applied to the log before  the filters, so a page can hold fewer events than `count` while older matches still exist. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getLoginEventsByFilter(
     userId,
@@ -188,9 +188,9 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of filtered login events |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**402** | Your pricing plan does not support this option |  -  |
-|**403** | No permissions to perform this action |  -  |
+|**200** | Login events matching the filters, newest first, or the twenty most recent events when the portal has no audit option |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The login history and audit trail section is not enabled for this portal |  -  |
+|**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -203,7 +203,7 @@ const { status, data } = await apiInstance.getLoginEventsByFilter(
 # **getLoginHistoryReport**
 > DocumentBuilderTaskWrapper getLoginHistoryReport()
 
-Returns the status of generating the login history report.
+Returns the state of the login history report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/login/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  audit trail report, which has its own status at `GET api/2.0/security/audit/events/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-login-history-report/).
 
@@ -242,9 +242,9 @@ const { status, data } = await apiInstance.getLoginHistoryReport();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Operation execution status |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**402** | Your pricing plan does not support this option |  -  |
-|**403** | No permissions to perform this action |  -  |
+|**200** | The state of the caller\'s login history report, or an empty answer when none is known |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The portal\'s pricing plan has no audit option, or the login history and audit trail section is not enabled |  -  |
+|**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -256,7 +256,7 @@ const { status, data } = await apiInstance.getLoginHistoryReport();
 # **terminateLoginHistoryReport**
 > terminateLoginHistoryReport()
 
-Terminates generating the login history report.
+Cancels the login history report the calling user has running and drops it from the build queue. The caller  needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. Cancellation is handed to the same background service that  builds the report, so a successful answer means the request was accepted rather than that the job has already  stopped: poll `GET api/2.0/security/audit/login/report` to watch it disappear. The operation returns no  content and touches only the caller\'s own login history report - the audit trail report is cancelled by  `DELETE api/2.0/security/audit/events/report`, and no report of another user can be reached from here. It is  idempotent: cancelling when nothing is running is not an error. A job stopped before it finished writing  leaves nothing in My documents, and a report cancelled by mistake has to be built again with  `POST api/2.0/security/audit/login/report`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-login-history-report/).
 
@@ -295,9 +295,9 @@ const { status, data } = await apiInstance.terminateLoginHistoryReport();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Ok |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**402** | Your pricing plan does not support this option |  -  |
-|**403** | No permissions to perform this action |  -  |
+|**200** | The cancellation of the caller\'s login history report has been accepted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The portal\'s pricing plan has no audit option, or the login history and audit trail section is not enabled |  -  |
+|**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

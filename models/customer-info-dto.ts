@@ -26,23 +26,31 @@ import type { EmployeeDto } from './employee-dto';
 import type { PaymentMethodStatus } from './payment-method-status';
 
 /**
- * The customer information.
+ * The billing customer behind the portal, and which portal member pays for it.
  */
 export interface CustomerInfoDto {
     /**
-     * The portal ID.
+     * The portal\'s identifier in the billing system, which is what support and invoices refer to. It is not the  portal alias.
      */
     'portalId'?: string | null;
     /**
-     * The customer\'s payment method.
+     * Whether a payment method is stored for the account and usable. Without one the portal can hold a wallet  balance but cannot be charged automatically.
      */
     'paymentMethodStatus'?: PaymentMethodStatus;
     /**
-     * The customer email address.
+     * The customer\'s payment method type.
+     */
+    'paymentMethodType'?: string | null;
+    /**
+     * Indicates whether the customer\'s payment method is delayed, i.e. the money reaches the wallet only after  the transfer settles rather than immediately.
+     */
+    'isDelayedPaymentMethod'?: boolean;
+    /**
+     * The address the billing account is registered to, lower-cased. It need not belong to a portal member,  which is exactly when `payer` stays empty.
      */
     'email'?: string | null;
     /**
-     * The paying user.
+     * The portal member whose account is behind the billing address. It is empty when `email` matches no member  of this portal, and while it is empty every operation of this group that only the payer may call is out  of reach for everybody.
      */
     'payer'?: EmployeeDto;
 }

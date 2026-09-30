@@ -1,19 +1,19 @@
 # FolderLinkRequest
 
-The folder link parameters.
+The external link of a folder, as it is to be created or rewritten.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**linkId** | **string** | The folder link ID. | [optional] [default to undefined]
-**access** | [**FileShare**](FileShare.md) | The link sharing rights. | [optional] [default to undefined]
-**expirationDate** | **string** | The link expiration date. | [optional] [default to undefined]
-**title** | **string** | The link name. | [optional] [default to undefined]
-**password** | **string** | The link password. | [optional] [default to undefined]
-**denyDownload** | **boolean** | Specifies if downloading the file from the link is disabled or not. | [optional] [default to undefined]
-**internal** | **boolean** | The link scope, whether it is internal or not. | [optional] [default to undefined]
-**primary** | **boolean** | Specifies whether the folder link is primary or not. | [optional] [default to undefined]
+**linkId** | **string** | Which link the request addresses: the identifier of an existing link rewrites that link, while an identifier  that is not in use, the empty one included, creates a new link. Take an existing identifier from  `GET api/2.0/files/folder/{id}/links`. | [optional] [default to undefined]
+**access** | [**FileShare**](FileShare.md) | The rights a visitor following the link is given. The value that grants nothing revokes the link instead of  setting it, and the answer is then empty. | [optional] [default to undefined]
+**expirationDate** | [**ApiDateTime**](ApiDateTime.md) | The moment the link stops working, sent as an ISO-8601 stamp. A moment that lies in the past is ignored,  and leaving the field out gives the link no expiry. | [optional] [default to undefined]
+**title** | **string** | The name the link is listed under for the people who manage the folder; a visitor following it never sees the  name. | [optional] [default to undefined]
+**password** | **string** | The secret a visitor has to enter before the link opens. Leave it out for a link that opens without one; the  secret itself is never given back, only the fact that one is set. | [optional] [default to undefined]
+**denyDownload** | **boolean** | Whether visitors are left with viewing alone: with true downloading and copying through the link are blocked,  with false they are allowed. | [optional] [default to undefined]
+**internal** | **boolean** | Whether the link admits signed-in portal members only: with true a visitor has to sign in before the link  opens, with false anyone holding the address may follow it. | [optional] [default to undefined]
+**primary** | **boolean** | Whether this link becomes the primary link of the folder, the one the Copy link action of a client hands  out; a folder has one primary link at a time. | [optional] [default to undefined]
 
 ## Example
 

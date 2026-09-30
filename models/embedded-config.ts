@@ -20,27 +20,27 @@
 
 
 /**
- * The configuration parameters for the embedded document type.
+ * The addresses the framed viewer needs. It is reported for the embedded layout only.
  */
 export interface EmbeddedConfig {
     /**
-     * The absolute URL to the document serving as a source file for the document embedded into the web page.
+     * The page to put into the frame. It is empty when the opening carries no external share key, since a framed  viewer cannot authenticate a portal member.
      */
     'embedUrl'?: string | null;
     /**
-     * The absolute URL that will allow the document to be saved onto the user personal computer.
+     * Where the download button of the framed viewer leads.
      */
     'saveUrl'?: string | null;
     /**
-     * The shared URL parameter.
+     * The query fragment carrying the external share key, ampersand included, out of which the addresses around it  are built.
      */
     'shareLinkParam'?: string | null;
     /**
-     * The absolute URL that will allow other users to share this document.
+     * The address behind the share button of the framed viewer, the document opened full-screen for reading. It is  empty when the opening carries no external share key.
      */
     'shareUrl'?: string | null;
     /**
-     * The place for the embedded viewer toolbar, can be either top or bottom.
+     * Where the framed viewer puts its toolbar. The portal always asks for the top.
      */
     'toolbarDocked'?: string | null;
 }

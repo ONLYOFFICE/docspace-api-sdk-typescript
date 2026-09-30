@@ -23,15 +23,15 @@
 import type { NotificationType } from './notification-type';
 
 /**
- * The notification settings parameters.
+ * Whether one kind of notification is switched on for the calling user.
  */
 export interface NotificationSettingsDto {
     /**
-     * The notification type.
+     * Which kind of notification the flag belongs to, echoed from the request. It is published as a number:  badges, room activity, the daily feed, and the tips.
      */
     'type'?: NotificationType;
     /**
-     * Specifies if the notification type is enabled or not.
+     * Whether the caller receives that kind of notification. It describes the caller\'s own account and nobody  else\'s; a fresh account has the badges on and the other three off, because those are subscriptions that  only `POST api/2.0/settings/notification` creates.
      */
     'isEnabled'?: boolean;
 }

@@ -24,24 +24,24 @@ import type { FileOperationRequestBaseDto } from './file-operation-request-base-
 
 /**
  * @type DeleteVersionBatchRequestDto
- * The request parameters for deleting file versions.
+ * The file whose versions are deleted, and the versions to delete.
  * @export
  */
 export type DeleteVersionBatchRequestDto = FileOperationRequestBaseDto &  {
     /**
-     * Specifies whether to delete a file after the editing session is finished or not.
+     * Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own.
      * @type {boolean}
      * @memberof DeleteVersionBatchRequestDto
      */
     'deleteAfter'?: boolean;
     /**
-     * The file ID to delete.
+     * The file whose history the versions are taken from; only files stored in the portal itself are addressed here.
      * @type {number}
      * @memberof DeleteVersionBatchRequestDto
      */
     'fileId': number;
     /**
-     * The collection of file versions to be deleted.
+     * The version numbers to remove, as reported by `GET api/2.0/files/file/{fileId}/history`. At least one number  has to be sent: an empty list removes the file itself instead of one of its versions. The number of the  current version is refused outright, while a number that no longer exists is passed over without a complaint.
      * @type {Array<number>}
      * @memberof DeleteVersionBatchRequestDto
      */

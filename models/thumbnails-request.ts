@@ -20,27 +20,27 @@
 
 
 /**
- * The thumbnail request.
+ * The crop rectangle to apply to an avatar image.
  */
 export interface ThumbnailsRequest {
     /**
-     * The path to the temporary thumbnail file.
+     * The temporary image to crop, as returned in the `data` of an upload made with `autosave` off. Only the file  name part of the value is used. Omit it to re-crop the photo the profile already has.
      */
     'tmpFile'?: string | null;
     /**
-     * The thumbnail horizontal coordinate.
+     * The distance in pixels from the left edge of the original image to the left edge of the crop rectangle.
      */
     'x'?: number;
     /**
-     * The thumbnail vertical coordinate.
+     * The distance in pixels from the top edge of the original image to the top edge of the crop rectangle.
      */
     'y'?: number;
     /**
-     * The thumbnail width.
+     * The width of the crop rectangle in pixels. Passing 0 together with `height` and `tmpFile` keeps the whole  uploaded image instead of cropping it.
      */
     'width'?: number;
     /**
-     * The thumbnail height.
+     * The height of the crop rectangle in pixels. Passing 0 together with `width` and `tmpFile` keeps the whole  uploaded image instead of cropping it.
      */
     'height'?: number;
 }

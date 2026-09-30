@@ -20,12 +20,12 @@
 
 
 /**
- * The used space parameters of the tenant quota feature.
+ * How much of one quota feature the portal has already consumed.
  */
 export interface FeatureUsedDto {
     'value': any;
     /**
-     * The used space title.
+     * The same figure as a sentence in the portal language, ready to print. It is empty when this build ships no  wording for the feature.
      */
     'title'?: string | null;
 }

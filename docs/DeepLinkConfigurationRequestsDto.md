@@ -1,12 +1,12 @@
 # DeepLinkConfigurationRequestsDto
 
-The request parameters for managing the deep link configuration.
+How the portal opens its links on a mobile device.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**deepLinkSettings** | [**TenantDeepLinkSettings**](TenantDeepLinkSettings.md) | The deep link settings for the specified tenant. | [optional] [default to undefined]
+**deepLinkSettings** | [**TenantDeepLinkSettings**](TenantDeepLinkSettings.md) | The deep link configuration to store. Only its `handlingMode` is read - whether a link always opens in the  browser, always in the native application, or asks the user each time - and a mode outside the defined set is  refused with 400 before anything is stored. | [optional] [default to undefined]
 
 ## Example
 

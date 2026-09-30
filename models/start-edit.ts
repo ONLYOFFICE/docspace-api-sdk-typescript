@@ -20,11 +20,11 @@
 
 
 /**
- * The parameters for starting file editing.
+ * The body of an editing session request.
  */
 export interface StartEdit {
     /**
-     * Specifies whether to share the file with other users for editing or not.
+     * Claims the file for this caller alone: the session is opened without asking the document service to track  co-editing, and the call is refused when anybody else already has the file open. Left off, an ordinary  co-editing session is opened and others may join it.
      */
     'editingAlone'?: boolean;
 }

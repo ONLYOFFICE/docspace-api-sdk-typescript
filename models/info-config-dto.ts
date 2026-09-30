@@ -26,31 +26,31 @@ import type { AceShortWrapper } from './ace-short-wrapper';
 import type { EditorType } from './editor-type';
 
 /**
- * The information config parameters.
+ * The facts the editor information panel shows about the open document.
  */
 export interface InfoConfigDto {
     /**
-     * Specifies if the file is favorite or not.
+     * Whether the caller has this document among their favorites. It is empty when favorites do not apply - for an  anonymous caller, for a guest, and for an encrypted document.
      */
     'favorite'?: boolean | null;
     /**
-     * The folder of the file.
+     * The place of the document as a readable path, its folders joined from the root downwards. It is empty in the  embedded layout, which shows no such panel.
      */
     'folder'?: string | null;
     /**
-     * The file owner.
+     * The display name of the owner of the document. It is empty for an anonymous session.
      */
     'owner'?: string | null;
     /**
-     * The sharing settings of the file.
+     * Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner.
      */
     'sharingSettings'?: Array<AceShortWrapper> | null;
     /**
-     * The editor type of the file.
+     * The layout the information panel is rendered for.
      */
     'type'?: EditorType;
     /**
-     * The uploaded file.
+     * When the document was created on the portal, already formatted for reading in the culture of the caller rather  than as a machine timestamp.
      */
     'uploaded'?: string | null;
 }

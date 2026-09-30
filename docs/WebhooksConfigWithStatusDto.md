@@ -1,13 +1,13 @@
 # WebhooksConfigWithStatusDto
 
-The webhook configuration with its status.
+A webhook subscription together with how its last delivery ended.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**configs** | [**WebhooksConfigDto**](WebhooksConfigDto.md) | The webhook configuration. | [optional] [default to undefined]
-**status** | **number** | The webhook status. | [optional] [default to undefined]
+**configs** | [**WebhooksConfigDto**](WebhooksConfigDto.md) | The subscription itself. Despite the plural name it is one subscription, not a list. | [optional] [default to undefined]
+**status** | **number** | The HTTP status code the target answered on the last attempt. `0` means nothing has been delivered yet,  which is not the same as a failure. | [optional] [default to undefined]
 
 ## Example
 

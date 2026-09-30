@@ -36,7 +36,7 @@ export const ScopeManagementApiAxiosParamCreator = function (configuration?: Con
     
     return {
         /**
-         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
+         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
          * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -45,7 +45,7 @@ export const ScopeManagementApiAxiosParamCreator = function (configuration?: Con
          */
         getScopes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
-            const localVarPath = `/api/2.0/scopes`;
+            const localVarPath = `/api/2.0/oauth2/scopes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -81,14 +81,14 @@ export const ScopeManagementApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ScopeManagementApiAxiosParamCreator(configuration)
     return {
         /**
-         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
+         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
          * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getScopes operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
          */
-        async getScopes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScopeResponse>> {
+        async getScopes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ScopeResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getScopes(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ScopeManagementApi.getScopes']?.[localVarOperationServerIndex]?.url;
@@ -105,14 +105,14 @@ export const ScopeManagementApiFactory = function (configuration?: Configuration
     const localVarFp = ScopeManagementApiFp(configuration)
     return {
         /**
-         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
+         * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
          * @summary List available OAuth2 scopes
          * @param {*} [options] Override http request option.
          * REST API Reference for getScopes operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-scopes/
          * @throws {RequiredError}
          */
-        getScopes(options?: RawAxiosRequestConfig): AxiosPromise<ScopeResponse> {
+        getScopes(options?: RawAxiosRequestConfig): AxiosPromise<Array<ScopeResponse>> {
             return localVarFp.getScopes(options).then((request) => request(axios, basePath));
         },
     };
@@ -126,7 +126,7 @@ export const ScopeManagementApiFactory = function (configuration?: Configuration
  */
 export class ScopeManagementApi extends BaseAPI {
     /**
-     * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first.
+     * Retrieves a list of all available OAuth2 scopes for the specified tenant. The scopes define the permissions that can be requested by OAuth2 clients. The list is ordered alphabetically, with the \'openid\' scope always appearing first. It is a read-only catalogue that does not depend on which clients exist: a valid portal signature is the only requirement, with no role restriction, and every caller of the portal sees the same list.
      * @summary List available OAuth2 scopes
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

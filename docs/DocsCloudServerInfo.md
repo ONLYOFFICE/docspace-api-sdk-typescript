@@ -1,6 +1,6 @@
 # DocsCloudServerInfo
 
-Represents the DocsCloud server information.
+Represents the Docs Connect server information.
 
 ## Properties
 

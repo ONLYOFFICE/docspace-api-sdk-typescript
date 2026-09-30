@@ -20,7 +20,7 @@
 
 
 /**
- * Represents the user limits of a DocsCloud license.
+ * Represents the user limits of a Docs Connect license.
  */
 export interface DocsCloudUsersLimit {
     /**

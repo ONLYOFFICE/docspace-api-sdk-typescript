@@ -1,6 +1,6 @@
 # DocsCloudUsersLimit
 
-Represents the user limits of a DocsCloud license.
+Represents the user limits of a Docs Connect license.
 
 ## Properties
 

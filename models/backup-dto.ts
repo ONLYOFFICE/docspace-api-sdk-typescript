@@ -26,19 +26,19 @@ import type { BackupStorageType } from './backup-storage-type';
 import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-object';
 
 /**
- * The backup parameters.
+ * The request parameters for starting a backup.
  */
 export interface BackupDto {
     /**
-     * The backup storage type.
+     * The storage the archive is written to. It defaults to `Documents`, and it decides which keys  `storageParams` has to carry.
      */
     'storageType'?: BackupStorageType;
     /**
-     * The backup storage parameters.
+     * The settings of the chosen storage, as an array of key and value pairs. `Documents` needs an integer  `folderId`, `ThridpartyDocuments` a provider-specific non-integer `folderId`, `Local` a `filePath`,  `ThirdPartyConsumer` a `module` plus the settings of that consumer, and `DataStore` none. The  `subdir` key is added by the operation itself and must not be sent.
      */
     'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
-     * Specifies if a dump will be created or not.
+     * Backs up the whole server rather than this one portal. It requires the space access permission and  works on a standalone installation only.
      */
     'dump'?: boolean;
 }

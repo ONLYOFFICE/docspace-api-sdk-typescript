@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **contacts** | [**Array&lt;Contact&gt;**](Contact.md) | The list of user contacts. | [optional] [default to undefined]
 **status** | [**EmployeeStatus**](EmployeeStatus.md) | The user status. | [optional] [default to undefined]
 **activationStatus** | [**EmployeeActivationStatus**](EmployeeActivationStatus.md) | The user activation status. | [optional] [default to undefined]
-**terminated** | **string** | The date when the user account was terminated. | [optional] [default to undefined]
+**terminated** | [**ApiDateTime**](ApiDateTime.md) | The date when the user account was terminated. | [optional] [default to undefined]
 **department** | **string** | The user department. | [optional] [default to undefined]
 **groups** | [**Array&lt;GroupSummaryDto&gt;**](GroupSummaryDto.md) | The list of user groups. | [optional] [default to undefined]
 **location** | **string** | The user location. | [optional] [default to undefined]
@@ -47,7 +47,7 @@ Name | Type | Description | Notes
 **loginEventId** | **number** | The current login event ID. | [optional] [default to undefined]
 **authCookieLifetime** | **number** | The auth cookie lifetime in seconds. | [optional] [default to undefined]
 **createdBy** | [**EmployeeDto**](EmployeeDto.md) | The user who created the current user. | [optional] [default to undefined]
-**registrationDate** | **string** | The user registration date. | [optional] [default to undefined]
+**registrationDate** | [**ApiDateTime**](ApiDateTime.md) | The user registration date. | [optional] [default to undefined]
 **hasPersonalFolder** | **boolean** | Specifies if the user has a personal folder or not. | [optional] [default to undefined]
 **tfaAppEnabled** | **boolean** | Indicates whether the user has enabled two-factor authentication (TFA) using an authentication app. | [optional] [default to undefined]
 

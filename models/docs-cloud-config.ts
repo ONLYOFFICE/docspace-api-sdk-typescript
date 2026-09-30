@@ -32,7 +32,7 @@ import type { DocsCloudServerConfig } from './docs-cloud-server-config';
 import type { DocsCloudWopiConfig } from './docs-cloud-wopi-config';
 
 /**
- * Represents the configuration of a DocsCloud tenant.
+ * Represents the configuration of a Docs Connect tenant.
  */
 export interface DocsCloudConfig {
     /**

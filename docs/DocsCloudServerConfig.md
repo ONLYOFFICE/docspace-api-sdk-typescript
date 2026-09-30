@@ -1,6 +1,6 @@
 # DocsCloudServerConfig
 
-Represents the server configuration of a DocsCloud tenant.
+Represents the server configuration of a Docs Connect tenant.
 
 ## Properties
 

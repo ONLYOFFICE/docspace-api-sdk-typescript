@@ -1,13 +1,13 @@
 # TenantUserInvitationSettingsDto
 
-The user invitation settings.
+Whether the portal currently lets anyone be invited into it, member and guest kept apart.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowInvitingMembers** | **boolean** | Specifies whether to allow inviting new DocSpace members through the Contacts section. | [default to undefined]
-**allowInvitingGuests** | **boolean** | Specifies whether to allow all DocSpace members to invite external guests to the rooms. | [default to undefined]
+**allowInvitingMembers** | **boolean** | Whether new members may be invited through the Contacts section. Switching it off stops new invitations  from being created; links already handed out keep working and members already invited stay. | [default to undefined]
+**allowInvitingGuests** | **boolean** | Whether every member, and not only an administrator, may invite an outside guest into a room. It is  independent of `allowInvitingMembers`, and switching it off has the same forward-only effect. | [default to undefined]
 
 ## Example
 

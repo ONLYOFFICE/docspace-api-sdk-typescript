@@ -33,6 +33,7 @@ export const AiActionType = {
     ImageGeneration: 'ImageGeneration',
     Ocr: 'OCR',
     Vision: 'Vision',
+    FormAnalysis: 'FormAnalysis',
 } as const;
 
 export type AiActionType = typeof AiActionType[keyof typeof AiActionType];

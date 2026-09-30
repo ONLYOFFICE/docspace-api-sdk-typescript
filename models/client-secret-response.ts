@@ -20,11 +20,11 @@
 
 
 /**
- * The response containing the regenerated client secret.
+ * The response carrying a regenerated client secret.
  */
 export interface ClientSecretResponse {
     /**
-     * The newly generated client secret.
+     * The newly generated client secret. It replaces the previous one immediately, so every deployed copy of the client has to be updated with this value.
      */
     'client_secret'?: string;
 }

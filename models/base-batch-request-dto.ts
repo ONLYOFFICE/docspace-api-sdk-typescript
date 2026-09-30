@@ -30,18 +30,18 @@ import type { FileOperationRequestBaseDto } from './file-operation-request-base-
 
 /**
  * @type BaseBatchRequestDto
- * The base batch request parameters.
+ * The files and folders a background operation is applied to.
  * @export
  */
 export type BaseBatchRequestDto = FileOperationRequestBaseDto &  {
     /**
-     * The list of folder IDs of the base batch request.
+     * The folders to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a folder stored in the portal itself, a string addresses a folder on a connected third-party  account, and both kinds may be sent in one list.
      * @type {Array<BaseBatchRequestDtoAllOfFolderIds>}
      * @memberof BaseBatchRequestDto
      */
     'folderIds'?: Array<BaseBatchRequestDtoAllOfFolderIds> | null;
     /**
-     * The list of file IDs of the base batch request.
+     * The files to act on, by id, as reported by a folder listing such as `GET api/2.0/files/{folderId}`. A number  addresses a file stored in the portal itself, a string addresses a file on a connected third-party account,  and both kinds may be sent in one list.
      * @type {Array<BaseBatchRequestDtoAllOfFileIds>}
      * @memberof BaseBatchRequestDto
      */

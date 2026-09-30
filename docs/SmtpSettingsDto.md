@@ -1,21 +1,21 @@
 # SmtpSettingsDto
 
-The SMTP settings parameters.
+The mail server the portal sends its letters through.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**host** | **string** | The SMTP host. | [optional] [default to undefined]
-**port** | **number** | The SMTP port. | [optional] [default to undefined]
-**senderAddress** | **string** | The sender address. | [optional] [default to undefined]
-**senderDisplayName** | **string** | The sender display name. | [optional] [default to undefined]
-**credentialsUserName** | **string** | The credentials username. | [optional] [default to undefined]
-**credentialsUserPassword** | **string** | The credentials user password. | [optional] [default to undefined]
-**enableSSL** | **boolean** | Specifies whether the SSL is enabled or not. | [optional] [default to undefined]
-**enableAuth** | **boolean** | Specifies whether the authentication is enabled or not. | [optional] [default to undefined]
-**useNtlm** | **boolean** | Specifies whether to use NTLM or not. | [optional] [default to undefined]
-**isDefaultSettings** | **boolean** | Specifies if the current settings are default or not. | [optional] [default to undefined]
+**host** | **string** | The host name or address of the mail server. On a cloud portal that has saved no relay of its own every  field of this object comes back empty, because the installation\'s own server is not disclosed - only  `isDefaultSettings` is set there. | [optional] [default to undefined]
+**port** | **number** | The port the mail server is reached on - conventionally 25 or 587 without encryption from the start, 465  with it. It is empty when no port was stored, in which case the portal falls back to its own default. | [optional] [default to undefined]
+**senderAddress** | **string** | The address the letters are sent from, which appears in the From header and is what a reply goes to. | [optional] [default to undefined]
+**senderDisplayName** | **string** | The name shown beside that address in a recipient\'s mailbox. | [optional] [default to undefined]
+**credentialsUserName** | **string** | The account the portal signs in to the mail server as, meaningful only while `enableAuth` is `true`. | [optional] [default to undefined]
+**credentialsUserPassword** | **string** | Always empty here: the stored password is never returned, so a client that sends these settings back has  to supply it again rather than echoing what it read. | [optional] [default to undefined]
+**enableSSL** | **boolean** | Whether the connection to the mail server is encrypted. | [optional] [default to undefined]
+**enableAuth** | **boolean** | Whether the portal signs in to the mail server at all. While it is `false` the credentials above are  ignored and the server is expected to accept mail unauthenticated. | [optional] [default to undefined]
+**useNtlm** | **boolean** | Always `false` here: the flag is accepted when settings are saved but is not stored, so it never comes  back set and says nothing about how the portal authenticates. | [optional] [default to undefined]
+**isDefaultSettings** | **boolean** | Whether the portal is still on the mail configuration of the installation rather than on a relay of its  own. `DELETE api/2.0/smtpsettings/smtp` puts it back to `true`, and while it is `true` on a cloud portal  the fields above are blank rather than showing the installation\'s server. | [optional] [default to undefined]
 
 ## Example
 

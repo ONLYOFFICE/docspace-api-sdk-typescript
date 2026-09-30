@@ -26,27 +26,27 @@ import type { BackupStorageType } from './backup-storage-type';
 import type { ItemKeyValuePairObjectObject } from './item-key-value-pair-object-object';
 
 /**
- * The backup restoring parameters.
+ * The request parameters for restoring a portal from a backup.
  */
 export interface BackupRestoreDto {
     /**
-     * The backup ID.
+     * The ID of the backup to restore from, as listed by `GET api/2.0/backup/getbackuphistory`. Send  anything that is not a GUID to restore from a file given by `storageParams` instead; an all-zero GUID  selects neither, because it parses as a GUID and then matches no record.
      */
     'backupId': string | null;
     /**
-     * The backup storage type.
+     * The storage the archive is read from. It defaults to `Documents` and is only used when `backupId` is  not a GUID, because a known backup carries the storage of its own record.
      */
     'storageType'?: BackupStorageType;
     /**
-     * The backup storage parameters.
+     * The location of the archive, as an array of key and value pairs. The key read here is `filePath` -  not the `folderId` a backup is started with - and it holds a file ID for `Documents`, a  provider-specific file ID for `ThridpartyDocuments` and a path on the server for `Local`. It is only  used when `backupId` is not a GUID.
      */
     'storageParams'?: Array<ItemKeyValuePairObjectObject> | null;
     /**
-     * Notifies users about the portal restoring process or not.
+     * Chooses who is emailed when the restoring starts and when it finishes: every active user of the  portal when true, and its owner alone when false. Mail goes only to accounts that have been  activated, so this decides the audience rather than whether anybody is notified at all.
      */
     'notify'?: boolean;
     /**
-     * Specifies if a dump will be created or not.
+     * Restores the whole server rather than this one portal. It requires the space access permission.
      */
     'dump'?: boolean;
 }

@@ -1,17 +1,17 @@
 # ActiveServiceDto
 
-Represents an active wallet service (quota) of the current portal.
+One wallet service the portal is running right now, with the allowance it grants where that is counted.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**service** | **string** | The name of the service. | [optional] [default to undefined]
-**serviceUnit** | **string** | The unit of measurement for the service. | [optional] [default to undefined]
-**subscription** | **boolean** | Indicates whether the service is subscription-based. | [optional] [default to undefined]
-**title** | **string** | The title of the service. | [optional] [default to undefined]
-**limit** | **number** | The service limit. Populated only for the subscription-based services. | [optional] [default to undefined]
-**used** | **number** | The current service usage. Populated only for the subscription-based services. | [optional] [default to undefined]
+**service** | **string** | The stable key of the service, which is what `POST api/2.0/portal/payment/servicestate` takes to switch  it off again. | [optional] [default to undefined]
+**serviceUnit** | **string** | What `limit` and `used` count, in the portal language - gigabytes, editor seats, credits. | [optional] [default to undefined]
+**subscription** | **boolean** | Whether the service is billed as a standing subscription rather than per unit consumed. Only a  subscription can carry `limit` and `used`. | [optional] [default to undefined]
+**title** | **string** | The service name in the portal language, for printing rather than matching. | [optional] [default to undefined]
+**limit** | **number** | How much of the service the portal is entitled to. It is empty for a service whose consumption is not  counted this way, which is not the same as a service without a limit. | [optional] [default to undefined]
+**used** | **number** | How much of that allowance is in use - the editors currently active for the cloud editors, the units  already consumed for disk storage. Empty under the same conditions as `limit`. | [optional] [default to undefined]
 
 ## Example
 

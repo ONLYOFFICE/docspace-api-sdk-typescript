@@ -1,13 +1,13 @@
 # NotificationSettingsRequestsDto
 
-The request parameters for configuring notification settings.
+Which kind of notification the calling user switches, and which way.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**NotificationType**](NotificationType.md) | The notification to be configured. | [default to undefined]
-**isEnabled** | **boolean** | Specifies if the specified notification type is enabled or not. | [optional] [default to undefined]
+**type** | [**NotificationType**](NotificationType.md) | The kind of notification being switched. A value outside the defined set is echoed back while nothing is  stored, so confirm the result with `GET api/2.0/settings/notification/{type}` rather than trusting the  answer. | [default to undefined]
+**isEnabled** | **boolean** | Whether that kind reaches the calling account. It applies to the caller own account alone and to every room  at once; a single room is silenced with `POST api/2.0/settings/notification/rooms` instead. | [optional] [default to undefined]
 
 ## Example
 

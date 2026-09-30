@@ -23,22 +23,22 @@
 import type { DocumentBuilderTaskDto } from './document-builder-task-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileDtoInteger } from './file-dto-integer';
+import type { FileDto } from './file-dto';
 
 /**
- * The XLSX report task response parameters.
+ * The answer to a report generation request: the queued task, the form whose answers are collected, and whether the  report file is being created or refreshed.
  */
 export interface XlsxReportResponseDto {
     /**
-     * The original form file information.
+     * The original form the answers are collected from. It is not the produced spreadsheet - that one arrives with  the task, once the task reports completion.
      */
-    'form'?: FileDtoInteger;
+    'form'?: FileDto;
     /**
-     * The Document Builder task information.
+     * The queued generation. Poll it with `GET api/2.0/files/file/{fileId}/xlsx` until it reports completion, and  take the produced file from it then.
      */
     'task'?: DocumentBuilderTaskDto;
     /**
-     * Specifies whether the XLSX report file is newly created or an existing file will be updated.
+     * True when this run creates the report file, false when an existing report is rewritten in place, which means  it keeps its id and the links already shared for it.
      */
     'isNewFile'?: boolean;
 }
