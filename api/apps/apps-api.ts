@@ -32,9 +32,9 @@ import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { JsonValueWrapper } from '../../models';
 // @ts-ignore
-import type { SetAppEnabledBody } from '../../models';
+import type { SetAppEnabledRequest } from '../../models';
 // @ts-ignore
-import type { SetAppSettingsBody } from '../../models';
+import type { SetAppSettingsRequest } from '../../models';
 /**
  * AppsApi - axios parameter creator
  * @export
@@ -211,17 +211,17 @@ export const AppsApiAxiosParamCreator = function (configuration?: Configuration)
          * Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
          * @summary Enable or disable an app
          * @param {string} id The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-         * @param {SetAppEnabledBody} setAppEnabledBody The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+         * @param {SetAppEnabledRequest} setAppEnabledRequest The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setEnabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled/
          */
-        setEnabled: async (id: string, setAppEnabledBody: SetAppEnabledBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setEnabled: async (id: string, setAppEnabledRequest: SetAppEnabledRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setEnabled', 'id', id)
-            // verify required parameter 'setAppEnabledBody' is not null or undefined
-            assertParamExists('setEnabled', 'setAppEnabledBody', setAppEnabledBody)
+            // verify required parameter 'setAppEnabledRequest' is not null or undefined
+            assertParamExists('setEnabled', 'setAppEnabledRequest', setAppEnabledRequest)
 
             const localVarPath = `/api/2.0/apps/{id}/enabled`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -262,7 +262,7 @@ export const AppsApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(setAppEnabledBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(setAppEnabledRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -273,17 +273,17 @@ export const AppsApiAxiosParamCreator = function (configuration?: Configuration)
          * Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
          * @summary Save app settings
          * @param {string} id The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-         * @param {SetAppSettingsBody} setAppSettingsBody The configuration to store for this portal, replacing whatever was stored before.
+         * @param {SetAppSettingsRequest} setAppSettingsRequest The configuration to store for this portal, replacing whatever was stored before.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-settings/
          */
-        setSettings: async (id: string, setAppSettingsBody: SetAppSettingsBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setSettings: async (id: string, setAppSettingsRequest: SetAppSettingsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('setSettings', 'id', id)
-            // verify required parameter 'setAppSettingsBody' is not null or undefined
-            assertParamExists('setSettings', 'setAppSettingsBody', setAppSettingsBody)
+            // verify required parameter 'setAppSettingsRequest' is not null or undefined
+            assertParamExists('setSettings', 'setAppSettingsRequest', setAppSettingsRequest)
 
             const localVarPath = `/api/2.0/apps/{id}/settings`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -324,7 +324,7 @@ export const AppsApiAxiosParamCreator = function (configuration?: Configuration)
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(setAppSettingsBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(setAppSettingsRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -389,14 +389,14 @@ export const AppsApiFp = function(configuration?: Configuration) {
          * Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
          * @summary Enable or disable an app
          * @param {string} id The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything.
-         * @param {SetAppEnabledBody} setAppEnabledBody The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+         * @param {SetAppEnabledRequest} setAppEnabledRequest The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setEnabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-enabled/
          */
-        async setEnabled(id: string, setAppEnabledBody: SetAppEnabledBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setEnabled(id, setAppEnabledBody, options);
+        async setEnabled(id: string, setAppEnabledRequest: SetAppEnabledRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setEnabled(id, setAppEnabledRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AppsApi.setEnabled']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -405,14 +405,14 @@ export const AppsApiFp = function(configuration?: Configuration) {
          * Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
          * @summary Save app settings
          * @param {string} id The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404.
-         * @param {SetAppSettingsBody} setAppSettingsBody The configuration to store for this portal, replacing whatever was stored before.
+         * @param {SetAppSettingsRequest} setAppSettingsRequest The configuration to store for this portal, replacing whatever was stored before.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-settings/
          */
-        async setSettings(id: string, setAppSettingsBody: SetAppSettingsBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setSettings(id, setAppSettingsBody, options);
+        async setSettings(id: string, setAppSettingsRequest: SetAppSettingsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AppWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setSettings(id, setAppSettingsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AppsApi.setSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -472,7 +472,7 @@ export const AppsApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         setEnabled(requestParameters: AppsApiSetEnabledRequest, options?: RawAxiosRequestConfig): AxiosPromise<AppWrapper> {
-            return localVarFp.setEnabled(requestParameters.id, requestParameters.setAppEnabledBody, options).then((request) => request(axios, basePath));
+            return localVarFp.setEnabled(requestParameters.id, requestParameters.setAppEnabledRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
@@ -484,7 +484,7 @@ export const AppsApiFactory = function (configuration?: Configuration, basePath?
          * @throws {RequiredError}
          */
         setSettings(requestParameters: AppsApiSetSettingsRequest, options?: RawAxiosRequestConfig): AxiosPromise<AppWrapper> {
-            return localVarFp.setSettings(requestParameters.id, requestParameters.setAppSettingsBody, options).then((request) => request(axios, basePath));
+            return localVarFp.setSettings(requestParameters.id, requestParameters.setAppSettingsRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -532,10 +532,10 @@ export interface AppsApiSetEnabledRequest {
 
     /**
      * The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
-     * @type {SetAppEnabledBody}
+     * @type {SetAppEnabledRequest}
      * @memberof AppsApiSetEnabled
      */
-    readonly setAppEnabledBody: SetAppEnabledBody
+    readonly setAppEnabledRequest: SetAppEnabledRequest
 }
 
 /**
@@ -553,10 +553,10 @@ export interface AppsApiSetSettingsRequest {
 
     /**
      * The configuration to store for this portal, replacing whatever was stored before.
-     * @type {SetAppSettingsBody}
+     * @type {SetAppSettingsRequest}
      * @memberof AppsApiSetSettings
      */
-    readonly setAppSettingsBody: SetAppSettingsBody
+    readonly setAppSettingsRequest: SetAppSettingsRequest
 }
 
 /**
@@ -610,7 +610,7 @@ export class AppsApi extends BaseAPI {
      * @memberof AppsApi
      */
     public setEnabled(requestParameters: AppsApiSetEnabledRequest, options?: RawAxiosRequestConfig) {
-        return AppsApiFp(this.configuration).setEnabled(requestParameters.id, requestParameters.setAppEnabledBody, options).then((request) => request(this.axios, this.basePath));
+        return AppsApiFp(this.configuration).setEnabled(requestParameters.id, requestParameters.setAppEnabledRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -622,7 +622,7 @@ export class AppsApi extends BaseAPI {
      * @memberof AppsApi
      */
     public setSettings(requestParameters: AppsApiSetSettingsRequest, options?: RawAxiosRequestConfig) {
-        return AppsApiFp(this.configuration).setSettings(requestParameters.id, requestParameters.setAppSettingsBody, options).then((request) => request(this.axios, this.basePath));
+        return AppsApiFp(this.configuration).setSettings(requestParameters.id, requestParameters.setAppSettingsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

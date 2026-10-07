@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 
 /**
  * Outcome of an MCP-server CRUD call. Either success or a field-scoped error suitable for the settings form.
@@ -33,6 +33,6 @@ export interface AiToolsMutationResult {
     /**
      * Why the MCP server was rejected. Present on failure.
      */
-    'error'?: AiTErrorData;
+    'error'?: AiErrorData;
 }
 

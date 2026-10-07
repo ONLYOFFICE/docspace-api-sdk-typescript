@@ -40,7 +40,7 @@ import type { CreateRoomRequestDto } from '../../models';
 // @ts-ignore
 import type { CreateTagRequestDto } from '../../models';
 // @ts-ignore
-import type { CreateThirdPartyRoom } from '../../models';
+import type { CreateThirdPartyRoomRequest } from '../../models';
 // @ts-ignore
 import type { DeleteRoomRequest } from '../../models';
 // @ts-ignore
@@ -55,6 +55,8 @@ import type { FileOperationWrapper } from '../../models';
 import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareWrapper } from '../../models';
+// @ts-ignore
+import type { FilterType } from '../../models';
 // @ts-ignore
 import type { FolderContentWrapper } from '../../models';
 // @ts-ignore
@@ -88,7 +90,7 @@ import type { RoomTemplateStatusWrapper } from '../../models';
 // @ts-ignore
 import type { RoomType } from '../../models';
 // @ts-ignore
-import type { STRINGArrayWrapper } from '../../models';
+import type { RoomsMetadataSearchRequestDto } from '../../models';
 // @ts-ignore
 import type { SearchArea } from '../../models';
 // @ts-ignore
@@ -99,6 +101,8 @@ import type { ShareFilterType } from '../../models';
 import type { SortOrder } from '../../models';
 // @ts-ignore
 import type { StorageFilter } from '../../models';
+// @ts-ignore
+import type { StringArrayWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
@@ -594,17 +598,17 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
          * @summary Create a third-party room
          * @param {string} id The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-         * @param {CreateThirdPartyRoom} createThirdPartyRoom The settings of the room to be created out of the folder.
+         * @param {CreateThirdPartyRoomRequest} createThirdPartyRoomRequest The settings of the room to be created out of the folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createRoomThirdParty operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-third-party/
          */
-        createRoomThirdParty: async (id: string, createThirdPartyRoom: CreateThirdPartyRoom, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createRoomThirdParty: async (id: string, createThirdPartyRoomRequest: CreateThirdPartyRoomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('createRoomThirdParty', 'id', id)
-            // verify required parameter 'createThirdPartyRoom' is not null or undefined
-            assertParamExists('createRoomThirdParty', 'createThirdPartyRoom', createThirdPartyRoom)
+            // verify required parameter 'createThirdPartyRoomRequest' is not null or undefined
+            assertParamExists('createRoomThirdParty', 'createThirdPartyRoomRequest', createThirdPartyRoomRequest)
 
             const localVarPath = `/api/2.0/files/rooms/thirdparty/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -645,7 +649,7 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createThirdPartyRoom, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createThirdPartyRoomRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1042,6 +1046,92 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist or holds no .ai folder is answered as not found.
+         * @summary Get the .ai folder of a room
+         * @param {number} id The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomAiFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/
+         */
+        getRoomAiFolder: async (id: number, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getRoomAiFolder', 'id', id)
+
+            const localVarPath = `/api/2.0/files/rooms/{id}/ai`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (filterType !== undefined) {
+                localVarQueryParameter['filterType'] = filterType;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
 
 
     
@@ -1539,18 +1629,21 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
          * @param {QuotaFilter} [quotaFilter] Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
          * @param {StorageFilter} [storageFilter] Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
          * @param {RoomPrivacyFilter} [privacyFilter] Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+         * @param {boolean} [withAiFolder] Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
          * @param {number} [count] How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
          * @param {number} [startIndex] How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
          * @param {string} [sortBy] The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account\'s stored order.
          * @param {SortOrder} [sortOrder] The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
          * @param {string} [filterValue] Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
          * @param {number} [groupId] Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
+         * @param {number} [metadataTemplateId] The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+         * @param {string} [metadataFilters] The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, privacyFilter?: RoomPrivacyFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getRoomsFolder: async (type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, privacyFilter?: RoomPrivacyFilter, withAiFolder?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, metadataTemplateId?: number, metadataFilters?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/rooms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1627,6 +1720,10 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['privacyFilter'] = privacyFilter;
             }
 
+            if (withAiFolder !== undefined) {
+                localVarQueryParameter['withAiFolder'] = withAiFolder;
+            }
+
             if (count !== undefined) {
                 localVarQueryParameter['count'] = count;
             }
@@ -1649,6 +1746,14 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
 
             if (groupId !== undefined) {
                 localVarQueryParameter['groupId'] = groupId;
+            }
+
+            if (metadataTemplateId !== undefined) {
+                localVarQueryParameter['metadataTemplateId'] = metadataTemplateId;
+            }
+
+            if (metadataFilters !== undefined) {
+                localVarQueryParameter['metadataFilters'] = metadataFilters;
             }
 
 
@@ -2002,6 +2107,62 @@ export const RoomsApiAxiosParamCreator = function (configuration?: Configuration
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(userInvitation, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+         * @summary Search the rooms by metadata
+         * @param {RoomsMetadataSearchRequestDto} [roomsMetadataSearchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for searchRooms operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/
+         */
+        searchRooms: async (roomsMetadataSearchRequestDto?: RoomsMetadataSearchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/rooms/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(roomsMetadataSearchRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2785,14 +2946,14 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * Turns a folder of a connected third-party storage account into a room of the `Rooms` section, so that the  files of the room keep living in that storage instead of the portal. Connect the account first with  `POST api/2.0/files/thirdparty` and take the path parameter from a folder listing of that account: it is the  identifier of a folder in the storage, not of a room. One connected account can back one room only, so a  second call over the same account is refused, and so is an account that was not connected for room storage.  The caller needs the right to create rooms, which a portal user and a guest do not have; a public room is  refused while the administrator restricts external access, and reaching the room limit of the tariff is  refused too. With `createAsNewFolder` the room is a new subfolder named after `title`, otherwise the folder  from the path becomes the room itself and `indexing`, `denyDownload`, `tags` and `logo` are then dropped. The  answer is the new room, whose identifiers are strings; a public or a form-filling room already has its primary  link, readable with `GET api/2.0/files/rooms/{id}/link`.
          * @summary Create a third-party room
          * @param {string} id The identifier of the folder in the connected third-party storage that becomes the room, or receives it as a  subfolder. Folder identifiers of a connected account are strings and are returned by the folder listings of  that account.
-         * @param {CreateThirdPartyRoom} createThirdPartyRoom The settings of the room to be created out of the folder.
+         * @param {CreateThirdPartyRoomRequest} createThirdPartyRoomRequest The settings of the room to be created out of the folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createRoomThirdParty operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-room-third-party/
          */
-        async createRoomThirdParty(id: string, createThirdPartyRoom: CreateThirdPartyRoom, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomThirdParty(id, createThirdPartyRoom, options);
+        async createRoomThirdParty(id: string, createThirdPartyRoomRequest: CreateThirdPartyRoomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createRoomThirdParty(id, createThirdPartyRoomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.createRoomThirdParty']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2905,6 +3066,27 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist or holds no .ai folder is answered as not found.
+         * @summary Get the .ai folder of a room
+         * @param {number} id The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+         * @param {number} [count] The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered.
+         * @param {string} [filterValue] The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomAiFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/
+         */
+        async getRoomAiFolder(id: number, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomAiFolder(id, filterType, count, startIndex, sortBy, sortOrder, filterValue, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomAiFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
          * @summary Get room cover gallery
          * @param {*} [options] Override http request option.
@@ -3007,7 +3189,7 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRoomTagsInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          */
-        async getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async getRoomTagsInfo(count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomTagsInfo(count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomTagsInfo']?.[localVarOperationServerIndex]?.url;
@@ -3041,19 +3223,22 @@ export const RoomsApiFp = function(configuration?: Configuration) {
          * @param {QuotaFilter} [quotaFilter] Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found.
          * @param {StorageFilter} [storageFilter] Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter.
          * @param {RoomPrivacyFilter} [privacyFilter] Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds.
+         * @param {boolean} [withAiFolder] Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
          * @param {number} [count] How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
          * @param {number} [startIndex] How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports.
          * @param {string} [sortBy] The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account\'s stored order.
          * @param {SortOrder} [sortOrder] The direction of the order chosen by the sort field. It has no effect when no sort field is given and the  stored order of the account is used.
          * @param {string} [filterValue] Keeps only the rooms whose title contains this text, ignoring case. It is a substring match over the title  alone: room content and tags are not searched.
          * @param {number} [groupId] Keeps only the rooms that belong to this room group. The identifier comes from `GET api/2.0/files/group`; the  groups of portal members are a different concept and their identifiers do not match here.
+         * @param {number} [metadataTemplateId] The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+         * @param {string} [metadataFilters] The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getRoomsFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-rooms-folder/
          */
-        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, privacyFilter?: RoomPrivacyFilter, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, count, startIndex, sortBy, sortOrder, filterValue, groupId, options);
+        async getRoomsFolder(type?: Array<RoomType>, subjectId?: string, subjectOwnerId?: string, searchArea?: SearchArea, withoutTags?: boolean, tags?: string, excludeSubject?: boolean, provider?: ProviderFilter, quotaFilter?: QuotaFilter, storageFilter?: StorageFilter, privacyFilter?: RoomPrivacyFilter, withAiFolder?: boolean, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, groupId?: number, metadataTemplateId?: number, metadataFilters?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomsFolder(type, subjectId, subjectOwnerId, searchArea, withoutTags, tags, excludeSubject, provider, quotaFilter, storageFilter, privacyFilter, withAiFolder, count, startIndex, sortBy, sortOrder, filterValue, groupId, metadataTemplateId, metadataFilters, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.getRoomsFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3147,6 +3332,21 @@ export const RoomsApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resendEmailInvitations(id, userInvitation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RoomsApi.resendEmailInvitations']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+         * @summary Search the rooms by metadata
+         * @param {RoomsMetadataSearchRequestDto} [roomsMetadataSearchRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for searchRooms operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/
+         */
+        async searchRooms(roomsMetadataSearchRequestDto?: RoomsMetadataSearchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchRooms(roomsMetadataSearchRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RoomsApi.searchRooms']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -3433,7 +3633,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createRoomThirdParty(requestParameters: RoomsApiCreateRoomThirdPartyRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFolderWrapper> {
-            return localVarFp.createRoomThirdParty(requestParameters.id, requestParameters.createThirdPartyRoom, options).then((request) => request(axios, basePath));
+            return localVarFp.createRoomThirdParty(requestParameters.id, requestParameters.createThirdPartyRoomRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes custom room tags from the portal catalog by name and detaches them from every room that carries them;  the rooms themselves and their content are untouched, and only the tag disappears from their tag lists. Only a  portal administrator may call it, and a room manager who is allowed to create tags is refused. The names are  matched exactly as they are stored: names that are not in the catalog are skipped in silence and an empty list  is accepted as a no-op, so a successful answer does not prove that anything was deleted; check a name with  `GET api/2.0/files/tags/{tagName}/haslinks` first when that matters. The call cannot be undone: creating the  name again with `POST api/2.0/files/tags` brings back the tag but not its links, which have to be attached to  each room once more. The answer carries no body. To take a tag off one room and leave it in the catalog for  the others, use `DELETE api/2.0/files/rooms/{id}/tags` instead.
@@ -3520,6 +3720,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getPublicSettings(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist or holds no .ai folder is answered as not found.
+         * @summary Get the .ai folder of a room
+         * @param {RoomsApiGetRoomAiFolderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getRoomAiFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/
+         * @throws {RequiredError}
+         */
+        getRoomAiFolder(requestParameters: RoomsApiGetRoomAiFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
+            return localVarFp.getRoomAiFolder(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the gallery of cover pictures a room can be given: every entry pairs the identifier to send to  `POST api/2.0/files/rooms/{id}/cover` with the drawing itself as inline vector markup ready to be rendered.  The gallery is built into the product rather than stored per portal, so it is the same for every account and  every room, does not depend on what rooms exist, and its identifiers do not change with the language of the  request. The identifiers are unique and stable, which makes them safe to keep in a client, while the drawings  behind them may change between product versions. Any account of the portal may read the gallery, but a guest  is refused. The list is the only source of valid cover identifiers: a value that is not in it is rejected  wherever a cover is set, including room creation and room update. The call changes nothing and is safe to  repeat.
          * @summary Get room cover gallery
          * @param {*} [options] Override http request option.
@@ -3597,7 +3809,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-tags-info/
          * @throws {RequiredError}
          */
-        getRoomTagsInfo(requestParameters: RoomsApiGetRoomTagsInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        getRoomTagsInfo(requestParameters: RoomsApiGetRoomTagsInfoRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringArrayWrapper> {
             return localVarFp.getRoomTagsInfo(requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3621,7 +3833,7 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         getRoomsFolder(requestParameters: RoomsApiGetRoomsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
-            return localVarFp.getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.privacyFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(axios, basePath));
+            return localVarFp.getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.privacyFilter, requestParameters.withAiFolder, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, requestParameters.metadataTemplateId, requestParameters.metadataFilters, options).then((request) => request(axios, basePath));
         },
         /**
          * Collects everything that is marked as new for the caller across the active rooms into one answer, grouped  first by the day an entry changed and then by the room it belongs to. An entry becomes new when somebody else  creates or changes it in a room the caller has already opened, so the caller\'s own work never shows up here,  and neither does anything from a room they have never visited. Only files are listed: a new subfolder is not  an item, although files created inside it are, at any depth. The days come newest first, and inside a day the  rooms and their files follow the same order by change time. The archive is out of scope, only rooms of the  active section are covered. Reading the list clears nothing: the marks stay until the room itself is opened  with `GET api/2.0/files/rooms/{id}`. An empty array means that this account has nothing new. For one room, use  `GET api/2.0/files/rooms/{id}/news`.
@@ -3693,6 +3905,18 @@ export const RoomsApiFactory = function (configuration?: Configuration, basePath
          */
         resendEmailInvitations(requestParameters: RoomsApiResendEmailInvitationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.resendEmailInvitations(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+         * @summary Search the rooms by metadata
+         * @param {RoomsApiSearchRoomsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for searchRooms operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/search-rooms/
+         * @throws {RequiredError}
+         */
+        searchRooms(requestParameters: RoomsApiSearchRoomsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
+            return localVarFp.searchRooms(requestParameters.roomsMetadataSearchRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Switches the room template named by `id` between shared with everyone and private, rewriting its whole  recipient list in the process. With `public` true the Everyone group is granted read access, so every member  allowed to create rooms can build one from the template with `POST api/2.0/files/rooms/fromtemplate`; with  false that access is taken away. In both cases every other account and group the template was shared with —  including the addresses passed as `share` when it was created — loses access, so this is not a way to add a  single recipient to an existing list. Only the account that owns the template may call it: a portal  administrator who does not own it is refused, and so is a member invited to the source room. The identifier  has to resolve to a room template; an ordinary room or an unknown value is answered as missing, and an  identifier below 1 is rejected as an invalid request. Repeating the call with the same value changes nothing,  and nothing is returned; read the current state with `GET api/2.0/files/roomtemplate/{id}/public`.
@@ -3983,10 +4207,10 @@ export interface RoomsApiCreateRoomThirdPartyRequest {
 
     /**
      * The settings of the room to be created out of the folder.
-     * @type {CreateThirdPartyRoom}
+     * @type {CreateThirdPartyRoomRequest}
      * @memberof RoomsApiCreateRoomThirdParty
      */
-    readonly createThirdPartyRoom: CreateThirdPartyRoom
+    readonly createThirdPartyRoomRequest: CreateThirdPartyRoomRequest
 }
 
 /**
@@ -4099,6 +4323,62 @@ export interface RoomsApiGetPublicSettingsRequest {
      * @memberof RoomsApiGetPublicSettings
      */
     readonly id: number
+}
+
+/**
+ * Request parameters for getRoomAiFolder operation in RoomsApi.
+ * @export
+ * @interface RoomsApiGetRoomAiFolderRequest
+ */
+export interface RoomsApiGetRoomAiFolderRequest {
+    /**
+     * The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it.
+     * @type {number}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly id: number
+
+    /**
+     * Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds.
+     * @type {FilterType}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read.
+     * @type {number}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly count?: number
+
+    /**
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+     * @type {number}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields,  such as `DateAndTime`, `AZ`, `Size` or `Type`.
+     * @type {string}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The direction in which the `sortBy` field is ordered.
+     * @type {SortOrder}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The search string the listing is filtered by: it is matched as a substring of entry titles. Omit it to list  the folder unfiltered.
+     * @type {string}
+     * @memberof RoomsApiGetRoomAiFolder
+     */
+    readonly filterValue?: string
 }
 
 /**
@@ -4290,6 +4570,13 @@ export interface RoomsApiGetRoomsFolderRequest {
     readonly privacyFilter?: RoomPrivacyFilter
 
     /**
+     * Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder.
+     * @type {boolean}
+     * @memberof RoomsApiGetRoomsFolder
+     */
+    readonly withAiFolder?: boolean
+
+    /**
      * How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received.
      * @type {number}
      * @memberof RoomsApiGetRoomsFolder
@@ -4330,6 +4617,20 @@ export interface RoomsApiGetRoomsFolderRequest {
      * @memberof RoomsApiGetRoomsFolder
      */
     readonly groupId?: number
+
+    /**
+     * The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.
+     * @type {number}
+     * @memberof RoomsApiGetRoomsFolder
+     */
+    readonly metadataTemplateId?: number
+
+    /**
+     * The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/rooms/search.
+     * @type {string}
+     * @memberof RoomsApiGetRoomsFolder
+     */
+    readonly metadataFilters?: string
 }
 
 /**
@@ -4414,6 +4715,20 @@ export interface RoomsApiResendEmailInvitationsRequest {
      * @memberof RoomsApiResendEmailInvitations
      */
     readonly userInvitation: UserInvitation
+}
+
+/**
+ * Request parameters for searchRooms operation in RoomsApi.
+ * @export
+ * @interface RoomsApiSearchRoomsRequest
+ */
+export interface RoomsApiSearchRoomsRequest {
+    /**
+     * 
+     * @type {RoomsMetadataSearchRequestDto}
+     * @memberof RoomsApiSearchRooms
+     */
+    readonly roomsMetadataSearchRequestDto?: RoomsMetadataSearchRequestDto
 }
 
 /**
@@ -4729,7 +5044,7 @@ export class RoomsApi extends BaseAPI {
      * @memberof RoomsApi
      */
     public createRoomThirdParty(requestParameters: RoomsApiCreateRoomThirdPartyRequest, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).createRoomThirdParty(requestParameters.id, requestParameters.createThirdPartyRoom, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).createRoomThirdParty(requestParameters.id, requestParameters.createThirdPartyRoomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4836,6 +5151,18 @@ export class RoomsApi extends BaseAPI {
      */
     public getPublicSettings(requestParameters: RoomsApiGetPublicSettingsRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).getPublicSettings(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist or holds no .ai folder is answered as not found.
+     * @summary Get the .ai folder of a room
+     * @param {RoomsApiGetRoomAiFolderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public getRoomAiFolder(requestParameters: RoomsApiGetRoomAiFolderRequest, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).getRoomAiFolder(requestParameters.id, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4950,7 +5277,7 @@ export class RoomsApi extends BaseAPI {
      * @memberof RoomsApi
      */
     public getRoomsFolder(requestParameters: RoomsApiGetRoomsFolderRequest = {}, options?: RawAxiosRequestConfig) {
-        return RoomsApiFp(this.configuration).getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.privacyFilter, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, options).then((request) => request(this.axios, this.basePath));
+        return RoomsApiFp(this.configuration).getRoomsFolder(requestParameters.type, requestParameters.subjectId, requestParameters.subjectOwnerId, requestParameters.searchArea, requestParameters.withoutTags, requestParameters.tags, requestParameters.excludeSubject, requestParameters.provider, requestParameters.quotaFilter, requestParameters.storageFilter, requestParameters.privacyFilter, requestParameters.withAiFolder, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.groupId, requestParameters.metadataTemplateId, requestParameters.metadataFilters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5044,6 +5371,18 @@ export class RoomsApi extends BaseAPI {
      */
     public resendEmailInvitations(requestParameters: RoomsApiResendEmailInvitationsRequest, options?: RawAxiosRequestConfig) {
         return RoomsApiFp(this.configuration).resendEmailInvitations(requestParameters.id, requestParameters.userInvitation, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Searches the rooms by metadata. The same filter the rooms listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+     * @summary Search the rooms by metadata
+     * @param {RoomsApiSearchRoomsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RoomsApi
+     */
+    public searchRooms(requestParameters: RoomsApiSearchRoomsRequest = {}, options?: RawAxiosRequestConfig) {
+        return RoomsApiFp(this.configuration).searchRooms(requestParameters.roomsMetadataSearchRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

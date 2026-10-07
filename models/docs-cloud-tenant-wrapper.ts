@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DocsCloudTenant } from './docs-cloud-tenant';
+import type { DocsCloudTenantDto } from './docs-cloud-tenant-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the DocsCloudTenant object.
+ * The successful API response containing the DocsCloudTenantDto object.
  */
 export interface DocsCloudTenantWrapper {
     /**
-     * The DocsCloudTenant object returned by the operation.
+     * The DocsCloudTenantDto object returned by the operation.
      */
-    'response'?: DocsCloudTenant;
+    'response'?: DocsCloudTenantDto;
     /**
      * The total number of items in the response
      */

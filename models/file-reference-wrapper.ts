@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileReference } from './file-reference';
+import type { FileReferenceDto } from './file-reference-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the FileReference object.
+ * The successful API response containing the FileReferenceDto object.
  */
 export interface FileReferenceWrapper {
     /**
-     * The FileReference object returned by the operation.
+     * The FileReferenceDto object returned by the operation.
      */
-    'response'?: FileReference;
+    'response'?: FileReferenceDto;
     /**
      * The total number of items in the response
      */

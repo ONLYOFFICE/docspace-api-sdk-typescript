@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/{userid}/share | Get a guest sharing link|
+|[**getGuestSharingLink**](#getguestsharinglink) | **GET** /api/2.0/people/guests/{userId}/share | Get a guest sharing link|
 
 # **getGuestSharingLink**
 > StringWrapper getGuestSharingLink()
@@ -17,7 +17,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | defaults to undefined|
+| **userId** | [**string**] | The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. | defaults to undefined|
 
 
 ### Return type
@@ -39,10 +39,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalGuestsApi(configuration);
 
-let userid: string; //The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. (default to undefined)
+let userId: string; //The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see. (default to undefined)
 
 const { status, data } = await apiInstance.getGuestSharingLink(
-    userid
+    userId
 );
 ```
 

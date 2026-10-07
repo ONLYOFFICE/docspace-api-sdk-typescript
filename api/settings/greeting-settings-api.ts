@@ -28,7 +28,7 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { GreetingSettingsRequestsDto } from '../../models';
+import type { GreetingSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 /**
@@ -198,13 +198,13 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
         /**
          * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
          * @summary Save the greeting settings
-         * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
+         * @param {GreetingSettingsRequestDto} [greetingSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveGreetingSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
          */
-        saveGreetingSettings: async (greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveGreetingSettings: async (greetingSettingsRequestDto?: GreetingSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/greetingsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -244,7 +244,7 @@ export const GreetingSettingsApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(greetingSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(greetingSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -306,14 +306,14 @@ export const GreetingSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Replaces the greeting title of the current portal with the `title` from the request, storing it as the portal  name. The caller needs the portal-settings right of a DocSpace administrator, otherwise the call is refused.  The new caption takes effect at once for every user of the portal and the change is written to the audit  trail; repeating the call with the same title leaves the portal in the same state. A missing `title` or one  longer than 255 characters is rejected as an invalid request before the handler runs. On a cloud portal with a  free or trial plan the title is also matched against the character rule configured for the installation and a  title that breaks it is refused, while a paid cloud plan and a server installation apply no character check.  An empty `title` clears the greeting: the portal falls back to the built-in default caption and  `GET api/2.0/settings/greetingsettings/isdefault` starts answering `true`. What comes back is a localized  confirmation message, not the stored title - read the title with `GET api/2.0/settings/greetingsettings`.
          * @summary Save the greeting settings
-         * @param {GreetingSettingsRequestsDto} [greetingSettingsRequestsDto] 
+         * @param {GreetingSettingsRequestDto} [greetingSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveGreetingSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-greeting-settings/
          */
-        async saveGreetingSettings(greetingSettingsRequestsDto?: GreetingSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveGreetingSettings(greetingSettingsRequestsDto, options);
+        async saveGreetingSettings(greetingSettingsRequestDto?: GreetingSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveGreetingSettings(greetingSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GreetingSettingsApi.saveGreetingSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -371,7 +371,7 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         saveGreetingSettings(requestParameters: GreetingSettingsApiSaveGreetingSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveGreetingSettings(requestParameters.greetingSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveGreetingSettings(requestParameters.greetingSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -384,10 +384,10 @@ export const GreetingSettingsApiFactory = function (configuration?: Configuratio
 export interface GreetingSettingsApiSaveGreetingSettingsRequest {
     /**
      * 
-     * @type {GreetingSettingsRequestsDto}
+     * @type {GreetingSettingsRequestDto}
      * @memberof GreetingSettingsApiSaveGreetingSettings
      */
-    readonly greetingSettingsRequestsDto?: GreetingSettingsRequestsDto
+    readonly greetingSettingsRequestDto?: GreetingSettingsRequestDto
 }
 
 /**
@@ -439,7 +439,7 @@ export class GreetingSettingsApi extends BaseAPI {
      * @memberof GreetingSettingsApi
      */
     public saveGreetingSettings(requestParameters: GreetingSettingsApiSaveGreetingSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return GreetingSettingsApiFp(this.configuration).saveGreetingSettings(requestParameters.greetingSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return GreetingSettingsApiFp(this.configuration).saveGreetingSettings(requestParameters.greetingSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

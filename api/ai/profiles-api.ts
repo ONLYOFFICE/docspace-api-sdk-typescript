@@ -99,15 +99,15 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
          * @summary Delete a provider profile
-         * @param {string} body The ID of the profile to delete, as a bare JSON string.
+         * @param {string} aiProfilesDeleteRequest The ID of the profile to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
          */
-        aiProfilesDelete: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiProfilesDelete', 'body', body)
+        aiProfilesDelete: async (aiProfilesDeleteRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiProfilesDeleteRequest' is not null or undefined
+            assertParamExists('aiProfilesDelete', 'aiProfilesDeleteRequest', aiProfilesDeleteRequest)
 
             const localVarPath = `/api/2.0/ai/profiles/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -134,7 +134,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiProfilesDeleteRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -320,15 +320,15 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
          * @summary Test a profile\'s provider
-         * @param {string} body The ID of the profile to probe, as a bare JSON string.
+         * @param {string} aiProfilesTestConnectionRequest The ID of the profile to probe, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesTestConnection operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
          */
-        aiProfilesTestConnection: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiProfilesTestConnection', 'body', body)
+        aiProfilesTestConnection: async (aiProfilesTestConnectionRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiProfilesTestConnectionRequest' is not null or undefined
+            assertParamExists('aiProfilesTestConnection', 'aiProfilesTestConnectionRequest', aiProfilesTestConnectionRequest)
 
             const localVarPath = `/api/2.0/ai/profiles/test-connection`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -355,7 +355,7 @@ export const ProfilesApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiProfilesTestConnectionRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -435,14 +435,14 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
         /**
          * Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
          * @summary Delete a provider profile
-         * @param {string} body The ID of the profile to delete, as a bare JSON string.
+         * @param {string} aiProfilesDeleteRequest The ID of the profile to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-delete/
          */
-        async aiProfilesDelete(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiProfilesDelete(body, options);
+        async aiProfilesDelete(aiProfilesDeleteRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiProfilesDelete(aiProfilesDeleteRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.aiProfilesDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -509,14 +509,14 @@ export const ProfilesApiFp = function(configuration?: Configuration) {
         /**
          * Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
          * @summary Test a profile\'s provider
-         * @param {string} body The ID of the profile to probe, as a bare JSON string.
+         * @param {string} aiProfilesTestConnectionRequest The ID of the profile to probe, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiProfilesTestConnection operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-profiles-test-connection/
          */
-        async aiProfilesTestConnection(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiProfilesTestConnection200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiProfilesTestConnection(body, options);
+        async aiProfilesTestConnection(aiProfilesTestConnectionRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiProfilesTestConnection200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiProfilesTestConnection(aiProfilesTestConnectionRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProfilesApi.aiProfilesTestConnection']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -568,7 +568,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         aiProfilesDelete(requestParameters: ProfilesApiAiProfilesDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiProfilesDelete(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiProfilesDelete(requestParameters.aiProfilesDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns one AI provider profile by its ID, with its secrets stripped: neither the API key nor the custom headers are ever sent back, on any portal. The ID is required and is read from the query, and an unknown one answers 404. The `baseUrl` in the answer is the one that was stored, not the internal gateway address a round actually dials, so it cannot be used to reach the provider directly. Use `GET api/2.0/ai/profiles/list` to enumerate profiles instead of reading them one by one.
@@ -627,7 +627,7 @@ export const ProfilesApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         aiProfilesTestConnection(requestParameters: ProfilesApiAiProfilesTestConnectionRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiProfilesTestConnection200Response> {
-            return localVarFp.aiProfilesTestConnection(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiProfilesTestConnection(requestParameters.aiProfilesTestConnectionRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces a stored AI provider profile and returns it, re-checking name uniqueness and probing the credentials against the live provider again. The same two inputs are refused as on create - a private-network `baseUrl` and `providerType: external` - and the whole profile is overwritten by the one supplied rather than merged. On a portal running the AI gateway this answers 403, because profiles are managed centrally there. A profile that is bound to an action or an agent keeps those bindings.
@@ -669,7 +669,7 @@ export interface ProfilesApiAiProfilesDeleteRequest {
      * @type {string}
      * @memberof ProfilesApiAiProfilesDelete
      */
-    readonly body: string
+    readonly aiProfilesDeleteRequest: string
 }
 
 /**
@@ -725,7 +725,7 @@ export interface ProfilesApiAiProfilesTestConnectionRequest {
      * @type {string}
      * @memberof ProfilesApiAiProfilesTestConnection
      */
-    readonly body: string
+    readonly aiProfilesTestConnectionRequest: string
 }
 
 /**
@@ -770,7 +770,7 @@ export class ProfilesApi extends BaseAPI {
      * @memberof ProfilesApi
      */
     public aiProfilesDelete(requestParameters: ProfilesApiAiProfilesDeleteRequest, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).aiProfilesDelete(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).aiProfilesDelete(requestParameters.aiProfilesDeleteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -829,7 +829,7 @@ export class ProfilesApi extends BaseAPI {
      * @memberof ProfilesApi
      */
     public aiProfilesTestConnection(requestParameters: ProfilesApiAiProfilesTestConnectionRequest, options?: RawAxiosRequestConfig) {
-        return ProfilesApiFp(this.configuration).aiProfilesTestConnection(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return ProfilesApiFp(this.configuration).aiProfilesTestConnection(requestParameters.aiProfilesTestConnectionRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

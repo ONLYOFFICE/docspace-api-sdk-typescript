@@ -62,7 +62,7 @@ import type { FolderType } from './folder-type';
 import type { FormFillingStatus } from './form-filling-status';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Size } from './size';
+import type { ImageSizeDto } from './image-size-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { Thumbnail } from './thumbnail';
@@ -282,10 +282,10 @@ export type FileDto = FileEntryDto &  {
     'externalDbTableName'?: string | null;
     /**
      * The pixel size of the picture, measured by reading the stored file rather than taken from any stored metadata.  Null for anything that is not a picture the portal can show, and also when the file could not be read.
-     * @type {Size}
+     * @type {ImageSizeDto}
      * @memberof FileDto
      */
-    'dimensions'?: Size;
+    'dimensions'?: ImageSizeDto;
 };
 
 

@@ -23,7 +23,7 @@
 import type { FileEntryBaseDto } from './file-entry-base-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { MultiSizeLogoCover } from './multi-size-logo-cover';
+import type { MultiSizeLogoCoverDto } from './multi-size-logo-cover-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { SearchArea } from './search-area';
@@ -43,7 +43,7 @@ export interface RoomGroupDto {
     /**
      * The built-in cover chosen for the group, carrying the cover identifier and its rendering in each available  size. Null when the group has no icon, either because it was never given one or because the icon was cleared  by setting it to an empty value.
      */
-    'icon'?: MultiSizeLogoCover;
+    'icon'?: MultiSizeLogoCoverDto;
     /**
      * The account that created the group and the only one able to read, change or delete it; for any other member of  the portal the group does not exist.
      */

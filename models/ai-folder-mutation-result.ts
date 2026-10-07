@@ -20,10 +20,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiPromptFolder } from './ai-prompt-folder';
+import type { AiErrorData } from './ai-error-data';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiPromptFolder } from './ai-prompt-folder';
 
 /**
  * Outcome of `createFolder` / `renameFolder` — either the persisted folder or a field-scoped error.
@@ -40,6 +40,6 @@ export interface AiFolderMutationResult {
     /**
      * Why the folder was rejected. Present on failure.
      */
-    'error'?: AiTErrorData;
+    'error'?: AiErrorData;
 }
 

@@ -24,19 +24,15 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { EntityQuotaSettingsWrapper } from '../../models';
+// @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { QuotaSettingsRequestsDto } from '../../models';
+import type { QuotaSettingsRequestDto } from '../../models';
 // @ts-ignore
-import type { TenantAiAgentQuotaSettingsWrapper } from '../../models';
-// @ts-ignore
-import type { TenantQuotaSettingsRequestsDto } from '../../models';
+import type { TenantQuotaSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantQuotaSettingsWrapper } from '../../models';
-// @ts-ignore
-import type { TenantRoomQuotaSettingsWrapper } from '../../models';
-// @ts-ignore
-import type { TenantUserQuotaSettingsWrapper } from '../../models';
 /**
  * SettingsQuotaApi - axios parameter creator
  * @export
@@ -100,13 +96,13 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Sets the portal\'s default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal\'s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal\'s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota\'s size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent\'s current usage.
          * @summary Save the AI Agent quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {QuotaSettingsRequestDto} [quotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAiAgentQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
          */
-        saveAiAgentQuotaSettings: async (quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveAiAgentQuotaSettings: async (quotaSettingsRequestDto?: QuotaSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/aiagentquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -146,7 +142,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(quotaSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(quotaSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -156,13 +152,13 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Sets the portal\'s default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal\'s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal\'s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota\'s size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms\' current usage.
          * @summary Save the room quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {QuotaSettingsRequestDto} [quotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveRoomQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
          */
-        saveRoomQuotaSettings: async (quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveRoomQuotaSettings: async (quotaSettingsRequestDto?: QuotaSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/roomquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -202,7 +198,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(quotaSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(quotaSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -212,13 +208,13 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal\'s plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
          * @summary Save the tenant quota settings
-         * @param {TenantQuotaSettingsRequestsDto} [tenantQuotaSettingsRequestsDto] 
+         * @param {TenantQuotaSettingsRequestDto} [tenantQuotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
          */
-        setTenantQuotaSettings: async (tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantQuotaSettings: async (tenantQuotaSettingsRequestDto?: TenantQuotaSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/tenantquotasettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -258,7 +254,7 @@ export const SettingsQuotaApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantQuotaSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantQuotaSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -283,7 +279,7 @@ export const SettingsQuotaApiFp = function(configuration?: Configuration) {
          * REST API Reference for getUserQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/
          */
-        async getUserQuotaSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantUserQuotaSettingsWrapper>> {
+        async getUserQuotaSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntityQuotaSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserQuotaSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsQuotaApi.getUserQuotaSettings']?.[localVarOperationServerIndex]?.url;
@@ -292,14 +288,14 @@ export const SettingsQuotaApiFp = function(configuration?: Configuration) {
         /**
          * Sets the portal\'s default storage quota for AI agents, applied as the starting limit for newly created agents.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal\'s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal\'s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota\'s size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new agents. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not any agent\'s current usage.
          * @summary Save the AI Agent quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {QuotaSettingsRequestDto} [quotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAiAgentQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
          */
-        async saveAiAgentQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAgentQuotaSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAiAgentQuotaSettings(quotaSettingsRequestsDto, options);
+        async saveAiAgentQuotaSettings(quotaSettingsRequestDto?: QuotaSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntityQuotaSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAiAgentQuotaSettings(quotaSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsQuotaApi.saveAiAgentQuotaSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -307,14 +303,14 @@ export const SettingsQuotaApiFp = function(configuration?: Configuration) {
         /**
          * Sets the portal\'s default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal\'s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal\'s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota\'s size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms\' current usage.
          * @summary Save the room quota settings
-         * @param {QuotaSettingsRequestsDto} [quotaSettingsRequestsDto] 
+         * @param {QuotaSettingsRequestDto} [quotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveRoomQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
          */
-        async saveRoomQuotaSettings(quotaSettingsRequestsDto?: QuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantRoomQuotaSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveRoomQuotaSettings(quotaSettingsRequestsDto, options);
+        async saveRoomQuotaSettings(quotaSettingsRequestDto?: QuotaSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EntityQuotaSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveRoomQuotaSettings(quotaSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsQuotaApi.saveRoomQuotaSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -322,14 +318,14 @@ export const SettingsQuotaApiFp = function(configuration?: Configuration) {
         /**
          * Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal\'s plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
          * @summary Save the tenant quota settings
-         * @param {TenantQuotaSettingsRequestsDto} [tenantQuotaSettingsRequestsDto] 
+         * @param {TenantQuotaSettingsRequestDto} [tenantQuotaSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantQuotaSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-quota-settings/
          */
-        async setTenantQuotaSettings(tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantQuotaSettings(tenantQuotaSettingsRequestsDto, options);
+        async setTenantQuotaSettings(tenantQuotaSettingsRequestDto?: TenantQuotaSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantQuotaSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantQuotaSettings(tenantQuotaSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsQuotaApi.setTenantQuotaSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -352,7 +348,7 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-quota-settings/
          * @throws {RequiredError}
          */
-        getUserQuotaSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantUserQuotaSettingsWrapper> {
+        getUserQuotaSettings(options?: RawAxiosRequestConfig): AxiosPromise<EntityQuotaSettingsWrapper> {
             return localVarFp.getUserQuotaSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -364,8 +360,8 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-ai-agent-quota-settings/
          * @throws {RequiredError}
          */
-        saveAiAgentQuotaSettings(requestParameters: SettingsQuotaApiSaveAiAgentQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAgentQuotaSettingsWrapper> {
-            return localVarFp.saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveAiAgentQuotaSettings(requestParameters: SettingsQuotaApiSaveAiAgentQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EntityQuotaSettingsWrapper> {
+            return localVarFp.saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets the portal\'s default per-room storage quota, applied to newly created rooms as their starting limit.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission), and on a paid SaaS tenant the portal\'s  plan must include the statistics feature, or the call is rejected as not covered by the plan. The requested  size cannot exceed the portal\'s own total storage quota, nor, on a Standalone install with a portal-wide quota  enabled, that quota\'s size. Disable enforcement by passing `enableQuota=false`; the size is then ignored for  new rooms. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved settings, not the individual rooms\' current usage.
@@ -376,8 +372,8 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-room-quota-settings/
          * @throws {RequiredError}
          */
-        saveRoomQuotaSettings(requestParameters: SettingsQuotaApiSaveRoomQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantRoomQuotaSettingsWrapper> {
-            return localVarFp.saveRoomQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveRoomQuotaSettings(requestParameters: SettingsQuotaApiSaveRoomQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EntityQuotaSettingsWrapper> {
+            return localVarFp.saveRoomQuotaSettings(requestParameters.quotaSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets or removes the storage quota for a given tenant. Available only on a Standalone (self-hosted)  installation; on SaaS the call is always refused. Requires a DocSpace administrator, and the portal\'s plan  must include the statistics feature or the call is rejected as not covered by the plan. Pass a non-negative  `quota` in bytes to enable the limit for the tenant identified by `tenantId`, or a negative value to remove  any limit. This is a mutating, idempotent call: sending the same body again leaves the quota unchanged. It  returns the saved quota settings for that tenant, not its current usage.
@@ -389,7 +385,7 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
          * @throws {RequiredError}
          */
         setTenantQuotaSettings(requestParameters: SettingsQuotaApiSetTenantQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantQuotaSettingsWrapper> {
-            return localVarFp.setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -402,10 +398,10 @@ export const SettingsQuotaApiFactory = function (configuration?: Configuration, 
 export interface SettingsQuotaApiSaveAiAgentQuotaSettingsRequest {
     /**
      * 
-     * @type {QuotaSettingsRequestsDto}
+     * @type {QuotaSettingsRequestDto}
      * @memberof SettingsQuotaApiSaveAiAgentQuotaSettings
      */
-    readonly quotaSettingsRequestsDto?: QuotaSettingsRequestsDto
+    readonly quotaSettingsRequestDto?: QuotaSettingsRequestDto
 }
 
 /**
@@ -416,10 +412,10 @@ export interface SettingsQuotaApiSaveAiAgentQuotaSettingsRequest {
 export interface SettingsQuotaApiSaveRoomQuotaSettingsRequest {
     /**
      * 
-     * @type {QuotaSettingsRequestsDto}
+     * @type {QuotaSettingsRequestDto}
      * @memberof SettingsQuotaApiSaveRoomQuotaSettings
      */
-    readonly quotaSettingsRequestsDto?: QuotaSettingsRequestsDto
+    readonly quotaSettingsRequestDto?: QuotaSettingsRequestDto
 }
 
 /**
@@ -430,10 +426,10 @@ export interface SettingsQuotaApiSaveRoomQuotaSettingsRequest {
 export interface SettingsQuotaApiSetTenantQuotaSettingsRequest {
     /**
      * 
-     * @type {TenantQuotaSettingsRequestsDto}
+     * @type {TenantQuotaSettingsRequestDto}
      * @memberof SettingsQuotaApiSetTenantQuotaSettings
      */
-    readonly tenantQuotaSettingsRequestsDto?: TenantQuotaSettingsRequestsDto
+    readonly tenantQuotaSettingsRequestDto?: TenantQuotaSettingsRequestDto
 }
 
 /**
@@ -463,7 +459,7 @@ export class SettingsQuotaApi extends BaseAPI {
      * @memberof SettingsQuotaApi
      */
     public saveAiAgentQuotaSettings(requestParameters: SettingsQuotaApiSaveAiAgentQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SettingsQuotaApiFp(this.configuration).saveAiAgentQuotaSettings(requestParameters.quotaSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -475,7 +471,7 @@ export class SettingsQuotaApi extends BaseAPI {
      * @memberof SettingsQuotaApi
      */
     public saveRoomQuotaSettings(requestParameters: SettingsQuotaApiSaveRoomQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).saveRoomQuotaSettings(requestParameters.quotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SettingsQuotaApiFp(this.configuration).saveRoomQuotaSettings(requestParameters.quotaSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -487,7 +483,7 @@ export class SettingsQuotaApi extends BaseAPI {
      * @memberof SettingsQuotaApi
      */
     public setTenantQuotaSettings(requestParameters: SettingsQuotaApiSetTenantQuotaSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SettingsQuotaApiFp(this.configuration).setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SettingsQuotaApiFp(this.configuration).setTenantQuotaSettings(requestParameters.tenantQuotaSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

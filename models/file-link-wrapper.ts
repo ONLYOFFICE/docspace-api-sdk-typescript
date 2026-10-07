@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileLink } from './file-link';
+import type { FileLinkDto } from './file-link-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the FileLink object.
+ * The successful API response containing the FileLinkDto object.
  */
 export interface FileLinkWrapper {
     /**
-     * The FileLink object returned by the operation.
+     * The FileLinkDto object returned by the operation.
      */
-    'response'?: FileLink;
+    'response'?: FileLinkDto;
     /**
      * The total number of items in the response
      */

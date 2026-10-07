@@ -66,14 +66,14 @@ const { status, data } = await apiInstance.aiAssignmentsAssign(
 |**200** | Whether the binding was stored. A failure is reported in `error` rather than as a status. |  -  |
 |**400** | `actionType` or `profileId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAssignmentsBulkAssign**
-> AiBulkAssignmentResult aiAssignmentsBulkAssign(requestBody)
+> AiBulkAssignmentResult aiAssignmentsBulkAssign(aiAssignmentsBulkAssignRequest)
 
 Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
 
@@ -83,7 +83,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **{ [key: string]: string; }**| A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. | |
+| **aiAssignmentsBulkAssignRequest** | **{ [key: string]: string; }**| A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map. | |
 
 
 ### Return type
@@ -105,10 +105,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAssignmentsApi(configuration);
 
-let requestBody: { [key: string]: string; }; //A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+let aiAssignmentsBulkAssignRequest: { [key: string]: string; }; //A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
 
 const { status, data } = await apiInstance.aiAssignmentsBulkAssign(
-    requestBody
+    aiAssignmentsBulkAssignRequest
 );
 ```
 
@@ -124,7 +124,7 @@ const { status, data } = await apiInstance.aiAssignmentsBulkAssign(
 |**200** | Whether the set was stored, with `errors` listing the entries that were refused. |  -  |
 |**400** | The body is not a map of action type to profile ID, or one of its keys is not a known action type. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -183,7 +183,7 @@ const { status, data } = await apiInstance.aiAssignmentsCascadeProfileDelete(
 |**200** | Confirms no assignment points at the profile any more. |  -  |
 |**400** | `profileId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -240,8 +240,8 @@ const { status, data } = await apiInstance.aiAssignmentsGetAllAssignments(
 |-------------|-------------|------------------|
 |**200** | The scope\'s bindings as a map of action type to profile ID. An action with no binding is absent. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -298,7 +298,7 @@ const { status, data } = await apiInstance.aiAssignmentsGetAssignment(
 |**200** | The profile bound to the action, or an empty result when it has none of its own. |  -  |
 |**400** | `actionType` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -358,7 +358,7 @@ const { status, data } = await apiInstance.aiAssignmentsResolveForAction(
 |**200** | The profile that will serve the action. |  -  |
 |**400** | `actionType` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -418,13 +418,13 @@ const { status, data } = await apiInstance.aiAssignmentsTryResolveForAction(
 |**200** | The profile that will serve the action, or an empty result when none is configured. |  -  |
 |**400** | `actionType` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAssignmentsUnassign**
-> AiSuccessResponse aiAssignmentsUnassign(body)
+> AiSuccessResponse aiAssignmentsUnassign(aiActionType)
 
 Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
 
@@ -434,7 +434,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**|  | |
+| **aiActionType** | **string**|  | |
 
 
 ### Return type
@@ -456,10 +456,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAssignmentsApi(configuration);
 
-let body: string; //
+let aiActionType: string; //
 
 const { status, data } = await apiInstance.aiAssignmentsUnassign(
-    body
+    aiActionType
 );
 ```
 
@@ -475,7 +475,7 @@ const { status, data } = await apiInstance.aiAssignmentsUnassign(
 |**200** | Confirms the action now has no profile of its own. |  -  |
 |**400** | `actionType` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

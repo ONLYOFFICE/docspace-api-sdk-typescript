@@ -23,7 +23,7 @@
 import type { EncryptionKeyDto } from './encryption-key-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileKeys } from './file-keys';
+import type { FileKeysDto } from './file-keys-dto';
 
 /**
  * The keys the calling account needs in order to open one file of an end-to-end encrypted private room.
@@ -36,6 +36,6 @@ export interface FileEncryptionInfoDto {
     /**
      * The keys of this file that were issued to the calling account, each naming the public key it was encrypted for  so that the client can pick the matching private half. An empty list means the file has not been shared with  this account rather than that the file is unencrypted.
      */
-    'fileKeys'?: Array<FileKeys> | null;
+    'fileKeys'?: Array<FileKeysDto> | null;
 }
 

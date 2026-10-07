@@ -20,13 +20,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTMCPItem } from './ai-tmcpitem';
+import type { AiMCPItem } from './ai-mcpitem';
 
 export interface AiToolsListSystemTools200Response {
     /**
      * Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope.
      */
-    'groups': { [key: string]: Array<AiTMCPItem>; };
+    'groups': { [key: string]: Array<AiMCPItem>; };
     /**
      * Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map.
      */

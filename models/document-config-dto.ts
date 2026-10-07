@@ -20,16 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileReferenceData } from './file-reference-data';
+import type { DocumentOptionsDto } from './document-options-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileReferenceDataDto } from './file-reference-data-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { InfoConfigDto } from './info-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Options } from './options';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { PermissionsConfig } from './permissions-config';
+import type { PermissionsConfigDto } from './permissions-config-dto';
 
 /**
  * The document itself as the editors address it: what to fetch, under which revision key, and what this caller may  do with it.
@@ -54,7 +54,7 @@ export interface DocumentConfigDto {
     /**
      * What this caller may do inside the editor - edit, comment, review, fill, download, print, copy and chat.
      */
-    'permissions'?: PermissionsConfig;
+    'permissions'?: PermissionsConfigDto;
     /**
      * The name of the query parameter that carries the external share key. It is set only when the document was  opened through an external link.
      */
@@ -66,7 +66,7 @@ export interface DocumentConfigDto {
     /**
      * How another spreadsheet names this document in a formula. Pass it to `POST api/2.0/files/file/referencedata`  to resolve such a reference.
      */
-    'referenceData'?: FileReferenceData;
+    'referenceData'?: FileReferenceDataDto;
     /**
      * The name the editors display. When a past version was opened, the moment that version was created is appended  to it in brackets.
      */
@@ -82,6 +82,6 @@ export interface DocumentConfigDto {
     /**
      * Extra instructions for the editors, currently the watermark to draw over the document. It is empty when the  room sets no watermark.
      */
-    'options'?: Options;
+    'options'?: DocumentOptionsDto;
 }
 

@@ -20,12 +20,16 @@
 
 
 /**
- * Whether the portal promotional banners are hidden.
+ * Whether the portal hides its promotional banners.
  */
 export interface TenantBannerSettingsDto {
     /**
-     * Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here.
+     * The banners visibility flag.
      */
     'hidden'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
+    'lastModified'?: string;
 }
 

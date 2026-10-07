@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EncryptionSettings } from './encryption-settings';
+import type { EncryptionSettingsDto } from './encryption-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the EncryptionSettings object.
+ * The successful API response containing the EncryptionSettingsDto object.
  */
 export interface EncryptionSettingsWrapper {
     /**
-     * The EncryptionSettings object returned by the operation.
+     * The EncryptionSettingsDto object returned by the operation.
      */
-    'response'?: EncryptionSettings;
+    'response'?: EncryptionSettingsDto;
     /**
      * The total number of items in the response
      */

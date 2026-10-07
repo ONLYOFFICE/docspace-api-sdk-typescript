@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FormsItemData } from './forms-item-data';
+import type { FormsItemDataDto } from './forms-item-data-dto';
 
 /**
  * One completed copy of a form, with the values that were entered into it.
@@ -33,6 +33,6 @@ export interface FormResultsDto {
     /**
      * The values that were entered into this copy, one entry per field, preceded by an entry keyed `FormNumber` that  carries the number of the copy and is what the submissions are ordered by. Fields holding a picture or a  signature are left out of the record, so a field missing here was not necessarily left blank.
      */
-    'formsData'?: Array<FormsItemData> | null;
+    'formsData'?: Array<FormsItemDataDto> | null;
 }
 

@@ -9,7 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**testExternalDatabaseConnection**](#testexternaldatabaseconnection) | **POST** /api/2.0/settings/authservice/externaldb/test | Test external database connection|
 
 # **getAuthServices**
-> AuthServiceRequestsArrayWrapper getAuthServices()
+> AuthServiceArrayWrapper getAuthServices()
 
 Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
 
@@ -21,7 +21,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**AuthServiceRequestsArrayWrapper**
+**AuthServiceArrayWrapper**
 
 ### Authorization
 
@@ -51,6 +51,7 @@ const { status, data } = await apiInstance.getAuthServices();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Third-party providers with a manageable key, and their last-saved key values |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -70,7 +71,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authServiceRequestsDto** | **AuthServiceRequestsDto**|  | |
+| **saveAuthKeysRequestDto** | **SaveAuthKeysRequestDto**|  | |
 
 
 ### Return type
@@ -87,16 +88,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsAuthorizationApi,
     Configuration,
-    AuthServiceRequestsDto
+    SaveAuthKeysRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsAuthorizationApi(configuration);
 
-let authServiceRequestsDto: AuthServiceRequestsDto; // (optional)
+let saveAuthKeysRequestDto: SaveAuthKeysRequestDto; // (optional)
 
 const { status, data } = await apiInstance.saveAuthKeys(
-    authServiceRequestsDto
+    saveAuthKeysRequestDto
 );
 ```
 
@@ -110,8 +111,9 @@ const { status, data } = await apiInstance.saveAuthKeys(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Whether the provider\'s keys actually changed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The submitted keys failed the provider\'s own validation |  -  |
+|**400** | The request body cannot be read or has no `name` or `props`, a key has no `name` or `value` or a `value` longer than 4000 characters, or the submitted keys failed the provider\'s own validation |  -  |
 |**402** | The provider is a paid option not covered by the portal\'s current pricing plan |  -  |
+|**403** | The caller has no portal-settings right, or the provider is unknown or its keys cannot be set |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -131,7 +133,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **externalDatabaseSettings** | **ExternalDatabaseSettings**|  | |
+| **externalDatabaseConnectionRequestDto** | **ExternalDatabaseConnectionRequestDto**|  | |
 
 
 ### Return type
@@ -148,16 +150,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsAuthorizationApi,
     Configuration,
-    ExternalDatabaseSettings
+    ExternalDatabaseConnectionRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsAuthorizationApi(configuration);
 
-let externalDatabaseSettings: ExternalDatabaseSettings; // (optional)
+let externalDatabaseConnectionRequestDto: ExternalDatabaseConnectionRequestDto; // (optional)
 
 const { status, data } = await apiInstance.testExternalDatabaseConnection(
-    externalDatabaseSettings
+    externalDatabaseConnectionRequestDto
 );
 ```
 
@@ -171,6 +173,7 @@ const { status, data } = await apiInstance.testExternalDatabaseConnection(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Connection test result: a success flag and, on failure, an error message |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

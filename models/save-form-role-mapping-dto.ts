@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FormRole } from './form-role';
+import type { FormRoleRequest } from './form-role-request';
 
 /**
  * The people who are to fill in the roles of a PDF form.
@@ -33,6 +33,6 @@ export interface SaveFormRoleMappingDto {
     /**
      * The roles with the account taking each of them and the sequence number that decides the turn: the same number  means the roles may be filled in parallel, different ones make a queue. The whole set is replaced on every  call, and an empty set resets the filling.
      */
-    'roles': Array<FormRole> | null;
+    'roles': Array<FormRoleRequest> | null;
 }
 

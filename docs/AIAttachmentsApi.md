@@ -14,7 +14,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**aiAttachmentsSaveFilesMany**](#aiattachmentssavefilesmany) | **POST** /api/2.0/ai/attachments/save-files-many | Save files many|
 
 # **aiAttachmentsDelete**
-> AiSuccessResponse aiAttachmentsDelete(body)
+> AiSuccessResponse aiAttachmentsDelete(aiAttachmentsDeleteRequest)
 
 Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
 
@@ -24,7 +24,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the attachment to delete, as a bare JSON string. | |
+| **aiAttachmentsDeleteRequest** | **string**| The ID of the attachment to delete, as a bare JSON string. | |
 
 
 ### Return type
@@ -46,10 +46,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAttachmentsApi(configuration);
 
-let body: string; //The ID of the attachment to delete, as a bare JSON string.
+let aiAttachmentsDeleteRequest: string; //The ID of the attachment to delete, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiAttachmentsDelete(
-    body
+    aiAttachmentsDeleteRequest
 );
 ```
 
@@ -64,14 +64,14 @@ const { status, data } = await apiInstance.aiAttachmentsDelete(
 |-------------|-------------|------------------|
 |**200** | Confirms the request was accepted, whether or not anything was deleted. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAttachmentsDeleteMany**
-> AiSuccessResponse aiAttachmentsDeleteMany(requestBody)
+> AiSuccessResponse aiAttachmentsDeleteMany(aiAttachmentsDeleteManyRequest)
 
 Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
 
@@ -81,7 +81,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **Array<string>**| The IDs of the attachments to delete, as a bare JSON array of strings. | |
+| **aiAttachmentsDeleteManyRequest** | **Array<string>**| The IDs of the attachments to delete, as a bare JSON array of strings. | |
 
 
 ### Return type
@@ -103,10 +103,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAttachmentsApi(configuration);
 
-let requestBody: Array<string>; //The IDs of the attachments to delete, as a bare JSON array of strings.
+let aiAttachmentsDeleteManyRequest: Array<string>; //The IDs of the attachments to delete, as a bare JSON array of strings.
 
 const { status, data } = await apiInstance.aiAttachmentsDeleteMany(
-    requestBody
+    aiAttachmentsDeleteManyRequest
 );
 ```
 
@@ -121,14 +121,14 @@ const { status, data } = await apiInstance.aiAttachmentsDeleteMany(
 |-------------|-------------|------------------|
 |**200** | Confirms the request was accepted, whether or not anything was deleted. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAttachmentsGet**
-> AiAttachment aiAttachmentsGet(body)
+> AiAttachment aiAttachmentsGet(aiAttachmentsGetRequest)
 
 Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
 
@@ -138,7 +138,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the attachment to read, as a bare JSON string. | |
+| **aiAttachmentsGetRequest** | **string**| The ID of the attachment to read, as a bare JSON string. | |
 
 
 ### Return type
@@ -160,10 +160,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAttachmentsApi(configuration);
 
-let body: string; //The ID of the attachment to read, as a bare JSON string.
+let aiAttachmentsGetRequest: string; //The ID of the attachment to read, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiAttachmentsGet(
-    body
+    aiAttachmentsGetRequest
 );
 ```
 
@@ -179,14 +179,14 @@ const { status, data } = await apiInstance.aiAttachmentsGet(
 |**200** | The attachment, or a null body when no attachment has that ID. |  -  |
 |**400** | The attachment ID is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAttachmentsGetMany**
-> Array<AiAttachment | null> aiAttachmentsGetMany(requestBody)
+> Array<AiAttachment | null> aiAttachmentsGetMany(aiAttachmentsGetManyRequest)
 
 Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
 
@@ -196,7 +196,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **Array<string>**| The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | |
+| **aiAttachmentsGetManyRequest** | **Array<string>**| The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position. | |
 
 
 ### Return type
@@ -218,10 +218,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAttachmentsApi(configuration);
 
-let requestBody: Array<string>; //The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+let aiAttachmentsGetManyRequest: Array<string>; //The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
 
 const { status, data } = await apiInstance.aiAttachmentsGetMany(
-    requestBody
+    aiAttachmentsGetManyRequest
 );
 ```
 
@@ -237,14 +237,14 @@ const { status, data } = await apiInstance.aiAttachmentsGetMany(
 |**200** | The attachments, aligned by position with the IDs that were sent. A missing one leaves its slot empty. |  -  |
 |**400** | The list of attachment IDs is malformed. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAttachmentsGetSuggestedQuestions**
-> AiSuccessResponse aiAttachmentsGetSuggestedQuestions(requestBody)
+> AiSuccessResponse aiAttachmentsGetSuggestedQuestions(aiAttachmentsGetSuggestedQuestionsRequest)
 
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/).
@@ -253,7 +253,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **{ [key: string]: any | null; }**|  | |
+| **aiAttachmentsGetSuggestedQuestionsRequest** | **{ [key: string]: any | null; }**|  | |
 
 
 ### Return type
@@ -275,10 +275,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAttachmentsApi(configuration);
 
-let requestBody: { [key: string]: any | null; }; //
+let aiAttachmentsGetSuggestedQuestionsRequest: { [key: string]: any | null; }; //
 
 const { status, data } = await apiInstance.aiAttachmentsGetSuggestedQuestions(
-    requestBody
+    aiAttachmentsGetSuggestedQuestionsRequest
 );
 ```
 
@@ -293,7 +293,7 @@ const { status, data } = await apiInstance.aiAttachmentsGetSuggestedQuestions(
 |-------------|-------------|------------------|
 |**200** | Success. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -352,7 +352,7 @@ const { status, data } = await apiInstance.aiAttachmentsLinkToMessage(
 |**200** | Confirms the attachments are now bound to the message. |  -  |
 |**400** | The attachment or message reference is malformed. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | The message or the attachment does not exist. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -412,7 +412,7 @@ const { status, data } = await apiInstance.aiAttachmentsSaveFile(
 |**200** | The stored draft, whose ID links it to a message later. |  -  |
 |**400** | The attachment payload is malformed. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -471,7 +471,7 @@ const { status, data } = await apiInstance.aiAttachmentsSaveFilesMany(
 |**200** | The stored drafts, in the order they were sent. |  -  |
 |**400** | `inputs` is not an array, or one of its entries is malformed. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

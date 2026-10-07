@@ -50,7 +50,7 @@ import type { AiFileShare } from './ai-file-share';
 import type { AiFolderType } from './ai-folder-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiLogo } from './ai-logo';
+import type { AiLogoDto } from './ai-logo-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiRoomDataLifetimeDto } from './ai-room-data-lifetime-dto';
@@ -111,10 +111,10 @@ export type AiFolderDto = AiFileEntryDto &  {
     'tags'?: Array<string> | null;
     /**
      * The addresses of the room logo in four sizes, together with the colour and the built-in cover that are drawn  when no logo was uploaded. A room without a logo answers with four empty addresses rather than with null, and  the field is null for a folder that is not a room.
-     * @type {AiLogo}
+     * @type {AiLogoDto}
      * @memberof AiFolderDto
      */
-    'logo'?: AiLogo;
+    'logo'?: AiLogoDto;
     /**
      * Whether the caller pinned the room to the top of their own room list. Pinning is personal and is lost when the  room is archived.
      * @type {boolean}
@@ -170,7 +170,7 @@ export type AiFolderDto = AiFileEntryDto &  {
      */
     'inRoom'?: boolean | null;
     /**
-     * How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the caller may only read  it.
+     * How much space the files of the room may take, in bytes. It is the limit set on this room, or the portal  default for rooms when none was set. Null when the tariff of the portal does not count room statistics, when  room quotas are switched off, when the room lies in the archive or the trash, or when the role of the caller  in the room carries no editing rights - a viewer, a commenter, a reviewer and a form filler do not see the  figure, a room manager, a content creator and an editor do.
      * @type {number}
      * @memberof AiFolderDto
      */

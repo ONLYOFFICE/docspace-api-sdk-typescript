@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { TenantDevToolsAccessSettingsDto } from '../../models';
+import type { TenantDevToolsAccessSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantDevToolsAccessSettingsWrapper } from '../../models';
 /**
@@ -40,13 +40,13 @@ export const SecurityAccessToDevToolsApiAxiosParamCreator = function (configurat
         /**
          * Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
          * @summary Set the Developer Tools access settings
-         * @param {TenantDevToolsAccessSettingsDto} [tenantDevToolsAccessSettingsDto] 
+         * @param {TenantDevToolsAccessSettingsRequestDto} [tenantDevToolsAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantDevToolsAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/
          */
-        setTenantDevToolsAccessSettings: async (tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantDevToolsAccessSettings: async (tenantDevToolsAccessSettingsRequestDto?: TenantDevToolsAccessSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/devtoolsaccess`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -86,7 +86,7 @@ export const SecurityAccessToDevToolsApiAxiosParamCreator = function (configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantDevToolsAccessSettingsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantDevToolsAccessSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -106,14 +106,14 @@ export const SecurityAccessToDevToolsApiFp = function(configuration?: Configurat
         /**
          * Sets whether the portal restricts the `User` role from using the developer tools (API keys, OAuth apps,  webhooks); `RoomAdmin` and `DocSpaceAdmin` are never affected by this setting. Requires Owner or DocSpaceAdmin  (the EditPortalSettings permission). This is a mutating, idempotent, portal-wide call: it applies to every  `User` on the tenant immediately. It returns the saved setting; read the current value at any time from  `GET api/2.0/settings/devtoolsaccess`.
          * @summary Set the Developer Tools access settings
-         * @param {TenantDevToolsAccessSettingsDto} [tenantDevToolsAccessSettingsDto] 
+         * @param {TenantDevToolsAccessSettingsRequestDto} [tenantDevToolsAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantDevToolsAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-dev-tools-access-settings/
          */
-        async setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDevToolsAccessSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsDto, options);
+        async setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsRequestDto?: TenantDevToolsAccessSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDevToolsAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantDevToolsAccessSettings(tenantDevToolsAccessSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityAccessToDevToolsApi.setTenantDevToolsAccessSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -138,7 +138,7 @@ export const SecurityAccessToDevToolsApiFactory = function (configuration?: Conf
          * @throws {RequiredError}
          */
         setTenantDevToolsAccessSettings(requestParameters: SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantDevToolsAccessSettingsWrapper> {
-            return localVarFp.setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -151,10 +151,10 @@ export const SecurityAccessToDevToolsApiFactory = function (configuration?: Conf
 export interface SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest {
     /**
      * 
-     * @type {TenantDevToolsAccessSettingsDto}
+     * @type {TenantDevToolsAccessSettingsRequestDto}
      * @memberof SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettings
      */
-    readonly tenantDevToolsAccessSettingsDto?: TenantDevToolsAccessSettingsDto
+    readonly tenantDevToolsAccessSettingsRequestDto?: TenantDevToolsAccessSettingsRequestDto
 }
 
 /**
@@ -173,7 +173,7 @@ export class SecurityAccessToDevToolsApi extends BaseAPI {
      * @memberof SecurityAccessToDevToolsApi
      */
     public setTenantDevToolsAccessSettings(requestParameters: SecurityAccessToDevToolsApiSetTenantDevToolsAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityAccessToDevToolsApiFp(this.configuration).setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityAccessToDevToolsApiFp(this.configuration).setTenantDevToolsAccessSettings(requestParameters.tenantDevToolsAccessSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

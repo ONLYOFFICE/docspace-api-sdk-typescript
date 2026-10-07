@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AceShortWrapper } from './ace-short-wrapper';
+import type { AceShortDto } from './ace-short-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EditorType } from './editor-type';
@@ -44,7 +44,7 @@ export interface InfoConfigDto {
     /**
      * Who the document is shared with, as the information panel lists it. An empty list means it is shared with  nobody beyond its owner.
      */
-    'sharingSettings'?: Array<AceShortWrapper> | null;
+    'sharingSettings'?: Array<AceShortDto> | null;
     /**
      * The layout the information panel is rendered for.
      */

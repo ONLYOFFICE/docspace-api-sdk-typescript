@@ -20,10 +20,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FileEntryType } from './file-entry-type';
+import type { ExternalShareStatus } from './external-share-status';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Status } from './status';
+import type { FileEntryType } from './file-entry-type';
 
 /**
  * The outcome of validating an external share link and the entry it points at.
@@ -32,7 +32,7 @@ export interface ExternalShareDto {
     /**
      * How validating the link went. It is the first field to read: a refused link is reported here with the answer  still arriving as a success. A link that resolved describes both the entry and the link, one that is waiting  for its password describes only the entry, and one that failed outright leaves the rest of the object empty.
      */
-    'status': Status;
+    'status': ExternalShareStatus;
     /**
      * The identifier of the room, folder or file the link points at, always rendered as a string even where the  portal stores it as a number. It is null when the link could not be resolved.
      */

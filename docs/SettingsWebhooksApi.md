@@ -25,7 +25,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createWebhooksConfigRequestsDto** | **CreateWebhooksConfigRequestsDto**|  | |
+| **createWebhooksConfigRequestDto** | **CreateWebhooksConfigRequestDto**|  | |
 
 
 ### Return type
@@ -42,16 +42,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration,
-    CreateWebhooksConfigRequestsDto
+    CreateWebhooksConfigRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let createWebhooksConfigRequestsDto: CreateWebhooksConfigRequestsDto; // (optional)
+let createWebhooksConfigRequestDto: CreateWebhooksConfigRequestDto; // (optional)
 
 const { status, data } = await apiInstance.createWebhook(
-    createWebhooksConfigRequestsDto
+    createWebhooksConfigRequestDto
 );
 ```
 
@@ -65,11 +65,11 @@ const { status, data } = await apiInstance.createWebhook(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created webhook subscription, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The target URL is unusable or unreachable, or the secret key or a trigger flag was rejected |  -  |
+|**400** | The request body cannot be read, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, the target URL is unusable or answers the HEAD request with a non-success code, or the secret key or a trigger flag was rejected |  -  |
 |**403** | The caller is a `Guest`, or a non-admin caller while the developer tools are restricted |  -  |
+|**500** | The target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while `ssl` is `true` |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -86,7 +86,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateWebhooksConfigRequestsDto** | **UpdateWebhooksConfigRequestsDto**|  | |
+| **updateWebhooksConfigRequestDto** | **UpdateWebhooksConfigRequestDto**|  | |
 
 
 ### Return type
@@ -103,16 +103,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration,
-    UpdateWebhooksConfigRequestsDto
+    UpdateWebhooksConfigRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let updateWebhooksConfigRequestsDto: UpdateWebhooksConfigRequestsDto; // (optional)
+let updateWebhooksConfigRequestDto: UpdateWebhooksConfigRequestDto; // (optional)
 
 const { status, data } = await apiInstance.enableWebhook(
-    updateWebhooksConfigRequestsDto
+    updateWebhooksConfigRequestDto
 );
 ```
 
@@ -126,12 +126,12 @@ const { status, data } = await apiInstance.enableWebhook(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The webhook subscription in its new state, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The saved target no longer answers, or the saved secret no longer passes the password rules |  -  |
+|**400** | The request body cannot be read or has no `id`, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, although this call reads only `id` and `enabled`, or on switching on the saved target answers the HEAD request with a non-success code or the saved secret no longer passes the password rules |  -  |
 |**403** | The subscription belongs to another member, or the caller may not use webhooks at all |  -  |
 |**404** | No webhook subscription with this ID exists in the portal |  -  |
+|**500** | On switching on, the saved target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while the subscription has `ssl` set |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -317,11 +317,11 @@ const { status, data } = await apiInstance.getWebhooksLogs(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching delivery records, newest first, with the total count reported beside them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The `count` is outside its allowed range |  -  |
 |**403** | The caller is a `Guest`, or a non-admin caller while the developer tools are restricted |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -460,7 +460,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webhookRetryRequestsDto** | **WebhookRetryRequestsDto**|  | |
+| **webhookRetryRequestDto** | **WebhookRetryRequestDto**|  | |
 
 
 ### Return type
@@ -477,16 +477,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration,
-    WebhookRetryRequestsDto
+    WebhookRetryRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let webhookRetryRequestsDto: WebhookRetryRequestsDto; // (optional)
+let webhookRetryRequestDto: WebhookRetryRequestDto; // (optional)
 
 const { status, data } = await apiInstance.retryWebhooks(
-    webhookRetryRequestsDto
+    webhookRetryRequestDto
 );
 ```
 
@@ -521,7 +521,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateWebhooksConfigRequestsDto** | **UpdateWebhooksConfigRequestsDto**|  | |
+| **updateWebhooksConfigRequestDto** | **UpdateWebhooksConfigRequestDto**|  | |
 
 
 ### Return type
@@ -538,16 +538,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsWebhooksApi,
     Configuration,
-    UpdateWebhooksConfigRequestsDto
+    UpdateWebhooksConfigRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsWebhooksApi(configuration);
 
-let updateWebhooksConfigRequestsDto: UpdateWebhooksConfigRequestsDto; // (optional)
+let updateWebhooksConfigRequestDto: UpdateWebhooksConfigRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updateWebhook(
-    updateWebhooksConfigRequestsDto
+    updateWebhooksConfigRequestDto
 );
 ```
 
@@ -561,12 +561,12 @@ const { status, data } = await apiInstance.updateWebhook(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The updated webhook subscription, without its secret key |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The target URL is unusable or unreachable, or the secret key or a trigger flag was rejected |  -  |
+|**400** | The request body cannot be read or has no `id`, `name` or `uri` is missing or empty, `name` or `secretKey` is longer than 50 characters or `targetId` longer than 255, the target URL is unusable or answers the HEAD request with a non-success code, or the secret key or a trigger flag was rejected |  -  |
 |**403** | The subscription belongs to another member, or the caller may not use webhooks at all |  -  |
 |**404** | No webhook subscription with this ID exists in the portal |  -  |
+|**500** | The target URL gives no answer to the HEAD request: the connection fails or times out, or the certificate is not valid while `ssl` is `true` |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

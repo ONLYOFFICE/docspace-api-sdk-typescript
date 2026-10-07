@@ -72,23 +72,23 @@ import type { QuotaWrapper } from '../../models';
 // @ts-ignore
 import type { ReportWrapper } from '../../models';
 // @ts-ignore
-import type { RestrictedModelsResponseWrapper } from '../../models';
+import type { RestrictedAiModelsWrapper } from '../../models';
 // @ts-ignore
-import type { SalesRequestsDto } from '../../models';
+import type { SalesRequestDto } from '../../models';
 // @ts-ignore
-import type { ServicePriceInfoArrayWrapper } from '../../models';
+import type { ServicePriceArrayWrapper } from '../../models';
 // @ts-ignore
 import type { SetRestrictedAiModelsRequestDto } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
-import type { SubscriptionBalanceInfoWrapper } from '../../models';
+import type { SubscriptionBalanceWrapper } from '../../models';
 // @ts-ignore
 import type { TenantWalletService } from '../../models';
 // @ts-ignore
 import type { TenantWalletServiceSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { TenantWalletSettingsResponseWrapper } from '../../models';
+import type { TenantWalletSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantWalletSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -600,11 +600,11 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (backUrl !== undefined) {
-                localVarQueryParameter['BackUrl'] = backUrl;
+                localVarQueryParameter['backUrl'] = backUrl;
             }
 
             if (successUrl !== undefined) {
-                localVarQueryParameter['SuccessUrl'] = successUrl;
+                localVarQueryParameter['successUrl'] = successUrl;
             }
 
 
@@ -912,47 +912,47 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             if (serviceName) {
-                localVarQueryParameter['ServiceName'] = serviceName;
+                localVarQueryParameter['serviceName'] = serviceName;
             }
 
             if (startDate !== undefined) {
-                localVarQueryParameter['StartDate'] = (startDate as any instanceof Date) ?
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
                     (startDate as any).toISOString() :
                     startDate;
             }
 
             if (endDate !== undefined) {
-                localVarQueryParameter['EndDate'] = (endDate as any instanceof Date) ?
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
                     (endDate as any).toISOString() :
                     endDate;
             }
 
             if (participantName !== undefined) {
-                localVarQueryParameter['ParticipantName'] = participantName;
+                localVarQueryParameter['participantName'] = participantName;
             }
 
             if (credit !== undefined) {
-                localVarQueryParameter['Credit'] = credit;
+                localVarQueryParameter['credit'] = credit;
             }
 
             if (debit !== undefined) {
-                localVarQueryParameter['Debit'] = debit;
+                localVarQueryParameter['debit'] = debit;
             }
 
             if (type !== undefined) {
-                localVarQueryParameter['Type'] = type;
+                localVarQueryParameter['type'] = type;
             }
 
             if (status !== undefined) {
-                localVarQueryParameter['Status'] = status;
+                localVarQueryParameter['status'] = status;
             }
 
             if (orderBy !== undefined) {
-                localVarQueryParameter['OrderBy'] = orderBy;
+                localVarQueryParameter['orderBy'] = orderBy;
             }
 
             if (orderType !== undefined) {
-                localVarQueryParameter['OrderType'] = orderType;
+                localVarQueryParameter['orderType'] = orderType;
             }
 
 
@@ -1070,31 +1070,31 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (serviceName) {
-                localVarQueryParameter['ServiceName'] = serviceName;
+                localVarQueryParameter['serviceName'] = serviceName;
             }
 
             if (participantName !== undefined) {
-                localVarQueryParameter['ParticipantName'] = participantName;
+                localVarQueryParameter['participantName'] = participantName;
             }
 
             if (status !== undefined) {
-                localVarQueryParameter['Status'] = status;
+                localVarQueryParameter['status'] = status;
             }
 
             if (startDate !== undefined) {
-                localVarQueryParameter['StartDate'] = (startDate as any instanceof Date) ?
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
                     (startDate as any).toISOString() :
                     startDate;
             }
 
             if (endDate !== undefined) {
-                localVarQueryParameter['EndDate'] = (endDate as any instanceof Date) ?
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
                     (endDate as any).toISOString() :
                     endDate;
             }
 
             if (metadata !== undefined) {
-                localVarQueryParameter['Metadata'] = metadata;
+                localVarQueryParameter['metadata'] = metadata;
             }
 
             if (offset !== undefined) {
@@ -1106,11 +1106,11 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             }
 
             if (orderBy !== undefined) {
-                localVarQueryParameter['OrderBy'] = orderBy;
+                localVarQueryParameter['orderBy'] = orderBy;
             }
 
             if (orderType !== undefined) {
-                localVarQueryParameter['OrderType'] = orderType;
+                localVarQueryParameter['orderType'] = orderType;
             }
 
 
@@ -1669,7 +1669,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
          * @summary Get the auto top-up settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1890,13 +1890,13 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Sends the portal\'s message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
          * @summary Contact the sales team
-         * @param {SalesRequestsDto} [salesRequestsDto] 
+         * @param {SalesRequestDto} [salesRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendPaymentRequest operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
          */
-        sendPaymentRequest: async (salesRequestsDto?: SalesRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendPaymentRequest: async (salesRequestDto?: SalesRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/request`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1936,7 +1936,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(salesRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(salesRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2000,15 +2000,15 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
          * @summary Set the auto top-up settings
-         * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
+         * @param {TenantWalletSettingsRequestDto} [tenantWalletSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          */
-        setTenantWalletSettings: async (tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantWalletSettings: async (tenantWalletSettingsRequestDto?: TenantWalletSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/topupsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2048,7 +2048,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantWalletSettingsWrapper, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantWalletSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2474,7 +2474,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAccountingServicePrices operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-service-prices/
          */
-        async getAccountingServicePrices(serviceName: string, active?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePriceInfoArrayWrapper>> {
+        async getAccountingServicePrices(serviceName: string, active?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePriceArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountingServicePrices(serviceName, active, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getAccountingServicePrices']?.[localVarOperationServerIndex]?.url;
@@ -2759,7 +2759,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getRestrictedAiModels operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models/
          */
-        async getRestrictedAiModels(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestrictedModelsResponseWrapper>> {
+        async getRestrictedAiModels(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestrictedAiModelsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRestrictedAiModels(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getRestrictedAiModels']?.[localVarOperationServerIndex]?.url;
@@ -2773,7 +2773,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSubscriptionBalanceInfo operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
          */
-        async getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionBalanceInfoWrapper>> {
+        async getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionBalanceWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSubscriptionBalanceInfo(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getSubscriptionBalanceInfo']?.[localVarOperationServerIndex]?.url;
@@ -2794,14 +2794,14 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
          * @summary Get the auto top-up settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
          */
-        async getTenantWalletSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsResponseWrapper>> {
+        async getTenantWalletSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
@@ -2854,14 +2854,14 @@ export const PaymentApiFp = function(configuration?: Configuration) {
         /**
          * Sends the portal\'s message to the ONLYOFFICE sales team - the contact-sales form behind a request for a quote,  an invoice or a plan that cannot be bought online. `email` has to be a well-formed address and is where the  answer will go, while `userName` and `message` say who is asking and what for; all three are required and none  may be empty. Only a DocSpace administrator may call it. Nothing on the portal changes: no plan, no quota and  no payment is touched, a message is mailed out and the request is written to the portal audit trail. There is  no response body - status 200 means the message was handed to the mail service - and the call is not  idempotent, so a repeat sends a second message. It is limited to ten requests a minute per user by default and  answers 429 above that.
          * @summary Contact the sales team
-         * @param {SalesRequestsDto} [salesRequestsDto] 
+         * @param {SalesRequestDto} [salesRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendPaymentRequest operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-payment-request/
          */
-        async sendPaymentRequest(salesRequestsDto?: SalesRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendPaymentRequest(salesRequestsDto, options);
+        async sendPaymentRequest(salesRequestDto?: SalesRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendPaymentRequest(salesRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.sendPaymentRequest']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2875,23 +2875,23 @@ export const PaymentApiFp = function(configuration?: Configuration) {
          * REST API Reference for setRestrictedAiModels operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
          */
-        async setRestrictedAiModels(setRestrictedAiModelsRequestDto?: SetRestrictedAiModelsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestrictedModelsResponseWrapper>> {
+        async setRestrictedAiModels(setRestrictedAiModelsRequestDto?: SetRestrictedAiModelsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RestrictedAiModelsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.setRestrictedAiModels(setRestrictedAiModelsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.setRestrictedAiModels']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
          * @summary Set the auto top-up settings
-         * @param {TenantWalletSettingsWrapper} [tenantWalletSettingsWrapper] 
+         * @param {TenantWalletSettingsRequestDto} [tenantWalletSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          */
-        async setTenantWalletSettings(tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantWalletSettings(tenantWalletSettingsWrapper, options);
+        async setTenantWalletSettings(tenantWalletSettingsRequestDto?: TenantWalletSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantWalletSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantWalletSettings(tenantWalletSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.setTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3062,7 +3062,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-accounting-service-prices/
          * @throws {RequiredError}
          */
-        getAccountingServicePrices(requestParameters: PaymentApiGetAccountingServicePricesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ServicePriceInfoArrayWrapper> {
+        getAccountingServicePrices(requestParameters: PaymentApiGetAccountingServicePricesRequest, options?: RawAxiosRequestConfig): AxiosPromise<ServicePriceArrayWrapper> {
             return localVarFp.getAccountingServicePrices(requestParameters.serviceName, requestParameters.active, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3270,7 +3270,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-restricted-ai-models/
          * @throws {RequiredError}
          */
-        getRestrictedAiModels(options?: RawAxiosRequestConfig): AxiosPromise<RestrictedModelsResponseWrapper> {
+        getRestrictedAiModels(options?: RawAxiosRequestConfig): AxiosPromise<RestrictedAiModelsWrapper> {
             return localVarFp.getRestrictedAiModels(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3281,7 +3281,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-subscription-balance-info/
          * @throws {RequiredError}
          */
-        getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): AxiosPromise<SubscriptionBalanceInfoWrapper> {
+        getSubscriptionBalanceInfo(options?: RawAxiosRequestConfig): AxiosPromise<SubscriptionBalanceWrapper> {
             return localVarFp.getSubscriptionBalanceInfo(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3296,14 +3296,14 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getTenantWalletServiceSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+         * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
          * @summary Get the auto top-up settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantWalletSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/
          * @throws {RequiredError}
          */
-        getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsResponseWrapper> {
+        getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -3351,7 +3351,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.sendPaymentRequest(requestParameters.salesRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.sendPaymentRequest(requestParameters.salesRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
@@ -3362,11 +3362,11 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-restricted-ai-models/
          * @throws {RequiredError}
          */
-        setRestrictedAiModels(requestParameters: PaymentApiSetRestrictedAiModelsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RestrictedModelsResponseWrapper> {
+        setRestrictedAiModels(requestParameters: PaymentApiSetRestrictedAiModelsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<RestrictedAiModelsWrapper> {
             return localVarFp.setRestrictedAiModels(requestParameters.setRestrictedAiModelsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+         * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
          * @summary Set the auto top-up settings
          * @param {PaymentApiSetTenantWalletSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3374,8 +3374,8 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/
          * @throws {RequiredError}
          */
-        setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsResponseWrapper> {
-            return localVarFp.setTenantWalletSettings(requestParameters.tenantWalletSettingsWrapper, options).then((request) => request(axios, basePath));
+        setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
+            return localVarFp.setTenantWalletSettings(requestParameters.tenantWalletSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Stops the `xlsx` monthly usage report this user has running and drops its task, for a report that was started  for the wrong period or is no longer wanted. The portal needs a billing customer and the caller has to be a  DocSpace administrator. The stop is asked of the worker that builds the file rather than done here, so  `GET api/2.0/portal/payment/customer/usage/monthly/report` can still answer for a moment afterwards. The call  is safe to repeat and does nothing at all when this user has no such report running: there is no response  body, and status 200 says the stop was requested, not that a report was really stopped. It leaves the  operations and service usage reports alone, and a report that had already finished keeps its file in My  documents.
@@ -3877,10 +3877,10 @@ export interface PaymentApiMoveSubscriptionToWalletRequest {
 export interface PaymentApiSendPaymentRequestRequest {
     /**
      * 
-     * @type {SalesRequestsDto}
+     * @type {SalesRequestDto}
      * @memberof PaymentApiSendPaymentRequest
      */
-    readonly salesRequestsDto?: SalesRequestsDto
+    readonly salesRequestDto?: SalesRequestDto
 }
 
 /**
@@ -3905,10 +3905,10 @@ export interface PaymentApiSetRestrictedAiModelsRequest {
 export interface PaymentApiSetTenantWalletSettingsRequest {
     /**
      * 
-     * @type {TenantWalletSettingsWrapper}
+     * @type {TenantWalletSettingsRequestDto}
      * @memberof PaymentApiSetTenantWalletSettings
      */
-    readonly tenantWalletSettingsWrapper?: TenantWalletSettingsWrapper
+    readonly tenantWalletSettingsRequestDto?: TenantWalletSettingsRequestDto
 }
 
 /**
@@ -4263,7 +4263,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+     * Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
      * @summary Get the auto top-up settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -4317,7 +4317,7 @@ export class PaymentApi extends BaseAPI {
      * @memberof PaymentApi
      */
     public sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).sendPaymentRequest(requestParameters.salesRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).sendPaymentRequest(requestParameters.salesRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4333,7 +4333,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+     * Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
      * @summary Set the auto top-up settings
      * @param {PortalPaymentApiSetTenantWalletSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4341,7 +4341,7 @@ export class PaymentApi extends BaseAPI {
      * @memberof PaymentApi
      */
     public setTenantWalletSettings(requestParameters: PaymentApiSetTenantWalletSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return PaymentApiFp(this.configuration).setTenantWalletSettings(requestParameters.tenantWalletSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return PaymentApiFp(this.configuration).setTenantWalletSettings(requestParameters.tenantWalletSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -34,7 +34,7 @@ import type { CreateApiKeyRequestDto } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { STRINGArrayWrapper } from '../../models';
+import type { StringArrayWrapper } from '../../models';
 // @ts-ignore
 import type { UpdateApiKeyRequest } from '../../models';
 /**
@@ -423,7 +423,7 @@ export const ApiKeysApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAllPermissions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-permissions/
          */
-        async getAllPermissions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async getAllPermissions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAllPermissions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ApiKeysApi.getAllPermissions']?.[localVarOperationServerIndex]?.url;
@@ -515,7 +515,7 @@ export const ApiKeysApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-all-permissions/
          * @throws {RequiredError}
          */
-        getAllPermissions(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        getAllPermissions(options?: RawAxiosRequestConfig): AxiosPromise<StringArrayWrapper> {
             return localVarFp.getAllPermissions(options).then((request) => request(axios, basePath));
         },
         /**

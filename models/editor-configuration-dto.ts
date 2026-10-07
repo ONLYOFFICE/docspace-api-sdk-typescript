@@ -20,28 +20,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CoEditingConfig } from './co-editing-config';
+import type { CoEditingConfigDto } from './co-editing-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { CustomizationConfigDto } from './customization-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EmbeddedConfig } from './embedded-config';
+import type { EmbeddedConfigDto } from './embedded-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EncryptionKeyDto } from './encryption-key-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PluginsConfig } from './plugins-config';
+import type { PluginsConfigDto } from './plugins-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RecentConfig } from './recent-config';
+import type { RecentConfigDto } from './recent-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TemplatesConfig } from './templates-config';
+import type { TemplatesConfigDto } from './templates-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UserConfig } from './user-config';
+import type { UserConfigDto } from './user-config-dto';
 
 /**
  * How the editors behave for this opening: the mode, the language, the interface, and who is editing.
@@ -54,7 +54,7 @@ export interface EditorConfigurationDto {
     /**
      * How co-editing starts out for this session and whether the user may switch it in the interface.
      */
-    'coEditing'?: CoEditingConfig;
+    'coEditing'?: CoEditingConfigDto;
     /**
      * Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here.
      */
@@ -66,7 +66,7 @@ export interface EditorConfigurationDto {
     /**
      * The addresses the framed viewer needs. It is filled in only for the embedded layout.
      */
-    'embedded'?: EmbeddedConfig;
+    'embedded'?: EmbeddedConfigDto;
     /**
      * The caller\'s end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else.
      */
@@ -86,18 +86,18 @@ export interface EditorConfigurationDto {
     /**
      * Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty.
      */
-    'plugins'?: PluginsConfig;
+    'plugins'?: PluginsConfigDto;
     /**
      * The documents offered in the editor\'s recent list. It is left out altogether when there is nothing to offer.
      */
-    'recent'?: Array<RecentConfig> | null;
+    'recent'?: Array<RecentConfigDto> | null;
     /**
      * Always empty: the portal no longer passes creation templates through the editor configuration.
      */
-    'templates'?: Array<TemplatesConfig> | null;
+    'templates'?: Array<TemplatesConfigDto> | null;
     /**
      * The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves.
      */
-    'user'?: UserConfig;
+    'user'?: UserConfigDto;
 }
 

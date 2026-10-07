@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DocsCloudConfig } from './docs-cloud-config';
+import type { DocsCloudConfigDto } from './docs-cloud-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the DocsCloudConfig object.
+ * The successful API response containing the DocsCloudConfigDto object.
  */
 export interface DocsCloudConfigWrapper {
     /**
-     * The DocsCloudConfig object returned by the operation.
+     * The DocsCloudConfigDto object returned by the operation.
      */
-    'response'?: DocsCloudConfig;
+    'response'?: DocsCloudConfigDto;
     /**
      * The total number of items in the response
      */

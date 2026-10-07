@@ -23,7 +23,7 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OperationTokenUsage } from './operation-token-usage';
+import type { OperationTokenUsageDto } from './operation-token-usage-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OperationType } from './operation-type';
@@ -69,6 +69,10 @@ export interface OperationDto {
      */
     'debit'?: number;
     /**
+     * What the AI provider charged for the whole `quantity` of an AI tools or AI search charge, as the billing  service recorded it - the provider\'s side of the same operation `debit` bills the portal for. It is `null`  on any other movement, and on an AI charge recorded without a provider cost.
+     */
+    'cost'?: number | null;
+    /**
      * Who caused the movement, as the billing service records them - an internal name, which is what the  `participantName` filter matches on. Show `participantDisplayName` instead.
      */
     'participantName'?: string | null;
@@ -91,7 +95,7 @@ export interface OperationDto {
     /**
      * The tokens an AI operation consumed, broken down by kind - prompt, completion, cache reads and writes,  reasoning, images. It is `null` on any movement that is not an AI charge, and on an AI charge the billing  service recorded without token counts.
      */
-    'tokenUsage'?: OperationTokenUsage;
+    'tokenUsage'?: OperationTokenUsageDto;
     /**
      * What kind of movement this is - a payment, a charge, a refund, a correction. It is what the `type` filter  matches on, and `Unknown` covers a movement the billing service reported under a kind this build does not  recognise.
      */

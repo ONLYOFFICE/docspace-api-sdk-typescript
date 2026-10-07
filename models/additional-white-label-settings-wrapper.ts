@@ -20,15 +20,34 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AdditionalWhiteLabelSettings } from './additional-white-label-settings';
+import type { AdditionalWhiteLabelSettingsDto } from './additional-white-label-settings-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The additional white label settings wrapper.
+ * The successful API response containing the AdditionalWhiteLabelSettingsDto object.
  */
 export interface AdditionalWhiteLabelSettingsWrapper {
     /**
-     * The additional white label settings.
+     * The AdditionalWhiteLabelSettingsDto object returned by the operation.
      */
-    'settings'?: AdditionalWhiteLabelSettings;
+    'response'?: AdditionalWhiteLabelSettingsDto;
+    /**
+     * The total number of items in the response
+     */
+    'count'?: number;
+    /**
+     * List of links related to the response
+     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

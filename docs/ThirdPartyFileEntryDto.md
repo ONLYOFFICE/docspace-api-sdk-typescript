@@ -42,6 +42,7 @@ Name | Type | Description | Notes
 **external** | **boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal\'s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] [default to undefined]
 **isLinkExpired** | **boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [default to undefined]
+**assignedMetadataTemplates** | **Array&lt;number&gt;** | The IDs of the metadata templates assigned to the file entry. | [optional] [default to undefined]
 
 ## Example
 
@@ -85,6 +86,7 @@ const instance: ThirdPartyFileEntryDto = {
     external,
     expirationDate,
     isLinkExpired,
+    assignedMetadataTemplates,
 };
 ```
 

@@ -20,10 +20,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiProfile } from './ai-profile';
+import type { AiErrorData } from './ai-error-data';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiProfile } from './ai-profile';
 
 /**
  * Outcome of `create` / `update` — either a success carrying the persisted profile, or a failure with a field-level error description from the name check or the provider credential check.
@@ -40,6 +40,6 @@ export interface AiProfileMutationResult {
     /**
      * Why the profile was rejected - the name check or the provider credential check. Present on failure.
      */
-    'error'?: AiTErrorData;
+    'error'?: AiErrorData;
 }
 

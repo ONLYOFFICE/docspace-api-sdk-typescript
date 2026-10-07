@@ -38,18 +38,18 @@ export const PortalGuestsApiAxiosParamCreator = function (configuration?: Config
         /**
          * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
          * @summary Get a guest sharing link
-         * @param {string} userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+         * @param {string} userId The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGuestSharingLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
          */
-        getGuestSharingLink: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getGuestSharingLink', 'userid', userid)
+        getGuestSharingLink: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getGuestSharingLink', 'userId', userId)
 
-            const localVarPath = `/api/2.0/people/guests/{userid}/share`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/guests/{userId}/share`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -104,14 +104,14 @@ export const PortalGuestsApiFp = function(configuration?: Configuration) {
         /**
          * Builds a link that lets another member of the portal take over the caller\'s guest, so that the guest becomes  visible to them as well.  The account in the route has to exist and be a guest - any other type is rejected with 400 - and the caller  has to be able to see it and must not be a guest itself.  The call is read-only: it only mints the link and changes nothing, and it can be repeated as often as needed.  The answer is a shortened confirmation URL as plain text; hand it to the person who should get the guest, and  their client completes the hand-over with `POST api/2.0/people/guests/share/approve`.  The link carries a confirmation token and therefore expires, so mint it when it is about to be used rather  than storing it.
          * @summary Get a guest sharing link
-         * @param {string} userid The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
+         * @param {string} userId The ID of the guest to be handed over, taken from the route. The account has to exist, has to be a guest, and  has to be one the caller can see.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGuestSharingLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-guest-sharing-link/
          */
-        async getGuestSharingLink(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGuestSharingLink(userid, options);
+        async getGuestSharingLink(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGuestSharingLink(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PortalGuestsApi.getGuestSharingLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -136,7 +136,7 @@ export const PortalGuestsApiFactory = function (configuration?: Configuration, b
          * @throws {RequiredError}
          */
         getGuestSharingLink(requestParameters: PortalGuestsApiGetGuestSharingLinkRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.getGuestSharingLink(requestParameters.userid, options).then((request) => request(axios, basePath));
+            return localVarFp.getGuestSharingLink(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -152,7 +152,7 @@ export interface PortalGuestsApiGetGuestSharingLinkRequest {
      * @type {string}
      * @memberof PortalGuestsApiGetGuestSharingLink
      */
-    readonly userid: string
+    readonly userId: string
 }
 
 /**
@@ -171,7 +171,7 @@ export class PortalGuestsApi extends BaseAPI {
      * @memberof PortalGuestsApi
      */
     public getGuestSharingLink(requestParameters: PortalGuestsApiGetGuestSharingLinkRequest, options?: RawAxiosRequestConfig) {
-        return PortalGuestsApiFp(this.configuration).getGuestSharingLink(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
+        return PortalGuestsApiFp(this.configuration).getGuestSharingLink(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

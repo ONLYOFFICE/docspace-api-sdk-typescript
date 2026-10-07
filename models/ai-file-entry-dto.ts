@@ -136,6 +136,12 @@ export type AiFileEntryDto = AiFileEntryBaseDto &  {
      * @memberof AiFileEntryDto
      */
     'isLinkExpired'?: boolean | null;
+    /**
+     * The IDs of the metadata templates assigned to the file entry.
+     * @type {Array<number>}
+     * @memberof AiFileEntryDto
+     */
+    'assignedMetadataTemplates'?: Array<number> | null;
 };
 
 

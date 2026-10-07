@@ -24,13 +24,17 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AiAiReasoningLevel } from '../../models';
+import type { AiChatToolPermissionMode } from '../../models';
 // @ts-ignore
 import type { AiErrorResponse } from '../../models';
 // @ts-ignore
 import type { AiPreferencesSetDeepModeRequest } from '../../models';
 // @ts-ignore
 import type { AiPreferencesSetReasoningLevelRequest } from '../../models';
+// @ts-ignore
+import type { AiPreferencesSetToolPermissionModeRequest } from '../../models';
+// @ts-ignore
+import type { AiReasoningLevel } from '../../models';
 // @ts-ignore
 import type { AiSuccessResponse } from '../../models';
 /**
@@ -44,15 +48,15 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
          * @summary Clear deep mode
-         * @param {string} body The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
+         * @param {string} aiPreferencesClearDeepModeRequest The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPreferencesClearDeepMode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode/
          */
-        aiPreferencesClearDeepMode: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPreferencesClearDeepMode', 'body', body)
+        aiPreferencesClearDeepMode: async (aiPreferencesClearDeepModeRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPreferencesClearDeepModeRequest' is not null or undefined
+            assertParamExists('aiPreferencesClearDeepMode', 'aiPreferencesClearDeepModeRequest', aiPreferencesClearDeepModeRequest)
 
             const localVarPath = `/api/2.0/ai/preferences/clear-deep-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -79,7 +83,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPreferencesClearDeepModeRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -142,6 +146,50 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
         aiPreferencesGetReasoningLevel: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/preferences/get-reasoning-level`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (entityId !== undefined) {
+                localVarQueryParameter['entityId'] = entityId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * @summary Get tool permission mode
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesGetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-tool-permission-mode/
+         */
+        aiPreferencesGetToolPermissionMode: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/preferences/get-tool-permission-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -308,6 +356,51 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+         * @summary Set tool permission mode
+         * @param {AiPreferencesSetToolPermissionModeRequest} aiPreferencesSetToolPermissionModeRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesSetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-tool-permission-mode/
+         */
+        aiPreferencesSetToolPermissionMode: async (aiPreferencesSetToolPermissionModeRequest: AiPreferencesSetToolPermissionModeRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPreferencesSetToolPermissionModeRequest' is not null or undefined
+            assertParamExists('aiPreferencesSetToolPermissionMode', 'aiPreferencesSetToolPermissionModeRequest', aiPreferencesSetToolPermissionModeRequest)
+
+            const localVarPath = `/api/2.0/ai/preferences/set-tool-permission-mode`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPreferencesSetToolPermissionModeRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -321,14 +414,14 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
         /**
          * Removes the stored extended-thinking setting of a scope (the depth and, with it, the deep-mode toggle), after which reads fall back to the configured default rather than to false. `entityId` picks a room and omitting it clears the portal-wide preference. Clearing a scope that has no stored value is not an error. This differs from storing false, which is an explicit choice a later read reports as set.
          * @summary Clear deep mode
-         * @param {string} body The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
+         * @param {string} aiPreferencesClearDeepModeRequest The ID of the room whose preference is cleared, as a bare JSON string. Send an empty body to clear the portal-wide preference.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPreferencesClearDeepMode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-clear-deep-mode/
          */
-        async aiPreferencesClearDeepMode(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesClearDeepMode(body, options);
+        async aiPreferencesClearDeepMode(aiPreferencesClearDeepModeRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesClearDeepMode(aiPreferencesClearDeepModeRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesClearDeepMode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -357,10 +450,25 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiPreferencesGetReasoningLevel operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
          */
-        async aiPreferencesGetReasoningLevel(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAiReasoningLevel>> {
+        async aiPreferencesGetReasoningLevel(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiReasoningLevel>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesGetReasoningLevel(entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesGetReasoningLevel']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * @summary Get tool permission mode
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesGetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-tool-permission-mode/
+         */
+        async aiPreferencesGetToolPermissionMode(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatToolPermissionMode>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesGetToolPermissionMode(entityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesGetToolPermissionMode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -408,6 +516,21 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesSetReasoningLevel']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+         * @summary Set tool permission mode
+         * @param {AiPreferencesSetToolPermissionModeRequest} aiPreferencesSetToolPermissionModeRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiPreferencesSetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-tool-permission-mode/
+         */
+        async aiPreferencesSetToolPermissionMode(aiPreferencesSetToolPermissionModeRequest: AiPreferencesSetToolPermissionModeRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPreferencesSetToolPermissionMode(aiPreferencesSetToolPermissionModeRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PreferencesApi.aiPreferencesSetToolPermissionMode']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -428,7 +551,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
         aiPreferencesClearDeepMode(requestParameters: PreferencesApiAiPreferencesClearDeepModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiPreferencesClearDeepMode(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPreferencesClearDeepMode(requestParameters.aiPreferencesClearDeepModeRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
@@ -451,8 +574,20 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-reasoning-level/
          * @throws {RequiredError}
          */
-        aiPreferencesGetReasoningLevel(requestParameters: PreferencesApiAiPreferencesGetReasoningLevelRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiAiReasoningLevel> {
+        aiPreferencesGetReasoningLevel(requestParameters: PreferencesApiAiPreferencesGetReasoningLevelRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiReasoningLevel> {
             return localVarFp.aiPreferencesGetReasoningLevel(requestParameters.entityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * @summary Get tool permission mode
+         * @param {PreferencesApiAiPreferencesGetToolPermissionModeRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiPreferencesGetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-get-tool-permission-mode/
+         * @throws {RequiredError}
+         */
+        aiPreferencesGetToolPermissionMode(requestParameters: PreferencesApiAiPreferencesGetToolPermissionModeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiChatToolPermissionMode> {
+            return localVarFp.aiPreferencesGetToolPermissionMode(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
          * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
@@ -490,6 +625,18 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
         aiPreferencesSetReasoningLevel(requestParameters: PreferencesApiAiPreferencesSetReasoningLevelRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
             return localVarFp.aiPreferencesSetReasoningLevel(requestParameters.aiPreferencesSetReasoningLevelRequest, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+         * @summary Set tool permission mode
+         * @param {PreferencesApiAiPreferencesSetToolPermissionModeRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiPreferencesSetToolPermissionMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-preferences-set-tool-permission-mode/
+         * @throws {RequiredError}
+         */
+        aiPreferencesSetToolPermissionMode(requestParameters: PreferencesApiAiPreferencesSetToolPermissionModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiPreferencesSetToolPermissionMode(requestParameters.aiPreferencesSetToolPermissionModeRequest, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -504,7 +651,7 @@ export interface PreferencesApiAiPreferencesClearDeepModeRequest {
      * @type {string}
      * @memberof PreferencesApiAiPreferencesClearDeepMode
      */
-    readonly body: string
+    readonly aiPreferencesClearDeepModeRequest: string
 }
 
 /**
@@ -531,6 +678,20 @@ export interface PreferencesApiAiPreferencesGetReasoningLevelRequest {
      * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof PreferencesApiAiPreferencesGetReasoningLevel
+     */
+    readonly entityId?: string
+}
+
+/**
+ * Request parameters for aiPreferencesGetToolPermissionMode operation in PreferencesApi.
+ * @export
+ * @interface PreferencesApiAiPreferencesGetToolPermissionModeRequest
+ */
+export interface PreferencesApiAiPreferencesGetToolPermissionModeRequest {
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof PreferencesApiAiPreferencesGetToolPermissionMode
      */
     readonly entityId?: string
 }
@@ -578,6 +739,20 @@ export interface PreferencesApiAiPreferencesSetReasoningLevelRequest {
 }
 
 /**
+ * Request parameters for aiPreferencesSetToolPermissionMode operation in PreferencesApi.
+ * @export
+ * @interface PreferencesApiAiPreferencesSetToolPermissionModeRequest
+ */
+export interface PreferencesApiAiPreferencesSetToolPermissionModeRequest {
+    /**
+     * 
+     * @type {AiPreferencesSetToolPermissionModeRequest}
+     * @memberof PreferencesApiAiPreferencesSetToolPermissionMode
+     */
+    readonly aiPreferencesSetToolPermissionModeRequest: AiPreferencesSetToolPermissionModeRequest
+}
+
+/**
  * PreferencesApi - object-oriented interface
  * @export
  * @class PreferencesApi
@@ -593,7 +768,7 @@ export class PreferencesApi extends BaseAPI {
      * @memberof PreferencesApi
      */
     public aiPreferencesClearDeepMode(requestParameters: PreferencesApiAiPreferencesClearDeepModeRequest, options?: RawAxiosRequestConfig) {
-        return PreferencesApiFp(this.configuration).aiPreferencesClearDeepMode(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PreferencesApiFp(this.configuration).aiPreferencesClearDeepMode(requestParameters.aiPreferencesClearDeepModeRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -618,6 +793,18 @@ export class PreferencesApi extends BaseAPI {
      */
     public aiPreferencesGetReasoningLevel(requestParameters: PreferencesApiAiPreferencesGetReasoningLevelRequest = {}, options?: RawAxiosRequestConfig) {
         return PreferencesApiFp(this.configuration).aiPreferencesGetReasoningLevel(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+     * @summary Get tool permission mode
+     * @param {AIPreferencesApiAiPreferencesGetToolPermissionModeRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PreferencesApi
+     */
+    public aiPreferencesGetToolPermissionMode(requestParameters: PreferencesApiAiPreferencesGetToolPermissionModeRequest = {}, options?: RawAxiosRequestConfig) {
+        return PreferencesApiFp(this.configuration).aiPreferencesGetToolPermissionMode(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -654,6 +841,18 @@ export class PreferencesApi extends BaseAPI {
      */
     public aiPreferencesSetReasoningLevel(requestParameters: PreferencesApiAiPreferencesSetReasoningLevelRequest, options?: RawAxiosRequestConfig) {
         return PreferencesApiFp(this.configuration).aiPreferencesSetReasoningLevel(requestParameters.aiPreferencesSetReasoningLevelRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Persists the tool permission mode of the calling user. `value` has to be one of `ask`, `auto`, `allow`: anything else is rejected rather than coerced, so an absent or mistyped value can never overwrite the stored mode. `entityId` is validated like on the other writes and otherwise ignored - the mode applies to every chat of the user. Idempotent.
+     * @summary Set tool permission mode
+     * @param {AIPreferencesApiAiPreferencesSetToolPermissionModeRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PreferencesApi
+     */
+    public aiPreferencesSetToolPermissionMode(requestParameters: PreferencesApiAiPreferencesSetToolPermissionModeRequest, options?: RawAxiosRequestConfig) {
+        return PreferencesApiFp(this.configuration).aiPreferencesSetToolPermissionMode(requestParameters.aiPreferencesSetToolPermissionModeRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

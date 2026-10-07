@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { TenantBannerSettingsDto } from '../../models';
+import type { TenantBannerSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantBannerSettingsWrapper } from '../../models';
 /**
@@ -40,13 +40,13 @@ export const SecurityBannersVisibilityApiAxiosParamCreator = function (configura
         /**
          * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
          * @summary Set the banners visibility
-         * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
+         * @param {TenantBannerSettingsRequestDto} [tenantBannerSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantBannerSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
          */
-        setTenantBannerSettings: async (tenantBannerSettingsDto?: TenantBannerSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantBannerSettings: async (tenantBannerSettingsRequestDto?: TenantBannerSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/banner`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -86,7 +86,7 @@ export const SecurityBannersVisibilityApiAxiosParamCreator = function (configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantBannerSettingsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantBannerSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -106,14 +106,14 @@ export const SecurityBannersVisibilityApiFp = function(configuration?: Configura
         /**
          * Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
          * @summary Set the banners visibility
-         * @param {TenantBannerSettingsDto} [tenantBannerSettingsDto] 
+         * @param {TenantBannerSettingsRequestDto} [tenantBannerSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantBannerSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/
          */
-        async setTenantBannerSettings(tenantBannerSettingsDto?: TenantBannerSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantBannerSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantBannerSettings(tenantBannerSettingsDto, options);
+        async setTenantBannerSettings(tenantBannerSettingsRequestDto?: TenantBannerSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantBannerSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantBannerSettings(tenantBannerSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityBannersVisibilityApi.setTenantBannerSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -138,7 +138,7 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
          * @throws {RequiredError}
          */
         setTenantBannerSettings(requestParameters: SecurityBannersVisibilityApiSetTenantBannerSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantBannerSettingsWrapper> {
-            return localVarFp.setTenantBannerSettings(requestParameters.tenantBannerSettingsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setTenantBannerSettings(requestParameters.tenantBannerSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -151,10 +151,10 @@ export const SecurityBannersVisibilityApiFactory = function (configuration?: Con
 export interface SecurityBannersVisibilityApiSetTenantBannerSettingsRequest {
     /**
      * 
-     * @type {TenantBannerSettingsDto}
+     * @type {TenantBannerSettingsRequestDto}
      * @memberof SecurityBannersVisibilityApiSetTenantBannerSettings
      */
-    readonly tenantBannerSettingsDto?: TenantBannerSettingsDto
+    readonly tenantBannerSettingsRequestDto?: TenantBannerSettingsRequestDto
 }
 
 /**
@@ -173,7 +173,7 @@ export class SecurityBannersVisibilityApi extends BaseAPI {
      * @memberof SecurityBannersVisibilityApi
      */
     public setTenantBannerSettings(requestParameters: SecurityBannersVisibilityApiSetTenantBannerSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityBannersVisibilityApiFp(this.configuration).setTenantBannerSettings(requestParameters.tenantBannerSettingsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityBannersVisibilityApiFp(this.configuration).setTenantBannerSettings(requestParameters.tenantBannerSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

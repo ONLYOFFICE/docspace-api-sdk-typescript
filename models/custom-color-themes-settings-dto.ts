@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CustomColorThemesSettingsItem } from './custom-color-themes-settings-item';
+import type { CustomColorThemeDto } from './custom-color-theme-dto';
 
 /**
  * The colour themes the portal offers, which of them is applied, and how many the plan allows.
@@ -29,7 +29,7 @@ export interface CustomColorThemesSettingsDto {
     /**
      * Every theme the portal can apply, ordered by ID, with the built-in ones first because they were created  first. It is never empty - the built-in themes cannot be deleted - and a custom theme is one whose ID is  higher than the built-in ones.
      */
-    'themes'?: Array<CustomColorThemesSettingsItem> | null;
+    'themes'?: Array<CustomColorThemeDto> | null;
     /**
      * The ID of the theme in `themes` that is currently applied to the whole portal. Deleting the applied theme  moves it to the lowest remaining ID, so it can change without anyone having chosen a new one.
      */

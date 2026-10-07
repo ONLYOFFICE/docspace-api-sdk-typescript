@@ -110,15 +110,15 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
          * @summary Clear messages
-         * @param {string} body The ID of the thread to empty, as a bare JSON string.
+         * @param {string} aiThreadsClearMessagesRequest The ID of the thread to empty, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsClearMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-clear-messages/
          */
-        aiThreadsClearMessages: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiThreadsClearMessages', 'body', body)
+        aiThreadsClearMessages: async (aiThreadsClearMessagesRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiThreadsClearMessagesRequest' is not null or undefined
+            assertParamExists('aiThreadsClearMessages', 'aiThreadsClearMessagesRequest', aiThreadsClearMessagesRequest)
 
             const localVarPath = `/api/2.0/ai/threads/clear-messages`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -145,7 +145,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiThreadsClearMessagesRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -200,15 +200,15 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
          * @summary Delete a chat thread
-         * @param {string} body The ID of the thread to delete, as a bare JSON string.
+         * @param {string} aiThreadsDeleteRequest The ID of the thread to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete/
          */
-        aiThreadsDelete: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiThreadsDelete', 'body', body)
+        aiThreadsDelete: async (aiThreadsDeleteRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiThreadsDeleteRequest' is not null or undefined
+            assertParamExists('aiThreadsDelete', 'aiThreadsDeleteRequest', aiThreadsDeleteRequest)
 
             const localVarPath = `/api/2.0/ai/threads/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -235,7 +235,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiThreadsDeleteRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -245,15 +245,15 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
          * @summary Delete message
-         * @param {string} body The ID of the message to delete, as a bare JSON string.
+         * @param {string} aiThreadsDeleteMessageRequest The ID of the message to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDeleteMessage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete-message/
          */
-        aiThreadsDeleteMessage: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiThreadsDeleteMessage', 'body', body)
+        aiThreadsDeleteMessage: async (aiThreadsDeleteMessageRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiThreadsDeleteMessageRequest' is not null or undefined
+            assertParamExists('aiThreadsDeleteMessage', 'aiThreadsDeleteMessageRequest', aiThreadsDeleteMessageRequest)
 
             const localVarPath = `/api/2.0/ai/threads/delete-message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -280,7 +280,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiThreadsDeleteMessageRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -758,14 +758,14 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
         /**
          * Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
          * @summary Clear messages
-         * @param {string} body The ID of the thread to empty, as a bare JSON string.
+         * @param {string} aiThreadsClearMessagesRequest The ID of the thread to empty, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsClearMessages operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-clear-messages/
          */
-        async aiThreadsClearMessages(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsClearMessages(body, options);
+        async aiThreadsClearMessages(aiThreadsClearMessagesRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsClearMessages(aiThreadsClearMessagesRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsClearMessages']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -788,14 +788,14 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
          * @summary Delete a chat thread
-         * @param {string} body The ID of the thread to delete, as a bare JSON string.
+         * @param {string} aiThreadsDeleteRequest The ID of the thread to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete/
          */
-        async aiThreadsDelete(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsDelete(body, options);
+        async aiThreadsDelete(aiThreadsDeleteRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsDelete(aiThreadsDeleteRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -803,14 +803,14 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
          * @summary Delete message
-         * @param {string} body The ID of the message to delete, as a bare JSON string.
+         * @param {string} aiThreadsDeleteMessageRequest The ID of the message to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiThreadsDeleteMessage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-threads-delete-message/
          */
-        async aiThreadsDeleteMessage(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsDeleteMessage(body, options);
+        async aiThreadsDeleteMessage(aiThreadsDeleteMessageRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiThreadsDeleteMessage(aiThreadsDeleteMessageRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThreadsApi.aiThreadsDeleteMessage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -988,7 +988,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiThreadsClearMessages(requestParameters: ThreadsApiAiThreadsClearMessagesRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiThreadsClearMessages(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiThreadsClearMessages(requestParameters.aiThreadsClearMessagesRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
@@ -1012,7 +1012,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiThreadsDelete(requestParameters: ThreadsApiAiThreadsDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiThreadsDelete(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiThreadsDelete(requestParameters.aiThreadsDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
@@ -1024,7 +1024,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiThreadsDeleteMessage(requestParameters: ThreadsApiAiThreadsDeleteMessageRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiThreadsDeleteMessage(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiThreadsDeleteMessage(requestParameters.aiThreadsDeleteMessageRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns one thread by its ID, without its messages - read those with `GET api/2.0/ai/threads/read-messages`. `threadId` is required and an unknown one answers 404, so the result is never an empty body. The answer carries the thread\'s title, its model binding and its last-edit date. This is a read-only operation and does not bump that date.
@@ -1162,7 +1162,7 @@ export interface ThreadsApiAiThreadsClearMessagesRequest {
      * @type {string}
      * @memberof ThreadsApiAiThreadsClearMessages
      */
-    readonly body: string
+    readonly aiThreadsClearMessagesRequest: string
 }
 
 /**
@@ -1190,7 +1190,7 @@ export interface ThreadsApiAiThreadsDeleteRequest {
      * @type {string}
      * @memberof ThreadsApiAiThreadsDelete
      */
-    readonly body: string
+    readonly aiThreadsDeleteRequest: string
 }
 
 /**
@@ -1204,7 +1204,7 @@ export interface ThreadsApiAiThreadsDeleteMessageRequest {
      * @type {string}
      * @memberof ThreadsApiAiThreadsDeleteMessage
      */
-    readonly body: string
+    readonly aiThreadsDeleteMessageRequest: string
 }
 
 /**
@@ -1403,7 +1403,7 @@ export class ThreadsApi extends BaseAPI {
      * @memberof ThreadsApi
      */
     public aiThreadsClearMessages(requestParameters: ThreadsApiAiThreadsClearMessagesRequest, options?: RawAxiosRequestConfig) {
-        return ThreadsApiFp(this.configuration).aiThreadsClearMessages(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return ThreadsApiFp(this.configuration).aiThreadsClearMessages(requestParameters.aiThreadsClearMessagesRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1427,7 +1427,7 @@ export class ThreadsApi extends BaseAPI {
      * @memberof ThreadsApi
      */
     public aiThreadsDelete(requestParameters: ThreadsApiAiThreadsDeleteRequest, options?: RawAxiosRequestConfig) {
-        return ThreadsApiFp(this.configuration).aiThreadsDelete(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return ThreadsApiFp(this.configuration).aiThreadsDelete(requestParameters.aiThreadsDeleteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1439,7 +1439,7 @@ export class ThreadsApi extends BaseAPI {
      * @memberof ThreadsApi
      */
     public aiThreadsDeleteMessage(requestParameters: ThreadsApiAiThreadsDeleteMessageRequest, options?: RawAxiosRequestConfig) {
-        return ThreadsApiFp(this.configuration).aiThreadsDeleteMessage(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return ThreadsApiFp(this.configuration).aiThreadsDeleteMessage(requestParameters.aiThreadsDeleteMessageRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -1,12 +1,12 @@
-# IPRestrictionsSettingsWrapper
+# IpRestrictionsSettingsWrapper
 
-The successful API response containing the IPRestrictionsSettings object.
+The successful API response containing the IpRestrictionsSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**IPRestrictionsSettings**](IPRestrictionsSettings.md) | The IPRestrictionsSettings object returned by the operation. | [optional] [default to undefined]
+**response** | [**IpRestrictionsSettingsDto**](IpRestrictionsSettingsDto.md) | The IpRestrictionsSettingsDto object returned by the operation. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]
@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IPRestrictionsSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
+import { IpRestrictionsSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: IPRestrictionsSettingsWrapper = {
+const instance: IpRestrictionsSettingsWrapper = {
     response,
     count,
     links,

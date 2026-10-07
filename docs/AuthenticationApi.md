@@ -23,7 +23,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
+| **authRequestDto** | **AuthRequestDto**|  | |
 
 
 ### Return type
@@ -40,16 +40,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AuthenticationApi,
     Configuration,
-    AuthRequestsDto
+    AuthRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
-let authRequestsDto: AuthRequestsDto; // (optional)
+let authRequestDto: AuthRequestDto; // (optional)
 
 const { status, data } = await apiInstance.authenticateMe(
-    authRequestsDto
+    authRequestDto
 );
 ```
 
@@ -85,7 +85,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authWithCodeRequestsDto** | **AuthWithCodeRequestsDto**|  | |
+| **authWithCodeRequestDto** | **AuthWithCodeRequestDto**|  | |
 | **code** | [**string**] | The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. | defaults to undefined|
 
 
@@ -103,18 +103,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AuthenticationApi,
     Configuration,
-    AuthWithCodeRequestsDto
+    AuthWithCodeRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
 let code: string; //The two-factor authentication code. Send the same value as the `code` of the request body, which is the one the handler reads. (default to undefined)
-let authWithCodeRequestsDto: AuthWithCodeRequestsDto; // (optional)
+let authWithCodeRequestDto: AuthWithCodeRequestDto; // (optional)
 
 const { status, data } = await apiInstance.authenticateMeFromBodyWithCode(
     code,
-    authWithCodeRequestsDto
+    authWithCodeRequestDto
 );
 ```
 
@@ -150,7 +150,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **emailValidationKeyModel** | **EmailValidationKeyModel**|  | |
+| **checkConfirmRequestDto** | **CheckConfirmRequestDto**|  | |
 
 
 ### Return type
@@ -167,16 +167,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AuthenticationApi,
     Configuration,
-    EmailValidationKeyModel
+    CheckConfirmRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
-let emailValidationKeyModel: EmailValidationKeyModel; // (optional)
+let checkConfirmRequestDto: CheckConfirmRequestDto; // (optional)
 
 const { status, data } = await apiInstance.checkConfirm(
-    emailValidationKeyModel
+    checkConfirmRequestDto
 );
 ```
 
@@ -190,10 +190,10 @@ const { status, data } = await apiInstance.checkConfirm(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Whether the confirmation link may be used, with the room and the email it was issued for when it is an invitation |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `email` is sent but empty or not a valid email address |  -  |
 |**403** | The portal\'s IP restrictions do not allow this address to check an invitation link |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -310,7 +310,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **mobileRequestsDto** | **MobileRequestsDto**|  | |
+| **mobileRequestDto** | **MobileRequestDto**|  | |
 
 
 ### Return type
@@ -327,16 +327,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AuthenticationApi,
     Configuration,
-    MobileRequestsDto
+    MobileRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
-let mobileRequestsDto: MobileRequestsDto; // (optional)
+let mobileRequestDto: MobileRequestDto; // (optional)
 
 const { status, data } = await apiInstance.saveMobilePhone(
-    mobileRequestsDto
+    mobileRequestDto
 );
 ```
 
@@ -370,7 +370,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **authRequestsDto** | **AuthRequestsDto**|  | |
+| **authRequestDto** | **AuthRequestDto**|  | |
 
 
 ### Return type
@@ -387,16 +387,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AuthenticationApi,
     Configuration,
-    AuthRequestsDto
+    AuthRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AuthenticationApi(configuration);
 
-let authRequestsDto: AuthRequestsDto; // (optional)
+let authRequestDto: AuthRequestDto; // (optional)
 
 const { status, data } = await apiInstance.sendSmsCode(
-    authRequestsDto
+    authRequestDto
 );
 ```
 

@@ -23,7 +23,7 @@
 import type { BackupStorageType } from './backup-storage-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CronParams } from './cron-params';
+import type { CronParamsDto } from './cron-params-dto';
 
 /**
  * The backup schedule of a portal.
@@ -40,7 +40,7 @@ export interface ScheduleDto {
     /**
      * When the backup runs, read back from the stored cron expression. `day` is 0 for a daily schedule,  because a daily one has no day.
      */
-    'cronParams': CronParams;
+    'cronParams': CronParamsDto;
     /**
      * The number of scheduled copies kept. It is null, not 0, when the schedule keeps an unlimited number.
      */

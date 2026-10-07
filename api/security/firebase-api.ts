@@ -26,9 +26,9 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { FireBaseUserWrapper } from '../../models';
+import type { FirebaseDeviceWrapper } from '../../models';
 // @ts-ignore
-import type { FirebaseRequestsDto } from '../../models';
+import type { FirebaseRequestDto } from '../../models';
 /**
  * FirebaseApi - axios parameter creator
  * @export
@@ -40,13 +40,13 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Registers one mobile device of the calling user for the push notifications of the Documents application, by  storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is  handed out by Firebase to the mobile client, so obtain it there before calling: nothing here checks it, and it  is kept as an opaque string of up to 255 characters. Every signed-in member registers its own devices,  whatever its role - owner, administrator, user or guest - and a registration is bound to the caller and the  current portal, so another member\'s devices cannot be touched. The call is safe to repeat, but it is not an  update: a token already registered comes back as it stands and `isSubscribed` from the request is ignored, so  switch an existing registration on or off with `PUT api/2.0/settings/push/docsubscribe` instead. What comes  back is the stored registration, with `application` always `doc` and `isSubscribed` as stored. Only a  subscribed device is sent the room activity messages, such as an invitation to a room, a role change, an  archived room or a new document in a room, and only while the installation itself is configured with Firebase  credentials.
          * @summary Register a push device
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseRequestDto} [firebaseRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for docRegisterPusnNotificationDevice operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/
          */
-        docRegisterPusnNotificationDevice: async (firebaseRequestsDto?: FirebaseRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        docRegisterPusnNotificationDevice: async (firebaseRequestDto?: FirebaseRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/push/docregisterdevice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -86,7 +86,7 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(firebaseRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(firebaseRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -96,13 +96,13 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device\'s Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
          * @summary Set push subscription
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseRequestDto} [firebaseRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for subscribeDocumentsPushNotification operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/
          */
-        subscribeDocumentsPushNotification: async (firebaseRequestsDto?: FirebaseRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        subscribeDocumentsPushNotification: async (firebaseRequestDto?: FirebaseRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/push/docsubscribe`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -142,7 +142,7 @@ export const FirebaseApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(firebaseRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(firebaseRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -162,14 +162,14 @@ export const FirebaseApiFp = function(configuration?: Configuration) {
         /**
          * Registers one mobile device of the calling user for the push notifications of the Documents application, by  storing the Firebase token that device was issued together with the initial `isSubscribed` state. The token is  handed out by Firebase to the mobile client, so obtain it there before calling: nothing here checks it, and it  is kept as an opaque string of up to 255 characters. Every signed-in member registers its own devices,  whatever its role - owner, administrator, user or guest - and a registration is bound to the caller and the  current portal, so another member\'s devices cannot be touched. The call is safe to repeat, but it is not an  update: a token already registered comes back as it stands and `isSubscribed` from the request is ignored, so  switch an existing registration on or off with `PUT api/2.0/settings/push/docsubscribe` instead. What comes  back is the stored registration, with `application` always `doc` and `isSubscribed` as stored. Only a  subscribed device is sent the room activity messages, such as an invitation to a room, a role change, an  archived room or a new document in a room, and only while the installation itself is configured with Firebase  credentials.
          * @summary Register a push device
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseRequestDto} [firebaseRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for docRegisterPusnNotificationDevice operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/
          */
-        async docRegisterPusnNotificationDevice(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FireBaseUserWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.docRegisterPusnNotificationDevice(firebaseRequestsDto, options);
+        async docRegisterPusnNotificationDevice(firebaseRequestDto?: FirebaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FirebaseDeviceWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.docRegisterPusnNotificationDevice(firebaseRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FirebaseApi.docRegisterPusnNotificationDevice']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -177,14 +177,14 @@ export const FirebaseApiFp = function(configuration?: Configuration) {
         /**
          * Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device\'s Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
          * @summary Set push subscription
-         * @param {FirebaseRequestsDto} [firebaseRequestsDto] 
+         * @param {FirebaseRequestDto} [firebaseRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for subscribeDocumentsPushNotification operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/
          */
-        async subscribeDocumentsPushNotification(firebaseRequestsDto?: FirebaseRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FireBaseUserWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.subscribeDocumentsPushNotification(firebaseRequestsDto, options);
+        async subscribeDocumentsPushNotification(firebaseRequestDto?: FirebaseRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FirebaseDeviceWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.subscribeDocumentsPushNotification(firebaseRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FirebaseApi.subscribeDocumentsPushNotification']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -208,8 +208,8 @@ export const FirebaseApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/doc-register-pusn-notification-device/
          * @throws {RequiredError}
          */
-        docRegisterPusnNotificationDevice(requestParameters: FirebaseApiDocRegisterPusnNotificationDeviceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
-            return localVarFp.docRegisterPusnNotificationDevice(requestParameters.firebaseRequestsDto, options).then((request) => request(axios, basePath));
+        docRegisterPusnNotificationDevice(requestParameters: FirebaseApiDocRegisterPusnNotificationDeviceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FirebaseDeviceWrapper> {
+            return localVarFp.docRegisterPusnNotificationDevice(requestParameters.firebaseRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Switches the push notifications of the Documents application on or off for one already registered device of  the calling user: send that device\'s Firebase token together with `isSubscribed` true to let the messages  through or false to stop them. The device has to be registered first with  `POST api/2.0/settings/push/docregisterdevice`, and only the subscription state is written - the token is  matched, never changed. Every signed-in member manages its own devices, whatever its role - owner,  administrator, user or guest - and a token that belongs to another member or to another portal is not matched  at all, so nothing of theirs can be switched. Repeating the call with the same pair leaves the registration as  it is. What comes back is the updated registration, while an empty response means no registration of the  caller carries that token and nothing was stored - register the device and call again. A device switched off  keeps its token stored but is left out of the delivery, and the other devices of the same member are  unaffected. Which kinds of notification the account receives at all is a separate setting, read with  `GET api/2.0/settings/notification/{type}`.
@@ -220,8 +220,8 @@ export const FirebaseApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/subscribe-documents-push-notification/
          * @throws {RequiredError}
          */
-        subscribeDocumentsPushNotification(requestParameters: FirebaseApiSubscribeDocumentsPushNotificationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FireBaseUserWrapper> {
-            return localVarFp.subscribeDocumentsPushNotification(requestParameters.firebaseRequestsDto, options).then((request) => request(axios, basePath));
+        subscribeDocumentsPushNotification(requestParameters: FirebaseApiSubscribeDocumentsPushNotificationRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FirebaseDeviceWrapper> {
+            return localVarFp.subscribeDocumentsPushNotification(requestParameters.firebaseRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -234,10 +234,10 @@ export const FirebaseApiFactory = function (configuration?: Configuration, baseP
 export interface FirebaseApiDocRegisterPusnNotificationDeviceRequest {
     /**
      * 
-     * @type {FirebaseRequestsDto}
+     * @type {FirebaseRequestDto}
      * @memberof FirebaseApiDocRegisterPusnNotificationDevice
      */
-    readonly firebaseRequestsDto?: FirebaseRequestsDto
+    readonly firebaseRequestDto?: FirebaseRequestDto
 }
 
 /**
@@ -248,10 +248,10 @@ export interface FirebaseApiDocRegisterPusnNotificationDeviceRequest {
 export interface FirebaseApiSubscribeDocumentsPushNotificationRequest {
     /**
      * 
-     * @type {FirebaseRequestsDto}
+     * @type {FirebaseRequestDto}
      * @memberof FirebaseApiSubscribeDocumentsPushNotification
      */
-    readonly firebaseRequestsDto?: FirebaseRequestsDto
+    readonly firebaseRequestDto?: FirebaseRequestDto
 }
 
 /**
@@ -270,7 +270,7 @@ export class FirebaseApi extends BaseAPI {
      * @memberof FirebaseApi
      */
     public docRegisterPusnNotificationDevice(requestParameters: FirebaseApiDocRegisterPusnNotificationDeviceRequest = {}, options?: RawAxiosRequestConfig) {
-        return FirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(requestParameters.firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return FirebaseApiFp(this.configuration).docRegisterPusnNotificationDevice(requestParameters.firebaseRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -282,7 +282,7 @@ export class FirebaseApi extends BaseAPI {
      * @memberof FirebaseApi
      */
     public subscribeDocumentsPushNotification(requestParameters: FirebaseApiSubscribeDocumentsPushNotificationRequest = {}, options?: RawAxiosRequestConfig) {
-        return FirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(requestParameters.firebaseRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return FirebaseApiFp(this.configuration).subscribeDocumentsPushNotification(requestParameters.firebaseRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

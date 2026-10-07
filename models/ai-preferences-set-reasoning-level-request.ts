@@ -20,13 +20,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiAiReasoningLevel } from './ai-ai-reasoning-level';
+import type { AiReasoningLevel } from './ai-reasoning-level';
 
 export interface AiPreferencesSetReasoningLevelRequest {
     /**
      * New extended-thinking depth; `off` turns deep mode off.
      */
-    'value': AiAiReasoningLevel;
+    'value': AiReasoningLevel;
     'entityId'?: string;
 }
 

@@ -44,21 +44,21 @@ export const EmailApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Sets a new email address on an account, which is the step that completes an email change.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, and only the portal owner may change the owner\'s own address.  Pass the address either in plain text as `email` or, as it arrives inside the confirmation link, encrypted as  `encEmail`; an empty or malformed address answers 400.  An address equal to the current one is accepted and changes nothing, while a new one is stored in lowercase  and marks the account `Activated`, because following the link proves the address works.  The answer is the profile with its new address.  The change is requested through `POST api/2.0/people/email`, which is what sends the link.
          * @summary Change a user email
-         * @param {string} userid The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+         * @param {string} userId The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
          * @param {ChangeEmailRequest} changeEmailRequest The new address, in plain text or in the encrypted form the confirmation link carries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-email/
          */
-        changeUserEmail: async (userid: string, changeEmailRequest: ChangeEmailRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('changeUserEmail', 'userid', userid)
+        changeUserEmail: async (userId: string, changeEmailRequest: ChangeEmailRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('changeUserEmail', 'userId', userId)
             // verify required parameter 'changeEmailRequest' is not null or undefined
             assertParamExists('changeUserEmail', 'changeEmailRequest', changeEmailRequest)
 
-            const localVarPath = `/api/2.0/people/{userid}/email`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/email`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -104,7 +104,7 @@ export const EmailApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
          * @summary Send instructions to change email
          * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -172,21 +172,21 @@ export const EmailApiFp = function(configuration?: Configuration) {
         /**
          * Sets a new email address on an account, which is the step that completes an email change.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, and only the portal owner may change the owner\'s own address.  Pass the address either in plain text as `email` or, as it arrives inside the confirmation link, encrypted as  `encEmail`; an empty or malformed address answers 400.  An address equal to the current one is accepted and changes nothing, while a new one is stored in lowercase  and marks the account `Activated`, because following the link proves the address works.  The answer is the profile with its new address.  The change is requested through `POST api/2.0/people/email`, which is what sends the link.
          * @summary Change a user email
-         * @param {string} userid The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+         * @param {string} userId The ID of the account whose address is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
          * @param {ChangeEmailRequest} changeEmailRequest The new address, in plain text or in the encrypted form the confirmation link carries.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserEmail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-email/
          */
-        async changeUserEmail(userid: string, changeEmailRequest: ChangeEmailRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserEmail(userid, changeEmailRequest, options);
+        async changeUserEmail(userId: string, changeEmailRequest: ChangeEmailRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserEmail(userId, changeEmailRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EmailApi.changeUserEmail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
          * @summary Send instructions to change email
          * @param {UpdateMemberRequestDto} [updateMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -220,10 +220,10 @@ export const EmailApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         changeUserEmail(requestParameters: EmailApiChangeUserEmailRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.changeUserEmail(requestParameters.userid, requestParameters.changeEmailRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.changeUserEmail(requestParameters.userId, requestParameters.changeEmailRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+         * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
          * @summary Send instructions to change email
          * @param {EmailApiSendEmailChangeInstructionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -248,7 +248,7 @@ export interface EmailApiChangeUserEmailRequest {
      * @type {string}
      * @memberof EmailApiChangeUserEmail
      */
-    readonly userid: string
+    readonly userId: string
 
     /**
      * The new address, in plain text or in the encrypted form the confirmation link carries.
@@ -288,11 +288,11 @@ export class EmailApi extends BaseAPI {
      * @memberof EmailApi
      */
     public changeUserEmail(requestParameters: EmailApiChangeUserEmailRequest, options?: RawAxiosRequestConfig) {
-        return EmailApiFp(this.configuration).changeUserEmail(requestParameters.userid, requestParameters.changeEmailRequest, options).then((request) => request(this.axios, this.basePath));
+        return EmailApiFp(this.configuration).changeUserEmail(requestParameters.userId, requestParameters.changeEmailRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userid}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
+     * Starts changing the email address of an account, and what it actually does depends on who calls it.  A caller acting on their own account only gets a confirmation letter sent to the new address, and the address  stays unchanged until that link is followed, which lands on `PUT api/2.0/people/{userId}/email`.  A DocSpace administrator acting on somebody else changes the address immediately instead: the account is  marked as not activated, every session of it is ended, and activation instructions are sent to the new  address - and passing the address the account already has is then rejected with 400.  A caller who is not an administrator may only address their own account, nobody but the owner may change the  owner\'s address, and only the owner may change the address of another DocSpace administrator.  The target has to be an account that is neither disabled nor a pending invitation, otherwise the operation  answers 404, and an address that already belongs to somebody answers 400.  The answer is a ready-to-display message naming the address the letter was sent to.
      * @summary Send instructions to change email
      * @param {PeopleEmailApiSendEmailChangeInstructionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AuthKey } from './auth-key';
+import type { AuthKeyDto } from './auth-key-dto';
 
 /**
  * One third-party storage provider the portal data can be kept in, with the keys it expects.
@@ -37,7 +37,7 @@ export interface StorageDto {
     /**
      * The settings the provider expects, each with its key, its localised label and the value the server  currently holds. For the entry marked `current` the values come from the portal\'s saved storage settings  and for the others from the installation configuration, so a setting nobody has configured comes back with  an empty value rather than being left out.
      */
-    'properties'?: Array<AuthKey> | null;
+    'properties'?: Array<AuthKeyDto> | null;
     /**
      * Whether the portal is using this provider right now. At most one entry of a listing has it set.
      */

@@ -50,6 +50,7 @@ const { status, data } = await apiInstance.getCookieSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The authentication session lifetime of the portal in minutes together with the flag that says whether that limit is applied |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -69,7 +70,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **cookieSettingsRequestsDto** | **CookieSettingsRequestsDto**|  | |
+| **cookieSettingsRequestDto** | **CookieSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -86,16 +87,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCookiesApi,
     Configuration,
-    CookieSettingsRequestsDto
+    CookieSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCookiesApi(configuration);
 
-let cookieSettingsRequestsDto: CookieSettingsRequestsDto; // (optional)
+let cookieSettingsRequestDto: CookieSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updateCookieSettings(
-    cookieSettingsRequestsDto
+    cookieSettingsRequestDto
 );
 ```
 
@@ -110,6 +111,7 @@ const { status, data } = await apiInstance.updateCookieSettings(
 |-------------|-------------|------------------|
 |**200** | A localized message confirming that the session lifetime has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | The installation hides the cookie lifetime section, or the portal\'s payment has lapsed |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

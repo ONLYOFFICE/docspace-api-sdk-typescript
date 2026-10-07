@@ -24,17 +24,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AiAiApproveToolCallRequest } from '../../models';
-// @ts-ignore
-import type { AiAiRegenerateStreamRequest } from '../../models';
-// @ts-ignore
-import type { AiAiSendCustomRequest } from '../../models';
-// @ts-ignore
-import type { AiAiSendRequest } from '../../models';
-// @ts-ignore
-import type { AiAiSendStreamBody } from '../../models';
-// @ts-ignore
-import type { AiAiToolCallData } from '../../models';
+import type { AiApproveToolCallRequest } from '../../models';
 // @ts-ignore
 import type { AiChatEvent } from '../../models';
 // @ts-ignore
@@ -42,7 +32,17 @@ import type { AiErrorResponse } from '../../models';
 // @ts-ignore
 import type { AiOpenAIStreamChunk } from '../../models';
 // @ts-ignore
+import type { AiRegenerateStreamRequest } from '../../models';
+// @ts-ignore
+import type { AiSendCustomRequest } from '../../models';
+// @ts-ignore
+import type { AiSendRequest } from '../../models';
+// @ts-ignore
+import type { AiSendStreamBody } from '../../models';
+// @ts-ignore
 import type { AiThreadMessageLike } from '../../models';
+// @ts-ignore
+import type { AiToolCallData } from '../../models';
 /**
  * AIApi - axios parameter creator
  * @export
@@ -54,15 +54,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
          * @summary Approve tool call
-         * @param {AiAiApproveToolCallRequest} aiAiApproveToolCallRequest 
+         * @param {AiApproveToolCallRequest} aiApproveToolCallRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiApproveToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call/
+         * REST API Reference for aiApproveToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-approve-tool-call/
          */
-        aiAiApproveToolCall: async (aiAiApproveToolCallRequest: AiAiApproveToolCallRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiApproveToolCallRequest' is not null or undefined
-            assertParamExists('aiAiApproveToolCall', 'aiAiApproveToolCallRequest', aiAiApproveToolCallRequest)
+        aiApproveToolCall: async (aiApproveToolCallRequest: AiApproveToolCallRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiApproveToolCallRequest' is not null or undefined
+            assertParamExists('aiApproveToolCall', 'aiApproveToolCallRequest', aiApproveToolCallRequest)
 
             const localVarPath = `/api/2.0/ai/ai/approve-tool-call`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -89,7 +89,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiApproveToolCallRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiApproveToolCallRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -99,15 +99,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
          * @summary Deny tool call
-         * @param {AiAiToolCallData} aiAiToolCallData 
+         * @param {AiToolCallData} aiToolCallData 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiDenyToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call/
+         * REST API Reference for aiDenyToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-deny-tool-call/
          */
-        aiAiDenyToolCall: async (aiAiToolCallData: AiAiToolCallData, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiToolCallData' is not null or undefined
-            assertParamExists('aiAiDenyToolCall', 'aiAiToolCallData', aiAiToolCallData)
+        aiDenyToolCall: async (aiToolCallData: AiToolCallData, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiToolCallData' is not null or undefined
+            assertParamExists('aiDenyToolCall', 'aiToolCallData', aiToolCallData)
 
             const localVarPath = `/api/2.0/ai/ai/deny-tool-call`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -134,7 +134,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiToolCallData, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiToolCallData, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -144,15 +144,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread\'s tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
          * @summary Regenerate stream
-         * @param {AiAiRegenerateStreamRequest} aiAiRegenerateStreamRequest 
+         * @param {AiRegenerateStreamRequest} aiRegenerateStreamRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiRegenerateStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream/
+         * REST API Reference for aiRegenerateStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-regenerate-stream/
          */
-        aiAiRegenerateStream: async (aiAiRegenerateStreamRequest: AiAiRegenerateStreamRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiRegenerateStreamRequest' is not null or undefined
-            assertParamExists('aiAiRegenerateStream', 'aiAiRegenerateStreamRequest', aiAiRegenerateStreamRequest)
+        aiRegenerateStream: async (aiRegenerateStreamRequest: AiRegenerateStreamRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiRegenerateStreamRequest' is not null or undefined
+            assertParamExists('aiRegenerateStream', 'aiRegenerateStreamRequest', aiRegenerateStreamRequest)
 
             const localVarPath = `/api/2.0/ai/ai/regenerate-stream`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -179,7 +179,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiRegenerateStreamRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiRegenerateStreamRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -189,15 +189,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
          * @summary Run an AI action
-         * @param {AiAiSendRequest} aiAiSendRequest 
+         * @param {AiSendRequest} aiSendRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSend operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send/
+         * REST API Reference for aiSend operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send/
          */
-        aiAiSend: async (aiAiSendRequest: AiAiSendRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiSendRequest' is not null or undefined
-            assertParamExists('aiAiSend', 'aiAiSendRequest', aiAiSendRequest)
+        aiSend: async (aiSendRequest: AiSendRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSendRequest' is not null or undefined
+            assertParamExists('aiSend', 'aiSendRequest', aiSendRequest)
 
             const localVarPath = `/api/2.0/ai/ai/send`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -224,7 +224,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiSendRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSendRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -234,15 +234,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal\'s own action configuration instead of from the caller.
          * @summary Send custom
-         * @param {AiAiSendCustomRequest} aiAiSendCustomRequest 
+         * @param {AiSendCustomRequest} aiSendCustomRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendCustom operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-custom/
+         * REST API Reference for aiSendCustom operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-custom/
          */
-        aiAiSendCustom: async (aiAiSendCustomRequest: AiAiSendCustomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiSendCustomRequest' is not null or undefined
-            assertParamExists('aiAiSendCustom', 'aiAiSendCustomRequest', aiAiSendCustomRequest)
+        aiSendCustom: async (aiSendCustomRequest: AiSendCustomRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSendCustomRequest' is not null or undefined
+            assertParamExists('aiSendCustom', 'aiSendCustomRequest', aiSendCustomRequest)
 
             const localVarPath = `/api/2.0/ai/ai/send-custom`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -269,7 +269,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiSendCustomRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSendCustomRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -279,15 +279,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent\'s assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
          * @summary Send with stream
-         * @param {AiAiSendStreamBody} aiAiSendStreamBody 
+         * @param {AiSendStreamBody} aiSendStreamBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendWithStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream/
+         * REST API Reference for aiSendWithStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream/
          */
-        aiAiSendWithStream: async (aiAiSendStreamBody: AiAiSendStreamBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiSendStreamBody' is not null or undefined
-            assertParamExists('aiAiSendWithStream', 'aiAiSendStreamBody', aiAiSendStreamBody)
+        aiSendWithStream: async (aiSendStreamBody: AiSendStreamBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSendStreamBody' is not null or undefined
+            assertParamExists('aiSendWithStream', 'aiSendStreamBody', aiSendStreamBody)
 
             const localVarPath = `/api/2.0/ai/ai/send-with-stream`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -314,7 +314,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiSendStreamBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSendStreamBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -324,15 +324,15 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
         /**
          * The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
          * @summary Stream a chat in OpenAI format
-         * @param {AiAiSendStreamBody} aiAiSendStreamBody 
+         * @param {AiSendStreamBody} aiSendStreamBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendWithStreamOpenAI operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream-open-ai/
+         * REST API Reference for aiSendWithStreamOpenAI operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream-open-ai/
          */
-        aiAiSendWithStreamOpenAI: async (aiAiSendStreamBody: AiAiSendStreamBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiAiSendStreamBody' is not null or undefined
-            assertParamExists('aiAiSendWithStreamOpenAI', 'aiAiSendStreamBody', aiAiSendStreamBody)
+        aiSendWithStreamOpenAI: async (aiSendStreamBody: AiSendStreamBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSendStreamBody' is not null or undefined
+            assertParamExists('aiSendWithStreamOpenAI', 'aiSendStreamBody', aiSendStreamBody)
 
             const localVarPath = `/api/2.0/ai/ai/send-with-stream-openai`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -359,7 +359,7 @@ export const AIApiAxiosParamCreator = function (configuration?: Configuration) {
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiAiSendStreamBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSendStreamBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -379,106 +379,106 @@ export const AIApiFp = function(configuration?: Configuration) {
         /**
          * Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
          * @summary Approve tool call
-         * @param {AiAiApproveToolCallRequest} aiAiApproveToolCallRequest 
+         * @param {AiApproveToolCallRequest} aiApproveToolCallRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiApproveToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call/
+         * REST API Reference for aiApproveToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-approve-tool-call/
          */
-        async aiAiApproveToolCall(aiAiApproveToolCallRequest: AiAiApproveToolCallRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiApproveToolCall(aiAiApproveToolCallRequest, options);
+        async aiApproveToolCall(aiApproveToolCallRequest: AiApproveToolCallRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiApproveToolCall(aiApproveToolCallRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiApproveToolCall']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiApproveToolCall']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
          * @summary Deny tool call
-         * @param {AiAiToolCallData} aiAiToolCallData 
+         * @param {AiToolCallData} aiToolCallData 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiDenyToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call/
+         * REST API Reference for aiDenyToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-deny-tool-call/
          */
-        async aiAiDenyToolCall(aiAiToolCallData: AiAiToolCallData, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiDenyToolCall(aiAiToolCallData, options);
+        async aiDenyToolCall(aiToolCallData: AiToolCallData, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiDenyToolCall(aiToolCallData, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiDenyToolCall']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiDenyToolCall']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread\'s tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
          * @summary Regenerate stream
-         * @param {AiAiRegenerateStreamRequest} aiAiRegenerateStreamRequest 
+         * @param {AiRegenerateStreamRequest} aiRegenerateStreamRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiRegenerateStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream/
+         * REST API Reference for aiRegenerateStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-regenerate-stream/
          */
-        async aiAiRegenerateStream(aiAiRegenerateStreamRequest: AiAiRegenerateStreamRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiRegenerateStream(aiAiRegenerateStreamRequest, options);
+        async aiRegenerateStream(aiRegenerateStreamRequest: AiRegenerateStreamRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiRegenerateStream(aiRegenerateStreamRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiRegenerateStream']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiRegenerateStream']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
          * @summary Run an AI action
-         * @param {AiAiSendRequest} aiAiSendRequest 
+         * @param {AiSendRequest} aiSendRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSend operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send/
+         * REST API Reference for aiSend operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send/
          */
-        async aiAiSend(aiAiSendRequest: AiAiSendRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadMessageLike>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiSend(aiAiSendRequest, options);
+        async aiSend(aiSendRequest: AiSendRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadMessageLike>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSend(aiSendRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiSend']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiSend']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal\'s own action configuration instead of from the caller.
          * @summary Send custom
-         * @param {AiAiSendCustomRequest} aiAiSendCustomRequest 
+         * @param {AiSendCustomRequest} aiSendCustomRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendCustom operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-custom/
+         * REST API Reference for aiSendCustom operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-custom/
          */
-        async aiAiSendCustom(aiAiSendCustomRequest: AiAiSendCustomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadMessageLike>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiSendCustom(aiAiSendCustomRequest, options);
+        async aiSendCustom(aiSendCustomRequest: AiSendCustomRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiThreadMessageLike>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSendCustom(aiSendCustomRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiSendCustom']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiSendCustom']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent\'s assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
          * @summary Send with stream
-         * @param {AiAiSendStreamBody} aiAiSendStreamBody 
+         * @param {AiSendStreamBody} aiSendStreamBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendWithStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream/
+         * REST API Reference for aiSendWithStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream/
          */
-        async aiAiSendWithStream(aiAiSendStreamBody: AiAiSendStreamBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiSendWithStream(aiAiSendStreamBody, options);
+        async aiSendWithStream(aiSendStreamBody: AiSendStreamBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiChatEvent>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSendWithStream(aiSendStreamBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiSendWithStream']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiSendWithStream']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
          * @summary Stream a chat in OpenAI format
-         * @param {AiAiSendStreamBody} aiAiSendStreamBody 
+         * @param {AiSendStreamBody} aiSendStreamBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for aiAiSendWithStreamOpenAI operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream-open-ai/
+         * REST API Reference for aiSendWithStreamOpenAI operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream-open-ai/
          */
-        async aiAiSendWithStreamOpenAI(aiAiSendStreamBody: AiAiSendStreamBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiOpenAIStreamChunk>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAiSendWithStreamOpenAI(aiAiSendStreamBody, options);
+        async aiSendWithStreamOpenAI(aiSendStreamBody: AiSendStreamBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiOpenAIStreamChunk>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSendWithStreamOpenAI(aiSendStreamBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AIApi.aiAiSendWithStreamOpenAI']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AIApi.aiSendWithStreamOpenAI']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -494,186 +494,186 @@ export const AIApiFactory = function (configuration?: Configuration, basePath?: 
         /**
          * Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
          * @summary Approve tool call
-         * @param {AIApiAiAiApproveToolCallRequest} requestParameters Request parameters.
+         * @param {AIApiAiApproveToolCallRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiApproveToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-approve-tool-call/
+         * REST API Reference for aiApproveToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-approve-tool-call/
          * @throws {RequiredError}
          */
-        aiAiApproveToolCall(requestParameters: AIApiAiAiApproveToolCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
-            return localVarFp.aiAiApproveToolCall(requestParameters.aiAiApproveToolCallRequest, options).then((request) => request(axios, basePath));
+        aiApproveToolCall(requestParameters: AIApiAiApproveToolCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
+            return localVarFp.aiApproveToolCall(requestParameters.aiApproveToolCallRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
          * @summary Deny tool call
-         * @param {AIApiAiAiDenyToolCallRequest} requestParameters Request parameters.
+         * @param {AIApiAiDenyToolCallRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiDenyToolCall operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-deny-tool-call/
+         * REST API Reference for aiDenyToolCall operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-deny-tool-call/
          * @throws {RequiredError}
          */
-        aiAiDenyToolCall(requestParameters: AIApiAiAiDenyToolCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
-            return localVarFp.aiAiDenyToolCall(requestParameters.aiAiToolCallData, options).then((request) => request(axios, basePath));
+        aiDenyToolCall(requestParameters: AIApiAiDenyToolCallRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
+            return localVarFp.aiDenyToolCall(requestParameters.aiToolCallData, options).then((request) => request(axios, basePath));
         },
         /**
          * Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread\'s tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
          * @summary Regenerate stream
-         * @param {AIApiAiAiRegenerateStreamRequest} requestParameters Request parameters.
+         * @param {AIApiAiRegenerateStreamRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiRegenerateStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-regenerate-stream/
+         * REST API Reference for aiRegenerateStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-regenerate-stream/
          * @throws {RequiredError}
          */
-        aiAiRegenerateStream(requestParameters: AIApiAiAiRegenerateStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
-            return localVarFp.aiAiRegenerateStream(requestParameters.aiAiRegenerateStreamRequest, options).then((request) => request(axios, basePath));
+        aiRegenerateStream(requestParameters: AIApiAiRegenerateStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
+            return localVarFp.aiRegenerateStream(requestParameters.aiRegenerateStreamRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
          * @summary Run an AI action
-         * @param {AIApiAiAiSendRequest} requestParameters Request parameters.
+         * @param {AIApiAiSendRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiSend operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send/
+         * REST API Reference for aiSend operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send/
          * @throws {RequiredError}
          */
-        aiAiSend(requestParameters: AIApiAiAiSendRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadMessageLike> {
-            return localVarFp.aiAiSend(requestParameters.aiAiSendRequest, options).then((request) => request(axios, basePath));
+        aiSend(requestParameters: AIApiAiSendRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadMessageLike> {
+            return localVarFp.aiSend(requestParameters.aiSendRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal\'s own action configuration instead of from the caller.
          * @summary Send custom
-         * @param {AIApiAiAiSendCustomRequest} requestParameters Request parameters.
+         * @param {AIApiAiSendCustomRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiSendCustom operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-custom/
+         * REST API Reference for aiSendCustom operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-custom/
          * @throws {RequiredError}
          */
-        aiAiSendCustom(requestParameters: AIApiAiAiSendCustomRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadMessageLike> {
-            return localVarFp.aiAiSendCustom(requestParameters.aiAiSendCustomRequest, options).then((request) => request(axios, basePath));
+        aiSendCustom(requestParameters: AIApiAiSendCustomRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiThreadMessageLike> {
+            return localVarFp.aiSendCustom(requestParameters.aiSendCustomRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent\'s assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
          * @summary Send with stream
-         * @param {AIApiAiAiSendWithStreamRequest} requestParameters Request parameters.
+         * @param {AIApiAiSendWithStreamRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiSendWithStream operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream/
+         * REST API Reference for aiSendWithStream operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream/
          * @throws {RequiredError}
          */
-        aiAiSendWithStream(requestParameters: AIApiAiAiSendWithStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
-            return localVarFp.aiAiSendWithStream(requestParameters.aiAiSendStreamBody, options).then((request) => request(axios, basePath));
+        aiSendWithStream(requestParameters: AIApiAiSendWithStreamRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiChatEvent> {
+            return localVarFp.aiSendWithStream(requestParameters.aiSendStreamBody, options).then((request) => request(axios, basePath));
         },
         /**
          * The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
          * @summary Stream a chat in OpenAI format
-         * @param {AIApiAiAiSendWithStreamOpenAIRequest} requestParameters Request parameters.
+         * @param {AIApiAiSendWithStreamOpenAIRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for aiAiSendWithStreamOpenAI operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-ai-send-with-stream-open-ai/
+         * REST API Reference for aiSendWithStreamOpenAI operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-send-with-stream-open-ai/
          * @throws {RequiredError}
          */
-        aiAiSendWithStreamOpenAI(requestParameters: AIApiAiAiSendWithStreamOpenAIRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiOpenAIStreamChunk> {
-            return localVarFp.aiAiSendWithStreamOpenAI(requestParameters.aiAiSendStreamBody, options).then((request) => request(axios, basePath));
+        aiSendWithStreamOpenAI(requestParameters: AIApiAiSendWithStreamOpenAIRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiOpenAIStreamChunk> {
+            return localVarFp.aiSendWithStreamOpenAI(requestParameters.aiSendStreamBody, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for aiAiApproveToolCall operation in AIApi.
+ * Request parameters for aiApproveToolCall operation in AIApi.
  * @export
- * @interface AIApiAiAiApproveToolCallRequest
+ * @interface AIApiAiApproveToolCallRequest
  */
-export interface AIApiAiAiApproveToolCallRequest {
+export interface AIApiAiApproveToolCallRequest {
     /**
      * 
-     * @type {AiAiApproveToolCallRequest}
-     * @memberof AIApiAiAiApproveToolCall
+     * @type {AiApproveToolCallRequest}
+     * @memberof AIApiAiApproveToolCall
      */
-    readonly aiAiApproveToolCallRequest: AiAiApproveToolCallRequest
+    readonly aiApproveToolCallRequest: AiApproveToolCallRequest
 }
 
 /**
- * Request parameters for aiAiDenyToolCall operation in AIApi.
+ * Request parameters for aiDenyToolCall operation in AIApi.
  * @export
- * @interface AIApiAiAiDenyToolCallRequest
+ * @interface AIApiAiDenyToolCallRequest
  */
-export interface AIApiAiAiDenyToolCallRequest {
+export interface AIApiAiDenyToolCallRequest {
     /**
      * 
-     * @type {AiAiToolCallData}
-     * @memberof AIApiAiAiDenyToolCall
+     * @type {AiToolCallData}
+     * @memberof AIApiAiDenyToolCall
      */
-    readonly aiAiToolCallData: AiAiToolCallData
+    readonly aiToolCallData: AiToolCallData
 }
 
 /**
- * Request parameters for aiAiRegenerateStream operation in AIApi.
+ * Request parameters for aiRegenerateStream operation in AIApi.
  * @export
- * @interface AIApiAiAiRegenerateStreamRequest
+ * @interface AIApiAiRegenerateStreamRequest
  */
-export interface AIApiAiAiRegenerateStreamRequest {
+export interface AIApiAiRegenerateStreamRequest {
     /**
      * 
-     * @type {AiAiRegenerateStreamRequest}
-     * @memberof AIApiAiAiRegenerateStream
+     * @type {AiRegenerateStreamRequest}
+     * @memberof AIApiAiRegenerateStream
      */
-    readonly aiAiRegenerateStreamRequest: AiAiRegenerateStreamRequest
+    readonly aiRegenerateStreamRequest: AiRegenerateStreamRequest
 }
 
 /**
- * Request parameters for aiAiSend operation in AIApi.
+ * Request parameters for aiSend operation in AIApi.
  * @export
- * @interface AIApiAiAiSendRequest
+ * @interface AIApiAiSendRequest
  */
-export interface AIApiAiAiSendRequest {
+export interface AIApiAiSendRequest {
     /**
      * 
-     * @type {AiAiSendRequest}
-     * @memberof AIApiAiAiSend
+     * @type {AiSendRequest}
+     * @memberof AIApiAiSend
      */
-    readonly aiAiSendRequest: AiAiSendRequest
+    readonly aiSendRequest: AiSendRequest
 }
 
 /**
- * Request parameters for aiAiSendCustom operation in AIApi.
+ * Request parameters for aiSendCustom operation in AIApi.
  * @export
- * @interface AIApiAiAiSendCustomRequest
+ * @interface AIApiAiSendCustomRequest
  */
-export interface AIApiAiAiSendCustomRequest {
+export interface AIApiAiSendCustomRequest {
     /**
      * 
-     * @type {AiAiSendCustomRequest}
-     * @memberof AIApiAiAiSendCustom
+     * @type {AiSendCustomRequest}
+     * @memberof AIApiAiSendCustom
      */
-    readonly aiAiSendCustomRequest: AiAiSendCustomRequest
+    readonly aiSendCustomRequest: AiSendCustomRequest
 }
 
 /**
- * Request parameters for aiAiSendWithStream operation in AIApi.
+ * Request parameters for aiSendWithStream operation in AIApi.
  * @export
- * @interface AIApiAiAiSendWithStreamRequest
+ * @interface AIApiAiSendWithStreamRequest
  */
-export interface AIApiAiAiSendWithStreamRequest {
+export interface AIApiAiSendWithStreamRequest {
     /**
      * 
-     * @type {AiAiSendStreamBody}
-     * @memberof AIApiAiAiSendWithStream
+     * @type {AiSendStreamBody}
+     * @memberof AIApiAiSendWithStream
      */
-    readonly aiAiSendStreamBody: AiAiSendStreamBody
+    readonly aiSendStreamBody: AiSendStreamBody
 }
 
 /**
- * Request parameters for aiAiSendWithStreamOpenAI operation in AIApi.
+ * Request parameters for aiSendWithStreamOpenAI operation in AIApi.
  * @export
- * @interface AIApiAiAiSendWithStreamOpenAIRequest
+ * @interface AIApiAiSendWithStreamOpenAIRequest
  */
-export interface AIApiAiAiSendWithStreamOpenAIRequest {
+export interface AIApiAiSendWithStreamOpenAIRequest {
     /**
      * 
-     * @type {AiAiSendStreamBody}
-     * @memberof AIApiAiAiSendWithStreamOpenAI
+     * @type {AiSendStreamBody}
+     * @memberof AIApiAiSendWithStreamOpenAI
      */
-    readonly aiAiSendStreamBody: AiAiSendStreamBody
+    readonly aiSendStreamBody: AiSendStreamBody
 }
 
 /**
@@ -686,85 +686,85 @@ export class AIApi extends BaseAPI {
     /**
      * Resumes a chat round that a tool call has paused, and streams the continuation as newline-delimited `ChatEvent` objects. The result supplied in the request is persisted onto the assistant message that issued the call, so the tool is not executed here - the caller runs it and reports the outcome. The round continues against the augmented history and may pause again on a further tool call. Call `POST api/2.0/ai/ai/deny-tool-call` instead to refuse the call and let the model answer without it.
      * @summary Approve tool call
-     * @param {AIAIApiAiAiApproveToolCallRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiApproveToolCallRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiApproveToolCall(requestParameters: AIApiAiAiApproveToolCallRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiApproveToolCall(requestParameters.aiAiApproveToolCallRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiApproveToolCall(requestParameters: AIApiAiApproveToolCallRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiApproveToolCall(requestParameters.aiApproveToolCallRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Refuses the tool call a chat round is paused on and resumes it immediately, streaming the continuation as newline-delimited `ChatEvent` objects. The literal `User deny tool call` is persisted in place of the tool result, so the model sees an explicit refusal rather than a missing answer and may reply without the tool or ask for something else. Nothing is executed and no result is accepted from the caller. Use `POST api/2.0/ai/ai/approve-tool-call` to supply a result instead.
      * @summary Deny tool call
-     * @param {AIAIApiAiAiDenyToolCallRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiDenyToolCallRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiDenyToolCall(requestParameters: AIApiAiAiDenyToolCallRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiDenyToolCall(requestParameters.aiAiToolCallData, options).then((request) => request(this.axios, this.basePath));
+    public aiDenyToolCall(requestParameters: AIApiAiDenyToolCallRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiDenyToolCall(requestParameters.aiToolCallData, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Re-rolls the last assistant reply of an existing thread: every message after the last user message - the previous reply and any tool-call hops - is dropped, and a fresh reply is streamed as newline-delimited `ChatEvent` objects against the unchanged prompt. The thread has to exist already, `threadId` is required, and no title is generated. The dropped messages are gone for good, so this is a destructive operation on the thread\'s tail rather than a retry that keeps both answers. Unlike `send-with-stream` the profile is not verified before the stream opens, so an unusable model surfaces as an error frame inside the 200 rather than as a 4xx.
      * @summary Regenerate stream
-     * @param {AIAIApiAiAiRegenerateStreamRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiRegenerateStreamRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiRegenerateStream(requestParameters: AIApiAiAiRegenerateStreamRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiRegenerateStream(requestParameters.aiAiRegenerateStreamRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiRegenerateStream(requestParameters: AIApiAiRegenerateStreamRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiRegenerateStream(requestParameters.aiRegenerateStreamRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Runs one AI action and returns the whole answer as a single JSON document. The model is the profile bound to `actionType`, falling back to the `Default` assignment slot, so this operation accepts no `profileId` of its own. Nothing is persisted - no thread is opened, no message is stored and no title is generated - which makes it the one to use for a stand-alone completion rather than for a conversation. `entityId` and `contextEntityId` set the scope of the round, which decides the workspace context and the custom MCP servers it may reach. For a conversation that keeps its history, use `POST api/2.0/ai/ai/send-with-stream` instead.
      * @summary Run an AI action
-     * @param {AIAIApiAiAiSendRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiSendRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiSend(requestParameters: AIApiAiAiSendRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiSend(requestParameters.aiAiSendRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiSend(requestParameters: AIApiAiSendRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiSend(requestParameters.aiSendRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Runs a free-form one-turn call against a system prompt supplied in the request, with no thread, no history and nothing persisted. The model is the explicit `profileId` when it resolves, otherwise the `Default` assignment slot. The shape of the answer depends on the body rather than on the route: with `isStream` set it arrives as a newline-delimited stream of chat events, and without it as a single JSON document, so a client has to handle both. Use `POST api/2.0/ai/ai/send` when the prompt should come from the portal\'s own action configuration instead of from the caller.
      * @summary Send custom
-     * @param {AIAIApiAiAiSendCustomRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiSendCustomRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiSendCustom(requestParameters: AIApiAiAiSendCustomRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiSendCustom(requestParameters.aiAiSendCustomRequest, options).then((request) => request(this.axios, this.basePath));
+    public aiSendCustom(requestParameters: AIApiAiSendCustomRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiSendCustom(requestParameters.aiSendCustomRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Runs one chat round and streams it back as newline-delimited `ChatEvent` objects. Omitting `threadId` opens a new thread, which requires that `entityId` names a room the caller can open and that a profile resolves for it; the user message and the reply are persisted either way, and a new thread also gets a generated title. The model is settled in a fixed order - an agent\'s assignment in scope overrides everything, then the explicit `profileId`, then the one stored on the thread, then the `Chat` assignment - and the effective profile is checked before the stream opens, so an unknown one fails with 400 rather than as an error buried in a 200. A tool call pauses the round and ends the stream; resume it with `POST api/2.0/ai/ai/approve-tool-call` or `POST api/2.0/ai/ai/deny-tool-call`.
      * @summary Send with stream
-     * @param {AIAIApiAiAiSendWithStreamRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiSendWithStreamRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiSendWithStream(requestParameters: AIApiAiAiSendWithStreamRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiSendWithStream(requestParameters.aiAiSendStreamBody, options).then((request) => request(this.axios, this.basePath));
+    public aiSendWithStream(requestParameters: AIApiAiSendWithStreamRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiSendWithStream(requestParameters.aiSendStreamBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * The same chat round as `send-with-stream`, re-encoded as a server-sent-events stream of OpenAI `chat.completion.chunk` objects terminated by a `[DONE]` sentinel. Thread handling, persistence, title generation and the profile pre-flight are identical, and a tool call ends the stream with `finish_reason: tool_calls` instead of a pause event - resume it through the same approve and deny operations. Unlike `send-with-stream` it does not reject an empty user message and does not enforce the per-kind attachment cap, so validate both before calling. Choose this route only for a client that already speaks the OpenAI wire format; `POST api/2.0/ai/ai/send-with-stream` is the native one.
      * @summary Stream a chat in OpenAI format
-     * @param {AIAIApiAiAiSendWithStreamOpenAIRequest} requestParameters Request parameters.
+     * @param {AIAIApiAiSendWithStreamOpenAIRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AIApi
      */
-    public aiAiSendWithStreamOpenAI(requestParameters: AIApiAiAiSendWithStreamOpenAIRequest, options?: RawAxiosRequestConfig) {
-        return AIApiFp(this.configuration).aiAiSendWithStreamOpenAI(requestParameters.aiAiSendStreamBody, options).then((request) => request(this.axios, this.basePath));
+    public aiSendWithStreamOpenAI(requestParameters: AIApiAiSendWithStreamOpenAIRequest, options?: RawAxiosRequestConfig) {
+        return AIApiFp(this.configuration).aiSendWithStreamOpenAI(requestParameters.aiSendStreamBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

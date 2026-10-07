@@ -111,10 +111,10 @@ const { status, data } = await apiInstance.getNotificationSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The notification kind that was asked for together with the flag that says whether it is switched on for the calling user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The `type` is not one of the notification kinds 0-3 |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -182,7 +182,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **notificationSettingsRequestsDto** | **NotificationSettingsRequestsDto**|  | |
+| **notificationSettingsRequestDto** | **NotificationSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -199,16 +199,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsNotificationsApi,
     Configuration,
-    NotificationSettingsRequestsDto
+    NotificationSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsNotificationsApi(configuration);
 
-let notificationSettingsRequestsDto: NotificationSettingsRequestsDto; // (optional)
+let notificationSettingsRequestDto: NotificationSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setNotificationSettings(
-    notificationSettingsRequestsDto
+    notificationSettingsRequestDto
 );
 ```
 
@@ -222,10 +222,10 @@ const { status, data } = await apiInstance.setNotificationSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The notification kind and state as they were sent in the request |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `type` |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

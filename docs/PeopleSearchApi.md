@@ -17,7 +17,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**searchUsersByStatus**](#searchusersbystatus) | **GET** /api/2.0/people/status/{status}/search | Search users by status filter|
 
 # **getAccountsEntriesWithFilesShared**
-> IAccountEntryArrayWrapper getAccountsEntriesWithFilesShared()
+> AccountEntryArrayWrapper getAccountsEntriesWithFilesShared()
 
 Searches the portal users and groups that can be given access to the file with the ID given in the route, and  reports for each of them whether it already has access to that file.  The caller has to be allowed to manage the access of that file, and the ID has to belong to an existing file,  so the operation answers 403 for a file the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
 
@@ -34,7 +34,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | (optional) defaults to undefined|
@@ -44,7 +44,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**IAccountEntryArrayWrapper**
+**AccountEntryArrayWrapper**
 
 ### Third-party storage
 
@@ -72,7 +72,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional) (default to undefined)
@@ -106,19 +106,19 @@ const { status, data } = await apiInstance.getAccountsEntriesWithFilesShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching users and groups, each with its access state for the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No file has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAccountsEntriesWithFoldersShared**
-> IAccountEntryArrayWrapper getAccountsEntriesWithFoldersShared()
+> AccountEntryArrayWrapper getAccountsEntriesWithFoldersShared()
 
 Searches the portal users and groups that can be given access to the folder with the ID given in the route,  and reports for each of them whether it already has access to that folder.  The caller has to be allowed to manage the access of that folder, and the ID has to belong to an existing  folder, so the operation answers 403 for a folder the caller cannot share and 404 for an ID that matches  nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
 
@@ -135,7 +135,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | (optional) defaults to undefined|
@@ -145,7 +145,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**IAccountEntryArrayWrapper**
+**AccountEntryArrayWrapper**
 
 ### Third-party storage
 
@@ -173,7 +173,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional) (default to undefined)
@@ -207,19 +207,19 @@ const { status, data } = await apiInstance.getAccountsEntriesWithFoldersShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching users and groups, each with its access state for the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No folder has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAccountsEntriesWithRoomsShared**
-> IAccountEntryArrayWrapper getAccountsEntriesWithRoomsShared()
+> AccountEntryArrayWrapper getAccountsEntriesWithRoomsShared()
 
 Searches the portal users and groups that can be given access to the room with the ID given in the route, and  reports for each of them whether it already has access to that room.  The caller has to be allowed to manage the access of that room, and the ID has to belong to an existing room,  so the operation answers 403 for a room the caller cannot share and 404 for an ID that matches nothing.  The search is read-only and needs `filterValue`: while it is empty the operation returns an empty list and a  total of 0 instead of every account, so it cannot be used to enumerate the portal.  `filterValue` is matched case-insensitively against the first name, the last name and the email; without  `filterSeparator` it is split on spaces and every term has to match, and with a separator it is split on that  separator and any term may match.  Matching groups are streamed first and users after them, both paged together by `count` and `startIndex`,  while the number of matches is reported in the total count of the response.  Pass `excludeShared` to keep only the accounts that have no access yet, `includeShared` to keep only those  that already have it, and neither to get both kinds with the `shared` field telling them apart.
 
@@ -236,7 +236,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. | (optional) defaults to undefined|
@@ -246,7 +246,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**IAccountEntryArrayWrapper**
+**AccountEntryArrayWrapper**
 
 ### Third-party storage
 
@@ -274,7 +274,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when  `excludeShared` is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the users invited by the caller when true, and only the users invited by somebody else when false.  Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the users invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the users of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page, counting groups and users together. It defaults to 100, which is also the largest value  the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts, counted over the groups and users together. It defaults  to 0, and the total number of matches is reported in the total count of the response. (optional) (default to undefined)
@@ -308,12 +308,12 @@ const { status, data } = await apiInstance.getAccountsEntriesWithRoomsShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching users and groups, each with its access state for the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No room has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -409,7 +409,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **excludeGroup** | [**boolean**] | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | (optional) defaults to undefined|
 | **sortBy** | [**string**] | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | (optional) defaults to undefined|
@@ -450,7 +450,7 @@ let withoutGroup: boolean; //Set it to true to keep only the accounts that belon
 let excludeGroup: boolean; //Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional) (default to undefined)
 let count: number; //The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional) (default to undefined)
 let sortBy: string; //What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional) (default to undefined)
@@ -492,11 +492,11 @@ const { status, data } = await apiInstance.getSimpleByFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A page of matching accounts, with their short profiles |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a member or a guest |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -520,7 +520,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | (optional) defaults to undefined|
@@ -558,7 +558,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional) (default to undefined)
@@ -592,12 +592,12 @@ const { status, data } = await apiInstance.getUsersWithFilesShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching accounts, each with its access state for the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a guest or cannot read the file |  -  |
 |**404** | No file has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -621,7 +621,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | (optional) defaults to undefined|
@@ -659,7 +659,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional) (default to undefined)
@@ -693,12 +693,12 @@ const { status, data } = await apiInstance.getUsersWithFoldersShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching accounts, each with its access state for the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a guest or cannot read the folder |  -  |
 |**404** | No folder has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -722,7 +722,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **includeShared** | [**boolean**] | Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. | (optional) defaults to undefined|
 | **employeeTypes** | **Array&lt;EmployeeType&gt;** | Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | (optional) defaults to undefined|
@@ -760,7 +760,7 @@ let excludeShared: boolean; //Keeps only the accounts that do not have access to
 let includeShared: boolean; //Keeps only the accounts that already have access to the entry, which is the set to offer when changing or  revoking access. Every returned entry has `shared` set to true, and the flag is ignored when `excludeShared`  is also set. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only - and for a caller who is not a DocSpace  administrator, only the guests that caller is related to. (optional) (default to undefined)
 let employeeTypes: Array<EmployeeType>; //Keeps only the accounts of the listed types, combined as alternatives. An empty list, which is the default,  searches every type. (optional) (default to undefined)
 let count: number; //The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional) (default to undefined)
@@ -794,12 +794,12 @@ const { status, data } = await apiInstance.getUsersWithRoomShared(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching accounts, each with its access state for the room |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a guest or cannot read the room |  -  |
 |**404** | No room has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -829,7 +829,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **excludeGroup** | [**boolean**] | Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. | (optional) defaults to undefined|
 | **invitedByMe** | [**boolean**] | Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. | (optional) defaults to undefined|
 | **inviterId** | [**string**] | Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. | (optional) defaults to undefined|
-| **area** | **Area** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | (optional) defaults to undefined|
+| **area** | **AccountSearchArea** | The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of the page. It defaults to 100, which is also the largest value the operation accepts. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. | (optional) defaults to undefined|
 | **sortBy** | [**string**] | What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. | (optional) defaults to undefined|
@@ -870,7 +870,7 @@ let withoutGroup: boolean; //Set it to true to keep only the accounts that belon
 let excludeGroup: boolean; //Inverts `groupId`: with true the members of that group are left out instead of being the only ones kept. It  has no effect without `groupId`. (optional) (default to undefined)
 let invitedByMe: boolean; //Keeps only the accounts invited by the caller when true, and only those invited by somebody else when  false. Omit it to search regardless of who sent the invitation. (optional) (default to undefined)
 let inviterId: string; //Keeps only the accounts invited by the account with this ID. Omit it to search regardless of who sent the  invitation. (optional) (default to undefined)
-let area: Area; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional) (default to undefined)
+let area: AccountSearchArea; //The part of the portal to search in: `All`, the default, searches members and guests together, `People`  leaves the guests out, and `Guests` returns guests only. It also cancels the type filters that contradict  it. (optional) (default to undefined)
 let count: number; //The size of the page. It defaults to 100, which is also the largest value the operation accepts. (optional) (default to undefined)
 let startIndex: number; //The number of matches to skip before the page starts. It defaults to 0, and the total number of matches is  reported in the total count of the response. (optional) (default to undefined)
 let sortBy: string; //What to order the accounts by, compared without regard to case: `FirstName`, `LastName`, `DisplayName`,  `Type`, `Email`, `Department`, `UsedSpace`, `CreatedBy` or `RegistrationDate`. (optional) (default to undefined)
@@ -912,11 +912,11 @@ const { status, data } = await apiInstance.searchUsersByExtendedFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A page of matching accounts, with their full profiles |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a member or a guest |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1041,11 +1041,11 @@ const { status, data } = await apiInstance.searchUsersByStatus(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The full profiles of the matching accounts |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or `query` is missing |  -  |
 |**403** | The caller is not a DocSpace administrator |  -  |
+|**500** | The `filterBy` is `group` and the `filterValue` is not a GUID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

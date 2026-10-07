@@ -23,16 +23,16 @@
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantQuota } from './tenant-quota';
+import type { TenantQuotaDto } from './tenant-quota-dto';
 
 /**
- * The successful API response containing the TenantQuota object.
+ * The successful API response containing the TenantQuotaDto object.
  */
 export interface TenantQuotaWrapper {
     /**
-     * The TenantQuota object returned by the operation.
+     * The TenantQuotaDto object returned by the operation.
      */
-    'response'?: TenantQuota;
+    'response'?: TenantQuotaDto;
     /**
      * The total number of items in the response
      */

@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiWebSearchConfig } from './ai-web-search-config';
@@ -40,6 +40,6 @@ export interface AiWebSearchMutationResult {
     /**
      * Why the configuration was rejected. Present on failure.
      */
-    'error'?: AiTErrorData;
+    'error'?: AiErrorData;
 }
 

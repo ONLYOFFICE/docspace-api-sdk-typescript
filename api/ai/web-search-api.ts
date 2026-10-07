@@ -35,6 +35,8 @@ import type { AiWebSearchConfig } from '../../models';
 import type { AiWebSearchConfigureRequest } from '../../models';
 // @ts-ignore
 import type { AiWebSearchMutationResult } from '../../models';
+// @ts-ignore
+import type { AiWebSearchSetActiveConfigRequest } from '../../models';
 /**
  * WebSearchApi - axios parameter creator
  * @export
@@ -46,15 +48,15 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Removes the portal\'s web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room\'s configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
          * @summary Clear the web-search configuration
-         * @param {string} body Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+         * @param {string} aiWebSearchClearRequest Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchClear operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
          */
-        aiWebSearchClear: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiWebSearchClear', 'body', body)
+        aiWebSearchClear: async (aiWebSearchClearRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiWebSearchClearRequest' is not null or undefined
+            assertParamExists('aiWebSearchClear', 'aiWebSearchClearRequest', aiWebSearchClearRequest)
 
             const localVarPath = `/api/2.0/ai/web-search/clear`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -81,7 +83,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiWebSearchClearRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -224,15 +226,15 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
          * @summary Web page contents passthrough
-         * @param {{ [key: string]: any | null; }} requestBody A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughContents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
          */
-        aiWebSearchPassthroughContents: async (requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiWebSearchPassthroughContents', 'requestBody', requestBody)
+        aiWebSearchPassthroughContents: async (aiWebSearchPassthroughContentsRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiWebSearchPassthroughContentsRequest' is not null or undefined
+            assertParamExists('aiWebSearchPassthroughContents', 'aiWebSearchPassthroughContentsRequest', aiWebSearchPassthroughContentsRequest)
 
             const localVarPath = `/api/2.0/ai/websearch/v1/contents`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -259,7 +261,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiWebSearchPassthroughContentsRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -269,15 +271,15 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
          * @summary Web search passthrough
-         * @param {{ [key: string]: any | null; }} requestBody A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughSearch operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
          */
-        aiWebSearchPassthroughSearch: async (requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiWebSearchPassthroughSearch', 'requestBody', requestBody)
+        aiWebSearchPassthroughSearch: async (aiWebSearchPassthroughSearchRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiWebSearchPassthroughSearchRequest' is not null or undefined
+            assertParamExists('aiWebSearchPassthroughSearch', 'aiWebSearchPassthroughSearchRequest', aiWebSearchPassthroughSearchRequest)
 
             const localVarPath = `/api/2.0/ai/websearch/v1/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -304,7 +306,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiWebSearchPassthroughSearchRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -314,15 +316,15 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
          * @summary Set active config
-         * @param {AiWebSearchConfigureRequest} aiWebSearchConfigureRequest 
+         * @param {AiWebSearchSetActiveConfigRequest} aiWebSearchSetActiveConfigRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchSetActiveConfig operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
          */
-        aiWebSearchSetActiveConfig: async (aiWebSearchConfigureRequest: AiWebSearchConfigureRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'aiWebSearchConfigureRequest' is not null or undefined
-            assertParamExists('aiWebSearchSetActiveConfig', 'aiWebSearchConfigureRequest', aiWebSearchConfigureRequest)
+        aiWebSearchSetActiveConfig: async (aiWebSearchSetActiveConfigRequest: AiWebSearchSetActiveConfigRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiWebSearchSetActiveConfigRequest' is not null or undefined
+            assertParamExists('aiWebSearchSetActiveConfig', 'aiWebSearchSetActiveConfigRequest', aiWebSearchSetActiveConfigRequest)
 
             const localVarPath = `/api/2.0/ai/web-search/set-active-config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -349,7 +351,7 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(aiWebSearchConfigureRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiWebSearchSetActiveConfigRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -414,14 +416,14 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
         /**
          * Removes the portal\'s web-search configuration, after which web search is unavailable everywhere it was not configured separately. This is not scoped: it takes no `entityId` and any body sent with it is ignored, so it cannot be used to clear one room\'s configuration. Clearing an already-unconfigured portal is not an error and the call answers success either way. The stored provider key is destroyed with the configuration and has to be entered again.
          * @summary Clear the web-search configuration
-         * @param {string} body Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
+         * @param {string} aiWebSearchClearRequest Ignored. The operation always clears the portal-wide configuration, so send an empty body; a value here does not scope it to a room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchClear operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-clear/
          */
-        async aiWebSearchClear(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchClear(body, options);
+        async aiWebSearchClear(aiWebSearchClearRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchClear(aiWebSearchClearRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebSearchApi.aiWebSearchClear']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -474,14 +476,14 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
         /**
          * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
          * @summary Web page contents passthrough
-         * @param {{ [key: string]: any | null; }} requestBody A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughContents operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-contents/
          */
-        async aiWebSearchPassthroughContents(requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchPassthroughContents(requestBody, options);
+        async aiWebSearchPassthroughContents(aiWebSearchPassthroughContentsRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchPassthroughContents(aiWebSearchPassthroughContentsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebSearchApi.aiWebSearchPassthroughContents']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -489,14 +491,14 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
         /**
          * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
          * @summary Web search passthrough
-         * @param {{ [key: string]: any | null; }} requestBody A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughSearch operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
          */
-        async aiWebSearchPassthroughSearch(requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchPassthroughSearch(requestBody, options);
+        async aiWebSearchPassthroughSearch(aiWebSearchPassthroughSearchRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchPassthroughSearch(aiWebSearchPassthroughSearchRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebSearchApi.aiWebSearchPassthroughSearch']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -504,14 +506,14 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
         /**
          * Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
          * @summary Set active config
-         * @param {AiWebSearchConfigureRequest} aiWebSearchConfigureRequest 
+         * @param {AiWebSearchSetActiveConfigRequest} aiWebSearchSetActiveConfigRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchSetActiveConfig operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-set-active-config/
          */
-        async aiWebSearchSetActiveConfig(aiWebSearchConfigureRequest: AiWebSearchConfigureRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchSetActiveConfig(aiWebSearchConfigureRequest, options);
+        async aiWebSearchSetActiveConfig(aiWebSearchSetActiveConfigRequest: AiWebSearchSetActiveConfigRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchSetActiveConfig(aiWebSearchSetActiveConfigRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebSearchApi.aiWebSearchSetActiveConfig']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -551,7 +553,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         aiWebSearchClear(requestParameters: WebSearchApiAiWebSearchClearRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiWebSearchClear(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiWebSearchClear(requestParameters.aiWebSearchClearRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Validates a web-search configuration against the live provider and stores it only if the provider answers, which makes it the safe way to save a form in one step. `entityId` scopes the configuration to a room and has to name one the caller can open; omitting it configures the portal. A `baseUrl` pointing at a private network address is refused. Use `PUT api/2.0/ai/web-search/set-active-config` when the configuration should be stored without a provider round trip.
@@ -599,7 +601,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         aiWebSearchPassthroughContents(requestParameters: WebSearchApiAiWebSearchPassthroughContentsRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
-            return localVarFp.aiWebSearchPassthroughContents(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiWebSearchPassthroughContents(requestParameters.aiWebSearchPassthroughContentsRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
@@ -611,7 +613,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         aiWebSearchPassthroughSearch(requestParameters: WebSearchApiAiWebSearchPassthroughSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
-            return localVarFp.aiWebSearchPassthroughSearch(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiWebSearchPassthroughSearch(requestParameters.aiWebSearchPassthroughSearchRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Stores a web-search configuration without contacting the provider first, for a form that has already validated its input or for restoring a known-good configuration. `entityId` scopes it to a room and has to name one the caller can open. A `baseUrl` pointing at a private network address is still refused, because that check is local. Nothing guarantees the stored provider works: follow up with `POST api/2.0/ai/web-search/test-connection`, or use `PUT api/2.0/ai/web-search/configure` to have the store gated on a live probe.
@@ -623,7 +625,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         aiWebSearchSetActiveConfig(requestParameters: WebSearchApiAiWebSearchSetActiveConfigRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiWebSearchSetActiveConfig(requestParameters.aiWebSearchConfigureRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.aiWebSearchSetActiveConfig(requestParameters.aiWebSearchSetActiveConfigRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Probes a web-search configuration against the live provider and reports the outcome, storing nothing - this is what a Test button calls so that a failure commits no state. The configuration is taken from the request rather than from storage, so credentials that were never saved can be checked. A `baseUrl` pointing at a private network address is refused before any request leaves the portal. The verdict is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload.
@@ -651,7 +653,7 @@ export interface WebSearchApiAiWebSearchClearRequest {
      * @type {string}
      * @memberof WebSearchApiAiWebSearchClear
      */
-    readonly body: string
+    readonly aiWebSearchClearRequest: string
 }
 
 /**
@@ -707,7 +709,7 @@ export interface WebSearchApiAiWebSearchPassthroughContentsRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof WebSearchApiAiWebSearchPassthroughContents
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiWebSearchPassthroughContentsRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -721,7 +723,7 @@ export interface WebSearchApiAiWebSearchPassthroughSearchRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof WebSearchApiAiWebSearchPassthroughSearch
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiWebSearchPassthroughSearchRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -732,10 +734,10 @@ export interface WebSearchApiAiWebSearchPassthroughSearchRequest {
 export interface WebSearchApiAiWebSearchSetActiveConfigRequest {
     /**
      * 
-     * @type {AiWebSearchConfigureRequest}
+     * @type {AiWebSearchSetActiveConfigRequest}
      * @memberof WebSearchApiAiWebSearchSetActiveConfig
      */
-    readonly aiWebSearchConfigureRequest: AiWebSearchConfigureRequest
+    readonly aiWebSearchSetActiveConfigRequest: AiWebSearchSetActiveConfigRequest
 }
 
 /**
@@ -768,7 +770,7 @@ export class WebSearchApi extends BaseAPI {
      * @memberof WebSearchApi
      */
     public aiWebSearchClear(requestParameters: WebSearchApiAiWebSearchClearRequest, options?: RawAxiosRequestConfig) {
-        return WebSearchApiFp(this.configuration).aiWebSearchClear(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return WebSearchApiFp(this.configuration).aiWebSearchClear(requestParameters.aiWebSearchClearRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -816,7 +818,7 @@ export class WebSearchApi extends BaseAPI {
      * @memberof WebSearchApi
      */
     public aiWebSearchPassthroughContents(requestParameters: WebSearchApiAiWebSearchPassthroughContentsRequest, options?: RawAxiosRequestConfig) {
-        return WebSearchApiFp(this.configuration).aiWebSearchPassthroughContents(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return WebSearchApiFp(this.configuration).aiWebSearchPassthroughContents(requestParameters.aiWebSearchPassthroughContentsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -828,7 +830,7 @@ export class WebSearchApi extends BaseAPI {
      * @memberof WebSearchApi
      */
     public aiWebSearchPassthroughSearch(requestParameters: WebSearchApiAiWebSearchPassthroughSearchRequest, options?: RawAxiosRequestConfig) {
-        return WebSearchApiFp(this.configuration).aiWebSearchPassthroughSearch(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return WebSearchApiFp(this.configuration).aiWebSearchPassthroughSearch(requestParameters.aiWebSearchPassthroughSearchRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -840,7 +842,7 @@ export class WebSearchApi extends BaseAPI {
      * @memberof WebSearchApi
      */
     public aiWebSearchSetActiveConfig(requestParameters: WebSearchApiAiWebSearchSetActiveConfigRequest, options?: RawAxiosRequestConfig) {
-        return WebSearchApiFp(this.configuration).aiWebSearchSetActiveConfig(requestParameters.aiWebSearchConfigureRequest, options).then((request) => request(this.axios, this.basePath));
+        return WebSearchApiFp(this.configuration).aiWebSearchSetActiveConfig(requestParameters.aiWebSearchSetActiveConfigRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

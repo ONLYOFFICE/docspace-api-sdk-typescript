@@ -6,18 +6,18 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |------------- | ------------- | -------------|
 |[**addMember**](#addmember) | **POST** /api/2.0/people | Add a user|
 |[**checkUserExistsByEmail**](#checkuserexistsbyemail) | **GET** /api/2.0/people/exists | Check whether an email is taken|
-|[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userid} | Delete a user|
+|[**deleteMember**](#deletemember) | **DELETE** /api/2.0/people/{userId} | Delete a user|
 |[**deleteProfile**](#deleteprofile) | **DELETE** /api/2.0/people/@self | Close my own profile|
 |[**getAllProfiles**](#getallprofiles) | **GET** /api/2.0/people | Get the active profiles|
 |[**getClaims**](#getclaims) | **GET** /api/2.0/people/tokendiagnostics | Get user claims|
 |[**getProfileByEmail**](#getprofilebyemail) | **GET** /api/2.0/people/email | Get a profile by user email|
-|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userid} | Get a profile by user ID|
+|[**getProfileByUserId**](#getprofilebyuserid) | **GET** /api/2.0/people/{userId} | Get a profile by user ID|
 |[**getSelfProfile**](#getselfprofile) | **GET** /api/2.0/people/@self | Get my profile|
 |[**inviteUsers**](#inviteusers) | **POST** /api/2.0/people/invite | Invite users|
 |[**removeUsers**](#removeusers) | **PUT** /api/2.0/people/delete | Delete users|
 |[**resendUserInvites**](#resenduserinvites) | **PUT** /api/2.0/people/invite | Resend activation emails|
-|[**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userid} | Update a user|
-|[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userid}/culture | Update a user culture|
+|[**updateMember**](#updatemember) | **PUT** /api/2.0/people/{userId} | Update a user|
+|[**updateMemberCulture**](#updatememberculture) | **PUT** /api/2.0/people/{userId}/culture | Update a user culture|
 
 # **addMember**
 > EmployeeFullWrapper addMember()
@@ -71,10 +71,10 @@ const { status, data } = await apiInstance.addMember(
 |-------------|-------------|------------------|
 |**200** | The new profile with its detailed information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The password does not meet the portal password policy |  -  |
-|**403** | The invitation link is invalid or has expired, the portal does not allow inviting this kind of account, or the caller may not create an account of the requested type |  -  |
+|**403** | The invitation link is invalid or has expired, the portal does not allow inviting this kind of account, the caller may not create an account of the requested type, the `files` URL was refused, or the server behind it answered with an error status after the account had been created |  -  |
+|**500** | The `files` URL could not be reached within 10 seconds, or the downloaded file is empty, is not an image the portal can read, or exceeds the portal limit on image size; the account is created all the same |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -148,7 +148,7 @@ const { status, data } = await apiInstance.checkUserExistsByEmail(
 # **deleteMember**
 > EmployeeFullWrapper deleteMember()
 
-Deletes a portal profile and queues the erasure of the data behind it.  The account has to be disabled first - set the `Terminated` status through  `PUT api/2.0/people/status/{status}`, otherwise the operation answers 403 - and it must not be a system  account or one imported from LDAP.  The caller needs the permission to add and remove users, and has to be the portal owner to delete a DocSpace  administrator.  The profile disappears at once, together with its avatar, its group memberships, its file shares and its  OAuth clients, while the data it owned is erased by a queued job afterwards, which can be watched through  `GET api/2.0/people/remove/progress/{userid}`.  The removal is permanent and cannot be undone, so hand the rooms and the shared files over first through  `POST api/2.0/people/reassign/start` - an account whose reassignment has not finished cannot be deleted.  The call raises a `UserDeleted` webhook and answers with the profile as it was just before it was removed.  To delete several accounts at once use `PUT api/2.0/people/delete`.
+Deletes a portal profile and queues the erasure of the data behind it.  The account has to be disabled first - set the `Terminated` status through  `PUT api/2.0/people/status/{status}`, otherwise the operation answers 403 - and it must not be a system  account or one imported from LDAP.  The caller needs the permission to add and remove users, and has to be the portal owner to delete a DocSpace  administrator.  The profile disappears at once, together with its avatar, its group memberships, its file shares and its  OAuth clients, while the data it owned is erased by a queued job afterwards, which can be watched through  `GET api/2.0/people/remove/progress/{userId}`.  The removal is permanent and cannot be undone, so hand the rooms and the shared files over first through  `POST api/2.0/people/reassign/start` - an account whose reassignment has not finished cannot be deleted.  The call raises a `UserDeleted` webhook and answers with the profile as it was just before it was removed.  To delete several accounts at once use `PUT api/2.0/people/delete`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member/).
 
@@ -156,7 +156,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
+| **userId** | [**string**] | The user ID. | defaults to undefined|
 
 
 ### Return type
@@ -178,10 +178,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-let userid: string; //The user ID. (default to undefined)
+let userId: string; //The user ID. (default to undefined)
 
 const { status, data } = await apiInstance.deleteMember(
-    userid
+    userId
 );
 ```
 
@@ -195,11 +195,11 @@ const { status, data } = await apiInstance.deleteMember(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The profile as it was just before it was deleted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The account is not disabled, is a system or an LDAP account, or the caller may not delete a DocSpace administrator |  -  |
+|**403** | The account is not disabled, is a system or an LDAP account, the caller may not delete a DocSpace administrator, or the OAuth service refused to remove the OAuth clients of the account |  -  |
 |**404** | No user has the specified ID |  -  |
+|**500** | A reassignment of the data of the account has not finished yet, or the OAuth service cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -209,7 +209,7 @@ const { status, data } = await apiInstance.deleteMember(
 # **deleteProfile**
 > EmployeeFullWrapper deleteProfile()
 
-Closes the calling account at its owner\'s request: it does not erase the profile, it disables it, ends every  session it has and tells the portal administrators that the account asked to be removed.  It is the second step of the self-service removal - the first is `PUT api/2.0/people/self/delete`, which mails  the confirmation link - so the request has to carry the confirmation token from that link rather than an  ordinary session.  It always acts on the calling account and takes no parameters; the portal owner and an account imported from  LDAP cannot close themselves and get 403.  After the call the account has the `Terminated` status and can no longer sign in, but its rooms, files and  group memberships are untouched, which is why an administrator still has to erase it through  `DELETE api/2.0/people/{userid}` - that operation requires exactly this disabled state.  The step is reversible until then: re-enabling the account through `PUT api/2.0/people/status/{status}`  restores it.  The call raises a `UserUpdated` webhook, not a delete one, and answers with the profile in its new state.
+Closes the calling account at its owner\'s request: it does not erase the profile, it disables it, ends every  session it has and tells the portal administrators that the account asked to be removed.  It is the second step of the self-service removal - the first is `PUT api/2.0/people/self/delete`, which mails  the confirmation link - so the request has to carry the confirmation token from that link rather than an  ordinary session.  It always acts on the calling account and takes no parameters; the portal owner and an account imported from  LDAP cannot close themselves and get 403.  After the call the account has the `Terminated` status and can no longer sign in, but its rooms, files and  group memberships are untouched, which is why an administrator still has to erase it through  `DELETE api/2.0/people/{userId}` - that operation requires exactly this disabled state.  The step is reversible until then: re-enabling the account through `PUT api/2.0/people/status/{status}`  restores it.  The call raises a `UserUpdated` webhook, not a delete one, and answers with the profile in its new state.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-profile/).
 
@@ -327,11 +327,11 @@ const { status, data } = await apiInstance.getAllProfiles(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A page of active accounts, with their full profiles |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | The caller is a member or a guest |  -  |
+|**500** | The `filterBy` is `group` and the `filterValue` is not a GUID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -391,7 +391,7 @@ const { status, data } = await apiInstance.getClaims();
 # **getProfileByEmail**
 > EmployeeFullWrapper getProfileByEmail()
 
-Returns the full profile of the account that owns an email address.  Pass the address either in plain text as `email` or, when it arrived inside an invitation link, encrypted as  `encemail`; one of the two is required and a malformed or overlong address answers 400.  The caller has to be allowed to see that account - a guest, for instance, only sees the accounts it is  related to - and an address that belongs to nobody answers 404.  The call is read-only, and `culture` changes nothing about the profile: it only picks the language of the  error message when the lookup fails.  To find out whether an address is taken without the right to see its owner, use  `GET api/2.0/people/exists`, and to look an account up by its ID or user name use  `GET api/2.0/people/{userid}`.
+Returns the full profile of the account that owns an email address.  Pass the address either in plain text as `email` or, when it arrived inside an invitation link, encrypted as  `encemail`; one of the two is required and a malformed or overlong address answers 400.  The caller has to be allowed to see that account - a guest, for instance, only sees the accounts it is  related to - and an address that belongs to nobody answers 404.  The call is read-only, and `culture` changes nothing about the profile: it only picks the language of the  error message when the lookup fails.  To find out whether an address is taken without the right to see its owner, use  `GET api/2.0/people/exists`, and to look an account up by its ID or user name use  `GET api/2.0/people/{userId}`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-profile-by-email/).
 
@@ -466,7 +466,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The user ID. | defaults to undefined|
+| **userId** | [**string**] | The user ID. | defaults to undefined|
 
 
 ### Return type
@@ -488,10 +488,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-let userid: string; //The user ID. (default to undefined)
+let userId: string; //The user ID. (default to undefined)
 
 const { status, data } = await apiInstance.getProfileByUserId(
-    userid
+    userId
 );
 ```
 
@@ -519,7 +519,7 @@ const { status, data } = await apiInstance.getProfileByUserId(
 # **getSelfProfile**
 > EmployeeFullWrapper getSelfProfile()
 
-Returns the profile of the account the request is authenticated as, together with the session details only  this operation reports.  It takes no parameters, needs no permission and always describes the caller, so it is the operation to call  right after signing in to find out who the token belongs to and what that account may do.  The call is read-only and available on an unpaid portal.  Beyond the ordinary profile fields it fills in four that stay empty everywhere else: `theme` with the  interface theme the account chose, `loginEventId` with the identifier of the current session,  `hasPersonalFolder` with whether the account has a personal folder, and `authCookieLifetime` with the seconds  the session has left - the last one only when less than a day remains or the portal is configured to expose  it, so an absent value means neither, not an endless session.  To read somebody else use `GET api/2.0/people/{userid}`, which reports none of these four.
+Returns the profile of the account the request is authenticated as, together with the session details only  this operation reports.  It takes no parameters, needs no permission and always describes the caller, so it is the operation to call  right after signing in to find out who the token belongs to and what that account may do.  The call is read-only and available on an unpaid portal.  Beyond the ordinary profile fields it fills in four that stay empty everywhere else: `theme` with the  interface theme the account chose, `loginEventId` with the identifier of the current session,  `hasPersonalFolder` with whether the account has a personal folder, and `authCookieLifetime` with the seconds  the session has left - the last one only when less than a day remains or the portal is configured to expose  it, so an absent value means neither, not an endless session.  To read somebody else use `GET api/2.0/people/{userId}`, which reports none of these four.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-self-profile/).
 
@@ -631,7 +631,7 @@ const { status, data } = await apiInstance.inviteUsers(
 # **removeUsers**
 > EmployeeFullArrayWrapper removeUsers()
 
-Deletes several portal profiles in one call and queues the erasure of the data behind each of them.  Every listed account has to be disabled already - set the `Terminated` status through  `PUT api/2.0/people/status/{status}` first, because a single account that is still active rejects the whole  call with 403 - and the caller needs the permission to add and remove users.  System and LDAP accounts are dropped from the list without an error, and so are the accounts the caller may  not delete: a room admin when the caller is not a DocSpace admin, and a DocSpace admin when the caller is not  the portal owner.  The answer lists every account that was asked for, including the ones that were skipped, so it is not proof  that an account was deleted - read `GET api/2.0/people/{userid}` for that, which then answers 404.  The removal is permanent and cannot be undone, and each deleted account raises a `UserDeleted` webhook while  its data is erased by a queued job that can be watched through  `GET api/2.0/people/remove/progress/{userid}`.  Hand the rooms and the shared files over first through `POST api/2.0/people/reassign/start` - an account with  an unfinished reassignment cannot be deleted.
+Deletes several portal profiles in one call and queues the erasure of the data behind each of them.  Every listed account has to be disabled already - set the `Terminated` status through  `PUT api/2.0/people/status/{status}` first, because a single account that is still active rejects the whole  call with 403 - and the caller needs the permission to add and remove users.  System and LDAP accounts are dropped from the list without an error, and so are the accounts the caller may  not delete: a room admin when the caller is not a DocSpace admin, and a DocSpace admin when the caller is not  the portal owner.  The answer lists every account that was asked for, including the ones that were skipped, so it is not proof  that an account was deleted - read `GET api/2.0/people/{userId}` for that, which then answers 404.  The removal is permanent and cannot be undone, and each deleted account raises a `UserDeleted` webhook while  its data is erased by a queued job that can be watched through  `GET api/2.0/people/remove/progress/{userId}`.  Hand the rooms and the shared files over first through `POST api/2.0/people/reassign/start` - an account with  an unfinished reassignment cannot be deleted.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/remove-users/).
 
@@ -680,10 +680,10 @@ const { status, data } = await apiInstance.removeUsers(
 |-------------|-------------|------------------|
 |**200** | Every account that was asked for, including the ones that were skipped |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The userIds field is missing |  -  |
-|**403** | No permissions to perform this action, or one of the listed accounts is not disabled |  -  |
+|**403** | No permissions to perform this action, one of the listed accounts is not disabled, or the OAuth service refused to remove the OAuth clients of an account |  -  |
+|**500** | A reassignment of the data of one of the listed accounts has not finished yet, or the OAuth service cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -740,11 +740,11 @@ const { status, data } = await apiInstance.resendUserInvites(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The targeted accounts the caller is allowed to see |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `userIds` is missing while `resendAll` is false |  -  |
 |**403** | A member or a guest asked for resendAll, or listed an account other than their own |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -753,7 +753,7 @@ const { status, data } = await apiInstance.resendUserInvites(
 # **updateMember**
 > EmployeeFullWrapper updateMember(updateMemberRequestDto)
 
-Updates a portal profile, and which fields it accepts depends on whose profile it is - the two halves of this  operation do not overlap.  On the caller\'s own profile it applies `firstName`, `lastName`, `location`, `comment`, `spam`, `contacts`,  `department` and the avatar named in `files`, while `disable` and `isUser` are ignored; on somebody else\'s  profile only `disable` and `isUser` are applied and every descriptive field is ignored, so an administrator  cannot rename another account through this operation.  The caller needs the permission to edit that profile, cannot touch the portal owner, and has to be the portal  owner to touch another DocSpace administrator; on an account imported from LDAP or SSO the name and the  location are silently left alone even on one\'s own profile.  Omitted fields keep their current values, an unusable pair of names answers 400, and `disable` set to true  gives the account the `Terminated` status and ends every session it has, which is the state  `DELETE api/2.0/people/{userid}` then requires.  The `isUser` flag turns the account into a guest when true and back into a member when false, both of which  can answer 402 because either direction takes a seat; a request to make the portal owner, a DocSpace  administrator or a module administrator a guest is ignored without an error.  A change raises a `UserUpdated` webhook and the answer holds the profile as it is afterwards, so read it  instead of assuming the request was applied.  For the language use `PUT api/2.0/people/{userid}/culture`, for the type  `PUT api/2.0/people/type/{type}`, and for the status of several accounts at once  `PUT api/2.0/people/status/{status}`.
+Updates a portal profile, and which fields it accepts depends on whose profile it is - the two halves of this  operation do not overlap.  On the caller\'s own profile it applies `firstName`, `lastName`, `location`, `comment`, `spam`, `contacts`,  `department` and the avatar named in `files`, while `disable` and `isUser` are ignored; on somebody else\'s  profile only `disable` and `isUser` are applied and every descriptive field is ignored, so an administrator  cannot rename another account through this operation.  The caller needs the permission to edit that profile, cannot touch the portal owner, and has to be the portal  owner to touch another DocSpace administrator; on an account imported from LDAP or SSO the name and the  location are silently left alone even on one\'s own profile.  Omitted fields keep their current values, an unusable pair of names answers 400, and `disable` set to true  gives the account the `Terminated` status and ends every session it has, which is the state  `DELETE api/2.0/people/{userId}` then requires.  The `isUser` flag turns the account into a guest when true and back into a member when false, both of which  can answer 402 because either direction takes a seat; a request to make the portal owner, a DocSpace  administrator or a module administrator a guest is ignored without an error.  A change raises a `UserUpdated` webhook and the answer holds the profile as it is afterwards, so read it  instead of assuming the request was applied.  For the language use `PUT api/2.0/people/{userId}/culture`, for the type  `PUT api/2.0/people/type/{type}`, and for the status of several accounts at once  `PUT api/2.0/people/status/{status}`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member/).
 
@@ -762,7 +762,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **updateMemberRequestDto** | **UpdateMemberRequestDto**| The request parameters for updating the user information. | |
-| **userid** | [**string**] | The user ID. | defaults to undefined|
+| **userId** | [**string**] | The user ID. | defaults to undefined|
 
 
 ### Return type
@@ -785,11 +785,11 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-let userid: string; //The user ID. (default to undefined)
+let userId: string; //The user ID. (default to undefined)
 let updateMemberRequestDto: UpdateMemberRequestDto; //The request parameters for updating the user information.
 
 const { status, data } = await apiInstance.updateMember(
-    userid,
+    userId,
     updateMemberRequestDto
 );
 ```
@@ -806,11 +806,11 @@ const { status, data } = await apiInstance.updateMember(
 |**200** | The profile as it is after the update |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The first and last name pair is not a valid user name |  -  |
 |**402** | The tariff or the user quota does not allow the requested guest or member seat |  -  |
-|**403** | The account is the portal owner or a system account, the caller may not edit it, or only the portal owner may edit a DocSpace administrator |  -  |
+|**403** | The account is the portal owner or a system account, the caller may not edit it, only the portal owner may edit a DocSpace administrator, or, on the caller\'s own profile, the `files` URL was refused or the server behind it answered with an error status |  -  |
 |**404** | No user has the specified ID |  -  |
+|**500** | On the caller\'s own profile, the `files` URL could not be reached within 10 seconds, or the downloaded file is empty, is not an image the portal can read, or exceeds the portal limit on image size |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -819,7 +819,7 @@ const { status, data } = await apiInstance.updateMember(
 # **updateMemberCulture**
 > EmployeeFullWrapper updateMemberCulture()
 
-Changes the interface language of a profile, which decides the language of the portal for that account and of  the emails it receives.  The culture has to be one the portal has enabled, otherwise the operation answers 400; read the enabled list  from the portal settings rather than guessing a code.  A caller may only change their own language - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The change takes effect immediately, raises a `UserUpdated` webhook, and answers with the profile carrying  the new `cultureName`.  Other profile fields are not touched here; use `PUT api/2.0/people/{userid}` for those.
+Changes the interface language of a profile, which decides the language of the portal for that account and of  the emails it receives.  The culture has to be one the portal has enabled, otherwise the operation answers 400; read the enabled list  from the portal settings rather than guessing a code.  A caller may only change their own language - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The change takes effect immediately, raises a `UserUpdated` webhook, and answers with the profile carrying  the new `cultureName`.  Other profile fields are not touched here; use `PUT api/2.0/people/{userId}` for those.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-culture/).
 
@@ -827,8 +827,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **culture** | **Culture**| The culture name parameters. | |
-| **userid** | [**string**] | The user ID. | defaults to undefined|
+| **updateMemberCultureRequest** | **UpdateMemberCultureRequest**| The culture name parameters. | |
+| **userId** | [**string**] | The user ID. | defaults to undefined|
 
 
 ### Return type
@@ -845,18 +845,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PeopleProfilesApi,
     Configuration,
-    Culture
+    UpdateMemberCultureRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PeopleProfilesApi(configuration);
 
-let userid: string; //The user ID. (default to undefined)
-let culture: Culture; //The culture name parameters. (optional)
+let userId: string; //The user ID. (default to undefined)
+let updateMemberCultureRequest: UpdateMemberCultureRequest; //The culture name parameters. (optional)
 
 const { status, data } = await apiInstance.updateMemberCulture(
-    userid,
-    culture
+    userId,
+    updateMemberCultureRequest
 );
 ```
 

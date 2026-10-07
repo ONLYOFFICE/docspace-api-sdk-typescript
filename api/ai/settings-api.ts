@@ -24,11 +24,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AiAiSettingsWrapper } from '../../models';
-// @ts-ignore
-import type { AiAiUserSettingsWrapper } from '../../models';
-// @ts-ignore
 import type { AiErrorResponse } from '../../models';
+// @ts-ignore
+import type { AiSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { AiSuccessResponse } from '../../models';
+// @ts-ignore
+import type { AiUserSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { AiVectorizationSettingsWrapper } from '../../models';
 /**
@@ -50,6 +52,45 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
         aiSettingsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/config`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * @summary Get the tool permission mode
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiSettingsGetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+         */
+        aiSettingsGetToolMode: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/config/tool-mode`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -157,17 +198,62 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * @summary Set the tool permission mode
+         * @param {{ [key: string]: any | null; }} aiSettingsSetToolModeRequest `{ mode }` with the AI service\'s `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiSettingsSetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
+         */
+        aiSettingsSetToolMode: async (aiSettingsSetToolModeRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSettingsSetToolModeRequest' is not null or undefined
+            assertParamExists('aiSettingsSetToolMode', 'aiSettingsSetToolModeRequest', aiSettingsSetToolModeRequest)
+
+            const localVarPath = `/api/2.0/ai/config/tool-mode`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSettingsSetToolModeRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
-         * @param {{ [key: string]: any | null; }} requestBody The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetUser operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
          */
-        aiSettingsSetUser: async (requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiSettingsSetUser', 'requestBody', requestBody)
+        aiSettingsSetUser: async (aiSettingsSetUserRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSettingsSetUserRequest' is not null or undefined
+            assertParamExists('aiSettingsSetUser', 'aiSettingsSetUserRequest', aiSettingsSetUserRequest)
 
             const localVarPath = `/api/2.0/ai/config/user`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -194,7 +280,7 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSettingsSetUserRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -204,15 +290,15 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Replaces the portal\'s vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service\'s own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
          * @summary Update vectorization settings
-         * @param {{ [key: string]: any | null; }} requestBody The portal\'s vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetVectorizationRequest The portal\'s vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetVectorization operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
          */
-        aiSettingsSetVectorization: async (requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiSettingsSetVectorization', 'requestBody', requestBody)
+        aiSettingsSetVectorization: async (aiSettingsSetVectorizationRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiSettingsSetVectorizationRequest' is not null or undefined
+            assertParamExists('aiSettingsSetVectorization', 'aiSettingsSetVectorizationRequest', aiSettingsSetVectorizationRequest)
 
             const localVarPath = `/api/2.0/ai/config/vectorization`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -239,7 +325,7 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiSettingsSetVectorizationRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -264,10 +350,24 @@ export const SettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiSettingsGet operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
          */
-        async aiSettingsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAiSettingsWrapper>> {
+        async aiSettingsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * @summary Get the tool permission mode
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiSettingsGetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+         */
+        async aiSettingsGetToolMode(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsGetToolMode(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsGetToolMode']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -278,7 +378,7 @@ export const SettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiSettingsGetUser operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
          */
-        async aiSettingsGetUser(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAiUserSettingsWrapper>> {
+        async aiSettingsGetUser(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiUserSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsGetUser(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsGetUser']?.[localVarOperationServerIndex]?.url;
@@ -299,16 +399,31 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * @summary Set the tool permission mode
+         * @param {{ [key: string]: any | null; }} aiSettingsSetToolModeRequest `{ mode }` with the AI service\'s `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiSettingsSetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
+         */
+        async aiSettingsSetToolMode(aiSettingsSetToolModeRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetToolMode(aiSettingsSetToolModeRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsSetToolMode']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
-         * @param {{ [key: string]: any | null; }} requestBody The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetUser operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
          */
-        async aiSettingsSetUser(requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAiUserSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetUser(requestBody, options);
+        async aiSettingsSetUser(aiSettingsSetUserRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiUserSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetUser(aiSettingsSetUserRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsSetUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -316,14 +431,14 @@ export const SettingsApiFp = function(configuration?: Configuration) {
         /**
          * Replaces the portal\'s vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service\'s own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
          * @summary Update vectorization settings
-         * @param {{ [key: string]: any | null; }} requestBody The portal\'s vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetVectorizationRequest The portal\'s vectorization settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/vectorization` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetVectorization operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-vectorization/
          */
-        async aiSettingsSetVectorization(requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiVectorizationSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetVectorization(requestBody, options);
+        async aiSettingsSetVectorization(aiSettingsSetVectorizationRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiVectorizationSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetVectorization(aiSettingsSetVectorizationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsSetVectorization']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -346,8 +461,19 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get/
          * @throws {RequiredError}
          */
-        aiSettingsGet(options?: RawAxiosRequestConfig): AxiosPromise<AiAiSettingsWrapper> {
+        aiSettingsGet(options?: RawAxiosRequestConfig): AxiosPromise<AiSettingsWrapper> {
             return localVarFp.aiSettingsGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * @summary Get the tool permission mode
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiSettingsGetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
+         * @throws {RequiredError}
+         */
+        aiSettingsGetToolMode(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiSettingsGetToolMode(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the AI settings of the calling user, as opposed to the portal-wide ones. It takes no parameters - the user is the authenticated caller, and there is no way to read somebody else\'s settings - and is proxied unchanged to the DocSpace AI service. Use `GET api/2.0/ai/config` for the portal-wide configuration. This is a read-only operation.
@@ -357,7 +483,7 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-user/
          * @throws {RequiredError}
          */
-        aiSettingsGetUser(options?: RawAxiosRequestConfig): AxiosPromise<AiAiUserSettingsWrapper> {
+        aiSettingsGetUser(options?: RawAxiosRequestConfig): AxiosPromise<AiUserSettingsWrapper> {
             return localVarFp.aiSettingsGetUser(options).then((request) => request(axios, basePath));
         },
         /**
@@ -372,6 +498,18 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiSettingsGetVectorization(options).then((request) => request(axios, basePath));
         },
         /**
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * @summary Set the tool permission mode
+         * @param {SettingsApiAiSettingsSetToolModeRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiSettingsSetToolMode operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
+         * @throws {RequiredError}
+         */
+        aiSettingsSetToolMode(requestParameters: SettingsApiAiSettingsSetToolModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiSettingsSetToolMode(requestParameters.aiSettingsSetToolModeRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
          * @param {SettingsApiAiSettingsSetUserRequest} requestParameters Request parameters.
@@ -380,8 +518,8 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-user/
          * @throws {RequiredError}
          */
-        aiSettingsSetUser(requestParameters: SettingsApiAiSettingsSetUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiAiUserSettingsWrapper> {
-            return localVarFp.aiSettingsSetUser(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+        aiSettingsSetUser(requestParameters: SettingsApiAiSettingsSetUserRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiUserSettingsWrapper> {
+            return localVarFp.aiSettingsSetUser(requestParameters.aiSettingsSetUserRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the portal\'s vectorization settings and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value is reported with that service\'s own verdict rather than being checked here. Changing the embedding provider does not re-index anything already indexed - start that separately with `POST api/2.0/ai/vectorization/tasks`. This is a portal-wide setting and requires the permissions the AI service demands for it.
@@ -393,10 +531,24 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         aiSettingsSetVectorization(requestParameters: SettingsApiAiSettingsSetVectorizationRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiVectorizationSettingsWrapper> {
-            return localVarFp.aiSettingsSetVectorization(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiSettingsSetVectorization(requestParameters.aiSettingsSetVectorizationRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for aiSettingsSetToolMode operation in SettingsApi.
+ * @export
+ * @interface SettingsApiAiSettingsSetToolModeRequest
+ */
+export interface SettingsApiAiSettingsSetToolModeRequest {
+    /**
+     * `{ mode }` with the AI service\'s `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
+     * @type {{ [key: string]: any | null; }}
+     * @memberof SettingsApiAiSettingsSetToolMode
+     */
+    readonly aiSettingsSetToolModeRequest: { [key: string]: any | null; }
+}
 
 /**
  * Request parameters for aiSettingsSetUser operation in SettingsApi.
@@ -409,7 +561,7 @@ export interface SettingsApiAiSettingsSetUserRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof SettingsApiAiSettingsSetUser
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiSettingsSetUserRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -423,7 +575,7 @@ export interface SettingsApiAiSettingsSetVectorizationRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof SettingsApiAiSettingsSetVectorization
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiSettingsSetVectorizationRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -442,6 +594,17 @@ export class SettingsApi extends BaseAPI {
      */
     public aiSettingsGet(options?: RawAxiosRequestConfig) {
         return SettingsApiFp(this.configuration).aiSettingsGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+     * @summary Get the tool permission mode
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public aiSettingsGetToolMode(options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).aiSettingsGetToolMode(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -467,6 +630,18 @@ export class SettingsApi extends BaseAPI {
     }
 
     /**
+     * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+     * @summary Set the tool permission mode
+     * @param {AISettingsApiAiSettingsSetToolModeRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SettingsApi
+     */
+    public aiSettingsSetToolMode(requestParameters: SettingsApiAiSettingsSetToolModeRequest, options?: RawAxiosRequestConfig) {
+        return SettingsApiFp(this.configuration).aiSettingsSetToolMode(requestParameters.aiSettingsSetToolModeRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
      * @summary Update user AI settings
      * @param {AISettingsApiAiSettingsSetUserRequest} requestParameters Request parameters.
@@ -475,7 +650,7 @@ export class SettingsApi extends BaseAPI {
      * @memberof SettingsApi
      */
     public aiSettingsSetUser(requestParameters: SettingsApiAiSettingsSetUserRequest, options?: RawAxiosRequestConfig) {
-        return SettingsApiFp(this.configuration).aiSettingsSetUser(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).aiSettingsSetUser(requestParameters.aiSettingsSetUserRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -487,7 +662,7 @@ export class SettingsApi extends BaseAPI {
      * @memberof SettingsApi
      */
     public aiSettingsSetVectorization(requestParameters: SettingsApiAiSettingsSetVectorizationRequest, options?: RawAxiosRequestConfig) {
-        return SettingsApiFp(this.configuration).aiSettingsSetVectorization(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return SettingsApiFp(this.configuration).aiSettingsSetVectorization(requestParameters.aiSettingsSetVectorizationRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

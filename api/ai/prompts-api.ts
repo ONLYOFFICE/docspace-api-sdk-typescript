@@ -105,15 +105,15 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Creates a folder in the caller\'s prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
          * @summary Create folder
-         * @param {string} body The name of the folder to create, as a bare JSON string.
+         * @param {string} aiPromptsCreateFolderRequest The name of the folder to create, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsCreateFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
          */
-        aiPromptsCreateFolder: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsCreateFolder', 'body', body)
+        aiPromptsCreateFolder: async (aiPromptsCreateFolderRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsCreateFolderRequest' is not null or undefined
+            assertParamExists('aiPromptsCreateFolder', 'aiPromptsCreateFolderRequest', aiPromptsCreateFolderRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/create-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -140,7 +140,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsCreateFolderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -150,15 +150,15 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
          * @summary Delete a saved prompt
-         * @param {string} body The ID of the prompt to delete, as a bare JSON string.
+         * @param {string} aiPromptsDeleteRequest The ID of the prompt to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
          */
-        aiPromptsDelete: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsDelete', 'body', body)
+        aiPromptsDelete: async (aiPromptsDeleteRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsDeleteRequest' is not null or undefined
+            assertParamExists('aiPromptsDelete', 'aiPromptsDeleteRequest', aiPromptsDeleteRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -185,7 +185,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsDeleteRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -195,15 +195,15 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
          * @summary Delete folder
-         * @param {string} body The ID of the folder to delete, as a bare JSON string.
+         * @param {string} aiPromptsDeleteFolderRequest The ID of the folder to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDeleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
          */
-        aiPromptsDeleteFolder: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsDeleteFolder', 'body', body)
+        aiPromptsDeleteFolder: async (aiPromptsDeleteFolderRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsDeleteFolderRequest' is not null or undefined
+            assertParamExists('aiPromptsDeleteFolder', 'aiPromptsDeleteFolderRequest', aiPromptsDeleteFolderRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/delete-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -230,7 +230,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsDeleteFolderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -659,14 +659,14 @@ export const PromptsApiFp = function(configuration?: Configuration) {
         /**
          * Creates a folder in the caller\'s prompt library and returns it. The name has to be non-empty and unique across that library. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
          * @summary Create folder
-         * @param {string} body The name of the folder to create, as a bare JSON string.
+         * @param {string} aiPromptsCreateFolderRequest The name of the folder to create, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsCreateFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
          */
-        async aiPromptsCreateFolder(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderMutationResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsCreateFolder(body, options);
+        async aiPromptsCreateFolder(aiPromptsCreateFolderRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderMutationResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsCreateFolder(aiPromptsCreateFolderRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsCreateFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -674,14 +674,14 @@ export const PromptsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
          * @summary Delete a saved prompt
-         * @param {string} body The ID of the prompt to delete, as a bare JSON string.
+         * @param {string} aiPromptsDeleteRequest The ID of the prompt to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
          */
-        async aiPromptsDelete(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDelete(body, options);
+        async aiPromptsDelete(aiPromptsDeleteRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDelete(aiPromptsDeleteRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -689,14 +689,14 @@ export const PromptsApiFp = function(configuration?: Configuration) {
         /**
          * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
          * @summary Delete folder
-         * @param {string} body The ID of the folder to delete, as a bare JSON string.
+         * @param {string} aiPromptsDeleteFolderRequest The ID of the folder to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDeleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
          */
-        async aiPromptsDeleteFolder(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDeleteFolder(body, options);
+        async aiPromptsDeleteFolder(aiPromptsDeleteFolderRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDeleteFolder(aiPromptsDeleteFolderRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsDeleteFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -866,7 +866,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsCreateFolder(requestParameters: PromptsApiAiPromptsCreateFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderMutationResult> {
-            return localVarFp.aiPromptsCreateFolder(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsCreateFolder(requestParameters.aiPromptsCreateFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
@@ -878,7 +878,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsDelete(requestParameters: PromptsApiAiPromptsDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiPromptsDelete(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsDelete(requestParameters.aiPromptsDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
@@ -890,7 +890,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsDeleteFolder(requestParameters: PromptsApiAiPromptsDeleteFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiPromptsDeleteFolder(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsDeleteFolder(requestParameters.aiPromptsDeleteFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Builds a versioned bundle of every prompt and folder in the caller\'s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
@@ -1026,7 +1026,7 @@ export interface PromptsApiAiPromptsCreateFolderRequest {
      * @type {string}
      * @memberof PromptsApiAiPromptsCreateFolder
      */
-    readonly body: string
+    readonly aiPromptsCreateFolderRequest: string
 }
 
 /**
@@ -1040,7 +1040,7 @@ export interface PromptsApiAiPromptsDeleteRequest {
      * @type {string}
      * @memberof PromptsApiAiPromptsDelete
      */
-    readonly body: string
+    readonly aiPromptsDeleteRequest: string
 }
 
 /**
@@ -1054,7 +1054,7 @@ export interface PromptsApiAiPromptsDeleteFolderRequest {
      * @type {string}
      * @memberof PromptsApiAiPromptsDeleteFolder
      */
-    readonly body: string
+    readonly aiPromptsDeleteFolderRequest: string
 }
 
 /**
@@ -1183,7 +1183,7 @@ export class PromptsApi extends BaseAPI {
      * @memberof PromptsApi
      */
     public aiPromptsCreateFolder(requestParameters: PromptsApiAiPromptsCreateFolderRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsCreateFolder(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsCreateFolder(requestParameters.aiPromptsCreateFolderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1195,7 +1195,7 @@ export class PromptsApi extends BaseAPI {
      * @memberof PromptsApi
      */
     public aiPromptsDelete(requestParameters: PromptsApiAiPromptsDeleteRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsDelete(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsDelete(requestParameters.aiPromptsDeleteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1207,7 +1207,7 @@ export class PromptsApi extends BaseAPI {
      * @memberof PromptsApi
      */
     public aiPromptsDeleteFolder(requestParameters: PromptsApiAiPromptsDeleteFolderRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsDeleteFolder(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsDeleteFolder(requestParameters.aiPromptsDeleteFolderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

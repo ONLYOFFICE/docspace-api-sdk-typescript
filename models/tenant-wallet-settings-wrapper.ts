@@ -20,15 +20,34 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantWalletSettings } from './tenant-wallet-settings';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantWalletSettingsDto } from './tenant-wallet-settings-dto';
 
 /**
- * The wrapper for the tenant wallet settings.
+ * The successful API response containing the TenantWalletSettingsDto object.
  */
 export interface TenantWalletSettingsWrapper {
     /**
-     * The tenant wallet settings.
+     * The TenantWalletSettingsDto object returned by the operation.
      */
-    'settings'?: TenantWalletSettings;
+    'response'?: TenantWalletSettingsDto;
+    /**
+     * The total number of items in the response
+     */
+    'count'?: number;
+    /**
+     * List of links related to the response
+     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

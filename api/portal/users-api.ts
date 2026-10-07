@@ -38,9 +38,9 @@ import type { InvitationLinkUpdateRequestDto } from '../../models';
 // @ts-ignore
 import type { InvitationLinkWrapper } from '../../models';
 // @ts-ignore
-import type { StringWrapper } from '../../models';
+import type { PortalUserWrapper } from '../../models';
 // @ts-ignore
-import type { UserInfoWrapper } from '../../models';
+import type { StringWrapper } from '../../models';
 /**
  * UsersApi - axios parameter creator
  * @export
@@ -50,7 +50,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     
     return {
         /**
-         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
          * @summary Create an invitation link
          * @param {InvitationLinkCreateRequestDto} [invitationLinkCreateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -219,7 +219,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
          * @summary Get an invitation link by role
          * @param {EmployeeType} employeeType The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it.
          * @param {*} [options] Override http request option.
@@ -327,20 +327,20 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
          * @summary Get a portal user
-         * @param {string} userID The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
+         * @param {string} userId The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getUserById operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id/
          */
-        getUserById: async (userID: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userID' is not null or undefined
-            assertParamExists('getUserById', 'userID', userID)
+        getUserById: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserById', 'userId', userId)
 
-            const localVarPath = `/api/2.0/portal/users/{userID}`
-                .replace(`{${"userID"}}`, encodeURIComponent(String(userID)));
+            const localVarPath = `/api/2.0/portal/users/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -482,11 +482,11 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             // authentication OpenId required
 
             if (userid !== undefined) {
-                localVarQueryParameter['Userid'] = userid;
+                localVarQueryParameter['userid'] = userid;
             }
 
             if (key !== undefined) {
-                localVarQueryParameter['Key'] = key;
+                localVarQueryParameter['key'] = key;
             }
 
 
@@ -567,7 +567,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = UsersApiAxiosParamCreator(configuration)
     return {
         /**
-         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
          * @summary Create an invitation link
          * @param {InvitationLinkCreateRequestDto} [invitationLinkCreateRequestDto] 
          * @param {*} [options] Override http request option.
@@ -613,7 +613,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
          * @summary Get an invitation link by role
          * @param {EmployeeType} employeeType The role whoever follows the link joins with. Only `DocSpaceAdmin`, `RoomAdmin` and `User` have a link; any  other role is refused. The portal keeps at most one link per role, so this value alone identifies it.
          * @param {*} [options] Override http request option.
@@ -642,16 +642,16 @@ export const UsersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
          * @summary Get a portal user
-         * @param {string} userID The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
+         * @param {string} userId The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getUserById operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id/
          */
-        async getUserById(userID: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserInfoWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(userID, options);
+        async getUserById(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PortalUserWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['UsersApi.getUserById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -712,7 +712,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = UsersApiFp(configuration)
     return {
         /**
-         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+         * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
          * @summary Create an invitation link
          * @param {UsersApiCreateInvitationLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -749,7 +749,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getInvitationLink(requestParameters.employeeType, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+         * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
          * @summary Get an invitation link by role
          * @param {UsersApiGetInvitationLinkByEmployeeTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -772,7 +772,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getPortalUsersCount(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+         * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
          * @summary Get a portal user
          * @param {UsersApiGetUserByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -780,8 +780,8 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id/
          * @throws {RequiredError}
          */
-        getUserById(requestParameters: UsersApiGetUserByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<UserInfoWrapper> {
-            return localVarFp.getUserById(requestParameters.userID, options).then((request) => request(axios, basePath));
+        getUserById(requestParameters: UsersApiGetUserByIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<PortalUserWrapper> {
+            return localVarFp.getUserById(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks the open-source gift message - the notice a server installation shows about its free edition - as read  for the calling user, so the client stops displaying it. Any signed-in user may call it and nothing has to be  called first. The flag is stored per user, so marking it read for one account leaves it unread for everybody  else on the portal. The call is mutating but idempotent: repeating it changes nothing. It never fails on the  caller\'s behalf - a storage error is written to the portal log and the operation still answers with a success,  so the answer is no proof that the flag was saved. Nothing is returned in the body, and no operation reads the  flag back or clears it again, which makes the change effectively permanent for that user. It touches only this  one notice: portal-wide announcements and the letters the portal sends are unaffected, and other per-user  settings are stored through the operations under `api/2.0/settings`.
@@ -888,7 +888,7 @@ export interface UsersApiGetUserByIdRequest {
      * @type {string}
      * @memberof UsersApiGetUserById
      */
-    readonly userID: string
+    readonly userId: string
 }
 
 /**
@@ -934,7 +934,7 @@ export interface UsersApiUpdateInvitationLinkRequest {
  */
 export class UsersApi extends BaseAPI {
     /**
-     * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+     * Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
      * @summary Create an invitation link
      * @param {PortalUsersApiCreateInvitationLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -971,7 +971,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+     * Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
      * @summary Get an invitation link by role
      * @param {PortalUsersApiGetInvitationLinkByEmployeeTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -994,7 +994,7 @@ export class UsersApi extends BaseAPI {
     }
 
     /**
-     * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+     * Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
      * @summary Get a portal user
      * @param {PortalUsersApiGetUserByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1002,7 +1002,7 @@ export class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     public getUserById(requestParameters: UsersApiGetUserByIdRequest, options?: RawAxiosRequestConfig) {
-        return UsersApiFp(this.configuration).getUserById(requestParameters.userID, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).getUserById(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

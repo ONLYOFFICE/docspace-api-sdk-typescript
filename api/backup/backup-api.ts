@@ -24,15 +24,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { BackupDto } from '../../models';
-// @ts-ignore
 import type { BackupHistoryRecordArrayWrapper } from '../../models';
 // @ts-ignore
 import type { BackupProgressWrapper } from '../../models';
-// @ts-ignore
-import type { BackupRestoreDto } from '../../models';
-// @ts-ignore
-import type { BackupScheduleDto } from '../../models';
 // @ts-ignore
 import type { BackupServiceStateWrapper } from '../../models';
 // @ts-ignore
@@ -40,11 +34,17 @@ import type { BackupsCountResultWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
+import type { CreateBackupScheduleRequestDto } from '../../models';
+// @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { Int32Wrapper } from '../../models';
 // @ts-ignore
 import type { ScheduleWrapper } from '../../models';
+// @ts-ignore
+import type { StartBackupRequestDto } from '../../models';
+// @ts-ignore
+import type { StartBackupRestoreRequestDto } from '../../models';
 /**
  * BackupApi - axios parameter creator
  * @export
@@ -108,13 +108,13 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
          * @summary Create the backup schedule
-         * @param {BackupScheduleDto} [backupScheduleDto] 
+         * @param {CreateBackupScheduleRequestDto} [createBackupScheduleRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createBackupSchedule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
          */
-        createBackupSchedule: async (backupScheduleDto?: BackupScheduleDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createBackupSchedule: async (createBackupScheduleRequestDto?: CreateBackupScheduleRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/backup/createbackupschedule`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -154,7 +154,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(backupScheduleDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createBackupScheduleRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -260,7 +260,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -317,7 +317,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -374,7 +374,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -431,7 +431,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -488,7 +488,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -739,7 +739,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -756,13 +756,13 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
          * @summary Start the backup
-         * @param {BackupDto} [backupDto] 
+         * @param {StartBackupRequestDto} [startBackupRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startBackup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
          */
-        startBackup: async (backupDto?: BackupDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startBackup: async (startBackupRequestDto?: StartBackupRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/backup/startbackup`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -802,7 +802,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(backupDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(startBackupRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -812,13 +812,13 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
          * @summary Start the restoring process
-         * @param {BackupRestoreDto} [backupRestoreDto] 
+         * @param {StartBackupRestoreRequestDto} [startBackupRestoreRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startBackupRestore operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
          */
-        startBackupRestore: async (backupRestoreDto?: BackupRestoreDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startBackupRestore: async (startBackupRestoreRequestDto?: StartBackupRestoreRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/backup/startrestore`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -858,7 +858,7 @@ export const BackupApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(backupRestoreDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(startBackupRestoreRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -892,14 +892,14 @@ export const BackupApiFp = function(configuration?: Configuration) {
         /**
          * Sets the backup schedule of the current portal. A portal keeps at most one schedule, so this replaces  the existing one rather than adding a second, and `dump` writes the schedule of the whole server  instead, which requires the space access permission and works on a standalone installation only.  Scheduled backups have to be allowed by the pricing plan of a portal that is not a standalone  installation.  `cronParams` is a period plus a time rather than a cron string: `hour` is the hour of the day from 0  to 23, and `day` has to be given for `EveryWeek`, where it is the day of the week from 1 to 7 with  Sunday as 1, and for `EveryMonth`, where it is the day of the month from 1 to 31. It is left out for  `EveryDay`, and because an omitted `day` is stored as 0, which neither period accepts, a weekly or  monthly schedule sent without it fails instead of falling back to a default.  `backupsStored` is the number of scheduled copies to keep, from 1 to 30, and it defaults to 1. Older  copies are removed by a background cleaner, and only the ones this schedule created: archives made by  `POST api/2.0/backup/startbackup` are not counted and not removed. A portal whose subscription stops  covering backups has its schedule deleted by the scheduler, not suspended, and its administrators are  notified that the scheduled backup failed.  The keys expected in `storageParams` are the same as for `POST api/2.0/backup/startbackup`, except  that they are sent as an array of key and value pairs here and returned as an object by  `GET api/2.0/backup/getbackupschedule`.
          * @summary Create the backup schedule
-         * @param {BackupScheduleDto} [backupScheduleDto] 
+         * @param {CreateBackupScheduleRequestDto} [createBackupScheduleRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createBackupSchedule operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-backup-schedule/
          */
-        async createBackupSchedule(backupScheduleDto?: BackupScheduleDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createBackupSchedule(backupScheduleDto, options);
+        async createBackupSchedule(createBackupScheduleRequestDto?: CreateBackupScheduleRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createBackupSchedule(createBackupScheduleRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BackupApi.createBackupSchedule']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1060,14 +1060,14 @@ export const BackupApiFp = function(configuration?: Configuration) {
         /**
          * Queues a backup of the current portal and returns straight away: the archive itself is written by the  separate backup worker service, which picks the job up from an integration event, so the response  reports a progress of 0 and the `Created` status, and its `taskId` is the handle to poll with  `GET api/2.0/backup/getbackupprogress`. The caller needs the portal settings permission, and  `dump` - a backup of the whole server instead of this one portal - additionally requires the space  access permission and is rejected outside a standalone installation.  The keys expected in `storageParams` depend on `storageType`: `Documents` takes an integer `folderId`,  `ThridpartyDocuments` takes a provider-specific non-integer `folderId`, `Local` takes `filePath` and  works on a standalone installation only, `ThirdPartyConsumer` takes `module` together with the settings  of that consumer, and `DataStore` takes no keys at all; the `subdir` key is added by the operation  itself and must not be sent.  A portal that has already used up the free backups of the current calendar month is charged through the  paid backup service instead, and the call is rejected with 402 when that service is not available to it.
          * @summary Start the backup
-         * @param {BackupDto} [backupDto] 
+         * @param {StartBackupRequestDto} [startBackupRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startBackup operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup/
          */
-        async startBackup(backupDto?: BackupDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BackupProgressWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startBackup(backupDto, options);
+        async startBackup(startBackupRequestDto?: StartBackupRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BackupProgressWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startBackup(startBackupRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BackupApi.startBackup']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1075,14 +1075,14 @@ export const BackupApiFp = function(configuration?: Configuration) {
         /**
          * Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
          * @summary Start the restoring process
-         * @param {BackupRestoreDto} [backupRestoreDto] 
+         * @param {StartBackupRestoreRequestDto} [startBackupRestoreRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startBackupRestore operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-backup-restore/
          */
-        async startBackupRestore(backupRestoreDto?: BackupRestoreDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BackupProgressWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startBackupRestore(backupRestoreDto, options);
+        async startBackupRestore(startBackupRestoreRequestDto?: StartBackupRestoreRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BackupProgressWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startBackupRestore(startBackupRestoreRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BackupApi.startBackupRestore']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1118,7 +1118,7 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         createBackupSchedule(requestParameters: BackupApiCreateBackupScheduleRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.createBackupSchedule(requestParameters.backupScheduleDto, options).then((request) => request(axios, basePath));
+            return localVarFp.createBackupSchedule(requestParameters.createBackupScheduleRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes one backup: first its history record, then the archive in the storage the record points at.  The ID is the one listed by `GET api/2.0/backup/getbackuphistory`, which is also the `taskId` the  backup was started with.  Deleting a backup of the whole server rather than of one portal additionally requires the space  access permission. A record that belongs to another portal is left untouched and the call still  answers true, so the result confirms that the request was accepted rather than that anything was  deleted - check with `GET api/2.0/backup/getbackuphistory` if it matters.  The record is removed before the archive, so when the storage can no longer be reached the archive  stays behind with nothing pointing at it.
@@ -1249,7 +1249,7 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         startBackup(requestParameters: BackupApiStartBackupRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.startBackup(requestParameters.backupDto, options).then((request) => request(axios, basePath));
+            return localVarFp.startBackup(requestParameters.startBackupRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Queues the restoring of the current portal from a backup and returns straight away: the work itself is  done by the separate backup worker service, which picks the job up from an integration event, so the  response reports a progress of 0 and the `Created` status, and the returned `taskId` is the handle to  poll with `GET api/2.0/backup/getrestoreprogress` - the one operation of this service that stays  reachable while the portal is being restored, because every other one answers 403 in that state.  The source is given either by `backupId`, which is the ID of a record from  `GET api/2.0/backup/getbackuphistory`, or, when `backupId` is not a GUID, by the `filePath` key of  `storageParams` together with the matching `storageType`; an all-zero GUID is parsed as a GUID and  therefore reaches neither branch.  The caller needs the portal settings permission, restoring has to be allowed by the pricing plan of a  portal that is not a standalone installation, and `dump` - restoring the whole server rather than this  one portal - additionally requires the space access permission.
@@ -1261,7 +1261,7 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         startBackupRestore(requestParameters: BackupApiStartBackupRestoreRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BackupProgressWrapper> {
-            return localVarFp.startBackupRestore(requestParameters.backupRestoreDto, options).then((request) => request(axios, basePath));
+            return localVarFp.startBackupRestore(requestParameters.startBackupRestoreRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1274,10 +1274,10 @@ export const BackupApiFactory = function (configuration?: Configuration, basePat
 export interface BackupApiCreateBackupScheduleRequest {
     /**
      * 
-     * @type {BackupScheduleDto}
+     * @type {CreateBackupScheduleRequestDto}
      * @memberof BackupApiCreateBackupSchedule
      */
-    readonly backupScheduleDto?: BackupScheduleDto
+    readonly createBackupScheduleRequestDto?: CreateBackupScheduleRequestDto
 }
 
 /**
@@ -1442,10 +1442,10 @@ export interface BackupApiGetRestoreProgressRequest {
 export interface BackupApiStartBackupRequest {
     /**
      * 
-     * @type {BackupDto}
+     * @type {StartBackupRequestDto}
      * @memberof BackupApiStartBackup
      */
-    readonly backupDto?: BackupDto
+    readonly startBackupRequestDto?: StartBackupRequestDto
 }
 
 /**
@@ -1456,10 +1456,10 @@ export interface BackupApiStartBackupRequest {
 export interface BackupApiStartBackupRestoreRequest {
     /**
      * 
-     * @type {BackupRestoreDto}
+     * @type {StartBackupRestoreRequestDto}
      * @memberof BackupApiStartBackupRestore
      */
-    readonly backupRestoreDto?: BackupRestoreDto
+    readonly startBackupRestoreRequestDto?: StartBackupRestoreRequestDto
 }
 
 /**
@@ -1489,7 +1489,7 @@ export class BackupApi extends BaseAPI {
      * @memberof BackupApi
      */
     public createBackupSchedule(requestParameters: BackupApiCreateBackupScheduleRequest = {}, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).createBackupSchedule(requestParameters.backupScheduleDto, options).then((request) => request(this.axios, this.basePath));
+        return BackupApiFp(this.configuration).createBackupSchedule(requestParameters.createBackupScheduleRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1620,7 +1620,7 @@ export class BackupApi extends BaseAPI {
      * @memberof BackupApi
      */
     public startBackup(requestParameters: BackupApiStartBackupRequest = {}, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).startBackup(requestParameters.backupDto, options).then((request) => request(this.axios, this.basePath));
+        return BackupApiFp(this.configuration).startBackup(requestParameters.startBackupRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1632,7 +1632,7 @@ export class BackupApi extends BaseAPI {
      * @memberof BackupApi
      */
     public startBackupRestore(requestParameters: BackupApiStartBackupRestoreRequest = {}, options?: RawAxiosRequestConfig) {
-        return BackupApiFp(this.configuration).startBackupRestore(requestParameters.backupRestoreDto, options).then((request) => request(this.axios, this.basePath));
+        return BackupApiFp(this.configuration).startBackupRestore(requestParameters.startBackupRestoreRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

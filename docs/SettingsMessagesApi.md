@@ -59,6 +59,7 @@ const { status, data } = await apiInstance.enableAdminMessageSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A localized message confirming that the administrator message setting has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -79,7 +80,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **adminMessageSettingsRequestsDto** | **AdminMessageSettingsRequestsDto**|  | |
+| **adminMessageSettingsRequestDto** | **AdminMessageSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -96,16 +97,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsMessagesApi,
     Configuration,
-    AdminMessageSettingsRequestsDto
+    AdminMessageSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsMessagesApi(configuration);
 
-let adminMessageSettingsRequestsDto: AdminMessageSettingsRequestsDto; // (optional)
+let adminMessageSettingsRequestDto: AdminMessageSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.sendAdminMail(
-    adminMessageSettingsRequestsDto
+    adminMessageSettingsRequestDto
 );
 ```
 
@@ -119,9 +120,10 @@ const { status, data } = await apiInstance.sendAdminMail(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A localized message confirming that the message has been queued for the portal administrators |  * X-RateLimit-Limit - Rate limit: 5 requests per 15 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 15-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The email address is malformed, or the message is empty once its markup is stripped |  -  |
+|**400** | The request body cannot be read or has no `email` or `message`, the email address is malformed or longer than 255 characters, or the message is longer than 255 characters or empty once its markup is stripped |  -  |
+|**403** | The caller is not signed in, the installation has a CAPTCHA configured, and `recaptchaResponse` is missing or not accepted |  -  |
 |**429** | Too many contact attempts came from the same address within the rate-limit window |  * Retry-After - Seconds to wait before retrying (5 req / 15 min limit per user/IP). <br>  |
-|**500** | Internal Server Error. |  -  |
+|**500** | The contact form is switched off and the portal\'s payment has not lapsed |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -138,7 +140,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **adminMessageBaseSettingsRequestsDto** | **AdminMessageBaseSettingsRequestsDto**|  | |
+| **adminMessageBaseSettingsRequestDto** | **AdminMessageBaseSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -155,16 +157,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsMessagesApi,
     Configuration,
-    AdminMessageBaseSettingsRequestsDto
+    AdminMessageBaseSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsMessagesApi(configuration);
 
-let adminMessageBaseSettingsRequestsDto: AdminMessageBaseSettingsRequestsDto; // (optional)
+let adminMessageBaseSettingsRequestDto: AdminMessageBaseSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.sendJoinInviteMail(
-    adminMessageBaseSettingsRequestsDto
+    adminMessageBaseSettingsRequestDto
 );
 ```
 
@@ -178,11 +180,11 @@ const { status, data } = await apiInstance.sendJoinInviteMail(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A localized message confirming that the invitation with the join link has been sent |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The email address is malformed or internationalized, lies outside the trusted domains, or already belongs to a member of the portal |  -  |
+|**400** | The request body cannot be read or has no `email`, the email address is malformed, internationalized or longer than 255 characters, lies outside the trusted domains, or already belongs to a member of the portal |  -  |
 |**403** | The portal is not accepting requests while it is being restored, transferred or encrypted |  -  |
 |**405** | The portal publishes no trusted-domain policy, so it has nothing to join |  -  |
-|**429** | Too many invitation requests came from the same network address |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
+|**500** | Eleven invitation requests from the same network address have already been counted, each less than two minutes after the one before |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

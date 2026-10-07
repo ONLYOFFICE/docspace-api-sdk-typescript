@@ -136,6 +136,12 @@ export type ThirdPartyFileEntryDto = FileEntryBaseDto &  {
      * @memberof ThirdPartyFileEntryDto
      */
     'isLinkExpired'?: boolean | null;
+    /**
+     * The IDs of the metadata templates assigned to the file entry.
+     * @type {Array<number>}
+     * @memberof ThirdPartyFileEntryDto
+     */
+    'assignedMetadataTemplates'?: Array<number> | null;
 };
 
 

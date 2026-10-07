@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 
 /**
  * Per-entry error reported by `PromptsEngine.importBundle`.
@@ -37,7 +37,7 @@ export interface AiImportError {
     /**
      * Why the entry was rejected.
      */
-    'error': AiTErrorData;
+    'error': AiErrorData;
 }
 
 export const AiImportErrorKindEnum = {

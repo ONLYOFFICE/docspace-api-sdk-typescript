@@ -24,37 +24,37 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { CustomColorThemesSettingsRequestsDto } from '../../models';
+import type { CustomColorThemesSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { CustomColorThemesSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { DeepLinkConfigurationRequestsDto } from '../../models';
+import type { DeepLinkConfigurationRequestDto } from '../../models';
 // @ts-ignore
 import type { DefaultProductRequestDto } from '../../models';
 // @ts-ignore
-import type { DnsSettingsRequestsDto } from '../../models';
+import type { DnsSettingsRequestDto } from '../../models';
 // @ts-ignore
-import type { EmailActivationSettings } from '../../models';
+import type { EmailActivationSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { EmailActivationSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { MailDomainSettingsRequestsDto } from '../../models';
+import type { MailDomainSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { PaymentSettingsWrapper } from '../../models';
-// @ts-ignore
-import type { STRINGArrayWrapper } from '../../models';
 // @ts-ignore
 import type { SettingsWrapper } from '../../models';
 // @ts-ignore
 import type { SocketSettingsWrapper } from '../../models';
 // @ts-ignore
+import type { StringArrayWrapper } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { StudioDefaultPageSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { TenantAiAccessSettingsDto } from '../../models';
+import type { TenantAiAccessSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantAiAccessSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -64,9 +64,9 @@ import type { TenantUserInvitationSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantUserInvitationSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { TimezonesRequestsArrayWrapper } from '../../models';
+import type { TimezoneArrayWrapper } from '../../models';
 // @ts-ignore
-import type { WizardRequestsDto } from '../../models';
+import type { WizardRequestDto } from '../../models';
 // @ts-ignore
 import type { WizardSettingsWrapper } from '../../models';
 /**
@@ -132,13 +132,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
          * @summary Complete the Wizard settings
-         * @param {WizardRequestsDto} [wizardRequestsDto] 
+         * @param {WizardRequestDto} [wizardRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for completeWizard operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          */
-        completeWizard: async (wizardRequestsDto?: WizardRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        completeWizard: async (wizardRequestDto?: WizardRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/wizard/complete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -178,7 +178,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(wizardRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(wizardRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -188,13 +188,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
          * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {DeepLinkConfigurationRequestDto} [deepLinkConfigurationRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for configureDeepLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          */
-        configureDeepLink: async (deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        configureDeepLink: async (deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/deeplink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -234,7 +234,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -936,13 +936,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
          * @summary Save the DNS settings
-         * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+         * @param {DnsSettingsRequestDto} [dnsSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveDnsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          */
-        saveDnsSettings: async (dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveDnsSettings: async (dnsSettingsRequestDto?: DnsSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/dns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -982,7 +982,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(dnsSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(dnsSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -992,13 +992,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
          * @summary Save the mail domain settings
-         * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+         * @param {MailDomainSettingsRequestDto} [mailDomainSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveMailDomainSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          */
-        saveMailDomainSettings: async (mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveMailDomainSettings: async (mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/maildomainsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1038,7 +1038,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(mailDomainSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(mailDomainSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1048,13 +1048,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
          * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {CustomColorThemesSettingsRequestDto} [customColorThemesSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for savePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          */
-        savePortalColorTheme: async (customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        savePortalColorTheme: async (customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1094,7 +1094,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1104,13 +1104,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
          * @summary Set the AI access settings
-         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {TenantAiAccessSettingsRequestDto} [tenantAiAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantAiAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
          */
-        setTenantAiAccessSettings: async (tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantAiAccessSettings: async (tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/ai-access`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1150,7 +1150,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1160,13 +1160,13 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
          * @summary Update the email activation settings
-         * @param {EmailActivationSettings} [emailActivationSettings] 
+         * @param {EmailActivationSettingsRequestDto} [emailActivationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateEmailActivationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          */
-        updateEmailActivationSettings: async (emailActivationSettings?: EmailActivationSettings, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateEmailActivationSettings: async (emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/emailactivation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1206,7 +1206,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(emailActivationSettings, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(emailActivationSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1296,14 +1296,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
          * @summary Complete the Wizard settings
-         * @param {WizardRequestsDto} [wizardRequestsDto] 
+         * @param {WizardRequestDto} [wizardRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for completeWizard operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          */
-        async completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WizardSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.completeWizard(wizardRequestsDto, options);
+        async completeWizard(wizardRequestDto?: WizardRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WizardSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.completeWizard(wizardRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.completeWizard']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1311,14 +1311,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
          * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {DeepLinkConfigurationRequestDto} [deepLinkConfigurationRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for configureDeepLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          */
-        async configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestsDto, options);
+        async configureDeepLink(deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.configureDeepLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1445,7 +1445,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSupportedCultures operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
          */
-        async getSupportedCultures(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async getSupportedCultures(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSupportedCultures(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getSupportedCultures']?.[localVarOperationServerIndex]?.url;
@@ -1487,7 +1487,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getTimeZones operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
          */
-        async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezonesRequestsArrayWrapper>> {
+        async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezoneArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZones(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
@@ -1511,14 +1511,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
          * @summary Save the DNS settings
-         * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+         * @param {DnsSettingsRequestDto} [dnsSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveDnsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          */
-        async saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDnsSettings(dnsSettingsRequestsDto, options);
+        async saveDnsSettings(dnsSettingsRequestDto?: DnsSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDnsSettings(dnsSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveDnsSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1526,14 +1526,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
          * @summary Save the mail domain settings
-         * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+         * @param {MailDomainSettingsRequestDto} [mailDomainSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveMailDomainSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          */
-        async saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestsDto, options);
+        async saveMailDomainSettings(mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveMailDomainSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1541,14 +1541,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
          * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {CustomColorThemesSettingsRequestDto} [customColorThemesSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for savePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          */
-        async savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
+        async savePortalColorTheme(customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1556,14 +1556,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
          * @summary Set the AI access settings
-         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * @param {TenantAiAccessSettingsRequestDto} [tenantAiAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantAiAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
          */
-        async setTenantAiAccessSettings(tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsDto, options);
+        async setTenantAiAccessSettings(tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.setTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1571,14 +1571,14 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
          * @summary Update the email activation settings
-         * @param {EmailActivationSettings} [emailActivationSettings] 
+         * @param {EmailActivationSettingsRequestDto} [emailActivationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateEmailActivationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          */
-        async updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailActivationSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmailActivationSettings(emailActivationSettings, options);
+        async updateEmailActivationSettings(emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailActivationSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmailActivationSettings(emailActivationSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.updateEmailActivationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1629,7 +1629,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WizardSettingsWrapper> {
-            return localVarFp.completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.completeWizard(requestParameters.wizardRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
@@ -1641,7 +1641,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
-            return localVarFp.configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.configureDeepLink(requestParameters.deepLinkConfigurationRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
@@ -1741,7 +1741,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
          * @throws {RequiredError}
          */
-        getSupportedCultures(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        getSupportedCultures(options?: RawAxiosRequestConfig): AxiosPromise<StringArrayWrapper> {
             return localVarFp.getSupportedCultures(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1774,7 +1774,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
          * @throws {RequiredError}
          */
-        getTimeZones(options?: RawAxiosRequestConfig): AxiosPromise<TimezonesRequestsArrayWrapper> {
+        getTimeZones(options?: RawAxiosRequestConfig): AxiosPromise<TimezoneArrayWrapper> {
             return localVarFp.getTimeZones(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1799,7 +1799,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveDnsSettings(requestParameters.dnsSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
@@ -1811,7 +1811,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveMailDomainSettings(requestParameters.mailDomainSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
@@ -1823,7 +1823,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
@@ -1835,7 +1835,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
-            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
@@ -1847,7 +1847,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmailActivationSettingsWrapper> {
-            return localVarFp.updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(axios, basePath));
+            return localVarFp.updateEmailActivationSettings(requestParameters.emailActivationSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
@@ -1872,10 +1872,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
 export interface CommonSettingsApiCompleteWizardRequest {
     /**
      * 
-     * @type {WizardRequestsDto}
+     * @type {WizardRequestDto}
      * @memberof CommonSettingsApiCompleteWizard
      */
-    readonly wizardRequestsDto?: WizardRequestsDto
+    readonly wizardRequestDto?: WizardRequestDto
 }
 
 /**
@@ -1886,10 +1886,10 @@ export interface CommonSettingsApiCompleteWizardRequest {
 export interface CommonSettingsApiConfigureDeepLinkRequest {
     /**
      * 
-     * @type {DeepLinkConfigurationRequestsDto}
+     * @type {DeepLinkConfigurationRequestDto}
      * @memberof CommonSettingsApiConfigureDeepLink
      */
-    readonly deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto
+    readonly deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto
 }
 
 /**
@@ -1942,10 +1942,10 @@ export interface CommonSettingsApiSaveDefaultFolderRequest {
 export interface CommonSettingsApiSaveDnsSettingsRequest {
     /**
      * 
-     * @type {DnsSettingsRequestsDto}
+     * @type {DnsSettingsRequestDto}
      * @memberof CommonSettingsApiSaveDnsSettings
      */
-    readonly dnsSettingsRequestsDto?: DnsSettingsRequestsDto
+    readonly dnsSettingsRequestDto?: DnsSettingsRequestDto
 }
 
 /**
@@ -1956,10 +1956,10 @@ export interface CommonSettingsApiSaveDnsSettingsRequest {
 export interface CommonSettingsApiSaveMailDomainSettingsRequest {
     /**
      * 
-     * @type {MailDomainSettingsRequestsDto}
+     * @type {MailDomainSettingsRequestDto}
      * @memberof CommonSettingsApiSaveMailDomainSettings
      */
-    readonly mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto
+    readonly mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto
 }
 
 /**
@@ -1970,10 +1970,10 @@ export interface CommonSettingsApiSaveMailDomainSettingsRequest {
 export interface CommonSettingsApiSavePortalColorThemeRequest {
     /**
      * 
-     * @type {CustomColorThemesSettingsRequestsDto}
+     * @type {CustomColorThemesSettingsRequestDto}
      * @memberof CommonSettingsApiSavePortalColorTheme
      */
-    readonly customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto
+    readonly customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto
 }
 
 /**
@@ -1984,10 +1984,10 @@ export interface CommonSettingsApiSavePortalColorThemeRequest {
 export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
     /**
      * 
-     * @type {TenantAiAccessSettingsDto}
+     * @type {TenantAiAccessSettingsRequestDto}
      * @memberof CommonSettingsApiSetTenantAiAccessSettings
      */
-    readonly tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto
+    readonly tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto
 }
 
 /**
@@ -1998,10 +1998,10 @@ export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
 export interface CommonSettingsApiUpdateEmailActivationSettingsRequest {
     /**
      * 
-     * @type {EmailActivationSettings}
+     * @type {EmailActivationSettingsRequestDto}
      * @memberof CommonSettingsApiUpdateEmailActivationSettings
      */
-    readonly emailActivationSettings?: EmailActivationSettings
+    readonly emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto
 }
 
 /**
@@ -2045,7 +2045,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).completeWizard(requestParameters.wizardRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2057,7 +2057,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).configureDeepLink(requestParameters.deepLinkConfigurationRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2215,7 +2215,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveDnsSettings(requestParameters.dnsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2227,7 +2227,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(requestParameters.mailDomainSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2239,7 +2239,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2251,7 +2251,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2263,7 +2263,7 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(requestParameters.emailActivationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Balance } from './balance';
+import type { BalanceDto } from './balance-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the Balance object.
+ * The successful API response containing the BalanceDto object.
  */
 export interface BalanceWrapper {
     /**
-     * The Balance object returned by the operation.
+     * The BalanceDto object returned by the operation.
      */
-    'response'?: Balance;
+    'response'?: BalanceDto;
     /**
      * The total number of items in the response
      */

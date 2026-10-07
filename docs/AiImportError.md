@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **kind** | **string** | `folder` or `prompt`, plus the offending name or id. | [default to undefined]
 **ref** | **string** | The offending entry - its name or its id. | [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the entry was rejected. | [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the entry was rejected. | [default to undefined]
 
 ## Example
 

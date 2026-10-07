@@ -24,15 +24,15 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { CreateWebhooksConfigRequestsDto } from '../../models';
+import type { CreateWebhooksConfigRequestDto } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { UpdateWebhooksConfigRequestsDto } from '../../models';
+import type { UpdateWebhooksConfigRequestDto } from '../../models';
 // @ts-ignore
 import type { WebhookGroupStatus } from '../../models';
 // @ts-ignore
-import type { WebhookRetryRequestsDto } from '../../models';
+import type { WebhookRetryRequestDto } from '../../models';
 // @ts-ignore
 import type { WebhookTrigger } from '../../models';
 // @ts-ignore
@@ -59,13 +59,13 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Creates a webhook subscription for the current portal: a target URL that the portal calls with a signed JSON  payload whenever one of the subscribed events happens. The target is checked before anything is stored, so it  has to be an absolute `http` or `https` address outside the installation\'s own network, and it has to answer a  HEAD request with a success code, redirects not being followed. `secretKey` is mandatory here, has to satisfy  the portal password rules published by `GET api/2.0/settings/security/password`, and signs the payloads; it  does not appear in any response. `triggers` is a bitmask of the subscribed events with 0 standing for all of  them; a flag the caller\'s role may not use is rejected, so take the allowed set from  `GET api/2.0/settings/webhook/triggers`. `ssl=true` additionally demands an `https` target with a valid  certificate, while `ssl=false` leaves the certificate unchecked. Set `targetId` to deliver events about a  single entity only. A subscription fires only for events its creator is allowed to see, and only while it is  enabled. Any role except `Guest` may create one, and each call adds another subscription rather than replacing  an existing one.
          * @summary Create a webhook
-         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
+         * @param {CreateWebhooksConfigRequestDto} [createWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-webhook/
          */
-        createWebhook: async (createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createWebhook: async (createWebhooksConfigRequestDto?: CreateWebhooksConfigRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -105,7 +105,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createWebhooksConfigRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -115,13 +115,13 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Switches one webhook subscription on or off, leaving the rest of its parameters as they are. Only `id` and  `enabled` are read from the body: `name`, `uri`, `secretKey`, `ssl`, `triggers` and `targetId` are demanded by  the schema but ignored here, so change any of them with `PUT api/2.0/settings/webhook` instead. Switching a  subscription on re-checks what is already stored, probing the saved URL with a HEAD request and re-validating  the saved secret against the current portal password rules, and the call is refused with 400 when either  fails: a subscription whose target has gone away, or whose secret predates a tightening of the password rules,  cannot be switched on until it is updated. Switching one off is not validated. While a subscription is off its  events are dropped rather than queued, so nothing arrives from that period once it is switched on again. A  `DocSpaceAdmin` may switch any subscription in the portal, anyone else only their own, and a `Guest` is  refused. The response carries the subscription in its new state, and repeating the call changes nothing  further.
          * @summary Switch a webhook on or off
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestDto} [updateWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for enableWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-webhook/
          */
-        enableWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        enableWebhook: async (updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/webhook/enable`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -161,7 +161,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -496,13 +496,13 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Sends a batch of past webhook deliveries again. `ids` holds the identifiers of delivery records from  `GET api/2.0/settings/webhooks/log`; each of them is sent once more to the subscription it belongs to as a  fresh delivery record, queued for asynchronous delivery, and the response lists those new records with  `status` and `delivery` not filled in yet. Records that do not exist, and records of another member\'s  subscription when the caller is not a `DocSpaceAdmin`, are skipped in silence instead of failing the call, so  a response shorter than `ids` is the only sign that something was left out: compare the counts rather than  assuming everything was queued. An empty `ids` list is accepted and queues nothing. Read the outcomes from  `GET api/2.0/settings/webhooks/log`, matching the returned identifiers with `eventId`. Every call queues  another round of attempts, and the original records stay as they are. A `Guest` is refused. The operation is  rate limited, so a burst of calls is answered with 429. For a single record  `PUT api/2.0/settings/webhook/{id}/retry` reports a missing or forbidden record instead of skipping it.
          * @summary Retry webhook deliveries
-         * @param {WebhookRetryRequestsDto} [webhookRetryRequestsDto] 
+         * @param {WebhookRetryRequestDto} [webhookRetryRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for retryWebhooks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhooks/
          */
-        retryWebhooks: async (webhookRetryRequestsDto?: WebhookRetryRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        retryWebhooks: async (webhookRetryRequestDto?: WebhookRetryRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/webhook/retry`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -542,7 +542,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webhookRetryRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(webhookRetryRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -552,13 +552,13 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Replaces the stored parameters of one webhook subscription, which is addressed by `id` in the body rather than  in the path. Every field of the request overwrites the stored one, so a payload that leaves out `enabled`,  `ssl`, `triggers` or `targetId` resets them to off, all events and no target: read the current values with  `GET api/2.0/settings/webhook` first and send back whatever should stay. `secretKey` is the one exception, an  empty value keeping the existing secret and a new one having to satisfy the portal password rules. The new  target is validated exactly as on creation, that is it must sit outside the installation\'s own network and  answer a HEAD request, and trigger flags the caller\'s role may not use are rejected. That validation runs  before the subscription is looked up, so an unusable payload is refused with 400 even when no subscription  with this `id` exists. A `DocSpaceAdmin` may update any subscription in the portal, anyone else only their  own, and a `Guest` is refused. Sending the same payload twice leaves the same state. Use  `PUT api/2.0/settings/webhook/enable` to switch a subscription on or off without touching anything else.
          * @summary Update a webhook
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestDto} [updateWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-webhook/
          */
-        updateWebhook: async (updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWebhook: async (updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/webhook`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -598,7 +598,7 @@ export const WebhooksApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateWebhooksConfigRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -618,14 +618,14 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Creates a webhook subscription for the current portal: a target URL that the portal calls with a signed JSON  payload whenever one of the subscribed events happens. The target is checked before anything is stored, so it  has to be an absolute `http` or `https` address outside the installation\'s own network, and it has to answer a  HEAD request with a success code, redirects not being followed. `secretKey` is mandatory here, has to satisfy  the portal password rules published by `GET api/2.0/settings/security/password`, and signs the payloads; it  does not appear in any response. `triggers` is a bitmask of the subscribed events with 0 standing for all of  them; a flag the caller\'s role may not use is rejected, so take the allowed set from  `GET api/2.0/settings/webhook/triggers`. `ssl=true` additionally demands an `https` target with a valid  certificate, while `ssl=false` leaves the certificate unchecked. Set `targetId` to deliver events about a  single entity only. A subscription fires only for events its creator is allowed to see, and only while it is  enabled. Any role except `Guest` may create one, and each call adds another subscription rather than replacing  an existing one.
          * @summary Create a webhook
-         * @param {CreateWebhooksConfigRequestsDto} [createWebhooksConfigRequestsDto] 
+         * @param {CreateWebhooksConfigRequestDto} [createWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-webhook/
          */
-        async createWebhook(createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhook(createWebhooksConfigRequestsDto, options);
+        async createWebhook(createWebhooksConfigRequestDto?: CreateWebhooksConfigRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createWebhook(createWebhooksConfigRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.createWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -633,14 +633,14 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Switches one webhook subscription on or off, leaving the rest of its parameters as they are. Only `id` and  `enabled` are read from the body: `name`, `uri`, `secretKey`, `ssl`, `triggers` and `targetId` are demanded by  the schema but ignored here, so change any of them with `PUT api/2.0/settings/webhook` instead. Switching a  subscription on re-checks what is already stored, probing the saved URL with a HEAD request and re-validating  the saved secret against the current portal password rules, and the call is refused with 400 when either  fails: a subscription whose target has gone away, or whose secret predates a tightening of the password rules,  cannot be switched on until it is updated. Switching one off is not validated. While a subscription is off its  events are dropped rather than queued, so nothing arrives from that period once it is switched on again. A  `DocSpaceAdmin` may switch any subscription in the portal, anyone else only their own, and a `Guest` is  refused. The response carries the subscription in its new state, and repeating the call changes nothing  further.
          * @summary Switch a webhook on or off
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestDto} [updateWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for enableWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/enable-webhook/
          */
-        async enableWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.enableWebhook(updateWebhooksConfigRequestsDto, options);
+        async enableWebhook(updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.enableWebhook(updateWebhooksConfigRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.enableWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -730,14 +730,14 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Sends a batch of past webhook deliveries again. `ids` holds the identifiers of delivery records from  `GET api/2.0/settings/webhooks/log`; each of them is sent once more to the subscription it belongs to as a  fresh delivery record, queued for asynchronous delivery, and the response lists those new records with  `status` and `delivery` not filled in yet. Records that do not exist, and records of another member\'s  subscription when the caller is not a `DocSpaceAdmin`, are skipped in silence instead of failing the call, so  a response shorter than `ids` is the only sign that something was left out: compare the counts rather than  assuming everything was queued. An empty `ids` list is accepted and queues nothing. Read the outcomes from  `GET api/2.0/settings/webhooks/log`, matching the returned identifiers with `eventId`. Every call queues  another round of attempts, and the original records stay as they are. A `Guest` is refused. The operation is  rate limited, so a burst of calls is answered with 429. For a single record  `PUT api/2.0/settings/webhook/{id}/retry` reports a missing or forbidden record instead of skipping it.
          * @summary Retry webhook deliveries
-         * @param {WebhookRetryRequestsDto} [webhookRetryRequestsDto] 
+         * @param {WebhookRetryRequestDto} [webhookRetryRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for retryWebhooks operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/retry-webhooks/
          */
-        async retryWebhooks(webhookRetryRequestsDto?: WebhookRetryRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retryWebhooks(webhookRetryRequestsDto, options);
+        async retryWebhooks(webhookRetryRequestDto?: WebhookRetryRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksLogArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retryWebhooks(webhookRetryRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.retryWebhooks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -745,14 +745,14 @@ export const WebhooksApiFp = function(configuration?: Configuration) {
         /**
          * Replaces the stored parameters of one webhook subscription, which is addressed by `id` in the body rather than  in the path. Every field of the request overwrites the stored one, so a payload that leaves out `enabled`,  `ssl`, `triggers` or `targetId` resets them to off, all events and no target: read the current values with  `GET api/2.0/settings/webhook` first and send back whatever should stay. `secretKey` is the one exception, an  empty value keeping the existing secret and a new one having to satisfy the portal password rules. The new  target is validated exactly as on creation, that is it must sit outside the installation\'s own network and  answer a HEAD request, and trigger flags the caller\'s role may not use are rejected. That validation runs  before the subscription is looked up, so an unusable payload is refused with 400 even when no subscription  with this `id` exists. A `DocSpaceAdmin` may update any subscription in the portal, anyone else only their  own, and a `Guest` is refused. Sending the same payload twice leaves the same state. Use  `PUT api/2.0/settings/webhook/enable` to switch a subscription on or off without touching anything else.
          * @summary Update a webhook
-         * @param {UpdateWebhooksConfigRequestsDto} [updateWebhooksConfigRequestsDto] 
+         * @param {UpdateWebhooksConfigRequestDto} [updateWebhooksConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebhook operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-webhook/
          */
-        async updateWebhook(updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhook(updateWebhooksConfigRequestsDto, options);
+        async updateWebhook(updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WebhooksConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebhook(updateWebhooksConfigRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebhooksApi.updateWebhook']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -777,7 +777,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         createWebhook(requestParameters: WebhooksApiCreateWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.createWebhook(requestParameters.createWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.createWebhook(requestParameters.createWebhooksConfigRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Switches one webhook subscription on or off, leaving the rest of its parameters as they are. Only `id` and  `enabled` are read from the body: `name`, `uri`, `secretKey`, `ssl`, `triggers` and `targetId` are demanded by  the schema but ignored here, so change any of them with `PUT api/2.0/settings/webhook` instead. Switching a  subscription on re-checks what is already stored, probing the saved URL with a HEAD request and re-validating  the saved secret against the current portal password rules, and the call is refused with 400 when either  fails: a subscription whose target has gone away, or whose secret predates a tightening of the password rules,  cannot be switched on until it is updated. Switching one off is not validated. While a subscription is off its  events are dropped rather than queued, so nothing arrives from that period once it is switched on again. A  `DocSpaceAdmin` may switch any subscription in the portal, anyone else only their own, and a `Guest` is  refused. The response carries the subscription in its new state, and repeating the call changes nothing  further.
@@ -789,7 +789,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         enableWebhook(requestParameters: WebhooksApiEnableWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.enableWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.enableWebhook(requestParameters.updateWebhooksConfigRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the webhook subscriptions of the current portal, each together with the outcome of its most recent  delivery. The portal owner and a `DocSpaceAdmin` see every subscription in the portal, while a `RoomAdmin` or  a `User` sees only the ones they created themselves, so the same call answers differently depending on who  asks. A `Guest` may not use webhooks at all and is refused, and so is any non-admin caller while the portal  keeps the developer tools restricted, which `GET api/2.0/settings/devtoolsaccess` reports. Every entry pairs  the stored configuration with `status`, the HTTP status code the target answered on the last attempt, where 0  means nothing has been delivered yet, while the secret key is not part of the response. The list is neither  paginated nor ordered, and an empty list simply means no subscription exists for the caller. Nothing is  written and the call is safe to repeat. Create a subscription with `POST api/2.0/settings/webhook`, and  inspect single deliveries with `GET api/2.0/settings/webhooks/log`.
@@ -859,7 +859,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         retryWebhooks(requestParameters: WebhooksApiRetryWebhooksRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksLogArrayWrapper> {
-            return localVarFp.retryWebhooks(requestParameters.webhookRetryRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.retryWebhooks(requestParameters.webhookRetryRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the stored parameters of one webhook subscription, which is addressed by `id` in the body rather than  in the path. Every field of the request overwrites the stored one, so a payload that leaves out `enabled`,  `ssl`, `triggers` or `targetId` resets them to off, all events and no target: read the current values with  `GET api/2.0/settings/webhook` first and send back whatever should stay. `secretKey` is the one exception, an  empty value keeping the existing secret and a new one having to satisfy the portal password rules. The new  target is validated exactly as on creation, that is it must sit outside the installation\'s own network and  answer a HEAD request, and trigger flags the caller\'s role may not use are rejected. That validation runs  before the subscription is looked up, so an unusable payload is refused with 400 even when no subscription  with this `id` exists. A `DocSpaceAdmin` may update any subscription in the portal, anyone else only their  own, and a `Guest` is refused. Sending the same payload twice leaves the same state. Use  `PUT api/2.0/settings/webhook/enable` to switch a subscription on or off without touching anything else.
@@ -871,7 +871,7 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         updateWebhook(requestParameters: WebhooksApiUpdateWebhookRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WebhooksConfigWrapper> {
-            return localVarFp.updateWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.updateWebhook(requestParameters.updateWebhooksConfigRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -884,10 +884,10 @@ export const WebhooksApiFactory = function (configuration?: Configuration, baseP
 export interface WebhooksApiCreateWebhookRequest {
     /**
      * 
-     * @type {CreateWebhooksConfigRequestsDto}
+     * @type {CreateWebhooksConfigRequestDto}
      * @memberof WebhooksApiCreateWebhook
      */
-    readonly createWebhooksConfigRequestsDto?: CreateWebhooksConfigRequestsDto
+    readonly createWebhooksConfigRequestDto?: CreateWebhooksConfigRequestDto
 }
 
 /**
@@ -898,10 +898,10 @@ export interface WebhooksApiCreateWebhookRequest {
 export interface WebhooksApiEnableWebhookRequest {
     /**
      * 
-     * @type {UpdateWebhooksConfigRequestsDto}
+     * @type {UpdateWebhooksConfigRequestDto}
      * @memberof WebhooksApiEnableWebhook
      */
-    readonly updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto
+    readonly updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto
 }
 
 /**
@@ -1017,10 +1017,10 @@ export interface WebhooksApiRetryWebhookRequest {
 export interface WebhooksApiRetryWebhooksRequest {
     /**
      * 
-     * @type {WebhookRetryRequestsDto}
+     * @type {WebhookRetryRequestDto}
      * @memberof WebhooksApiRetryWebhooks
      */
-    readonly webhookRetryRequestsDto?: WebhookRetryRequestsDto
+    readonly webhookRetryRequestDto?: WebhookRetryRequestDto
 }
 
 /**
@@ -1031,10 +1031,10 @@ export interface WebhooksApiRetryWebhooksRequest {
 export interface WebhooksApiUpdateWebhookRequest {
     /**
      * 
-     * @type {UpdateWebhooksConfigRequestsDto}
+     * @type {UpdateWebhooksConfigRequestDto}
      * @memberof WebhooksApiUpdateWebhook
      */
-    readonly updateWebhooksConfigRequestsDto?: UpdateWebhooksConfigRequestsDto
+    readonly updateWebhooksConfigRequestDto?: UpdateWebhooksConfigRequestDto
 }
 
 /**
@@ -1053,7 +1053,7 @@ export class WebhooksApi extends BaseAPI {
      * @memberof WebhooksApi
      */
     public createWebhook(requestParameters: WebhooksApiCreateWebhookRequest = {}, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).createWebhook(requestParameters.createWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).createWebhook(requestParameters.createWebhooksConfigRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1065,7 +1065,7 @@ export class WebhooksApi extends BaseAPI {
      * @memberof WebhooksApi
      */
     public enableWebhook(requestParameters: WebhooksApiEnableWebhookRequest = {}, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).enableWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).enableWebhook(requestParameters.updateWebhooksConfigRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1135,7 +1135,7 @@ export class WebhooksApi extends BaseAPI {
      * @memberof WebhooksApi
      */
     public retryWebhooks(requestParameters: WebhooksApiRetryWebhooksRequest = {}, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).retryWebhooks(requestParameters.webhookRetryRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).retryWebhooks(requestParameters.webhookRetryRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1147,7 +1147,7 @@ export class WebhooksApi extends BaseAPI {
      * @memberof WebhooksApi
      */
     public updateWebhook(requestParameters: WebhooksApiUpdateWebhookRequest = {}, options?: RawAxiosRequestConfig) {
-        return WebhooksApiFp(this.configuration).updateWebhook(requestParameters.updateWebhooksConfigRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return WebhooksApiFp(this.configuration).updateWebhook(requestParameters.updateWebhooksConfigRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

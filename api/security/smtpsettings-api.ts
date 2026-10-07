@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { SmtpOperationStatusRequestsWrapper } from '../../models';
+import type { SmtpOperationStatusWrapper } from '../../models';
 // @ts-ignore
 import type { SmtpSettingsDto } from '../../models';
 // @ts-ignore
@@ -321,7 +321,7 @@ export const SMTPSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSmtpOperationStatus operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/
          */
-        async getSmtpOperationStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SmtpOperationStatusRequestsWrapper>> {
+        async getSmtpOperationStatus(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SmtpOperationStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSmtpOperationStatus(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SMTPSettingsApi.getSmtpOperationStatus']?.[localVarOperationServerIndex]?.url;
@@ -378,7 +378,7 @@ export const SMTPSettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for testSmtpSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/
          */
-        async testSmtpSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SmtpOperationStatusRequestsWrapper>> {
+        async testSmtpSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SmtpOperationStatusWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.testSmtpSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SMTPSettingsApi.testSmtpSettings']?.[localVarOperationServerIndex]?.url;
@@ -402,7 +402,7 @@ export const SMTPSettingsApiFactory = function (configuration?: Configuration, b
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-smtp-operation-status/
          * @throws {RequiredError}
          */
-        getSmtpOperationStatus(options?: RawAxiosRequestConfig): AxiosPromise<SmtpOperationStatusRequestsWrapper> {
+        getSmtpOperationStatus(options?: RawAxiosRequestConfig): AxiosPromise<SmtpOperationStatusWrapper> {
             return localVarFp.getSmtpOperationStatus(options).then((request) => request(axios, basePath));
         },
         /**
@@ -447,7 +447,7 @@ export const SMTPSettingsApiFactory = function (configuration?: Configuration, b
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-smtp-settings/
          * @throws {RequiredError}
          */
-        testSmtpSettings(options?: RawAxiosRequestConfig): AxiosPromise<SmtpOperationStatusRequestsWrapper> {
+        testSmtpSettings(options?: RawAxiosRequestConfig): AxiosPromise<SmtpOperationStatusWrapper> {
             return localVarFp.testSmtpSettings(options).then((request) => request(axios, basePath));
         },
     };

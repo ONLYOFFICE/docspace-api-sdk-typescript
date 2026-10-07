@@ -44,21 +44,21 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Sets a new password on an account, which is the step that completes a password change or a password  recovery.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, so the password of a disabled account or of an open invitation  cannot be set, and only the portal owner may set the owner\'s own password.  Send either `passwordHash`, which is taken as it is, or a plain `password`, which is checked against the  portal password policy; sending neither, or a password the policy rejects, answers 400.  The change ends every other session of that account and emails it a notice that the password was changed.  The answer is the profile, which does not carry the password in any form.  To have the recovery link sent in the first place, use `POST api/2.0/people/password`.
          * @summary Change a user password
-         * @param {string} userid The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+         * @param {string} userId The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
          * @param {ChangePasswordRequest} changePasswordRequest The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        changeUserPassword: async (userid: string, changePasswordRequest: ChangePasswordRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('changeUserPassword', 'userid', userid)
+        changeUserPassword: async (userId: string, changePasswordRequest: ChangePasswordRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('changeUserPassword', 'userId', userId)
             // verify required parameter 'changePasswordRequest' is not null or undefined
             assertParamExists('changeUserPassword', 'changePasswordRequest', changePasswordRequest)
 
-            const localVarPath = `/api/2.0/people/{userid}/password`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/password`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -104,7 +104,7 @@ export const PasswordApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -172,21 +172,21 @@ export const PasswordApiFp = function(configuration?: Configuration) {
         /**
          * Sets a new password on an account, which is the step that completes a password change or a password  recovery.  The request has to carry the confirmation token from the emailed link rather than an ordinary session, and an  expired or already used token is answered with 401.  The account has to exist and be `Active`, so the password of a disabled account or of an open invitation  cannot be set, and only the portal owner may set the owner\'s own password.  Send either `passwordHash`, which is taken as it is, or a plain `password`, which is checked against the  portal password policy; sending neither, or a password the policy rejects, answers 400.  The change ends every other session of that account and emails it a notice that the password was changed.  The answer is the profile, which does not carry the password in any form.  To have the recovery link sent in the first place, use `POST api/2.0/people/password`.
          * @summary Change a user password
-         * @param {string} userid The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
+         * @param {string} userId The ID of the account whose password is set, taken from the route. It has to match the account the  confirmation token was issued for, and the account has to be active.
          * @param {ChangePasswordRequest} changePasswordRequest The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeUserPassword operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-user-password/
          */
-        async changeUserPassword(userid: string, changePasswordRequest: ChangePasswordRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userid, changePasswordRequest, options);
+        async changeUserPassword(userId: string, changePasswordRequest: ChangePasswordRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeFullWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeUserPassword(userId, changePasswordRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PasswordApi.changeUserPassword']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
          * @summary Remind a user password
          * @param {EmailMemberRequestDto} [emailMemberRequestDto] 
          * @param {*} [options] Override http request option.
@@ -220,10 +220,10 @@ export const PasswordApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         changeUserPassword(requestParameters: PasswordApiChangeUserPasswordRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeFullWrapper> {
-            return localVarFp.changeUserPassword(requestParameters.userid, requestParameters.changePasswordRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.changeUserPassword(requestParameters.userId, requestParameters.changePasswordRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+         * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
          * @summary Remind a user password
          * @param {PasswordApiSendUserPasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -248,7 +248,7 @@ export interface PasswordApiChangeUserPasswordRequest {
      * @type {string}
      * @memberof PasswordApiChangeUserPassword
      */
-    readonly userid: string
+    readonly userId: string
 
     /**
      * The new password, sent either in plain text or already hashed. Exactly one of the two fields is needed.
@@ -288,11 +288,11 @@ export class PasswordApi extends BaseAPI {
      * @memberof PasswordApi
      */
     public changeUserPassword(requestParameters: PasswordApiChangeUserPasswordRequest, options?: RawAxiosRequestConfig) {
-        return PasswordApiFp(this.configuration).changeUserPassword(requestParameters.userid, requestParameters.changePasswordRequest, options).then((request) => request(this.axios, this.basePath));
+        return PasswordApiFp(this.configuration).changeUserPassword(requestParameters.userId, requestParameters.changePasswordRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userid}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
+     * Emails a password recovery link to an address, and is the entry point of the recovery flow rather than the  operation that changes anything.  It needs no authentication, which is how a person who cannot sign in uses it; when the portal has a CAPTCHA  configured, an unauthenticated request has to pass it and answers 403 if it does not.  An unauthenticated caller always gets the same success message, whether or not the address belongs to an  account, so the answer cannot be used to find out which addresses are registered.  An authenticated caller does get told: a failure is answered with 403, and asking for somebody else requires  DocSpace administrator rights, while the owner\'s password can be asked for by the owner alone and another  administrator\'s only by the owner.  The link that is sent leads to `PUT api/2.0/people/{userId}/password`, which is where the new password is  set; no password is ever sent by email despite the wording of the message.  Repeated calls are throttled.
      * @summary Remind a user password
      * @param {PeoplePasswordApiSendUserPasswordRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

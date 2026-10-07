@@ -82,7 +82,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **backupScheduleDto** | **BackupScheduleDto**|  | |
+| **createBackupScheduleRequestDto** | **CreateBackupScheduleRequestDto**|  | |
 
 
 ### Return type
@@ -99,16 +99,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     BackupApi,
     Configuration,
-    BackupScheduleDto
+    CreateBackupScheduleRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new BackupApi(configuration);
 
-let backupScheduleDto: BackupScheduleDto; // (optional)
+let createBackupScheduleRequestDto: CreateBackupScheduleRequestDto; // (optional)
 
 const { status, data } = await apiInstance.createBackupSchedule(
-    backupScheduleDto
+    createBackupScheduleRequestDto
 );
 ```
 
@@ -122,13 +122,13 @@ const { status, data } = await apiInstance.createBackupSchedule(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | True if the schedule was saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The number of the stored copies is outside 1 - 30, or a dump was requested on a portal that is not a standalone installation |  -  |
+|**400** | The request body cannot be read, the number of the stored copies is outside 1-30, a dump was requested on a portal that is not a standalone installation, or `storageParams` repeats a key or, on a dump, contains `tenantId` |  -  |
 |**402** | The portal subscription does not cover scheduled backups, has expired or has not been paid |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | The target folder was not found |  -  |
+|**500** | `cronParams` is missing, its period is not a defined value, its hour or day is out of range for the period, which includes a weekly or monthly schedule sent without `day`, a key or value of `storageParams` is null, the `folderId` or `filePath` key the storage type needs is missing, or `Local` storage was requested on a portal that is not a standalone installation |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -186,9 +186,9 @@ const { status, data } = await apiInstance.deleteBackup(
 |**200** | True once the request has been accepted, whether or not a backup was deleted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | The portal subscription has expired or has not been paid |  -  |
 |**403** | No permissions to perform this action |  -  |
+|**500** | There is no backup record with this ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -555,7 +555,7 @@ const { status, data } = await apiInstance.getBackupsCount(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The number of backups created within the period |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The start of the period is later than its end |  -  |
+|**400** | The start of the period is later than its end, or `from`, `to` or `paid` cannot be parsed |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -621,7 +621,7 @@ const { status, data } = await apiInstance.getBackupsCounts(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The number of free and of paid backups created within the period |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The start of the period is later than its end |  -  |
+|**400** | The start of the period is later than its end, or `from`, `to` or `paid` cannot be parsed |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -752,7 +752,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **backupDto** | **BackupDto**|  | |
+| **startBackupRequestDto** | **StartBackupRequestDto**|  | |
 
 
 ### Return type
@@ -769,16 +769,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     BackupApi,
     Configuration,
-    BackupDto
+    StartBackupRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new BackupApi(configuration);
 
-let backupDto: BackupDto; // (optional)
+let startBackupRequestDto: StartBackupRequestDto; // (optional)
 
 const { status, data } = await apiInstance.startBackup(
-    backupDto
+    startBackupRequestDto
 );
 ```
 
@@ -792,13 +792,13 @@ const { status, data } = await apiInstance.startBackup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The state of the queued backup job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The folder ID does not match the storage type, or a dump was requested on a portal that is not a standalone installation |  -  |
-|**402** | The free backups of the current month are used up and the paid backup service is not available to this portal |  -  |
+|**400** | The request body cannot be read, the folder ID does not match the storage type, a dump was requested on a portal that is not a standalone installation, or `storageParams` repeats a key |  -  |
+|**402** | The portal already uses more storage than its plan allows and the backup goes to `Documents`, or the free backups of the current month are used up and the paid backup service is not available to this portal or cannot be charged |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | The target folder or the backup quota was not found |  -  |
+|**500** | A key or value of `storageParams` is null, `ThridpartyDocuments` storage has no `folderId`, or `Local` storage has no `filePath` or was requested on a portal that is not a standalone installation |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -815,7 +815,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **backupRestoreDto** | **BackupRestoreDto**|  | |
+| **startBackupRestoreRequestDto** | **StartBackupRestoreRequestDto**|  | |
 
 
 ### Return type
@@ -832,16 +832,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     BackupApi,
     Configuration,
-    BackupRestoreDto
+    StartBackupRestoreRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new BackupApi(configuration);
 
-let backupRestoreDto: BackupRestoreDto; // (optional)
+let startBackupRestoreRequestDto: StartBackupRestoreRequestDto; // (optional)
 
 const { status, data } = await apiInstance.startBackupRestore(
-    backupRestoreDto
+    startBackupRestoreRequestDto
 );
 ```
 
@@ -855,13 +855,13 @@ const { status, data } = await apiInstance.startBackupRestore(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The state of the queued restoring job |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `backupId`, or `storageParams` repeats a key |  -  |
 |**402** | The pricing plan of this portal does not allow restoring |  -  |
 |**403** | No permissions to perform this action |  -  |
-|**404** | The backup record was not found, or the file it points to is missing |  -  |
+|**404** | The backup record was not found, the file given in `filePath` or its folder was not found, or, for `Local` storage, no backup archive has been uploaded to the portal |  -  |
+|**500** | `backupId` is not a GUID and `storageParams` has no `filePath`, or a key or value of `storageParams` is null |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

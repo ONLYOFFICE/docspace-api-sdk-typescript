@@ -1,0 +1,19 @@
+# QuotaSettingsRequestDtoDefaultQuota
+
+The starting limit, in bytes, written as a JSON number. It has to parse as a whole number and may not exceed  the portal total storage quota, nor, on a self-hosted installation with a portal-wide quota switched on, that  quota; anything larger is refused with 400. It is applied to objects created from now on and leaves the  limits of existing ones as they are.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+
+## Example
+
+```typescript
+import { QuotaSettingsRequestDtoDefaultQuota } from '@onlyoffice/docspace-api-sdk';
+
+const instance: QuotaSettingsRequestDtoDefaultQuota = {
+};
+```
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -66,7 +66,7 @@ const { status, data } = await apiInstance.aiAgentsCreate(
 |**200** | The created agent room, with the model already bound to it. |  -  |
 |**400** | `profileId` is missing, is not a UUID, names no existing profile, or names one that does not support chat; or `prompt` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -128,7 +128,7 @@ const { status, data } = await apiInstance.aiAgentsDelete(
 |**200** | The queued file operation. Deletion runs asynchronously, so poll DocSpace for its outcome. |  -  |
 |**400** | The agent ID is not a positive integer. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -186,7 +186,7 @@ const { status, data } = await apiInstance.aiAgentsGet(
 |**200** | The agent room, with `profileId` added when a model is bound to it. |  -  |
 |**400** | The agent ID is not a positive integer. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -272,7 +272,7 @@ const { status, data } = await apiInstance.aiAgentsList(
 |-------------|-------------|------------------|
 |**200** | The agent rooms, in the DocSpace AI service\'s folder-content envelope. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -321,7 +321,7 @@ const { status, data } = await apiInstance.aiAgentsNews();
 |-------------|-------------|------------------|
 |**200** | The unread items of the caller\'s agent rooms. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -378,7 +378,7 @@ const { status, data } = await apiInstance.aiAgentsResetQuota(
 |-------------|-------------|------------------|
 |**200** | The updated agent rooms, one entry each. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -440,7 +440,7 @@ const { status, data } = await apiInstance.aiAgentsUpdate(
 |**200** | The updated agent room. |  -  |
 |**400** | The agent ID is not a positive integer, or `profileId` is not a UUID, names no existing profile, or names one that does not support chat. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -498,7 +498,7 @@ const { status, data } = await apiInstance.aiAgentsUpdateQuota(
 |-------------|-------------|------------------|
 |**200** | The updated agent rooms, one entry each. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { DocsCloudConfig } from '../../models';
+import type { DocsCloudConfigRequestDto } from '../../models';
 // @ts-ignore
 import type { DocsCloudConfigWrapper } from '../../models';
 // @ts-ignore
@@ -661,13 +661,13 @@ export const DocsCloudApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
          * @summary Update the Docs Connect tenant configuration
-         * @param {DocsCloudConfig} [docsCloudConfig] 
+         * @param {DocsCloudConfigRequestDto} [docsCloudConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateTenantConfig operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config/
          */
-        updateTenantConfig: async (docsCloudConfig?: DocsCloudConfig, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateTenantConfig: async (docsCloudConfigRequestDto?: DocsCloudConfigRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/docscloud/tenant/config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -707,7 +707,7 @@ export const DocsCloudApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(docsCloudConfig, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(docsCloudConfigRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -888,14 +888,14 @@ export const DocsCloudApiFp = function(configuration?: Configuration) {
         /**
          * Replaces the configuration of the Docs Connect tenant of the current portal: its name, the security secret and  header name, the file size limit and anonymous access switch of the server, the WOPI switch and the IP filter  rules; it returns the configuration as Docs Connect stored it. The portal must have an activated Docs Connect tenant,  granted by `POST api/2.0/settings/docscloud/trial` or by a Docs Connect purchase: an empty result from  `GET api/2.0/settings/docscloud/tenant` means there is none and this call fails with 400. Read the current  values with `GET api/2.0/settings/docscloud/tenant/config` first and send back whole sections: the sections  left out of the request are not sent to Docs Connect at all, while a section that is present is sent with all of  its fields, so a field left unset inside it goes out as `0`, `false` or empty. The caller must be a portal  administrator allowed to edit the portal settings, on an installation where the Docs Connect service is  configured. The call is mutating,  synchronous and idempotent, it is recorded in the portal audit trail, and it drops the cached configuration  itself, so the next read returns the new values without `refresh=true`. The `tenantName`, `security.secret`,  `security.header` and every `ipFilter.rules` address are capped at 255 characters and `server.fileSizeLimit`  at 209715200 bytes (200 MB); a value outside those bounds is rejected with 400 before anything reaches  Docs Connect. It changes these settings only, never the subscription, the user quota or the license.
          * @summary Update the Docs Connect tenant configuration
-         * @param {DocsCloudConfig} [docsCloudConfig] 
+         * @param {DocsCloudConfigRequestDto} [docsCloudConfigRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateTenantConfig operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-tenant-config/
          */
-        async updateTenantConfig(docsCloudConfig?: DocsCloudConfig, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocsCloudConfigWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTenantConfig(docsCloudConfig, options);
+        async updateTenantConfig(docsCloudConfigRequestDto?: DocsCloudConfigRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocsCloudConfigWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateTenantConfig(docsCloudConfigRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['DocsCloudApi.updateTenantConfig']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1048,7 +1048,7 @@ export const DocsCloudApiFactory = function (configuration?: Configuration, base
          * @throws {RequiredError}
          */
         updateTenantConfig(requestParameters: DocsCloudApiUpdateTenantConfigRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocsCloudConfigWrapper> {
-            return localVarFp.updateTenantConfig(requestParameters.docsCloudConfig, options).then((request) => request(axios, basePath));
+            return localVarFp.updateTenantConfig(requestParameters.docsCloudConfigRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1159,10 +1159,10 @@ export interface DocsCloudApiSwitchToDevPackRequest {
 export interface DocsCloudApiUpdateTenantConfigRequest {
     /**
      * 
-     * @type {DocsCloudConfig}
+     * @type {DocsCloudConfigRequestDto}
      * @memberof DocsCloudApiUpdateTenantConfig
      */
-    readonly docsCloudConfig?: DocsCloudConfig
+    readonly docsCloudConfigRequestDto?: DocsCloudConfigRequestDto
 }
 
 /**
@@ -1309,7 +1309,7 @@ export class DocsCloudApi extends BaseAPI {
      * @memberof DocsCloudApi
      */
     public updateTenantConfig(requestParameters: DocsCloudApiUpdateTenantConfigRequest = {}, options?: RawAxiosRequestConfig) {
-        return DocsCloudApiFp(this.configuration).updateTenantConfig(requestParameters.docsCloudConfig, options).then((request) => request(this.axios, this.basePath));
+        return DocsCloudApiFp(this.configuration).updateTenantConfig(requestParameters.docsCloudConfigRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

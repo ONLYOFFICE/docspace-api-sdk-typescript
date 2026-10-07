@@ -26,15 +26,13 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { AmazonS3RegionArrayWrapper } from '../../models';
 // @ts-ignore
-import type { CdnStorageSettingsWrapper } from '../../models';
-// @ts-ignore
 import type { DoubleWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { StorageArrayWrapper } from '../../models';
 // @ts-ignore
-import type { StorageRequestsDto } from '../../models';
+import type { StorageRequestDto } from '../../models';
 // @ts-ignore
 import type { StorageSettingsWrapper } from '../../models';
 /**
@@ -88,7 +86,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
             // authentication OpenId required
 
             if (dump !== undefined) {
-                localVarQueryParameter['Dump'] = dump;
+                localVarQueryParameter['dump'] = dump;
             }
 
 
@@ -417,13 +415,13 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`  carries that provider\'s authentication keys as name and value pairs. The provider has to be available on the  server, which the `isSet` flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use `PUT api/2.0/settings/storage`. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
          * @summary Update the CDN storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageRequestDto} [storageRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateCdnStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
          */
-        updateCdnStorage: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateCdnStorage: async (storageRequestDto?: StorageRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/storage/cdn`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -463,7 +461,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(storageRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(storageRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -473,13 +471,13 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of  one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider\'s  authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3  storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,  otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and  returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:  the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with  `GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the  permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server  installation with an unrestricted access space. The response is the stored configuration, module and  properties, not the state of the migration. To return to the built-in local storage call  `DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
          * @summary Switch the portal storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageRequestDto} [storageRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
          */
-        updateStorage: async (storageRequestsDto?: StorageRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateStorage: async (storageRequestDto?: StorageRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/storage`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -519,7 +517,7 @@ export const StorageApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(storageRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(storageRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -638,14 +636,14 @@ export const StorageApiFp = function(configuration?: Configuration) {
         /**
          * Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`  carries that provider\'s authentication keys as name and value pairs. The provider has to be available on the  server, which the `isSet` flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use `PUT api/2.0/settings/storage`. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
          * @summary Update the CDN storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageRequestDto} [storageRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateCdnStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
          */
-        async updateCdnStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CdnStorageSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCdnStorage(storageRequestsDto, options);
+        async updateCdnStorage(storageRequestDto?: StorageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateCdnStorage(storageRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StorageApi.updateCdnStorage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -653,14 +651,14 @@ export const StorageApiFp = function(configuration?: Configuration) {
         /**
          * Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of  one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider\'s  authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3  storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,  otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and  returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:  the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with  `GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the  permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server  installation with an unrestricted access space. The response is the stored configuration, module and  properties, not the state of the migration. To return to the built-in local storage call  `DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
          * @summary Switch the portal storage
-         * @param {StorageRequestsDto} [storageRequestsDto] 
+         * @param {StorageRequestDto} [storageRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateStorage operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-storage/
          */
-        async updateStorage(storageRequestsDto?: StorageRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateStorage(storageRequestsDto, options);
+        async updateStorage(storageRequestDto?: StorageRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StorageSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateStorage(storageRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['StorageApi.updateStorage']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -762,8 +760,8 @@ export const StorageApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-cdn-storage/
          * @throws {RequiredError}
          */
-        updateCdnStorage(requestParameters: StorageApiUpdateCdnStorageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CdnStorageSettingsWrapper> {
-            return localVarFp.updateCdnStorage(requestParameters.storageRequestsDto, options).then((request) => request(axios, basePath));
+        updateCdnStorage(requestParameters: StorageApiUpdateCdnStorageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StorageSettingsWrapper> {
+            return localVarFp.updateCdnStorage(requestParameters.storageRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Points the current portal at another storage and saves the credentials it needs: `module` is the identifier of  one of the storages listed by `GET api/2.0/settings/storage`, and `props` carries that provider\'s  authentication keys as name and value pairs, for example the bucket, region and access key of an Amazon S3  storage. The provider has to be available on the server, which the `isSet` flag of the listing tells,  otherwise the request is rejected as invalid. Sending the module the portal already uses changes nothing and  returns the saved settings as they are. Any other module starts an asynchronous migration of the portal data:  the portal moves into the migrating state and stays unavailable until the transfer ends, so follow it with  `GET api/2.0/settings/storage/progress` and do not send a second switch while it runs. The caller needs the  permission to edit portal settings, which in practice means the portal owner or a DocSpace admin, on a server  installation with an unrestricted access space. The response is the stored configuration, module and  properties, not the state of the migration. To return to the built-in local storage call  `DELETE api/2.0/settings/storage`, and for the CDN use `PUT api/2.0/settings/storage/cdn`.
@@ -775,7 +773,7 @@ export const StorageApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         updateStorage(requestParameters: StorageApiUpdateStorageRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StorageSettingsWrapper> {
-            return localVarFp.updateStorage(requestParameters.storageRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.updateStorage(requestParameters.storageRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -802,10 +800,10 @@ export interface StorageApiGetAllBackupStoragesRequest {
 export interface StorageApiUpdateCdnStorageRequest {
     /**
      * 
-     * @type {StorageRequestsDto}
+     * @type {StorageRequestDto}
      * @memberof StorageApiUpdateCdnStorage
      */
-    readonly storageRequestsDto?: StorageRequestsDto
+    readonly storageRequestDto?: StorageRequestDto
 }
 
 /**
@@ -816,10 +814,10 @@ export interface StorageApiUpdateCdnStorageRequest {
 export interface StorageApiUpdateStorageRequest {
     /**
      * 
-     * @type {StorageRequestsDto}
+     * @type {StorageRequestDto}
      * @memberof StorageApiUpdateStorage
      */
-    readonly storageRequestsDto?: StorageRequestsDto
+    readonly storageRequestDto?: StorageRequestDto
 }
 
 /**
@@ -916,7 +914,7 @@ export class StorageApi extends BaseAPI {
      * @memberof StorageApi
      */
     public updateCdnStorage(requestParameters: StorageApiUpdateCdnStorageRequest = {}, options?: RawAxiosRequestConfig) {
-        return StorageApiFp(this.configuration).updateCdnStorage(requestParameters.storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).updateCdnStorage(requestParameters.storageRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -928,7 +926,7 @@ export class StorageApi extends BaseAPI {
      * @memberof StorageApi
      */
     public updateStorage(requestParameters: StorageApiUpdateStorageRequest = {}, options?: RawAxiosRequestConfig) {
-        return StorageApiFp(this.configuration).updateStorage(requestParameters.storageRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return StorageApiFp(this.configuration).updateStorage(requestParameters.storageRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

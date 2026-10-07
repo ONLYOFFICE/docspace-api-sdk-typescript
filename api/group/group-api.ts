@@ -290,18 +290,18 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
          * @summary Get user groups
-         * @param {string} userid The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+         * @param {string} userId The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupByUserId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
          */
-        getGroupByUserId: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getGroupByUserId', 'userid', userid)
+        getGroupByUserId: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getGroupByUserId', 'userId', userId)
 
-            const localVarPath = `/api/2.0/group/user/{userid}`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/group/user/{userId}`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -344,7 +344,7 @@ export const GroupApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
          * @summary Get groups
          * @param {string} [userId] Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
          * @param {boolean} [manager] Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
@@ -816,20 +816,20 @@ export const GroupApiFp = function(configuration?: Configuration) {
         /**
          * Returns every group the account with the ID in the route belongs to, as a flat list of ID and name pairs.  The caller needs the permission to read groups.  The call is read-only, is not paged, and answers an empty list both for an account that belongs to no group  and for an ID that matches no account, so an empty answer does not prove the account exists.  The entries are summaries and carry neither the manager nor the members - read `GET api/2.0/group/{id}` for  the full picture of one of them.
          * @summary Get user groups
-         * @param {string} userid The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
+         * @param {string} userId The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getGroupByUserId operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-group-by-user-id/
          */
-        async getGroupByUserId(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupSummaryArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupByUserId(userid, options);
+        async getGroupByUserId(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupSummaryArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupByUserId(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['GroupApi.getGroupByUserId']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
          * @summary Get groups
          * @param {string} [userId] Keeps only the groups the account with this ID takes part in. Omit it to search every group of the portal.
          * @param {boolean} [manager] Narrows `userId` down to the groups that account manages, instead of every group it belongs to. It has no  effect on its own and defaults to false.
@@ -997,10 +997,10 @@ export const GroupApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         getGroupByUserId(requestParameters: GroupApiGetGroupByUserIdRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupSummaryArrayWrapper> {
-            return localVarFp.getGroupByUserId(requestParameters.userid, options).then((request) => request(axios, basePath));
+            return localVarFp.getGroupByUserId(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+         * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
          * @summary Get groups
          * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1155,7 +1155,7 @@ export interface GroupApiGetGroupByUserIdRequest {
      * @type {string}
      * @memberof GroupApiGetGroupByUserId
      */
-    readonly userid: string
+    readonly userId: string
 }
 
 /**
@@ -1383,11 +1383,11 @@ export class GroupApi extends BaseAPI {
      * @memberof GroupApi
      */
     public getGroupByUserId(requestParameters: GroupApiGetGroupByUserIdRequest, options?: RawAxiosRequestConfig) {
-        return GroupApiFp(this.configuration).getGroupByUserId(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
+        return GroupApiFp(this.configuration).getGroupByUserId(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+     * Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
      * @summary Get groups
      * @param {GroupApiGetGroupsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

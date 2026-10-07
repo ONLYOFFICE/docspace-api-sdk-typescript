@@ -1,12 +1,13 @@
 # TenantBannerSettingsDto
 
-Whether the portal promotional banners are hidden.
+Whether the portal hides its promotional banners.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hidden** | **boolean** | Whether the promotional banners are hidden from every user of the portal. The flag is only honoured on a  self-hosted installation; a SaaS portal keeps showing the banners whatever is stored here. | [optional] [default to undefined]
+**hidden** | **boolean** | The banners visibility flag. | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 
@@ -15,6 +16,7 @@ import { TenantBannerSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantBannerSettingsDto = {
     hidden,
+    lastModified,
 };
 ```
 

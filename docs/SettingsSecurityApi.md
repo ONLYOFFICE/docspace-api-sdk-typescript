@@ -7,7 +7,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getEnabledModules**](#getenabledmodules) | **GET** /api/2.0/settings/security/modules | Get enabled modules|
 |[**getIsProductAdministrator**](#getisproductadministrator) | **GET** /api/2.0/settings/security/administrator | Check product administrator|
 |[**getPasswordSettings**](#getpasswordsettings) | **GET** /api/2.0/settings/security/password | Get password settings|
-|[**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/{productid} | Get product administrators|
+|[**getProductAdministrators**](#getproductadministrators) | **GET** /api/2.0/settings/security/administrator/{productId} | Get product administrators|
 |[**getWebItemSecurityInfo**](#getwebitemsecurityinfo) | **GET** /api/2.0/settings/security/{id} | Check module availability|
 |[**getWebItemSettingsSecurityInfo**](#getwebitemsettingssecurityinfo) | **GET** /api/2.0/settings/security | Get module access settings|
 |[**setAccessToWebItems**](#setaccesstowebitems) | **PUT** /api/2.0/settings/security/access | Set access to modules in bulk|
@@ -69,7 +69,7 @@ const { status, data } = await apiInstance.getEnabledModules();
 # **getIsProductAdministrator**
 > ProductAdministratorWrapper getIsProductAdministrator()
 
-Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productid}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/).
 
@@ -77,8 +77,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **productid** | [**string**] | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | defaults to undefined|
-| **userid** | [**string**] | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | defaults to undefined|
+| **productId** | [**string**] | The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. | defaults to undefined|
+| **userId** | [**string**] | The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. | defaults to undefined|
 
 
 ### Return type
@@ -100,12 +100,12 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let productid: string; //The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (default to undefined)
-let userid: string; //The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (default to undefined)
+let productId: string; //The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module. (default to undefined)
+let userId: string; //The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists. (default to undefined)
 
 const { status, data } = await apiInstance.getIsProductAdministrator(
-    productid,
-    userid
+    productId,
+    userId
 );
 ```
 
@@ -119,6 +119,7 @@ const { status, data } = await apiInstance.getIsProductAdministrator(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The module and the user asked about together with the flag that says whether that user administers the module |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -171,6 +172,7 @@ const { status, data } = await apiInstance.getPasswordSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The portal password policy: the minimum length, the uppercase, digit and special-symbol requirements, and the regular expressions a client can validate against |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The password policy has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -190,7 +192,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **productid** | [**string**] | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | defaults to undefined|
+| **productId** | [**string**] | The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. | defaults to undefined|
 
 
 ### Return type
@@ -212,10 +214,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let productid: string; //The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (default to undefined)
+let productId: string; //The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure. (default to undefined)
 
 const { status, data } = await apiInstance.getProductAdministrators(
-    productid
+    productId
 );
 ```
 
@@ -229,6 +231,7 @@ const { status, data } = await apiInstance.getProductAdministrators(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The users who administer the module asked about, or the portal-wide administrators when the all-zero identifier is used |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -347,10 +350,10 @@ const { status, data } = await apiInstance.getWebItemSettingsSecurityInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The access configuration of every module identifier asked about: the enabled flag, the allowed groups, the allowed users the caller may see, and the sub-module flag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | An `ids` value is not a GUID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -367,7 +370,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webItemsSecurityRequestsDto** | **WebItemsSecurityRequestsDto**|  | |
+| **webItemsSecurityRequestDto** | **WebItemsSecurityRequestDto**|  | |
 
 
 ### Return type
@@ -384,16 +387,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration,
-    WebItemsSecurityRequestsDto
+    WebItemsSecurityRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let webItemsSecurityRequestsDto: WebItemsSecurityRequestsDto; // (optional)
+let webItemsSecurityRequestDto: WebItemsSecurityRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setAccessToWebItems(
-    webItemsSecurityRequestsDto
+    webItemsSecurityRequestDto
 );
 ```
 
@@ -407,11 +410,11 @@ const { status, data } = await apiInstance.setAccessToWebItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The resulting access configuration of every module listed in the request |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or a `key` in `items` is not a GUID |  -  |
 |**403** | Per-module access cannot be configured on an open portal, or the caller lacks the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -428,7 +431,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **securityRequestsDto** | **SecurityRequestsDto**|  | |
+| **securityRequestDto** | **SecurityRequestDto**|  | |
 
 
 ### Return type
@@ -445,16 +448,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration,
-    SecurityRequestsDto
+    SecurityRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let securityRequestsDto: SecurityRequestsDto; // (optional)
+let securityRequestDto: SecurityRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setProductAdministrator(
-    securityRequestsDto
+    securityRequestDto
 );
 ```
 
@@ -468,12 +471,12 @@ const { status, data } = await apiInstance.setProductAdministrator(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The module, the user and the administrator flag as they were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `productId` or `userId` |  -  |
 |**402** | The portal plan does not offer product administrators, or no paid seat is left for the member being promoted |  -  |
-|**403** | Only the portal owner can grant or revoke the portal-wide administrator role |  -  |
+|**403** | The caller has no portal-settings right, or is not the portal owner and grants the portal-wide administrator role or takes a role away from a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -490,7 +493,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **webItemSecurityRequestsDto** | **WebItemSecurityRequestsDto**|  | |
+| **webItemSecurityRequestDto** | **WebItemSecurityRequestDto**|  | |
 
 
 ### Return type
@@ -507,16 +510,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration,
-    WebItemSecurityRequestsDto
+    WebItemSecurityRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let webItemSecurityRequestsDto: WebItemSecurityRequestsDto; // (optional)
+let webItemSecurityRequestDto: WebItemSecurityRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setWebItemSecurity(
-    webItemSecurityRequestsDto
+    webItemSecurityRequestDto
 );
 ```
 
@@ -530,11 +533,11 @@ const { status, data } = await apiInstance.setWebItemSecurity(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The resulting access configuration of the module, as a single-entry list |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `id`, or the `id` is not a GUID |  -  |
 |**403** | Per-module access cannot be configured on an open portal, or the caller lacks the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -551,7 +554,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **passwordSettingsRequestsDto** | **PasswordSettingsRequestsDto**|  | |
+| **passwordSettingsRequestDto** | **PasswordSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -568,16 +571,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsSecurityApi,
     Configuration,
-    PasswordSettingsRequestsDto
+    PasswordSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsSecurityApi(configuration);
 
-let passwordSettingsRequestsDto: PasswordSettingsRequestsDto; // (optional)
+let passwordSettingsRequestDto: PasswordSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updatePasswordSettings(
-    passwordSettingsRequestsDto
+    passwordSettingsRequestDto
 );
 ```
 
@@ -591,7 +594,8 @@ const { status, data } = await apiInstance.updatePasswordSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The password policy as it was stored, including the regular expressions a client can validate against |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The requested minimum length is outside the range the installation allows |  -  |
+|**400** | The request body cannot be read or has no `minLength`, or the minimum length is outside the range the installation allows |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

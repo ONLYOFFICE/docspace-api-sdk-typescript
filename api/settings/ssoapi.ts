@@ -26,11 +26,11 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { SsoSettingsRequestsDto } from '../../models';
+import type { SsoSettingsConstantsWrapper } from '../../models';
 // @ts-ignore
-import type { SsoSettingsV2ConstantsWrapper } from '../../models';
+import type { SsoSettingsRequestDto } from '../../models';
 // @ts-ignore
-import type { SsoSettingsV2Wrapper } from '../../models';
+import type { SsoSettingsWrapper } from '../../models';
 /**
  * SSOApi - axios parameter creator
  * @export
@@ -250,13 +250,13 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * Replaces the whole SAML Single Sign-On configuration of the current portal with the one passed as a JSON  object in `serializeSettings`, and returns the configuration as it was stored. The payload is a complete  configuration rather than a patch: fields left out are stored empty, so send back a changed copy of  `GET api/2.0/settings/ssov2`, or start from `GET api/2.0/settings/ssov2/default`. The identity provider entity  ID and sign-in URL are required, the sign-in and sign-out URLs have to be absolute http or https addresses,  and the attribute mapping has to name the fields for first name, last name and email; otherwise nothing is  saved. The caller has to be allowed to edit portal settings (portal owner or DocSpace admin), and the portal  plan has to include Single Sign-On. Some values are normalised on the way in: a `usersType` other than 1 (room  admin), 3 (DocSpace admin) or 4 (user) becomes 4, an empty login label becomes `Single Sign-on`, and a longer  one is cut to 100 characters. Saving with SSO switched off unlinks every existing SSO account and turns it  into an ordinary one; switching SSO back on later does not restore those links. The change is recorded in the  audit trail.
          * @summary Save the SSO settings
-         * @param {SsoSettingsRequestsDto} [ssoSettingsRequestsDto] 
+         * @param {SsoSettingsRequestDto} [ssoSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/
          */
-        saveSsoSettingsV2: async (ssoSettingsRequestsDto?: SsoSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveSsoSettingsV2: async (ssoSettingsRequestDto?: SsoSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/ssov2`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -296,7 +296,7 @@ export const SSOApiAxiosParamCreator = function (configuration?: Configuration) 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(ssoSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(ssoSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -321,7 +321,7 @@ export const SSOApiFp = function(configuration?: Configuration) {
          * REST API Reference for getDefaultSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-sso-settings-v2/
          */
-        async getDefaultSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsV2Wrapper>> {
+        async getDefaultSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaultSsoSettingsV2(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SSOApi.getDefaultSsoSettingsV2']?.[localVarOperationServerIndex]?.url;
@@ -335,7 +335,7 @@ export const SSOApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2/
          */
-        async getSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsV2Wrapper>> {
+        async getSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSsoSettingsV2(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SSOApi.getSsoSettingsV2']?.[localVarOperationServerIndex]?.url;
@@ -349,7 +349,7 @@ export const SSOApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSsoSettingsV2Constants operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2-constants/
          */
-        async getSsoSettingsV2Constants(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsV2ConstantsWrapper>> {
+        async getSsoSettingsV2Constants(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsConstantsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSsoSettingsV2Constants(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SSOApi.getSsoSettingsV2Constants']?.[localVarOperationServerIndex]?.url;
@@ -363,7 +363,7 @@ export const SSOApiFp = function(configuration?: Configuration) {
          * REST API Reference for resetSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-sso-settings-v2/
          */
-        async resetSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsV2Wrapper>> {
+        async resetSsoSettingsV2(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.resetSsoSettingsV2(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SSOApi.resetSsoSettingsV2']?.[localVarOperationServerIndex]?.url;
@@ -372,14 +372,14 @@ export const SSOApiFp = function(configuration?: Configuration) {
         /**
          * Replaces the whole SAML Single Sign-On configuration of the current portal with the one passed as a JSON  object in `serializeSettings`, and returns the configuration as it was stored. The payload is a complete  configuration rather than a patch: fields left out are stored empty, so send back a changed copy of  `GET api/2.0/settings/ssov2`, or start from `GET api/2.0/settings/ssov2/default`. The identity provider entity  ID and sign-in URL are required, the sign-in and sign-out URLs have to be absolute http or https addresses,  and the attribute mapping has to name the fields for first name, last name and email; otherwise nothing is  saved. The caller has to be allowed to edit portal settings (portal owner or DocSpace admin), and the portal  plan has to include Single Sign-On. Some values are normalised on the way in: a `usersType` other than 1 (room  admin), 3 (DocSpace admin) or 4 (user) becomes 4, an empty login label becomes `Single Sign-on`, and a longer  one is cut to 100 characters. Saving with SSO switched off unlinks every existing SSO account and turns it  into an ordinary one; switching SSO back on later does not restore those links. The change is recorded in the  audit trail.
          * @summary Save the SSO settings
-         * @param {SsoSettingsRequestsDto} [ssoSettingsRequestsDto] 
+         * @param {SsoSettingsRequestDto} [ssoSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveSsoSettingsV2 operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/
          */
-        async saveSsoSettingsV2(ssoSettingsRequestsDto?: SsoSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsV2Wrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveSsoSettingsV2(ssoSettingsRequestsDto, options);
+        async saveSsoSettingsV2(ssoSettingsRequestDto?: SsoSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SsoSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveSsoSettingsV2(ssoSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SSOApi.saveSsoSettingsV2']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -402,7 +402,7 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-default-sso-settings-v2/
          * @throws {RequiredError}
          */
-        getDefaultSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
+        getDefaultSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsWrapper> {
             return localVarFp.getDefaultSsoSettingsV2(options).then((request) => request(axios, basePath));
         },
         /**
@@ -413,7 +413,7 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2/
          * @throws {RequiredError}
          */
-        getSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
+        getSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsWrapper> {
             return localVarFp.getSsoSettingsV2(options).then((request) => request(axios, basePath));
         },
         /**
@@ -424,7 +424,7 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-sso-settings-v2-constants/
          * @throws {RequiredError}
          */
-        getSsoSettingsV2Constants(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2ConstantsWrapper> {
+        getSsoSettingsV2Constants(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsConstantsWrapper> {
             return localVarFp.getSsoSettingsV2Constants(options).then((request) => request(axios, basePath));
         },
         /**
@@ -435,7 +435,7 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-sso-settings-v2/
          * @throws {RequiredError}
          */
-        resetSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
+        resetSsoSettingsV2(options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsWrapper> {
             return localVarFp.resetSsoSettingsV2(options).then((request) => request(axios, basePath));
         },
         /**
@@ -447,8 +447,8 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-sso-settings-v2/
          * @throws {RequiredError}
          */
-        saveSsoSettingsV2(requestParameters: SSOApiSaveSsoSettingsV2Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsV2Wrapper> {
-            return localVarFp.saveSsoSettingsV2(requestParameters.ssoSettingsRequestsDto, options).then((request) => request(axios, basePath));
+        saveSsoSettingsV2(requestParameters: SSOApiSaveSsoSettingsV2Request = {}, options?: RawAxiosRequestConfig): AxiosPromise<SsoSettingsWrapper> {
+            return localVarFp.saveSsoSettingsV2(requestParameters.ssoSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -461,10 +461,10 @@ export const SSOApiFactory = function (configuration?: Configuration, basePath?:
 export interface SSOApiSaveSsoSettingsV2Request {
     /**
      * 
-     * @type {SsoSettingsRequestsDto}
+     * @type {SsoSettingsRequestDto}
      * @memberof SSOApiSaveSsoSettingsV2
      */
-    readonly ssoSettingsRequestsDto?: SsoSettingsRequestsDto
+    readonly ssoSettingsRequestDto?: SsoSettingsRequestDto
 }
 
 /**
@@ -527,7 +527,7 @@ export class SSOApi extends BaseAPI {
      * @memberof SSOApi
      */
     public saveSsoSettingsV2(requestParameters: SSOApiSaveSsoSettingsV2Request = {}, options?: RawAxiosRequestConfig) {
-        return SSOApiFp(this.configuration).saveSsoSettingsV2(requestParameters.ssoSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SSOApiFp(this.configuration).saveSsoSettingsV2(requestParameters.ssoSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

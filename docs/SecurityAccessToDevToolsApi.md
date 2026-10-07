@@ -17,7 +17,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantDevToolsAccessSettingsDto** | **TenantDevToolsAccessSettingsDto**|  | |
+| **tenantDevToolsAccessSettingsRequestDto** | **TenantDevToolsAccessSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -34,16 +34,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SecurityAccessToDevToolsApi,
     Configuration,
-    TenantDevToolsAccessSettingsDto
+    TenantDevToolsAccessSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityAccessToDevToolsApi(configuration);
 
-let tenantDevToolsAccessSettingsDto: TenantDevToolsAccessSettingsDto; // (optional)
+let tenantDevToolsAccessSettingsRequestDto: TenantDevToolsAccessSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setTenantDevToolsAccessSettings(
-    tenantDevToolsAccessSettingsDto
+    tenantDevToolsAccessSettingsRequestDto
 );
 ```
 
@@ -57,6 +57,7 @@ const { status, data } = await apiInstance.setTenantDevToolsAccessSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Saved developer tools access restriction for the `User` role |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

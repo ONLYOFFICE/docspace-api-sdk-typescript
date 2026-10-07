@@ -1,12 +1,16 @@
 # TenantWalletSettingsWrapper
 
-The wrapper for the tenant wallet settings.
+The successful API response containing the TenantWalletSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**TenantWalletSettings**](TenantWalletSettings.md) | The tenant wallet settings. | [optional] [default to undefined]
+**response** | [**TenantWalletSettingsDto**](TenantWalletSettingsDto.md) | The TenantWalletSettingsDto object returned by the operation. | [optional] [default to undefined]
+**count** | **number** | The total number of items in the response | [optional] [default to undefined]
+**links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
+**status** | **number** | HTTP status code of the response | [optional] [default to undefined]
+**statusCode** | **number** | HTTP status code of the response (duplicate of status) | [optional] [default to undefined]
 
 ## Example
 
@@ -14,7 +18,11 @@ Name | Type | Description | Notes
 import { TenantWalletSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantWalletSettingsWrapper = {
-    settings,
+    response,
+    count,
+    links,
+    status,
+    statusCode,
 };
 ```
 

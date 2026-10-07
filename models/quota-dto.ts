@@ -20,16 +20,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PriceDto } from './price-dto';
+import type { EntityQuotaDto } from './entity-quota-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
+import type { PriceDto } from './price-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TenantQuotaFeatureDto } from './tenant-quota-feature-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantQuotaSettings } from './tenant-quota-settings';
+import type { TenantQuotaSettingsDto } from './tenant-quota-settings-dto';
 
 /**
  * A quota - a plan, an add-on or a wallet service - with its price, the features it switches on and their limits.
@@ -66,19 +66,19 @@ export interface QuotaDto {
     /**
      * The per-member storage allowance an administrator has set on top of the quota, and whether it is applied  at all. It describes the live portal rather than this quota, so every entry of a catalogue listing repeats  the same values, and it is empty unless the portal is a server installation or its plan includes  statistics.
      */
-    'usersQuota'?: TenantEntityQuotaSettings;
+    'usersQuota'?: EntityQuotaDto;
     /**
      * The same kind of per-room storage override, filled in and read the same way as `usersQuota`.
      */
-    'roomsQuota'?: TenantEntityQuotaSettings;
+    'roomsQuota'?: EntityQuotaDto;
     /**
      * The same kind of per-agent storage override for AI agents, filled in and read the same way as  `usersQuota`.
      */
-    'aiAgentsQuota'?: TenantEntityQuotaSettings;
+    'aiAgentsQuota'?: EntityQuotaDto;
     /**
      * The storage allowance an administrator has set for the portal as a whole, which caps it below what the  quota grants. Filled in under the same conditions as `usersQuota`.
      */
-    'tenantCustomQuota'?: TenantQuotaSettings;
+    'tenantCustomQuota'?: TenantQuotaSettingsDto;
     /**
      * When the quota runs out, in UTC. It is empty on a quota from the catalogue, which has no date until it is  bought, and on a quota that never expires.
      */

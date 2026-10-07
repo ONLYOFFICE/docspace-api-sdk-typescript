@@ -32,13 +32,13 @@ import type { ProviderArrayWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
+import type { ThirdPartyAccountArrayWrapper } from '../../models';
+// @ts-ignore
 import type { ThirdPartyBackupRequestDto } from '../../models';
 // @ts-ignore
 import type { ThirdPartyFolderArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyFolderWrapper } from '../../models';
-// @ts-ignore
-import type { ThirdPartyParamsArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyRequestDto } from '../../models';
 /**
@@ -50,7 +50,7 @@ export const ThirdPartyIntegrationApiAxiosParamCreator = function (configuration
     
     return {
         /**
-         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
          * @summary Remove a third-party account
          * @param {number} providerId The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`.
          * @param {*} [options] Override http request option.
@@ -493,7 +493,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = ThirdPartyIntegrationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
          * @summary Remove a third-party account
          * @param {number} providerId The ID of the connected third-party storage account, as `providerId` of `GET api/2.0/files/thirdparty`.
          * @param {*} [options] Override http request option.
@@ -572,7 +572,7 @@ export const ThirdPartyIntegrationApiFp = function(configuration?: Configuration
          * REST API Reference for getThirdPartyAccounts operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts/
          */
-        async getThirdPartyAccounts(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyParamsArrayWrapper>> {
+        async getThirdPartyAccounts(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThirdPartyAccountArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getThirdPartyAccounts(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ThirdPartyIntegrationApi.getThirdPartyAccounts']?.[localVarOperationServerIndex]?.url;
@@ -619,7 +619,7 @@ export const ThirdPartyIntegrationApiFactory = function (configuration?: Configu
     const localVarFp = ThirdPartyIntegrationApiFp(configuration)
     return {
         /**
-         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+         * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
          * @summary Remove a third-party account
          * @param {ThirdPartyIntegrationApiDeleteThirdPartyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -683,7 +683,7 @@ export const ThirdPartyIntegrationApiFactory = function (configuration?: Configu
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-third-party-accounts/
          * @throws {RequiredError}
          */
-        getThirdPartyAccounts(options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyParamsArrayWrapper> {
+        getThirdPartyAccounts(options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyAccountArrayWrapper> {
             return localVarFp.getThirdPartyAccounts(options).then((request) => request(axios, basePath));
         },
         /**
@@ -777,7 +777,7 @@ export interface ThirdPartyIntegrationApiSaveThirdPartyBackupRequest {
  */
 export class ThirdPartyIntegrationApi extends BaseAPI {
     /**
-     * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. A room that was created on this account stops being available. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
+     * Disconnects a third-party storage account from the portal and returns the ID of the folder that stood for it,  in the `provider-accountId` form the Files operations use for third-party entries. Take `providerId` from  `GET api/2.0/files/thirdparty`: it is the numeric account ID, not that composed folder ID. The member who  connected the account can remove it; another member\'s request is refused unless they hold delete rights on the  folder it stands for. Nothing is deleted at the storage service: the files stay with the provider, and what  goes away is the portal\'s link to them together with the stored credentials, the sharing records and the tags  kept for its entries. An account a room was created on is refused with 403 while the room exists: delete the  room instead, which disconnects the account along with it. When the account being  removed is the one connected for backups by `POST api/2.0/files/thirdparty/backup`, its backup schedule is  deleted as well. The removal cannot be repeated: once the account is gone the same ID is refused rather than  confirmed, so treat the first successful answer as the record of it.
      * @summary Remove a third-party account
      * @param {FilesThirdPartyIntegrationApiDeleteThirdPartyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

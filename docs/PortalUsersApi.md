@@ -9,7 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getInvitationLink**](#getinvitationlink) | **GET** /api/2.0/portal/users/invite/{employeeType} | Get a legacy invitation link|
 |[**getInvitationLinkByEmployeeType**](#getinvitationlinkbyemployeetype) | **GET** /api/2.0/portal/users/invitationlink/{employeeType} | Get an invitation link by role|
 |[**getPortalUsersCount**](#getportaluserscount) | **GET** /api/2.0/portal/userscount | Get a number of portal users|
-|[**getUserById**](#getuserbyid) | **GET** /api/2.0/portal/users/{userID} | Get a portal user|
+|[**getUserById**](#getuserbyid) | **GET** /api/2.0/portal/users/{userId} | Get a portal user|
 |[**markGiftMessageAsRead**](#markgiftmessageasread) | **POST** /api/2.0/portal/present/mark | Mark a gift message as read|
 |[**sendCongratulations**](#sendcongratulations) | **POST** /api/2.0/portal/sendcongratulations | Send congratulations|
 |[**updateInvitationLink**](#updateinvitationlink) | **PUT** /api/2.0/portal/users/invitationlink | Update an invitation link|
@@ -17,7 +17,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **createInvitationLink**
 > InvitationLinkWrapper createInvitationLink()
 
-Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role additionally needs a free paid seat in the portal quota. The call is mutating and not  idempotent. The answer carries the `id` needed to update or delete the link, the shortened `url`,  `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty for a link that never  expires - and `isExpired`.
+Creates the portal\'s invitation link for one role and returns it together with the URL to share. A portal  keeps at most one link per role, so a call for a role that already has one is refused - read the existing link  with `GET api/2.0/portal/users/invitationlink/{employeeType}` and change it with  `PUT api/2.0/portal/users/invitationlink` instead. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`), `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or `User`,  and `expiration`, when given, has to lie in the future and is read in the portal time zone. The caller needs  the right to add users of that role, only the portal owner may create the DocSpace administrator link, and a  link for a paying role is refused while the portal payment is overdue or the portal quota has no free paid  seat left. The call is mutating and not idempotent. The answer carries the `id` needed to update or delete the  link, the shortened `url`, `maxUseCount` and `currentUseCount`, `expiration` in the portal time zone - empty  for a link that never expires - and `isExpired`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-invitation-link/).
 
@@ -65,10 +65,12 @@ const { status, data } = await apiInstance.createInvitationLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The invitation link as it was created, with the `id` to address it later and the `url` to share |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, the role is not `DocSpaceAdmin`, `RoomAdmin` or `User`, the use limit is outside 1-1000, the deadline is in the past, or the role already has a link |  -  |
+|**402** | The link is for a paying role, and the portal payment is overdue or the portal quota has no free paid seat left |  -  |
+|**403** | Inviting members is disabled for the portal, the caller has no right to add users of that role, or a non-owner asks for the DocSpace administrator link |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -125,10 +127,12 @@ const { status, data } = await apiInstance.deleteInvitationLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The invitation link is deleted and its URL no longer lets anyone join the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `id` |  -  |
+|**403** | Inviting members is disabled for the portal, the caller has no right to add users of the link\'s role, or a non-owner tries to delete the DocSpace administrator link |  -  |
+|**404** | No invitation link with this ID exists on the portal |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -184,6 +188,7 @@ const { status, data } = await apiInstance.getInvitationLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The invitation URL to hand to the invited person, or an empty string when the caller may not invite that role |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | Inviting members is disabled for the portal |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -196,7 +201,7 @@ const { status, data } = await apiInstance.getInvitationLink(
 # **getInvitationLinkByEmployeeType**
 > InvitationLinkWrapper getInvitationLinkByEmployeeType()
 
-Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and a link for a paying role is shown only while the portal quota still has a free paid  seat. The call is read-only and idempotent, but the `url` it returns is signed for the calling account, so two  administrators are handed two different URLs for one and the same link. A role that has no link yet is  answered with an empty body and 200 rather than a 404 - create the link with  `POST api/2.0/portal/users/invitationlink`. `expiration` is in the portal time zone and empty for a link  without a deadline, `isExpired` says whether that deadline has passed, and `currentUseCount` counts how many  accounts have already joined through the link.
+Returns the portal\'s invitation link for one role - the URL to share, how long it lasts and how often it has  already been used. Inviting members has to be enabled for the portal  (`GET api/2.0/settings/invitationsettings`) and `employeeType` has to be `DocSpaceAdmin`, `RoomAdmin` or  `User`; the caller needs the right to add users of that role, only the portal owner may read the DocSpace  administrator link, and for a paying role (`DocSpaceAdmin` or `RoomAdmin`) the call is refused while the  portal payment is overdue or the portal quota has no free paid seat left. The call is read-only and  idempotent, but the `url` it returns is signed for the calling account, so two administrators are handed two  different URLs for one and the same link. A role that has no link yet is answered with an empty body and 200  rather than a 404 - create the link with `POST api/2.0/portal/users/invitationlink`. `expiration` is in the  portal time zone and empty for a link without a deadline, `isExpired` says whether that deadline has passed,  and `currentUseCount` counts how many accounts have already joined through the link.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-invitation-link-by-employee-type/).
 
@@ -243,10 +248,12 @@ const { status, data } = await apiInstance.getInvitationLinkByEmployeeType(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The invitation link of that role, or an empty body when the portal has no link for it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The role is not `DocSpaceAdmin`, `RoomAdmin` or `User` |  -  |
+|**402** | The role is a paying one, and the portal payment is overdue or the portal quota has no free paid seat left, whether or not the role has a link |  -  |
+|**403** | Inviting members is disabled for the portal, the caller has no right to add users of that role, or a non-owner asks for the DocSpace administrator link |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -295,6 +302,7 @@ const { status, data } = await apiInstance.getPortalUsersCount();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The number of accounts of this portal that are in the active state |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -304,9 +312,9 @@ const { status, data } = await apiInstance.getPortalUsersCount();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getUserById**
-> UserInfoWrapper getUserById()
+> PortalUserWrapper getUserById()
 
-Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userID` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userid}` for the same user in the People format, with the group, quota and access  information a client usually needs.
+Returns one user of this portal, addressed by ID, in the shape the portal stores the account: display name,  e-mail, contacts, role and status flags, and the dates of the profile. Nothing has to be called first, and the  call is read-only and idempotent. Who may be read is decided per pair of accounts: a caller always reads their  own profile, a DocSpace administrator reads anyone, a room administrator reads anyone except a guest they have  no relation with, and a user or a guest reads nobody but themselves - a pair that is not allowed is refused.  An ID that belongs to no account of this portal and an ID of a system account are both answered as not found,  so a 404 does not tell the two apart. `userId` in the path has to be a GUID; the calling user\'s own profile is  easier to fetch with `GET api/2.0/people/@self`. This operation hands back the internal user record - use  `GET api/2.0/people/{userId}` for the same user in the People format, with the group, quota and access  information a client usually needs.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-user-by-id/).
 
@@ -314,12 +322,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userID** | [**string**] | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | defaults to undefined|
+| **userId** | [**string**] | The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. | defaults to undefined|
 
 
 ### Return type
 
-**UserInfoWrapper**
+**PortalUserWrapper**
 
 ### Authorization
 
@@ -336,10 +344,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PortalUsersApi(configuration);
 
-let userID: string; //The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. (default to undefined)
+let userId: string; //The portal account the operation acts on, by user ID as `GET api/2.0/people` reports it. An ID belonging to  no account of this portal and an ID of an internal system account are both answered as not found. (default to undefined)
 
 const { status, data } = await apiInstance.getUserById(
-    userID
+    userId
 );
 ```
 
@@ -353,6 +361,7 @@ const { status, data } = await apiInstance.getUserById(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The account of this portal, in the internal user format |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller is not allowed to view this account: a user or a guest gets it for any ID but their own, whether the account exists or not, and a room administrator gets it for a guest they have no relation with |  -  |
 |**404** | No account with this ID exists on the portal, or the ID belongs to a system account |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -527,10 +536,12 @@ const { status, data } = await apiInstance.updateInvitationLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The invitation link as it now stands, with the deadline and the use limit that were applied |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `id`, the use limit is outside 1-1000 or lower than the number of uses the link already has, or the deadline is in the past |  -  |
+|**403** | Inviting members is disabled for the portal, the caller has no right to add users of the link\'s role, or a non-owner tries to change the DocSpace administrator link |  -  |
+|**404** | No invitation link with this ID exists on the portal |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

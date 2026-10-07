@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | True when the profile was persisted. | [default to undefined]
 **profile** | [**AiProfile**](AiProfile.md) | The persisted profile. Present on success. | [optional] [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the profile was rejected - the name check or the provider credential check. Present on failure. | [optional] [default to undefined]
 
 ## Example
 

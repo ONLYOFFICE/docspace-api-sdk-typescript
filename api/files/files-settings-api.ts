@@ -182,13 +182,13 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
          * @summary Change the default access rights
-         * @param {Array<number>} [requestBody] The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+         * @param {Array<number>} [defaultAccessRightsRequestDto] The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeDefaultAccessRights operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
          */
-        changeDefaultAccessRights: async (requestBody?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeDefaultAccessRights: async (defaultAccessRightsRequestDto?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/settings/dafaultaccessrights`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -228,7 +228,7 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(defaultAccessRightsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1717,12 +1717,12 @@ export const FilesSettingsApiAxiosParamCreator = function (configuration?: Confi
             // authentication OpenId required
 
             if (fileExtension !== undefined) {
-                localVarQueryParameter['FileExtension'] = fileExtension;
+                localVarQueryParameter['fileExtension'] = fileExtension;
             }
 
 
             if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
+                localVarFormParams.append('file', file as any);
             }
     
     
@@ -1781,14 +1781,14 @@ export const FilesSettingsApiFp = function(configuration?: Configuration) {
         /**
          * Stores the access rights the sharing dialog offers the calling account by default, and returns the set that  was actually stored. The body is a bare array of access-right values, not an object. The portal normalises the  array instead of keeping it as sent: it keeps the fill-forms, custom-filter and review entries, then adds  read-and-write or comment - whichever is present, in that order - and stops there, and it falls back to read  alone when nothing else applies, so the response can be shorter than the request and its order can differ. An  empty array clears the setting, after which read alone is reported. A value outside the published list is  rejected as an invalid request. The set belongs to the calling account alone: every authenticated role down to  a guest may store its own, and an unauthenticated caller is refused. Nothing already shared is changed. The  stored set is published as `defaultSharingAccessRights` by `GET api/2.0/files/settings`.
          * @summary Change the default access rights
-         * @param {Array<number>} [requestBody] The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
+         * @param {Array<number>} [defaultAccessRightsRequestDto] The access rights the sharing dialog should offer by default. The array is the whole request body rather than  a field of an object, and the portal stores a normalised subset of it instead of the array as sent, so read  the answer to learn what was kept. An empty array clears the setting, after which the portal reports read  access alone. A value outside the published list is rejected as an invalid request.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeDefaultAccessRights operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-default-access-rights/
          */
-        async changeDefaultAccessRights(requestBody?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareResponseArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeDefaultAccessRights(requestBody, options);
+        async changeDefaultAccessRights(defaultAccessRightsRequestDto?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileShareResponseArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeDefaultAccessRights(defaultAccessRightsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesSettingsApi.changeDefaultAccessRights']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -2237,7 +2237,7 @@ export const FilesSettingsApiFactory = function (configuration?: Configuration, 
          * @throws {RequiredError}
          */
         changeDefaultAccessRights(requestParameters: FilesSettingsApiChangeDefaultAccessRightsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileShareResponseArrayWrapper> {
-            return localVarFp.changeDefaultAccessRights(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.changeDefaultAccessRights(requestParameters.defaultAccessRightsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Stores whether the caller wants to be asked for confirmation before files and folders are deleted, and returns  the value that is now stored. The setting belongs to the calling account alone: every authenticated role down  to a guest may change its own copy, one member\'s choice never affects another, and an unauthenticated caller  is refused. It is a hint for the interface, not a server-side guard: the delete operations under  `api/2.0/files/fileops` remove whatever they are given regardless of this value, so a client that skips its  own prompt loses nothing but the prompt. Pass `set=true` to be asked again, `set=false` to delete without a  prompt. The same value is published as `confirmDelete` by `GET api/2.0/files/settings`, which is the only way  to read it back. Repeating the call with the same value writes it again and is safe. A new account starts with  the confirmation switched on, and the value says nothing about where deleted items land: they go to the trash  and are cleared from there according to `GET api/2.0/files/settings/autocleanup`.
@@ -2599,7 +2599,7 @@ export interface FilesSettingsApiChangeDefaultAccessRightsRequest {
      * @type {Array<number>}
      * @memberof FilesSettingsApiChangeDefaultAccessRights
      */
-    readonly requestBody?: Array<number>
+    readonly defaultAccessRightsRequestDto?: Array<number>
 }
 
 /**
@@ -2943,7 +2943,7 @@ export class FilesSettingsApi extends BaseAPI {
      * @memberof FilesSettingsApi
      */
     public changeDefaultAccessRights(requestParameters: FilesSettingsApiChangeDefaultAccessRightsRequest = {}, options?: RawAxiosRequestConfig) {
-        return FilesSettingsApiFp(this.configuration).changeDefaultAccessRights(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return FilesSettingsApiFp(this.configuration).changeDefaultAccessRights(requestParameters.defaultAccessRightsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

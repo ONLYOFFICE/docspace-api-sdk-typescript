@@ -272,6 +272,7 @@ const { status, data } = await apiInstance.getStorageProgress();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Migration progress as a percentage, or -1 where storage migration is not offered |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -385,7 +386,7 @@ const { status, data } = await apiInstance.resetStorageToDefault();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateCdnStorage**
-> CdnStorageSettingsWrapper updateCdnStorage()
+> StorageSettingsWrapper updateCdnStorage()
 
 Selects the content delivery network that serves the static content of the portal and saves the credentials it  needs: `module` is the identifier of one of the entries of `GET api/2.0/settings/storage/cdn`, and `props`  carries that provider\'s authentication keys as name and value pairs. The provider has to be available on the  server, which the `isSet` flag of the listing tells, otherwise the request is rejected as invalid. Sending the  module the portal already uses changes nothing and returns the saved settings as they are. Any other module is  saved and the upload of the static content is handed to the storage service; the settings come back only when  that hand-over succeeds, a failure being reported as a server error. Unlike the portal storage this has no  progress operation, so there is nothing to poll: the content appears on the CDN once the service has copied  it. Only static content is affected here, never documents; for those use `PUT api/2.0/settings/storage`. The  caller needs the permission to edit portal settings, which in practice means the portal owner or a DocSpace  admin, on a server installation with an unrestricted access space. The response is the stored CDN  configuration.
 
@@ -395,12 +396,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **storageRequestsDto** | **StorageRequestsDto**|  | |
+| **storageRequestDto** | **StorageRequestDto**|  | |
 
 
 ### Return type
 
-**CdnStorageSettingsWrapper**
+**StorageSettingsWrapper**
 
 ### Authorization
 
@@ -412,16 +413,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsStorageApi,
     Configuration,
-    StorageRequestsDto
+    StorageRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
 
-let storageRequestsDto: StorageRequestsDto; // (optional)
+let storageRequestDto: StorageRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updateCdnStorage(
-    storageRequestsDto
+    storageRequestDto
 );
 ```
 
@@ -435,7 +436,7 @@ const { status, data } = await apiInstance.updateCdnStorage(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The saved CDN configuration; the upload of the static content has been handed to the storage service |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The requested CDN module is not configured on this installation |  -  |
+|**400** | The request body cannot be read or has no `module`, or the requested CDN module is unknown or not configured on this installation |  -  |
 |**403** | The caller may not edit portal settings, or this installation does not allow changing the storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -456,7 +457,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **storageRequestsDto** | **StorageRequestsDto**|  | |
+| **storageRequestDto** | **StorageRequestDto**|  | |
 
 
 ### Return type
@@ -473,16 +474,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsStorageApi,
     Configuration,
-    StorageRequestsDto
+    StorageRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsStorageApi(configuration);
 
-let storageRequestsDto: StorageRequestsDto; // (optional)
+let storageRequestDto: StorageRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updateStorage(
-    storageRequestsDto
+    storageRequestDto
 );
 ```
 
@@ -496,7 +497,7 @@ const { status, data } = await apiInstance.updateStorage(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The saved storage configuration; migration of the portal data to it has been started |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The requested storage module is not configured on this installation |  -  |
+|**400** | The request body cannot be read or has no `module`, or the requested storage module is unknown or not configured on this installation |  -  |
 |**403** | The caller may not edit portal settings, or this installation does not allow changing the storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |

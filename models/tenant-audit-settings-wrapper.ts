@@ -20,15 +20,34 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantAuditSettings } from './tenant-audit-settings';
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TenantAuditSettingsDto } from './tenant-audit-settings-dto';
 
 /**
- * The tenant audit settings wrapper.
+ * The successful API response containing the TenantAuditSettingsDto object.
  */
 export interface TenantAuditSettingsWrapper {
     /**
-     * The tenant audit settings parameters.
+     * The TenantAuditSettingsDto object returned by the operation.
      */
-    'settings'?: TenantAuditSettings;
+    'response'?: TenantAuditSettingsDto;
+    /**
+     * The total number of items in the response
+     */
+    'count'?: number;
+    /**
+     * List of links related to the response
+     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

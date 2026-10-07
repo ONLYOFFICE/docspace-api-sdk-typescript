@@ -1,12 +1,16 @@
 # CompanyWhiteLabelSettingsWrapper
 
-The company white label settings wrapper.
+The successful API response containing the CompanyWhiteLabelSettingsDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**settings** | [**CompanyWhiteLabelSettings**](CompanyWhiteLabelSettings.md) | The company white label settings. | [optional] [default to undefined]
+**response** | [**CompanyWhiteLabelSettingsDto**](CompanyWhiteLabelSettingsDto.md) | The CompanyWhiteLabelSettingsDto object returned by the operation. | [optional] [default to undefined]
+**count** | **number** | The total number of items in the response | [optional] [default to undefined]
+**links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
+**status** | **number** | HTTP status code of the response | [optional] [default to undefined]
+**statusCode** | **number** | HTTP status code of the response (duplicate of status) | [optional] [default to undefined]
 
 ## Example
 
@@ -14,7 +18,11 @@ Name | Type | Description | Notes
 import { CompanyWhiteLabelSettingsWrapper } from '@onlyoffice/docspace-api-sdk';
 
 const instance: CompanyWhiteLabelSettingsWrapper = {
-    settings,
+    response,
+    count,
+    links,
+    status,
+    statusCode,
 };
 ```
 

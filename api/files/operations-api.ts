@@ -34,9 +34,13 @@ import type { CheckConversionRequestDto } from '../../models';
 // @ts-ignore
 import type { CheckDestFolderWrapper } from '../../models';
 // @ts-ignore
-import type { ChunkedUploadSessionResponseResponseWrapper } from '../../models';
+import type { CheckMoveOrCopyBatchItemsDestFolderIdParameter } from '../../models';
 // @ts-ignore
-import type { ChunkedUploadSessionResponseWrapperWrapper } from '../../models';
+import type { CheckMoveOrCopyBatchItemsFolderIdsParameterInner } from '../../models';
+// @ts-ignore
+import type { ChunkedUploadSessionResultWrapper } from '../../models';
+// @ts-ignore
+import type { ChunkedUploadSessionWrapper } from '../../models';
 // @ts-ignore
 import type { ConversationResultArrayWrapper } from '../../models';
 // @ts-ignore
@@ -50,6 +54,8 @@ import type { DuplicateRequestDto } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
+import type { FileConflictResolveType } from '../../models';
+// @ts-ignore
 import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileOperationArrayWrapper } from '../../models';
@@ -62,13 +68,13 @@ import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyCheckConversionRequestDto } from '../../models';
 // @ts-ignore
-import type { ThirdPartyChunkedUploadSessionResponseResponseWrapper } from '../../models';
+import type { ThirdPartyChunkedUploadSessionResultWrapper } from '../../models';
 // @ts-ignore
-import type { ThirdPartyChunkedUploadSessionResponseWrapperWrapper } from '../../models';
+import type { ThirdPartyChunkedUploadSessionWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyUploadSessionResponseWrapper } from '../../models';
 // @ts-ignore
-import type { UpdateComment } from '../../models';
+import type { UpdateCommentRequest } from '../../models';
 // @ts-ignore
 import type { UploadSessionResponseWrapper } from '../../models';
 /**
@@ -315,13 +321,20 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
          * @summary Check move or copy conflicts
-         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+         * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+         * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+         * @param {boolean} [toFillOut] Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          */
-        checkMoveOrCopyBatchItems: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkMoveOrCopyBatchItems: async (returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/fileops/move`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -354,10 +367,38 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
 
             // authentication OpenId required
 
-            if (inDto !== undefined) {
-                for (const [key, value] of Object.entries(inDto)) {
+            if (returnSingleOperation !== undefined) {
+                localVarQueryParameter['returnSingleOperation'] = returnSingleOperation;
+            }
+
+            if (folderIds) {
+                localVarQueryParameter['folderIds'] = folderIds;
+            }
+
+            if (fileIds) {
+                localVarQueryParameter['fileIds'] = fileIds;
+            }
+
+            if (destFolderId !== undefined) {
+                for (const [key, value] of Object.entries(destFolderId)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (conflictResolveType !== undefined) {
+                localVarQueryParameter['conflictResolveType'] = conflictResolveType;
+            }
+
+            if (deleteAfter !== undefined) {
+                localVarQueryParameter['deleteAfter'] = deleteAfter;
+            }
+
+            if (content !== undefined) {
+                localVarQueryParameter['content'] = content;
+            }
+
+            if (toFillOut !== undefined) {
+                localVarQueryParameter['toFillOut'] = toFillOut;
             }
 
 
@@ -374,13 +415,20 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
         /**
          * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
          * @summary Check the destination folder
-         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+         * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+         * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+         * @param {boolean} [toFillOut] Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyDestFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          */
-        checkMoveOrCopyDestFolder: async (inDto?: BatchRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkMoveOrCopyDestFolder: async (returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/fileops/checkdestfolder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -413,10 +461,38 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
 
             // authentication OpenId required
 
-            if (inDto !== undefined) {
-                for (const [key, value] of Object.entries(inDto)) {
+            if (returnSingleOperation !== undefined) {
+                localVarQueryParameter['returnSingleOperation'] = returnSingleOperation;
+            }
+
+            if (folderIds) {
+                localVarQueryParameter['folderIds'] = folderIds;
+            }
+
+            if (fileIds) {
+                localVarQueryParameter['fileIds'] = fileIds;
+            }
+
+            if (destFolderId !== undefined) {
+                for (const [key, value] of Object.entries(destFolderId)) {
                     localVarQueryParameter[key] = value;
                 }
+            }
+
+            if (conflictResolveType !== undefined) {
+                localVarQueryParameter['conflictResolveType'] = conflictResolveType;
+            }
+
+            if (deleteAfter !== undefined) {
+                localVarQueryParameter['deleteAfter'] = deleteAfter;
+            }
+
+            if (content !== undefined) {
+                localVarQueryParameter['content'] = content;
+            }
+
+            if (toFillOut !== undefined) {
+                localVarQueryParameter['toFillOut'] = toFillOut;
             }
 
 
@@ -879,7 +955,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (single !== undefined) {
-                localVarQueryParameter['Single'] = single;
+                localVarQueryParameter['single'] = single;
             }
 
             if (folderType) {
@@ -1307,17 +1383,17 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Update a comment
          * @param {number | string} fileId The file whose version comment is replaced.
-         * @param {UpdateComment} updateComment The version and the comment to store on it.
+         * @param {UpdateCommentRequest} updateCommentRequest The version and the comment to store on it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFileComment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
          */
-        updateFileComment: async (fileId: number | string, updateComment: UpdateComment, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFileComment: async (fileId: number | string, updateCommentRequest: UpdateCommentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('updateFileComment', 'fileId', fileId)
-            // verify required parameter 'updateComment' is not null or undefined
-            assertParamExists('updateFileComment', 'updateComment', updateComment)
+            // verify required parameter 'updateCommentRequest' is not null or undefined
+            assertParamExists('updateFileComment', 'updateCommentRequest', updateCommentRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/comment`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -1358,7 +1434,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateComment, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateCommentRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1418,12 +1494,12 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (chunkNumber !== undefined) {
-                localVarQueryParameter['ChunkNumber'] = chunkNumber;
+                localVarQueryParameter['chunkNumber'] = chunkNumber;
             }
 
 
             if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
+                localVarFormParams.append('file', file as any);
             }
     
     
@@ -1492,7 +1568,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
 
 
             if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
+                localVarFormParams.append('file', file as any);
             }
     
     
@@ -1583,14 +1659,21 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
          * @summary Check move or copy conflicts
-         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+         * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+         * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+         * @param {boolean} [toFillOut] Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          */
-        async checkMoveOrCopyBatchItems(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyBatchItems(inDto, options);
+        async checkMoveOrCopyBatchItems(returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyBatchItems(returnSingleOperation, folderIds, fileIds, destFolderId, conflictResolveType, deleteAfter, content, toFillOut, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.checkMoveOrCopyBatchItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1598,14 +1681,21 @@ export const OperationsApiFp = function(configuration?: Configuration) {
         /**
          * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
          * @summary Check the destination folder
-         * @param {BatchRequestDto} [inDto] The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
+         * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+         * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+         * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+         * @param {boolean} [toFillOut] Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkMoveOrCopyDestFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          */
-        async checkMoveOrCopyDestFolder(inDto?: BatchRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyDestFolder(inDto, options);
+        async checkMoveOrCopyDestFolder(returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyDestFolder(returnSingleOperation, folderIds, fileIds, destFolderId, conflictResolveType, deleteAfter, content, toFillOut, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.checkMoveOrCopyDestFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1636,7 +1726,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for createUploadSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
          */
-        async createUploadSession(folderId: number | string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>> {
+        async createUploadSession(folderId: number | string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSession(folderId, sessionRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSession']?.[localVarOperationServerIndex]?.url;
@@ -1652,7 +1742,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for createUploadSessionInFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
          */
-        async createUploadSessionInFolder(folderId: number | string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper>> {
+        async createUploadSessionInFolder(folderId: number | string, sessionRequest: SessionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createUploadSessionInFolder(folderId, sessionRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.createUploadSessionInFolder']?.[localVarOperationServerIndex]?.url;
@@ -1846,14 +1936,14 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
          * @summary Update a comment
          * @param {number | string} fileId The file whose version comment is replaced.
-         * @param {UpdateComment} updateComment The version and the comment to store on it.
+         * @param {UpdateCommentRequest} updateCommentRequest The version and the comment to store on it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFileComment operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file-comment/
          */
-        async updateFileComment(fileId: number | string, updateComment: UpdateComment, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileComment(fileId, updateComment, options);
+        async updateFileComment(fileId: number | string, updateCommentRequest: UpdateCommentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFileComment(fileId, updateCommentRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.updateFileComment']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1870,7 +1960,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for uploadAsyncSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
          */
-        async uploadAsyncSession(folderId: number | string, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper>> {
+        async uploadAsyncSession(folderId: number | string, sessionId: string, chunkNumber?: number, file?: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uploadAsyncSession(folderId, sessionId, chunkNumber, file, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.uploadAsyncSession']?.[localVarOperationServerIndex]?.url;
@@ -1961,7 +2051,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         checkMoveOrCopyBatchItems(requestParameters: OperationsApiCheckMoveOrCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
-            return localVarFp.checkMoveOrCopyBatchItems(requestParameters.inDto, options).then((request) => request(axios, basePath));
+            return localVarFp.checkMoveOrCopyBatchItems(requestParameters.returnSingleOperation, requestParameters.folderIds, requestParameters.fileIds, requestParameters.destFolderId, requestParameters.conflictResolveType, requestParameters.deleteAfter, requestParameters.content, requestParameters.toFillOut, options).then((request) => request(axios, basePath));
         },
         /**
          * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
@@ -1973,7 +2063,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         checkMoveOrCopyDestFolder(requestParameters: OperationsApiCheckMoveOrCopyDestFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CheckDestFolderWrapper> {
-            return localVarFp.checkMoveOrCopyDestFolder(requestParameters.inDto, options).then((request) => request(axios, basePath));
+            return localVarFp.checkMoveOrCopyDestFolder(requestParameters.returnSingleOperation, requestParameters.folderIds, requestParameters.fileIds, requestParameters.destFolderId, requestParameters.conflictResolveType, requestParameters.deleteAfter, requestParameters.content, requestParameters.toFillOut, options).then((request) => request(axios, basePath));
         },
         /**
          * Queues a background job that copies the requested files and folders into `destFolderId`, leaving the originals  where they are, and answers with the caller\'s move and copy operations, including the one just started. Poll  `GET api/2.0/files/fileops` until the operation reports `finished`; its `files` and `folders` then name what  was produced. Before starting, `GET api/2.0/files/fileops/move` reports which items already have a same-named  entry at the destination and `conflictResolveType` decides what happens to them, while  `GET api/2.0/files/fileops/checkdestfolder` reports whether the destination accepts the files at all. The  caller needs create access to the destination — room manager or content-creator rights inside a room — and  read access to every source item; anything less is refused with 403. With `content=true` each listed folder is  replaced by its own files and subfolders, so the folder itself is not recreated at the destination. An empty  selection queues nothing and answers with the operations that are already there. To remove the originals  instead use `PUT api/2.0/files/fileops/move`.
@@ -1997,7 +2087,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session/
          * @throws {RequiredError}
          */
-        createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper> {
+        createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper> {
             return localVarFp.createUploadSession(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2009,7 +2099,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-upload-session-in-folder/
          * @throws {RequiredError}
          */
-        createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper> {
+        createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper> {
             return localVarFp.createUploadSessionInFolder(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2166,7 +2256,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         updateFileComment(requestParameters: OperationsApiUpdateFileCommentRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.updateFileComment(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(axios, basePath));
+            return localVarFp.updateFileComment(requestParameters.fileId, requestParameters.updateCommentRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
@@ -2177,7 +2267,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-async-session/
          * @throws {RequiredError}
          */
-        uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper> {
+        uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper> {
             return localVarFp.uploadAsyncSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2272,11 +2362,60 @@ export interface OperationsApiCheckConversionStatusRequest {
  */
 export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
     /**
-     * The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-     * @type {BatchRequestDto}
+     * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+     * @type {boolean}
      * @memberof OperationsApiCheckMoveOrCopyBatchItems
      */
-    readonly inDto?: BatchRequestDto
+    readonly returnSingleOperation?: boolean
+
+    /**
+     * The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+
+    /**
+     * The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+
+    /**
+     * The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+     * @type {CheckMoveOrCopyBatchItemsDestFolderIdParameter}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+
+    /**
+     * What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+     * @type {FileConflictResolveType}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly conflictResolveType?: FileConflictResolveType
+
+    /**
+     * Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly deleteAfter?: boolean
+
+    /**
+     * What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly content?: boolean
+
+    /**
+     * Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyBatchItems
+     */
+    readonly toFillOut?: boolean
 }
 
 /**
@@ -2286,11 +2425,60 @@ export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
  */
 export interface OperationsApiCheckMoveOrCopyDestFolderRequest {
     /**
-     * The files and folders to move or copy, the folder they go to, and the way name clashes are settled.
-     * @type {BatchRequestDto}
+     * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
+     * @type {boolean}
      * @memberof OperationsApiCheckMoveOrCopyDestFolder
      */
-    readonly inDto?: BatchRequestDto
+    readonly returnSingleOperation?: boolean
+
+    /**
+     * The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+
+    /**
+     * The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+
+    /**
+     * The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+     * @type {CheckMoveOrCopyBatchItemsDestFolderIdParameter}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+
+    /**
+     * What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
+     * @type {FileConflictResolveType}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly conflictResolveType?: FileConflictResolveType
+
+    /**
+     * Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly deleteAfter?: boolean
+
+    /**
+     * What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly content?: boolean
+
+    /**
+     * Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected.
+     * @type {boolean}
+     * @memberof OperationsApiCheckMoveOrCopyDestFolder
+     */
+    readonly toFillOut?: boolean
 }
 
 /**
@@ -2420,7 +2608,7 @@ export interface OperationsApiEmptyTrashRequest {
 
     /**
      * Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms.
-     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>}
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37>}
      * @memberof OperationsApiEmptyTrash
      */
     readonly folderType?: Array<EmptyTrashFolderTypeEnum>
@@ -2560,10 +2748,10 @@ export interface OperationsApiUpdateFileCommentRequest {
 
     /**
      * The version and the comment to store on it.
-     * @type {UpdateComment}
+     * @type {UpdateCommentRequest}
      * @memberof OperationsApiUpdateFileComment
      */
-    readonly updateComment: UpdateComment
+    readonly updateCommentRequest: UpdateCommentRequest
 }
 
 /**
@@ -2693,7 +2881,7 @@ export class OperationsApi extends BaseAPI {
      * @memberof OperationsApi
      */
     public checkMoveOrCopyBatchItems(requestParameters: OperationsApiCheckMoveOrCopyBatchItemsRequest = {}, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).checkMoveOrCopyBatchItems(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
+        return OperationsApiFp(this.configuration).checkMoveOrCopyBatchItems(requestParameters.returnSingleOperation, requestParameters.folderIds, requestParameters.fileIds, requestParameters.destFolderId, requestParameters.conflictResolveType, requestParameters.deleteAfter, requestParameters.content, requestParameters.toFillOut, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2705,7 +2893,7 @@ export class OperationsApi extends BaseAPI {
      * @memberof OperationsApi
      */
     public checkMoveOrCopyDestFolder(requestParameters: OperationsApiCheckMoveOrCopyDestFolderRequest = {}, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).checkMoveOrCopyDestFolder(requestParameters.inDto, options).then((request) => request(this.axios, this.basePath));
+        return OperationsApiFp(this.configuration).checkMoveOrCopyDestFolder(requestParameters.returnSingleOperation, requestParameters.folderIds, requestParameters.fileIds, requestParameters.destFolderId, requestParameters.conflictResolveType, requestParameters.deleteAfter, requestParameters.content, requestParameters.toFillOut, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2729,7 +2917,7 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper>;
+    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper>;
     /**
      * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Chunked upload (third-party storage)
@@ -2738,8 +2926,8 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
-    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
+    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResultWrapper>;
+    public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper>;
     public createUploadSession(requestParameters: OperationsApiCreateUploadSessionRequest, options?: RawAxiosRequestConfig) {
         return OperationsApiFp(this.configuration).createUploadSession(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
     }
@@ -2752,7 +2940,7 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper>;
+    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper>;
     /**
      * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create an upload session (third-party storage)
@@ -2761,8 +2949,8 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper>;
-    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper>;
+    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionWrapper>;
+    public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper>;
     public createUploadSessionInFolder(requestParameters: OperationsApiCreateUploadSessionInFolderRequest, options?: RawAxiosRequestConfig) {
         return OperationsApiFp(this.configuration).createUploadSessionInFolder(requestParameters.folderId, requestParameters.sessionRequest, options).then((request) => request(this.axios, this.basePath));
     }
@@ -2931,7 +3119,7 @@ export class OperationsApi extends BaseAPI {
      * @memberof OperationsApi
      */
     public updateFileComment(requestParameters: OperationsApiUpdateFileCommentRequest, options?: RawAxiosRequestConfig) {
-        return OperationsApiFp(this.configuration).updateFileComment(requestParameters.fileId, requestParameters.updateComment, options).then((request) => request(this.axios, this.basePath));
+        return OperationsApiFp(this.configuration).updateFileComment(requestParameters.fileId, requestParameters.updateCommentRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2942,7 +3130,7 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper>;
+    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest & { folderId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper>;
     /**
      * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Upload a numbered chunk (third-party storage)
@@ -2951,8 +3139,8 @@ export class OperationsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OperationsApi
      */
-    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseResponseWrapper>;
-    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseResponseWrapper | ThirdPartyChunkedUploadSessionResponseResponseWrapper>;
+    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionWrapper>;
+    public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionWrapper | ThirdPartyChunkedUploadSessionWrapper>;
     public uploadAsyncSession(requestParameters: OperationsApiUploadAsyncSessionRequest, options?: RawAxiosRequestConfig) {
         return OperationsApiFp(this.configuration).uploadAsyncSession(requestParameters.folderId, requestParameters.sessionId, requestParameters.chunkNumber, requestParameters.file, options).then((request) => request(this.axios, this.basePath));
     }
@@ -3014,6 +3202,7 @@ export const EmptyTrashFolderTypeEnum = {
     ChatOutputs: 33,
     AiAgents: 34,
     DefaultTemplates: 35,
-    Forms: 36
+    Forms: 36,
+    Ai: 37
 } as const;
 export type EmptyTrashFolderTypeEnum = typeof EmptyTrashFolderTypeEnum[keyof typeof EmptyTrashFolderTypeEnum];

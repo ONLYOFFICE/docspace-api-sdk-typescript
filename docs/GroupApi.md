@@ -8,7 +8,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**addMembersTo**](#addmembersto) | **PUT** /api/2.0/group/{id}/members | Add group members|
 |[**deleteGroup**](#deletegroup) | **DELETE** /api/2.0/group/{id} | Delete a group|
 |[**getGroup**](#getgroup) | **GET** /api/2.0/group/{id} | Get a group|
-|[**getGroupByUserId**](#getgroupbyuserid) | **GET** /api/2.0/group/user/{userid} | Get user groups|
+|[**getGroupByUserId**](#getgroupbyuserid) | **GET** /api/2.0/group/user/{userId} | Get user groups|
 |[**getGroups**](#getgroups) | **GET** /api/2.0/group | Get groups|
 |[**moveMembersTo**](#movemembersto) | **PUT** /api/2.0/group/{fromId}/members/{toId} | Move group members|
 |[**removeMembersFrom**](#removemembersfrom) | **DELETE** /api/2.0/group/{id}/members | Remove group members|
@@ -67,7 +67,7 @@ const { status, data } = await apiInstance.addGroup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The new group, with its members |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The group name is empty, or one of the listed accounts is a guest, is disabled or does not exist |  -  |
+|**400** | The request body cannot be read or has no `groupName`, the group name is `null`, blank or longer than 128 characters, or one of the listed members or the manager is a guest, is disabled or does not exist |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -278,7 +278,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | defaults to undefined|
+| **userId** | [**string**] | The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. | defaults to undefined|
 
 
 ### Return type
@@ -300,10 +300,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new GroupApi(configuration);
 
-let userid: string; //The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (default to undefined)
+let userId: string; //The ID of the account whose groups are listed, taken from the route. An ID that matches no account yields an  empty list rather than 404. (default to undefined)
 
 const { status, data } = await apiInstance.getGroupByUserId(
-    userid
+    userId
 );
 ```
 
@@ -330,7 +330,7 @@ const { status, data } = await apiInstance.getGroupByUserId(
 # **getGroups**
 > GroupArrayWrapper getGroups()
 
-Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userid}` to find the groups of a single account.
+Returns the groups of the portal, one page at a time, with the summary information about each of them - the  ID, the name and the manager - but without the member list.  The caller needs the permission to read groups.  The call is read-only, and the number of groups that match the filters is reported in the total count of the  response, so a client can page through them with `count` and `startIndex`.  Narrow the result with `filterValue` on the group name, with `userId` to keep only the groups that account  belongs to, and with `manager` set to true to keep only the groups it manages; order it with `sortBy` and  `sortOrder`, and an unknown `sortBy` falls back to sorting by title.  The entries carry no members - read `GET api/2.0/group/{id}` with `includeMembers` for one group, or  `GET api/2.0/group/user/{userId}` to find the groups of a single account.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups/).
 
@@ -395,11 +395,11 @@ const { status, data } = await apiInstance.getGroups(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The matching groups, with their summary information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -588,12 +588,12 @@ const { status, data } = await apiInstance.setGroupManager(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The group with its new manager |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `userId` |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No group has the specified ID, or no account has the specified userId |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -653,7 +653,7 @@ const { status, data } = await apiInstance.setMembersTo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The group with the members it ends up with |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | None of the listed accounts can be a group member |  -  |
+|**400** | The request body cannot be read or has no `members` list, or none of the listed accounts can be a group member |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No group has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
@@ -718,12 +718,12 @@ const { status, data } = await apiInstance.updateGroup(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The group as it is after the update |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `groupName` is longer than 128 characters |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**404** | No group has the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

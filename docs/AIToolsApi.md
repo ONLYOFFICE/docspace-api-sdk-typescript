@@ -71,8 +71,8 @@ const { status, data } = await apiInstance.aiToolsAddCustomServer(
 |**200** | Whether the server was registered, with the stored entry. |  -  |
 |**400** | The server name is missing or is not routable. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -129,7 +129,7 @@ const { status, data } = await apiInstance.aiToolsGetAllowAlways(
 |-------------|-------------|------------------|
 |**200** | The tools that run without an approval pause. An empty list means every call needs approval. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -189,7 +189,7 @@ const { status, data } = await apiInstance.aiToolsGetCustomServer(
 |**200** | The stored configuration, empty for a system server and null when the name is not registered. |  -  |
 |**400** | The server name is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -245,7 +245,7 @@ const { status, data } = await apiInstance.aiToolsGetDisabled(
 |-------------|-------------|------------------|
 |**200** | The switched-off tools as a map of server type to tool names. An absent type means nothing is switched off for it. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -308,7 +308,7 @@ const { status, data } = await apiInstance.aiToolsIsAllowAlways(
 |**200** | Whether that one tool runs without an approval pause. |  -  |
 |**400** | `serverType` or `toolName` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -371,7 +371,7 @@ const { status, data } = await apiInstance.aiToolsIsToolDisabled(
 |**200** | Whether that one tool is switched off in the scope. |  -  |
 |**400** | `serverType` or `toolName` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -427,7 +427,7 @@ const { status, data } = await apiInstance.aiToolsListCustomServers(
 |-------------|-------------|------------------|
 |**200** | The scope\'s registrations as a map of name to configuration, system entries emptied and the portal\'s built-in server left out. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -483,7 +483,7 @@ const { status, data } = await apiInstance.aiToolsListSystemTools(
 |-------------|-------------|------------------|
 |**200** | The scope\'s tools grouped by server type, the system group keys named in `system`, and the reason a registered server delivered none in `errors`. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -541,8 +541,8 @@ const { status, data } = await apiInstance.aiToolsRemoveCustomServer(
 |**200** | Confirms the request was accepted, whether or not a registration was removed. |  -  |
 |**400** | The server name is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -601,8 +601,8 @@ const { status, data } = await apiInstance.aiToolsReplaceAllCustomServers(
 |**200** | Whether the registry was replaced, with `errors` listing what was refused. |  -  |
 |**400** | The body is not a map of server name to configuration, or a name is not routable. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -660,8 +660,8 @@ const { status, data } = await apiInstance.aiToolsSetAllowAlways(
 |-------------|-------------|------------------|
 |**200** | Confirms the always-allow list was updated. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -720,8 +720,8 @@ const { status, data } = await apiInstance.aiToolsSetDisabled(
 |**200** | Confirms the new disable list was stored for that server type. |  -  |
 |**400** | The list of tools to disable is malformed. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -780,8 +780,8 @@ const { status, data } = await apiInstance.aiToolsUpdateCustomServer(
 |**200** | Whether the server was updated, with the stored entry. |  -  |
 |**400** | The server name is missing or is not routable. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
-|**404** | The referenced object does not exist, or the caller cannot access it - the two are deliberately indistinguishable, so a room the caller may not open answers 404 rather than 403. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**404** | The referenced object does not exist: an unknown or deleted room named by `entityId`, or an object the caller cannot read - for those the two cases are deliberately indistinguishable. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

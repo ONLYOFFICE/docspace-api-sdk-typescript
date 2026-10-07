@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EntityQuotaDto } from './entity-quota-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { PriceDto } from './price-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { QuotaDto } from './quota-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantEntityQuotaSettings } from './tenant-entity-quota-settings';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { TenantQuotaFeatureDto } from './tenant-quota-feature-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantQuotaSettings } from './tenant-quota-settings';
+import type { TenantQuotaSettingsDto } from './tenant-quota-settings-dto';
 
 /**
  * @type WalletServiceDto

@@ -20,10 +20,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiPrompt } from './ai-prompt';
+import type { AiErrorData } from './ai-error-data';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiPrompt } from './ai-prompt';
 
 /**
  * Outcome of `create` / `update` / `move` on a prompt — either the persisted prompt or a field-scoped error.
@@ -40,6 +40,6 @@ export interface AiPromptMutationResult {
     /**
      * Why the prompt was rejected. Present on failure.
      */
-    'error'?: AiTErrorData;
+    'error'?: AiErrorData;
 }
 

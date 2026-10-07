@@ -182,7 +182,7 @@ const { status, data } = await apiInstance.getSettings(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setEnabled**
-> AppWrapper setEnabled(setAppEnabledBody)
+> AppWrapper setEnabled(setAppEnabledRequest)
 
 Turns one portal application on or off for the current portal, and notifies the clients connected to the portal  so that they can show or hide it without being reloaded. The identifier must be an application declared in the  installation configuration, as listed by `GET api/2.0/apps`. The caller must be a portal administrator allowed  to edit the portal settings. The call is mutating and idempotent: it stores the flag for this portal, overriding  the default that the configuration gives the application, and repeating it with the same value changes nothing.  Disabling an application does not delete its settings document, which stays saved and applies again as soon as  the application is enabled. The response is the application in its new state, including that settings document.  Only the enabled flag is affected here: to change the settings document use `PUT api/2.0/apps/{id}/settings`.
 
@@ -192,7 +192,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **setAppEnabledBody** | **SetAppEnabledBody**| The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | |
+| **setAppEnabledRequest** | **SetAppEnabledRequest**| The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`. | |
 | **id** | [**string**] | The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. | defaults to undefined|
 
 
@@ -210,18 +210,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AppsApi,
     Configuration,
-    SetAppEnabledBody
+    SetAppEnabledRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AppsApi(configuration);
 
 let id: string; //The application to switch, by the identifier `GET api/2.0/apps` reports. It has to be an application declared  in the installation configuration; an unknown identifier answers 404 rather than creating anything. (default to undefined)
-let setAppEnabledBody: SetAppEnabledBody; //The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
+let setAppEnabledRequest: SetAppEnabledRequest; //The new state of the application. Only the enabled flag travels here; the settings document is changed  through `PUT api/2.0/apps/{id}/settings`.
 
 const { status, data } = await apiInstance.setEnabled(
     id,
-    setAppEnabledBody
+    setAppEnabledRequest
 );
 ```
 
@@ -235,7 +235,7 @@ const { status, data } = await apiInstance.setEnabled(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The application in its new state, with the saved settings document left untouched |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller is not allowed to edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**404** | No application with this identifier is configured on this installation |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -247,7 +247,7 @@ const { status, data } = await apiInstance.setEnabled(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setSettings**
-> AppWrapper setSettings(setAppSettingsBody)
+> AppWrapper setSettings(setAppSettingsRequest)
 
 Stores the application-specific settings document of one portal application for the current portal. The  identifier must be an application declared in the installation configuration, as listed by `GET api/2.0/apps`.  The caller must be a portal administrator allowed to edit the portal settings. The call is mutating and  idempotent, and it replaces the whole document instead of merging into it: read the current one with  `GET api/2.0/apps/{id}/settings`, change it and send it back complete, or send `null` to drop the saved document  and let the application fall back to its own defaults. Any valid JSON value is accepted, since the content is  stored as it is and is interpreted by the application rather than by the portal, while a body that is not valid  JSON fails with 400 and stores nothing. The response is the application in its new state, with the stored  document echoed back. Unlike `PUT api/2.0/apps/{id}/enabled`, this operation sends no notification to the  connected clients, which pick the new settings up on their next read.
 
@@ -257,7 +257,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **setAppSettingsBody** | **SetAppSettingsBody**| The configuration to store for this portal, replacing whatever was stored before. | |
+| **setAppSettingsRequest** | **SetAppSettingsRequest**| The configuration to store for this portal, replacing whatever was stored before. | |
 | **id** | [**string**] | The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. | defaults to undefined|
 
 
@@ -275,18 +275,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AppsApi,
     Configuration,
-    SetAppSettingsBody
+    SetAppSettingsRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AppsApi(configuration);
 
 let id: string; //The application whose configuration is stored, by the identifier `GET api/2.0/apps` reports. An identifier  not declared in the installation configuration answers 404. (default to undefined)
-let setAppSettingsBody: SetAppSettingsBody; //The configuration to store for this portal, replacing whatever was stored before.
+let setAppSettingsRequest: SetAppSettingsRequest; //The configuration to store for this portal, replacing whatever was stored before.
 
 const { status, data } = await apiInstance.setSettings(
     id,
-    setAppSettingsBody
+    setAppSettingsRequest
 );
 ```
 
@@ -301,7 +301,7 @@ const { status, data } = await apiInstance.setSettings(
 |-------------|-------------|------------------|
 |**200** | The application in its new state, with the stored settings document |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body is not a valid JSON document, so no settings are stored |  -  |
-|**403** | The caller is not allowed to edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**404** | No application with this identifier is configured on this installation |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |

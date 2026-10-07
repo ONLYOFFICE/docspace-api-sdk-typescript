@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | True when the configuration was persisted. | [default to undefined]
 **config** | [**AiWebSearchConfig**](AiWebSearchConfig.md) | The persisted web-search configuration. Present on success. | [optional] [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the configuration was rejected. Present on failure. | [optional] [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the configuration was rejected. Present on failure. | [optional] [default to undefined]
 
 ## Example
 

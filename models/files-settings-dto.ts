@@ -20,13 +20,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AutoCleanUpData } from './auto-clean-up-data';
+import type { AutoCleanUpDataDto } from './auto-clean-up-data-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FilesSettingsDtoInternalFormats } from './files-settings-dto-internal-formats';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderBy } from './order-by';
+import type { OrderByDto } from './order-by-dto';
 
 /**
  * Everything a client needs to work with documents in this portal: the format tables, the address templates, the  upload limits, the portal-wide switches and the preferences of the calling account.
@@ -212,7 +212,7 @@ export interface FilesSettingsDto {
     /**
      * The ordering the listing operations fall back to when a request names none. It follows the last order the  caller asked a listing for, so it changes on its own as the account is used.
      */
-    'defaultOrder'?: OrderBy;
+    'defaultOrder'?: OrderByDto;
     /**
      * Whether the editor writes a document back to storage while the session is still open. It is on for every  portal and cannot be switched off.
      */
@@ -240,7 +240,7 @@ export interface FilesSettingsDto {
     /**
      * The trash auto-clearing setting of the caller, the same pair `GET api/2.0/files/settings/autocleanup` returns.
      */
-    'automaticallyCleanUp'?: AutoCleanUpData;
+    'automaticallyCleanUp'?: AutoCleanUpDataDto;
     /**
      * Whether documents in this portal can be searched by what is inside them and not only by title. It depends on  the full-text search service being configured and having indexed the portal.
      */

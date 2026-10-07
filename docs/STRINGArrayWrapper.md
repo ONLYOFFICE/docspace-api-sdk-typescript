@@ -1,4 +1,4 @@
-# STRINGArrayWrapper
+# StringArrayWrapper
 
 The successful API response.
 
@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { STRINGArrayWrapper } from '@onlyoffice/docspace-api-sdk';
+import { StringArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: STRINGArrayWrapper = {
+const instance: StringArrayWrapper = {
     response,
     count,
     links,

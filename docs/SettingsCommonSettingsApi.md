@@ -70,7 +70,7 @@ const { status, data } = await apiInstance.closeAdminHelper();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The admin helper tip was dismissed for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**405** | The caller is not a DocSpace administrator, or the portal is on SaaS, custom mode, or not Standalone |  -  |
+|**415** | The caller is not a DocSpace administrator, or the portal is on SaaS, custom mode, or not Standalone |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -90,7 +90,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **wizardRequestsDto** | **WizardRequestsDto**|  | |
+| **wizardRequestDto** | **WizardRequestDto**|  | |
 
 
 ### Return type
@@ -107,16 +107,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    WizardRequestsDto
+    WizardRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let wizardRequestsDto: WizardRequestsDto; // (optional)
+let wizardRequestDto: WizardRequestDto; // (optional)
 
 const { status, data } = await apiInstance.completeWizard(
-    wizardRequestsDto
+    wizardRequestDto
 );
 ```
 
@@ -130,11 +130,11 @@ const { status, data } = await apiInstance.completeWizard(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Resulting wizard settings, including the completed flag |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The email address is malformed, or the password is empty |  -  |
-|**402** | The supplied license is missing, invalid, expired, or its user quota does not cover the portal |  -  |
+|**400** | The request body cannot be read or has no `email` or `passwordHash`, the email address is empty or malformed, or the license\'s start date is in the future |  -  |
+|**403** | The account the confirmation link was issued for has no portal-settings right |  -  |
+|**500** | The wizard is already completed, the AMI instance ID does not match, the email address fails the portal\'s check, the password is empty, or the license is missing, unreadable, rejected by validation or of the wrong type |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -151,7 +151,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **deepLinkConfigurationRequestsDto** | **DeepLinkConfigurationRequestsDto**|  | |
+| **deepLinkConfigurationRequestDto** | **DeepLinkConfigurationRequestDto**|  | |
 
 
 ### Return type
@@ -168,16 +168,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    DeepLinkConfigurationRequestsDto
+    DeepLinkConfigurationRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let deepLinkConfigurationRequestsDto: DeepLinkConfigurationRequestsDto; // (optional)
+let deepLinkConfigurationRequestDto: DeepLinkConfigurationRequestDto; // (optional)
 
 const { status, data } = await apiInstance.configureDeepLink(
-    deepLinkConfigurationRequestsDto
+    deepLinkConfigurationRequestDto
 );
 ```
 
@@ -192,9 +192,10 @@ const { status, data } = await apiInstance.configureDeepLink(
 |-------------|-------------|------------------|
 |**200** | Saved deep link handling settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The handling mode is not one of the supported deep link handling values |  -  |
+|**403** | The caller has no portal-settings right |  -  |
+|**500** | The request body has no `deepLinkSettings` |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -250,6 +251,7 @@ const { status, data } = await apiInstance.deletePortalColorTheme(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -302,6 +304,7 @@ const { status, data } = await apiInstance.getDeepLinkSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Current deep link handling settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The deep link settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -352,6 +355,7 @@ const { status, data } = await apiInstance.getPaymentSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Payment-related settings: sales contact, buy URL, Standalone flag, license, and quota cap |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -403,6 +407,7 @@ const { status, data } = await apiInstance.getPortalColorTheme();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Current color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The color theme configuration has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -504,6 +509,7 @@ const { status, data } = await apiInstance.getPortalLogo();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Absolute URL of the portal\'s current logo image |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The portal logo has not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -622,7 +628,7 @@ const { status, data } = await apiInstance.getSocketSettings();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getSupportedCultures**
-> STRINGArrayWrapper getSupportedCultures()
+> StringArrayWrapper getSupportedCultures()
 
 Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
 
@@ -634,7 +640,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**STRINGArrayWrapper**
+**StringArrayWrapper**
 
 ### Authorization
 
@@ -664,6 +670,7 @@ const { status, data } = await apiInstance.getSupportedCultures();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Language codes of every culture currently enabled on the portal |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The list of enabled cultures has not changed since the `ETag` sent back in `If-None-Match`; the body is empty |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -765,6 +772,7 @@ const { status, data } = await apiInstance.getTenantUserInvitationSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Whether inviting new members and new guests is currently allowed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The invitation settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -773,7 +781,7 @@ const { status, data } = await apiInstance.getTenantUserInvitationSettings();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getTimeZones**
-> TimezonesRequestsArrayWrapper getTimeZones()
+> TimezoneArrayWrapper getTimeZones()
 
 Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
 
@@ -785,7 +793,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**TimezonesRequestsArrayWrapper**
+**TimezoneArrayWrapper**
 
 ### Authorization
 
@@ -874,10 +882,10 @@ const { status, data } = await apiInstance.saveDefaultFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Saved default folder setting for the current user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `defaultFolderType`, the folder is not one a start page can be set to, or a guest chooses My documents |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -894,7 +902,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **dnsSettingsRequestsDto** | **DnsSettingsRequestsDto**|  | |
+| **dnsSettingsRequestDto** | **DnsSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -911,16 +919,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    DnsSettingsRequestsDto
+    DnsSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let dnsSettingsRequestsDto: DnsSettingsRequestsDto; // (optional)
+let dnsSettingsRequestDto: DnsSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.saveDnsSettings(
-    dnsSettingsRequestsDto
+    dnsSettingsRequestDto
 );
 ```
 
@@ -934,12 +942,12 @@ const { status, data } = await apiInstance.saveDnsSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Confirmation that the DNS mapping was updated |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The domain name is invalid, or collides with the portal\'s reserved base domain |  -  |
-|**402** | This option is not available under the portal\'s current pricing plan |  -  |
-|**405** | The portal is not a Standalone installation, so a custom domain cannot be mapped |  -  |
+|**403** | The caller has no portal-settings right |  -  |
+|**415** | The portal is not a Standalone installation, so a custom domain cannot be mapped |  -  |
+|**500** | The installation hides the DNS settings section, or the domain name is not a valid host name, lies under the portal\'s base domain, has a length outside the allowed range, is reserved, or is already the alias or mapped domain of a portal, this one included |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
+|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -956,7 +964,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **mailDomainSettingsRequestsDto** | **MailDomainSettingsRequestsDto**|  | |
+| **mailDomainSettingsRequestDto** | **MailDomainSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -973,16 +981,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    MailDomainSettingsRequestsDto
+    MailDomainSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let mailDomainSettingsRequestsDto: MailDomainSettingsRequestsDto; // (optional)
+let mailDomainSettingsRequestDto: MailDomainSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.saveMailDomainSettings(
-    mailDomainSettingsRequestsDto
+    mailDomainSettingsRequestDto
 );
 ```
 
@@ -996,10 +1004,11 @@ const { status, data } = await apiInstance.saveMailDomainSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Confirmation message that the trusted mail domain settings were saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `type`, `domains` or `inviteUsersAsVisitors`, or the trust type is `Custom` and the domain list is empty or holds an empty or malformed domain |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1016,7 +1025,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **customColorThemesSettingsRequestsDto** | **CustomColorThemesSettingsRequestsDto**|  | |
+| **customColorThemesSettingsRequestDto** | **CustomColorThemesSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -1033,16 +1042,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    CustomColorThemesSettingsRequestsDto
+    CustomColorThemesSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let customColorThemesSettingsRequestsDto: CustomColorThemesSettingsRequestsDto; // (optional)
+let customColorThemesSettingsRequestDto: CustomColorThemesSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.savePortalColorTheme(
-    customColorThemesSettingsRequestsDto
+    customColorThemesSettingsRequestDto
 );
 ```
 
@@ -1056,6 +1065,7 @@ const { status, data } = await apiInstance.savePortalColorTheme(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Updated color theme configuration: saved themes, selected theme, and plan limit |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1076,7 +1086,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantAiAccessSettingsDto** | **TenantAiAccessSettingsDto**|  | |
+| **tenantAiAccessSettingsRequestDto** | **TenantAiAccessSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -1093,16 +1103,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    TenantAiAccessSettingsDto
+    TenantAiAccessSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let tenantAiAccessSettingsDto: TenantAiAccessSettingsDto; // (optional)
+let tenantAiAccessSettingsRequestDto: TenantAiAccessSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setTenantAiAccessSettings(
-    tenantAiAccessSettingsDto
+    tenantAiAccessSettingsRequestDto
 );
 ```
 
@@ -1137,7 +1147,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **emailActivationSettings** | **EmailActivationSettings**|  | |
+| **emailActivationSettingsRequestDto** | **EmailActivationSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -1154,16 +1164,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsCommonSettingsApi,
     Configuration,
-    EmailActivationSettings
+    EmailActivationSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsCommonSettingsApi(configuration);
 
-let emailActivationSettings: EmailActivationSettings; // (optional)
+let emailActivationSettingsRequestDto: EmailActivationSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.updateEmailActivationSettings(
-    emailActivationSettings
+    emailActivationSettingsRequestDto
 );
 ```
 
@@ -1237,6 +1247,7 @@ const { status, data } = await apiInstance.updateInvitationSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Saved user invitation settings |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

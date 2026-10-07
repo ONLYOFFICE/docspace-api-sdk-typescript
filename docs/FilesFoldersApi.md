@@ -30,6 +30,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**insertFile**](#insertfile) | **POST** /api/2.0/files/{folderId}/insert | Insert a file|
 |[**insertFileToMyFromBody**](#insertfiletomyfrombody) | **POST** /api/2.0/files/@my/insert | Insert a file into My documents|
 |[**renameFolder**](#renamefolder) | **PUT** /api/2.0/files/folder/{folderId} | Rename a folder|
+|[**searchFolder**](#searchfolder) | **POST** /api/2.0/files/{folderId}/search | Search a folder by metadata|
 |[**setFolderOrder**](#setfolderorder) | **PUT** /api/2.0/files/folder/{folderId}/order | Set folder order|
 |[**setFolderPrimaryExternalLink**](#setfolderprimaryexternallink) | **PUT** /api/2.0/files/folder/{id}/links | Set the folder external link|
 |[**terminateReportFolderHistory**](#terminatereportfolderhistory) | **DELETE** /api/2.0/files/folder/{folderId}/log/report | Terminate the folder history report generation|
@@ -37,7 +38,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**uploadFileToMy**](#uploadfiletomy) | **POST** /api/2.0/files/@my/upload | Upload a file to My documents|
 
 # **checkUpload**
-> STRINGArrayWrapper checkUpload(checkUploadRequest)
+> StringArrayWrapper checkUpload(checkUploadRequest)
 
 Reports which of the submitted titles already belong to a file in the folder, so an upload can decide in  advance whether to overwrite or to ask for another name. Only the clashing titles come back, unordered and  without repetitions, and an empty array means every name is free. Matching is by title and ignores case, so a  name that differs only in capitalisation is still reported; an existing file that is encrypted is left out,  because an upload cannot take it over. The call changes nothing. It needs the same right as the upload itself,  the right to add content to the folder, which room managers and content creators have and readers, editors and  guests do not; an archived room, a section root and a folder the caller cannot write to are all refused, while  an unknown folder is answered as missing. A request without `filesTitle` is rejected as an invalid request, an  empty list is accepted and answers with an empty array.
 
@@ -53,7 +54,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**STRINGArrayWrapper**
+**StringArrayWrapper**
 
 ### Third-party storage
 
@@ -94,17 +95,19 @@ const { status, data } = await apiInstance.checkUpload(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The submitted titles that already belong to a file in the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `filesTitle` |  -  |
+|**403** | The caller cannot add content to the folder, or a title that is not a PDF is checked against a form-filling room template |  -  |
+|**404** | No folder with the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFolder**
-> FolderWrapper createFolder(createFolder)
+> FolderWrapper createFolder(createFolderRequest)
 
 Creates a folder inside the folder named in the path and answers with the folder as it was stored. The title  is trimmed, may not be blank and is refused when it is longer than the limit the schema prints; titles are not  required to be unique, so creating the same title twice leaves two folders side by side, which makes the call  mutating and not idempotent. The caller needs the right to create content in the parent, which the room  manager, a content creator and the owner of a personal section have; a member without that right, an archived  parent, and a section root that only holds rooms - Rooms, Forms and AI agents - are all refused, as is a  parent that does not exist. Rooms are not created here: use `POST api/2.0/files/rooms` for those, and this  operation for ordinary folders within them. Members of the room are notified of the new folder. Read the  identifier of the new folder from `id` and fill it with `POST api/2.0/files/{folderId}/upload`.
 
@@ -114,7 +117,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The title carried by the request body. | |
+| **createFolderRequest** | **CreateFolderRequest**| The title carried by the request body. | |
 | **folderId** | [**number**] | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | defaults to undefined|
 
 
@@ -136,18 +139,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFoldersApi,
     Configuration,
-    CreateFolder
+    CreateFolderRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (default to undefined)
-let createFolder: CreateFolder; //The title carried by the request body.
+let createFolderRequest: CreateFolderRequest; //The title carried by the request body.
 
 const { status, data } = await apiInstance.createFolder(
     folderId,
-    createFolder
+    createFolderRequest
 );
 ```
 
@@ -161,10 +164,12 @@ const { status, data } = await apiInstance.createFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The folder that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title`, or the title is empty, blank or longer than 165 characters |  -  |
+|**403** | The caller may not create content in the parent folder, or the parent does not exist, lies in the archive or is a section root that holds only rooms |  -  |
+|**404** | The parent folder id is a string that is not the id of a folder in a known third-party storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -228,12 +233,12 @@ const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not manage the links of this folder |  -  |
-|**404** | The folder does not exist |  -  |
+|**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+|**403** | The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin restricts external links to public rooms |  -  |
+|**404** | The folder does not exist, or its primary link was revoked |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -242,7 +247,7 @@ const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
 # **createReportFolderHistory**
 > DocumentBuilderTaskWrapper createReportFolderHistory()
 
-Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`, of which a CSV report fills only the last two.  `from` and `to` limit the exported period; leaving both out exports the whole history. While a report for the  same folder and caller is still running, this call joins it and answers with the running task instead of  starting a second one, so retrying is safe. The caller needs read access to the folder and may not be a guest,  and the portal plan has to include the audit feature - otherwise the call is refused, with 403 for the access  rule and 404 for a folder that does not exist. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
+Queues a background job that renders the history of a folder into a spreadsheet, or into a CSV file when  `format` asks for one, and saves the result in the caller\'s My documents. The answer is the queued task, not  the report: poll `GET api/2.0/files/folder/{folderId}/log/report` until `isCompleted` is true, then take the  file from `resultFileId`, `resultFileName` and `resultFileUrl`; the URL of a CSV file too large for the editor  downloads it instead of opening it. An XLSX report keeps only the most recent events, at most 200,000 by default  and fewer when the events are long, and its header says how many were left out; `format=Csv` exports every event  of the period. `from` and `to` limit the exported period; leaving both out exports the whole history. While a  report for the same folder and caller is still running, this call joins it and answers with the running task  instead of starting a second one, so retrying is safe. The caller needs read access to the folder and may not be  a guest - otherwise the call is refused with 403, and a folder that does not exist with 404; the report is  available on every pricing plan, and 402 comes only when the login history and audit trail section is turned  off for the portal. Only a portal administrator gets the address, browser and  platform columns. Give up a running report with `DELETE api/2.0/files/folder/{folderId}/log/report`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-report-folder-history/).
 
@@ -251,7 +256,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | [**number**] | The folder whose history is exported; the report covers the folder itself and the entries inside it. | defaults to undefined|
-| **format** | **AuditReportFormat** | The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. | (optional) defaults to undefined|
+| **format** | **AuditReportFormat** | The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. | (optional) defaults to undefined|
 | **from** | [**string**] | The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. | (optional) defaults to undefined|
 | **to** | [**string**] | The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. | (optional) defaults to undefined|
 
@@ -276,7 +281,7 @@ const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The folder whose history is exported; the report covers the folder itself and the entries inside it. (default to undefined)
-let format: AuditReportFormat; //The shape the report is written in: `Xlsx` produces a spreadsheet that is saved as a file of the portal, while  `Csv` produces a comma-separated text file that is uploaded to My documents without being reported back with  a file identifier. (optional) (default to undefined)
+let format: AuditReportFormat; //The shape the report is written in: `Xlsx` produces a spreadsheet and `Csv` a comma-separated text file, and  either is saved as a file in My documents. (optional) (default to undefined)
 let from: string; //The earliest moment an exported entry may have, read in the time zone of the portal; left out, the report  starts at the oldest entry the portal still keeps. (optional) (default to undefined)
 let to: string; //The latest moment an exported entry may have, read in the time zone of the portal; left out, the report ends  at the newest entry. (optional) (default to undefined)
 
@@ -298,6 +303,7 @@ const { status, data } = await apiInstance.createReportFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The queued report task |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The login history and audit trail section is turned off for this portal |  -  |
 |**403** | The caller may not export the history of this folder |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
@@ -310,7 +316,7 @@ const { status, data } = await apiInstance.createReportFolderHistory(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteFolder**
-> FileOperationArrayWrapper deleteFolder(deleteFolder)
+> FileOperationArrayWrapper deleteFolder(deleteFolderRequest)
 
 Queues the deletion of one folder together with everything inside it, and answers with the file operations of  the caller, the one just created among them. The folder is not gone when the response arrives: poll  `GET api/2.0/files/fileops` until the operation reports `finished`, and read its `error` to learn whether the  deletion succeeded. By default the folder is moved to the Trash section, from where it can be restored;  `immediately=true` discards it for good instead, and inside a room, where there is no Trash, deletion is  always final. `deleteAfter=true` postpones the deletion until the editing sessions on the contents have ended,  so files somebody is working on are not pulled away. The caller needs the right to delete the folder, which  the room manager, a portal administrator acting as room manager and a content creator acting on a folder of  their own have; editing access alone, read access and a guest are refused. The call is destructive. To delete  several items at once use `PUT api/2.0/files/fileops/delete`.
 
@@ -320,7 +326,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **deleteFolder** | **DeleteFolder**| How the deletion is to be carried out. | |
+| **deleteFolderRequest** | **DeleteFolderRequest**| How the deletion is to be carried out. | |
 | **folderId** | [**number**] | The folder to delete, together with everything it holds. | defaults to undefined|
 
 
@@ -342,18 +348,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFoldersApi,
     Configuration,
-    DeleteFolder
+    DeleteFolderRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The folder to delete, together with everything it holds. (default to undefined)
-let deleteFolder: DeleteFolder; //How the deletion is to be carried out.
+let deleteFolderRequest: DeleteFolderRequest; //How the deletion is to be carried out.
 
 const { status, data } = await apiInstance.deleteFolder(
     folderId,
-    deleteFolder
+    deleteFolderRequest
 );
 ```
 
@@ -367,6 +373,8 @@ const { status, data } = await apiInstance.deleteFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not delete the folder, or the folder is a room and `immediately` is not set |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -426,7 +434,7 @@ const { status, data } = await apiInstance.generateXlsxByFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The queued report task together with the form the answers belong to |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The folder is not a completed-forms folder, or the caller may not maintain the form |  -  |
+|**403** | The folder is not a completed-forms folder, the room of the submitted copy is not a form-filling room, the caller may not maintain the form, or the filling of the form is not started |  -  |
 |**404** | The folder, the submitted copy or the original form was not found |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -448,6 +456,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
+| **metadataTemplateId** | [**number**] | The ID of the metadata template the favorite entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | (optional) defaults to undefined|
+| **metadataFilters** | [**string**] | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | (optional) defaults to undefined|
 | **userIdOrGroupId** | [**string**] | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | (optional) defaults to undefined|
@@ -476,6 +486,8 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
+let metadataTemplateId: number; //The ID of the metadata template the favorite entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional) (default to undefined)
+let metadataFilters: string; //The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional) (default to undefined)
 let userIdOrGroupId: string; //Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. (optional) (default to undefined)
 let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. (optional) (default to undefined)
 let count: number; //The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. (optional) (default to undefined)
@@ -485,6 +497,8 @@ let sortOrder: SortOrder; //The direction in which the `sortBy` field is ordered
 let filterValue: string; //The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFavoritesFolder(
+    metadataTemplateId,
+    metadataFilters,
     userIdOrGroupId,
     filterType,
     count,
@@ -505,12 +519,12 @@ const { status, data } = await apiInstance.getFavoritesFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Favorites section with one page of the entries the caller marked as favorite |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read the Favorites section |  -  |
 |**404** | The Favorites section could not be resolved for this account |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -559,6 +573,7 @@ const { status, data } = await apiInstance.getFilesUsedSpace();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The space taken by documents in each section, in bytes |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -641,7 +656,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sharedBy** | [**string**] | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | (optional) defaults to undefined|
 | **roomId** | [**number**] | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | (optional) defaults to undefined|
-| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36>** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | (optional) defaults to undefined|
+| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37>** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | (optional) defaults to undefined|
 | **withSubFolders** | [**boolean**] | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | (optional) defaults to undefined|
@@ -654,7 +669,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sortBy** | [**string**] | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | (optional) defaults to undefined|
 | **sortOrder** | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. | (optional) defaults to undefined|
-| **location** | **Location** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | (optional) defaults to undefined|
+| **location** | **RequestLocation** | Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. | (optional) defaults to undefined|
+| **metadataTemplateId** | [**number**] | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. | (optional) defaults to undefined|
+| **metadataFilters** | [**string**] | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -685,7 +702,7 @@ let userIdOrGroupId: string; //Restricts the listing to the entries authored by 
 let sharedBy: string; //Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. (optional) (default to undefined)
 let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. (optional) (default to undefined)
 let roomId: number; //Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. (optional) (default to undefined)
-let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>; //Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. (optional) (default to undefined)
+let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37>; //Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. (optional) (default to undefined)
 let excludeSubject: boolean; //Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. (optional) (default to undefined)
 let applyFilterOption: ApplyFilterOption; //Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. (optional) (default to undefined)
 let withSubFolders: boolean; //Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. (optional) (default to undefined)
@@ -698,7 +715,9 @@ let startIndex: number; //The number of matching entries to skip before the retu
 let sortBy: string; //The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional) (default to undefined)
 let sortOrder: SortOrder; //The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional) (default to undefined)
 let filterValue: string; //The search string the listing is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the folder unfiltered. (optional) (default to undefined)
-let location: Location; //Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional) (default to undefined)
+let location: RequestLocation; //Where the entries of a tag-based listing have to live to be kept: `Room` keeps what lies in a room,  `Documents` what lies in a personal section, and `Link` what was reached through an external link that is  still valid. It shapes the Favorites and Recent listings and does nothing in an ordinary folder. (optional) (default to undefined)
+let metadataTemplateId: number; //The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  Supported for the rooms, the trash, the regular folders and the Shared with me, Recent and Favorites sections  (the third-party entries never carry metadata and are left out); the Templates and Private sections reject it with 400. (optional) (default to undefined)
+let metadataFilters: string; //The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day, so to:2026-06-30 includes the values stored on 30 June.  A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.  The same filter is taken as a typed request body by POST api/2.0/files/{folderId}/search. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getFolderByFolderId(
     folderId,
@@ -719,7 +738,9 @@ const { status, data } = await apiInstance.getFolderByFolderId(
     sortBy,
     sortOrder,
     filterValue,
-    location
+    location,
+    metadataTemplateId,
+    metadataFilters
 );
 ```
 
@@ -733,11 +754,11 @@ const { status, data } = await apiInstance.getFolderByFolderId(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | One page of the folder contents, with the folder itself and the chain of its parents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the `roomId` is not a number while the folder id is one |  -  |
+|**403** | The caller may not read this folder, the folder lies inside Trash, or an anonymous caller asks for a folder that does not exist |  -  |
 |**404** | The folder does not exist |  -  |
+|**500** | The folder lies in a third-party storage that cannot deliver it |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -805,12 +826,12 @@ const { status, data } = await apiInstance.getFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | One page of the folder history, the most recent record first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or `fromDate` or `toDate` is not a date and time ending in `Z` or a UTC offset |  -  |
 |**403** | The caller may not read this folder |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -870,6 +891,9 @@ const { status, data } = await apiInstance.getFolderInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The folder itself - its title, its parent, the moments it was created and changed, the access the caller has to it, how many items in it are new for them, and the room settings when the folder is a room; nothing about the items it holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**401** | An anonymous caller has no external link that grants access to the folder |  -  |
+|**403** | The caller may not read this folder |  -  |
+|**404** | The folder does not exist |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -932,6 +956,7 @@ const { status, data } = await apiInstance.getFolderLinks(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The external links of the folder the caller may manage |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -996,6 +1021,7 @@ const { status, data } = await apiInstance.getFolderPath(
 |-------------|-------------|------------------|
 |**200** | The chain of folders leading to the folder, the section root first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller may not read this folder |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1065,11 +1091,12 @@ const { status, data } = await apiInstance.getFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+|**401** | An anonymous caller has no external link |  -  |
 |**403** | The caller may not manage the links of this folder |  -  |
 |**404** | The folder does not exist, or its primary link was revoked |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1130,6 +1157,7 @@ const { status, data } = await apiInstance.getFolders(
 |-------------|-------------|------------------|
 |**200** | The direct subfolders of the folder, ordered by title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller may not read this folder |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1207,12 +1235,12 @@ const { status, data } = await apiInstance.getFormsFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Forms section with one page of the form-filling rooms available to the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read the Forms section |  -  |
 |**404** | The Forms section could not be resolved for this account |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1289,12 +1317,12 @@ const { status, data } = await apiInstance.getMyFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The My documents section with one page of its contents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read the My documents section |  -  |
 |**404** | This account has no personal section |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1354,7 +1382,8 @@ const { status, data } = await apiInstance.getNewFolderItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The entries of the folder that are new for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not read this folder |  -  |
+|**403** | The caller may not read this folder, or the folder lies inside Trash |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1386,6 +1415,8 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sortBy** | [**string**] | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. | (optional) defaults to undefined|
 | **sortOrder** | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. | (optional) defaults to undefined|
 | **filterValue** | [**string**] | The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. | (optional) defaults to undefined|
+| **metadataTemplateId** | [**number**] | The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. | (optional) defaults to undefined|
+| **metadataFilters** | [**string**] | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -1418,6 +1449,8 @@ let startIndex: number; //The number of matching entries to skip before the retu
 let sortBy: string; //The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. The Recent section keeps its own newest-first order, so the value does not  reorder this listing. (optional) (default to undefined)
 let sortOrder: SortOrder; //The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. The Recent section keeps its own newest-first order, so the value does not reorder this  listing. (optional) (default to undefined)
 let filterValue: string; //The search string the history is filtered by: it is matched as a substring of file titles and against the  indexed document content as well. Omit it to list the whole history. (optional) (default to undefined)
+let metadataTemplateId: number; //The ID of the metadata template the recent files must be assigned to. On its own it narrows the listing to the files  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party files never carry metadata and are left out when the filter is set. (optional) (default to undefined)
+let metadataFilters: string; //The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:eq,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  The range bounds are inclusive; a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.getRecentFolder(
     userIdOrGroupId,
@@ -1430,7 +1463,9 @@ const { status, data } = await apiInstance.getRecentFolder(
     startIndex,
     sortBy,
     sortOrder,
-    filterValue
+    filterValue,
+    metadataTemplateId,
+    metadataFilters
 );
 ```
 
@@ -1444,12 +1479,12 @@ const { status, data } = await apiInstance.getRecentFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Recent section with one page of the files the caller opened lately |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read the Recent section |  -  |
 |**404** | The Recent section could not be resolved for this account |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1458,7 +1493,7 @@ const { status, data } = await apiInstance.getRecentFolder(
 # **getReportFolderHistory**
 > DocumentBuilderTaskWrapper getReportFolderHistory()
 
-Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and  `resultFileId`, `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My  documents - a CSV report leaving the identifier empty. An empty answer means there is no report for this  folder and caller, either because none was started or because a finished one has already been picked up by an  earlier poll. The caller needs read access to the folder and may not be a guest, and the portal plan has to  include the audit feature; a caller who fails the access rule is answered with 403 and a folder that does not  exist with 404. The call is read-only, and each caller sees only their own report.
+Reports how far the history report of a folder has got, and is the operation to poll after  `POST api/2.0/files/folder/{folderId}/log/report` has queued one. `percentage` climbs to 100, `isCompleted`  turns true when the job is over however it ended, `error` carries the reason when it failed, and `resultFileId`,  `resultFileName` and `resultFileUrl` name the file that was saved in the caller\'s My documents. An empty  answer means there is no report for this folder and caller, either because none was started or because a  finished one has already been picked up by an earlier poll. The caller needs read access to the folder and may  not be a guest; a caller who fails the access rule is answered with 403, a folder that does not exist with 404,  and a portal with the login history and audit trail section turned off with 402. The call is read-only, and each caller sees only  their own report.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-report-folder-history/).
 
@@ -1505,6 +1540,7 @@ const { status, data } = await apiInstance.getReportFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The state of the report task, or nothing when there is none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The login history and audit trail section is turned off for this portal |  -  |
 |**403** | The caller may not export the history of this folder |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
@@ -1587,12 +1623,12 @@ const { status, data } = await apiInstance.getRootFolders(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The sections available to the caller, each with one page of its content |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read one of the sections |  -  |
 |**404** | One of the sections could not be resolved for this account |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1669,12 +1705,12 @@ const { status, data } = await apiInstance.getTrashFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The Trash section with one page of the entries the caller deleted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller is not allowed to read the Trash section |  -  |
 |**404** | This account has no Trash section |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1770,11 +1806,13 @@ const { status, data } = await apiInstance.insertFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 |**403** | The caller cannot add content to this folder |  -  |
 |**404** | No folder with the specified ID |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
+|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1864,8 +1902,10 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The stored file, with the identifier, version and title it was saved under |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 |**403** | Creating a file in the personal section is not allowed for this account |  -  |
 |**404** | The caller has no personal section, so there is nothing to store the file in |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1876,7 +1916,7 @@ const { status, data } = await apiInstance.insertFileToMyFromBody(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **renameFolder**
-> FolderWrapper renameFolder(createFolder)
+> FolderWrapper renameFolder(createFolderRequest)
 
 Gives a folder a new title and answers with the folder as it now stands. The title is trimmed, may not be  blank and is refused when it is longer than the limit the schema prints; a title that matches the current one  leaves the folder untouched, and titles need not be unique among the neighbours. The caller needs the right to  rename the folder, which the room manager, a content creator acting on a folder of their own and the owner of  a personal section have, while a guest is refused with 403 whatever their access; a folder in the Trash  section or in an archived room cannot be renamed either, and a folder that does not exist is answered as  not found. A room may be renamed here as well, in which case the caller needs the right to edit the  room, and `PUT api/2.0/files/rooms/{id}` is the operation that changes its other settings. The call is  mutating and idempotent; on a folder stored in a connected third-party account the identifier of the folder  may change with the title.
 
@@ -1886,7 +1926,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createFolder** | **CreateFolder**| The title carried by the request body. | |
+| **createFolderRequest** | **CreateFolderRequest**| The title carried by the request body. | |
 | **folderId** | [**number**] | The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. | defaults to undefined|
 
 
@@ -1908,18 +1948,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFoldersApi,
     Configuration,
-    CreateFolder
+    CreateFolderRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFoldersApi(configuration);
 
 let folderId: number; //The folder the request is addressed to: when a folder is created it is the parent that receives the new  folder, and when a folder is renamed it is the folder that gets the new title. (default to undefined)
-let createFolder: CreateFolder; //The title carried by the request body.
+let createFolderRequest: CreateFolderRequest; //The title carried by the request body.
 
 const { status, data } = await apiInstance.renameFolder(
     folderId,
-    createFolder
+    createFolderRequest
 );
 ```
 
@@ -1933,11 +1973,81 @@ const { status, data } = await apiInstance.renameFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The folder with its new title |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not rename this folder |  -  |
+|**400** | The request body cannot be read or has no `title`, or the title is empty, blank or longer than 165 characters |  -  |
+|**403** | The caller may not rename this folder, or the folder lies in Trash or in the archive |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **searchFolder**
+> FolderContentWrapper searchFolder(folderMetadataSearch)
+
+Searches the folder by metadata. The same filter the folder listing takes in the metadataTemplateId and metadataFilters  query parameters, here as a typed request body for the clients that build the conditions as objects rather than as a JSON string.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/search-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **folderMetadataSearch** | **FolderMetadataSearch**| The search parameters. | |
+| **folderId** | [**number**] | The folder ID. | defaults to undefined|
+
+
+### Return type
+
+**FolderContentWrapper**
+
+### Third-party storage
+
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyFolderContentWrapper**.
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration,
+    FolderMetadataSearch
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let folderId: number; //The folder ID. (default to undefined)
+let folderMetadataSearch: FolderMetadataSearch; //The search parameters.
+
+const { status, data } = await apiInstance.searchFolder(
+    folderId,
+    folderMetadataSearch
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | Folder contents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | Invalid metadata filter, or a metadata filter on a section that cannot apply it |  -  |
+|**403** | You don\'t have enough permission to view the folder content |  -  |
+|**404** | The required folder was not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2001,10 +2111,12 @@ const { status, data } = await apiInstance.setFolderOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The folder with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
+|**403** | The caller may not reorder this folder |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2068,10 +2180,12 @@ const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+|**403** | The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin\'s restriction on external links forbids the change |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2080,7 +2194,7 @@ const { status, data } = await apiInstance.setFolderPrimaryExternalLink(
 # **terminateReportFolderHistory**
 > terminateReportFolderHistory()
 
-Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest, and the portal  plan has to include the audit feature; a caller who fails the access rule is answered with 403 and a folder  that does not exist with 404. Each caller can only terminate their own report.
+Gives up the history report the caller has started for a folder with  `POST api/2.0/files/folder/{folderId}/log/report`. The request only asks the background worker to stop, and  the answer carries no body, so a following `GET api/2.0/files/folder/{folderId}/log/report` is what shows the  task ending as cancelled. Asking to terminate when nothing is running is accepted and changes nothing, which  makes the call safe to repeat. A report that has already finished is not undone by this call and its file  stays in My documents. The caller needs read access to the folder and may not be a guest; a caller who fails  the access rule is answered with 403, a folder that does not exist with 404, and a portal with the login history  and audit trail section turned off with 402. Each caller can only terminate their own report.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/terminate-report-folder-history/).
 
@@ -2127,6 +2241,7 @@ const { status, data } = await apiInstance.terminateReportFolderHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The request to stop the report was accepted |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The login history and audit trail section is turned off for this portal |  -  |
 |**403** | The caller may not export the history of this folder |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
@@ -2204,12 +2319,14 @@ const { status, data } = await apiInstance.uploadFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The stored file, as a list with one element |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request has no file part |  -  |
+|**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 |**403** | The caller cannot add content to this folder |  -  |
 |**404** | No folder with the specified ID |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
+|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2274,12 +2391,14 @@ const { status, data } = await apiInstance.uploadFileToMy(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | An array holding the single uploaded file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request has no file part |  -  |
+|**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
 |**403** | Uploading a file to the personal section is not allowed for this account |  -  |
 |**404** | The caller has no personal section, so there is nothing to store the file in |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

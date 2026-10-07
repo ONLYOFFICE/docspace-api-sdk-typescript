@@ -20,15 +20,34 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CompanyWhiteLabelSettings } from './company-white-label-settings';
+import type { CompanyWhiteLabelSettingsDto } from './company-white-label-settings-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The company white label settings wrapper.
+ * The successful API response containing the CompanyWhiteLabelSettingsDto object.
  */
 export interface CompanyWhiteLabelSettingsWrapper {
     /**
-     * The company white label settings.
+     * The CompanyWhiteLabelSettingsDto object returned by the operation.
      */
-    'settings'?: CompanyWhiteLabelSettings;
+    'response'?: CompanyWhiteLabelSettingsDto;
+    /**
+     * The total number of items in the response
+     */
+    'count'?: number;
+    /**
+     * List of links related to the response
+     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
 }
 

@@ -154,6 +154,7 @@ const { status, data } = await apiInstance.restoreGreetingSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The greeting title in force after the restore, or the localized default caption when the installation configures none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -173,7 +174,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **greetingSettingsRequestsDto** | **GreetingSettingsRequestsDto**|  | |
+| **greetingSettingsRequestDto** | **GreetingSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -190,16 +191,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SettingsGreetingSettingsApi,
     Configuration,
-    GreetingSettingsRequestsDto
+    GreetingSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SettingsGreetingSettingsApi(configuration);
 
-let greetingSettingsRequestsDto: GreetingSettingsRequestsDto; // (optional)
+let greetingSettingsRequestDto: GreetingSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.saveGreetingSettings(
-    greetingSettingsRequestsDto
+    greetingSettingsRequestDto
 );
 ```
 
@@ -213,10 +214,11 @@ const { status, data } = await apiInstance.saveGreetingSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | A localized message confirming that the greeting title has been saved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title`, the `title` is longer than 255 characters, or on a free or trial cloud plan it breaks the character rule of the installation |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

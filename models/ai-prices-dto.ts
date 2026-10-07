@@ -32,7 +32,7 @@ import type { AiEntryPricingDtoAiImagePriceDto } from './ai-entry-pricing-dto-ai
 import type { AiEntryPricingDtoDecimal } from './ai-entry-pricing-dto-decimal';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CurrencyInfo } from './currency-info';
+import type { AiPriceCurrencyDto } from './ai-price-currency-dto';
 
 /**
  * What the AI features cost out of the portal wallet, grouped by the kind of model, in one currency.
@@ -57,6 +57,6 @@ export interface AiPricesDto {
     /**
      * The currency every price above is expressed in, with its ISO code and symbol. One answer never mixes  currencies, so this is the only place to read it.
      */
-    'currency': CurrencyInfo;
+    'currency': AiPriceCurrencyDto;
 }
 

@@ -39,17 +39,17 @@ export const OpenAIPassthroughApiAxiosParamCreator = function (configuration?: C
          * OpenAI-compatible chat completions for the document editor\'s AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin\'s SDK on one end and the provider on the other. A client disconnect cancels the provider call.
          * @summary OpenAI chat completions passthrough
          * @param {string} profileId The AI provider profile identifier.
-         * @param {{ [key: string]: any | null; }} requestBody An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, so consult the provider\'s own reference; the model and the credentials come from the profile in the path and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiOpenaiChatCompletionsRequest An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, so consult the provider\'s own reference; the model and the credentials come from the profile in the path and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiOpenaiChatCompletions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-chat-completions/
          */
-        aiOpenaiChatCompletions: async (profileId: string, requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiOpenaiChatCompletions: async (profileId: string, aiOpenaiChatCompletionsRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('aiOpenaiChatCompletions', 'profileId', profileId)
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiOpenaiChatCompletions', 'requestBody', requestBody)
+            // verify required parameter 'aiOpenaiChatCompletionsRequest' is not null or undefined
+            assertParamExists('aiOpenaiChatCompletions', 'aiOpenaiChatCompletionsRequest', aiOpenaiChatCompletionsRequest)
 
             const localVarPath = `/api/2.0/ai/openai/{profileId}/v1/chat/completions`
                 .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
@@ -77,7 +77,7 @@ export const OpenAIPassthroughApiAxiosParamCreator = function (configuration?: C
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiOpenaiChatCompletionsRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -88,17 +88,17 @@ export const OpenAIPassthroughApiAxiosParamCreator = function (configuration?: C
          * OpenAI-compatible image generation for the document editor\'s AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider\'s status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
          * @summary OpenAI image generation passthrough
          * @param {string} profileId The AI provider profile identifier.
-         * @param {{ [key: string]: any | null; }} requestBody An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, and the credentials come from the profile in the path.
+         * @param {{ [key: string]: any | null; }} aiOpenaiImagesGenerationsRequest An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, and the credentials come from the profile in the path.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiOpenaiImagesGenerations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-images-generations/
          */
-        aiOpenaiImagesGenerations: async (profileId: string, requestBody: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiOpenaiImagesGenerations: async (profileId: string, aiOpenaiImagesGenerationsRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'profileId' is not null or undefined
             assertParamExists('aiOpenaiImagesGenerations', 'profileId', profileId)
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiOpenaiImagesGenerations', 'requestBody', requestBody)
+            // verify required parameter 'aiOpenaiImagesGenerationsRequest' is not null or undefined
+            assertParamExists('aiOpenaiImagesGenerations', 'aiOpenaiImagesGenerationsRequest', aiOpenaiImagesGenerationsRequest)
 
             const localVarPath = `/api/2.0/ai/openai/{profileId}/v1/images/generations`
                 .replace(`{${"profileId"}}`, encodeURIComponent(String(profileId)));
@@ -126,7 +126,7 @@ export const OpenAIPassthroughApiAxiosParamCreator = function (configuration?: C
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiOpenaiImagesGenerationsRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -147,14 +147,14 @@ export const OpenAIPassthroughApiFp = function(configuration?: Configuration) {
          * OpenAI-compatible chat completions for the document editor\'s AI plugin. The profile is resolved server-side, its credentials are attached, and the body is forwarded to the provider verbatim - the payload is owned by the plugin\'s SDK on one end and the provider on the other. A client disconnect cancels the provider call.
          * @summary OpenAI chat completions passthrough
          * @param {string} profileId The AI provider profile identifier.
-         * @param {{ [key: string]: any | null; }} requestBody An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, so consult the provider\'s own reference; the model and the credentials come from the profile in the path and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiOpenaiChatCompletionsRequest An OpenAI Chat Completions request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, so consult the provider\'s own reference; the model and the credentials come from the profile in the path and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiOpenaiChatCompletions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-chat-completions/
          */
-        async aiOpenaiChatCompletions(profileId: string, requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | null; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiOpenaiChatCompletions(profileId, requestBody, options);
+        async aiOpenaiChatCompletions(profileId: string, aiOpenaiChatCompletionsRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | null; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiOpenaiChatCompletions(profileId, aiOpenaiChatCompletionsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OpenAIPassthroughApi.aiOpenaiChatCompletions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -163,14 +163,14 @@ export const OpenAIPassthroughApiFp = function(configuration?: Configuration) {
          * OpenAI-compatible image generation for the document editor\'s AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider\'s status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
          * @summary OpenAI image generation passthrough
          * @param {string} profileId The AI provider profile identifier.
-         * @param {{ [key: string]: any | null; }} requestBody An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, and the credentials come from the profile in the path.
+         * @param {{ [key: string]: any | null; }} aiOpenaiImagesGenerationsRequest An OpenAI image-generation request, forwarded to the provider byte for byte. The shape is the provider\'s, not this API\'s, and the credentials come from the profile in the path.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiOpenaiImagesGenerations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-openai-images-generations/
          */
-        async aiOpenaiImagesGenerations(profileId: string, requestBody: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | null; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiOpenaiImagesGenerations(profileId, requestBody, options);
+        async aiOpenaiImagesGenerations(profileId: string, aiOpenaiImagesGenerationsRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | null; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiOpenaiImagesGenerations(profileId, aiOpenaiImagesGenerationsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OpenAIPassthroughApi.aiOpenaiImagesGenerations']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -195,7 +195,7 @@ export const OpenAIPassthroughApiFactory = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         aiOpenaiChatCompletions(requestParameters: OpenAIPassthroughApiAiOpenaiChatCompletionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any | null; }> {
-            return localVarFp.aiOpenaiChatCompletions(requestParameters.profileId, requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiOpenaiChatCompletions(requestParameters.profileId, requestParameters.aiOpenaiChatCompletionsRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * OpenAI-compatible image generation for the document editor\'s AI plugin, working exactly as the chat-completions passthrough does: the profile named by `profileId` is resolved server-side, its credentials are attached, and the body reaches the provider unchanged. The provider\'s status and body are relayed verbatim, so its 429 and its own error envelope surface as they stand. A body larger than this route accepts is refused before it is forwarded. A client disconnect aborts the provider call.
@@ -207,7 +207,7 @@ export const OpenAIPassthroughApiFactory = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         aiOpenaiImagesGenerations(requestParameters: OpenAIPassthroughApiAiOpenaiImagesGenerationsRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any | null; }> {
-            return localVarFp.aiOpenaiImagesGenerations(requestParameters.profileId, requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiOpenaiImagesGenerations(requestParameters.profileId, requestParameters.aiOpenaiImagesGenerationsRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -230,7 +230,7 @@ export interface OpenAIPassthroughApiAiOpenaiChatCompletionsRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof OpenAIPassthroughApiAiOpenaiChatCompletions
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiOpenaiChatCompletionsRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -251,7 +251,7 @@ export interface OpenAIPassthroughApiAiOpenaiImagesGenerationsRequest {
      * @type {{ [key: string]: any | null; }}
      * @memberof OpenAIPassthroughApiAiOpenaiImagesGenerations
      */
-    readonly requestBody: { [key: string]: any | null; }
+    readonly aiOpenaiImagesGenerationsRequest: { [key: string]: any | null; }
 }
 
 /**
@@ -270,7 +270,7 @@ export class OpenAIPassthroughApi extends BaseAPI {
      * @memberof OpenAIPassthroughApi
      */
     public aiOpenaiChatCompletions(requestParameters: OpenAIPassthroughApiAiOpenaiChatCompletionsRequest, options?: RawAxiosRequestConfig) {
-        return OpenAIPassthroughApiFp(this.configuration).aiOpenaiChatCompletions(requestParameters.profileId, requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return OpenAIPassthroughApiFp(this.configuration).aiOpenaiChatCompletions(requestParameters.profileId, requestParameters.aiOpenaiChatCompletionsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -282,7 +282,7 @@ export class OpenAIPassthroughApi extends BaseAPI {
      * @memberof OpenAIPassthroughApi
      */
     public aiOpenaiImagesGenerations(requestParameters: OpenAIPassthroughApiAiOpenaiImagesGenerationsRequest, options?: RawAxiosRequestConfig) {
-        return OpenAIPassthroughApiFp(this.configuration).aiOpenaiImagesGenerations(requestParameters.profileId, requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return OpenAIPassthroughApiFp(this.configuration).aiOpenaiImagesGenerations(requestParameters.profileId, requestParameters.aiOpenaiImagesGenerationsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

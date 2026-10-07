@@ -17,7 +17,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantBannerSettingsDto** | **TenantBannerSettingsDto**|  | |
+| **tenantBannerSettingsRequestDto** | **TenantBannerSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -34,16 +34,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SecurityBannersVisibilityApi,
     Configuration,
-    TenantBannerSettingsDto
+    TenantBannerSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityBannersVisibilityApi(configuration);
 
-let tenantBannerSettingsDto: TenantBannerSettingsDto; // (optional)
+let tenantBannerSettingsRequestDto: TenantBannerSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setTenantBannerSettings(
-    tenantBannerSettingsDto
+    tenantBannerSettingsRequestDto
 );
 ```
 
@@ -57,6 +57,8 @@ const { status, data } = await apiInstance.setTenantBannerSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Saved promotional banners visibility setting |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The portal is not an Enterprise installation |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | [**AiAiReasoningLevel**](AiAiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. | [default to undefined]
+**value** | [**AiReasoningLevel**](AiReasoningLevel.md) | New extended-thinking depth; `off` turns deep mode off. | [default to undefined]
 **entityId** | **string** |  | [optional] [default to undefined]
 
 ## Example

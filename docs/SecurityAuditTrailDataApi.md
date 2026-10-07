@@ -17,7 +17,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **createAuditTrailReport**
 > DocumentBuilderTaskWrapper createAuditTrailReport()
 
-Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller\'s My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/).
 
@@ -25,7 +25,9 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **format** | **AuditReportFormat** | The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. | (optional) defaults to undefined|
+| **format** | **AuditReportFormat** | The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. | (optional) defaults to undefined|
+| **from** | [**string**] | The earliest moment a reported event may have been recorded at, read as a UTC instant. | (optional) defaults to undefined|
+| **to** | [**string**] | The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -47,10 +49,14 @@ import {
 const configuration = new Configuration();
 const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
-let format: AuditReportFormat; //The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`. (optional) (default to undefined)
+let format: AuditReportFormat; //The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file. (optional) (default to undefined)
+let from: string; //The earliest moment a reported event may have been recorded at, read as a UTC instant. (optional) (default to undefined)
+let to: string; //The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.createAuditTrailReport(
-    format
+    format,
+    from,
+    to
 );
 ```
 
@@ -64,12 +70,12 @@ const { status, data } = await apiInstance.createAuditTrailReport(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The state of the queued job that builds the audit trail report |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the requested period ends before it starts or lies entirely outside the audit trail lifetime |  -  |
 |**402** | The portal\'s pricing plan has no audit option, or the login history and audit trail section is not enabled |  -  |
 |**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -152,19 +158,19 @@ const { status, data } = await apiInstance.getAuditEventsByFilter(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Audit events matching the filters, newest first, or the twenty most recent events when the portal has no audit option |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or `from` or `to` is not a date and time ending in `Z` or a UTC offset |  -  |
 |**402** | The login history and audit trail section is not enabled for this portal |  -  |
 |**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAuditSettings**
-> TenantAuditSettingsResponseWrapper getAuditSettings()
+> TenantAuditSettingsWrapper getAuditSettings()
 
 Returns how long this portal keeps its two security logs: `loginHistoryLifeTime` for login events and  `auditTrailLifeTime` for audit events, both counted in days, together with `lastModified`, the moment the pair  was last saved. The caller needs the portal-settings right of a DocSpace administrator, and in a cloud  installation the login history and audit trail section must be enabled for the portal, otherwise the call is  answered with 402; the audit option of the pricing plan is not required to read the values. Both numbers lie  between 1 and 180 days, and a portal that never changed them reports the default of 180. They define the  window the rest of the audit operations work in: `GET api/2.0/security/audit/events/last` looks exactly this  far back, and the reports started by `POST api/2.0/security/audit/login/report` and  `POST api/2.0/security/audit/events/report` cover exactly this period. The operation is read-only; change the  values with `POST api/2.0/security/audit/settings/lifetime`.
 
@@ -176,7 +182,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**TenantAuditSettingsResponseWrapper**
+**TenantAuditSettingsWrapper**
 
 ### Authorization
 
@@ -217,7 +223,7 @@ const { status, data } = await apiInstance.getAuditSettings();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAuditTrailMappers**
-> AuditTrailProductMapperArrayWrapper getAuditTrailMappers()
+> AuditTrailProductArrayWrapper getAuditTrailMappers()
 
 Returns the audit vocabulary as the tree it really is: every product, the modules inside it, and for each  module the actions it can record together with the type of change and the entity each of them applies to. Pass  `productType` to keep a single product and `moduleType` to keep a single module inside the products that  remain; omit both to get the whole tree. The caller needs the portal-settings right of a DocSpace  administrator; the audit option of the pricing plan is not required, and the call is read-only and safe to  repeat. Each action carries `messageAction`, the name to send as the `action` filter of  `GET api/2.0/security/audit/events/filter`, next to `actionType` and `entity`, the values its `actionType` and  `entryType` filters accept - this is where a caller learns which action belongs to which module instead of  guessing. A filter that matches nothing yields an empty list rather than an error. Use  `GET api/2.0/security/audit/types` for the flat lists of the same names.
 
@@ -233,7 +239,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**AuditTrailProductMapperArrayWrapper**
+**AuditTrailProductArrayWrapper**
 
 ### Authorization
 
@@ -282,7 +288,7 @@ const { status, data } = await apiInstance.getAuditTrailMappers(
 # **getAuditTrailReport**
 > DocumentBuilderTaskWrapper getAuditTrailReport()
 
-Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator\'s report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-report/).
 
@@ -438,7 +444,7 @@ const { status, data } = await apiInstance.getLastAuditEvents();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setAuditSettings**
-> TenantAuditSettingsResponseWrapper setAuditSettings()
+> TenantAuditSettingsWrapper setAuditSettings()
 
 Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal\'s pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
 
@@ -448,12 +454,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantAuditSettingsWrapper** | **TenantAuditSettingsWrapper**|  | |
+| **tenantAuditSettingsRequestDto** | **TenantAuditSettingsRequestDto**|  | |
 
 
 ### Return type
 
-**TenantAuditSettingsResponseWrapper**
+**TenantAuditSettingsWrapper**
 
 ### Authorization
 
@@ -465,16 +471,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SecurityAuditTrailDataApi,
     Configuration,
-    TenantAuditSettingsWrapper
+    TenantAuditSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityAuditTrailDataApi(configuration);
 
-let tenantAuditSettingsWrapper: TenantAuditSettingsWrapper; // (optional)
+let tenantAuditSettingsRequestDto: TenantAuditSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setAuditSettings(
-    tenantAuditSettingsWrapper
+    tenantAuditSettingsRequestDto
 );
 ```
 
@@ -488,7 +494,7 @@ const { status, data } = await apiInstance.setAuditSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The login history and audit trail lifetimes as they were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | A lifetime is outside the allowed range of 1 to 180 days |  -  |
+|**400** | The request body cannot be read or has no `settings`, or a lifetime is outside the allowed range of 1 to 180 days |  -  |
 |**402** | The portal\'s pricing plan has no audit option, or the login history and audit trail section is not enabled |  -  |
 |**403** | The caller does not have the portal-settings right of a DocSpace administrator |  -  |
 |**401** | Unauthorized |  -  |

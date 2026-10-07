@@ -111,12 +111,12 @@ const { status, data } = await apiInstance.addFileToRecent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file as it stands after the entry was recorded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A third-party file identifier refers to a storage account that is not connected |  -  |
 |**403** | The calling account cannot read this file |  -  |
 |**404** | No file answers to this identifier |  -  |
+|**500** | A third-party file identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -173,6 +173,7 @@ const { status, data } = await apiInstance.addTemplates(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Always true: the request was understood, which does not mean that anything was added |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller is a guest |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -183,7 +184,7 @@ const { status, data } = await apiInstance.addTemplates(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **changeVersionHistory**
-> FileArrayWrapper changeVersionHistory(changeHistory)
+> FileArrayWrapper changeVersionHistory(changeHistoryRequest)
 
 Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
 
@@ -193,7 +194,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **changeHistory** | **ChangeHistory**| The change to make to the revision group. | |
+| **changeHistoryRequest** | **ChangeHistoryRequest**| The change to make to the revision group. | |
 | **fileId** | [**number**] | The file whose version history is changed. | defaults to undefined|
 
 
@@ -215,18 +216,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    ChangeHistory
+    ChangeHistoryRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file whose version history is changed. (default to undefined)
-let changeHistory: ChangeHistory; //The change to make to the revision group.
+let changeHistoryRequest: ChangeHistoryRequest; //The change to make to the revision group.
 
 const { status, data } = await apiInstance.changeVersionHistory(
     fileId,
-    changeHistory
+    changeHistoryRequest
 );
 ```
 
@@ -240,18 +241,20 @@ const { status, data } = await apiInstance.changeVersionHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The versions of the file after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `version` |  -  |
+|**402** | Completing the current version needs more space than the room or user storage quota leaves |  -  |
 |**403** | The caller may not change the version history of the file |  -  |
+|**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+|**500** | The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **checkFillFormDraft**
-> StringWrapper checkFillFormDraft(checkFillFormDraft)
+> StringWrapper checkFillFormDraft(checkFillFormDraftRequest)
 
 Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
 
@@ -261,7 +264,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **checkFillFormDraft** | **CheckFillFormDraft**| The revision of the form to open and what the caller intends to do with it. | |
+| **checkFillFormDraftRequest** | **CheckFillFormDraftRequest**| The revision of the form to open and what the caller intends to do with it. | |
 | **fileId** | [**number**] | The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. | defaults to undefined|
 
 
@@ -283,18 +286,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CheckFillFormDraft
+    CheckFillFormDraftRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well. (default to undefined)
-let checkFillFormDraft: CheckFillFormDraft; //The revision of the form to open and what the caller intends to do with it.
+let checkFillFormDraftRequest: CheckFillFormDraftRequest; //The revision of the form to open and what the caller intends to do with it.
 
 const { status, data } = await apiInstance.checkFillFormDraft(
     fileId,
-    checkFillFormDraft
+    checkFillFormDraftRequest
 );
 ```
 
@@ -308,17 +311,21 @@ const { status, data } = await apiInstance.checkFillFormDraft(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The editor address to open, with an optional notice fragment |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot open the form, or asked for a past revision without history access |  -  |
+|**400** | The request body cannot be read or has no `version` |  -  |
+|**401** | An anonymous caller has no external link |  -  |
+|**402** | The personal draft does not fit into the storage quota of the portal or the room |  -  |
+|**403** | The caller cannot open the form, asked for a past revision without history access, the form is in Trash, or the caller may fill the form but not the folder it lies in |  -  |
+|**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+|**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+|**500** | The file lies in a third-party storage that cannot deliver it |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **copyFileAs**
-> FileEntryBaseWrapper copyFileAs(copyAsJsonElement)
+> FileEntryBaseWrapper copyFileAs(copyAsRequest)
 
 Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
 
@@ -328,7 +335,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **copyAsJsonElement** | **CopyAsJsonElement**| The title, the destination and the conversion options of the copy. | |
+| **copyAsRequest** | **CopyAsRequest**| The title, the destination and the conversion options of the copy. | |
 | **fileId** | [**number**] | The file to copy. | defaults to undefined|
 
 
@@ -350,18 +357,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CopyAsJsonElement
+    CopyAsRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file to copy. (default to undefined)
-let copyAsJsonElement: CopyAsJsonElement; //The title, the destination and the conversion options of the copy.
+let copyAsRequest: CopyAsRequest; //The title, the destination and the conversion options of the copy.
 
 const { status, data } = await apiInstance.copyFileAs(
     fileId,
-    copyAsJsonElement
+    copyAsRequest
 );
 ```
 
@@ -375,19 +382,21 @@ const { status, data } = await apiInstance.copyFileAs(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The copy that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The content cannot be converted into the format of the new title |  -  |
-|**403** | The caller may not read the file or may not create files in the destination folder |  -  |
+|**400** | The request body cannot be read or has no `destTitle` or `destFolderId`, or the new title is empty while the source file has no extension |  -  |
+|**402** | The copy does not fit into the storage quota of the portal, the room or the user, or the converted content exceeds the maximum upload size |  -  |
+|**403** | The caller may not read the file, the destination folder does not exist, or the caller may not create files in it |  -  |
 |**404** | The file or the destination folder does not exist |  -  |
+|**415** | The installation filters uploads and does not accept the format of the new title |  -  |
+|**500** | The document service fails to convert the content, `destFolderId` is a fraction or outside the 32-bit range, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createEditSession**
-> ChunkedUploadSessionResponseWrapperWrapper createEditSession()
+> ChunkedUploadSessionResultWrapper createEditSession()
 
 Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
 
@@ -403,11 +412,11 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ChunkedUploadSessionResponseWrapperWrapper**
+**ChunkedUploadSessionResultWrapper**
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `fileId: string` and the answer is **ThirdPartyChunkedUploadSessionResponseWrapperWrapper**.
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `fileId: string` and the answer is **ThirdPartyChunkedUploadSessionResultWrapper**.
 
 ### Authorization
 
@@ -443,7 +452,9 @@ const { status, data } = await apiInstance.createEditSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created editing session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot edit this file |  -  |
+|**402** | The declared `fileSize` exceeds the portal limit for chunked uploads |  -  |
+|**403** | The caller cannot edit this file, or the file is locked, open in the editor, in the trash or encrypted |  -  |
+|**404** | No file with the specified ID |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -454,7 +465,7 @@ const { status, data } = await apiInstance.createEditSession(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createFile**
-> FileWrapper createFile(createFileJsonElement)
+> FileWrapper createFile(createFileRequest)
 
 Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
 
@@ -464,7 +475,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createFileJsonElement** | **CreateFileJsonElement**| The title of the new file and the source of its content. | |
+| **createFileRequest** | **CreateFileRequest**| The title of the new file and the source of its content. | |
 | **folderId** | [**number**] | The folder the file is created in. | defaults to undefined|
 
 
@@ -486,18 +497,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CreateFileJsonElement
+    CreateFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let folderId: number; //The folder the file is created in. (default to undefined)
-let createFileJsonElement: CreateFileJsonElement; //The title of the new file and the source of its content.
+let createFileRequest: CreateFileRequest; //The title of the new file and the source of its content.
 
 const { status, data } = await apiInstance.createFile(
     folderId,
-    createFileJsonElement
+    createFileRequest
 );
 ```
 
@@ -511,10 +522,13 @@ const { status, data } = await apiInstance.createFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters |  -  |
+|**402** | The new file does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, or the form gallery has no file of the title\'s format |  -  |
+|**404** | The folder id or `templateId` is a string that is not the id of an item in a known third-party storage |  -  |
+|**500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the folder id is 0 and the caller is a guest without My documents |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -531,7 +545,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createFileJsonElement** | **CreateFileJsonElement**|  | |
+| **createFileRequest** | **CreateFileRequest**|  | |
 
 
 ### Return type
@@ -548,16 +562,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration,
-    CreateFileJsonElement
+    CreateFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let createFileJsonElement: CreateFileJsonElement; // (optional)
+let createFileRequest: CreateFileRequest; // (optional)
 
 const { status, data } = await apiInstance.createFileInMyDocuments(
-    createFileJsonElement
+    createFileRequest
 );
 ```
 
@@ -571,10 +585,13 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file created in My documents: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters |  -  |
+|**402** | The new file does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The template does not exist or cannot be read, or the form gallery has no file of the title\'s format |  -  |
+|**404** | `templateId` is a string that is not the id of a file in a known third-party storage |  -  |
+|**500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the caller is a guest, who has no My documents |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -638,19 +655,19 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not share the file |  -  |
+|**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+|**403** | The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin restricts external links to public rooms |  -  |
 |**404** | The file does not exist, or its primary link was revoked |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createHtmlFile**
-> FileWrapper createHtmlFile(createTextOrHtmlFile)
+> FileWrapper createHtmlFile(createTextOrHtmlFileRequest)
 
 Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
 
@@ -660,7 +677,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The title, the content and the collision behaviour of the new file. | |
+| **createTextOrHtmlFileRequest** | **CreateTextOrHtmlFileRequest**| The title, the content and the collision behaviour of the new file. | |
 | **folderId** | [**number**] | The folder the file is created in. | defaults to undefined|
 
 
@@ -682,18 +699,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CreateTextOrHtmlFile
+    CreateTextOrHtmlFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let folderId: number; //The folder the file is created in. (default to undefined)
-let createTextOrHtmlFile: CreateTextOrHtmlFile; //The title, the content and the collision behaviour of the new file.
+let createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest; //The title, the content and the collision behaviour of the new file.
 
 const { status, data } = await apiInstance.createHtmlFile(
     folderId,
-    createTextOrHtmlFile
+    createTextOrHtmlFileRequest
 );
 ```
 
@@ -707,11 +724,13 @@ const { status, data } = await apiInstance.createHtmlFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not create files in this folder |  -  |
+|**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+|**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -728,7 +747,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
+| **createTextOrHtmlFileRequest** | **CreateTextOrHtmlFileRequest**|  | |
 
 
 ### Return type
@@ -745,16 +764,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration,
-    CreateTextOrHtmlFile
+    CreateTextOrHtmlFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let createTextOrHtmlFile: CreateTextOrHtmlFile; // (optional)
+let createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest; // (optional)
 
 const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
-    createTextOrHtmlFile
+    createTextOrHtmlFileRequest
 );
 ```
 
@@ -768,18 +787,20 @@ const { status, data } = await apiInstance.createHtmlFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+|**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
 |**403** | The caller may not create a file in this section |  -  |
+|**404** | The caller is a guest, who has no My documents |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createTextFile**
-> FileWrapper createTextFile(createTextOrHtmlFile)
+> FileWrapper createTextFile(createTextOrHtmlFileRequest)
 
 Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
 
@@ -789,7 +810,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**| The title, the content and the collision behaviour of the new file. | |
+| **createTextOrHtmlFileRequest** | **CreateTextOrHtmlFileRequest**| The title, the content and the collision behaviour of the new file. | |
 | **folderId** | [**number**] | The folder the file is created in. | defaults to undefined|
 
 
@@ -811,18 +832,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CreateTextOrHtmlFile
+    CreateTextOrHtmlFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let folderId: number; //The folder the file is created in. (default to undefined)
-let createTextOrHtmlFile: CreateTextOrHtmlFile; //The title, the content and the collision behaviour of the new file.
+let createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest; //The title, the content and the collision behaviour of the new file.
 
 const { status, data } = await apiInstance.createTextFile(
     folderId,
-    createTextOrHtmlFile
+    createTextOrHtmlFileRequest
 );
 ```
 
@@ -836,10 +857,13 @@ const { status, data } = await apiInstance.createTextFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+|**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -856,7 +880,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createTextOrHtmlFile** | **CreateTextOrHtmlFile**|  | |
+| **createTextOrHtmlFileRequest** | **CreateTextOrHtmlFileRequest**|  | |
 
 
 ### Return type
@@ -873,16 +897,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesFilesApi,
     Configuration,
-    CreateTextOrHtmlFile
+    CreateTextOrHtmlFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let createTextOrHtmlFile: CreateTextOrHtmlFile; // (optional)
+let createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest; // (optional)
 
 const { status, data } = await apiInstance.createTextFileInMyDocuments(
-    createTextOrHtmlFile
+    createTextOrHtmlFileRequest
 );
 ```
 
@@ -896,10 +920,13 @@ const { status, data } = await apiInstance.createTextFileInMyDocuments(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
+|**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The caller may not create a file in this section |  -  |
+|**404** | The caller is a guest, who has no My documents |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -956,6 +983,7 @@ const { status, data } = await apiInstance.createThumbnails(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file ids from the request, echoed back |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**401** | An anonymous caller has no external link |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -965,7 +993,7 @@ const { status, data } = await apiInstance.createThumbnails(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deleteFile**
-> FileOperationArrayWrapper deleteFile(_delete)
+> FileOperationArrayWrapper deleteFile(deleteFileRequest)
 
 Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
 
@@ -975,7 +1003,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **_delete** | **Delete**| When and how the file is deleted. | |
+| **deleteFileRequest** | **DeleteFileRequest**| When and how the file is deleted. | |
 | **fileId** | [**number**] | The file to delete. | defaults to undefined|
 | **returnSingleOperation** | [**boolean**] | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | (optional) defaults to undefined|
 
@@ -998,19 +1026,19 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    Delete
+    DeleteFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file to delete. (default to undefined)
-let _delete: Delete; //When and how the file is deleted.
+let deleteFileRequest: DeleteFileRequest; //When and how the file is deleted.
 let returnSingleOperation: boolean; //Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.deleteFile(
     fileId,
-    _delete,
+    deleteFileRequest,
     returnSingleOperation
 );
 ```
@@ -1025,6 +1053,8 @@ const { status, data } = await apiInstance.deleteFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file operations of the caller, including the deletion just queued |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not delete the file, or the file is locked by somebody else or open in an editing session |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1085,10 +1115,11 @@ const { status, data } = await apiInstance.deleteRecent(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Empty answer: the listed entries no longer appear in the Recent section |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or a third-party folder identifier refers to a storage account that is not connected |  -  |
+|**404** | A third-party folder identifier names a storage type the portal does not know |  -  |
+|**500** | An id is a number that is not a 32-bit integer, or a third-party folder identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1105,7 +1136,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **requestBody** | **Array<number>**| The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | |
+| **deleteTemplateFilesRequestDto** | **Array<number>**| The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. | |
 
 
 ### Return type
@@ -1127,10 +1158,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
-let requestBody: Array<number>; //The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
+let deleteTemplateFilesRequestDto: Array<number>; //The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric. (optional)
 
 const { status, data } = await apiInstance.deleteTemplates(
-    requestBody
+    deleteTemplateFilesRequestDto
 );
 ```
 
@@ -1144,6 +1175,7 @@ const { status, data } = await apiInstance.deleteTemplates(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Always true: the files named in the array are no longer templates of the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller is a guest |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1268,7 +1300,7 @@ const { status, data } = await apiInstance.getAllFormRoles(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The roles of the form with the state of each |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller has no read access to the form |  -  |
+|**403** | The caller has no read access to the form, or the file is not a PDF |  -  |
 |**404** | No file with this identifier exists |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1336,6 +1368,8 @@ const { status, data } = await apiInstance.getEditDiffUrl(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The addresses and keys the editor needs to show the changes |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not read the history of the file, as with an anonymous caller, read-only or commenting access, or a file in a third-party storage |  -  |
+|**404** | The file id, or the requested version of it, resolves to nothing |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -1398,6 +1432,8 @@ const { status, data } = await apiInstance.getEditHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The editing revisions of the file, oldest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not read the history of the file, as with an anonymous caller, read-only or commenting access, or a file in a third-party storage |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -1461,7 +1497,7 @@ const { status, data } = await apiInstance.getEncryptionInfo(
 |-------------|-------------|------------------|
 |**200** | The key pairs of the caller and the file keys issued to them |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The file cannot carry encryption keys |  -  |
-|**403** | The caller has no read access to the file |  -  |
+|**403** | The file does not exist, or the caller has no read access to it |  -  |
 |**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1533,12 +1569,12 @@ const { status, data } = await apiInstance.getFileHistory(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The activity entries of the file, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, or `fromDate` or `toDate` is not a date and time ending in `Z` or a UTC offset |  -  |
 |**403** | The caller has no read access to the file |  -  |
 |**404** | No file with this identifier exists |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1601,6 +1637,9 @@ const { status, data } = await apiInstance.getFileInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file as it is stored, with the state it has for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**401** | An anonymous caller has no external link |  -  |
+|**403** | The caller cannot read the file |  -  |
+|**404** | The file id, or the requested version of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -1669,10 +1708,12 @@ const { status, data } = await apiInstance.getFileLinks(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The external links of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+|**403** | The caller cannot read the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1738,11 +1779,12 @@ const { status, data } = await apiInstance.getFilePrimaryExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or the `count` is outside its allowed range |  -  |
+|**401** | An anonymous caller has no external link |  -  |
 |**403** | The caller may not share the file |  -  |
 |**404** | The file does not exist, or its primary link was revoked |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1802,6 +1844,8 @@ const { status, data } = await apiInstance.getFileVersionInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Every stored version of the file, newest first |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not read the history of the file, or the file id resolves to nothing |  -  |
+|**404** | The file id is neither a number nor the id of a file in a known third-party storage |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
@@ -1860,9 +1904,10 @@ const { status, data } = await apiInstance.getFillResult(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The result of the completed form-filling session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The `fillingSessionId` is missing or empty |  -  |
+|**404** | No completed form-filling session with this identifier is remembered |  -  |
+|**500** | The original form of the filled copy has been deleted |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1918,7 +1963,7 @@ const { status, data } = await apiInstance.getFormSubmissions(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The submissions collected for the form, with the description of its fields |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller has no read access to the form |  -  |
+|**403** | The form does not exist or is not a PDF, the caller has no read access to it, its filling has not started, it is a copy rather than the original form, or it lies outside the room its filling was started in |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1982,6 +2027,8 @@ const { status, data } = await apiInstance.getPresignedFileUri(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The download address of the file with its signature token |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller cannot read the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -2045,17 +2092,19 @@ const { status, data } = await apiInstance.getPresignedUri(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The download address of the current file version |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The file is a PDF form in a form-filling room whose filling has not started, and the caller may only fill forms there |  -  |
+|**403** | The caller cannot read the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getProtectedFileUsers**
-> MentionWrapperArrayWrapper getProtectedFileUsers()
+> MentionArrayWrapper getProtectedFileUsers()
 
 Lists the users the file is shared with, which is what a client offers when the author protects a document and  picks who may still edit it. The list is built from the whole access list of the file: every entry that is not  an explicit denial, with groups expanded into their members, the caller themselves and deleted accounts left  out, ordered by display name. Access inherited from the room counts, so a member who never received a share on  the file itself is listed too. A file kept in the legacy project storage always answers with an empty list  rather than with its team. The call only reads. A guest is refused, an anonymous caller is answered with  nothing, and a file id that resolves to nothing is refused as well instead of being reported as missing. For  the readers to offer as mentions inside the editor use `GET api/2.0/files/file/{fileId}/sharedusers`.
 
@@ -2070,7 +2119,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**MentionWrapperArrayWrapper**
+**MentionArrayWrapper**
 
 ### Third-party storage
 
@@ -2108,6 +2157,7 @@ const { status, data } = await apiInstance.getProtectedFileUsers(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The users the file is shared with, ordered by display name |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller is a guest, or the file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -2168,10 +2218,11 @@ const { status, data } = await apiInstance.getReferenceData(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The reference descriptor, or the same object with the error text set when nothing resolved |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `fileKey` or `instanceId` |  -  |
+|**403** | The caller cannot read the source file, its folder or the referenced file |  -  |
+|**500** | `fileKey` is empty or not a number while `instanceId` names this portal |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2290,9 +2341,11 @@ const { status, data } = await apiInstance.isFormPDF(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | True when the file is a PDF form made in the editors, false otherwise |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller cannot read the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
+|**500** | The file is a PDF form in a form-filling room whose filling has not started, and the caller may only fill forms there |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2300,7 +2353,7 @@ const { status, data } = await apiInstance.isFormPDF(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lockFile**
-> FileWrapper lockFile(lockFileParameters)
+> FileWrapper lockFile(lockFileRequest)
 
 Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
 
@@ -2310,7 +2363,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **lockFileParameters** | **LockFileParameters**| The lock state to reach. | |
+| **lockFileRequest** | **LockFileRequest**| The lock state to reach. | |
 | **fileId** | [**number**] | The file to lock or unlock. | defaults to undefined|
 
 
@@ -2332,18 +2385,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    LockFileParameters
+    LockFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file to lock or unlock. (default to undefined)
-let lockFileParameters: LockFileParameters; //The lock state to reach.
+let lockFileRequest: LockFileRequest; //The lock state to reach.
 
 const { status, data } = await apiInstance.lockFile(
     fileId,
-    lockFileParameters
+    lockFileRequest
 );
 ```
 
@@ -2357,6 +2410,8 @@ const { status, data } = await apiInstance.lockFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file with its lock state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller may not lock or unlock the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -2420,11 +2475,11 @@ const { status, data } = await apiInstance.manageFormFilling(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The action was applied to the form |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not start, stop or resume the filling of this form |  -  |
+|**400** | The request body cannot be read or has no `formId` |  -  |
+|**403** | The form does not exist, is not a PDF or lies outside a room, the caller may not start or stop its filling, or `action` is not one of the known values |  -  |
+|**500** | The form has no filling properties yet, as when a filling that was never started is resumed, or the form lies in a third-party storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2499,9 +2554,11 @@ const { status, data } = await apiInstance.openEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The editor configuration for the requested file and mode |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot read the file, or asked for a past version without access to the file history |  -  |
+|**403** | The caller cannot read the file, asked for a past version without access to the file history, or the file is in Trash |  -  |
+|**404** | The file id, or the requested version of it, resolves to nothing |  -  |
+|**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+|**500** | The file lies in a third-party storage that cannot deliver it |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2569,9 +2626,11 @@ const { status, data } = await apiInstance.restoreFileVersion(
 |-------------|-------------|------------------|
 |**200** | The editing revisions of the file after the restore |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The version is missing or is already the current one |  -  |
-|**403** | The caller may not change the version history of the file |  -  |
+|**402** | The restored content does not fit into the storage quota |  -  |
+|**403** | The caller may not change the version history of the file, or, with `url`, may not edit the file or the file is locked by somebody else or being edited |  -  |
+|**404** | Without `url`, the file id or the requested version resolves to nothing |  -  |
+|**500** | The file is locked by somebody else or being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2644,17 +2703,19 @@ const { status, data } = await apiInstance.saveEditingFileFromForm(
 |-------------|-------------|------------------|
 |**200** | The file is saved and the stored version is returned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The file id cannot be resolved to a storage that could accept the content |  -  |
+|**402** | The content does not fit into the portal\'s storage quota, even with the overshoot allowed for editor saves |  -  |
 |**403** | The caller cannot edit the file, or it is locked, in Trash, or open in somebody else\'s editing session |  -  |
+|**404** | The file id resolves to nothing |  -  |
+|**500** | The file lies in a third-party storage in another format and the document service fails to convert the content |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **saveFileAsPdf**
-> FileWrapper saveFileAsPdf(saveAsPdf)
+> FileWrapper saveFileAsPdf(saveAsPdfRequest)
 
 Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
 
@@ -2664,7 +2725,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **saveAsPdf** | **SaveAsPdf | ThirdPartySaveAsPdf**| The destination folder and the name of the PDF. | |
+| **saveAsPdfRequest** | **SaveAsPdfRequest | ThirdPartySaveAsPdfRequest**| The destination folder and the name of the PDF. | |
 | **id** | [**number**] | The file to convert; it is left untouched. | defaults to undefined|
 
 
@@ -2674,7 +2735,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string` `saveAsPdf: ThirdPartySaveAsPdf` and the answer is **ThirdPartyFileWrapper**.
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `id: string` `saveAsPdfRequest: ThirdPartySaveAsPdfRequest` and the answer is **ThirdPartyFileWrapper**.
 
 ### Authorization
 
@@ -2686,18 +2747,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    SaveAsPdf
+    SaveAsPdfRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let id: number; //The file to convert; it is left untouched. (default to undefined)
-let saveAsPdf: SaveAsPdf; //The destination folder and the name of the PDF.
+let saveAsPdfRequest: SaveAsPdfRequest; //The destination folder and the name of the PDF.
 
 const { status, data } = await apiInstance.saveFileAsPdf(
     id,
-    saveAsPdf
+    saveAsPdfRequest
 );
 ```
 
@@ -2711,11 +2772,13 @@ const { status, data } = await apiInstance.saveFileAsPdf(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The PDF file that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `folderId` or `title` |  -  |
+|**402** | The PDF does not fit into the storage quota of the portal, the room or the user |  -  |
+|**403** | The caller cannot read the source file or may not create files in the destination folder |  -  |
 |**404** | The source file or the destination folder does not exist |  -  |
+|**500** | The document service fails to convert the file to PDF, or the converted file cannot be downloaded |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2775,18 +2838,18 @@ const { status, data } = await apiInstance.saveFormRoleMapping(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The roles were stored and the filling was started or reset |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not start or reset the filling of this form |  -  |
+|**400** | The request body cannot be read or has no `formId` or `roles`, or `roles` is null |  -  |
+|**403** | The caller may not start or reset the filling of this form, or the file is not a PDF or lies outside a room |  -  |
+|**500** | No file with the `formId` exists |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setCustomFilterTag**
-> FileWrapper setCustomFilterTag(customFilterParameters)
+> FileWrapper setCustomFilterTag(customFilterRequest)
 
 Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
 
@@ -2796,7 +2859,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **customFilterParameters** | **CustomFilterParameters**| The Custom Filter state to reach. | |
+| **customFilterRequest** | **CustomFilterRequest**| The Custom Filter state to reach. | |
 | **fileId** | [**number**] | The spreadsheet whose Custom Filter mode is switched. | defaults to undefined|
 
 
@@ -2818,18 +2881,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    CustomFilterParameters
+    CustomFilterRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The spreadsheet whose Custom Filter mode is switched. (default to undefined)
-let customFilterParameters: CustomFilterParameters; //The Custom Filter state to reach.
+let customFilterRequest: CustomFilterRequest; //The Custom Filter state to reach.
 
 const { status, data } = await apiInstance.setCustomFilterTag(
     fileId,
-    customFilterParameters
+    customFilterRequest
 );
 ```
 
@@ -2843,10 +2906,12 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The spreadsheet with its Custom Filter state as it now stands |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The file is not in a format that supports the Custom Filter mode |  -  |
+|**403** | The caller may not use the Custom Filter mode on the file, or somebody else switched the mode on and the caller is neither a room manager nor a DocSpace admin |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2909,7 +2974,7 @@ const { status, data } = await apiInstance.setEncryptionInfo(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file keys were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not issue keys for this file, or the file is not in a private room |  -  |
+|**403** | The file does not exist, the caller may not issue keys for it, the file is not in a private room, or a recipient has no read access to it |  -  |
 |**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -2978,10 +3043,12 @@ const { status, data } = await apiInstance.setFileExternalLink(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The link as it now stands, or nothing when it was revoked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
+|**403** | The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin\'s restriction on external links forbids the change |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3045,12 +3112,12 @@ const { status, data } = await apiInstance.setFileOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file with the position it now holds |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
 |**403** | The caller may not reorder this file |  -  |
 |**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3107,17 +3174,19 @@ const { status, data } = await apiInstance.setFilesOrder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The files and folders that were moved, with the positions they now hold |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `items`, an item has no `entryId` or `entryType`, or an `order` is below 1 or is neither a number nor a dotted path ending in one |  -  |
+|**403** | The caller may not administer the room of an entry, or an entry lies outside any room |  -  |
+|**404** | An entry does not exist or is sent with the wrong `entryType` |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **startEditFile**
-> StringWrapper startEditFile(startEdit)
+> StringWrapper startEditFile(startEditRequest)
 
 Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
 
@@ -3127,7 +3196,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **startEdit** | **StartEdit**| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | |
+| **startEditRequest** | **StartEditRequest**| The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session. | |
 | **fileId** | [**number**] | The file to open the editing session on. The caller needs edit access to it. | defaults to undefined|
 
 
@@ -3149,18 +3218,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    StartEdit
+    StartEditRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file to open the editing session on. The caller needs edit access to it. (default to undefined)
-let startEdit: StartEdit; //The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+let startEditRequest: StartEditRequest; //The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
 
 const { status, data } = await apiInstance.startEditFile(
     fileId,
-    startEdit
+    startEditRequest
 );
 ```
 
@@ -3174,9 +3243,12 @@ const { status, data } = await apiInstance.startEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The document key of the editing session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot edit the file, or the file is already being edited and the session was claimed alone |  -  |
+|**401** | An anonymous caller who may not edit the file claims the session with `editingAlone=true` |  -  |
+|**403** | The caller cannot edit the file, the file is locked or in Trash, somebody is already editing it and the session was claimed alone, or the document service did not accept the tracking request |  -  |
+|**404** | The file id resolves to nothing |  -  |
+|**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+|**500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file is locked by somebody else or lies in Trash |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3238,6 +3310,7 @@ const { status, data } = await apiInstance.startFillingFile(
 |-------------|-------------|------------------|
 |**200** | The form file, with the filling properties now stored on it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller holds only form-filling access on the room, or no access to it at all |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -3304,11 +3377,12 @@ const { status, data } = await apiInstance.toggleFileFavorite(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Echo of the requested state, which does not prove that the mark was changed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, or a third-party file identifier refers to a storage account that is not connected |  -  |
 |**403** | Changing the favorite mark is refused for the caller |  -  |
+|**404** | A third-party file identifier names a storage type the portal does not know |  -  |
+|**500** | A third-party file identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -3377,9 +3451,11 @@ const { status, data } = await apiInstance.trackEditFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The session was refreshed or closed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The document key does not match the revision being edited |  -  |
+|**401** | An anonymous caller has no external link, or refreshes the session through a link that does not grant editing |  -  |
+|**403** | The document key does not match the revision being edited, or the caller has none of the editing rights on the file |  -  |
+|**404** | The file id resolves to nothing |  -  |
+|**500** | The session is refreshed while the file is locked by somebody else or lies in Trash |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3387,7 +3463,7 @@ const { status, data } = await apiInstance.trackEditFile(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateFile**
-> FileWrapper updateFile(updateFile)
+> FileWrapper updateFile(updateFileRequest)
 
 Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
 
@@ -3397,7 +3473,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateFile** | **UpdateFile**| The new title and the version to restore. | |
+| **updateFileRequest** | **UpdateFileRequest**| The new title and the version to restore. | |
 | **fileId** | [**number**] | The file to update. | defaults to undefined|
 
 
@@ -3419,18 +3495,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesFilesApi,
     Configuration,
-    UpdateFile
+    UpdateFileRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesFilesApi(configuration);
 
 let fileId: number; //The file to update. (default to undefined)
-let updateFile: UpdateFile; //The new title and the version to restore.
+let updateFileRequest: UpdateFileRequest; //The new title and the version to restore.
 
 const { status, data } = await apiInstance.updateFile(
     fileId,
-    updateFile
+    updateFileRequest
 );
 ```
 
@@ -3444,10 +3520,13 @@ const { status, data } = await apiInstance.updateFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The file after the rename, the restore, or both |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not rename the file or change its version |  -  |
+|**400** | The title is longer than 165 characters, or `lastVersion` is the current version |  -  |
+|**401** | An anonymous caller has no external link |  -  |
+|**402** | Restoring `lastVersion` needs more space than the room or user storage quota leaves |  -  |
+|**403** | The caller may not read or rename the file or change its version |  -  |
+|**404** | The file id, or `lastVersion` of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
+|**500** | The file is locked by somebody else, a third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

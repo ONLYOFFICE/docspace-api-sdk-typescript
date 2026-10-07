@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DocsCloudQuota } from './docs-cloud-quota';
+import type { DocsCloudQuotaDto } from './docs-cloud-quota-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the DocsCloudQuota object.
+ * The successful API response containing the DocsCloudQuotaDto object.
  */
 export interface DocsCloudQuotaWrapper {
     /**
-     * The DocsCloudQuota object returned by the operation.
+     * The DocsCloudQuotaDto object returned by the operation.
      */
-    'response'?: DocsCloudQuota;
+    'response'?: DocsCloudQuotaDto;
     /**
      * The total number of items in the response
      */

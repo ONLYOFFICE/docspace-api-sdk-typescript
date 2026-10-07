@@ -30,7 +30,7 @@ import type { AuditEventArrayWrapper } from '../../models';
 // @ts-ignore
 import type { AuditReportFormat } from '../../models';
 // @ts-ignore
-import type { AuditTrailProductMapperArrayWrapper } from '../../models';
+import type { AuditTrailProductArrayWrapper } from '../../models';
 // @ts-ignore
 import type { AuditTrailTypesWrapper } from '../../models';
 // @ts-ignore
@@ -46,7 +46,7 @@ import type { MessageAction } from '../../models';
 // @ts-ignore
 import type { ProductType } from '../../models';
 // @ts-ignore
-import type { TenantAuditSettingsResponseWrapper } from '../../models';
+import type { TenantAuditSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantAuditSettingsWrapper } from '../../models';
 /**
@@ -61,15 +61,17 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             fields = f;
         },
         /**
-         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller\'s My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
          * @summary Start audit trail report
-         * @param {AuditReportFormat} [format] The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+         * @param {AuditReportFormat} [format] The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
+         * @param {string} [from] The earliest moment a reported event may have been recorded at, read as a UTC instant.
+         * @param {string} [to] The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createAuditTrailReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          */
-        createAuditTrailReport: async (format?: AuditReportFormat, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createAuditTrailReport: async (format?: AuditReportFormat, from?: string, to?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/events/report`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -104,6 +106,18 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
 
             if (format !== undefined) {
                 localVarQueryParameter['format'] = format;
+            }
+
+            if (from !== undefined) {
+                localVarQueryParameter['from'] = (from as any instanceof Date) ?
+                    (from as any).toISOString() :
+                    from;
+            }
+
+            if (to !== undefined) {
+                localVarQueryParameter['to'] = (to as any instanceof Date) ?
+                    (to as any).toISOString() :
+                    to;
             }
 
 
@@ -341,7 +355,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator\'s report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
          * @summary Get audit trail report status
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -499,13 +513,13 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
         /**
          * Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal\'s pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
          * @summary Set audit lifetime settings
-         * @param {TenantAuditSettingsWrapper} [tenantAuditSettingsWrapper] 
+         * @param {TenantAuditSettingsRequestDto} [tenantAuditSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          */
-        setAuditSettings: async (tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setAuditSettings: async (tenantAuditSettingsRequestDto?: TenantAuditSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/security/audit/settings/lifetime`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -545,7 +559,7 @@ export const AuditTrailDataApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantAuditSettingsWrapper, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantAuditSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -615,16 +629,18 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuditTrailDataApiAxiosParamCreator(configuration)
     return {
         /**
-         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller\'s My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
          * @summary Start audit trail report
-         * @param {AuditReportFormat} [format] The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+         * @param {AuditReportFormat} [format] The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
+         * @param {string} [from] The earliest moment a reported event may have been recorded at, read as a UTC instant.
+         * @param {string} [to] The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createAuditTrailReport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-audit-trail-report/
          */
-        async createAuditTrailReport(format?: AuditReportFormat, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createAuditTrailReport(format, options);
+        async createAuditTrailReport(format?: AuditReportFormat, from?: string, to?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentBuilderTaskWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createAuditTrailReport(format, from, to, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.createAuditTrailReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -661,7 +677,7 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
          */
-        async getAuditSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsResponseWrapper>> {
+        async getAuditSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditSettings']?.[localVarOperationServerIndex]?.url;
@@ -677,14 +693,14 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
          * REST API Reference for getAuditTrailMappers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          */
-        async getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditTrailProductMapperArrayWrapper>> {
+        async getAuditTrailMappers(productType?: ProductType, moduleType?: LocationType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditTrailProductArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditTrailMappers(productType, moduleType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.getAuditTrailMappers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator\'s report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
          * @summary Get audit trail report status
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -728,14 +744,14 @@ export const AuditTrailDataApiFp = function(configuration?: Configuration) {
         /**
          * Sets how long this portal keeps its login history and its audit trail, in days, and returns the pair as it was  stored. The caller needs the portal-settings right of a DocSpace administrator plus the audit option of the  portal\'s pricing plan, otherwise the call is answered with 402. Send both numbers inside `settings`: each has  to be between 1 and 180 days, and a value outside that range is refused with 400 without either number being  saved, so read the current pair from `GET api/2.0/security/audit/settings/lifetime` and resend the one that  should stay as it is. The call replaces the stored settings rather than merging them, is idempotent, and takes  effect at once: the period covered by `GET api/2.0/security/audit/events/last` and by both audit reports  shrinks or grows with it, and events older than the new lifetime stop being reported. The change is itself  recorded in the audit trail.
          * @summary Set audit lifetime settings
-         * @param {TenantAuditSettingsWrapper} [tenantAuditSettingsWrapper] 
+         * @param {TenantAuditSettingsRequestDto} [tenantAuditSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setAuditSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          */
-        async setAuditSettings(tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsResponseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setAuditSettings(tenantAuditSettingsWrapper, options);
+        async setAuditSettings(tenantAuditSettingsRequestDto?: TenantAuditSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAuditSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setAuditSettings(tenantAuditSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuditTrailDataApi.setAuditSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -765,7 +781,7 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
     const localVarFp = AuditTrailDataApiFp(configuration)
     return {
         /**
-         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+         * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller\'s My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
          * @summary Start audit trail report
          * @param {AuditTrailDataApiCreateAuditTrailReportRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -774,7 +790,7 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         createAuditTrailReport(requestParameters: AuditTrailDataApiCreateAuditTrailReportRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DocumentBuilderTaskWrapper> {
-            return localVarFp.createAuditTrailReport(requestParameters.format, options).then((request) => request(axios, basePath));
+            return localVarFp.createAuditTrailReport(requestParameters.format, requestParameters.from, requestParameters.to, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the portal\'s audit events that match the filters in the query - by the user who acted, the module the  action belongs to, the action and its type, the entity type and target, and the period - and is the operation  behind the audit trail page. The caller needs the portal-settings right of a DocSpace administrator plus the  audit option of the portal\'s pricing plan; when that option is missing the filters are silently ignored and  the answer is the same twenty most recent events that `GET api/2.0/security/audit/events/last` returns, and  when the login history and audit trail section is disabled altogether the call is answered with 402. Take the  values accepted by `action`, `actionType`, `moduleType` and `entryType` from  `GET api/2.0/security/audit/types`, and the tree they belong to from `GET api/2.0/security/audit/mappers`. A  non-default `action` matches only that action and, combined with `target`, only its exact value; it also  stops `moduleType` and `actionType` from narrowing the result, so combine `target` with `entryType` instead of  `action` when filtering by target without pinning a single action. `from` and `to` are read as UTC instants  while `date` comes back in the portal time zone, `count` defaults to 100 and cannot exceed it, and the filters  are applied before the page window, so a full page means there may be more matching events beyond it. The  operation is read-only.
@@ -796,7 +812,7 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-settings/
          * @throws {RequiredError}
          */
-        getAuditSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsResponseWrapper> {
+        getAuditSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
             return localVarFp.getAuditSettings(options).then((request) => request(axios, basePath));
         },
         /**
@@ -808,11 +824,11 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-audit-trail-mappers/
          * @throws {RequiredError}
          */
-        getAuditTrailMappers(requestParameters: AuditTrailDataApiGetAuditTrailMappersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuditTrailProductMapperArrayWrapper> {
+        getAuditTrailMappers(requestParameters: AuditTrailDataApiGetAuditTrailMappersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AuditTrailProductArrayWrapper> {
             return localVarFp.getAuditTrailMappers(requestParameters.productType, requestParameters.moduleType, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+         * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator\'s report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
          * @summary Get audit trail report status
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuditTrailReport operation
@@ -853,8 +869,8 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-audit-settings/
          * @throws {RequiredError}
          */
-        setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsResponseWrapper> {
-            return localVarFp.setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(axios, basePath));
+        setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAuditSettingsWrapper> {
+            return localVarFp.setAuditSettings(requestParameters.tenantAuditSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Cancels the audit trail report the calling user has running and drops it from the build queue. The caller  needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. Cancellation is handed to the same background service that  builds the report, so a successful answer means the request was accepted rather than that the job has already  stopped: poll `GET api/2.0/security/audit/events/report` to watch it disappear. The operation returns no  content and touches only the caller\'s own audit trail report - the login history report is cancelled by  `DELETE api/2.0/security/audit/login/report`, and no report of another user can be reached from here. It is  idempotent: cancelling when nothing is running is not an error. A job stopped before it finished writing  leaves nothing in My documents, and a report cancelled by mistake has to be built again with  `POST api/2.0/security/audit/events/report`.
@@ -877,11 +893,25 @@ export const AuditTrailDataApiFactory = function (configuration?: Configuration,
  */
 export interface AuditTrailDataApiCreateAuditTrailReportRequest {
     /**
-     * The format the report file is written in. The workbook format is the default and is the only one that leaves  the finished file addressable by ID: a report asked for as CSV comes back with an empty `resultFileId`, so it  can only be reached through `resultFileName` and `resultFileUrl`.
+     * The format the report file is written in: a spreadsheet workbook, which is the default, or a comma-separated  text file.
      * @type {AuditReportFormat}
      * @memberof AuditTrailDataApiCreateAuditTrailReport
      */
     readonly format?: AuditReportFormat
+
+    /**
+     * The earliest moment a reported event may have been recorded at, read as a UTC instant.
+     * @type {string}
+     * @memberof AuditTrailDataApiCreateAuditTrailReport
+     */
+    readonly from?: string
+
+    /**
+     * The latest moment a reported event may have been recorded at, read as a UTC instant in the same way as `from`.
+     * @type {string}
+     * @memberof AuditTrailDataApiCreateAuditTrailReport
+     */
+    readonly to?: string
 }
 
 /**
@@ -990,10 +1020,10 @@ export interface AuditTrailDataApiGetAuditTrailMappersRequest {
 export interface AuditTrailDataApiSetAuditSettingsRequest {
     /**
      * 
-     * @type {TenantAuditSettingsWrapper}
+     * @type {TenantAuditSettingsRequestDto}
      * @memberof AuditTrailDataApiSetAuditSettings
      */
-    readonly tenantAuditSettingsWrapper?: TenantAuditSettingsWrapper
+    readonly tenantAuditSettingsRequestDto?: TenantAuditSettingsRequestDto
 }
 
 /**
@@ -1004,7 +1034,7 @@ export interface AuditTrailDataApiSetAuditSettingsRequest {
  */
 export class AuditTrailDataApi extends BaseAPI {
     /**
-     * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. The  report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports and is never filtered: the query parameters of  `GET api/2.0/security/audit/events/filter` do not apply here. The caller needs the portal-settings right of a  DocSpace administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with  402. The file is not ready when the response arrives - poll `GET api/2.0/security/audit/events/report` until  `isCompleted` is true, then take `resultFileUrl`, and treat a non-empty `error` as a failed build. The  finished file is saved to the caller\'s My documents section, as an XLSX workbook by default or as CSV when  `format=Csv`, in which case `resultFileId` stays empty and only the name and the URL identify it. One job runs  per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
+     * Queues a report of the portal\'s audit trail and returns the state of the background job that builds it. By  default the report covers the period reaching from now back by the audit trail lifetime that  `GET api/2.0/security/audit/settings/lifetime` reports; `from` and `to` narrow it, a `from` older than that  window is moved up to its start, a `to` in the future is moved back to now, and a period that ends before it  starts is answered with 400. No other filter of `GET api/2.0/security/audit/events/filter` applies here. The  caller needs the portal-settings right of a DocSpace administrator plus the audit option of the portal\'s pricing  plan, otherwise the call is answered with 402. The file is not ready when the response arrives - poll  `GET api/2.0/security/audit/events/report` until `isCompleted` is true, then take `resultFileUrl`, and treat a  non-empty `error` as a failed build. The finished file is saved to the caller\'s My documents section, as an XLSX  workbook by default or as CSV when `format=Csv`, and `resultFileId` identifies it in either format;  `resultFileUrl` opens it in the editor, except for a CSV file too large for the editor, which it downloads  instead. An XLSX report keeps only the most recent events, at most 200,000 by default and fewer when the events  are long, and its header says how many were left out; `format=Csv` exports every event of the period. One job  runs per caller and kind: calling again while the previous one is still building returns that job instead of  starting a second, and `DELETE api/2.0/security/audit/events/report` cancels it.
      * @summary Start audit trail report
      * @param {SecurityAuditTrailDataApiCreateAuditTrailReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1012,7 +1042,7 @@ export class AuditTrailDataApi extends BaseAPI {
      * @memberof AuditTrailDataApi
      */
     public createAuditTrailReport(requestParameters: AuditTrailDataApiCreateAuditTrailReportRequest = {}, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).createAuditTrailReport(requestParameters.format, options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).createAuditTrailReport(requestParameters.format, requestParameters.from, requestParameters.to, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1051,7 +1081,7 @@ export class AuditTrailDataApi extends BaseAPI {
     }
 
     /**
-     * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402.  Jobs are kept per user and per report kind: this operation never shows another administrator\'s report, nor the  login history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is  empty when no report of this kind is known for the caller; otherwise `percentage` grows towards 100,  `isCompleted` turns true when the build has ended, `error` carries the failure message when it ended badly,  and `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section, while  `resultFileId` is filled for an XLSX report only. The operation is read-only and safe to poll every few  seconds; a finished job is dropped as soon as the next report of this kind is started.
+     * Returns the state of the audit trail report the calling user has started, and is the operation to poll after  `POST api/2.0/security/audit/events/report`. The caller needs the portal-settings right of a DocSpace  administrator plus the audit option of the portal\'s pricing plan, otherwise the call is answered with 402. Jobs  are kept per user and per report kind: this operation never shows another administrator\'s report, nor the login  history report, which has its own status at `GET api/2.0/security/audit/login/report`. The answer is empty when  no report of this kind is known for the caller; otherwise `percentage` grows towards 100, `isCompleted` turns  true when the build has ended, `error` carries the failure message when it ended badly, and `resultFileId`,  `resultFileName` and `resultFileUrl` point at the file saved to the caller\'s My documents section. The operation  is read-only and safe to poll every few seconds; a finished job is dropped as soon as the next report of this  kind is started.
      * @summary Get audit trail report status
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1092,7 +1122,7 @@ export class AuditTrailDataApi extends BaseAPI {
      * @memberof AuditTrailDataApi
      */
     public setAuditSettings(requestParameters: AuditTrailDataApiSetAuditSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return AuditTrailDataApiFp(this.configuration).setAuditSettings(requestParameters.tenantAuditSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return AuditTrailDataApiFp(this.configuration).setAuditSettings(requestParameters.tenantAuditSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

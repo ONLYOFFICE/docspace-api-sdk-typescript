@@ -28,7 +28,7 @@ import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { WebPluginArrayWrapper } from '../../models';
 // @ts-ignore
-import type { WebPluginRequests } from '../../models';
+import type { WebPluginRequest } from '../../models';
 // @ts-ignore
 import type { WebPluginWrapper } from '../../models';
 /**
@@ -269,17 +269,17 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
          * Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
          * @summary Update a web plugin
          * @param {string} name The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-         * @param {WebPluginRequests} webPluginRequests The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+         * @param {WebPluginRequest} webPluginRequest The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          */
-        updateWebPlugin: async (name: string, webPluginRequests: WebPluginRequests, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateWebPlugin: async (name: string, webPluginRequest: WebPluginRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('updateWebPlugin', 'name', name)
-            // verify required parameter 'webPluginRequests' is not null or undefined
-            assertParamExists('updateWebPlugin', 'webPluginRequests', webPluginRequests)
+            // verify required parameter 'webPluginRequest' is not null or undefined
+            assertParamExists('updateWebPlugin', 'webPluginRequest', webPluginRequest)
 
             const localVarPath = `/api/2.0/settings/webplugins/{name}`
                 .replace(`{${"name"}}`, encodeURIComponent(String(name)));
@@ -320,7 +320,7 @@ export const WebpluginsApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webPluginRequests, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(webPluginRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -401,14 +401,14 @@ export const WebpluginsApiFp = function(configuration?: Configuration) {
          * Switches a web plugin of the current portal on or off and stores the settings string the portal keeps for it.  The plugin has to be installed already, so upload its package with `POST api/2.0/settings/webplugins` first,  and `name` is its manifest name as published by `GET api/2.0/settings/webplugins`, matched without regard to  case. Editing the portal settings is required, so a portal owner or administrator, and the installation has to  have web plugins enabled in its configuration. The body replaces the stored state instead of merging into it,  which makes the call idempotent; `settings` is required, so send `{}` when there is nothing to keep, and it is  limited to 255 characters and stored encrypted for this portal alone. Switching the plugin on adds the domains  its manifest declares to the portal Content Security Policy and switching it off takes them away again, and  the connected clients are notified of the new state. Nothing is returned on success. A name that is not  installed is rejected as not found, and 403 means web plugins are switched off or the caller may not edit the  portal settings.
          * @summary Update a web plugin
          * @param {string} name The plugin to change, by the manifest name `GET api/2.0/settings/webplugins` publishes as `name`, matched  without regard to case. It is neither the localized display name nor the JavaScript object name in  `pluginName`, so it cannot be read off the interface; a name that is not installed answers 404.
-         * @param {WebPluginRequests} webPluginRequests The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
+         * @param {WebPluginRequest} webPluginRequest The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateWebPlugin operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-web-plugin/
          */
-        async updateWebPlugin(name: string, webPluginRequests: WebPluginRequests, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebPlugin(name, webPluginRequests, options);
+        async updateWebPlugin(name: string, webPluginRequest: WebPluginRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateWebPlugin(name, webPluginRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebpluginsApi.updateWebPlugin']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -481,7 +481,7 @@ export const WebpluginsApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         updateWebPlugin(requestParameters: WebpluginsApiUpdateWebPluginRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.updateWebPlugin(requestParameters.name, requestParameters.webPluginRequests, options).then((request) => request(axios, basePath));
+            return localVarFp.updateWebPlugin(requestParameters.name, requestParameters.webPluginRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -557,10 +557,10 @@ export interface WebpluginsApiUpdateWebPluginRequest {
 
     /**
      * The whole state the plugin is to have afterwards. It replaces what was stored instead of merging into it, so  both the enabled flag and the settings have to be sent every time.
-     * @type {WebPluginRequests}
+     * @type {WebPluginRequest}
      * @memberof WebpluginsApiUpdateWebPlugin
      */
-    readonly webPluginRequests: WebPluginRequests
+    readonly webPluginRequest: WebPluginRequest
 }
 
 /**
@@ -627,7 +627,7 @@ export class WebpluginsApi extends BaseAPI {
      * @memberof WebpluginsApi
      */
     public updateWebPlugin(requestParameters: WebpluginsApiUpdateWebPluginRequest, options?: RawAxiosRequestConfig) {
-        return WebpluginsApiFp(this.configuration).updateWebPlugin(requestParameters.name, requestParameters.webPluginRequests, options).then((request) => request(this.axios, this.basePath));
+        return WebpluginsApiFp(this.configuration).updateWebPlugin(requestParameters.name, requestParameters.webPluginRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

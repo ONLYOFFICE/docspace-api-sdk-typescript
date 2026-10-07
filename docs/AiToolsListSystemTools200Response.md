@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**groups** | **{ [key: string]: Array&lt;AiTMCPItem&gt;; }** | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | [default to undefined]
+**groups** | **{ [key: string]: Array&lt;AiMCPItem&gt;; }** | Tools by server name, covering both the host-configured system servers and the custom MCP servers registered for this scope. | [default to undefined]
 **errors** | **{ [key: string]: string; }** | Why a registered custom server could not be reached, keyed by server name. A server that answered is absent from this map. | [default to undefined]
 **system** | **Array&lt;string&gt;** | Names of the host-configured system servers among the keys of `groups`; everything else there was registered as a custom server. | [default to undefined]
 

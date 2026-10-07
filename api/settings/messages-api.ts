@@ -24,9 +24,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AdminMessageBaseSettingsRequestsDto } from '../../models';
+import type { AdminMessageBaseSettingsRequestDto } from '../../models';
 // @ts-ignore
-import type { AdminMessageSettingsRequestsDto } from '../../models';
+import type { AdminMessageSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
@@ -100,13 +100,13 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal\'s payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
          * @summary Send a message to the administrator
-         * @param {AdminMessageSettingsRequestsDto} [adminMessageSettingsRequestsDto] 
+         * @param {AdminMessageSettingsRequestDto} [adminMessageSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendAdminMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail/
          */
-        sendAdminMail: async (adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendAdminMail: async (adminMessageSettingsRequestDto?: AdminMessageSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/sendadmmail`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -146,7 +146,7 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(adminMessageSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(adminMessageSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -156,13 +156,13 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page\'s register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal\'s paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
          * @summary Send an invitation email
-         * @param {AdminMessageBaseSettingsRequestsDto} [adminMessageBaseSettingsRequestsDto] 
+         * @param {AdminMessageBaseSettingsRequestDto} [adminMessageBaseSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendJoinInviteMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail/
          */
-        sendJoinInviteMail: async (adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendJoinInviteMail: async (adminMessageBaseSettingsRequestDto?: AdminMessageBaseSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/sendjoininvite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -202,7 +202,7 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(adminMessageBaseSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(adminMessageBaseSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -237,14 +237,14 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         /**
          * Sends a message from someone who cannot get into the portal to its administrators - the contact form the  sign-in page offers unauthenticated visitors. No token is needed. The form has to be published first with  `POST api/2.0/settings/messagesettings` unless the portal\'s payment has lapsed, otherwise nothing is sent;  `enableAdmMess` in `GET api/2.0/settings` reports whether the call is worth making. `email` is the address the  administrators answer to and has to be a real address, and `message` is reduced to plain text first, so a body  carrying nothing but markup counts as empty - either fault is refused with 400. When the caller is not signed  in and this installation has a CAPTCHA configured, `recaptchaResponse` has to carry a solved challenge of the  `recaptchaType` that `GET api/2.0/settings` publishes together with the site key, and a missing or stale  answer refuses the call. `culture` picks the language of the letter. Delivery is queued and reaches the  administrators subscribed to administrator notifications, so a confirmed call means accepted rather than read,  and the answer is a localized confirmation. Attempts are rate limited per address and per operation, and  further ones are refused with 429.
          * @summary Send a message to the administrator
-         * @param {AdminMessageSettingsRequestsDto} [adminMessageSettingsRequestsDto] 
+         * @param {AdminMessageSettingsRequestDto} [adminMessageSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendAdminMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-admin-mail/
          */
-        async sendAdminMail(adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendAdminMail(adminMessageSettingsRequestsDto, options);
+        async sendAdminMail(adminMessageSettingsRequestDto?: AdminMessageSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendAdminMail(adminMessageSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MessagesApi.sendAdminMail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -252,14 +252,14 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         /**
          * Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page\'s register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal\'s paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
          * @summary Send an invitation email
-         * @param {AdminMessageBaseSettingsRequestsDto} [adminMessageBaseSettingsRequestsDto] 
+         * @param {AdminMessageBaseSettingsRequestDto} [adminMessageBaseSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendJoinInviteMail operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-join-invite-mail/
          */
-        async sendJoinInviteMail(adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendJoinInviteMail(adminMessageBaseSettingsRequestsDto, options);
+        async sendJoinInviteMail(adminMessageBaseSettingsRequestDto?: AdminMessageBaseSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendJoinInviteMail(adminMessageBaseSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MessagesApi.sendJoinInviteMail']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -296,7 +296,7 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         sendAdminMail(requestParameters: MessagesApiSendAdminMailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendAdminMail(requestParameters.adminMessageSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.sendAdminMail(requestParameters.adminMessageSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Sends an invitation email with a join link to the address in the request - the self-registration the sign-in  page\'s register link performs. No token is needed. The portal has to publish a trusted-domain policy first,  saved with `POST api/2.0/settings/maildomainsettings`: without one there is nothing to join and every caller  alike is answered with 405 - the same condition `GET api/2.0/settings` reports as `enabledJoin`. `email` has  to be a real address written in ASCII rather than an internationalized one, must not already belong to a  portal member, and, when the policy names domains rather than accepting all of them, has to end with one of  them - each of those faults is refused with 400. `culture` picks the language of the letter. The invitation is  not an account: the invitee becomes a member only after following the link, and the role it grants, user or  room administrator, follows the trusted-domain settings and drops to user once the portal\'s paid places are  taken. Where the installation caps invitations, an accepted call spends one of those counted by  `invitationLimit`, and only about a dozen calls from one address in two minutes are accepted. What comes back  is a localized confirmation.
@@ -308,7 +308,7 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         sendJoinInviteMail(requestParameters: MessagesApiSendJoinInviteMailRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -335,10 +335,10 @@ export interface MessagesApiEnableAdminMessageSettingsRequest {
 export interface MessagesApiSendAdminMailRequest {
     /**
      * 
-     * @type {AdminMessageSettingsRequestsDto}
+     * @type {AdminMessageSettingsRequestDto}
      * @memberof MessagesApiSendAdminMail
      */
-    readonly adminMessageSettingsRequestsDto?: AdminMessageSettingsRequestsDto
+    readonly adminMessageSettingsRequestDto?: AdminMessageSettingsRequestDto
 }
 
 /**
@@ -349,10 +349,10 @@ export interface MessagesApiSendAdminMailRequest {
 export interface MessagesApiSendJoinInviteMailRequest {
     /**
      * 
-     * @type {AdminMessageBaseSettingsRequestsDto}
+     * @type {AdminMessageBaseSettingsRequestDto}
      * @memberof MessagesApiSendJoinInviteMail
      */
-    readonly adminMessageBaseSettingsRequestsDto?: AdminMessageBaseSettingsRequestsDto
+    readonly adminMessageBaseSettingsRequestDto?: AdminMessageBaseSettingsRequestDto
 }
 
 /**
@@ -383,7 +383,7 @@ export class MessagesApi extends BaseAPI {
      * @memberof MessagesApi
      */
     public sendAdminMail(requestParameters: MessagesApiSendAdminMailRequest = {}, options?: RawAxiosRequestConfig) {
-        return MessagesApiFp(this.configuration).sendAdminMail(requestParameters.adminMessageSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return MessagesApiFp(this.configuration).sendAdminMail(requestParameters.adminMessageSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -395,7 +395,7 @@ export class MessagesApi extends BaseAPI {
      * @memberof MessagesApi
      */
     public sendJoinInviteMail(requestParameters: MessagesApiSendJoinInviteMailRequest = {}, options?: RawAxiosRequestConfig) {
-        return MessagesApiFp(this.configuration).sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return MessagesApiFp(this.configuration).sendJoinInviteMail(requestParameters.adminMessageBaseSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

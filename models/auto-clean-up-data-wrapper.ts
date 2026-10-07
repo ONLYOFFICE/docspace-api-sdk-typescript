@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AutoCleanUpData } from './auto-clean-up-data';
+import type { AutoCleanUpDataDto } from './auto-clean-up-data-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the AutoCleanUpData object.
+ * The successful API response containing the AutoCleanUpDataDto object.
  */
 export interface AutoCleanUpDataWrapper {
     /**
-     * The AutoCleanUpData object returned by the operation.
+     * The AutoCleanUpDataDto object returned by the operation.
      */
-    'response'?: AutoCleanUpData;
+    'response'?: AutoCleanUpDataDto;
     /**
      * The total number of items in the response
      */

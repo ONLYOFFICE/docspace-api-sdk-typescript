@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **actionType** | [**AiActionType**](AiActionType.md) |  | [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) |  | [default to undefined]
 
 ## Example
 

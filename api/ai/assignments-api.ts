@@ -95,15 +95,15 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
          * @summary Bulk assign
-         * @param {{ [key: string]: string; }} requestBody A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+         * @param {{ [key: string]: string; }} aiAssignmentsBulkAssignRequest A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsBulkAssign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign/
          */
-        aiAssignmentsBulkAssign: async (requestBody: { [key: string]: string; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'requestBody' is not null or undefined
-            assertParamExists('aiAssignmentsBulkAssign', 'requestBody', requestBody)
+        aiAssignmentsBulkAssign: async (aiAssignmentsBulkAssignRequest: { [key: string]: string; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAssignmentsBulkAssignRequest' is not null or undefined
+            assertParamExists('aiAssignmentsBulkAssign', 'aiAssignmentsBulkAssignRequest', aiAssignmentsBulkAssignRequest)
 
             const localVarPath = `/api/2.0/ai/assignments/bulk-assign`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -130,7 +130,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAssignmentsBulkAssignRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -377,15 +377,15 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
          * @summary Clear an action\'s profile
-         * @param {string} body 
+         * @param {string} aiActionType 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsUnassign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign/
          */
-        aiAssignmentsUnassign: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiAssignmentsUnassign', 'body', body)
+        aiAssignmentsUnassign: async (aiActionType: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiActionType' is not null or undefined
+            assertParamExists('aiAssignmentsUnassign', 'aiActionType', aiActionType)
 
             const localVarPath = `/api/2.0/ai/assignments/unassign`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -412,7 +412,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiActionType, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -447,14 +447,14 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
         /**
          * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
          * @summary Bulk assign
-         * @param {{ [key: string]: string; }} requestBody A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+         * @param {{ [key: string]: string; }} aiAssignmentsBulkAssignRequest A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsBulkAssign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign/
          */
-        async aiAssignmentsBulkAssign(requestBody: { [key: string]: string; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiBulkAssignmentResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsBulkAssign(requestBody, options);
+        async aiAssignmentsBulkAssign(aiAssignmentsBulkAssignRequest: { [key: string]: string; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiBulkAssignmentResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsBulkAssign(aiAssignmentsBulkAssignRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsBulkAssign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -539,14 +539,14 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
         /**
          * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
          * @summary Clear an action\'s profile
-         * @param {string} body 
+         * @param {string} aiActionType 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsUnassign operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign/
          */
-        async aiAssignmentsUnassign(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsUnassign(body, options);
+        async aiAssignmentsUnassign(aiActionType: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsUnassign(aiActionType, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsUnassign']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -583,7 +583,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
         aiAssignmentsBulkAssign(requestParameters: AssignmentsApiAiAssignmentsBulkAssignRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiBulkAssignmentResult> {
-            return localVarFp.aiAssignmentsBulkAssign(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.aiAssignmentsBulkAssign(requestParameters.aiAssignmentsBulkAssignRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
@@ -655,7 +655,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
         aiAssignmentsUnassign(requestParameters: AssignmentsApiAiAssignmentsUnassignRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiAssignmentsUnassign(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiAssignmentsUnassign(requestParameters.aiActionType, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -685,7 +685,7 @@ export interface AssignmentsApiAiAssignmentsBulkAssignRequest {
      * @type {{ [key: string]: string; }}
      * @memberof AssignmentsApiAiAssignmentsBulkAssign
      */
-    readonly requestBody: { [key: string]: string; }
+    readonly aiAssignmentsBulkAssignRequest: { [key: string]: string; }
 }
 
 /**
@@ -783,7 +783,7 @@ export interface AssignmentsApiAiAssignmentsUnassignRequest {
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsUnassign
      */
-    readonly body: string
+    readonly aiActionType: string
 }
 
 /**
@@ -814,7 +814,7 @@ export class AssignmentsApi extends BaseAPI {
      * @memberof AssignmentsApi
      */
     public aiAssignmentsBulkAssign(requestParameters: AssignmentsApiAiAssignmentsBulkAssignRequest, options?: RawAxiosRequestConfig) {
-        return AssignmentsApiFp(this.configuration).aiAssignmentsBulkAssign(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return AssignmentsApiFp(this.configuration).aiAssignmentsBulkAssign(requestParameters.aiAssignmentsBulkAssignRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -886,7 +886,7 @@ export class AssignmentsApi extends BaseAPI {
      * @memberof AssignmentsApi
      */
     public aiAssignmentsUnassign(requestParameters: AssignmentsApiAiAssignmentsUnassignRequest, options?: RawAxiosRequestConfig) {
-        return AssignmentsApiFp(this.configuration).aiAssignmentsUnassign(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return AssignmentsApiFp(this.configuration).aiAssignmentsUnassign(requestParameters.aiActionType, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

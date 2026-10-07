@@ -23,10 +23,10 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EditHistoryAuthor } from './edit-history-author';
+import type { EditHistoryAuthorDto } from './edit-history-author-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EditHistoryChangesWrapper } from './edit-history-changes-wrapper';
+import type { EditHistoryChangesDto } from './edit-history-changes-dto';
 
 /**
  * One saved revision of a file, as the editing service recorded it.
@@ -51,7 +51,7 @@ export interface EditHistoryDto {
     /**
      * The account that saved the revision. A revision saved by an account that no longer exists, or through an  anonymous link, is reported as a guest.
      */
-    'user'?: EditHistoryAuthor;
+    'user'?: EditHistoryAuthorDto;
     /**
      * When the revision was saved, written with the offset of the portal\'s time zone rather than as plain UTC. The  times of one history are consistent with each other, so order and display the revisions by them.
      */
@@ -63,7 +63,7 @@ export interface EditHistoryDto {
     /**
      * The single changes this revision introduced - who made each of them and when - taken from the stored change  record. It comes back empty both for a revision whose changes were never recorded and for one whose record is  in a format the portal no longer reads, so an empty list is not proof that nothing changed.
      */
-    'changes'?: Array<EditHistoryChangesWrapper> | null;
+    'changes'?: Array<EditHistoryChangesDto> | null;
     /**
      * The build of the editing service that wrote the change record of this revision, taken from the record itself;  empty when the portal holds no record for the revision.
      */

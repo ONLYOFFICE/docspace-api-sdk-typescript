@@ -7,7 +7,7 @@ Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a s
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | True when the assignment was persisted. | [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the assignment was rejected. Present on failure. | [optional] [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the assignment was rejected. Present on failure. | [optional] [default to undefined]
 
 ## Example
 

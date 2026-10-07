@@ -73,7 +73,7 @@ const { status, data } = await apiInstance.aiProfilesCreate(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiProfilesDelete**
-> AiSuccessResponse aiProfilesDelete(body)
+> AiSuccessResponse aiProfilesDelete(aiProfilesDeleteRequest)
 
 Deletes an AI provider profile and cleans up every assignment pointing at it: the `Default` slot moves to the first remaining profile and the other slots are left unbound. The ID is required and may be sent in the body or as a query parameter. An unknown ID is not reported - the call answers success without deleting anything. Threads already bound to the profile keep the stored reference, so a round on such a thread falls back to whatever the scope resolves to.
 
@@ -83,7 +83,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the profile to delete, as a bare JSON string. | |
+| **aiProfilesDeleteRequest** | **string**| The ID of the profile to delete, as a bare JSON string. | |
 
 
 ### Return type
@@ -105,10 +105,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIProfilesApi(configuration);
 
-let body: string; //The ID of the profile to delete, as a bare JSON string.
+let aiProfilesDeleteRequest: string; //The ID of the profile to delete, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiProfilesDelete(
-    body
+    aiProfilesDeleteRequest
 );
 ```
 
@@ -124,7 +124,7 @@ const { status, data } = await apiInstance.aiProfilesDelete(
 |**200** | Confirms the request was accepted, whether or not a profile was deleted. |  -  |
 |**400** | The profile ID is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -182,7 +182,7 @@ const { status, data } = await apiInstance.aiProfilesGetById(
 |**200** | The profile, with its key and headers stripped. |  -  |
 |**400** | The profile ID is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | No profile has this ID. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -232,7 +232,7 @@ const { status, data } = await apiInstance.aiProfilesList();
 |-------------|-------------|------------------|
 |**200** | The portal\'s profiles, with their keys and headers stripped. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -289,7 +289,7 @@ const { status, data } = await apiInstance.aiProfilesListModels(
 |**200** | The models the profile\'s provider currently offers. |  -  |
 |**400** | `profileId` is missing, or the provider rejected the profile\'s API key. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 |**502** | The AI provider could not be reached, or answered with a failure of its own. |  -  |
 
@@ -348,7 +348,7 @@ const { status, data } = await apiInstance.aiProfilesListProviderModels(
 |**200** | The models the endpoint offers for the supplied credentials. |  -  |
 |**400** | `baseUrl` is missing, points at a private network address, or the provider rejected the supplied API key. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 |**502** | The AI provider could not be reached, or answered with a failure of its own. |  -  |
@@ -356,7 +356,7 @@ const { status, data } = await apiInstance.aiProfilesListProviderModels(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiProfilesTestConnection**
-> AiProfilesTestConnection200Response aiProfilesTestConnection(body)
+> AiProfilesTestConnection200Response aiProfilesTestConnection(aiProfilesTestConnectionRequest)
 
 Probes a stored profile\'s credentials against its provider and reports the outcome in the answer, writing nothing - this is what a Test button calls so that a failure does not commit anything. `profileId` is required and may be sent in the body or as a query parameter. The result is carried in the body rather than in the status, so a failed probe still answers 200 and the caller has to read the payload. To validate credentials that are not stored yet, use `POST api/2.0/ai/profiles/list-provider-models`.
 
@@ -366,7 +366,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the profile to probe, as a bare JSON string. | |
+| **aiProfilesTestConnectionRequest** | **string**| The ID of the profile to probe, as a bare JSON string. | |
 
 
 ### Return type
@@ -388,10 +388,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIProfilesApi(configuration);
 
-let body: string; //The ID of the profile to probe, as a bare JSON string.
+let aiProfilesTestConnectionRequest: string; //The ID of the profile to probe, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiProfilesTestConnection(
-    body
+    aiProfilesTestConnectionRequest
 );
 ```
 
@@ -407,7 +407,7 @@ const { status, data } = await apiInstance.aiProfilesTestConnection(
 |**200** | The outcome of the probe. A failed probe is reported here, not as a status. |  -  |
 |**400** | `profileId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

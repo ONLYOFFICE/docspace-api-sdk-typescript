@@ -30,23 +30,23 @@ import type { BaseBatchRequestDto } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { ChangeHistory } from '../../models';
+import type { ChangeHistoryRequest } from '../../models';
 // @ts-ignore
-import type { CheckFillFormDraft } from '../../models';
+import type { CheckFillFormDraftRequest } from '../../models';
 // @ts-ignore
-import type { ChunkedUploadSessionResponseWrapperWrapper } from '../../models';
+import type { ChunkedUploadSessionResultWrapper } from '../../models';
 // @ts-ignore
 import type { ConfigurationWrapper } from '../../models';
 // @ts-ignore
-import type { CopyAsJsonElement } from '../../models';
+import type { CopyAsRequest } from '../../models';
 // @ts-ignore
-import type { CreateFileJsonElement } from '../../models';
+import type { CreateFileRequest } from '../../models';
 // @ts-ignore
-import type { CreateTextOrHtmlFile } from '../../models';
+import type { CreateTextOrHtmlFileRequest } from '../../models';
 // @ts-ignore
-import type { CustomFilterParameters } from '../../models';
+import type { CustomFilterRequest } from '../../models';
 // @ts-ignore
-import type { Delete } from '../../models';
+import type { DeleteFileRequest } from '../../models';
 // @ts-ignore
 import type { DocumentBuilderTaskWrapper } from '../../models';
 // @ts-ignore
@@ -92,11 +92,11 @@ import type { HistoryArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ItemKeyValuePairBooleanStringWrapper } from '../../models';
 // @ts-ignore
-import type { LockFileParameters } from '../../models';
+import type { LockFileRequest } from '../../models';
 // @ts-ignore
 import type { ManageFormFillingDto } from '../../models';
 // @ts-ignore
-import type { MentionWrapperArrayWrapper } from '../../models';
+import type { MentionArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ObjectArrayWrapper } from '../../models';
 // @ts-ignore
@@ -104,17 +104,17 @@ import type { OrderRequestDto } from '../../models';
 // @ts-ignore
 import type { OrdersRequestDto } from '../../models';
 // @ts-ignore
-import type { SaveAsPdf } from '../../models';
+import type { SaveAsPdfRequest } from '../../models';
 // @ts-ignore
 import type { SaveFormRoleMappingDto } from '../../models';
 // @ts-ignore
-import type { StartEdit } from '../../models';
+import type { StartEditRequest } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { TemplatesRequestDto } from '../../models';
 // @ts-ignore
-import type { ThirdPartyChunkedUploadSessionResponseWrapperWrapper } from '../../models';
+import type { ThirdPartyChunkedUploadSessionResultWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyConfigurationWrapper } from '../../models';
 // @ts-ignore
@@ -122,9 +122,9 @@ import type { ThirdPartyFileArrayWrapper } from '../../models';
 // @ts-ignore
 import type { ThirdPartyFileWrapper } from '../../models';
 // @ts-ignore
-import type { ThirdPartySaveAsPdf } from '../../models';
+import type { ThirdPartySaveAsPdfRequest } from '../../models';
 // @ts-ignore
-import type { UpdateFile } from '../../models';
+import type { UpdateFileRequest } from '../../models';
 // @ts-ignore
 import type { XlsxReportResponseWrapper } from '../../models';
 /**
@@ -251,17 +251,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
          * @summary Change version history
          * @param {number | string} fileId The file whose version history is changed.
-         * @param {ChangeHistory} changeHistory The change to make to the revision group.
+         * @param {ChangeHistoryRequest} changeHistoryRequest The change to make to the revision group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeVersionHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          */
-        changeVersionHistory: async (fileId: number | string, changeHistory: ChangeHistory, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        changeVersionHistory: async (fileId: number | string, changeHistoryRequest: ChangeHistoryRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('changeVersionHistory', 'fileId', fileId)
-            // verify required parameter 'changeHistory' is not null or undefined
-            assertParamExists('changeVersionHistory', 'changeHistory', changeHistory)
+            // verify required parameter 'changeHistoryRequest' is not null or undefined
+            assertParamExists('changeVersionHistory', 'changeHistoryRequest', changeHistoryRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/history`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -302,7 +302,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(changeHistory, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(changeHistoryRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -313,17 +313,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
          * @summary Open a form draft for filling
          * @param {number | string} fileId The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-         * @param {CheckFillFormDraft} checkFillFormDraft The revision of the form to open and what the caller intends to do with it.
+         * @param {CheckFillFormDraftRequest} checkFillFormDraftRequest The revision of the form to open and what the caller intends to do with it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkFillFormDraft operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
          */
-        checkFillFormDraft: async (fileId: number | string, checkFillFormDraft: CheckFillFormDraft, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkFillFormDraft: async (fileId: number | string, checkFillFormDraftRequest: CheckFillFormDraftRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('checkFillFormDraft', 'fileId', fileId)
-            // verify required parameter 'checkFillFormDraft' is not null or undefined
-            assertParamExists('checkFillFormDraft', 'checkFillFormDraft', checkFillFormDraft)
+            // verify required parameter 'checkFillFormDraftRequest' is not null or undefined
+            assertParamExists('checkFillFormDraft', 'checkFillFormDraftRequest', checkFillFormDraftRequest)
 
             const localVarPath = `/api/2.0/files/masterform/{fileId}/checkfillformdraft`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -364,7 +364,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(checkFillFormDraft, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(checkFillFormDraftRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -375,17 +375,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
          * @summary Copy a file
          * @param {number | string} fileId The file to copy.
-         * @param {CopyAsJsonElement} copyAsJsonElement The title, the destination and the conversion options of the copy.
+         * @param {CopyAsRequest} copyAsRequest The title, the destination and the conversion options of the copy.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for copyFileAs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
          */
-        copyFileAs: async (fileId: number | string, copyAsJsonElement: CopyAsJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        copyFileAs: async (fileId: number | string, copyAsRequest: CopyAsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('copyFileAs', 'fileId', fileId)
-            // verify required parameter 'copyAsJsonElement' is not null or undefined
-            assertParamExists('copyFileAs', 'copyAsJsonElement', copyAsJsonElement)
+            // verify required parameter 'copyAsRequest' is not null or undefined
+            assertParamExists('copyFileAs', 'copyAsRequest', copyAsRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/copyas`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -426,7 +426,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(copyAsJsonElement, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(copyAsRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -498,17 +498,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
          * @summary Create a file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateFileJsonElement} createFileJsonElement The title of the new file and the source of its content.
+         * @param {CreateFileRequest} createFileRequest The title of the new file and the source of its content.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
          */
-        createFile: async (folderId: number | string, createFileJsonElement: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFile: async (folderId: number | string, createFileRequest: CreateFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createFile', 'folderId', folderId)
-            // verify required parameter 'createFileJsonElement' is not null or undefined
-            assertParamExists('createFile', 'createFileJsonElement', createFileJsonElement)
+            // verify required parameter 'createFileRequest' is not null or undefined
+            assertParamExists('createFile', 'createFileRequest', createFileRequest)
 
             const localVarPath = `/api/2.0/files/{folderId}/file`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -549,7 +549,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createFileJsonElement, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -559,13 +559,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Creates a file in the caller\'s own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
          * @summary Create a file in My documents
-         * @param {CreateFileJsonElement} [createFileJsonElement] 
+         * @param {CreateFileRequest} [createFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/
          */
-        createFileInMyDocuments: async (createFileJsonElement?: CreateFileJsonElement, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createFileInMyDocuments: async (createFileRequest?: CreateFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/@my/file`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -605,7 +605,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createFileJsonElement, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -678,17 +678,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
          * @summary Create an HTML file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
+         * @param {CreateTextOrHtmlFileRequest} createTextOrHtmlFileRequest The title, the content and the collision behaviour of the new file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createHtmlFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
          */
-        createHtmlFile: async (folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createHtmlFile: async (folderId: number | string, createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createHtmlFile', 'folderId', folderId)
-            // verify required parameter 'createTextOrHtmlFile' is not null or undefined
-            assertParamExists('createHtmlFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
+            // verify required parameter 'createTextOrHtmlFileRequest' is not null or undefined
+            assertParamExists('createHtmlFile', 'createTextOrHtmlFileRequest', createTextOrHtmlFileRequest)
 
             const localVarPath = `/api/2.0/files/{folderId}/html`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -729,7 +729,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -739,13 +739,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Creates an HTML file in the caller\'s own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
          * @summary Create an HTML file in My documents
-         * @param {CreateTextOrHtmlFile} [createTextOrHtmlFile] 
+         * @param {CreateTextOrHtmlFileRequest} [createTextOrHtmlFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createHtmlFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/
          */
-        createHtmlFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createHtmlFileInMyDocuments: async (createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/@my/html`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -785,7 +785,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -796,17 +796,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
          * @summary Create a text file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
+         * @param {CreateTextOrHtmlFileRequest} createTextOrHtmlFileRequest The title, the content and the collision behaviour of the new file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTextFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
          */
-        createTextFile: async (folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createTextFile: async (folderId: number | string, createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'folderId' is not null or undefined
             assertParamExists('createTextFile', 'folderId', folderId)
-            // verify required parameter 'createTextOrHtmlFile' is not null or undefined
-            assertParamExists('createTextFile', 'createTextOrHtmlFile', createTextOrHtmlFile)
+            // verify required parameter 'createTextOrHtmlFileRequest' is not null or undefined
+            assertParamExists('createTextFile', 'createTextOrHtmlFileRequest', createTextOrHtmlFileRequest)
 
             const localVarPath = `/api/2.0/files/{folderId}/text`
                 .replace(`{${"folderId"}}`, encodeURIComponent(String(folderId)));
@@ -847,7 +847,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -857,13 +857,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Creates a text file in the caller\'s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
          * @summary Create a text file in My documents
-         * @param {CreateTextOrHtmlFile} [createTextOrHtmlFile] 
+         * @param {CreateTextOrHtmlFileRequest} [createTextOrHtmlFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTextFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/
          */
-        createTextFileInMyDocuments: async (createTextOrHtmlFile?: CreateTextOrHtmlFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createTextFileInMyDocuments: async (createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/@my/text`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -903,7 +903,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFile, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createTextOrHtmlFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -970,18 +970,18 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete a file
          * @param {number | string} fileId The file to delete.
-         * @param {Delete} _delete When and how the file is deleted.
+         * @param {DeleteFileRequest} deleteFileRequest When and how the file is deleted.
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
          */
-        deleteFile: async (fileId: number | string, _delete: Delete, returnSingleOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteFile: async (fileId: number | string, deleteFileRequest: DeleteFileRequest, returnSingleOperation?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('deleteFile', 'fileId', fileId)
-            // verify required parameter '_delete' is not null or undefined
-            assertParamExists('deleteFile', '_delete', _delete)
+            // verify required parameter 'deleteFileRequest' is not null or undefined
+            assertParamExists('deleteFile', 'deleteFileRequest', deleteFileRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -1016,7 +1016,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             // authentication OpenId required
 
             if (returnSingleOperation !== undefined) {
-                localVarQueryParameter['ReturnSingleOperation'] = returnSingleOperation;
+                localVarQueryParameter['returnSingleOperation'] = returnSingleOperation;
             }
 
 
@@ -1026,7 +1026,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(_delete, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(deleteFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1092,13 +1092,13 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
          * @summary Delete template files
-         * @param {Array<number>} [requestBody] The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+         * @param {Array<number>} [deleteTemplateFilesRequestDto] The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteTemplates operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/
          */
-        deleteTemplates: async (requestBody?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteTemplates: async (deleteTemplateFilesRequestDto?: Array<number>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/templates`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1138,7 +1138,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(deleteTemplateFilesRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2212,17 +2212,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
          * @summary Lock a file
          * @param {number | string} fileId The file to lock or unlock.
-         * @param {LockFileParameters} lockFileParameters The lock state to reach.
+         * @param {LockFileRequest} lockFileRequest The lock state to reach.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for lockFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
          */
-        lockFile: async (fileId: number | string, lockFileParameters: LockFileParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        lockFile: async (fileId: number | string, lockFileRequest: LockFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('lockFile', 'fileId', fileId)
-            // verify required parameter 'lockFileParameters' is not null or undefined
-            assertParamExists('lockFile', 'lockFileParameters', lockFileParameters)
+            // verify required parameter 'lockFileRequest' is not null or undefined
+            assertParamExists('lockFile', 'lockFileRequest', lockFileRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/lock`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2263,7 +2263,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(lockFileParameters, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(lockFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2528,20 +2528,20 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             // authentication OpenId required
 
             if (downloadUri !== undefined) {
-                localVarQueryParameter['DownloadUri'] = downloadUri;
+                localVarQueryParameter['downloadUri'] = downloadUri;
             }
 
 
             if (fileExtension !== undefined) { 
-                localVarFormParams.append('FileExtension', fileExtension as any);
+                localVarFormParams.append('fileExtension', fileExtension as any);
             }
     
             if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
+                localVarFormParams.append('file', file as any);
             }
     
             if (forcesave !== undefined) { 
-                localVarFormParams.append('Forcesave', String(forcesave) as any);
+                localVarFormParams.append('forcesave', String(forcesave) as any);
             }
     
     
@@ -2561,17 +2561,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
          * @summary Save a file as PDF
          * @param {number | string} id The file to convert; it is left untouched.
-         * @param {SaveAsPdf | ThirdPartySaveAsPdf} saveAsPdf The destination folder and the name of the PDF.
+         * @param {SaveAsPdfRequest | ThirdPartySaveAsPdfRequest} saveAsPdfRequest The destination folder and the name of the PDF.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveFileAsPdf operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
          */
-        saveFileAsPdf: async (id: number | string, saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveFileAsPdf: async (id: number | string, saveAsPdfRequest: SaveAsPdfRequest | ThirdPartySaveAsPdfRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('saveFileAsPdf', 'id', id)
-            // verify required parameter 'saveAsPdf' is not null or undefined
-            assertParamExists('saveFileAsPdf', 'saveAsPdf', saveAsPdf)
+            // verify required parameter 'saveAsPdfRequest' is not null or undefined
+            assertParamExists('saveFileAsPdf', 'saveAsPdfRequest', saveAsPdfRequest)
 
             const localVarPath = `/api/2.0/files/file/{id}/saveaspdf`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -2612,7 +2612,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(saveAsPdf, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(saveAsPdfRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2683,17 +2683,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
          * @summary Set the Custom Filter editing mode
          * @param {number | string} fileId The spreadsheet whose Custom Filter mode is switched.
-         * @param {CustomFilterParameters} customFilterParameters The Custom Filter state to reach.
+         * @param {CustomFilterRequest} customFilterRequest The Custom Filter state to reach.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setCustomFilterTag operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
          */
-        setCustomFilterTag: async (fileId: number | string, customFilterParameters: CustomFilterParameters, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setCustomFilterTag: async (fileId: number | string, customFilterRequest: CustomFilterRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('setCustomFilterTag', 'fileId', fileId)
-            // verify required parameter 'customFilterParameters' is not null or undefined
-            assertParamExists('setCustomFilterTag', 'customFilterParameters', customFilterParameters)
+            // verify required parameter 'customFilterRequest' is not null or undefined
+            assertParamExists('setCustomFilterTag', 'customFilterRequest', customFilterRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/customfilter`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -2734,7 +2734,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customFilterParameters, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customFilterRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2983,17 +2983,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
          * @summary Open an editing session
          * @param {number | string} fileId The file to open the editing session on. The caller needs edit access to it.
-         * @param {StartEdit} startEdit The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+         * @param {StartEditRequest} startEditRequest The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
          */
-        startEditFile: async (fileId: number | string, startEdit: StartEdit, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startEditFile: async (fileId: number | string, startEditRequest: StartEditRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('startEditFile', 'fileId', fileId)
-            // verify required parameter 'startEdit' is not null or undefined
-            assertParamExists('startEditFile', 'startEdit', startEdit)
+            // verify required parameter 'startEditRequest' is not null or undefined
+            assertParamExists('startEditFile', 'startEditRequest', startEditRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}/startedit`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3034,7 +3034,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(startEdit, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(startEditRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3233,17 +3233,17 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
          * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
          * @summary Update a file
          * @param {number | string} fileId The file to update.
-         * @param {UpdateFile} updateFile The new title and the version to restore.
+         * @param {UpdateFileRequest} updateFileRequest The new title and the version to restore.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
          */
-        updateFile: async (fileId: number | string, updateFile: UpdateFile, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateFile: async (fileId: number | string, updateFileRequest: UpdateFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('updateFile', 'fileId', fileId)
-            // verify required parameter 'updateFile' is not null or undefined
-            assertParamExists('updateFile', 'updateFile', updateFile)
+            // verify required parameter 'updateFileRequest' is not null or undefined
+            assertParamExists('updateFile', 'updateFileRequest', updateFileRequest)
 
             const localVarPath = `/api/2.0/files/file/{fileId}`
                 .replace(`{${"fileId"}}`, encodeURIComponent(String(fileId)));
@@ -3284,7 +3284,7 @@ export const FilesApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateFile, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateFileRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -3335,14 +3335,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Closes or reopens a revision group in the version history of a file and answers with every stored version of  that file, newest first. With `continueVersion=false` the named version is completed: its content is stored  again as a fresh version that opens a new revision group, so the editing that follows no longer extends the  previous one. With `continueVersion=true` the last revision group is folded back into the group before it, so  the next save continues that revision instead of becoming a version of its own; a file that has only one group  is left as it is. A `version` of 0 means the current version. The caller needs the right to edit the history  of the file, which the room admin, a DocSpace admin acting as room manager and a member with content-creator  rights have; plain editing access is refused with 403, as are a guest and a member without access to the room.  The call is mutating and not idempotent. A file that is locked, lies in Trash, is open in an editing session  or is kept in a connected third-party storage is refused.
          * @summary Change version history
          * @param {number | string} fileId The file whose version history is changed.
-         * @param {ChangeHistory} changeHistory The change to make to the revision group.
+         * @param {ChangeHistoryRequest} changeHistoryRequest The change to make to the revision group.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for changeVersionHistory operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/change-version-history/
          */
-        async changeVersionHistory(fileId: number | string, changeHistory: ChangeHistory, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistory(fileId, changeHistory, options);
+        async changeVersionHistory(fileId: number | string, changeHistoryRequest: ChangeHistoryRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.changeVersionHistory(fileId, changeHistoryRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.changeVersionHistory']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3351,14 +3351,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
          * @summary Open a form draft for filling
          * @param {number | string} fileId The identifier of the PDF form to open, as it is returned by a room listing such as  `GET api/2.0/files/{folderId}`. The identifier of an already created draft is accepted here as well.
-         * @param {CheckFillFormDraft} checkFillFormDraft The revision of the form to open and what the caller intends to do with it.
+         * @param {CheckFillFormDraftRequest} checkFillFormDraftRequest The revision of the form to open and what the caller intends to do with it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for checkFillFormDraft operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-fill-form-draft/
          */
-        async checkFillFormDraft(fileId: number | string, checkFillFormDraft: CheckFillFormDraft, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.checkFillFormDraft(fileId, checkFillFormDraft, options);
+        async checkFillFormDraft(fileId: number | string, checkFillFormDraftRequest: CheckFillFormDraftRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkFillFormDraft(fileId, checkFillFormDraftRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.checkFillFormDraft']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3367,14 +3367,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
          * @summary Copy a file
          * @param {number | string} fileId The file to copy.
-         * @param {CopyAsJsonElement} copyAsJsonElement The title, the destination and the conversion options of the copy.
+         * @param {CopyAsRequest} copyAsRequest The title, the destination and the conversion options of the copy.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for copyFileAs operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/copy-file-as/
          */
-        async copyFileAs(fileId: number | string, copyAsJsonElement: CopyAsJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.copyFileAs(fileId, copyAsJsonElement, options);
+        async copyFileAs(fileId: number | string, copyAsRequest: CopyAsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.copyFileAs(fileId, copyAsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.copyFileAs']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3389,7 +3389,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for createEditSession operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/
          */
-        async createEditSession(fileId: number | string, fileSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>> {
+        async createEditSession(fileId: number | string, fileSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.createEditSession(fileId, fileSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createEditSession']?.[localVarOperationServerIndex]?.url;
@@ -3399,14 +3399,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Creates a file in the folder named in the route and answers with the stored file. The extension in the title  decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to the  portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown extension  and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the title  verbatim and skips that rewriting. The content comes from one of three sources, tried in this order: `formId`  copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read - a  number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The caller needs the right  to create files in the folder, and the room roots, Archive and the template sections are refused even to an  admin. The call is mutating and not idempotent. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/file`.
          * @summary Create a file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateFileJsonElement} createFileJsonElement The title of the new file and the source of its content.
+         * @param {CreateFileRequest} createFileRequest The title of the new file and the source of its content.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file/
          */
-        async createFile(folderId: number | string, createFileJsonElement: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createFile(folderId, createFileJsonElement, options);
+        async createFile(folderId: number | string, createFileRequest: CreateFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFile(folderId, createFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3414,14 +3414,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
         /**
          * Creates a file in the caller\'s own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
          * @summary Create a file in My documents
-         * @param {CreateFileJsonElement} [createFileJsonElement] 
+         * @param {CreateFileRequest} [createFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-in-my-documents/
          */
-        async createFileInMyDocuments(createFileJsonElement?: CreateFileJsonElement, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createFileInMyDocuments(createFileJsonElement, options);
+        async createFileInMyDocuments(createFileRequest?: CreateFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createFileInMyDocuments(createFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3446,14 +3446,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Creates an HTML file in the folder named in the route out of the markup passed as the content, and answers  with the stored file. The `.html` extension is added to the title unless the title already ends with it, and a  request carrying no content is rejected as an invalid request. `createNewIfExist` acts the other way round  than its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The caller needs the right to create files in the folder and is otherwise  refused with 403. The call is mutating. To create the file in the caller\'s own section use  `POST api/2.0/files/@my/html`.
          * @summary Create an HTML file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
+         * @param {CreateTextOrHtmlFileRequest} createTextOrHtmlFileRequest The title, the content and the collision behaviour of the new file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createHtmlFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file/
          */
-        async createHtmlFile(folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFile(folderId, createTextOrHtmlFile, options);
+        async createHtmlFile(folderId: number | string, createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFile(folderId, createTextOrHtmlFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createHtmlFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3461,14 +3461,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
         /**
          * Creates an HTML file in the caller\'s own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
          * @summary Create an HTML file in My documents
-         * @param {CreateTextOrHtmlFile} [createTextOrHtmlFile] 
+         * @param {CreateTextOrHtmlFileRequest} [createTextOrHtmlFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createHtmlFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-html-file-in-my-documents/
          */
-        async createHtmlFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileInMyDocuments(createTextOrHtmlFile, options);
+        async createHtmlFileInMyDocuments(createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createHtmlFileInMyDocuments(createTextOrHtmlFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createHtmlFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3477,14 +3477,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
          * @summary Create a text file
          * @param {number | string} folderId The folder the file is created in.
-         * @param {CreateTextOrHtmlFile} createTextOrHtmlFile The title, the content and the collision behaviour of the new file.
+         * @param {CreateTextOrHtmlFileRequest} createTextOrHtmlFileRequest The title, the content and the collision behaviour of the new file.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTextFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file/
          */
-        async createTextFile(folderId: number | string, createTextOrHtmlFile: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFile(folderId, createTextOrHtmlFile, options);
+        async createTextFile(folderId: number | string, createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFile(folderId, createTextOrHtmlFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createTextFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3492,14 +3492,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
         /**
          * Creates a text file in the caller\'s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
          * @summary Create a text file in My documents
-         * @param {CreateTextOrHtmlFile} [createTextOrHtmlFile] 
+         * @param {CreateTextOrHtmlFileRequest} [createTextOrHtmlFileRequest] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createTextFileInMyDocuments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-text-file-in-my-documents/
          */
-        async createTextFileInMyDocuments(createTextOrHtmlFile?: CreateTextOrHtmlFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFileInMyDocuments(createTextOrHtmlFile, options);
+        async createTextFileInMyDocuments(createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createTextFileInMyDocuments(createTextOrHtmlFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.createTextFileInMyDocuments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3523,15 +3523,15 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Queues the deletion of one file and answers with the caller\'s file operations, the one just created among  them. The file is not gone when the response arrives: poll `GET api/2.0/files/fileops` until the operation  reports `finished`, and read its `error` to learn whether the deletion succeeded. By default the file is moved  to Trash, from where it can be restored; `immediately=true` deletes it for good instead, and inside a room,  where there is no Trash, deletion is always final. `deleteAfter=true` postpones the deletion until the editing  session on the file has ended, so a file somebody is working on is not pulled away.  `returnSingleOperation=true` narrows the answer to this deletion instead of listing every active operation of  the caller. The caller needs the right to delete the file, which the room admin, a DocSpace admin acting as  room manager and a content creator acting on their own file have; editing access alone, read access, a guest  and a member without access to the room are all refused. The call is destructive. To delete several items at  once use `PUT api/2.0/files/fileops/delete`.
          * @summary Delete a file
          * @param {number | string} fileId The file to delete.
-         * @param {Delete} _delete When and how the file is deleted.
+         * @param {DeleteFileRequest} deleteFileRequest When and how the file is deleted.
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-file/
          */
-        async deleteFile(fileId: number | string, _delete: Delete, returnSingleOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFile(fileId, _delete, returnSingleOperation, options);
+        async deleteFile(fileId: number | string, deleteFileRequest: DeleteFileRequest, returnSingleOperation?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileOperationArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteFile(fileId, deleteFileRequest, returnSingleOperation, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.deleteFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3554,14 +3554,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
         /**
          * Takes the listed files off the personal template list of the calling account, leaving the files themselves  untouched: only the template mark is dropped. The body of this request is a bare JSON array of numeric file  ids rather than an object with a field, and a request that carries no array at all is rejected as an invalid  request. Every authenticated member type may manage their own list, a guest is refused, and read access to a  file is required for its mark to be dropped. The answer is `true` whenever the array was understood, which an  empty array, an id that does not exist and a file that was never a template all achieve, so it confirms  nothing about what was removed. Repeating the call is safe. Use `POST api/2.0/files/templates` to put a file  back on the list; that operation expects an object with a `fileIds` field, so the two bodies are not  interchangeable.
          * @summary Delete template files
-         * @param {Array<number>} [requestBody] The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
+         * @param {Array<number>} [deleteTemplateFilesRequestDto] The files to take off the template list, by id; this array is the whole request body. Only a file stored in  the portal itself can be a template, which is why an id here is always numeric.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteTemplates operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-templates/
          */
-        async deleteTemplates(requestBody?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTemplates(requestBody, options);
+        async deleteTemplates(deleteTemplateFilesRequestDto?: Array<number>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteTemplates(deleteTemplateFilesRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.deleteTemplates']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3795,7 +3795,7 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * REST API Reference for getProtectedFileUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
          */
-        async getProtectedFileUsers(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
+        async getProtectedFileUsers(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getProtectedFileUsers(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.getProtectedFileUsers']?.[localVarOperationServerIndex]?.url;
@@ -3850,14 +3850,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Locks a file so that nobody else can change it, or releases that lock, and answers with the file as it now  stands. With `lockFile=true` the lock is put on the file and everybody else who is editing it at that moment  is dropped out of the session, the caller excepted; the lock then blocks editing, renaming and deleting for  everybody but the account that set it and the room admins. With `lockFile=false` the lock is removed and a  note about the unlocking is appended to the current version comment, unless the file lives in a connected  third-party storage. Locking a file that is already locked, or unlocking one that is not, changes nothing and  still answers with the file, so the call is idempotent in effect while remaining a mutating one. The caller  needs the right to lock the file, which the room admin, a DocSpace admin acting as room manager and a member  with content-creator rights have; a member without access to the room and a guest are refused, and so is a  file in Trash. A lock set by somebody else can only be released by a room manager.
          * @summary Lock a file
          * @param {number | string} fileId The file to lock or unlock.
-         * @param {LockFileParameters} lockFileParameters The lock state to reach.
+         * @param {LockFileRequest} lockFileRequest The lock state to reach.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for lockFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/lock-file/
          */
-        async lockFile(fileId: number | string, lockFileParameters: LockFileParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.lockFile(fileId, lockFileParameters, options);
+        async lockFile(fileId: number | string, lockFileRequest: LockFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.lockFile(fileId, lockFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.lockFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3938,14 +3938,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Converts a file into a PDF, stores that PDF as a new file in the folder named in the body, and answers with  the file that was created. The source is left untouched, so the two files then live side by side. `title`  names the result without an extension - the `.pdf` extension is added to it - and an empty title reuses the  name of the source with its extension replaced. The conversion is done by the document service while the  request waits, so the call takes as long as the document needs and answers with the finished file rather than  with a queue entry. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused; a source file or a destination folder that does not exist is  answered with 404. The call is mutating and not idempotent: each call adds another PDF, its title made unique  when one of that name is already there. The result is marked as new for the room, and for a form the portal  recognises it is stored as a PDF form. To convert in place instead use  `PUT api/2.0/files/file/{fileId}/checkconversion`.
          * @summary Save a file as PDF
          * @param {number | string} id The file to convert; it is left untouched.
-         * @param {SaveAsPdf | ThirdPartySaveAsPdf} saveAsPdf The destination folder and the name of the PDF.
+         * @param {SaveAsPdfRequest | ThirdPartySaveAsPdfRequest} saveAsPdfRequest The destination folder and the name of the PDF.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveFileAsPdf operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-file-as-pdf/
          */
-        async saveFileAsPdf(id: number | string, saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveFileAsPdf(id, saveAsPdf, options);
+        async saveFileAsPdf(id: number | string, saveAsPdfRequest: SaveAsPdfRequest | ThirdPartySaveAsPdfRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveFileAsPdf(id, saveAsPdfRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.saveFileAsPdf']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -3970,14 +3970,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Turns the Custom Filter editing mode of a spreadsheet on or off and answers with the file as it now stands. In  that mode the sorting and filtering one person applies to the sheet is visible to that person alone, so that  several people can work on the same data without moving the rows under each other; with the mode off,  filtering is shared again, as everywhere else. Turning it on also drops everybody else out of the running  editing session, the caller excepted, because the mode has to be established before the sheet is opened. Only  formats that support the mode are accepted; anything else is rejected as an invalid request. The caller needs  the right to use the mode in the room, which the room admin and a DocSpace admin acting as room manager have;  read-only access, a member without access to the room and an anonymous caller are refused. Once the mode has  been switched on by one person, only that person, a room manager or a DocSpace admin can switch it off again.  The call is mutating and, called twice with the same value, changes nothing the second time.
          * @summary Set the Custom Filter editing mode
          * @param {number | string} fileId The spreadsheet whose Custom Filter mode is switched.
-         * @param {CustomFilterParameters} customFilterParameters The Custom Filter state to reach.
+         * @param {CustomFilterRequest} customFilterRequest The Custom Filter state to reach.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setCustomFilterTag operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-custom-filter-tag/
          */
-        async setCustomFilterTag(fileId: number | string, customFilterParameters: CustomFilterParameters, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setCustomFilterTag(fileId, customFilterParameters, options);
+        async setCustomFilterTag(fileId: number | string, customFilterRequest: CustomFilterRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setCustomFilterTag(fileId, customFilterRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.setCustomFilterTag']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4049,14 +4049,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Opens an editing session on the file and answers with the document key that identifies it, the value an editor  client passes to the document service in order to join the co-editing session for that exact revision. The  file is marked as being edited for as long as the session lasts, which keeps it from being deleted or moved.  With `editingAlone=false` the portal builds the editor configuration, requires write mode plus at least one of  the edit, review, comment, form-filling or filter permissions, and asks the document service to start tracking  the document. With `editingAlone=true` the caller claims the file for itself, and the call is refused with 403  when anybody is already editing it. The caller needs edit access: a member with read access, a guest and an  anonymous caller whose external link does not grant editing are all refused. The call is mutating and not  idempotent. Keep the session alive with `GET api/2.0/files/file/{fileId}/trackeditfile`, and end it by calling  that operation with `isFinish=true`.
          * @summary Open an editing session
          * @param {number | string} fileId The file to open the editing session on. The caller needs edit access to it.
-         * @param {StartEdit} startEdit The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
+         * @param {StartEditRequest} startEditRequest The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startEditFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-edit-file/
          */
-        async startEditFile(fileId: number | string, startEdit: StartEdit, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startEditFile(fileId, startEdit, options);
+        async startEditFile(fileId: number | string, startEditRequest: StartEditRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startEditFile(fileId, startEditRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.startEditFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4114,14 +4114,14 @@ export const FilesApiFp = function(configuration?: Configuration) {
          * Renames a file, restores one of its versions, or both at once, and answers with the file as it now stands. A  non-empty `title` renames the file, keeping the stored extension whatever the new title says, so a rename  cannot change the format; an empty or missing title leaves the name alone. A `lastVersion` above 0 restores  that version the way `POST api/2.0/files/file/{fileId}/restoreversion` does, storing its content again on top  of the history, while 0 or less leaves the versions untouched and answers with the file as it is - which makes  this operation a read of the file when both fields are left out. The caller needs edit access, and renaming  somebody else\'s file additionally needs room-manager rights: a member or room admin with plain editing access,  read-only access, a guest and a DocSpace admin who is not a member of the room are all refused with 403, while  a content creator may rename a file of their own. The call is mutating. Renaming marks the file as new for  everybody else who can read it.
          * @summary Update a file
          * @param {number | string} fileId The file to update.
-         * @param {UpdateFile} updateFile The new title and the version to restore.
+         * @param {UpdateFileRequest} updateFileRequest The new title and the version to restore.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateFile operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-file/
          */
-        async updateFile(fileId: number | string, updateFile: UpdateFile, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFile(fileId, updateFile, options);
+        async updateFile(fileId: number | string, updateFileRequest: UpdateFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileWrapper | ThirdPartyFileWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateFile(fileId, updateFileRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FilesApi.updateFile']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -4170,7 +4170,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper> {
-            return localVarFp.changeVersionHistory(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(axios, basePath));
+            return localVarFp.changeVersionHistory(requestParameters.fileId, requestParameters.changeHistoryRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Resolves the editor address the caller must open to fill out the given PDF form, and provisions the personal  draft that filling needs. The form has to live in a form-filling room and filling has to be started for it  with `PUT api/2.0/files/file/{fileId}/manageformfilling`; a caller who may edit the form, a form whose filling  has not started, and a request naming `view` or `embedded` as the action are all sent straight to the form  itself. Read access to the form is enough to get an address, fill-forms access is what puts the caller into  the filling flow, and a holder of an external link may call it without signing in, while a caller with neither  a session nor a link key is rejected. In the filling case the call is not read-only: it copies the form into  the room\'s in-progress folder under the caller\'s name, clears the new-item badge, closes the editing session  of the original, and answers with the address of that copy. A repeated call reuses that copy, and a call  naming an existing draft adds a discard notice when that draft is no longer valid. The answer is one URL  string that may carry a `#message/...` fragment the editor renders as a notice. For the full editor  configuration use `GET api/2.0/files/file/{fileId}/openedit`. A form the caller cannot open is refused with  403, and one that does not exist is answered as missing.
@@ -4182,7 +4182,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         checkFillFormDraft(requestParameters: FilesApiCheckFillFormDraftRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.checkFillFormDraft(requestParameters.fileId, requestParameters.checkFillFormDraft, options).then((request) => request(axios, basePath));
+            return localVarFp.checkFillFormDraft(requestParameters.fileId, requestParameters.checkFillFormDraftRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Copies one file into another folder under a new title, converting its content when the new title names a  different format, and answers with the copy that was created. The extension of `destTitle` decides what  happens: the same extension as the source copies the bytes as they are, a different one has the document  service convert them first, and `toForm=true` converts a document into a PDF form. `password` unlocks a source  file that is protected by one. `destFolderId` is read as a number for a folder inside the portal and as a  string for a folder in a connected third-party storage; anything else is answered with an empty body and  nothing is copied. The caller needs read access to the source file and the right to create files in the  destination folder, and is otherwise refused with 403; a missing file or folder is answered with 404, and a  format that cannot be converted with 400. The call is mutating and not idempotent - each call adds another  copy. To copy many items at once, and without converting, use `PUT api/2.0/files/fileops/copy`.
@@ -4194,7 +4194,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         copyFileAs(requestParameters: FilesApiCopyFileAsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseWrapper> {
-            return localVarFp.copyFileAs(requestParameters.fileId, requestParameters.copyAsJsonElement, options).then((request) => request(axios, basePath));
+            return localVarFp.copyFileAs(requestParameters.fileId, requestParameters.copyAsRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Opens a chunked session that replaces the content of an existing file, which is how WebDAV clients save over a  document. The answer carries the session id the later calls quote, the address of the standalone chunk  handler, the expiry and the reserved size, and nothing is written until the parts reach  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the session is closed with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`, where `folderId` is the folder the file lives in.  Unlike an upload into a folder, the finished content does not become a new version: it overwrites the current  one, and the file loses its encrypted flag and its stored conversion result in the process. The caller must be  allowed to edit the file, as the owner, a room manager and a member invited with editing rights are; a reader  and a guest get 403. A file that does not exist is answered as missing, and a payload above the portal limit  for chunked uploads is refused before the session is created.
@@ -4205,7 +4205,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-edit-session/
          * @throws {RequiredError}
          */
-        createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper> {
+        createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper> {
             return localVarFp.createEditSession(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4218,7 +4218,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.createFile(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(axios, basePath));
+            return localVarFp.createFile(requestParameters.folderId, requestParameters.createFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a file in the caller\'s own My documents section and answers with the stored file. The extension in  the title decides the format: an extension of a known text, spreadsheet or presentation format is rewritten to  the portal\'s own DOCX, XLSX or PPTX, a title with no extension at all gets DOCX added, while an unknown  extension and the few formats the portal keeps as they are stay untouched; `enableExternalExt=true` stores the  title verbatim and skips that rewriting. The content comes from one of three sources, tried in this order:  `formId` copies a ready form out of the form gallery, `templateId` copies an existing file the caller can read  - a number for a file in the portal, a string for one in a connected third-party storage - and with neither of  them the portal\'s blank template for that format and the caller\'s language is used. The call is mutating and  not idempotent: each call adds another file. A guest has no My documents section of their own, so a guest  cannot use this operation at all, and a template the caller cannot read is refused. To create a file in a  room or any other folder use  `POST api/2.0/files/{folderId}/file`.
@@ -4230,7 +4230,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createFileInMyDocuments(requestParameters: FilesApiCreateFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
-            return localVarFp.createFileInMyDocuments(requestParameters.createFileJsonElement, options).then((request) => request(axios, basePath));
+            return localVarFp.createFileInMyDocuments(requestParameters.createFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
@@ -4254,7 +4254,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+            return localVarFp.createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates an HTML file in the caller\'s own My documents section out of the markup passed as the content, and  answers with the stored file. The `.html` extension is added to the title unless the title already ends with  it, and a request carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than  its name reads: with `true` the file that already carries this title is updated, the markup replacing its  content and a version appearing in its history, while with `false`, which is also the default, another file is  created and its title made unique, as in Notes (1).html. Updating needs the existing file to be editable by  the caller, so one that is locked, open in an editing session, encrypted or in Trash is left alone and a new  file appears beside it instead. The call is mutating: repeating it with `true` keeps a single file and grows  its history, repeating it with `false` fills the section with numbered copies. A guest has no My documents  section and is refused. To create the file in a room or another folder use  `POST api/2.0/files/{folderId}/html`.
@@ -4266,7 +4266,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createHtmlFileInMyDocuments(requestParameters: FilesApiCreateHtmlFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
-            return localVarFp.createHtmlFileInMyDocuments(requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+            return localVarFp.createHtmlFileInMyDocuments(requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a text file in the folder named in the route out of the text passed as the content, and answers with  the stored file. The extension follows the content rather than the request: `.txt` normally, but `.html` as  soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends up as an  HTML file; the extension is added to the title unless the title already ends with it. A request carrying no  content is rejected as an invalid request. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in Notes  (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a new file  appears beside it instead. The caller needs the right to create files in the folder. The call is mutating. To  create the file in the caller\'s own section use `POST api/2.0/files/@my/text`.
@@ -4278,7 +4278,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+            return localVarFp.createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a text file in the caller\'s own My documents section out of the text passed as the content, and  answers with the stored file. The extension follows the content rather than the request: `.txt` normally, but  `.html` as soon as the text contains something shaped like an HTML tag, so a snippet of markup sent here ends  up as an HTML file; the extension is added to the title unless the title already ends with it. A request  carrying no content is rejected as invalid. `createNewIfExist` acts the other way round than its name reads:  with `true` the file that already carries this title is updated and a version appears in its history, while  with `false`, which is also the default, another file is created and its title made unique, as in  Notes (1).txt. A file that is locked, open in an editing session, encrypted or in Trash is not updated - a  new file appears beside it instead. The call is mutating. A guest has no My documents section and is  refused. To create the file in a room or another folder use `POST api/2.0/files/{folderId}/text`.
@@ -4290,7 +4290,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         createTextFileInMyDocuments(requestParameters: FilesApiCreateTextFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper> {
-            return localVarFp.createTextFileInMyDocuments(requestParameters.createTextOrHtmlFile, options).then((request) => request(axios, basePath));
+            return localVarFp.createTextFileInMyDocuments(requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Asks the portal to build preview thumbnails for the listed files, and answers at once with the same file ids  that were sent. That answer echoes the request and does not confirm that anything was queued: the work is  handed over to a background worker, and a failure on the way there is written to the log rather than reported  to the caller. Only the file ids of the body are read - the folder ids are ignored, and a request naming no  files at all is answered with an empty list. Ids of files kept in a connected third-party storage are dropped  as well, because the worker handles portal storage only. Access to the individual files is not checked here;  the caller has to be signed in or to reach the portal through an external share link, and an anonymous caller  without such a link is refused. The call is asynchronous and safe to repeat. The thumbnails themselves are not  in the answer: read `thumbnailStatus` and `thumbnailUrl` of the file, for instance with  `GET api/2.0/files/file/{fileId}`, until the status reports the thumbnail as created.
@@ -4314,7 +4314,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileOperationArrayWrapper> {
-            return localVarFp.deleteFile(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(axios, basePath));
+            return localVarFp.deleteFile(requestParameters.fileId, requestParameters.deleteFileRequest, requestParameters.returnSingleOperation, options).then((request) => request(axios, basePath));
         },
         /**
          * Removes the listed entries from the Recent section of the calling account, the history of opened files that  `GET api/2.0/files/recent` returns. Nothing is deleted from storage and no other member\'s history is touched;  access to the entries is not checked at all, so a file the caller can no longer read can still be cleared from  their own history. Only numeric file ids are honoured, so a file on a connected third-party account cannot be  cleared this way, and folder ids are accepted but change nothing because the section lists files only. The  answer carries no body and reports nothing about how many entries were found: an empty request and an id that  was never in the section are accepted alike. Repeating the call is safe, but an entry returns the next time  the file is opened or `POST api/2.0/files/file/{fileId}/recent` is called for it. To hide the whole section  instead, call `PUT api/2.0/files/displayrecent`.
@@ -4338,7 +4338,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         deleteTemplates(requestParameters: FilesApiDeleteTemplatesRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.deleteTemplates(requestParameters.requestBody, options).then((request) => request(axios, basePath));
+            return localVarFp.deleteTemplates(requestParameters.deleteTemplateFilesRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Queues generation of the spreadsheet that collects every answer submitted for a PDF form in a form-filling  room, and answers at once with the queued task, the original form and a flag telling whether the report file  is being created now or an existing one refreshed in place. Either identifier works: the id of the original  form, or the id of an XLSX or CSV result file inside the room\'s Complete folder, from which the portal  resolves the form behind it. The form must already have been opened for filling with  `PUT api/2.0/files/file/{fileId}/startfilling` and must still live in the form-filling room that started it.  The caller must be allowed to update that form\'s report. The call is mutating and asynchronous: the  spreadsheet is not ready when the response arrives, so poll `GET api/2.0/files/file/{fileId}/xlsx` with the  original form\'s id until the task reports completion, then take the produced file from the task. Calling it  again while a run is still going answers with that run instead of starting a second one.
@@ -4517,7 +4517,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-protected-file-users/
          * @throws {RequiredError}
          */
-        getProtectedFileUsers(requestParameters: FilesApiGetProtectedFileUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
+        getProtectedFileUsers(requestParameters: FilesApiGetProtectedFileUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionArrayWrapper> {
             return localVarFp.getProtectedFileUsers(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -4566,7 +4566,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.lockFile(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(axios, basePath));
+            return localVarFp.lockFile(requestParameters.fileId, requestParameters.lockFileRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read  with `GET api/2.0/files/file/{fileId}/formroles`.
@@ -4626,7 +4626,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdf, options).then((request) => request(axios, basePath));
+            return localVarFp.saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdfRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Assigns the roles of a PDF form to the people who are to fill them in, and starts the filling: the form is  marked as being filled out, the account that called is recorded as the one who started it, everybody named in  a role is notified, and the form becomes visible to the members whose room rights are limited to filling  forms. Each role carries its name, the account that takes it and the sequence number that decides the turn, so  the same sequence means the roles may be filled in parallel and different ones make a queue. Sending an empty  role list resets the filling instead, dropping the assignment altogether. The whole set is replaced on every  call, so the call is idempotent for a given set of roles but not additive. The file has to be a PDF form lying  in a room; the caller needs the right to start the filling of that form, which the room admin and a member  with content-creator rights have, and is otherwise refused with 403. Read back what was stored with  `GET api/2.0/files/file/{fileId}/formroles`.
@@ -4650,7 +4650,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(axios, basePath));
+            return localVarFp.setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
@@ -4710,7 +4710,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         startEditFile(requestParameters: FilesApiStartEditFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.startEditFile(requestParameters.fileId, requestParameters.startEdit, options).then((request) => request(axios, basePath));
+            return localVarFp.startEditFile(requestParameters.fileId, requestParameters.startEditRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
@@ -4758,7 +4758,7 @@ export const FilesApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper> {
-            return localVarFp.updateFile(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(axios, basePath));
+            return localVarFp.updateFile(requestParameters.fileId, requestParameters.updateFileRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4806,10 +4806,10 @@ export interface FilesApiChangeVersionHistoryRequest {
 
     /**
      * The change to make to the revision group.
-     * @type {ChangeHistory}
+     * @type {ChangeHistoryRequest}
      * @memberof FilesApiChangeVersionHistory
      */
-    readonly changeHistory: ChangeHistory
+    readonly changeHistoryRequest: ChangeHistoryRequest
 }
 
 /**
@@ -4827,10 +4827,10 @@ export interface FilesApiCheckFillFormDraftRequest {
 
     /**
      * The revision of the form to open and what the caller intends to do with it.
-     * @type {CheckFillFormDraft}
+     * @type {CheckFillFormDraftRequest}
      * @memberof FilesApiCheckFillFormDraft
      */
-    readonly checkFillFormDraft: CheckFillFormDraft
+    readonly checkFillFormDraftRequest: CheckFillFormDraftRequest
 }
 
 /**
@@ -4848,10 +4848,10 @@ export interface FilesApiCopyFileAsRequest {
 
     /**
      * The title, the destination and the conversion options of the copy.
-     * @type {CopyAsJsonElement}
+     * @type {CopyAsRequest}
      * @memberof FilesApiCopyFileAs
      */
-    readonly copyAsJsonElement: CopyAsJsonElement
+    readonly copyAsRequest: CopyAsRequest
 }
 
 /**
@@ -4890,10 +4890,10 @@ export interface FilesApiCreateFileRequest {
 
     /**
      * The title of the new file and the source of its content.
-     * @type {CreateFileJsonElement}
+     * @type {CreateFileRequest}
      * @memberof FilesApiCreateFile
      */
-    readonly createFileJsonElement: CreateFileJsonElement
+    readonly createFileRequest: CreateFileRequest
 }
 
 /**
@@ -4904,10 +4904,10 @@ export interface FilesApiCreateFileRequest {
 export interface FilesApiCreateFileInMyDocumentsRequest {
     /**
      * 
-     * @type {CreateFileJsonElement}
+     * @type {CreateFileRequest}
      * @memberof FilesApiCreateFileInMyDocuments
      */
-    readonly createFileJsonElement?: CreateFileJsonElement
+    readonly createFileRequest?: CreateFileRequest
 }
 
 /**
@@ -4946,10 +4946,10 @@ export interface FilesApiCreateHtmlFileRequest {
 
     /**
      * The title, the content and the collision behaviour of the new file.
-     * @type {CreateTextOrHtmlFile}
+     * @type {CreateTextOrHtmlFileRequest}
      * @memberof FilesApiCreateHtmlFile
      */
-    readonly createTextOrHtmlFile: CreateTextOrHtmlFile
+    readonly createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest
 }
 
 /**
@@ -4960,10 +4960,10 @@ export interface FilesApiCreateHtmlFileRequest {
 export interface FilesApiCreateHtmlFileInMyDocumentsRequest {
     /**
      * 
-     * @type {CreateTextOrHtmlFile}
+     * @type {CreateTextOrHtmlFileRequest}
      * @memberof FilesApiCreateHtmlFileInMyDocuments
      */
-    readonly createTextOrHtmlFile?: CreateTextOrHtmlFile
+    readonly createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest
 }
 
 /**
@@ -4981,10 +4981,10 @@ export interface FilesApiCreateTextFileRequest {
 
     /**
      * The title, the content and the collision behaviour of the new file.
-     * @type {CreateTextOrHtmlFile}
+     * @type {CreateTextOrHtmlFileRequest}
      * @memberof FilesApiCreateTextFile
      */
-    readonly createTextOrHtmlFile: CreateTextOrHtmlFile
+    readonly createTextOrHtmlFileRequest: CreateTextOrHtmlFileRequest
 }
 
 /**
@@ -4995,10 +4995,10 @@ export interface FilesApiCreateTextFileRequest {
 export interface FilesApiCreateTextFileInMyDocumentsRequest {
     /**
      * 
-     * @type {CreateTextOrHtmlFile}
+     * @type {CreateTextOrHtmlFileRequest}
      * @memberof FilesApiCreateTextFileInMyDocuments
      */
-    readonly createTextOrHtmlFile?: CreateTextOrHtmlFile
+    readonly createTextOrHtmlFileRequest?: CreateTextOrHtmlFileRequest
 }
 
 /**
@@ -5030,10 +5030,10 @@ export interface FilesApiDeleteFileRequest {
 
     /**
      * When and how the file is deleted.
-     * @type {Delete}
+     * @type {DeleteFileRequest}
      * @memberof FilesApiDeleteFile
      */
-    readonly _delete: Delete
+    readonly deleteFileRequest: DeleteFileRequest
 
     /**
      * Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
@@ -5068,7 +5068,7 @@ export interface FilesApiDeleteTemplatesRequest {
      * @type {Array<number>}
      * @memberof FilesApiDeleteTemplates
      */
-    readonly requestBody?: Array<number>
+    readonly deleteTemplateFilesRequestDto?: Array<number>
 }
 
 /**
@@ -5408,10 +5408,10 @@ export interface FilesApiLockFileRequest {
 
     /**
      * The lock state to reach.
-     * @type {LockFileParameters}
+     * @type {LockFileRequest}
      * @memberof FilesApiLockFile
      */
-    readonly lockFileParameters: LockFileParameters
+    readonly lockFileRequest: LockFileRequest
 }
 
 /**
@@ -5569,10 +5569,10 @@ export interface FilesApiSaveFileAsPdfRequest {
 
     /**
      * The destination folder and the name of the PDF.
-     * @type {SaveAsPdf | ThirdPartySaveAsPdf}
+     * @type {SaveAsPdfRequest | ThirdPartySaveAsPdfRequest}
      * @memberof FilesApiSaveFileAsPdf
      */
-    readonly saveAsPdf: SaveAsPdf | ThirdPartySaveAsPdf
+    readonly saveAsPdfRequest: SaveAsPdfRequest | ThirdPartySaveAsPdfRequest
 }
 
 /**
@@ -5611,10 +5611,10 @@ export interface FilesApiSetCustomFilterTagRequest {
 
     /**
      * The Custom Filter state to reach.
-     * @type {CustomFilterParameters}
+     * @type {CustomFilterRequest}
      * @memberof FilesApiSetCustomFilterTag
      */
-    readonly customFilterParameters: CustomFilterParameters
+    readonly customFilterRequest: CustomFilterRequest
 }
 
 /**
@@ -5709,10 +5709,10 @@ export interface FilesApiStartEditFileRequest {
 
     /**
      * The session options. The body is required even when it only carries the default, so send an empty object to  open an ordinary co-editing session.
-     * @type {StartEdit}
+     * @type {StartEditRequest}
      * @memberof FilesApiStartEditFile
      */
-    readonly startEdit: StartEdit
+    readonly startEditRequest: StartEditRequest
 }
 
 /**
@@ -5800,10 +5800,10 @@ export interface FilesApiUpdateFileRequest {
 
     /**
      * The new title and the version to restore.
-     * @type {UpdateFile}
+     * @type {UpdateFileRequest}
      * @memberof FilesApiUpdateFile
      */
-    readonly updateFile: UpdateFile
+    readonly updateFileRequest: UpdateFileRequest
 }
 
 /**
@@ -5868,7 +5868,7 @@ export class FilesApi extends BaseAPI {
     public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileArrayWrapper>;
     public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileArrayWrapper | ThirdPartyFileArrayWrapper>;
     public changeVersionHistory(requestParameters: FilesApiChangeVersionHistoryRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).changeVersionHistory(requestParameters.fileId, requestParameters.changeHistory, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).changeVersionHistory(requestParameters.fileId, requestParameters.changeHistoryRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5880,7 +5880,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public checkFillFormDraft(requestParameters: FilesApiCheckFillFormDraftRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).checkFillFormDraft(requestParameters.fileId, requestParameters.checkFillFormDraft, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).checkFillFormDraft(requestParameters.fileId, requestParameters.checkFillFormDraftRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5892,7 +5892,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public copyFileAs(requestParameters: FilesApiCopyFileAsRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).copyFileAs(requestParameters.fileId, requestParameters.copyAsJsonElement, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).copyFileAs(requestParameters.fileId, requestParameters.copyAsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5903,7 +5903,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper>;
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: number }, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper>;
     /**
      * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Create the editing session (third-party storage)
@@ -5912,8 +5912,8 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
-    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResponseWrapperWrapper | ThirdPartyChunkedUploadSessionResponseWrapperWrapper>;
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyChunkedUploadSessionResultWrapper>;
+    public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ChunkedUploadSessionResultWrapper | ThirdPartyChunkedUploadSessionResultWrapper>;
     public createEditSession(requestParameters: FilesApiCreateEditSessionRequest, options?: RawAxiosRequestConfig) {
         return FilesApiFp(this.configuration).createEditSession(requestParameters.fileId, requestParameters.fileSize, options).then((request) => request(this.axios, this.basePath));
     }
@@ -5938,7 +5938,7 @@ export class FilesApi extends BaseAPI {
     public createFile(requestParameters: FilesApiCreateFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public createFile(requestParameters: FilesApiCreateFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createFile(requestParameters.folderId, requestParameters.createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createFile(requestParameters.folderId, requestParameters.createFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5950,7 +5950,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public createFileInMyDocuments(requestParameters: FilesApiCreateFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createFileInMyDocuments(requestParameters.createFileJsonElement, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createFileInMyDocuments(requestParameters.createFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5985,7 +5985,7 @@ export class FilesApi extends BaseAPI {
     public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public createHtmlFile(requestParameters: FilesApiCreateHtmlFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createHtmlFile(requestParameters.folderId, requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5997,7 +5997,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public createHtmlFileInMyDocuments(requestParameters: FilesApiCreateHtmlFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createHtmlFileInMyDocuments(requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createHtmlFileInMyDocuments(requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6020,7 +6020,7 @@ export class FilesApi extends BaseAPI {
     public createTextFile(requestParameters: FilesApiCreateTextFileRequest & { folderId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public createTextFile(requestParameters: FilesApiCreateTextFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createTextFile(requestParameters.folderId, requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6032,7 +6032,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public createTextFileInMyDocuments(requestParameters: FilesApiCreateTextFileInMyDocumentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).createTextFileInMyDocuments(requestParameters.createTextOrHtmlFile, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).createTextFileInMyDocuments(requestParameters.createTextOrHtmlFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6056,7 +6056,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public deleteFile(requestParameters: FilesApiDeleteFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).deleteFile(requestParameters.fileId, requestParameters._delete, requestParameters.returnSingleOperation, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).deleteFile(requestParameters.fileId, requestParameters.deleteFileRequest, requestParameters.returnSingleOperation, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6080,7 +6080,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public deleteTemplates(requestParameters: FilesApiDeleteTemplatesRequest = {}, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).deleteTemplates(requestParameters.requestBody, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).deleteTemplates(requestParameters.deleteTemplateFilesRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6341,7 +6341,7 @@ export class FilesApi extends BaseAPI {
     public lockFile(requestParameters: FilesApiLockFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public lockFile(requestParameters: FilesApiLockFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).lockFile(requestParameters.fileId, requestParameters.lockFileParameters, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).lockFile(requestParameters.fileId, requestParameters.lockFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6422,7 +6422,7 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: number; saveAsPdf: SaveAsPdf }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: number; saveAsPdfRequest: SaveAsPdfRequest }, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper>;
     /**
      * The same operation for an entry in a connected third-party storage: the identifier is a string such as `sbox-42`, and the answer carries string identifiers as well.
      * @summary Save a file as PDF (third-party storage)
@@ -6431,10 +6431,10 @@ export class FilesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof FilesApi
      */
-    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: string; saveAsPdf: ThirdPartySaveAsPdf }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
+    public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest & { id: string; saveAsPdfRequest: ThirdPartySaveAsPdfRequest }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public saveFileAsPdf(requestParameters: FilesApiSaveFileAsPdfRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdf, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).saveFileAsPdf(requestParameters.id, requestParameters.saveAsPdfRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6469,7 +6469,7 @@ export class FilesApi extends BaseAPI {
     public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public setCustomFilterTag(requestParameters: FilesApiSetCustomFilterTagRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterParameters, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).setCustomFilterTag(requestParameters.fileId, requestParameters.customFilterRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6540,7 +6540,7 @@ export class FilesApi extends BaseAPI {
      * @memberof FilesApi
      */
     public startEditFile(requestParameters: FilesApiStartEditFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).startEditFile(requestParameters.fileId, requestParameters.startEdit, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).startEditFile(requestParameters.fileId, requestParameters.startEditRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6610,7 +6610,7 @@ export class FilesApi extends BaseAPI {
     public updateFile(requestParameters: FilesApiUpdateFileRequest & { fileId: string }, options?: RawAxiosRequestConfig): AxiosPromise<ThirdPartyFileWrapper>;
     public updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileWrapper | ThirdPartyFileWrapper>;
     public updateFile(requestParameters: FilesApiUpdateFileRequest, options?: RawAxiosRequestConfig) {
-        return FilesApiFp(this.configuration).updateFile(requestParameters.fileId, requestParameters.updateFile, options).then((request) => request(this.axios, this.basePath));
+        return FilesApiFp(this.configuration).updateFile(requestParameters.fileId, requestParameters.updateFileRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

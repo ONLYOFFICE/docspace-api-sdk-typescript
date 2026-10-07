@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AIConfig } from './aiconfig';
+import type { AiConfigDto } from './ai-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AnonymousConfigDto } from './anonymous-config-dto';
@@ -29,22 +29,22 @@ import type { AnonymousConfigDto } from './anonymous-config-dto';
 import type { CustomerConfigDto } from './customer-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { FeedbackConfig } from './feedback-config';
+import type { FeedbackConfigDto } from './feedback-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GobackConfig } from './goback-config';
+import type { GobackConfigDto } from './goback-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { LogoConfigDto } from './logo-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReviewConfig } from './review-config';
+import type { ReviewConfigDto } from './review-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { StartFillingForm } from './start-filling-form';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { SubmitForm } from './submit-form';
+import type { SubmitFormDto } from './submit-form-dto';
 
 /**
  * How the editor interface is dressed: branding, the buttons that lead back into the portal, and the behaviour of  review, mentions and form submission.
@@ -65,7 +65,7 @@ export interface CustomizationConfigDto {
     /**
      * The support link the editor offers behind its feedback button.
      */
-    'feedback'?: FeedbackConfig;
+    'feedback'?: FeedbackConfigDto;
     /**
      * Whether the editors write intermediate revisions while the document stays open. It is empty when the portal  leaves the decision to the editors themselves.
      */
@@ -73,11 +73,11 @@ export interface CustomizationConfigDto {
     /**
      * Where the editor returns the user to when they leave the document. It is empty when there is nowhere to go  back to, as in an embedded opening.
      */
-    'goback'?: GobackConfig;
+    'goback'?: GobackConfigDto;
     /**
      * How tracked changes are displayed when the document opens; it depends on whether this session may write.
      */
-    'review'?: ReviewConfig;
+    'review'?: ReviewConfigDto;
     /**
      * The logo the editor shows, in the variants the current layout and file type need.
      */
@@ -89,7 +89,7 @@ export interface CustomizationConfigDto {
     /**
      * The submit button of a form: whether it is shown and what it says.
      */
-    'submitForm'?: SubmitForm;
+    'submitForm'?: SubmitFormDto;
     /**
      * The button that starts filling out the form. It is empty when this opening offers no such button.
      */
@@ -97,6 +97,6 @@ export interface CustomizationConfigDto {
     /**
      * The AI configuration settings.
      */
-    'ai'?: AIConfig;
+    'ai'?: AiConfigDto;
 }
 

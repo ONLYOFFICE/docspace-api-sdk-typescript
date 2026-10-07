@@ -26,11 +26,11 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { IPRestrictionArrayWrapper } from '../../models';
-// @ts-ignore
-import type { IPRestrictionsSettingsWrapper } from '../../models';
+import type { IpRestrictionArrayWrapper } from '../../models';
 // @ts-ignore
 import type { IpRestrictionsDto } from '../../models';
+// @ts-ignore
+import type { IpRestrictionsSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { IpRestrictionsWrapper } from '../../models';
 /**
@@ -275,7 +275,7 @@ export const IPRestrictionsApiFp = function(configuration?: Configuration) {
          * REST API Reference for getIpRestrictions operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ip-restrictions/
          */
-        async getIpRestrictions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IPRestrictionArrayWrapper>> {
+        async getIpRestrictions(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpRestrictionArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIpRestrictions(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['IPRestrictionsApi.getIpRestrictions']?.[localVarOperationServerIndex]?.url;
@@ -289,7 +289,7 @@ export const IPRestrictionsApiFp = function(configuration?: Configuration) {
          * REST API Reference for readIpRestrictionsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/read-ip-restrictions-settings/
          */
-        async readIpRestrictionsSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IPRestrictionsSettingsWrapper>> {
+        async readIpRestrictionsSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpRestrictionsSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.readIpRestrictionsSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['IPRestrictionsApi.readIpRestrictionsSettings']?.[localVarOperationServerIndex]?.url;
@@ -343,7 +343,7 @@ export const IPRestrictionsApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-ip-restrictions/
          * @throws {RequiredError}
          */
-        getIpRestrictions(options?: RawAxiosRequestConfig): AxiosPromise<IPRestrictionArrayWrapper> {
+        getIpRestrictions(options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionArrayWrapper> {
             return localVarFp.getIpRestrictions(options).then((request) => request(axios, basePath));
         },
         /**
@@ -354,7 +354,7 @@ export const IPRestrictionsApiFactory = function (configuration?: Configuration,
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/read-ip-restrictions-settings/
          * @throws {RequiredError}
          */
-        readIpRestrictionsSettings(options?: RawAxiosRequestConfig): AxiosPromise<IPRestrictionsSettingsWrapper> {
+        readIpRestrictionsSettings(options?: RawAxiosRequestConfig): AxiosPromise<IpRestrictionsSettingsWrapper> {
             return localVarFp.readIpRestrictionsSettings(options).then((request) => request(axios, basePath));
         },
         /**

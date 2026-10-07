@@ -1,12 +1,12 @@
-# IPRestrictionArrayWrapper
+# IpRestrictionArrayWrapper
 
-The successful API response containing the list of IPRestriction objects.
+The successful API response containing the list of IpRestrictionDto objects.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**Array&lt;IPRestriction&gt;**](IPRestriction.md) | The list of IPRestriction objects returned by the operation. | [optional] [default to undefined]
+**response** | [**Array&lt;IpRestrictionDto&gt;**](IpRestrictionDto.md) | The list of IpRestrictionDto objects returned by the operation. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]
@@ -15,9 +15,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { IPRestrictionArrayWrapper } from '@onlyoffice/docspace-api-sdk';
+import { IpRestrictionArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: IPRestrictionArrayWrapper = {
+const instance: IpRestrictionArrayWrapper = {
     response,
     count,
     links,

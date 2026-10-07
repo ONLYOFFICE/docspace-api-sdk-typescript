@@ -32,7 +32,7 @@ import type { MigrationApiInfo } from '../../models';
 // @ts-ignore
 import type { MigrationStatusWrapper } from '../../models';
 // @ts-ignore
-import type { STRINGArrayWrapper } from '../../models';
+import type { StringArrayWrapper } from '../../models';
 /**
  * MigrationApi - axios parameter creator
  * @export
@@ -558,7 +558,7 @@ export const MigrationApiFp = function(configuration?: Configuration) {
          * REST API Reference for listMigrations operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations/
          */
-        async listMigrations(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async listMigrations(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listMigrations(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['MigrationApi.listMigrations']?.[localVarOperationServerIndex]?.url;
@@ -668,7 +668,7 @@ export const MigrationApiFactory = function (configuration?: Configuration, base
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/list-migrations/
          * @throws {RequiredError}
          */
-        listMigrations(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        listMigrations(options?: RawAxiosRequestConfig): AxiosPromise<StringArrayWrapper> {
             return localVarFp.listMigrations(options).then((request) => request(axios, basePath));
         },
         /**

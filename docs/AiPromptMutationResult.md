@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **success** | **boolean** | True when the prompt was persisted. | [default to undefined]
 **prompt** | [**AiPrompt**](AiPrompt.md) | The persisted prompt. Present on success. | [optional] [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) | Why the prompt was rejected. Present on failure. | [optional] [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the prompt was rejected. Present on failure. | [optional] [default to undefined]
 
 ## Example
 

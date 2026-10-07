@@ -20,7 +20,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EditHistoryUrl } from './edit-history-url';
+import type { EditHistoryUrlDto } from './edit-history-url-dto';
 
 /**
  * Everything an editor needs in order to show what one revision of a file changed.
@@ -37,7 +37,7 @@ export interface EditHistoryDataDto {
     /**
      * The revision this one is compared against. It arrives together with `changesUrl`, and when the revision shown  is the first one the file ever had, it points at the blank template the file was created from instead of at an  earlier revision.
      */
-    'previous'?: EditHistoryUrl;
+    'previous'?: EditHistoryUrlDto;
     /**
      * The signature over the whole answer, as a JSON Web Token that the editing service verifies before it accepts  the addresses in it. Empty when the portal runs without a document-service secret.
      */

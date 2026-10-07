@@ -23,16 +23,16 @@
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PaymentCalculation } from './payment-calculation';
+import type { PaymentCalculationDto } from './payment-calculation-dto';
 
 /**
- * The successful API response containing the PaymentCalculation object.
+ * The successful API response containing the PaymentCalculationDto object.
  */
 export interface PaymentCalculationWrapper {
     /**
-     * The PaymentCalculation object returned by the operation.
+     * The PaymentCalculationDto object returned by the operation.
      */
-    'response'?: PaymentCalculation;
+    'response'?: PaymentCalculationDto;
     /**
      * The total number of items in the response
      */

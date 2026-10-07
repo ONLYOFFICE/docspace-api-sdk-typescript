@@ -24,7 +24,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AceShortWrapperArrayWrapper } from '../../models';
+import type { AceShortArrayWrapper } from '../../models';
 // @ts-ignore
 import type { BaseBatchRequestDto } from '../../models';
 // @ts-ignore
@@ -44,11 +44,11 @@ import type { FileEntryBaseArrayWrapper } from '../../models';
 // @ts-ignore
 import type { FileShareArrayWrapper } from '../../models';
 // @ts-ignore
-import type { GroupMemberSecurityRequestArrayWrapper } from '../../models';
+import type { GroupMemberSecurityArrayWrapper } from '../../models';
 // @ts-ignore
-import type { MentionMessageWrapper } from '../../models';
+import type { MentionArrayWrapper } from '../../models';
 // @ts-ignore
-import type { MentionWrapperArrayWrapper } from '../../models';
+import type { MentionMessageRequest } from '../../models';
 // @ts-ignore
 import type { SecurityInfoRequestDto } from '../../models';
 // @ts-ignore
@@ -755,13 +755,13 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
          * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
          * @summary Notify mentioned users
          * @param {number | string} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
+         * @param {MentionMessageRequest} [mentionMessageRequest] The notification to send.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendEditorNotify operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
          */
-        sendEditorNotify: async (fileId: number | string, mentionMessageWrapper?: MentionMessageWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        sendEditorNotify: async (fileId: number | string, mentionMessageRequest?: MentionMessageRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fileId' is not null or undefined
             assertParamExists('sendEditorNotify', 'fileId', fileId)
 
@@ -804,7 +804,7 @@ export const SharingApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(mentionMessageWrapper, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(mentionMessageRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1111,7 +1111,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
          * REST API Reference for getGroupsMembersWithFileSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
          */
-        async getGroupsMembersWithFileSecurity(fileId: number | string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+        async getGroupsMembersWithFileSecurity(fileId: number | string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFileSecurity(fileId, groupId, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFileSecurity']?.[localVarOperationServerIndex]?.url;
@@ -1130,7 +1130,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
          * REST API Reference for getGroupsMembersWithFolderSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
          */
-        async getGroupsMembersWithFolderSecurity(folderId: number | string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityRequestArrayWrapper>> {
+        async getGroupsMembersWithFolderSecurity(folderId: number | string, groupId: string, count?: number, startIndex?: number, filterValue?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GroupMemberSecurityArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getGroupsMembersWithFolderSecurity(folderId, groupId, count, startIndex, filterValue, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.getGroupsMembersWithFolderSecurity']?.[localVarOperationServerIndex]?.url;
@@ -1160,7 +1160,7 @@ export const SharingApiFp = function(configuration?: Configuration) {
          * REST API Reference for getSharedUsers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
          */
-        async getSharedUsers(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionWrapperArrayWrapper>> {
+        async getSharedUsers(fileId: number | string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MentionArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSharedUsers(fileId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.getSharedUsers']?.[localVarOperationServerIndex]?.url;
@@ -1185,14 +1185,14 @@ export const SharingApiFp = function(configuration?: Configuration) {
          * Emails the people named in `emails` that they were mentioned in a file, with a link that opens the file at the  place the mention sits when `actionLink` carries the anchor the editor produced. Only addresses that belong to  portal accounts are notified: an address that belongs to nobody is skipped, and the note is cut to its first  200 characters in the mail, while a `message` longer than the field allows is refused with 400. The answer is  usually empty: the access list of the file comes back when the file is encrypted, or when one of the addresses  belongs to nobody and the caller may share the file - that is then the cue to invite that person with  `PUT api/2.0/files/file/{id}/share`. The caller needs comment rights, which the creator of the file, the  manager of its room and a member invited to comment, review or edit have, while a guest or a member without  access is refused with 403; a file that does not exist answers with 404 and a file in the trash is refused.  The operation is rate-limited and answers 429 once the caller sends too many notifications. A delivery failure  is swallowed, so 200 does not prove that the mail left the portal.
          * @summary Notify mentioned users
          * @param {number | string} fileId The file the mention was made in. A file stored on the portal is numbered, while a file in a connected  third-party account is named by an opaque string.
-         * @param {MentionMessageWrapper} [mentionMessageWrapper] The notification to send.
+         * @param {MentionMessageRequest} [mentionMessageRequest] The notification to send.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for sendEditorNotify operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
          */
-        async sendEditorNotify(fileId: number | string, mentionMessageWrapper?: MentionMessageWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AceShortWrapperArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEditorNotify(fileId, mentionMessageWrapper, options);
+        async sendEditorNotify(fileId: number | string, mentionMessageRequest?: MentionMessageRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AceShortArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.sendEditorNotify(fileId, mentionMessageRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SharingApi.sendEditorNotify']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1335,7 +1335,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-file-security/
          * @throws {RequiredError}
          */
-        getGroupsMembersWithFileSecurity(requestParameters: SharingApiGetGroupsMembersWithFileSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+        getGroupsMembersWithFileSecurity(requestParameters: SharingApiGetGroupsMembersWithFileSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityArrayWrapper> {
             return localVarFp.getGroupsMembersWithFileSecurity(requestParameters.fileId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1347,7 +1347,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-groups-members-with-folder-security/
          * @throws {RequiredError}
          */
-        getGroupsMembersWithFolderSecurity(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityRequestArrayWrapper> {
+        getGroupsMembersWithFolderSecurity(requestParameters: SharingApiGetGroupsMembersWithFolderSecurityRequest, options?: RawAxiosRequestConfig): AxiosPromise<GroupMemberSecurityArrayWrapper> {
             return localVarFp.getGroupsMembersWithFolderSecurity(requestParameters.folderId, requestParameters.groupId, requestParameters.count, requestParameters.startIndex, requestParameters.filterValue, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1371,7 +1371,7 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-shared-users/
          * @throws {RequiredError}
          */
-        getSharedUsers(requestParameters: SharingApiGetSharedUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionWrapperArrayWrapper> {
+        getSharedUsers(requestParameters: SharingApiGetSharedUsersRequest, options?: RawAxiosRequestConfig): AxiosPromise<MentionArrayWrapper> {
             return localVarFp.getSharedUsers(requestParameters.fileId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1395,8 +1395,8 @@ export const SharingApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/send-editor-notify/
          * @throws {RequiredError}
          */
-        sendEditorNotify(requestParameters: SharingApiSendEditorNotifyRequest, options?: RawAxiosRequestConfig): AxiosPromise<AceShortWrapperArrayWrapper> {
-            return localVarFp.sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(axios, basePath));
+        sendEditorNotify(requestParameters: SharingApiSendEditorNotifyRequest, options?: RawAxiosRequestConfig): AxiosPromise<AceShortArrayWrapper> {
+            return localVarFp.sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Grants, changes or withdraws the rights of the listed accounts and groups on one file, and answers with the  rights those subjects hold afterwards. Every element of `share` names a subject and the level it is to get,  and the level that denies everything takes the access away instead; an empty `share` changes nothing and is  answered with an empty list. A subject the caller is not allowed to share with, such as a guest who belongs to  another member, is dropped without an error, so compare the answer with what was sent. With `notify` set, each  account named is emailed about the access it received and `sharingMessage` is put into that mail with its  markup stripped, while a message longer than the field allows is rejected as an invalid request. The caller  has to be allowed to change the sharing of the file, which its creator, the manager of the room it lies in and  a portal administrator acting as room manager are; anyone else, a guest and a member with read access  included, is refused. The call is mutating and safe to repeat. For several files and folders in one request  use `PUT api/2.0/files/share`.
@@ -1711,10 +1711,10 @@ export interface SharingApiSendEditorNotifyRequest {
 
     /**
      * The notification to send.
-     * @type {MentionMessageWrapper}
+     * @type {MentionMessageRequest}
      * @memberof SharingApiSendEditorNotify
      */
-    readonly mentionMessageWrapper?: MentionMessageWrapper
+    readonly mentionMessageRequest?: MentionMessageRequest
 }
 
 /**
@@ -1921,7 +1921,7 @@ export class SharingApi extends BaseAPI {
      * @memberof SharingApi
      */
     public sendEditorNotify(requestParameters: SharingApiSendEditorNotifyRequest, options?: RawAxiosRequestConfig) {
-        return SharingApiFp(this.configuration).sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageWrapper, options).then((request) => request(this.axios, this.basePath));
+        return SharingApiFp(this.configuration).sendEditorNotify(requestParameters.fileId, requestParameters.mentionMessageRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

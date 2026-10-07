@@ -42,23 +42,23 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
     
     return {
         /**
-         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userid}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userid}/photo`  returns.
+         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
          * @summary Create photo thumbnails
-         * @param {string} userid The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {ThumbnailsRequest} thumbnailsRequest The crop rectangle, and optionally the temporary image to crop.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          */
-        createMemberPhotoThumbnails: async (userid: string, thumbnailsRequest: ThumbnailsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('createMemberPhotoThumbnails', 'userid', userid)
+        createMemberPhotoThumbnails: async (userId: string, thumbnailsRequest: ThumbnailsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('createMemberPhotoThumbnails', 'userId', userId)
             // verify required parameter 'thumbnailsRequest' is not null or undefined
             assertParamExists('createMemberPhotoThumbnails', 'thumbnailsRequest', thumbnailsRequest)
 
-            const localVarPath = `/api/2.0/people/{userid}/photo/thumbnails`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/photo/thumbnails`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -104,20 +104,20 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userid}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
+         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
          * @summary Delete a user photo
-         * @param {string} userid The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+         * @param {string} userId The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member-photo/
          */
-        deleteMemberPhoto: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('deleteMemberPhoto', 'userid', userid)
+        deleteMemberPhoto: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('deleteMemberPhoto', 'userId', userId)
 
-            const localVarPath = `/api/2.0/people/{userid}/photo`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/photo`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -160,20 +160,20 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userid}/photo` for an uploaded file,  `PUT api/2.0/people/{userid}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userid}/photo` to drop it.
+         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
          * @summary Get a user photo
-         * @param {string} userid The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+         * @param {string} userId The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-member-photo/
          */
-        getMemberPhoto: async (userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getMemberPhoto', 'userid', userid)
+        getMemberPhoto: async (userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getMemberPhoto', 'userId', userId)
 
-            const localVarPath = `/api/2.0/people/{userid}/photo`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/photo`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -216,23 +216,23 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userid}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userid}/photo`.
+         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
          * @summary Update a user photo
-         * @param {string} userid The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The address of the image to use as the new avatar.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          */
-        updateMemberPhoto: async (userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('updateMemberPhoto', 'userid', userid)
+        updateMemberPhoto: async (userId: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('updateMemberPhoto', 'userId', userId)
             // verify required parameter 'updatePhotoMemberRequest' is not null or undefined
             assertParamExists('updateMemberPhoto', 'updatePhotoMemberRequest', updatePhotoMemberRequest)
 
-            const localVarPath = `/api/2.0/people/{userid}/photo`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/photo`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -278,24 +278,24 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userid}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
+         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
          * @summary Upload a user photo
-         * @param {string} userid The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {File} file The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.
-         * @param {boolean} [autosave] Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect.
+         * @param {boolean} [autosave] Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        uploadMemberPhoto: async (userid: string, file: File, autosave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('uploadMemberPhoto', 'userid', userid)
+        uploadMemberPhoto: async (userId: string, file: File, autosave?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('uploadMemberPhoto', 'userId', userId)
             // verify required parameter 'file' is not null or undefined
             assertParamExists('uploadMemberPhoto', 'file', file)
 
-            const localVarPath = `/api/2.0/people/{userid}/photo`
-                .replace(`{${"userid"}}`, encodeURIComponent(String(userid)));
+            const localVarPath = `/api/2.0/people/{userId}/photo`
+                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -329,11 +329,11 @@ export const PhotosApiAxiosParamCreator = function (configuration?: Configuratio
 
 
             if (file !== undefined) { 
-                localVarFormParams.append('File', file as any);
+                localVarFormParams.append('file', file as any);
             }
     
             if (autosave !== undefined) { 
-                localVarFormParams.append('Autosave', String(autosave) as any);
+                localVarFormParams.append('autosave', String(autosave) as any);
             }
     
     
@@ -360,80 +360,80 @@ export const PhotosApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PhotosApiAxiosParamCreator(configuration)
     return {
         /**
-         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userid}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userid}/photo`  returns.
+         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
          * @summary Create photo thumbnails
-         * @param {string} userid The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is cropped, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {ThumbnailsRequest} thumbnailsRequest The crop rectangle, and optionally the temporary image to crop.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for createMemberPhotoThumbnails operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-member-photo-thumbnails/
          */
-        async createMemberPhotoThumbnails(userid: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createMemberPhotoThumbnails(userid, thumbnailsRequest, options);
+        async createMemberPhotoThumbnails(userId: string, thumbnailsRequest: ThumbnailsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createMemberPhotoThumbnails(userId, thumbnailsRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.createMemberPhotoThumbnails']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userid}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
+         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
          * @summary Delete a user photo
-         * @param {string} userid The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+         * @param {string} userId The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-member-photo/
          */
-        async deleteMemberPhoto(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMemberPhoto(userid, options);
+        async deleteMemberPhoto(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteMemberPhoto(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.deleteMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userid}/photo` for an uploaded file,  `PUT api/2.0/people/{userid}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userid}/photo` to drop it.
+         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
          * @summary Get a user photo
-         * @param {string} userid The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
+         * @param {string} userId The profile whose avatar the operation addresses, taken from the route. Either the ID of the account or its  user name is accepted. Reading a photo works for any account the caller may see, while deleting one only  works for the calling account itself.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-member-photo/
          */
-        async getMemberPhoto(userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemberPhoto(userid, options);
+        async getMemberPhoto(userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemberPhoto(userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.getMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userid}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userid}/photo`.
+         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
          * @summary Update a user photo
-         * @param {string} userid The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is replaced, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {UpdatePhotoMemberRequest} updatePhotoMemberRequest The address of the image to use as the new avatar.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-member-photo/
          */
-        async updateMemberPhoto(userid: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMemberPhoto(userid, updatePhotoMemberRequest, options);
+        async updateMemberPhoto(userId: string, updatePhotoMemberRequest: UpdatePhotoMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ThumbnailsDataWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateMemberPhoto(userId, updatePhotoMemberRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.updateMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userid}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
+         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
          * @summary Upload a user photo
-         * @param {string} userid The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
+         * @param {string} userId The profile whose avatar is uploaded, taken from the route. Either the ID of the account or its user name is  accepted, and it has to be the calling account, because a profile photo can only be changed by its owner.
          * @param {File} file The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.
-         * @param {boolean} [autosave] Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect.
+         * @param {boolean} [autosave] Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for uploadMemberPhoto operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/upload-member-photo/
          */
-        async uploadMemberPhoto(userid: string, file: File, autosave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userid, file, autosave, options);
+        async uploadMemberPhoto(userId: string, file: File, autosave?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileUploadResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadMemberPhoto(userId, file, autosave, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PhotosApi.uploadMemberPhoto']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -449,7 +449,7 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
     const localVarFp = PhotosApiFp(configuration)
     return {
         /**
-         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userid}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userid}/photo`  returns.
+         * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
          * @summary Create photo thumbnails
          * @param {PhotosApiCreateMemberPhotoThumbnailsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -458,10 +458,10 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         createMemberPhotoThumbnails(requestParameters: PhotosApiCreateMemberPhotoThumbnailsRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.createMemberPhotoThumbnails(requestParameters.userid, requestParameters.thumbnailsRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.createMemberPhotoThumbnails(requestParameters.userId, requestParameters.thumbnailsRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userid}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
+         * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
          * @summary Delete a user photo
          * @param {PhotosApiDeleteMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -470,10 +470,10 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         deleteMemberPhoto(requestParameters: PhotosApiDeleteMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.deleteMemberPhoto(requestParameters.userid, options).then((request) => request(axios, basePath));
+            return localVarFp.deleteMemberPhoto(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userid}/photo` for an uploaded file,  `PUT api/2.0/people/{userid}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userid}/photo` to drop it.
+         * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
          * @summary Get a user photo
          * @param {PhotosApiGetMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -482,10 +482,10 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         getMemberPhoto(requestParameters: PhotosApiGetMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.getMemberPhoto(requestParameters.userid, options).then((request) => request(axios, basePath));
+            return localVarFp.getMemberPhoto(requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userid}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userid}/photo`.
+         * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
          * @summary Update a user photo
          * @param {PhotosApiUpdateMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -494,10 +494,10 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         updateMemberPhoto(requestParameters: PhotosApiUpdateMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<ThumbnailsDataWrapper> {
-            return localVarFp.updateMemberPhoto(requestParameters.userid, requestParameters.updatePhotoMemberRequest, options).then((request) => request(axios, basePath));
+            return localVarFp.updateMemberPhoto(requestParameters.userId, requestParameters.updatePhotoMemberRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userid}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
+         * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
          * @summary Upload a user photo
          * @param {PhotosApiUploadMemberPhotoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -506,7 +506,7 @@ export const PhotosApiFactory = function (configuration?: Configuration, basePat
          * @throws {RequiredError}
          */
         uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileUploadResultWrapper> {
-            return localVarFp.uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(axios, basePath));
+            return localVarFp.uploadMemberPhoto(requestParameters.userId, requestParameters.file, requestParameters.autosave, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -522,7 +522,7 @@ export interface PhotosApiCreateMemberPhotoThumbnailsRequest {
      * @type {string}
      * @memberof PhotosApiCreateMemberPhotoThumbnails
      */
-    readonly userid: string
+    readonly userId: string
 
     /**
      * The crop rectangle, and optionally the temporary image to crop.
@@ -543,7 +543,7 @@ export interface PhotosApiDeleteMemberPhotoRequest {
      * @type {string}
      * @memberof PhotosApiDeleteMemberPhoto
      */
-    readonly userid: string
+    readonly userId: string
 }
 
 /**
@@ -557,7 +557,7 @@ export interface PhotosApiGetMemberPhotoRequest {
      * @type {string}
      * @memberof PhotosApiGetMemberPhoto
      */
-    readonly userid: string
+    readonly userId: string
 }
 
 /**
@@ -571,7 +571,7 @@ export interface PhotosApiUpdateMemberPhotoRequest {
      * @type {string}
      * @memberof PhotosApiUpdateMemberPhoto
      */
-    readonly userid: string
+    readonly userId: string
 
     /**
      * The address of the image to use as the new avatar.
@@ -592,7 +592,7 @@ export interface PhotosApiUploadMemberPhotoRequest {
      * @type {string}
      * @memberof PhotosApiUploadMemberPhoto
      */
-    readonly userid: string
+    readonly userId: string
 
     /**
      * The image itself, sent as a multipart form field. It has to be a raster format the portal can read and stay  within the portal limit on image size; sending no file makes the operation answer with `success` false rather  than an error status.
@@ -602,7 +602,7 @@ export interface PhotosApiUploadMemberPhotoRequest {
     readonly file: File
 
     /**
-     * Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userid}/photo/thumbnails` to take effect.
+     * Set it to true to make the uploaded image the avatar right away. With the default false the image is only  stored as a temporary file whose name comes back in `data`, and it has to be passed to  `POST api/2.0/people/{userId}/photo/thumbnails` to take effect.
      * @type {boolean}
      * @memberof PhotosApiUploadMemberPhoto
      */
@@ -617,7 +617,7 @@ export interface PhotosApiUploadMemberPhotoRequest {
  */
 export class PhotosApi extends BaseAPI {
     /**
-     * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userid}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userid}/photo`  returns.
+     * Crops the avatar of a profile to the rectangle given in the request and rebuilds all of its thumbnail sizes,  which is the second step of changing an avatar by hand.  It works in two modes: with `tmpFile` it takes the temporary image  `POST api/2.0/people/{userId}/photo` produced with `autosave` off, makes the cropped result the main photo and  then discards the temporary file, and without `tmpFile` it re-crops the photo the profile already has.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The call replaces the stored photo, so the previous crop is lost, and it can be repeated with new coordinates  as often as needed.  Passing `width` and `height` as 0 together with `tmpFile` keeps the whole uploaded image instead of cropping  it.  The answer holds the URLs of every generated size, the same shape `GET api/2.0/people/{userId}/photo`  returns.
      * @summary Create photo thumbnails
      * @param {PeoplePhotosApiCreateMemberPhotoThumbnailsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -625,11 +625,11 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public createMemberPhotoThumbnails(requestParameters: PhotosApiCreateMemberPhotoThumbnailsRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(requestParameters.userid, requestParameters.thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).createMemberPhotoThumbnails(requestParameters.userId, requestParameters.thumbnailsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userid}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
+     * Removes the avatar of a profile, so that the profile falls back to the default placeholder image.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The removal is permanent and cannot be undone: the stored image and all of its sizes are deleted, and a new  avatar has to be uploaded through `POST api/2.0/people/{userId}/photo` to replace it.  The call is idempotent, so removing an avatar from a profile that has none succeeds as well, and it raises a  `UserUpdated` webhook.  The answer still holds the URLs of every size, now pointing at the default image.
      * @summary Delete a user photo
      * @param {PeoplePhotosApiDeleteMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -637,11 +637,11 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public deleteMemberPhoto(requestParameters: PhotosApiDeleteMemberPhotoRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).deleteMemberPhoto(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).deleteMemberPhoto(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userid}/photo` for an uploaded file,  `PUT api/2.0/people/{userid}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userid}/photo` to drop it.
+     * Returns the URLs of the avatar of a profile in every size the portal keeps: the original, the retina and the  maximum variants, and the big, medium and small thumbnails.  Unlike the operations that change an avatar, this one may be called for another account, as long as the  caller is allowed to see that account - a guest, for instance, only sees the accounts it is related to.  The call is read-only and always answers with a full set of URLs: a profile that has no avatar of its own  gets the URLs of the default placeholder image rather than an empty answer.  The URLs are portal paths meant to be requested directly and may be replaced when the avatar changes, so they  should not be stored for a long time.  To change the avatar use `POST api/2.0/people/{userId}/photo` for an uploaded file,  `PUT api/2.0/people/{userId}/photo` for one taken from a URL, and  `DELETE api/2.0/people/{userId}/photo` to drop it.
      * @summary Get a user photo
      * @param {PeoplePhotosApiGetMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -649,11 +649,11 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public getMemberPhoto(requestParameters: PhotosApiGetMemberPhotoRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).getMemberPhoto(requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).getMemberPhoto(requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userid}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userid}/photo`.
+     * Sets the avatar of a profile from an image the portal downloads itself from the URL given in `files`, which is  the way to reuse a picture that is already published somewhere.  A caller may only do this to their own profile - the ID in the route has to be the calling account, and an  administrator gets 403 for anybody else - and the account must be allowed to edit its own profile.  The URL has to be absolute or relative to the portal, and it has to use HTTPS unless the request itself came  over HTTP; an address the portal refuses to fetch, and a download that does not succeed, both answer 403.  Passing the URL the profile already uses is a no-op, and an empty `files` is rejected with 400, so use  `DELETE api/2.0/people/{userId}/photo` to remove an avatar rather than sending an empty value.  The downloaded image replaces the stored avatar and all of its sizes at once, raises a `UserUpdated` webhook,  and is subject to the portal limit on image size.  To send the bytes instead of a URL, upload the file through `POST api/2.0/people/{userId}/photo`.
      * @summary Update a user photo
      * @param {PeoplePhotosApiUpdateMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -661,11 +661,11 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public updateMemberPhoto(requestParameters: PhotosApiUpdateMemberPhotoRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).updateMemberPhoto(requestParameters.userid, requestParameters.updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).updateMemberPhoto(requestParameters.userId, requestParameters.updatePhotoMemberRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userid}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
+     * Uploads an image as multipart form data and either makes it the avatar of a profile straight away or keeps it  as a temporary file to be cropped afterwards.  With `autosave` set to true the image becomes the avatar immediately, all of its sizes are built and their  URLs come back in `data`, each with a `hash` query parameter that changes whenever the avatar does, so a  client can cache them safely.  With `autosave` left false the image is only stored as a temporary file and `data` holds its name, which has  to be passed as `tmpFile` to `POST api/2.0/people/{userId}/photo/thumbnails` to choose the crop; nothing  changes on the profile until that second call succeeds.  A caller may only do this to their own profile, the ID in the route has to be the calling account, and the  image has to be a format the portal can read and stay within the portal limit on image size.  This operation reports every problem in the body instead of as a status code: it answers 200 with `success`  set to false and a human-readable `message`, and it does so for a missing file, an unreadable format, an  oversized image and a rejected permission alike, so a client has to check `success` and must not rely on the  status alone.  A successful upload raises a `UserUpdated` webhook only in the `autosave` case.
      * @summary Upload a user photo
      * @param {PeoplePhotosApiUploadMemberPhotoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -673,7 +673,7 @@ export class PhotosApi extends BaseAPI {
      * @memberof PhotosApi
      */
     public uploadMemberPhoto(requestParameters: PhotosApiUploadMemberPhotoRequest, options?: RawAxiosRequestConfig) {
-        return PhotosApiFp(this.configuration).uploadMemberPhoto(requestParameters.userid, requestParameters.file, requestParameters.autosave, options).then((request) => request(this.axios, this.basePath));
+        return PhotosApiFp(this.configuration).uploadMemberPhoto(requestParameters.userId, requestParameters.file, requestParameters.autosave, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

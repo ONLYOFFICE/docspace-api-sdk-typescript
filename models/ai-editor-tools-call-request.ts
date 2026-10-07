@@ -27,7 +27,7 @@ export interface AiEditorToolsCallRequest {
     /**
      * Arguments for the tool, shaped by that tool\'s own input schema. Treated as empty when it is not an object.
      */
-    'arguments'?: { [key: string]: any | null; };
+    'arguments'?: { [key: string]: any; };
     /**
      * Room the call is scoped to. Left out for a portal-wide call.
      */

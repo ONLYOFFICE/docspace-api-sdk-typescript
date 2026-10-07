@@ -72,14 +72,14 @@ const { status, data } = await apiInstance.aiThreadsAppendUserMessage(
 |**200** | The stored message, with the ID storage assigned to it. |  -  |
 |**400** | The message is longer than the limit allows. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiThreadsClearMessages**
-> AiSuccessResponse aiThreadsClearMessages(body)
+> AiSuccessResponse aiThreadsClearMessages(aiThreadsClearMessagesRequest)
 
 Removes every message of a thread while keeping the thread, its title and its model binding, and bumps its last-edit date. The messages are gone for good. Unlike `delete` this does not verify that the thread exists, so clearing an unknown `threadId` reports success rather than 404. The answer only confirms the write.
 
@@ -89,7 +89,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the thread to empty, as a bare JSON string. | |
+| **aiThreadsClearMessagesRequest** | **string**| The ID of the thread to empty, as a bare JSON string. | |
 
 
 ### Return type
@@ -111,10 +111,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIThreadsApi(configuration);
 
-let body: string; //The ID of the thread to empty, as a bare JSON string.
+let aiThreadsClearMessagesRequest: string; //The ID of the thread to empty, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiThreadsClearMessages(
-    body
+    aiThreadsClearMessagesRequest
 );
 ```
 
@@ -130,7 +130,7 @@ const { status, data } = await apiInstance.aiThreadsClearMessages(
 |**200** | Confirms the request was accepted. It does not mean the thread existed. |  -  |
 |**400** | `threadId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -188,7 +188,7 @@ const { status, data } = await apiInstance.aiThreadsCreate(
 |-------------|-------------|------------------|
 |**200** | The created thread. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | The `entityId` names a room the caller cannot open, or no live AI profile is bound to it, so there is no model to run the thread against. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -196,7 +196,7 @@ const { status, data } = await apiInstance.aiThreadsCreate(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiThreadsDelete**
-> AiSuccessResponse aiThreadsDelete(body)
+> AiSuccessResponse aiThreadsDelete(aiThreadsDeleteRequest)
 
 Deletes a thread together with every message in it. The thread has to exist: unlike the other operations that take a `threadId`, this one checks first and answers 404 for an unknown or already-deleted thread rather than reporting success. The deletion is permanent and the messages cannot be recovered. To empty a thread but keep it, use `DELETE api/2.0/ai/threads/clear-messages`.
 
@@ -206,7 +206,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the thread to delete, as a bare JSON string. | |
+| **aiThreadsDeleteRequest** | **string**| The ID of the thread to delete, as a bare JSON string. | |
 
 
 ### Return type
@@ -228,10 +228,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIThreadsApi(configuration);
 
-let body: string; //The ID of the thread to delete, as a bare JSON string.
+let aiThreadsDeleteRequest: string; //The ID of the thread to delete, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiThreadsDelete(
-    body
+    aiThreadsDeleteRequest
 );
 ```
 
@@ -247,7 +247,7 @@ const { status, data } = await apiInstance.aiThreadsDelete(
 |**200** | Confirms the thread and its messages are gone. |  -  |
 |**400** | `threadId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | No thread has this ID. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -255,7 +255,7 @@ const { status, data } = await apiInstance.aiThreadsDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiThreadsDeleteMessage**
-> AiSuccessResponse aiThreadsDeleteMessage(body)
+> AiSuccessResponse aiThreadsDeleteMessage(aiThreadsDeleteMessageRequest)
 
 Deletes one message and leaves the rest of the thread untouched. `messageId` is required and may be sent either in the body or as a query parameter. An unknown ID is not reported: the call answers success without having deleted anything, so verify with `GET api/2.0/ai/threads/read-messages` when it matters. The deletion is permanent.
 
@@ -265,7 +265,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **body** | **string**| The ID of the message to delete, as a bare JSON string. | |
+| **aiThreadsDeleteMessageRequest** | **string**| The ID of the message to delete, as a bare JSON string. | |
 
 
 ### Return type
@@ -287,10 +287,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIThreadsApi(configuration);
 
-let body: string; //The ID of the message to delete, as a bare JSON string.
+let aiThreadsDeleteMessageRequest: string; //The ID of the message to delete, as a bare JSON string.
 
 const { status, data } = await apiInstance.aiThreadsDeleteMessage(
-    body
+    aiThreadsDeleteMessageRequest
 );
 ```
 
@@ -306,7 +306,7 @@ const { status, data } = await apiInstance.aiThreadsDeleteMessage(
 |**200** | Confirms the request was accepted, whether or not a message was deleted. |  -  |
 |**400** | `messageId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -364,7 +364,7 @@ const { status, data } = await apiInstance.aiThreadsGetById(
 |**200** | The thread, without its messages. |  -  |
 |**400** | `threadId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | No thread has this ID. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -422,7 +422,7 @@ const { status, data } = await apiInstance.aiThreadsGetMessageById(
 |**200** | The message, or an empty body when no message has that ID. |  -  |
 |**400** | `messageId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -487,7 +487,7 @@ const { status, data } = await apiInstance.aiThreadsList(
 |-------------|-------------|------------------|
 |**200** | The threads of the scope, most recently edited first. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -544,7 +544,7 @@ const { status, data } = await apiInstance.aiThreadsOpenOrCreate(
 |-------------|-------------|------------------|
 |**200** | The thread that was opened or created, with its prior messages. A created one carries the generated title. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**404** | The `entityId` names a room the caller cannot open, or no live AI profile is bound to it. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -611,7 +611,7 @@ const { status, data } = await apiInstance.aiThreadsReadMessages(
 |-------------|-------------|------------------|
 |**200** | The thread\'s messages, oldest first unless `direction` reversed them. An empty list also means the request carried no thread ID. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -669,7 +669,7 @@ const { status, data } = await apiInstance.aiThreadsRegenerateTitle(
 |**200** | The newly generated title, already stored on the thread. |  -  |
 |**400** | `threadId` is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -728,7 +728,7 @@ const { status, data } = await apiInstance.aiThreadsRename(
 |**200** | Confirms the new title was stored. |  -  |
 |**400** | `threadId` or the new title is missing. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -786,7 +786,7 @@ const { status, data } = await apiInstance.aiThreadsTouch(
 |-------------|-------------|------------------|
 |**200** | Confirms the thread\'s activity date moved forward. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
@@ -844,7 +844,7 @@ const { status, data } = await apiInstance.aiThreadsUpdateMessage(
 |-------------|-------------|------------------|
 |**200** | Confirms the replacement was stored. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
-|**403** | AI is disabled for this portal, or the caller is a guest. Relayed from the DocSpace AI service. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 

@@ -240,7 +240,7 @@ export const LicenseApiAxiosParamCreator = function (configuration?: Configurati
 
             if (files) {
                 files.forEach((element) => {
-                    localVarFormParams.append('Files', element as any);
+                    localVarFormParams.append('files', element as any);
                 })
             }
 

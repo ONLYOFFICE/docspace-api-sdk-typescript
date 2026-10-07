@@ -51,6 +51,8 @@ const { status, data } = await apiInstance.getLoginSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The brute-force protection settings of the portal: the tolerated attempts, the counting window and the block in seconds, and whether they match the shipped defaults |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**304** | The brute-force protection settings have not changed since the `Last-Modified` value sent back in `If-Modified-Since`; the body is empty |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -102,6 +104,7 @@ const { status, data } = await apiInstance.setDefaultLoginSettings();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The brute-force protection settings restored to the shipped defaults |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -161,10 +164,11 @@ const { status, data } = await apiInstance.updateLoginSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The brute-force protection settings as they were stored, with the flag that says whether they match the shipped defaults |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `attemptCount`, `checkPeriod` or `blockTime` is missing or outside 1-9999 |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

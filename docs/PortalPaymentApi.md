@@ -95,9 +95,9 @@ const { status, data } = await apiInstance.calculateWalletPayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The amount the purchase would cost, its currency and the quantity it was calculated for |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The quantity type is not `Add`, the quantity is not greater than zero, or the product is not a wallet service |  -  |
+|**400** | The request body cannot be read or has no `quantity`, `quantity` does not hold exactly one product, the quantity type is not `Add`, the quantity is not greater than zero, or the product is not a wallet service |  -  |
 |**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
-|**404** | This portal has no billing customer, or its wallet has no sub-account in the accounting currency |  -  |
+|**404** | This portal has no billing customer, or its wallet has no balance or no sub-account in the accounting currency |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -157,12 +157,12 @@ const { status, data } = await apiInstance.changeTenantWalletServiceState(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The whole set of wallet services switched on for the portal after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings or is not a DocSpace administrator, the portal has no billing service configured, or AI search was switched on while AI tools is off |  -  |
+|**400** | The request body cannot be read, including a `service` name that is not a wallet service |  -  |
+|**403** | The caller has no portal-settings right or is not a DocSpace administrator, the portal has no billing service configured, AI tools or AI search was switched on while AI is disabled for the portal, or AI search was switched on while AI tools is off |  -  |
 |**404** | This portal has no billing customer yet |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -355,7 +355,7 @@ const { status, data } = await apiInstance.createCustomerServiceUsageReport(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getAccountingServicePrices**
-> ServicePriceInfoArrayWrapper getAccountingServicePrices()
+> ServicePriceArrayWrapper getAccountingServicePrices()
 
 Returns the portal\'s automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
 
@@ -371,7 +371,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ServicePriceInfoArrayWrapper**
+**ServicePriceArrayWrapper**
 
 ### Authorization
 
@@ -407,11 +407,11 @@ const { status, data } = await apiInstance.getAccountingServicePrices(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The list of the service prices |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | No permissions to perform this action |  -  |
+|**400** | The `serviceName` is longer than 255 characters |  -  |
+|**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+|**500** | The accounting service is not configured, answers the price request with an error or cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -460,10 +460,11 @@ const { status, data } = await apiInstance.getActiveServices();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet services active on the portal, with their limits and usage where those are known |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The portal has an active Docs Connect subscription that the Docs Connect service does not know |  -  |
 |**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
+|**500** | The portal has an active Docs Connect subscription, and the Docs Connect service answers with an error or cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -513,9 +514,9 @@ const { status, data } = await apiInstance.getAiPrices();
 |-------------|-------------|------------------|
 |**200** | The prices of the chat, embedding and image models and of the web search providers, with the currency they are in |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller is not a DocSpace administrator, or the installation has no billing service or no AI gateway configured |  -  |
+|**500** | The AI gateway answers with an error or cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -574,11 +575,11 @@ const { status, data } = await apiInstance.getCheckoutSetupUrl(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The absolute URL of the payment method setup page, or an empty result when the portal already has a payment method |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | `backUrl` or `successUrl` is missing, does not start with `http://`, `https://` or `ftp://`, or is longer than 255 characters |  -  |
 |**403** | The caller is not a DocSpace administrator or, once a billing customer exists, not its payer; or the portal has no billing service configured |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1158,11 +1159,11 @@ const { status, data } = await apiInstance.getPaymentAccount(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The portal-relative address of the billing account page, or an empty result when the portal has no billing customer |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | `backUrl` does not start with `http://`, `https://` or `ftp://`, or is longer than 255 characters |  -  |
 |**403** | The caller is neither the payer nor the portal owner, or the portal has no billing service configured |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1211,7 +1212,7 @@ const { status, data } = await apiInstance.getPaymentCurrencies();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The default currency of the portal region first, followed by the currency of the current request when it differs |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1273,7 +1274,7 @@ const { status, data } = await apiInstance.getPaymentQuotas(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The visible quotas matching the filters, newest first, each with its price, features and limits |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1334,7 +1335,8 @@ const { status, data } = await apiInstance.getPaymentUrl(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The absolute URL of the checkout page to open, or an empty result when the portal already has a paid plan |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | `quantity` holds more than one product, a quantity that is not greater than zero, or a product that is not a monthly plan |  -  |
+|**400** | The request body cannot be read or has no `backUrl`, `successUrl` or `quantity`, `backUrl` or `successUrl` does not start with `http://`, `https://` or `ftp://` or is longer than 255 characters, or `quantity` does not hold exactly one product, holds a quantity that is not greater than zero, or a product that is not a monthly plan |  -  |
+|**402** | The portal already has more administrators, users, rooms or AI agents, or stores more data, than the plan in the requested quantity allows |  -  |
 |**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -1387,7 +1389,7 @@ const { status, data } = await apiInstance.getPortalPrices();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Product name to the price of one unit in the currency of the request, `0` where the product has no price in it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1457,7 +1459,7 @@ const { status, data } = await apiInstance.getQuotaPaymentInformation(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getRestrictedAiModels**
-> RestrictedModelsResponseWrapper getRestrictedAiModels()
+> RestrictedAiModelsWrapper getRestrictedAiModels()
 
 Returns the AI chat models that are barred on this portal - the ones no user of it may pick for a  conversation, whatever the price list offers. Only a DocSpace administrator may read it, and the call is  read-only. When the installation has no billing service or AI is not enabled for the portal, the answer is an  empty set instead of an error, which is indistinguishable from a portal that restricts nothing. An empty  `models` therefore means every model in `GET api/2.0/portal/payment/ai-prices` may be used. The set names the  barred models and not the allowed ones; replace it with `PUT api/2.0/portal/payment/ai-model/restrictions`.
 
@@ -1469,7 +1471,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**RestrictedModelsResponseWrapper**
+**RestrictedAiModelsWrapper**
 
 ### Authorization
 
@@ -1499,17 +1501,18 @@ const { status, data } = await apiInstance.getRestrictedAiModels();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The identifiers of the AI chat models barred on this portal, empty when none is |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | AI tools is on for the portal, but the billing service reports no customer for it or fails to answer |  -  |
 |**403** | The caller is not a DocSpace administrator |  -  |
+|**500** | The AI gateway answers with an error or cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getSubscriptionBalanceInfo**
-> SubscriptionBalanceInfoWrapper getSubscriptionBalanceInfo()
+> SubscriptionBalanceWrapper getSubscriptionBalanceInfo()
 
 Reports in money how much of the portal\'s paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer\'s e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
 
@@ -1521,7 +1524,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**SubscriptionBalanceInfoWrapper**
+**SubscriptionBalanceWrapper**
 
 ### Authorization
 
@@ -1552,7 +1555,7 @@ const { status, data } = await apiInstance.getSubscriptionBalanceInfo();
 |-------------|-------------|------------------|
 |**200** | The unused balance of the current subscription period with its period boundaries and currencies |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The plan currently paid is a wallet product or has no product identifier |  -  |
-|**402** | The plan of the portal is not in the paid state |  -  |
+|**402** | The plan of the portal is not in the paid state, or the billing service answers with an error or cannot be reached |  -  |
 |**403** | The caller is not the payer of this portal, or the portal has no billing service configured |  -  |
 |**404** | This portal has no billing customer, or its paid plan has no subscription |  -  |
 |**401** | Unauthorized |  -  |
@@ -1616,9 +1619,9 @@ const { status, data } = await apiInstance.getTenantWalletServiceSettings();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getTenantWalletSettings**
-> TenantWalletSettingsResponseWrapper getTenantWalletSettings()
+> TenantWalletSettingsWrapper getTenantWalletSettings()
 
-Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but ignored when the settings are written.
+Returns the portal\'s automatic wallet top-up settings - whether it is on, the balance that triggers a  charge, the balance it is topped up to, and the currency both are expressed in. Any DocSpace  administrator may read them, and unlike the operation that changes them this one needs neither a  billing customer nor a configured billing service, so it answers on a portal that has never paid for  anything. It is read-only and changes nothing.  A portal that has never configured top-up gets the defaults rather than an empty result: `enabled` is  false, `currency` is null, and `minBalance` and `upToBalance` are 0. Those two zeros are outside the  ranges `POST api/2.0/portal/payment/topupsettings` accepts - 5 to 1000 and 6 to 5000 - so the answer  cannot be sent straight back to it; supply real values instead. `lastModified` is  `0001-01-01T00:00:00` until the settings are stored for the first time.  `lowBalanceThreshold` and `lowBalanceNotified` are maintained by the portal itself: they are reported  here, but cannot be written.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-wallet-settings/).
 
@@ -1628,7 +1631,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**TenantWalletSettingsResponseWrapper**
+**TenantWalletSettingsWrapper**
 
 ### Authorization
 
@@ -1717,12 +1720,12 @@ const { status, data } = await apiInstance.getWalletService(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet service with its price, unit and the limits it grants |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings |  -  |
+|**400** | `service` is sent empty, or is neither the name nor the number of a wallet service |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**404** | This installation does not sell a wallet service under that name |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1771,7 +1774,7 @@ const { status, data } = await apiInstance.getWalletServices();
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The wallet services on offer, with their prices, units and grouped variants |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1831,10 +1834,10 @@ const { status, data } = await apiInstance.moveSubscriptionToWallet(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | `true` when the balance was moved to the wallet and the administrators were bought |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 1-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | `quantity` does not name the administrators wallet product, or the number asked for is below the administrators the portal already has |  -  |
+|**400** | The request body cannot be read or has no `quantity`, `quantity` does not hold exactly one product or does not name the administrators wallet product, the number asked for is not greater than zero or is below the administrators the portal already has, or the plan currently paid is a wallet product or has no product identifier |  -  |
 |**402** | The plan of the portal is not paid, the balance could not be moved, or the wallet is still short of the price after the top-up |  -  |
 |**403** | The caller is not the payer of this portal, the portal has no billing service configured, or the customer has no payment method set |  -  |
-|**404** | This portal has no billing customer, its paid plan has no subscription, or the price of the administrators product is unknown |  -  |
+|**404** | This portal has no billing customer, its paid plan has no subscription, the price of the administrators product is unknown, or after the move its wallet has no balance or no sub-account in the accounting currency |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (10 req / 1 min limit per user/IP). <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1854,7 +1857,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **salesRequestsDto** | **SalesRequestsDto**|  | |
+| **salesRequestDto** | **SalesRequestDto**|  | |
 
 
 ### Return type
@@ -1871,16 +1874,16 @@ void (empty response body)
 import {
     PortalPaymentApi,
     Configuration,
-    SalesRequestsDto
+    SalesRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let salesRequestsDto: SalesRequestsDto; // (optional)
+let salesRequestDto: SalesRequestDto; // (optional)
 
 const { status, data } = await apiInstance.sendPaymentRequest(
-    salesRequestsDto
+    salesRequestDto
 );
 ```
 
@@ -1905,7 +1908,7 @@ const { status, data } = await apiInstance.sendPaymentRequest(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setRestrictedAiModels**
-> RestrictedModelsResponseWrapper setRestrictedAiModels()
+> RestrictedAiModelsWrapper setRestrictedAiModels()
 
 Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer, and the caller needs the permission to edit the  portal settings as well as DocSpace administrator rights. The call is mutating and idempotent - sending the  same set twice leaves the same state - and it is written to the portal audit trail. It takes effect on the  next AI request, so a conversation already open on a model that has just been barred cannot go on with it. The  stored set comes back in the answer.
 
@@ -1920,7 +1923,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**RestrictedModelsResponseWrapper**
+**RestrictedAiModelsWrapper**
 
 ### Authorization
 
@@ -1955,21 +1958,21 @@ const { status, data } = await apiInstance.setRestrictedAiModels(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The set of barred AI chat models as it was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller may not edit the portal settings or is not a DocSpace administrator, or the installation has no billing service or no AI gateway configured |  -  |
+|**400** | The request body cannot be read, or `models` is missing or `null` |  -  |
+|**403** | The caller has no portal-settings right or is not a DocSpace administrator, or the installation has no billing service or no AI gateway configured |  -  |
 |**404** | This portal has no billing customer yet |  -  |
+|**500** | The AI gateway answers with an error or cannot be reached |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setTenantWalletSettings**
-> TenantWalletSettingsResponseWrapper setTenantWalletSettings()
+> TenantWalletSettingsWrapper setTenantWalletSettings()
 
-Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000, while `lowBalanceThreshold` and `lowBalanceNotified` are ignored on the way in and kept as the portal  had them. The call is mutating and idempotent, it charges nothing by itself, it is written to the portal audit  trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
+Switches the portal\'s automatic wallet top-up on or off and sets its thresholds: while it is on, the payment  method on file is charged whenever the wallet balance falls below `minBalance`, enough to bring it up to  `upToBalance`, in `currency`. The portal needs a billing customer whose wallet balance exists - a portal that  has never had one answers 404, so top the wallet up once with `POST api/2.0/portal/payment/deposit` first -  and only the payer may change the settings. The body replaces the stored settings as a whole and an omitted  body resets them to the defaults; `minBalance` is accepted between 5 and 1000 and `upToBalance` between 6 and  5000. The low-balance warning state (`lowBalanceThreshold`, `lowBalanceNotified`) and `lastModified` may be  sent for compatibility but are ignored: the portal keeps the values it had. The call is mutating and  idempotent, it charges nothing by itself, it is written to the portal audit trail, and switching the top-up on also re-arms the low-balance warning. The settings as they were stored come  back in the answer.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-wallet-settings/).
 
@@ -1977,12 +1980,12 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantWalletSettingsWrapper** | **TenantWalletSettingsWrapper**|  | |
+| **tenantWalletSettingsRequestDto** | **TenantWalletSettingsRequestDto**|  | |
 
 
 ### Return type
 
-**TenantWalletSettingsResponseWrapper**
+**TenantWalletSettingsWrapper**
 
 ### Authorization
 
@@ -1994,16 +1997,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     PortalPaymentApi,
     Configuration,
-    TenantWalletSettingsWrapper
+    TenantWalletSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new PortalPaymentApi(configuration);
 
-let tenantWalletSettingsWrapper: TenantWalletSettingsWrapper; // (optional)
+let tenantWalletSettingsRequestDto: TenantWalletSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setTenantWalletSettings(
-    tenantWalletSettingsWrapper
+    tenantWalletSettingsRequestDto
 );
 ```
 
@@ -2017,12 +2020,12 @@ const { status, data } = await apiInstance.setTenantWalletSettings(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The automatic top-up settings as they were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or `settings` is sent with `minBalance` outside 5-1000 or `upToBalance` outside 6-5000, including when either of them is left out |  -  |
 |**403** | The caller is not the payer of this portal, or the portal has no billing service configured |  -  |
 |**404** | This portal has no billing customer, or its wallet has no balance yet |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -2300,7 +2303,8 @@ const { status, data } = await apiInstance.updatePayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | `true` when the provider accepted the new quantity, `false` when it declined it |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 1-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The product is not the plan currently paid, or the quantity is already the one in effect |  -  |
+|**400** | The request body cannot be read or has no `quantity`, `quantity` does not hold exactly one product, the product is not a subscription plan or not the plan currently paid, or the quantity is already the one in effect |  -  |
+|**402** | The portal already has more administrators, users, rooms or AI agents, or stores more data, than the plan in the new quantity allows |  -  |
 |**403** | The caller is not the payer of this portal, or the portal has no billing service configured |  -  |
 |**404** | This portal has no billing customer yet |  -  |
 |**401** | Unauthorized |  -  |
@@ -2362,10 +2366,10 @@ const { status, data } = await apiInstance.updateWalletPayment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | `true` when the purchase or the scheduled change was accepted, `false` when the provider declined it |  * X-RateLimit-Limit - Rate limit: 10 requests per 1 minutes per user/IP. <br>  * X-RateLimit-Remaining - Requests remaining in the current 1-minute window. <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The quantity type is not `Set` or `Add`, the product is not a wallet service, the quantity is below the minimum for it, or that service is already set |  -  |
-|**402** | The plan of the portal is not paid and the requested service is an add-on to it |  -  |
+|**400** | The request body cannot be read or has no `quantity`, `quantity` does not hold exactly one product, the quantity type is not `Set` or `Add`, the product is not a wallet service, the quantity is below the minimum for it or is empty or zero where a purchase needs one, or that service is already set |  -  |
+|**402** | The plan of the portal is not paid and the requested service is an add-on to it, or in the `Add` form the billing service declines the purchase, answers with an error or cannot be reached |  -  |
 |**403** | The caller is not a DocSpace administrator, or the portal has no billing service configured |  -  |
-|**404** | This portal has no billing customer, or its wallet has no sub-account in the accounting currency |  -  |
+|**404** | This portal has no billing customer, or its wallet has no balance or no sub-account in the accounting currency |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying (10 req / 1 min limit per user/IP). <br>  |
 |**500** | Internal Server Error. |  -  |

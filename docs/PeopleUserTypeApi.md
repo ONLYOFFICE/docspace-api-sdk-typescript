@@ -4,7 +4,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userid} | Get the user type change progress|
+|[**getUserTypeUpdateProgress**](#getusertypeupdateprogress) | **GET** /api/2.0/people/type/progress/{userId} | Get the user type change progress|
 |[**startUserTypeUpdate**](#startusertypeupdate) | **POST** /api/2.0/people/type | Start updating user type|
 |[**terminateUserTypeUpdate**](#terminateusertypeupdate) | **PUT** /api/2.0/people/type/terminate | Terminate updating user type|
 |[**updateUserType**](#updateusertype) | **PUT** /api/2.0/people/type/{type} | Change a user type|
@@ -20,7 +20,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **userid** | [**string**] | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | defaults to undefined|
+| **userId** | [**string**] | The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. | defaults to undefined|
 
 
 ### Return type
@@ -42,10 +42,10 @@ import {
 const configuration = new Configuration();
 const apiInstance = new PeopleUserTypeApi(configuration);
 
-let userid: string; //The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (default to undefined)
+let userId: string; //The ID of the user the operation applies to, taken from the route. For a progress operation it has to be the  same ID that was passed when the job was started. (default to undefined)
 
 const { status, data } = await apiInstance.getUserTypeUpdateProgress(
-    userid
+    userId
 );
 ```
 
@@ -72,7 +72,7 @@ const { status, data } = await apiInstance.getUserTypeUpdateProgress(
 # **startUserTypeUpdate**
 > TaskProgressResponseWrapper startUserTypeUpdate()
 
-Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userid}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
+Queues an asynchronous job that converts one account to `Guest` or `User` and, in the same job, hands the  rooms and the shared files of that account over to another administrator.  Only `Guest` and `User` are accepted here, because they are the types that cannot own rooms; for any other  type use `PUT api/2.0/people/type/{type}`, which converts immediately and transfers nothing.  The caller needs the permission to add and remove users of the requested type, has to be the portal owner to  convert a DocSpace administrator, and converting to `Guest` also requires the portal to allow inviting guests.  The account being converted has to be active and cannot be the caller, and the recipient - `reassignUserId`,  or the caller when it is omitted - has to be an active room admin or DocSpace admin other than that account.  The conversion does not finish within this call: poll `GET api/2.0/people/type/progress/{userId}` with the  converted user ID until `isCompleted` is true, and cancel it through `PUT api/2.0/people/type/terminate`.  A failure inside the running job is reported in the `error` field of the progress, not as a status code here.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-user-type-update/).
 
@@ -181,11 +181,11 @@ const { status, data } = await apiInstance.terminateUserTypeUpdate(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The state of the cancelled user type change, or an empty body when nothing was queued for the user |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `userId` |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -245,12 +245,12 @@ const { status, data } = await apiInstance.updateUserType(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The converted users with their detailed information |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `userIds` |  -  |
 |**402** | The tariff or the paid-user quota does not allow one more paid user |  -  |
 |**403** | No permissions to perform this action |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

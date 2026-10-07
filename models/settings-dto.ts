@@ -20,10 +20,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CultureSpecificExternalResources } from './culture-specific-external-resources';
+import type { DeepLinkDto } from './deep-link-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DeepLinkDto } from './deep-link-dto';
+import type { DomainNameRulesDto } from './domain-name-rules-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ExternalResourcesDto } from './external-resources-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FirebaseDto } from './firebase-dto';
@@ -35,16 +38,13 @@ import type { FolderType } from './folder-type';
 import type { FormGalleryDto } from './form-gallery-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PasswordHasher } from './password-hasher';
+import type { PasswordHashSettingsDto } from './password-hash-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PluginsDto } from './plugins-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { RecaptchaType } from './recaptcha-type';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TenantDomainValidator } from './tenant-domain-validator';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TenantStatus } from './tenant-status';
@@ -127,7 +127,7 @@ export interface SettingsDto {
     /**
      * The parameters for hashing a password in the client before it is sent - the salt, the iteration count and  the hash size. It is filled in for an anonymous caller and, for a signed-in one, only when  `withPassword=true` is asked for. Hash with exactly these parameters and send the result as  `passwordHash`, since the portal cannot reproduce the hash from a different set.
      */
-    'passwordHash'?: PasswordHasher;
+    'passwordHash'?: PasswordHashSettingsDto;
     /**
      * The Firebase project a mobile or web client sends push registrations to. Filled in for a signed-in caller  only, and its own fields are empty strings on an installation that configures no Firebase project.
      */
@@ -167,7 +167,7 @@ export interface SettingsDto {
     /**
      * The rules a portal name is checked against - its length limits and the pattern it has to match - so a  client can validate a rename before sending it. Filled in for a signed-in caller only.
      */
-    'domainValidator'?: TenantDomainValidator;
+    'domainValidator'?: DomainNameRulesDto;
     /**
      * The key that lets the client open the vendor\'s support chat, empty when the installation configures none.  Filled in for a signed-in caller only.
      */
@@ -231,7 +231,7 @@ export interface SettingsDto {
     /**
      * The addresses of the vendor\'s help, support, forum and video resources, already picked for the portal  language. An entry is missing when the installation configures no address for it or the resource is  switched off, which `GET api/2.0/settings/rebranding/additional` reports flag by flag.
      */
-    'externalResources'?: CultureSpecificExternalResources;
+    'externalResources'?: ExternalResourcesDto;
     /**
      * The section the client should open after sign-in, which is the caller\'s own preference rather than a  portal-wide one. Filled in for a signed-in caller only.
      */

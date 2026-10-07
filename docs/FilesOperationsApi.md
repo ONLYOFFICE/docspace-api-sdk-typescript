@@ -86,6 +86,8 @@ const { status, data } = await apiInstance.abortUploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The session and the parts received so far have been discarded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The session was opened by another account |  -  |
+|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -146,11 +148,12 @@ const { status, data } = await apiInstance.addFavorites(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Always true: the request was understood, which does not mean that anything was marked |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or a third-party identifier refers to a storage account that is not connected |  -  |
 |**403** | Marking favorites is refused for the caller |  -  |
+|**404** | A third-party identifier names a storage type the portal does not know |  -  |
+|**500** | An id is a number that is not a 32-bit integer, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -207,10 +210,12 @@ const { status, data } = await apiInstance.bulkDownload(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The download operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | An item in the selection cannot be read by the caller, or another download of theirs is still running |  -  |
+|**400** | The request body cannot be read, or an item of `fileConvertIds` has no `key` or `value` |  -  |
+|**401** | The caller is not signed in and holds no external link |  -  |
+|**403** | None of the listed items that exist can be read by the caller, or another download of theirs is still running |  -  |
+|**404** | None of the listed items exists, counted separately for the portal\'s own items and for those on third-party accounts |  -  |
+|**500** | An id is a number that is not a 32-bit integer |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -273,6 +278,8 @@ const { status, data } = await apiInstance.checkConversionStatus(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The conversion entry of the file, or an empty list when the portal has none |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The caller cannot read the file, or, with `start=true`, may not convert it |  -  |
+|**404** | The file id is neither a number nor the id of a file in a known third-party storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -293,7 +300,14 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | (optional) defaults to undefined|
+| **returnSingleOperation** | [**boolean**] | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | (optional) defaults to undefined|
+| **folderIds** | **Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;** | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | (optional) defaults to undefined|
+| **fileIds** | **Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;** | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | (optional) defaults to undefined|
+| **destFolderId** | **CheckMoveOrCopyBatchItemsDestFolderIdParameter** | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | (optional) defaults to undefined|
+| **conflictResolveType** | **FileConflictResolveType** | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | (optional) defaults to undefined|
+| **deleteAfter** | [**boolean**] | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | (optional) defaults to undefined|
+| **content** | [**boolean**] | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | (optional) defaults to undefined|
+| **toFillOut** | [**boolean**] | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -310,16 +324,30 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesOperationsApi,
     Configuration,
-    BatchRequestDto
+    CheckMoveOrCopyBatchItemsDestFolderIdParameter
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let inDto: BatchRequestDto; //The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional) (default to undefined)
+let returnSingleOperation: boolean; //Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional) (default to undefined)
+let folderIds: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>; //The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional) (default to undefined)
+let fileIds: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>; //The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional) (default to undefined)
+let destFolderId: CheckMoveOrCopyBatchItemsDestFolderIdParameter; //The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional) (default to undefined)
+let conflictResolveType: FileConflictResolveType; //What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional) (default to undefined)
+let deleteAfter: boolean; //Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional) (default to undefined)
+let content: boolean; //What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional) (default to undefined)
+let toFillOut: boolean; //Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
-    inDto
+    returnSingleOperation,
+    folderIds,
+    fileIds,
+    destFolderId,
+    conflictResolveType,
+    deleteAfter,
+    content,
+    toFillOut
 );
 ```
 
@@ -333,11 +361,12 @@ const { status, data } = await apiInstance.checkMoveOrCopyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The listed items that already have a same-named entry in the destination folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot create items in the destination folder |  -  |
+|**400** | `destFolderId` is not given |  -  |
+|**403** | The caller cannot create items in the destination folder, or the destination is a listed folder or lies inside one |  -  |
+|**404** | The destination folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -354,7 +383,14 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **inDto** | **BatchRequestDto** | The files and folders to move or copy, the folder they go to, and the way name clashes are settled. | (optional) defaults to undefined|
+| **returnSingleOperation** | [**boolean**] | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | (optional) defaults to undefined|
+| **folderIds** | **Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;** | The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. | (optional) defaults to undefined|
+| **fileIds** | **Array&lt;CheckMoveOrCopyBatchItemsFolderIdsParameterInner&gt;** | The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. | (optional) defaults to undefined|
+| **destFolderId** | **CheckMoveOrCopyBatchItemsDestFolderIdParameter** | The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. | (optional) defaults to undefined|
+| **conflictResolveType** | **FileConflictResolveType** | What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. | (optional) defaults to undefined|
+| **deleteAfter** | [**boolean**] | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. | (optional) defaults to undefined|
+| **content** | [**boolean**] | What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. | (optional) defaults to undefined|
+| **toFillOut** | [**boolean**] | Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -371,16 +407,30 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     FilesOperationsApi,
     Configuration,
-    BatchRequestDto
+    CheckMoveOrCopyBatchItemsDestFolderIdParameter
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
-let inDto: BatchRequestDto; //The files and folders to move or copy, the folder they go to, and the way name clashes are settled. (optional) (default to undefined)
+let returnSingleOperation: boolean; //Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. (optional) (default to undefined)
+let folderIds: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>; //The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list. (optional) (default to undefined)
+let fileIds: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>; //The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list. (optional) (default to undefined)
+let destFolderId: CheckMoveOrCopyBatchItemsDestFolderIdParameter; //The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room. (optional) (default to undefined)
+let conflictResolveType: FileConflictResolveType; //What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash. (optional) (default to undefined)
+let deleteAfter: boolean; //Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them. (optional) (default to undefined)
+let content: boolean; //What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there. (optional) (default to undefined)
+let toFillOut: boolean; //Marks every copied PDF form as a draft prepared for filling, which is how such a copy reports its filling  status in a virtual data room. Files that are not forms are left unaffected. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
-    inDto
+    returnSingleOperation,
+    folderIds,
+    fileIds,
+    destFolderId,
+    conflictResolveType,
+    deleteAfter,
+    content,
+    toFillOut
 );
 ```
 
@@ -394,11 +444,12 @@ const { status, data } = await apiInstance.checkMoveOrCopyDestFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Whether the destination accepts all of the listed files, some of them or none, and which ones it accepts |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | `destFolderId` is not given |  -  |
 |**403** | The caller cannot create items in the destination folder |  -  |
+|**404** | The destination folder does not exist |  -  |
+|**500** | A listed file is on a third-party account and the destination accepts it, or a listed file does not exist while the destination is a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -455,10 +506,12 @@ const { status, data } = await apiInstance.copyBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The move and copy operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot create items in the destination folder, or cannot read one of the listed items |  -  |
+|**403** | The caller cannot create items in the destination folder or cannot read one of the listed items, the destination is a listed folder or lies inside one, the room or user quota would be exceeded, a file that is not a PDF form goes to a form-filling room, or a file to overwrite is locked or cannot be edited by the caller |  -  |
+|**404** | The destination folder, a listed file or a listed folder other than the first one does not exist |  -  |
+|**415** | A listed file has a format the portal does not accept for upload, or one a knowledge folder cannot index |  -  |
+|**500** | The first listed folder does not exist, or an id is a number that is not a 32-bit integer |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -466,7 +519,7 @@ const { status, data } = await apiInstance.copyBatchItems(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createUploadSession**
-> ChunkedUploadSessionResponseWrapperWrapper createUploadSession(sessionRequest)
+> ChunkedUploadSessionResultWrapper createUploadSession(sessionRequest)
 
 Deprecated in favour of `POST api/2.0/files/{folderId}/session`, which opens the same session and returns it  without the success envelope used here; new callers should go there. Reserves a chunked upload of a file in  the folder named by the path: the title comes from `fileName`, the declared payload size from `fileSize`, and  the answer carries the session id every later call quotes, the address of the standalone chunk handler, the  moment an idle session is dropped and the reserved byte count. No content is stored yet. Send the payload as  multipart parts to `POST api/2.0/files/{folderId}/session/{sessionId}/upload`, keeping each part within  `chunkUploadSize` from `GET api/2.0/files/settings`, then close the session with  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller needs the right to add content to the  target folder, which room managers and content creators have and readers, editors and guests do not: they get  403, as does a section root such as Rooms or Archive, while an unknown folder is answered as missing. A  payload above the portal limit for chunked uploads is refused before the session exists.
 
@@ -482,11 +535,11 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ChunkedUploadSessionResponseWrapperWrapper**
+**ChunkedUploadSessionResultWrapper**
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionResponseWrapperWrapper**.
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionResultWrapper**.
 
 ### Authorization
 
@@ -523,18 +576,21 @@ const { status, data } = await apiInstance.createUploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot add content to the target folder |  -  |
+|**400** | The request body cannot be read or has no `fileName` |  -  |
+|**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
+|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+|**404** | No folder with the specified ID |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **createUploadSessionInFolder**
-> ChunkedUploadSessionResponseResponseWrapper createUploadSessionInFolder(sessionRequest)
+> ChunkedUploadSessionWrapper createUploadSessionInFolder(sessionRequest)
 
 Opens a chunked upload session for a file in the folder named by the path and returns the session itself,  which is the difference from the deprecated `POST api/2.0/files/{folderId}/upload/create_session` and its  success envelope. The answer gives `id`, quoted by every later call, `location` for the standalone chunk  handler used by clients that bypass this API, `expired`, and `bytes_total` echoing the reserved size. Whether  parts are really needed follows from `fileSize`: below `chunkUploadSize` from `GET api/2.0/files/settings` the  whole payload goes in one `POST api/2.0/files/{folderId}/session/{sessionId}`, which stores the file and  answers 201, and above it the parts go one by one to  `POST api/2.0/files/{folderId}/session/{sessionId}/upload` and the file appears only after  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. The caller must be allowed to add content to the  folder, so readers, editors and guests are refused, a section root is refused as well, and an unknown folder  is answered as missing. Nothing is written until the parts arrive, and an abandoned session disappears twelve  hours later.
 
@@ -550,11 +606,11 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ChunkedUploadSessionResponseResponseWrapper**
+**ChunkedUploadSessionWrapper**
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionResponseResponseWrapper**.
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionWrapper**.
 
 ### Authorization
 
@@ -591,10 +647,14 @@ const { status, data } = await apiInstance.createUploadSessionInFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created upload session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `fileName` |  -  |
+|**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
+|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+|**404** | No folder with the specified ID |  -  |
+|**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -651,10 +711,11 @@ const { status, data } = await apiInstance.deleteBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller does not have the rights to delete one of the listed items |  -  |
+|**403** | The caller does not have the rights to delete one of the listed items, one of them is locked by another user or open for editing, or a room is sent to Trash without `immediately` |  -  |
+|**404** | A listed file or folder does not exist |  -  |
+|**500** | An id is a number that is not a 32-bit integer |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -712,10 +773,11 @@ const { status, data } = await apiInstance.deleteFavoritesFromBody(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | Always true: the marks named in the request are gone or were never there |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read, or a third-party identifier refers to a storage account that is not connected |  -  |
+|**404** | A third-party identifier names a storage type the portal does not know |  -  |
+|**500** | An id is a number that is not a 32-bit integer, or a third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -772,10 +834,12 @@ const { status, data } = await apiInstance.deleteFileVersions(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `fileId` or `versions` |  -  |
+|**403** | The caller cannot delete the file, the file is locked by another user, open for editing, in an archived room or in Trash, or `versions` includes the current version |  -  |
+|**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -832,10 +896,12 @@ const { status, data } = await apiInstance.duplicateBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The duplicate operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot create items in the folder that holds one of the listed items |  -  |
+|**403** | The caller cannot create items in the folder that holds one of the listed items, or cannot copy that item |  -  |
+|**404** | A listed file or folder does not exist |  -  |
+|**415** | A listed file has a format the portal does not accept for upload |  -  |
+|**500** | An id is a number that is not a 32-bit integer |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -854,7 +920,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **single** | [**boolean**] | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. | (optional) defaults to undefined|
-| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36>** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | (optional) defaults to undefined|
+| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37>** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -877,7 +943,7 @@ const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
 let single: boolean; //Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. (optional) (default to undefined)
-let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36>; //Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. (optional) (default to undefined)
+let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37>; //Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.emptyTrash(
     single,
@@ -895,10 +961,10 @@ const { status, data } = await apiInstance.emptyTrash(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The delete operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | `folderType` holds a value that is not a folder type |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -961,10 +1027,12 @@ const { status, data } = await apiInstance.finalizeSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The assembled file and the identifiers of the closed session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The parts received so far do not add up to the size the session was opened for |  -  |
+|**402** | Storing the file would exceed a storage quota or size limit |  -  |
+|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1081,9 +1149,9 @@ const { status, data } = await apiInstance.getOperationStatusesByType(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The operations of the caller that are of the requested kind |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | `operationType` is neither the number nor the name of an operation type |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1140,9 +1208,9 @@ const { status, data } = await apiInstance.markAsRead(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The mark-as-read operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**500** | An id is a number that is not a 32-bit integer |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1200,10 +1268,12 @@ const { status, data } = await apiInstance.moveBatchItems(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The move and copy operations of the caller, the one just queued included |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller cannot create items in the destination folder, or cannot take one of the items out of its source |  -  |
+|**403** | The caller cannot create items in the destination folder or cannot take one of the items out of its source, the destination is a listed folder or lies inside one, a folder or several files are moved into a form-filling room from outside it, the room or user quota would be exceeded, a file that is not a PDF form goes to a form-filling room, or a file to overwrite is locked or cannot be edited by the caller |  -  |
+|**404** | The destination folder, a listed file or a listed folder other than the first one does not exist |  -  |
+|**415** | A listed file has a format the portal does not accept for upload, or one a knowledge folder cannot index |  -  |
+|**500** | The first listed folder does not exist, or an id is a number that is not a 32-bit integer |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1336,7 +1406,7 @@ const { status, data } = await apiInstance.terminateTasks(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **updateFileComment**
-> StringWrapper updateFileComment(updateComment)
+> StringWrapper updateFileComment(updateCommentRequest)
 
 Replaces the comment stored on one version of a file - the note that explains what changed in it - and answers  with the comment as it was stored, which is the text cut to the length the portal keeps. `version` names the  version and has to be an existing one: a version that does not exist is rejected as an invalid request, while  a file that does not exist at all is answered as not found. Sending an empty comment clears the note. The  caller needs the right to edit the history of the file, which the room admin, a DocSpace admin acting as room  manager and a member with content-creator rights have; a member with editing access to somebody else\'s file,  read-only access, a guest and an anonymous caller are all refused. A file that is locked by somebody else or  lies in Trash is refused as well. The call is mutating and idempotent - repeating it with the same text leaves  the same comment. The comments of all versions come back with `GET api/2.0/files/file/{fileId}/edit/history`.
 
@@ -1346,7 +1416,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateComment** | **UpdateComment**| The version and the comment to store on it. | |
+| **updateCommentRequest** | **UpdateCommentRequest**| The version and the comment to store on it. | |
 | **fileId** | [**number**] | The file whose version comment is replaced. | defaults to undefined|
 
 
@@ -1368,18 +1438,18 @@ The same method serves an entry in a connected third-party storage, whose identi
 import {
     FilesOperationsApi,
     Configuration,
-    UpdateComment
+    UpdateCommentRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
 let fileId: number; //The file whose version comment is replaced. (default to undefined)
-let updateComment: UpdateComment; //The version and the comment to store on it.
+let updateCommentRequest: UpdateCommentRequest; //The version and the comment to store on it.
 
 const { status, data } = await apiInstance.updateFileComment(
     fileId,
-    updateComment
+    updateCommentRequest
 );
 ```
 
@@ -1393,17 +1463,19 @@ const { status, data } = await apiInstance.updateFileComment(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The comment as it was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The request body cannot be read or has no `version`, the version is below 1 or does not exist, or the comment is longer than 255 characters |  -  |
+|**403** | The caller may not change the version history of the file, or the file is locked by somebody else |  -  |
+|**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
-|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **uploadAsyncSession**
-> ChunkedUploadSessionResponseResponseWrapper uploadAsyncSession()
+> ChunkedUploadSessionWrapper uploadAsyncSession()
 
 Stores one part of a file under the number given in `chunkNumber`, which is what the ordinary chunked flow  uses: parts are kept by their number rather than by arrival, so a part that failed can be resent under the  same number without restarting the session. Numbering starts at 1, and leaving the number out makes the server  count the parts itself. The answer is always the session, never the file, and this call never completes the  upload: the file appears only after `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize`. Use  `POST api/2.0/files/{folderId}/session/{sessionId}` instead when the parts go strictly in order and the upload  should complete by itself. A part bigger than `chunkUploadSize` from `GET api/2.0/files/settings` is refused,  so that value is also the size to split the payload by. The first part of a PDF is inspected, and a PDF that  is not a fillable form is refused when the session targets a form-filling room. The session is found by its id  alone.
 
@@ -1421,11 +1493,11 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**ChunkedUploadSessionResponseResponseWrapper**
+**ChunkedUploadSessionWrapper**
 
 ### Third-party storage
 
-The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionResponseResponseWrapper**.
+The same method serves an entry in a connected third-party storage, whose identifier is a string such as `sbox-42`: pass `folderId: string` and the answer is **ThirdPartyChunkedUploadSessionWrapper**.
 
 ### Authorization
 
@@ -1465,9 +1537,11 @@ const { status, data } = await apiInstance.uploadAsyncSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The session with its progress after the part was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The part is larger than `chunkUploadSize`, or a session below that size would exceed a storage quota or size limit when storing the file |  -  |
+|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+|**500** | The request has no `File` part, or a session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -1534,9 +1608,11 @@ const { status, data } = await apiInstance.uploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The progress of the session, or the stored file once the last part has arrived |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The part is larger than `chunkUploadSize`, or storing the file would exceed a storage quota or size limit |  -  |
+|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+|**500** | The request has no `File` part, or a file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
-|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

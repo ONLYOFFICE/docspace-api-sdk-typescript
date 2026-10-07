@@ -20,19 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EmailActivationSettings } from './email-activation-settings';
+import type { EmailActivationSettingsDto } from './email-activation-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
 /**
- * The successful API response containing the EmailActivationSettings object.
+ * The successful API response containing the EmailActivationSettingsDto object.
  */
 export interface EmailActivationSettingsWrapper {
     /**
-     * The EmailActivationSettings object returned by the operation.
+     * The EmailActivationSettingsDto object returned by the operation.
      */
-    'response'?: EmailActivationSettings;
+    'response'?: EmailActivationSettingsDto;
     /**
      * The total number of items in the response
      */
