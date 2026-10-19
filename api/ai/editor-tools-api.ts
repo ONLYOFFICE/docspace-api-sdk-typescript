@@ -40,7 +40,7 @@ export const EditorToolsApiAxiosParamCreator = function (configuration?: Configu
     
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
          * @summary Call an editor tool
          * @param {AiEditorToolsCallRequest} aiEditorToolsCallRequest The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool\'s input schema, and an optional `entityId` for the room to run it in.
          * @param {*} [options] Override http request option.
@@ -134,7 +134,7 @@ export const EditorToolsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = EditorToolsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
          * @summary Call an editor tool
          * @param {AiEditorToolsCallRequest} aiEditorToolsCallRequest The tool to run: `name` from `GET api/2.0/ai/editor-tools/list`, `arguments` matching that tool\'s input schema, and an optional `entityId` for the room to run it in.
          * @param {*} [options] Override http request option.
@@ -173,7 +173,7 @@ export const EditorToolsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = EditorToolsApiFp(configuration)
     return {
         /**
-         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+         * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
          * @summary Call an editor tool
          * @param {EditorToolsApiAiEditorToolsCallRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -220,7 +220,7 @@ export interface EditorToolsApiAiEditorToolsCallRequest {
  */
 export class EditorToolsApi extends BaseAPI {
     /**
-     * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be one of the tools `GET api/2.0/ai/editor-tools/list` reports; anything else, including a tool the editor is not allowed to reach, is refused. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
+     * Executes one DocSpace tool on behalf of the document editor\'s AI plugin, server-side and under the caller\'s own credentials, so the browser never holds the transport. `name` has to be exactly one of the tools `GET api/2.0/ai/editor-tools/list` reports (surrounding whitespace is ignored, letter case is not); anything else, including a tool the editor is not allowed to reach, is refused with 400 before anything runs. The result is always returned as a string - a structured result is serialised - because the plugin relays it to the model verbatim. A tool that fails does so inside that string as an error payload rather than as an HTTP status, so check the content before trusting it.
      * @summary Call an editor tool
      * @param {AIEditorToolsApiAiEditorToolsCallRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

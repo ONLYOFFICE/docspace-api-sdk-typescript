@@ -45,6 +45,9 @@ import type { FileShare } from './file-share';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FolderType } from './folder-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { MetadataMatchDto } from './metadata-match-dto';
 
 /**
  * @type ThirdPartyFileEntryDto
@@ -142,6 +145,12 @@ export type ThirdPartyFileEntryDto = FileEntryBaseDto &  {
      * @memberof ThirdPartyFileEntryDto
      */
     'assignedMetadataTemplates'?: Array<number> | null;
+    /**
+     * Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+     * @type {Array<MetadataMatchDto>}
+     * @memberof ThirdPartyFileEntryDto
+     */
+    'metadataMatches'?: Array<MetadataMatchDto> | null;
 };
 
 

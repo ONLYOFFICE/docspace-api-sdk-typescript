@@ -40,6 +40,7 @@ export * from './api/apps/apps-api';
 export * from './api/authentication/authentication-api';
 export * from './api/backup/backup-api';
 export * from './api/capabilities/capabilities-api';
+export * from './api/docs/docs-api';
 export * from './api/files/files-api';
 export * from './api/files/folders-api';
 export * from './api/files/metadata-api';

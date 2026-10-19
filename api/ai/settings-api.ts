@@ -243,9 +243,9 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
+         * Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
-         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetUser operation
@@ -414,9 +414,9 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
+         * Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
-         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+         * @param {{ [key: string]: any | null; }} aiSettingsSetUserRequest The user\'s AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsSetUser operation
@@ -510,7 +510,7 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiSettingsSetToolMode(requestParameters.aiSettingsSetToolModeRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
+         * Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
          * @summary Update user AI settings
          * @param {SettingsApiAiSettingsSetUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -557,7 +557,7 @@ export interface SettingsApiAiSettingsSetToolModeRequest {
  */
 export interface SettingsApiAiSettingsSetUserRequest {
     /**
-     * The user\'s AI settings, proxied unchanged to the DocSpace AI service, which owns and validates the shape. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
+     * The user\'s AI settings: `chatRecommendedModelVisible` as a boolean, required. Read the current one with `GET api/2.0/ai/config/user` and send it back changed.
      * @type {{ [key: string]: any | null; }}
      * @memberof SettingsApiAiSettingsSetUser
      */
@@ -642,7 +642,7 @@ export class SettingsApi extends BaseAPI {
     }
 
     /**
-     * Replaces the AI settings of the calling user and returns the stored result. The body is proxied unchanged to the DocSpace AI service, which validates it, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
+     * Replaces the AI settings of the calling user and returns the stored result. `chatRecommendedModelVisible` is required and has to be a real boolean - a body the JSON parser cannot read, such as one sent as text/plain, used to arrive empty and answer 200 having stored nothing. The body is then proxied to the DocSpace AI service, which validates the rest, so a rejected value comes back with that service\'s verdict. Only the caller\'s own settings can be written. Portal-wide configuration is not touched by this operation.
      * @summary Update user AI settings
      * @param {AISettingsApiAiSettingsSetUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

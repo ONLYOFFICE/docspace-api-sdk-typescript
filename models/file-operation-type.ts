@@ -20,7 +20,7 @@
 
 
 /**
- * [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
+ * [0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate, 8 - Build]
  */
 
 export const FileOperationType = {
@@ -32,6 +32,7 @@ export const FileOperationType = {
     Import: 5,
     Convert: 6,
     Duplicate: 7,
+    Build: 8,
 } as const;
 
 export type FileOperationType = typeof FileOperationType[keyof typeof FileOperationType];

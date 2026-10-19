@@ -32,11 +32,11 @@ export interface MetadataFilterConditionRequest {
      */
     'name'?: string | null;
     /**
-     * The operator, one of ASC.Files.Core.MetadataFilterOperators. Optional: the field type alone determines how the  condition is evaluated, so an omitted operator is accepted, while a present one has to match the field type.
+     * The operator, one of ASC.Files.Core.MetadataFilterOperators: eq or contains for a string field, eq, range,  gt, gte, lt or lte for a number field, range, gt, gte, lt or lte for a date field, in for a  choice field. Optional: an omitted operator is read as eq for a string, as range for a date, as in for a  choice, and for a number as eq when a value is given or as range when a bound is. A present one has to belong  to the field type and to the arguments: eq takes a value, range takes bounds.
      */
     'op'?: string | null;
     /**
-     * The exact value: string fields, and number fields given a single value. A JSON number is accepted as well as a string.
+     * The value of a single-valued condition: the whole or a part of a string field, the exact value of a number field,  or the bound of a gt, gte, lt or lte condition on a number or a date field. A JSON number is accepted as  well as a string. A date given without a time (2026-06-30) names the whole day (UTC).
      */
     'value'?: string | null;
     /**

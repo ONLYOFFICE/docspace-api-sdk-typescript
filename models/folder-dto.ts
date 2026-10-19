@@ -53,6 +53,9 @@ import type { FolderType } from './folder-type';
 import type { LogoDto } from './logo-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { MetadataMatchDto } from './metadata-match-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { RoomDataLifetimeDto } from './room-data-lifetime-dto';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -74,13 +77,13 @@ export type FolderDto = FileEntryDto &  {
      */
     'parentId'?: number;
     /**
-     * How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates and default templates sections always report 0, because the number is not collected for them.
+     * How many files lie directly in the folder, without counting the subfolders. The roots of the `Rooms`, room  templates, default templates and AI agents sections always report 0, because the number is not collected for  them.
      * @type {number}
      * @memberof FolderDto
      */
     'filesCount'?: number;
     /**
-     * How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms` and templates  sections report 0.
+     * How many subfolders lie directly in the folder. For an AI room the two service subfolders it always holds are  subtracted, so the number matches what a listing of it shows, and the roots of the `Rooms`, templates and AI  agents sections report 0.
      * @type {number}
      * @memberof FolderDto
      */

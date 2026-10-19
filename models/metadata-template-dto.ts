@@ -23,6 +23,9 @@
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { EmployeeDto } from './employee-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { MetadataFieldDto } from './metadata-field-dto';
 
 /**
@@ -42,17 +45,17 @@ export interface MetadataTemplateDto {
      */
     'visible'?: boolean;
     /**
-     * The user who created the template.
+     * The user who created the template. A user who has since left the portal comes back as the lost user placeholder.
      */
-    'createBy'?: string;
+    'createBy'?: EmployeeDto;
     /**
      * The template creation date.
      */
     'createOn'?: ApiDateTime;
     /**
-     * The user who modified the template last.
+     * The user who changed the template itself last: its name or its visibility. The creator until somebody changes  it; a change of a field is recorded on the field, not here.
      */
-    'modifiedBy'?: string;
+    'modifiedBy'?: EmployeeDto;
     /**
      * The date when the template was modified last.
      */

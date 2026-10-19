@@ -91,7 +91,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -135,7 +135,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
          * @summary Get reasoning level
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -179,7 +179,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service\'s default is `auto`.
          * @summary Get tool permission mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -223,7 +223,7 @@ export const PreferencesApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -427,7 +427,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -442,7 +442,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
          * @summary Get reasoning level
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -457,7 +457,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service\'s default is `auto`.
          * @summary Get tool permission mode
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -472,7 +472,7 @@ export const PreferencesApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
@@ -554,7 +554,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesClearDeepMode(requestParameters.aiPreferencesClearDeepModeRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+         * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
          * @summary Get deep mode
          * @param {PreferencesApiAiPreferencesGetDeepModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -566,7 +566,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesGetDeepMode(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+         * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
          * @summary Get reasoning level
          * @param {PreferencesApiAiPreferencesGetReasoningLevelRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -578,7 +578,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesGetReasoningLevel(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+         * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service\'s default is `auto`.
          * @summary Get tool permission mode
          * @param {PreferencesApiAiPreferencesGetToolPermissionModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -590,7 +590,7 @@ export const PreferencesApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiPreferencesGetToolPermissionMode(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+         * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
          * @summary Is deep mode set
          * @param {PreferencesApiAiPreferencesIsDeepModeSetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -772,7 +772,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
+     * Returns the deep-mode toggle of a scope, as a bare boolean: whether the stored extended-thinking depth is above `off`. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400, as it is on the write. A scope that has never had a value stored falls back to the configured default, so the answer never distinguishes off from unset - ask `GET api/2.0/ai/preferences/is-deep-mode-set` for that. This is a read-only operation.
      * @summary Get deep mode
      * @param {AIPreferencesApiAiPreferencesGetDeepModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -784,7 +784,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference. Providers clamp the depth to what the model accepts.
+     * Returns the effective extended-thinking depth of the scope: `off` while deep mode is off, otherwise the persisted depth (`low`, `medium`, `high`, `max`), falling back to the default depth (`medium`) when none has been stored. `entityId` picks a room and omitting it reads the portal-wide preference; a value that is not a room ID is refused with 400. Providers clamp the depth to what the model accepts.
      * @summary Get reasoning level
      * @param {AIPreferencesApiAiPreferencesGetReasoningLevelRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -796,7 +796,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored. The AI service\'s default is `auto`.
+     * Returns how a tool call the model makes is approved for the calling user, in the chat library\'s spelling: `ask` prompts for every call bar the tools pinned as always allowed, `auto` also runs a tool that opted out of approval itself or is annotated read-only / non-destructive, `allow` runs everything without asking. The mode is one value per user, stored in the user\'s AI settings (the same value `GET api/2.0/ai/config/tool-mode` reports as the AI service\'s enum); `entityId` is accepted for symmetry with the depth routes and ignored, though a value that is not a room ID is still refused with 400. The AI service\'s default is `auto`.
      * @summary Get tool permission mode
      * @param {AIPreferencesApiAiPreferencesGetToolPermissionModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -808,7 +808,7 @@ export class PreferencesApi extends BaseAPI {
     }
 
     /**
-     * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
+     * Tells whether a scope has an explicitly persisted extended-thinking setting of its own, as opposed to inheriting the configured default. `entityId` picks a room and omitting it asks about the portal-wide preference; a value that is not a room ID is refused with 400. A true answer means a value was stored, whether that value is on or off - read the value itself with `GET api/2.0/ai/preferences/get-deep-mode`. This is the check a settings screen uses to show an explicit override rather than an inherited state.
      * @summary Is deep mode set
      * @param {AIPreferencesApiAiPreferencesIsDeepModeSetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

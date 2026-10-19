@@ -39,5 +39,9 @@ export interface MetadataOperationDto {
      * The operation error message.
      */
     'error'?: string | null;
+    /**
+     * The IDs of the metadata templates the operation propagates to the subtree. Empty when there is no operation to  report, so the answer describes nothing in progress.
+     */
+    'templateIds'?: Array<number> | null;
 }
 

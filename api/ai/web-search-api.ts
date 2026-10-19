@@ -32,6 +32,8 @@ import type { AiSuccessResponse } from '../../models';
 // @ts-ignore
 import type { AiWebSearchConfig } from '../../models';
 // @ts-ignore
+import type { AiWebSearchConfigure400Response } from '../../models';
+// @ts-ignore
 import type { AiWebSearchConfigureRequest } from '../../models';
 // @ts-ignore
 import type { AiWebSearchMutationResult } from '../../models';
@@ -224,9 +226,9 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider\'s 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
          * @summary Web page contents passthrough
-         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughContents operation
@@ -269,9 +271,9 @@ export const WebSearchApiAxiosParamCreator = function (configuration?: Configura
             };
         },
         /**
-         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider\'s own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
          * @summary Web search passthrough
-         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughSearch operation
@@ -474,9 +476,9 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider\'s 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
          * @summary Web page contents passthrough
-         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughContentsRequest A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughContents operation
@@ -489,15 +491,15 @@ export const WebSearchApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider\'s own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
          * @summary Web search passthrough
-         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+         * @param {{ [key: string]: any | null; }} aiWebSearchPassthroughSearchRequest A search request in the shape the portal\'s active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiWebSearchPassthroughSearch operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
          */
-        async aiWebSearchPassthroughSearch(aiWebSearchPassthroughSearchRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
+        async aiWebSearchPassthroughSearch(aiWebSearchPassthroughSearchRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | null; }>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiWebSearchPassthroughSearch(aiWebSearchPassthroughSearchRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['WebSearchApi.aiWebSearchPassthroughSearch']?.[localVarOperationServerIndex]?.url;
@@ -592,7 +594,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
             return localVarFp.aiWebSearchIsConfigured(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+         * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider\'s 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
          * @summary Web page contents passthrough
          * @param {WebSearchApiAiWebSearchPassthroughContentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -604,7 +606,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
             return localVarFp.aiWebSearchPassthroughContents(requestParameters.aiWebSearchPassthroughContentsRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+         * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider\'s own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
          * @summary Web search passthrough
          * @param {WebSearchApiAiWebSearchPassthroughSearchRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -612,7 +614,7 @@ export const WebSearchApiFactory = function (configuration?: Configuration, base
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-web-search-passthrough-search/
          * @throws {RequiredError}
          */
-        aiWebSearchPassthroughSearch(requestParameters: WebSearchApiAiWebSearchPassthroughSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
+        aiWebSearchPassthroughSearch(requestParameters: WebSearchApiAiWebSearchPassthroughSearchRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any | null; }> {
             return localVarFp.aiWebSearchPassthroughSearch(requestParameters.aiWebSearchPassthroughSearchRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -705,7 +707,7 @@ export interface WebSearchApiAiWebSearchIsConfiguredRequest {
  */
 export interface WebSearchApiAiWebSearchPassthroughContentsRequest {
     /**
-     * A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration.
+     * A page-contents request in the shape the portal\'s active web-search provider expects, forwarded to it once `urls` passes a type check. The endpoint and the key come from the stored configuration.
      * @type {{ [key: string]: any | null; }}
      * @memberof WebSearchApiAiWebSearchPassthroughContents
      */
@@ -719,7 +721,7 @@ export interface WebSearchApiAiWebSearchPassthroughContentsRequest {
  */
 export interface WebSearchApiAiWebSearchPassthroughSearchRequest {
     /**
-     * A search request in the shape the portal\'s active web-search provider expects, forwarded to it unchanged. The endpoint and the key come from the stored configuration and must not be sent here.
+     * A search request in the shape the portal\'s active web-search provider expects, forwarded to it once `query` and `numResults` pass a type check. The endpoint and the key come from the stored configuration and must not be sent here.
      * @type {{ [key: string]: any | null; }}
      * @memberof WebSearchApiAiWebSearchPassthroughSearch
      */
@@ -810,7 +812,7 @@ export class WebSearchApi extends BaseAPI {
     }
 
     /**
-     * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. The provider\'s status, body and content type are relayed verbatim, so its 429 and its failures surface unchanged. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
+     * Fetches the contents of web pages on behalf of the document editor\'s AI plugin, against the portal\'s active web-search provider, exactly as the search passthrough does — including the `entityId` / `entityKind` billing attribution. The portal-wide configuration is used and a portal without one answers 404. `urls` has to be a non-empty array of strings, or the call answers 400 naming the field. The provider\'s 4xx status, body and content type are relayed, so its 429 surfaces unchanged, while a 5xx is replaced by a fixed 502 with the detail kept in the server log. This is the follow-up to `POST api/2.0/ai/websearch/v1/search`, which returns the results whose contents this operation retrieves.
      * @summary Web page contents passthrough
      * @param {AIWebSearchApiAiWebSearchPassthroughContentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -822,7 +824,7 @@ export class WebSearchApi extends BaseAPI {
     }
 
     /**
-     * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. The provider\'s own status, body and content type are relayed as they stand, so a provider that rate-limits answers 429 and one that is unreachable answers 502. Closing the connection aborts the upstream request.
+     * Runs a web search on behalf of the document editor\'s AI plugin, which holds only a placeholder configuration - the portal\'s active provider and its key are resolved here, so neither ever reaches the browser. The portal-wide configuration is used, and a portal without one answers 404. The `entityId` and `entityKind` query parameters name the document the search is billed to; with the ONLYOFFICE provider the entry is resolved under the caller\'s credentials and sent to the gateway as the request `metadata` (`source_id` / `source_type` / `source_title`), and an entry the caller cannot open sends none. `query` has to be a non-empty string and `numResults`, when sent, a positive integer; a body failing that answers 400 naming the field, before anything is sent on. The provider\'s own 4xx status, body and content type are relayed as they stand, so a provider that rate-limits answers 429; a 5xx from the provider or from the hop in front of it is not relayed, its detail stays in the server log and the call answers a fixed 502, which is also what an unreachable provider answers. Closing the connection aborts the upstream request.
      * @summary Web search passthrough
      * @param {AIWebSearchApiAiWebSearchPassthroughSearchRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

@@ -45,6 +45,9 @@ import type { AiFileShare } from './ai-file-share';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiFolderType } from './ai-folder-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiMetadataMatchDto } from './ai-metadata-match-dto';
 
 /**
  * @type AiFileEntryDto
@@ -142,6 +145,12 @@ export type AiFileEntryDto = AiFileEntryBaseDto &  {
      * @memberof AiFileEntryDto
      */
     'assignedMetadataTemplates'?: Array<number> | null;
+    /**
+     * Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
+     * @type {Array<AiMetadataMatchDto>}
+     * @memberof AiFileEntryDto
+     */
+    'metadataMatches'?: Array<AiMetadataMatchDto> | null;
 };
 
 

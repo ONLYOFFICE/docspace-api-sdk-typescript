@@ -45,7 +45,7 @@ export interface CreateBackupScheduleRequestDto {
      */
     'backupsStored'?: number | null;
     /**
-     * When the backup runs. It is required: a request without it fails rather than falling back to a  default.
+     * When the backup runs. It is required: a request without it is rejected rather than falling back to  a default.
      */
     'cronParams'?: BackupCronRequest;
     /**

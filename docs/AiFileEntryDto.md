@@ -43,6 +43,7 @@ Name | Type | Description | Notes
 **expirationDate** | [**AiApiDateTime**](AiApiDateTime.md) | When the link being used stops working, written with the offset of the portal\'s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] [default to undefined]
 **isLinkExpired** | **boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [default to undefined]
 **assignedMetadataTemplates** | **Array&lt;number&gt;** | The IDs of the metadata templates assigned to the file entry. | [optional] [default to undefined]
+**metadataMatches** | [**Array&lt;AiMetadataMatchDto&gt;**](AiMetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] [default to undefined]
 
 ## Example
 
@@ -87,6 +88,7 @@ const instance: AiFileEntryDto = {
     expirationDate,
     isLinkExpired,
     assignedMetadataTemplates,
+    metadataMatches,
 };
 ```
 

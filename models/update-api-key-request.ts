@@ -24,7 +24,7 @@
  */
 export interface UpdateApiKeyRequest {
     /**
-     * The new label of the key, up to 30 characters. Omit it to keep the current name.
+     * The new label of the key, up to 30 characters, neither empty nor made of whitespace only. Omit it to keep the  current name.
      */
     'name'?: string | null;
     /**

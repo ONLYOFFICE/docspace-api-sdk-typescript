@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiErrorCode } from './ai-error-code';
 
 /**
  * A field-scoped validation error: which form field was rejected, and why.
@@ -31,12 +34,17 @@ export interface AiErrorData {
      * The human-readable reason the field was rejected.
      */
     'message': string;
+    /**
+     * Optional: producers that know the reason set it (the prompts engine does).
+     */
+    'code'?: AiErrorCode;
 }
 
 export const AiErrorDataFieldEnum = {
     Key: 'key',
     Url: 'url',
     Name: 'name',
+    Text: 'text',
 } as const;
 
 export type AiErrorDataFieldEnum = typeof AiErrorDataFieldEnum[keyof typeof AiErrorDataFieldEnum];

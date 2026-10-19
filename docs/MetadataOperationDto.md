@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **progress** | **number** | The operation progress percentage. | [optional] [default to undefined]
 **isCompleted** | **boolean** | Specifies if the operation is completed. | [optional] [default to undefined]
 **error** | **string** | The operation error message. | [optional] [default to undefined]
+**templateIds** | **Array&lt;number&gt;** | The IDs of the metadata templates the operation propagates to the subtree. Empty when there is no operation to  report, so the answer describes nothing in progress. | [optional] [default to undefined]
 
 ## Example
 
@@ -21,6 +22,7 @@ const instance: MetadataOperationDto = {
     progress,
     isCompleted,
     error,
+    templateIds,
 };
 ```
 

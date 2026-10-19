@@ -32,7 +32,7 @@ export interface EncryptionKeyDto {
      */
     'userId'?: string;
     /**
-     * When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier.
+     * When this key material was written. Rotating the pair refreshes it, so it dates the material that is being  reported rather than the first appearance of the identifier. A pair stored before key sets existed (the one with  the all-zero identifier) has no recorded date and reports `0001-01-01T00:00:00` until it is rotated.
      */
     'date'?: string;
     /**

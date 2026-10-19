@@ -65,6 +65,9 @@ import type { FormFillingStatus } from './form-filling-status';
 import type { ImageSizeDto } from './image-size-dto';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { MetadataMatchDto } from './metadata-match-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Thumbnail } from './thumbnail';
 // May contain unused imports in some cases
 // @ts-ignore
