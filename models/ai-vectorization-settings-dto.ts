@@ -26,6 +26,9 @@ import type { AiEmbeddingProviderType } from './ai-embedding-provider-type';
  * The vectorization settings.
  */
 export interface AiVectorizationSettingsDto {
+    /**
+     * The type of embedding provider configured for document vectorization.
+     */
     'type'?: AiEmbeddingProviderType;
     /**
      * Indicates whether the embedding provider API key needs to be reconfigured.

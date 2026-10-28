@@ -26,11 +26,17 @@ import type { AiImportError } from './ai-import-error';
 import type { AiImportResultImported } from './ai-import-result-imported';
 
 /**
- * Outcome of  {@link  PromptsEngine.importBundle } . Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
+ * Outcome of `PromptsEngine.importBundle`. Either every entry persisted with counts, or no entries persisted plus a per-entry error report.
  */
 export interface AiImportResult {
+    /**
+     * True when the whole bundle was imported.
+     */
     'success': boolean;
     'imported'?: AiImportResultImported;
+    /**
+     * What was rejected, per entry. Present on failure - and then nothing was imported.
+     */
     'errors'?: Array<AiImportError>;
 }
 

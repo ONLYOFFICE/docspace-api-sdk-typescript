@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { SecurityDto } from './security-dto';
 
+/**
+ * The successful API response containing the list of SecurityDto objects.
+ */
 export interface SecurityArrayWrapper {
+    /**
+     * The list of SecurityDto objects returned by the operation.
+     */
     'response'?: Array<SecurityDto>;
     /**
      * The total number of items in the response

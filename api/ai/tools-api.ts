@@ -28,11 +28,11 @@ import type { AiErrorResponse } from '../../models';
 // @ts-ignore
 import type { AiSuccessResponse } from '../../models';
 // @ts-ignore
-import type { AiTMCPItem } from '../../models';
-// @ts-ignore
 import type { AiToolsAddCustomServerRequest } from '../../models';
 // @ts-ignore
 import type { AiToolsBulkResult } from '../../models';
+// @ts-ignore
+import type { AiToolsListSystemTools200Response } from '../../models';
 // @ts-ignore
 import type { AiToolsMutationResult } from '../../models';
 // @ts-ignore
@@ -54,7 +54,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
     
     return {
         /**
-         * 
+         * Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server\'s canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal\'s own registry.
          * @summary Add custom server
          * @param {AiToolsAddCustomServerRequest} aiToolsAddCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -78,6 +78,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -93,17 +99,15 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
          * @summary Get allow always
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetAllowAlways operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/
          */
-        aiToolsGetAllowAlways: async (entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsGetAllowAlways', 'entityId', entityId)
+        aiToolsGetAllowAlways: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/tools/get-allow-always`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -116,6 +120,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
@@ -133,20 +143,18 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
          * @summary Get custom server
-         * @param {string} name 
-         * @param {string} entityId 
+         * @param {string} name The custom MCP server name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetCustomServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server/
          */
-        aiToolsGetCustomServer: async (name: string, entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiToolsGetCustomServer: async (name: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('aiToolsGetCustomServer', 'name', name)
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsGetCustomServer', 'entityId', entityId)
 
             const localVarPath = `/api/2.0/ai/tools/get-custom-server`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -159,6 +167,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (name !== undefined) {
                 localVarQueryParameter['name'] = name;
@@ -180,17 +194,18 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller\'s effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
          * @summary Get disabled
-         * @param {string} entityId 
+         * @param {string} scope 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetDisabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
          */
-        aiToolsGetDisabled: async (entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsGetDisabled', 'entityId', entityId)
+        aiToolsGetDisabled: async (scope: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'scope' is not null or undefined
+            assertParamExists('aiToolsGetDisabled', 'scope', scope)
 
             const localVarPath = `/api/2.0/ai/tools/get-disabled`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -204,8 +219,18 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
+            }
+
+            if (scope !== undefined) {
+                localVarQueryParameter['scope'] = scope;
             }
 
 
@@ -220,23 +245,21 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
          * @summary Is allow always
-         * @param {string} serverType 
-         * @param {string} toolName 
-         * @param {string} entityId 
+         * @param {string} serverType The MCP server type the tool belongs to.
+         * @param {string} toolName The tool name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsIsAllowAlways operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-allow-always/
          */
-        aiToolsIsAllowAlways: async (serverType: string, toolName: string, entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiToolsIsAllowAlways: async (serverType: string, toolName: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'serverType' is not null or undefined
             assertParamExists('aiToolsIsAllowAlways', 'serverType', serverType)
             // verify required parameter 'toolName' is not null or undefined
             assertParamExists('aiToolsIsAllowAlways', 'toolName', toolName)
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsIsAllowAlways', 'entityId', entityId)
 
             const localVarPath = `/api/2.0/ai/tools/is-allow-always`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -250,6 +273,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (serverType !== undefined) {
                 localVarQueryParameter['serverType'] = serverType;
             }
@@ -274,23 +303,21 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
          * @summary Is tool disabled
-         * @param {string} serverType 
-         * @param {string} toolName 
-         * @param {string} entityId 
+         * @param {string} serverType The MCP server type the tool belongs to.
+         * @param {string} toolName The tool name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsIsToolDisabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-tool-disabled/
          */
-        aiToolsIsToolDisabled: async (serverType: string, toolName: string, entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiToolsIsToolDisabled: async (serverType: string, toolName: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'serverType' is not null or undefined
             assertParamExists('aiToolsIsToolDisabled', 'serverType', serverType)
             // verify required parameter 'toolName' is not null or undefined
             assertParamExists('aiToolsIsToolDisabled', 'toolName', toolName)
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsIsToolDisabled', 'entityId', entityId)
 
             const localVarPath = `/api/2.0/ai/tools/is-tool-disabled`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -304,6 +331,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (serverType !== undefined) {
                 localVarQueryParameter['serverType'] = serverType;
             }
@@ -328,17 +361,15 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal\'s own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
          * @summary List custom servers
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsListCustomServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/
          */
-        aiToolsListCustomServers: async (entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsListCustomServers', 'entityId', entityId)
+        aiToolsListCustomServers: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/tools/list-custom-servers`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -352,6 +383,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
             }
@@ -368,17 +405,15 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope\'s registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal\'s own built-in server is left out because it is always enabled.
          * @summary List system tools
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsListSystemTools operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
          */
-        aiToolsListSystemTools: async (entityId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'entityId' is not null or undefined
-            assertParamExists('aiToolsListSystemTools', 'entityId', entityId)
+        aiToolsListSystemTools: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/tools/list-system-tools`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -392,6 +427,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
             }
@@ -408,7 +449,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal\'s registration is dropped.
          * @summary Remove custom server
          * @param {AiToolsRemoveCustomServerRequest} aiToolsRemoveCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -432,6 +473,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -447,7 +494,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
          * @summary Replace all custom servers
          * @param {AiToolsReplaceAllCustomServersRequest} aiToolsReplaceAllCustomServersRequest 
          * @param {*} [options] Override http request option.
@@ -471,6 +518,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -486,7 +539,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Adds one tool to the scope\'s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
          * @summary Set allow always
          * @param {AiToolsSetAllowAlwaysRequest} aiToolsSetAllowAlwaysRequest 
          * @param {*} [options] Override http request option.
@@ -510,6 +563,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -525,7 +584,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round\'s tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope\'s registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller\'s own; `tenant`, the list an administrator keeps for everyone, which every user\'s reads fold in - the portal settings page writes that one, the composer\'s own toggles the first.
          * @summary Set disabled
          * @param {AiToolsSetDisabledRequest} aiToolsSetDisabledRequest 
          * @param {*} [options] Override http request option.
@@ -549,6 +608,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -564,7 +629,7 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server\'s canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
          * @summary Update custom server
          * @param {AiToolsUpdateCustomServerRequest} aiToolsUpdateCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -587,6 +652,12 @@ export const ToolsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -613,7 +684,7 @@ export const ToolsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ToolsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server\'s canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal\'s own registry.
          * @summary Add custom server
          * @param {AiToolsAddCustomServerRequest} aiToolsAddCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -628,117 +699,118 @@ export const ToolsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
          * @summary Get allow always
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetAllowAlways operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/
          */
-        async aiToolsGetAllowAlways(entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+        async aiToolsGetAllowAlways(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsGetAllowAlways(entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsGetAllowAlways']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
          * @summary Get custom server
-         * @param {string} name 
-         * @param {string} entityId 
+         * @param {string} name The custom MCP server name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetCustomServer operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-custom-server/
          */
-        async aiToolsGetCustomServer(name: string, entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async aiToolsGetCustomServer(name: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsGetCustomServer(name, entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsGetCustomServer']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller\'s effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
          * @summary Get disabled
-         * @param {string} entityId 
+         * @param {string} scope 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsGetDisabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-disabled/
          */
-        async aiToolsGetDisabled(entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: Array<string>; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsGetDisabled(entityId, options);
+        async aiToolsGetDisabled(scope: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: Array<string>; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsGetDisabled(scope, entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsGetDisabled']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
          * @summary Is allow always
-         * @param {string} serverType 
-         * @param {string} toolName 
-         * @param {string} entityId 
+         * @param {string} serverType The MCP server type the tool belongs to.
+         * @param {string} toolName The tool name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsIsAllowAlways operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-allow-always/
          */
-        async aiToolsIsAllowAlways(serverType: string, toolName: string, entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async aiToolsIsAllowAlways(serverType: string, toolName: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsIsAllowAlways(serverType, toolName, entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsIsAllowAlways']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
          * @summary Is tool disabled
-         * @param {string} serverType 
-         * @param {string} toolName 
-         * @param {string} entityId 
+         * @param {string} serverType The MCP server type the tool belongs to.
+         * @param {string} toolName The tool name.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsIsToolDisabled operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-is-tool-disabled/
          */
-        async aiToolsIsToolDisabled(serverType: string, toolName: string, entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
+        async aiToolsIsToolDisabled(serverType: string, toolName: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsIsToolDisabled(serverType, toolName, entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsIsToolDisabled']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal\'s own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
          * @summary List custom servers
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsListCustomServers operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/
          */
-        async aiToolsListCustomServers(entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: object; }>> {
+        async aiToolsListCustomServers(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: object; }>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsListCustomServers(entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsListCustomServers']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope\'s registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal\'s own built-in server is left out because it is always enabled.
          * @summary List system tools
-         * @param {string} entityId 
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiToolsListSystemTools operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
          */
-        async aiToolsListSystemTools(entityId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: Array<AiTMCPItem>; }>> {
+        async aiToolsListSystemTools(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiToolsListSystemTools200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiToolsListSystemTools(entityId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ToolsApi.aiToolsListSystemTools']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal\'s registration is dropped.
          * @summary Remove custom server
          * @param {AiToolsRemoveCustomServerRequest} aiToolsRemoveCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -753,7 +825,7 @@ export const ToolsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
          * @summary Replace all custom servers
          * @param {AiToolsReplaceAllCustomServersRequest} aiToolsReplaceAllCustomServersRequest 
          * @param {*} [options] Override http request option.
@@ -768,7 +840,7 @@ export const ToolsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Adds one tool to the scope\'s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
          * @summary Set allow always
          * @param {AiToolsSetAllowAlwaysRequest} aiToolsSetAllowAlwaysRequest 
          * @param {*} [options] Override http request option.
@@ -783,7 +855,7 @@ export const ToolsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round\'s tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope\'s registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller\'s own; `tenant`, the list an administrator keeps for everyone, which every user\'s reads fold in - the portal settings page writes that one, the composer\'s own toggles the first.
          * @summary Set disabled
          * @param {AiToolsSetDisabledRequest} aiToolsSetDisabledRequest 
          * @param {*} [options] Override http request option.
@@ -798,7 +870,7 @@ export const ToolsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server\'s canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
          * @summary Update custom server
          * @param {AiToolsUpdateCustomServerRequest} aiToolsUpdateCustomServerRequest 
          * @param {*} [options] Override http request option.
@@ -823,7 +895,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
     const localVarFp = ToolsApiFp(configuration)
     return {
         /**
-         * 
+         * Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server\'s canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal\'s own registry.
          * @summary Add custom server
          * @param {ToolsApiAiToolsAddCustomServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -835,7 +907,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsAddCustomServer(requestParameters.aiToolsAddCustomServerRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
          * @summary Get allow always
          * @param {ToolsApiAiToolsGetAllowAlwaysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -843,11 +915,11 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-get-allow-always/
          * @throws {RequiredError}
          */
-        aiToolsGetAllowAlways(requestParameters: ToolsApiAiToolsGetAllowAlwaysRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
+        aiToolsGetAllowAlways(requestParameters: ToolsApiAiToolsGetAllowAlwaysRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
             return localVarFp.aiToolsGetAllowAlways(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
          * @summary Get custom server
          * @param {ToolsApiAiToolsGetCustomServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -859,7 +931,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsGetCustomServer(requestParameters.name, requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller\'s effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
          * @summary Get disabled
          * @param {ToolsApiAiToolsGetDisabledRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -868,10 +940,10 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
          * @throws {RequiredError}
          */
         aiToolsGetDisabled(requestParameters: ToolsApiAiToolsGetDisabledRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: Array<string>; }> {
-            return localVarFp.aiToolsGetDisabled(requestParameters.entityId, options).then((request) => request(axios, basePath));
+            return localVarFp.aiToolsGetDisabled(requestParameters.scope, requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
          * @summary Is allow always
          * @param {ToolsApiAiToolsIsAllowAlwaysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -883,7 +955,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsIsAllowAlways(requestParameters.serverType, requestParameters.toolName, requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
          * @summary Is tool disabled
          * @param {ToolsApiAiToolsIsToolDisabledRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -895,7 +967,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsIsToolDisabled(requestParameters.serverType, requestParameters.toolName, requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal\'s own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
          * @summary List custom servers
          * @param {ToolsApiAiToolsListCustomServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -903,11 +975,11 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-custom-servers/
          * @throws {RequiredError}
          */
-        aiToolsListCustomServers(requestParameters: ToolsApiAiToolsListCustomServersRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: object; }> {
+        aiToolsListCustomServers(requestParameters: ToolsApiAiToolsListCustomServersRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: object; }> {
             return localVarFp.aiToolsListCustomServers(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope\'s registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal\'s own built-in server is left out because it is always enabled.
          * @summary List system tools
          * @param {ToolsApiAiToolsListSystemToolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -915,11 +987,11 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-tools-list-system-tools/
          * @throws {RequiredError}
          */
-        aiToolsListSystemTools(requestParameters: ToolsApiAiToolsListSystemToolsRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: Array<AiTMCPItem>; }> {
+        aiToolsListSystemTools(requestParameters: ToolsApiAiToolsListSystemToolsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiToolsListSystemTools200Response> {
             return localVarFp.aiToolsListSystemTools(requestParameters.entityId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal\'s registration is dropped.
          * @summary Remove custom server
          * @param {ToolsApiAiToolsRemoveCustomServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -931,7 +1003,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsRemoveCustomServer(requestParameters.aiToolsRemoveCustomServerRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
          * @summary Replace all custom servers
          * @param {ToolsApiAiToolsReplaceAllCustomServersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -943,7 +1015,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsReplaceAllCustomServers(requestParameters.aiToolsReplaceAllCustomServersRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Adds one tool to the scope\'s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
          * @summary Set allow always
          * @param {ToolsApiAiToolsSetAllowAlwaysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -955,7 +1027,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsSetAllowAlways(requestParameters.aiToolsSetAllowAlwaysRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round\'s tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope\'s registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller\'s own; `tenant`, the list an administrator keeps for everyone, which every user\'s reads fold in - the portal settings page writes that one, the composer\'s own toggles the first.
          * @summary Set disabled
          * @param {ToolsApiAiToolsSetDisabledRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -967,7 +1039,7 @@ export const ToolsApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.aiToolsSetDisabled(requestParameters.aiToolsSetDisabledRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server\'s canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
          * @summary Update custom server
          * @param {ToolsApiAiToolsUpdateCustomServerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1002,11 +1074,11 @@ export interface ToolsApiAiToolsAddCustomServerRequest {
  */
 export interface ToolsApiAiToolsGetAllowAlwaysRequest {
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsGetAllowAlways
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1016,18 +1088,18 @@ export interface ToolsApiAiToolsGetAllowAlwaysRequest {
  */
 export interface ToolsApiAiToolsGetCustomServerRequest {
     /**
-     * 
+     * The custom MCP server name.
      * @type {string}
      * @memberof ToolsApiAiToolsGetCustomServer
      */
     readonly name: string
 
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsGetCustomServer
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1041,7 +1113,14 @@ export interface ToolsApiAiToolsGetDisabledRequest {
      * @type {string}
      * @memberof ToolsApiAiToolsGetDisabled
      */
-    readonly entityId: string
+    readonly scope: string
+
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof ToolsApiAiToolsGetDisabled
+     */
+    readonly entityId?: string
 }
 
 /**
@@ -1051,25 +1130,25 @@ export interface ToolsApiAiToolsGetDisabledRequest {
  */
 export interface ToolsApiAiToolsIsAllowAlwaysRequest {
     /**
-     * 
+     * The MCP server type the tool belongs to.
      * @type {string}
      * @memberof ToolsApiAiToolsIsAllowAlways
      */
     readonly serverType: string
 
     /**
-     * 
+     * The tool name.
      * @type {string}
      * @memberof ToolsApiAiToolsIsAllowAlways
      */
     readonly toolName: string
 
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsIsAllowAlways
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1079,25 +1158,25 @@ export interface ToolsApiAiToolsIsAllowAlwaysRequest {
  */
 export interface ToolsApiAiToolsIsToolDisabledRequest {
     /**
-     * 
+     * The MCP server type the tool belongs to.
      * @type {string}
      * @memberof ToolsApiAiToolsIsToolDisabled
      */
     readonly serverType: string
 
     /**
-     * 
+     * The tool name.
      * @type {string}
      * @memberof ToolsApiAiToolsIsToolDisabled
      */
     readonly toolName: string
 
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsIsToolDisabled
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1107,11 +1186,11 @@ export interface ToolsApiAiToolsIsToolDisabledRequest {
  */
 export interface ToolsApiAiToolsListCustomServersRequest {
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsListCustomServers
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1121,11 +1200,11 @@ export interface ToolsApiAiToolsListCustomServersRequest {
  */
 export interface ToolsApiAiToolsListSystemToolsRequest {
     /**
-     * 
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
      * @type {string}
      * @memberof ToolsApiAiToolsListSystemTools
      */
-    readonly entityId: string
+    readonly entityId?: string
 }
 
 /**
@@ -1206,7 +1285,7 @@ export interface ToolsApiAiToolsUpdateCustomServerRequest {
  */
 export class ToolsApi extends BaseAPI {
     /**
-     * 
+     * Registers a custom MCP server under the given name so the model may call its tools. The name becomes a URL path segment, so it may not be `.`, `..`, or contain a path separator or a control character. `config` may be omitted in two cases: a name matching a host-configured system server pins the entry to that server\'s canonical settings as a whitelist marker, and a name already registered portal-wide copies the portal-level configuration into this scope; anything else without a config is rejected. `entityId` scopes the registration and has to name a room the caller can open - a room that is not an agent room folds to the portal-wide scope, while an unreachable one is refused so it cannot silently rewrite the portal\'s own registry.
      * @summary Add custom server
      * @param {AIToolsApiAiToolsAddCustomServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1218,19 +1297,19 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns the always-allow list of the scope - the tools whose calls run without pausing the round for approval. `entityId` picks the scope and omitting it reads the portal-wide setting. An empty answer means every tool call has to be approved through `POST api/2.0/ai/ai/approve-tool-call`. Use `GET api/2.0/ai/tools/is-allow-always` to ask about a single tool.
      * @summary Get allow always
      * @param {AIToolsApiAiToolsGetAllowAlwaysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ToolsApi
      */
-    public aiToolsGetAllowAlways(requestParameters: ToolsApiAiToolsGetAllowAlwaysRequest, options?: RawAxiosRequestConfig) {
+    public aiToolsGetAllowAlways(requestParameters: ToolsApiAiToolsGetAllowAlwaysRequest = {}, options?: RawAxiosRequestConfig) {
         return ToolsApiFp(this.configuration).aiToolsGetAllowAlways(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Returns the stored configuration of one registered custom MCP server. The name is required and is read from the query; `entityId` picks the scope, and omitting it reads the portal-wide registry. A name that is not registered answers a null body with status 200 rather than 404. The configuration of a system server is returned empty on purpose: those run server-side only, so neither their endpoint nor their credentials are handed to a browser.
      * @summary Get custom server
      * @param {AIToolsApiAiToolsGetCustomServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1242,7 +1321,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns the tools switched off in the scope, as a map of server type to tool names. `entityId` picks the scope and omitting it reads the portal-wide setting. Without `scope` the answer is the caller\'s effective list, with the tools an administrator switched off for everyone folded in; `scope=tenant` reads that administrator list alone, which is what the settings page shows. An absent server type means nothing is switched off for it, so an empty answer means every tool is on offer. Use `GET api/2.0/ai/tools/is-tool-disabled` to ask about one tool instead of reading the whole map.
      * @summary Get disabled
      * @param {AIToolsApiAiToolsGetDisabledRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1250,11 +1329,11 @@ export class ToolsApi extends BaseAPI {
      * @memberof ToolsApi
      */
     public aiToolsGetDisabled(requestParameters: ToolsApiAiToolsGetDisabledRequest, options?: RawAxiosRequestConfig) {
-        return ToolsApiFp(this.configuration).aiToolsGetDisabled(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+        return ToolsApiFp(this.configuration).aiToolsGetDisabled(requestParameters.scope, requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Tells whether one named tool runs without an approval pause in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. A false answer means a call to that tool pauses the round, and the caller resumes it with the approve or deny operation.
      * @summary Is allow always
      * @param {AIToolsApiAiToolsIsAllowAlwaysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1266,7 +1345,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Tells whether one named tool of one server type is switched off in the scope. Both `serverType` and `toolName` are required and are read from the query; `entityId` picks the scope. The answer is a bare boolean. It reflects only the disable list - a tool that is on offer may still require approval, which `GET api/2.0/ai/tools/is-allow-always` reports.
      * @summary Is tool disabled
      * @param {AIToolsApiAiToolsIsToolDisabledRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1278,31 +1357,31 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Lists the custom MCP servers registered in the scope as a map of name to configuration. `entityId` picks the scope and omitting it lists the portal-wide registry. The configuration of any entry that names a host-configured system server comes back empty, for the same reason as in the single-server read, and the portal\'s own built-in MCP server is left out of the list entirely because it is always enabled and cannot be configured. The names in the answer are what the disable and always-allow operations accept as `serverType`.
      * @summary List custom servers
      * @param {AIToolsApiAiToolsListCustomServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ToolsApi
      */
-    public aiToolsListCustomServers(requestParameters: ToolsApiAiToolsListCustomServersRequest, options?: RawAxiosRequestConfig) {
+    public aiToolsListCustomServers(requestParameters: ToolsApiAiToolsListCustomServersRequest = {}, options?: RawAxiosRequestConfig) {
         return ToolsApiFp(this.configuration).aiToolsListCustomServers(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Lists every tool the scope can offer the model, as a map of server type to tool group. The answer merges two sources - the host-configured system servers and the live tools of the scope\'s registered custom MCP servers; for an agent room those are the servers enabled for that agent alone, never the portal-wide registry - and names the system ones separately in `system`, so a client can tell the two apart. `errors` carries the reason a registered server delivered no tools, which is the text to show on a permission card, because the browser cannot reach a server-executed MCP server to find out for itself. The connections are opened server-side, so one request is enough and the client never speaks MCP itself; the portal\'s own built-in server is left out because it is always enabled.
      * @summary List system tools
      * @param {AIToolsApiAiToolsListSystemToolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ToolsApi
      */
-    public aiToolsListSystemTools(requestParameters: ToolsApiAiToolsListSystemToolsRequest, options?: RawAxiosRequestConfig) {
+    public aiToolsListSystemTools(requestParameters: ToolsApiAiToolsListSystemToolsRequest = {}, options?: RawAxiosRequestConfig) {
         return ToolsApiFp(this.configuration).aiToolsListSystemTools(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Unregisters a custom MCP server from the scope, so the model is no longer offered its tools. The name is required and may be sent in the body or as a query parameter, and `entityId` has to name a room the caller can open. A name that is not registered is not reported: the call answers success without removing anything. The server itself is untouched - only this portal\'s registration is dropped.
      * @summary Remove custom server
      * @param {AIToolsApiAiToolsRemoveCustomServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1314,7 +1393,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Replaces the whole custom MCP server registry of the scope with the supplied map in one write, which makes it the operation a settings screen saves with. `map` is required: without it the registry would be emptied, so a missing or non-object value is rejected rather than treated as none. Every name in the map is validated as a routable path segment and every configuration is resolved before anything is written, so a map with one bad entry changes nothing. `entityId` has to name a room the caller can open - this is the operation where an unreachable one would otherwise have wiped the portal-wide registry.
      * @summary Replace all custom servers
      * @param {AIToolsApiAiToolsReplaceAllCustomServersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1326,7 +1405,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Adds one tool to the scope\'s always-allow list, or takes it off, which decides whether a call to it pauses the round for approval. `serverType` and `toolName` have to be non-empty strings and `value` a real boolean - `true` adds, `false` removes - and anything else is rejected before the list is touched, so a malformed body can no longer grant a permanent approval. Unlike the disable operation, `serverType` is not checked against the known server types: an unknown one is stored and then simply never matches. `entityId` has to name a room the caller can open.
      * @summary Set allow always
      * @param {AIToolsApiAiToolsSetAllowAlwaysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1338,7 +1417,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Switches off the listed tools of one server type in the scope, so the model is no longer offered them. `serverType` has to be a key the round\'s tool filter actually matches - a host-configured system server, one of the two DocSpace integration groups, web search, image generation, or one of the scope\'s registered custom servers - and an unknown value is rejected with the list of valid ones in the message, rather than stored and silently ignored. `toolNames` is required and replaces the previous selection for that server type, so send the full list and pass an empty one to switch everything back on; a missing or non-array value is rejected rather than read as a request to clear, and so is one with anything but non-empty tool names in it. `entityId` has to name a room the caller can open. `scope` picks the list the write lands in: omitted or `user`, the caller\'s own; `tenant`, the list an administrator keeps for everyone, which every user\'s reads fold in - the portal settings page writes that one, the composer\'s own toggles the first.
      * @summary Set disabled
      * @param {AIToolsApiAiToolsSetDisabledRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1350,7 +1429,7 @@ export class ToolsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Replaces the stored configuration of a registered custom MCP server, under the same name and scope rules as the add operation. The name is re-validated as a routable path segment, and an omitted `config` resolves the same way - to a system server\'s canonical settings, or to the portal-level entry of that name. `entityId` has to name a room the caller can open. The answer carries the stored registry entry.
      * @summary Update custom server
      * @param {AIToolsApiAiToolsUpdateCustomServerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

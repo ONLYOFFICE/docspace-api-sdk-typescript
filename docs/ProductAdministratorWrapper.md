@@ -1,11 +1,12 @@
 # ProductAdministratorWrapper
 
+The successful API response containing the ProductAdministratorDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**ProductAdministratorDto**](ProductAdministratorDto.md) |  | [optional] [default to undefined]
+**response** | [**ProductAdministratorDto**](ProductAdministratorDto.md) | The ProductAdministratorDto object returned by the operation. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]

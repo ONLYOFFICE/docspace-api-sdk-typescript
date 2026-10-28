@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ReportDto } from './report-dto';
 
+/**
+ * The successful API response containing the ReportDto object.
+ */
 export interface ReportWrapper {
+    /**
+     * The ReportDto object returned by the operation.
+     */
     'response'?: ReportDto;
     /**
      * The total number of items in the response

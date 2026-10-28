@@ -24,16 +24,25 @@ import type { AiBuiltinProviderType } from './ai-builtin-provider-type';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiProviderType } from './ai-provider-type';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiReasoningSupport } from './ai-reasoning-support';
 
 /**
- * Input for creating a new profile — the same shape as  {@link  Profile }  without the engine-generated fields (`id`, `createdAt`).
+ * Input for creating a new profile — the same shape as `Profile` without the engine-generated fields (`id`, `createdAt`).
  */
 export interface AiCreateProfileInput {
     /**
      * User-defined profile display name.
      */
     'name': string;
+    /**
+     * Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider\'s response parser — see `Profile.basedOn` for the format selector.
+     */
     'providerType': AiProviderType;
+    /**
+     * Selects the response-format parser used by the `external` provider. Ignored for any other `providerType`.  Supported values are `openai`, `anthropic`, `mistral` and `openrouter`. Remaining values (`genai`, `stabilityai`, …) are accepted by the type but not yet implemented; passing one raises an error at request time.
+     */
     'basedOn'?: AiBuiltinProviderType;
     /**
      * Base URL of the provider API.
@@ -44,7 +53,7 @@ export interface AiCreateProfileInput {
      */
     'key'?: string;
     /**
-     * Extra HTTP headers sent with every request to this provider. Merged into the SDK client\'s default headers; an explicit `Authorization` here wins over the one derived from  {@link  key  } . Honoured by the OpenAI-family providers.
+     * Extra HTTP headers sent with every request to this provider. Merged into the SDK client\'s default headers; an explicit `Authorization` here wins over the one derived from `key`. Honoured by the OpenAI-family providers.
      */
     'headers'?: { [key: string]: string; };
     /**
@@ -56,6 +65,10 @@ export interface AiCreateProfileInput {
      */
     'reasoning'?: boolean;
     /**
+     * Extended-thinking capabilities of the selected model as reported by the provider\'s catalogue at save time (see `Model.reasoningSupport`). When present the composer\'s Effort row follows it exactly; when absent the provider\'s id-based table answers. Hosts persist it with the rest of the profile.
+     */
+    'reasoningSupport'?: AiReasoningSupport;
+    /**
      * Bitmask of capabilities supported by the selected model.
      */
     'capabilities'?: number;
@@ -64,7 +77,7 @@ export interface AiCreateProfileInput {
      */
     'canUseTool'?: boolean;
     /**
-     * Result of the live Responses-API probe (parallel to  {@link  canUseTool  } ). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.
+     * Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`.
      */
     'useResponsesApi'?: boolean;
     /**
@@ -72,7 +85,7 @@ export interface AiCreateProfileInput {
      */
     'isCloudProvider'?: boolean;
     /**
-     * Route every provider request through the host\'s `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the  {@link  PlatformAdapter.fetchProxy  }  is not configured.
+     * Route every provider request through the host\'s `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.
      */
     'useProxy'?: boolean;
 }

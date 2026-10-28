@@ -20,13 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 
 /**
- * Outcome of  {@link  AssignmentsEngine.assign }  /  {@link  AssignmentsEngine.unassign } . Either a success or a field-scoped error suitable for displaying in the profile editor.
+ * Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
  */
 export interface AiAssignmentMutationResult {
+    /**
+     * True when the assignment was persisted.
+     */
     'success': boolean;
-    'error'?: AiTErrorData;
+    /**
+     * Why the assignment was rejected. Present on failure.
+     */
+    'error'?: AiErrorData;
 }
 

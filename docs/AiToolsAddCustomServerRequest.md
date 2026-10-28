@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** | Server name (unique within scope). | [default to undefined]
-**config** | **object** | One MCP server configuration. The shape is intentionally open — MCP allows per-transport fields (`command`/`args` for stdio, `url` for HTTP, plus env, headers, etc.) and the storage layer stays agnostic to which transport is in use. | [default to undefined]
+**config** | **object** | Server transport configuration. | [default to undefined]
 **entityId** | **string** |  | [optional] [default to undefined]
 
 ## Example

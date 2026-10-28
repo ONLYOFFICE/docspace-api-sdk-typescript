@@ -25,9 +25,21 @@ import type { AiOpenAIChoiceDelta } from './ai-open-aichoice-delta';
 // @ts-ignore
 import type { AiOpenAIFinishReason } from './ai-open-aifinish-reason';
 
+/**
+ * One choice of a streaming completion, carrying the part this chunk adds.
+ */
 export interface AiOpenAIChunkChoice {
+    /**
+     * The zero-based position of the choice. This service emits a single choice, so always 0.
+     */
     'index': number;
+    /**
+     * What this chunk adds to the choice.
+     */
     'delta': AiOpenAIChoiceDelta;
+    /**
+     * Why the completion stopped, or null while it is still streaming.
+     */
     'finish_reason': AiOpenAIFinishReason | null;
 }
 

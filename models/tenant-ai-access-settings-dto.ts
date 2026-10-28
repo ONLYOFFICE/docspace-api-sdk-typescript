@@ -20,12 +20,16 @@
 
 
 /**
- * The request parameters for managing the tenant-level AI access settings.
+ * Whether AI functionality is switched on for the portal.
  */
 export interface TenantAiAccessSettingsDto {
     /**
-     * Specifies whether AI functionality is enabled for the tenant.  Set to `true` to enable all AI features or `false` to disable them tenant-wide.
+     * Specifies whether AI functionality is enabled for the tenant.  When set to `false`, all AI features (chat, agents, vectorization) are disabled tenant-wide.
      */
     'enabled'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
+    'lastModified'?: string;
 }
 

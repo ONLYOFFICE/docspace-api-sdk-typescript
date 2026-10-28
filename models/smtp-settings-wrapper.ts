@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { SmtpSettingsDto } from './smtp-settings-dto';
 
+/**
+ * The successful API response containing the SmtpSettingsDto object.
+ */
 export interface SmtpSettingsWrapper {
+    /**
+     * The SmtpSettingsDto object returned by the operation.
+     */
     'response'?: SmtpSettingsDto;
     /**
      * The total number of items in the response

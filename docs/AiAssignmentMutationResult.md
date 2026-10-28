@@ -1,13 +1,13 @@
 # AiAssignmentMutationResult
 
-Outcome of  {@link  AssignmentsEngine.assign }  /  {@link  AssignmentsEngine.unassign } . Either a success or a field-scoped error suitable for displaying in the profile editor.
+Outcome of `AssignmentsEngine.assign` / `AssignmentsEngine.unassign`. Either a success or a field-scoped error suitable for displaying in the profile editor.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **boolean** |  | [default to undefined]
-**error** | [**AiTErrorData**](AiTErrorData.md) |  | [optional] [default to undefined]
+**success** | **boolean** | True when the assignment was persisted. | [default to undefined]
+**error** | [**AiErrorData**](AiErrorData.md) | Why the assignment was rejected. Present on failure. | [optional] [default to undefined]
 
 ## Example
 

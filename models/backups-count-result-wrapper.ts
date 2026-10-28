@@ -25,7 +25,13 @@ import type { BackupsCountResultDto } from './backups-count-result-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the BackupsCountResultDto object.
+ */
 export interface BackupsCountResultWrapper {
+    /**
+     * The BackupsCountResultDto object returned by the operation.
+     */
     'response'?: BackupsCountResultDto;
     /**
      * The total number of items in the response

@@ -20,20 +20,20 @@
 
 
 /**
- * [0 - Active, 1 - Archive, 2 - Any, 3 - Recent by links, 4 - Template, 5 - Knowledge, 6 - Result storage, 7 - AiAgents, 8 - Forms, 9 - Form templates]
+ * [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]
  */
 
 export const SearchArea = {
-    Active: 0,
-    Archive: 1,
-    Any: 2,
-    RecentByLinks: 3,
-    Templates: 4,
-    Knowledge: 5,
-    ResultStorage: 6,
-    AiAgents: 7,
-    Forms: 8,
-    FormTemplates: 9,
+    Active: 'Active',
+    Archive: 'Archive',
+    Any: 'Any',
+    RecentByLinks: 'RecentByLinks',
+    Templates: 'Templates',
+    Knowledge: 'Knowledge',
+    ResultStorage: 'ResultStorage',
+    AiAgents: 'AiAgents',
+    Forms: 'Forms',
+    FormTemplates: 'FormTemplates',
 } as const;
 
 export type SearchArea = typeof SearchArea[keyof typeof SearchArea];

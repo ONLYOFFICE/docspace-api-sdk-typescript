@@ -20,9 +20,8 @@
 
 
 /**
- * @type AiAgentsUpdateQuotaRequestRoomIdsInner
  * A DocSpace room id: an integer for native rooms, a string for third-party-backed ones.
  */
-export type AiAgentsUpdateQuotaRequestRoomIdsInner = number | string;
-
+export interface AiAgentsUpdateQuotaRequestRoomIdsInner {
+}
 

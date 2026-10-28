@@ -6,7 +6,7 @@ Generic success acknowledgement for mutations that return no data.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**success** | **boolean** |  | [default to undefined]
+**success** | **boolean** | Always true — the mutation completed. | [default to undefined]
 
 ## Example
 

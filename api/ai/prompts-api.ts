@@ -58,8 +58,8 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
     
     return {
         /**
-         * 
-         * @summary Create
+         * Saves a new prompt in the caller\'s own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user\'s library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+         * @summary Save a prompt
          * @param {AiCreatePromptInput} aiCreatePromptInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -82,6 +82,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -97,17 +103,17 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Creates a folder in the caller\'s prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
          * @summary Create folder
-         * @param {string} body 
+         * @param {string} aiPromptsCreateFolderRequest The name of the folder to create, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsCreateFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
          */
-        aiPromptsCreateFolder: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsCreateFolder', 'body', body)
+        aiPromptsCreateFolder: async (aiPromptsCreateFolderRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsCreateFolderRequest' is not null or undefined
+            assertParamExists('aiPromptsCreateFolder', 'aiPromptsCreateFolderRequest', aiPromptsCreateFolderRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/create-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -121,6 +127,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -128,7 +140,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsCreateFolderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -136,17 +148,17 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Delete
-         * @param {string} body 
+         * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
+         * @summary Delete a saved prompt
+         * @param {string} aiPromptsDeleteRequest The ID of the prompt to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
          */
-        aiPromptsDelete: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsDelete', 'body', body)
+        aiPromptsDelete: async (aiPromptsDeleteRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsDeleteRequest' is not null or undefined
+            assertParamExists('aiPromptsDelete', 'aiPromptsDeleteRequest', aiPromptsDeleteRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/delete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -160,6 +172,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -167,7 +185,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsDeleteRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -175,17 +193,17 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
          * @summary Delete folder
-         * @param {string} body 
+         * @param {string} aiPromptsDeleteFolderRequest The ID of the folder to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDeleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
          */
-        aiPromptsDeleteFolder: async (body: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('aiPromptsDeleteFolder', 'body', body)
+        aiPromptsDeleteFolder: async (aiPromptsDeleteFolderRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiPromptsDeleteFolderRequest' is not null or undefined
+            assertParamExists('aiPromptsDeleteFolder', 'aiPromptsDeleteFolderRequest', aiPromptsDeleteFolderRequest)
 
             const localVarPath = `/api/2.0/ai/prompts/delete-folder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -199,6 +217,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -206,7 +230,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiPromptsDeleteFolderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -214,8 +238,8 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Export
+         * Builds a versioned bundle of every prompt and folder in the caller\'s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
+         * @summary Export the prompt library
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsExport operation
@@ -235,6 +259,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -247,9 +277,9 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Get by id
-         * @param {string} id 
+         * Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
+         * @summary Get a saved prompt
+         * @param {string} id The saved prompt identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsGetById operation
@@ -271,6 +301,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
             }
@@ -287,9 +323,9 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Get folder by id
-         * @param {string} id 
+         * Returns one folder of the caller\'s prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
+         * @summary Get a prompt folder
+         * @param {string} id The prompt folder identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsGetFolderById operation
@@ -311,6 +347,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
             if (id !== undefined) {
                 localVarQueryParameter['id'] = id;
             }
@@ -327,7 +369,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller\'s library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle\'s shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
          * @summary Import bundle
          * @param {AiPromptsImportBundleRequest} aiPromptsImportBundleRequest 
          * @param {*} [options] Override http request option.
@@ -351,6 +393,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -366,17 +414,15 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary List
-         * @param {string} folderId 
+         * Lists the caller\'s saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
+         * @summary List saved prompts
+         * @param {string} [folderId] The prompt folder identifier. Omit to list the prompts that sit outside any folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list/
          */
-        aiPromptsList: async (folderId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'folderId' is not null or undefined
-            assertParamExists('aiPromptsList', 'folderId', folderId)
+        aiPromptsList: async (folderId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/prompts/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -389,6 +435,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             if (folderId !== undefined) {
                 localVarQueryParameter['folderId'] = folderId;
@@ -406,7 +458,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Lists every folder of the caller\'s prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user\'s folders are never listed.
          * @summary List folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -427,6 +479,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -439,8 +497,8 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Move
+         * Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+         * @summary Move a prompt to a folder
          * @param {AiPromptsMoveRequest} aiPromptsMoveRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -463,6 +521,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -478,7 +542,7 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Renames a folder in the caller\'s prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
          * @summary Rename folder
          * @param {AiPromptsRenameFolderRequest} aiPromptsRenameFolderRequest 
          * @param {*} [options] Override http request option.
@@ -502,6 +566,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
 
     
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -517,8 +587,8 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Update
+         * Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+         * @summary Update a saved prompt
          * @param {AiPromptsUpdateRequest} aiPromptsUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -540,6 +610,12 @@ export const PromptsApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
 
     
@@ -566,8 +642,8 @@ export const PromptsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = PromptsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @summary Create
+         * Saves a new prompt in the caller\'s own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user\'s library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+         * @summary Save a prompt
          * @param {AiCreatePromptInput} aiCreatePromptInput 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -581,53 +657,53 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Creates a folder in the caller\'s prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
          * @summary Create folder
-         * @param {string} body 
+         * @param {string} aiPromptsCreateFolderRequest The name of the folder to create, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsCreateFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-create-folder/
          */
-        async aiPromptsCreateFolder(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderMutationResult>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsCreateFolder(body, options);
+        async aiPromptsCreateFolder(aiPromptsCreateFolderRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiFolderMutationResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsCreateFolder(aiPromptsCreateFolderRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsCreateFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Delete
-         * @param {string} body 
+         * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
+         * @summary Delete a saved prompt
+         * @param {string} aiPromptsDeleteRequest The ID of the prompt to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDelete operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete/
          */
-        async aiPromptsDelete(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDelete(body, options);
+        async aiPromptsDelete(aiPromptsDeleteRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDelete(aiPromptsDeleteRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
          * @summary Delete folder
-         * @param {string} body 
+         * @param {string} aiPromptsDeleteFolderRequest The ID of the folder to delete, as a bare JSON string.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsDeleteFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-delete-folder/
          */
-        async aiPromptsDeleteFolder(body: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDeleteFolder(body, options);
+        async aiPromptsDeleteFolder(aiPromptsDeleteFolderRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsDeleteFolder(aiPromptsDeleteFolderRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsDeleteFolder']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Export
+         * Builds a versioned bundle of every prompt and folder in the caller\'s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
+         * @summary Export the prompt library
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsExport operation
@@ -640,9 +716,9 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Get by id
-         * @param {string} id 
+         * Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
+         * @summary Get a saved prompt
+         * @param {string} id The saved prompt identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsGetById operation
@@ -655,9 +731,9 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Get folder by id
-         * @param {string} id 
+         * Returns one folder of the caller\'s prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
+         * @summary Get a prompt folder
+         * @param {string} id The prompt folder identifier.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsGetFolderById operation
@@ -670,7 +746,7 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller\'s library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle\'s shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
          * @summary Import bundle
          * @param {AiPromptsImportBundleRequest} aiPromptsImportBundleRequest 
          * @param {*} [options] Override http request option.
@@ -685,22 +761,22 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary List
-         * @param {string} folderId 
+         * Lists the caller\'s saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
+         * @summary List saved prompts
+         * @param {string} [folderId] The prompt folder identifier. Omit to list the prompts that sit outside any folder.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiPromptsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list/
          */
-        async aiPromptsList(folderId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiPrompt>>> {
+        async aiPromptsList(folderId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiPrompt>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiPromptsList(folderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PromptsApi.aiPromptsList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Lists every folder of the caller\'s prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user\'s folders are never listed.
          * @summary List folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -714,8 +790,8 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Move
+         * Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+         * @summary Move a prompt to a folder
          * @param {AiPromptsMoveRequest} aiPromptsMoveRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -729,7 +805,7 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Renames a folder in the caller\'s prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
          * @summary Rename folder
          * @param {AiPromptsRenameFolderRequest} aiPromptsRenameFolderRequest 
          * @param {*} [options] Override http request option.
@@ -744,8 +820,8 @@ export const PromptsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
-         * @summary Update
+         * Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+         * @summary Update a saved prompt
          * @param {AiPromptsUpdateRequest} aiPromptsUpdateRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -769,8 +845,8 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = PromptsApiFp(configuration)
     return {
         /**
-         * 
-         * @summary Create
+         * Saves a new prompt in the caller\'s own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user\'s library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+         * @summary Save a prompt
          * @param {PromptsApiAiPromptsCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsCreate operation
@@ -781,7 +857,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsCreate(requestParameters.aiCreatePromptInput, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Creates a folder in the caller\'s prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
          * @summary Create folder
          * @param {PromptsApiAiPromptsCreateFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -790,11 +866,11 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsCreateFolder(requestParameters: PromptsApiAiPromptsCreateFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiFolderMutationResult> {
-            return localVarFp.aiPromptsCreateFolder(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsCreateFolder(requestParameters.aiPromptsCreateFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Delete
+         * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
+         * @summary Delete a saved prompt
          * @param {PromptsApiAiPromptsDeleteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsDelete operation
@@ -802,10 +878,10 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsDelete(requestParameters: PromptsApiAiPromptsDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiPromptsDelete(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsDelete(requestParameters.aiPromptsDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
          * @summary Delete folder
          * @param {PromptsApiAiPromptsDeleteFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -814,11 +890,11 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
          * @throws {RequiredError}
          */
         aiPromptsDeleteFolder(requestParameters: PromptsApiAiPromptsDeleteFolderRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiPromptsDeleteFolder(requestParameters.body, options).then((request) => request(axios, basePath));
+            return localVarFp.aiPromptsDeleteFolder(requestParameters.aiPromptsDeleteFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Export
+         * Builds a versioned bundle of every prompt and folder in the caller\'s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
+         * @summary Export the prompt library
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsExport operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-export/
@@ -828,8 +904,8 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsExport(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get by id
+         * Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
+         * @summary Get a saved prompt
          * @param {PromptsApiAiPromptsGetByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsGetById operation
@@ -840,8 +916,8 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsGetById(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get folder by id
+         * Returns one folder of the caller\'s prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
+         * @summary Get a prompt folder
          * @param {PromptsApiAiPromptsGetFolderByIdRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsGetFolderById operation
@@ -852,7 +928,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsGetFolderById(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller\'s library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle\'s shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
          * @summary Import bundle
          * @param {PromptsApiAiPromptsImportBundleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -864,19 +940,19 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsImportBundle(requestParameters.aiPromptsImportBundleRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List
+         * Lists the caller\'s saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
+         * @summary List saved prompts
          * @param {PromptsApiAiPromptsListRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsList operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-prompts-list/
          * @throws {RequiredError}
          */
-        aiPromptsList(requestParameters: PromptsApiAiPromptsListRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AiPrompt>> {
+        aiPromptsList(requestParameters: PromptsApiAiPromptsListRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<Array<AiPrompt>> {
             return localVarFp.aiPromptsList(requestParameters.folderId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists every folder of the caller\'s prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user\'s folders are never listed.
          * @summary List folders
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsListFolders operation
@@ -887,8 +963,8 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsListFolders(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Move
+         * Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+         * @summary Move a prompt to a folder
          * @param {PromptsApiAiPromptsMoveRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsMove operation
@@ -899,7 +975,7 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsMove(requestParameters.aiPromptsMoveRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Renames a folder in the caller\'s prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
          * @summary Rename folder
          * @param {PromptsApiAiPromptsRenameFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -911,8 +987,8 @@ export const PromptsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiPromptsRenameFolder(requestParameters.aiPromptsRenameFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Update
+         * Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+         * @summary Update a saved prompt
          * @param {PromptsApiAiPromptsUpdateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for aiPromptsUpdate operation
@@ -946,11 +1022,11 @@ export interface PromptsApiAiPromptsCreateRequest {
  */
 export interface PromptsApiAiPromptsCreateFolderRequest {
     /**
-     * 
+     * The name of the folder to create, as a bare JSON string.
      * @type {string}
      * @memberof PromptsApiAiPromptsCreateFolder
      */
-    readonly body: string
+    readonly aiPromptsCreateFolderRequest: string
 }
 
 /**
@@ -960,11 +1036,11 @@ export interface PromptsApiAiPromptsCreateFolderRequest {
  */
 export interface PromptsApiAiPromptsDeleteRequest {
     /**
-     * 
+     * The ID of the prompt to delete, as a bare JSON string.
      * @type {string}
      * @memberof PromptsApiAiPromptsDelete
      */
-    readonly body: string
+    readonly aiPromptsDeleteRequest: string
 }
 
 /**
@@ -974,11 +1050,11 @@ export interface PromptsApiAiPromptsDeleteRequest {
  */
 export interface PromptsApiAiPromptsDeleteFolderRequest {
     /**
-     * 
+     * The ID of the folder to delete, as a bare JSON string.
      * @type {string}
      * @memberof PromptsApiAiPromptsDeleteFolder
      */
-    readonly body: string
+    readonly aiPromptsDeleteFolderRequest: string
 }
 
 /**
@@ -988,7 +1064,7 @@ export interface PromptsApiAiPromptsDeleteFolderRequest {
  */
 export interface PromptsApiAiPromptsGetByIdRequest {
     /**
-     * 
+     * The saved prompt identifier.
      * @type {string}
      * @memberof PromptsApiAiPromptsGetById
      */
@@ -1002,7 +1078,7 @@ export interface PromptsApiAiPromptsGetByIdRequest {
  */
 export interface PromptsApiAiPromptsGetFolderByIdRequest {
     /**
-     * 
+     * The prompt folder identifier.
      * @type {string}
      * @memberof PromptsApiAiPromptsGetFolderById
      */
@@ -1030,11 +1106,11 @@ export interface PromptsApiAiPromptsImportBundleRequest {
  */
 export interface PromptsApiAiPromptsListRequest {
     /**
-     * 
+     * The prompt folder identifier. Omit to list the prompts that sit outside any folder.
      * @type {string}
      * @memberof PromptsApiAiPromptsList
      */
-    readonly folderId: string
+    readonly folderId?: string
 }
 
 /**
@@ -1087,8 +1163,8 @@ export interface PromptsApiAiPromptsUpdateRequest {
  */
 export class PromptsApi extends BaseAPI {
     /**
-     * 
-     * @summary Create
+     * Saves a new prompt in the caller\'s own prompt library and returns it. `name` and `text` have to be strings and `folderId`, when sent, a string or null, or the call answers 400 before the library is touched. The name has to be non-empty and unique inside its folder, and `folderId` has to name an existing folder - omit it to save the prompt at the root. A refusal keeps the `{ success: false, error }` body but answers 400 for an empty value, 404 for an unknown folder and 409 for a name already in use. Prompts are per-user: another user\'s library is never visible here, and no permission beyond having AI enabled is needed. The answer carries the stored prompt including the ID to use with the update, move and delete operations.
+     * @summary Save a prompt
      * @param {AIPromptsApiAiPromptsCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1099,7 +1175,7 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Creates a folder in the caller\'s prompt library and returns it. The name has to be a non-empty string and unique across that library - a non-string or empty one answers 400, a name in use 409, both with the `{ success: false, error }` body. Folders do not nest: there is one flat level, so a folder cannot be created inside another. The answer carries the folder ID to use as `folderId` when saving or moving prompts.
      * @summary Create folder
      * @param {AIPromptsApiAiPromptsCreateFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1107,23 +1183,23 @@ export class PromptsApi extends BaseAPI {
      * @memberof PromptsApi
      */
     public aiPromptsCreateFolder(requestParameters: PromptsApiAiPromptsCreateFolderRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsCreateFolder(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsCreateFolder(requestParameters.aiPromptsCreateFolderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Delete
+     * Deletes one saved prompt from the caller\'s library. The ID may be sent in the body or as a query parameter, and it is required. An ID that does not exist, or that belongs to another user, is not reported: the call answers success without deleting anything. The deletion is permanent.
+     * @summary Delete a saved prompt
      * @param {AIPromptsApiAiPromptsDeleteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PromptsApi
      */
     public aiPromptsDelete(requestParameters: PromptsApiAiPromptsDeleteRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsDelete(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsDelete(requestParameters.aiPromptsDeleteRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Deletes a folder together with every prompt inside it, permanently. The ID is required and may be sent in the body or as a query parameter. Unlike deleting a prompt, this checks first: a folder that does not exist, and one that belongs to another user, both answer 404 - the two cases are deliberately indistinguishable, so a foreign folder cannot be probed. Move the prompts out with `PUT api/2.0/ai/prompts/move` first if they should survive.
      * @summary Delete folder
      * @param {AIPromptsApiAiPromptsDeleteFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1131,12 +1207,12 @@ export class PromptsApi extends BaseAPI {
      * @memberof PromptsApi
      */
     public aiPromptsDeleteFolder(requestParameters: PromptsApiAiPromptsDeleteFolderRequest, options?: RawAxiosRequestConfig) {
-        return PromptsApiFp(this.configuration).aiPromptsDeleteFolder(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+        return PromptsApiFp(this.configuration).aiPromptsDeleteFolder(requestParameters.aiPromptsDeleteFolderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Export
+     * Builds a versioned bundle of every prompt and folder in the caller\'s library and returns it, with no parameters. The bundle is self-contained: it carries its own format version so an older export can still be read back, and it is the input `POST api/2.0/ai/prompts/import-bundle` expects. This is also the only way to read the whole library at once, since listing is folder-scoped. Nothing is changed by the call.
+     * @summary Export the prompt library
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PromptsApi
@@ -1146,8 +1222,8 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get by id
+     * Returns one saved prompt by its ID. The ID is required and is read from the query. An ID that is unknown, or that belongs to another user, is not reported as 404: the answer is an empty body with status 200, so treat a missing payload as no such prompt. Prompt IDs come from `GET api/2.0/ai/prompts/list` or from the answer of the create operation.
+     * @summary Get a saved prompt
      * @param {AIPromptsApiAiPromptsGetByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1158,8 +1234,8 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get folder by id
+     * Returns one folder of the caller\'s prompt library by its ID, without the prompts inside it. The ID is required and is read from the query. An unknown or foreign ID is not reported as 404: the answer is an empty body with status 200. This differs from the delete operation on the same ID, which does answer 404.
+     * @summary Get a prompt folder
      * @param {AIPromptsApiAiPromptsGetFolderByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1170,7 +1246,7 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Writes a bundle produced by `GET api/2.0/ai/prompts/export` back into the caller\'s library. `mode` decides how: `replace` deletes the current prompts and folders before writing, and `merge` writes the bundle on top of what is already there. The bundle\'s shape - version 1, `folders` and `prompts` arrays of objects with string ids, names and texts - and the folder references inside it are validated before anything is written, so a corrupt bundle is rejected whole rather than applied halfway: 400 with the refusals in `errors`, or 409 when every refusal is a name that already exists in the library. `replace` is destructive and cannot be undone - export first if the current library matters.
      * @summary Import bundle
      * @param {AIPromptsApiAiPromptsImportBundleRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1182,19 +1258,19 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List
+     * Lists the caller\'s saved prompts, newest first. `folderId` scopes the answer to one folder, and omitting it - or sending it empty - lists the prompts that sit at the root rather than every prompt, because the client fetcher cannot tell an absent value from a null one. There is therefore no way to ask for the whole library in one call: walk the folders from `GET api/2.0/ai/prompts/list-folders`, or take everything at once with `GET api/2.0/ai/prompts/export`. The prompts of other users are never included.
+     * @summary List saved prompts
      * @param {AIPromptsApiAiPromptsListRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PromptsApi
      */
-    public aiPromptsList(requestParameters: PromptsApiAiPromptsListRequest, options?: RawAxiosRequestConfig) {
+    public aiPromptsList(requestParameters: PromptsApiAiPromptsListRequest = {}, options?: RawAxiosRequestConfig) {
         return PromptsApiFp(this.configuration).aiPromptsList(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Lists every folder of the caller\'s prompt library, newest first, with no parameters and no pagination. Folders are flat, so the answer is a single list rather than a tree. The prompts inside them are not included - read those with `GET api/2.0/ai/prompts/list` per folder. Another user\'s folders are never listed.
      * @summary List folders
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1205,8 +1281,8 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Move
+     * Moves a saved prompt into another folder, or to the root when `folderId` is omitted or null. The name is re-validated in the target folder, so the move fails with 409 when a prompt of that name already sits there - rename it first with `PUT api/2.0/ai/prompts/update`; an unknown prompt or folder answers 404. Nothing about the prompt other than its folder changes. The answer carries the moved prompt.
+     * @summary Move a prompt to a folder
      * @param {AIPromptsApiAiPromptsMoveRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1217,7 +1293,7 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Renames a folder in the caller\'s prompt library, validating the new name against the folders already there. The prompts inside it are untouched and keep their IDs. The answer carries the renamed folder. A name that another folder already uses is rejected with 409, an unknown folder with 404 and a non-string or empty name with 400, always with the `{ success: false, error }` body.
      * @summary Rename folder
      * @param {AIPromptsApiAiPromptsRenameFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1229,8 +1305,8 @@ export class PromptsApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Update
+     * Changes a saved prompt and returns the stored result. Only the fields present in `updates` are written, so a partial object leaves the rest of the prompt alone. The name and the folder reference are re-validated whenever either changes, which means an update can fail on a name another prompt in the same folder already uses - that answers 409, an unknown prompt or folder 404, an empty or non-string value 400, always with the `{ success: false, error }` body. Use `PUT api/2.0/ai/prompts/move` to change only the folder.
+     * @summary Update a saved prompt
      * @param {AIPromptsApiAiPromptsUpdateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

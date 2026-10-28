@@ -30,7 +30,9 @@ import type { DoubleNullableWrapper } from '../../models';
 // @ts-ignore
 import type { EncryptionSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { StorageEncryptionRequestsDto } from '../../models';
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
+import type { StorageEncryptionRequestDto } from '../../models';
 /**
  * EncryptionApi - axios parameter creator
  * @export
@@ -40,7 +42,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * Returns the storage encryption progress.
+         * Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
          * @summary Get the storage encryption progress
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -92,7 +94,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the storage encryption settings.
+         * Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
          * @summary Get the storage encryption settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -144,15 +146,15 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Starts the storage encryption process.
-         * @summary Start the storage encryption process
-         * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+         * Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
+         * @summary Start the storage encryption
+         * @param {StorageEncryptionRequestDto} [storageEncryptionRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startStorageEncryption operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/
          */
-        startStorageEncryption: async (storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startStorageEncryption: async (storageEncryptionRequestDto?: StorageEncryptionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/encryption/start`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -192,7 +194,7 @@ export const EncryptionApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(storageEncryptionRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(storageEncryptionRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -210,7 +212,7 @@ export const EncryptionApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = EncryptionApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the storage encryption progress.
+         * Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
          * @summary Get the storage encryption progress
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -224,7 +226,7 @@ export const EncryptionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the storage encryption settings.
+         * Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
          * @summary Get the storage encryption settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -238,16 +240,16 @@ export const EncryptionApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Starts the storage encryption process.
-         * @summary Start the storage encryption process
-         * @param {StorageEncryptionRequestsDto} [storageEncryptionRequestsDto] 
+         * Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
+         * @summary Start the storage encryption
+         * @param {StorageEncryptionRequestDto} [storageEncryptionRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for startStorageEncryption operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-storage-encryption/
          */
-        async startStorageEncryption(storageEncryptionRequestsDto?: StorageEncryptionRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startStorageEncryption(storageEncryptionRequestsDto, options);
+        async startStorageEncryption(storageEncryptionRequestDto?: StorageEncryptionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startStorageEncryption(storageEncryptionRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['EncryptionApi.startStorageEncryption']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -263,7 +265,7 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
     const localVarFp = EncryptionApiFp(configuration)
     return {
         /**
-         * Returns the storage encryption progress.
+         * Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
          * @summary Get the storage encryption progress
          * @param {*} [options] Override http request option.
          * REST API Reference for getStorageEncryptionProgress operation
@@ -274,7 +276,7 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getStorageEncryptionProgress(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the storage encryption settings.
+         * Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
          * @summary Get the storage encryption settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getStorageEncryptionSettings operation
@@ -285,8 +287,8 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getStorageEncryptionSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Starts the storage encryption process.
-         * @summary Start the storage encryption process
+         * Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
+         * @summary Start the storage encryption
          * @param {EncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for startStorageEncryption operation
@@ -294,7 +296,7 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.startStorageEncryption(requestParameters.storageEncryptionRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -307,10 +309,10 @@ export const EncryptionApiFactory = function (configuration?: Configuration, bas
 export interface EncryptionApiStartStorageEncryptionRequest {
     /**
      * 
-     * @type {StorageEncryptionRequestsDto}
+     * @type {StorageEncryptionRequestDto}
      * @memberof EncryptionApiStartStorageEncryption
      */
-    readonly storageEncryptionRequestsDto?: StorageEncryptionRequestsDto
+    readonly storageEncryptionRequestDto?: StorageEncryptionRequestDto
 }
 
 /**
@@ -321,7 +323,7 @@ export interface EncryptionApiStartStorageEncryptionRequest {
  */
 export class EncryptionApi extends BaseAPI {
     /**
-     * Returns the storage encryption progress.
+     * Returns how far the running encryption or decryption of the installation storage has got, as a percentage from  0 to 100. It reports the run started by `POST api/2.0/settings/encryption/start`, whose direction, encryption  or decryption, is told by `GET api/2.0/settings/encryption/settings`. An empty response means no run is in  flight and no recent result is remembered: the value of a finished run is kept for one minute after it  completes and then dropped, so poll often enough not to miss the end of the operation. A value of -1 means the  build does not offer storage encryption at all, and on an installation that is not a server one the call is  refused rather than answered. Unlike the other encryption operations, this one asks for no portal-settings  permission: any authenticated member of the portal may read the progress, which is intentional, because the  portals are unavailable while the run is on and their users need to see when it ends. Nothing is written and  the call is safe to repeat.
      * @summary Get the storage encryption progress
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -332,7 +334,7 @@ export class EncryptionApi extends BaseAPI {
     }
 
     /**
-     * Returns the storage encryption settings.
+     * Returns the encryption state of the installation storage: the status, which is one of decrypted, encryption  started, encrypted or decryption started, and the flag saying whether users are mailed when an encryption run  begins. The encryption password is never returned. The caller is expected to have the permission to edit portal settings, which in practice means  the portal owner or a DocSpace admin, on a server installation with an unrestricted access space; on any other  installation, and whenever the check fails, the operation answers with an empty body instead of an error. An  empty answer is therefore not proof that encryption is off, only that the settings cannot be read in this  context. Nothing is written and the call is safe to repeat. Use `GET api/2.0/settings/encryption/progress` to  follow a run that is in flight, and `POST api/2.0/settings/encryption/start` to encrypt or decrypt the  storage.
      * @summary Get the storage encryption settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -343,15 +345,15 @@ export class EncryptionApi extends BaseAPI {
     }
 
     /**
-     * Starts the storage encryption process.
-     * @summary Start the storage encryption process
+     * Queues encryption of everything the installation keeps in its local storage, or decryption of it when the data  is already encrypted: the saved encryption state decides the direction, so the same call encrypts a decrypted  installation and decrypts an encrypted one. It covers the whole server, not one portal, and only a server  installation with the feature switched on can run it, with neither the portal storage nor the CDN pointing at  a third-party provider: reset those first with `DELETE api/2.0/settings/storage` and  `DELETE api/2.0/settings/storage/cdn`. No backup may be running, and the backup schedules of all portals are  dropped as part of starting. The caller needs the permission to edit portal settings, that is the portal owner  or a DocSpace admin, and an unrestricted access space. This is a long, disruptive operation: every portal is  put into the encryption state and stays unavailable until it ends, so do not repeat the call while it runs,  and follow it with `GET api/2.0/settings/encryption/progress` instead. The password is generated on the server  and never returned by the API. Pass `notifyUsers=true` to mail every user before the portals go down. The  response is true once the job is queued, and false where encryption is switched off, nothing being started  then.
+     * @summary Start the storage encryption
      * @param {SettingsEncryptionApiStartStorageEncryptionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EncryptionApi
      */
     public startStorageEncryption(requestParameters: EncryptionApiStartStorageEncryptionRequest = {}, options?: RawAxiosRequestConfig) {
-        return EncryptionApiFp(this.configuration).startStorageEncryption(requestParameters.storageEncryptionRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return EncryptionApiFp(this.configuration).startStorageEncryption(requestParameters.storageEncryptionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -25,7 +25,13 @@ import type { AiVectorizationSettingsDto } from './ai-vectorization-settings-dto
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the VectorizationSettingsDto object.
+ */
 export interface AiVectorizationSettingsWrapper {
+    /**
+     * The VectorizationSettingsDto object returned by the operation.
+     */
     'response'?: AiVectorizationSettingsDto;
     /**
      * The total number of items in the response

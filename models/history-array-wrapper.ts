@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { HistoryDto } from './history-dto';
 
+/**
+ * The successful API response containing the list of HistoryDto objects.
+ */
 export interface HistoryArrayWrapper {
+    /**
+     * The list of HistoryDto objects returned by the operation.
+     */
     'response'?: Array<HistoryDto>;
     /**
      * The total number of items in the response

@@ -29,8 +29,17 @@ import type { AiPromptFolder } from './ai-prompt-folder';
  * Versioned, self-contained bundle of every saved prompt and folder. Stable wire format — `version` lets the import path migrate older shapes if the schema ever changes.
  */
 export interface AiPromptBundle {
+    /**
+     * The bundle format version, so an import can migrate an older export.
+     */
     'version': AiPromptBundleVersionEnum;
+    /**
+     * Every exported prompt folder.
+     */
     'folders': Array<AiPromptFolder>;
+    /**
+     * Every exported prompt.
+     */
     'prompts': Array<AiPrompt>;
 }
 

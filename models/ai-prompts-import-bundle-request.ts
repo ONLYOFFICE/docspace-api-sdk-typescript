@@ -26,6 +26,9 @@ import type { AiPromptBundle } from './ai-prompt-bundle';
 import type { AiPromptsImportBundleRequestOptions } from './ai-prompts-import-bundle-request-options';
 
 export interface AiPromptsImportBundleRequest {
+    /**
+     * Bundle to restore.
+     */
     'bundle': AiPromptBundle;
     'options'?: AiPromptsImportBundleRequestOptions;
 }

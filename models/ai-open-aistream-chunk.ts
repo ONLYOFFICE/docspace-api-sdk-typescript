@@ -35,10 +35,25 @@ import type { AiOpenAIStreamErrorError } from './ai-open-aistream-error-error';
  * A chunk or the terminal error envelope emitted on a failed stream.
  */
 export interface AiOpenAIStreamChunk {
+    /**
+     * The completion identifier, stable across every chunk of one response.
+     */
     'id': string;
+    /**
+     * Always `chat.completion.chunk`.
+     */
     'object': AiOpenAIStreamChunkObjectEnum;
+    /**
+     * When the completion started, in Unix seconds.
+     */
     'created': number;
+    /**
+     * The model that produced the completion - the resolved profile\'s model.
+     */
     'model': string;
+    /**
+     * The choices carried by this chunk. This service emits exactly one.
+     */
     'choices': Array<AiOpenAIChunkChoice>;
     'error': AiOpenAIStreamErrorError;
 }

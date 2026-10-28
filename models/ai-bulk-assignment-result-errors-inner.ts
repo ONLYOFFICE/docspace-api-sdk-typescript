@@ -23,11 +23,11 @@
 import type { AiActionType } from './ai-action-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 
 export interface AiBulkAssignmentResultErrorsInner {
     'actionType': AiActionType;
-    'error': AiTErrorData;
+    'error': AiErrorData;
 }
 
 

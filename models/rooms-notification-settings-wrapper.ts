@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { RoomsNotificationSettingsDto } from './rooms-notification-settings-dto';
 
+/**
+ * The successful API response containing the RoomsNotificationSettingsDto object.
+ */
 export interface RoomsNotificationSettingsWrapper {
+    /**
+     * The RoomsNotificationSettingsDto object returned by the operation.
+     */
     'response'?: RoomsNotificationSettingsDto;
     /**
      * The total number of items in the response

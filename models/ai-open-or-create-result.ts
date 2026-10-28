@@ -23,14 +23,20 @@
 import type { AiThreadMessageLike } from './ai-thread-message-like';
 
 /**
- * Resolved thread state returned by  {@link  ThreadsEngine.openOrCreate } .
+ * Resolved thread state returned by `ThreadsEngine.openOrCreate`.
  */
 export interface AiOpenOrCreateResult {
+    /**
+     * The thread that was opened, or the one just created.
+     */
     'threadId': string;
     /**
      * Empty string for existing threads — the engine doesn\'t re-fetch.
      */
     'title': string;
+    /**
+     * The messages already in the thread - empty for a thread that was just created.
+     */
     'priorMessages': Array<AiThreadMessageLike>;
 }
 

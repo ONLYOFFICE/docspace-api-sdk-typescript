@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **messageId** | **string** |  | [default to undefined]
-**message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) |  | [default to undefined]
+**message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | Replacement message content. | [default to undefined]
 
 ## Example
 

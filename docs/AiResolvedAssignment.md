@@ -6,8 +6,8 @@ Resolved profile for an action — both the storage row and its ID.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**profileId** | **string** |  | [default to undefined]
-**profile** | [**AiProfile**](AiProfile.md) |  | [default to undefined]
+**profileId** | **string** | The identifier of the resolved profile. | [default to undefined]
+**profile** | [**AiProfile**](AiProfile.md) | The resolved profile itself. | [default to undefined]
 
 ## Example
 

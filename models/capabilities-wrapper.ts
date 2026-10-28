@@ -25,7 +25,13 @@ import type { CapabilitiesDto } from './capabilities-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CapabilitiesDto object.
+ */
 export interface CapabilitiesWrapper {
+    /**
+     * The CapabilitiesDto object returned by the operation.
+     */
     'response'?: CapabilitiesDto;
     /**
      * The total number of items in the response

@@ -25,7 +25,13 @@ import type { CustomColorThemesSettingsDto } from './custom-color-themes-setting
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CustomColorThemesSettingsDto object.
+ */
 export interface CustomColorThemesSettingsWrapper {
+    /**
+     * The CustomColorThemesSettingsDto object returned by the operation.
+     */
     'response'?: CustomColorThemesSettingsDto;
     /**
      * The total number of items in the response

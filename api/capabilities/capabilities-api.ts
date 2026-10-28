@@ -25,6 +25,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
 import type { CapabilitiesWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 /**
  * CapabilitiesApi - axios parameter creator
  * @export
@@ -34,7 +36,7 @@ export const CapabilitiesApiAxiosParamCreator = function (configuration?: Config
     
     return {
         /**
-         * Returns the information about portal capabilities.
+         * Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal\'s payment has lapsed,  and is read-only and idempotent. `providers` holds provider keys such as `google` or `facebook`, ordered for  the country detected from the caller\'s IP address and reduced to the ones this installation has configured;  pass one of them as `provider` to `POST api/2.0/authentication`. An empty `providers` means external sign-in  is off and an empty `ssoUrl` means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from `GET api/2.0/settings/ssov2` and  `GET api/2.0/settings/authservice`.
          * @summary Get portal capabilities
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -54,6 +56,25 @@ export const CapabilitiesApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
 
 
     
@@ -77,7 +98,7 @@ export const CapabilitiesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CapabilitiesApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the information about portal capabilities.
+         * Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal\'s payment has lapsed,  and is read-only and idempotent. `providers` holds provider keys such as `google` or `facebook`, ordered for  the country detected from the caller\'s IP address and reduced to the ones this installation has configured;  pass one of them as `provider` to `POST api/2.0/authentication`. An empty `providers` means external sign-in  is off and an empty `ssoUrl` means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from `GET api/2.0/settings/ssov2` and  `GET api/2.0/settings/authservice`.
          * @summary Get portal capabilities
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -101,7 +122,7 @@ export const CapabilitiesApiFactory = function (configuration?: Configuration, b
     const localVarFp = CapabilitiesApiFp(configuration)
     return {
         /**
-         * Returns the information about portal capabilities.
+         * Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal\'s payment has lapsed,  and is read-only and idempotent. `providers` holds provider keys such as `google` or `facebook`, ordered for  the country detected from the caller\'s IP address and reduced to the ones this installation has configured;  pass one of them as `provider` to `POST api/2.0/authentication`. An empty `providers` means external sign-in  is off and an empty `ssoUrl` means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from `GET api/2.0/settings/ssov2` and  `GET api/2.0/settings/authservice`.
          * @summary Get portal capabilities
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalCapabilities operation
@@ -122,7 +143,7 @@ export const CapabilitiesApiFactory = function (configuration?: Configuration, b
  */
 export class CapabilitiesApi extends BaseAPI {
     /**
-     * Returns the information about portal capabilities.
+     * Returns the sign-in methods this portal offers, which a login client needs before anyone has signed in: LDAP  authentication and its domain, the external identity providers to show, the SAML single sign-on URL and its  label, and whether the built-in identity server is available. No token is needed and nothing has to be called  first - the operation is open to unauthenticated callers, answers even while the portal\'s payment has lapsed,  and is read-only and idempotent. `providers` holds provider keys such as `google` or `facebook`, ordered for  the country detected from the caller\'s IP address and reduced to the ones this installation has configured;  pass one of them as `provider` to `POST api/2.0/authentication`. An empty `providers` means external sign-in  is off and an empty `ssoUrl` means single sign-on is off; a capability whose settings cannot be read is  reported as disabled rather than failing the call, so a false flag means the method is not offered, not that  it is unknown. The answer describes the portal and never a user, and carries none of the configuration behind  these methods: an administrator reads that from `GET api/2.0/settings/ssov2` and  `GET api/2.0/settings/authservice`.
      * @summary Get portal capabilities
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

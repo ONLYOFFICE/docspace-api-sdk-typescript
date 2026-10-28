@@ -25,7 +25,13 @@ import type { CustomerServiceUsageReportDto } from './customer-service-usage-rep
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CustomerServiceUsageReportDto object.
+ */
 export interface CustomerServiceUsageReportWrapper {
+    /**
+     * The CustomerServiceUsageReportDto object returned by the operation.
+     */
     'response'?: CustomerServiceUsageReportDto;
     /**
      * The total number of items in the response

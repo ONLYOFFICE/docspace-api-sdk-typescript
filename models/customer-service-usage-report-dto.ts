@@ -23,31 +23,31 @@
 import type { CustomerServiceUsageDto } from './customer-service-usage-dto';
 
 /**
- * Represents a paged report of customer service usage statistics.
+ * One page of the per-service consumption totals, with the paging figures needed to walk the rest.
  */
 export interface CustomerServiceUsageReportDto {
     /**
-     * A collection of service usage statistics.
+     * The services on this page, one entry per service rather than per charge. It is empty for a period in  which nothing was consumed as well as for a page past the end of the report.
      */
     'collection'?: Array<CustomerServiceUsageDto> | null;
     /**
-     * The report data offset.
+     * How many entries were skipped before this page, echoed from the request.
      */
     'offset'?: number;
     /**
-     * The report data limit.
+     * How many entries one page may hold, echoed from the request; it is 25 unless another value was asked for.
      */
     'limit'?: number;
     /**
-     * The total quantity of records in the report.
+     * How many services match the filters in total, across every page - services, not charges.
      */
     'totalQuantity'?: number;
     /**
-     * The total number of pages in the report.
+     * How many pages those entries come to at the current `limit`.
      */
     'totalPage'?: number;
     /**
-     * The current page number of the report.
+     * Which of those pages this one is, as the billing service numbers them. Page through by advancing `offset`  rather than this value, which nothing accepts as an argument.
      */
     'currentPage'?: number;
 }

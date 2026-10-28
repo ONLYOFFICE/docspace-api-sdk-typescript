@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UploadResultDto } from './upload-result-dto';
 
+/**
+ * The successful API response containing the UploadResultDto object.
+ */
 export interface UploadResultWrapper {
+    /**
+     * The UploadResultDto object returned by the operation.
+     */
     'response'?: UploadResultDto;
     /**
      * The total number of items in the response

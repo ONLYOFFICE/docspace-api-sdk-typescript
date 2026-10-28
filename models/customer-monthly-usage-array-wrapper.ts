@@ -25,7 +25,13 @@ import type { CustomerMonthlyUsageDto } from './customer-monthly-usage-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of CustomerMonthlyUsageDto objects.
+ */
 export interface CustomerMonthlyUsageArrayWrapper {
+    /**
+     * The list of CustomerMonthlyUsageDto objects returned by the operation.
+     */
     'response'?: Array<CustomerMonthlyUsageDto>;
     /**
      * The total number of items in the response

@@ -23,7 +23,7 @@
 import type { AiModel } from './ai-model';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTProvider } from './ai-tprovider';
+import type { AiProvider } from './ai-provider';
 
 /**
  * Chat conversation metadata. Represents a single chat session (thread).
@@ -41,10 +41,16 @@ export interface AiThread {
      * Timestamp (ms since epoch) of the last message in this thread. Used for sorting.
      */
     'lastEditDate'?: number;
-    'provider'?: AiTProvider;
+    /**
+     * Provider configuration at the time of last message. Used for thread-level provider display.
+     */
+    'provider'?: AiProvider;
+    /**
+     * Model info at the time of last message.
+     */
     'model'?: AiModel;
     /**
-     * ID of the profile used for this thread. Links to  {@link  Profile.id } .
+     * ID of the profile used for this thread. Links to `Profile.id`.
      */
     'profileId'?: string;
 }

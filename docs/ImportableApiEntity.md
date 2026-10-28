@@ -1,11 +1,12 @@
 # ImportableApiEntity
 
+The parameters of an importable API entity.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**shouldImport** | **boolean** |  | [optional] [default to undefined]
+**shouldImport** | **boolean** | Specifies whether the API entity should be imported. | [optional] [default to undefined]
 
 ## Example
 

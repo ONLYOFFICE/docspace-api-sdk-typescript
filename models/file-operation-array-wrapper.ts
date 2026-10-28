@@ -25,7 +25,13 @@ import type { FileOperationDto } from './file-operation-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FileOperationDto objects.
+ */
 export interface FileOperationArrayWrapper {
+    /**
+     * The list of FileOperationDto objects returned by the operation.
+     */
     'response'?: Array<FileOperationDto>;
     /**
      * The total number of items in the response

@@ -21,9 +21,16 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiProfile } from './ai-profile';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiThreadsOpenOrCreateRequestEntityMeta } from './ai-threads-open-or-create-request-entity-meta';
 
 export interface AiThreadsRegenerateTitleRequest {
     'threadId': string;
+    /**
+     * Profile used to regenerate the title.
+     */
     'profile': AiProfile;
+    'entityMeta'?: AiThreadsOpenOrCreateRequestEntityMeta;
 }
 

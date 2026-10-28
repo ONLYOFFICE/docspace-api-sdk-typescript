@@ -23,14 +23,17 @@
 import type { AiProviderType } from './ai-provider-type';
 
 export interface AiProfilesListProviderModelsRequest {
+    /**
+     * Provider whose catalog to list.
+     */
     'providerType': AiProviderType;
     /**
      * Provider API base URL.
      */
     'baseUrl': string;
     /**
-     * Provider API key.
+     * Provider API key. Omit it for a provider that needs none; the request is then made without one.
      */
-    'apiKey': string;
+    'apiKey'?: string;
 }
 

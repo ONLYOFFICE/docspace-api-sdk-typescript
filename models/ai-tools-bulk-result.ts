@@ -23,10 +23,16 @@
 import type { AiToolsBulkResultErrorsInner } from './ai-tools-bulk-result-errors-inner';
 
 /**
- * Outcome of  {@link  ToolsEngine.replaceAllCustomServers }  — either every entry persisted, or no entries persisted plus a per-key error report.
+ * Outcome of `ToolsEngine.replaceAllCustomServers` — either every entry persisted, or no entries persisted plus a per-key error report.
  */
 export interface AiToolsBulkResult {
+    /**
+     * True when every custom MCP server was persisted.
+     */
     'success': boolean;
+    /**
+     * What was rejected, per server. Present on failure - and then no server was persisted.
+     */
     'errors'?: Array<AiToolsBulkResultErrorsInner>;
 }
 

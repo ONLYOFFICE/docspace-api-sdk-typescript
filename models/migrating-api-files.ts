@@ -19,9 +19,21 @@
  */
 
 
+/**
+ * The parameters of the migrating files.
+ */
 export interface MigratingApiFiles {
+    /**
+     * The number of folders.
+     */
     'foldersCount'?: number;
+    /**
+     * The number of files.
+     */
     'filesCount'?: number;
+    /**
+     * The total number of bytes.
+     */
     'bytesTotal'?: number;
 }
 

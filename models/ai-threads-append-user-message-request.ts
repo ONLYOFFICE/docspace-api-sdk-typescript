@@ -24,6 +24,9 @@ import type { AiThreadMessageLike } from './ai-thread-message-like';
 
 export interface AiThreadsAppendUserMessageRequest {
     'threadId': string;
+    /**
+     * Message to persist (id/createdAt are storage-assigned).
+     */
     'message': AiThreadMessageLike;
     'profileId'?: string;
 }

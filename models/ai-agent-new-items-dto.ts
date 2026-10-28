@@ -26,6 +26,9 @@ import type { AiFileEntryBaseDto } from './ai-file-entry-base-dto';
  * The agent new item\'s information.
  */
 export interface AiAgentNewItemsDto {
+    /**
+     * The agent file entry.
+     */
     'agent': AiFileEntryBaseDto;
     /**
      * The list of file entry items.

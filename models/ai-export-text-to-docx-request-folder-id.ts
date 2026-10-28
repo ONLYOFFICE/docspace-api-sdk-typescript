@@ -20,9 +20,8 @@
 
 
 /**
- * @type AiExportTextToDocxRequestFolderId
  * Target folder id (int or string).
  */
-export type AiExportTextToDocxRequestFolderId = number | string;
-
+export interface AiExportTextToDocxRequestFolderId {
+}
 

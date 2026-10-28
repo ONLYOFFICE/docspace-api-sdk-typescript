@@ -25,7 +25,13 @@ import type { FormSubmissionsDto } from './form-submissions-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FormSubmissionsDto object.
+ */
 export interface FormSubmissionsWrapper {
+    /**
+     * The FormSubmissionsDto object returned by the operation.
+     */
     'response'?: FormSubmissionsDto;
     /**
      * The total number of items in the response

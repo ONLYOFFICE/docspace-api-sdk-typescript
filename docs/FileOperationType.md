@@ -1,6 +1,6 @@
 # FileOperationType
 
-[0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate]
+[0 - Move, 1 - Copy, 2 - Delete, 3 - Download, 4 - MarkAsRead, 5 - Import, 6 - Convert, 7 - Duplicate, 8 - Build]
 
 ## Enum
 
@@ -19,5 +19,7 @@
 * `Convert` (value: `6`)
 
 * `Duplicate` (value: `7`)
+
+* `Build` (value: `8`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -24,35 +24,37 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { CustomColorThemesSettingsRequestsDto } from '../../models';
+import type { CustomColorThemesSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { CustomColorThemesSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { DeepLinkConfigurationRequestsDto } from '../../models';
+import type { DeepLinkConfigurationRequestDto } from '../../models';
 // @ts-ignore
 import type { DefaultProductRequestDto } from '../../models';
 // @ts-ignore
-import type { DnsSettingsRequestsDto } from '../../models';
+import type { DnsSettingsRequestDto } from '../../models';
 // @ts-ignore
-import type { EmailActivationSettings } from '../../models';
+import type { EmailActivationSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { EmailActivationSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { MailDomainSettingsRequestsDto } from '../../models';
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
-import type { ObjectWrapper } from '../../models';
+import type { MailDomainSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { PaymentSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { STRINGArrayWrapper } from '../../models';
-// @ts-ignore
 import type { SettingsWrapper } from '../../models';
+// @ts-ignore
+import type { SocketSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { StringArrayWrapper } from '../../models';
 // @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { StudioDefaultPageSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { TenantAiAccessSettingsDto } from '../../models';
+import type { TenantAiAccessSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantAiAccessSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -62,9 +64,9 @@ import type { TenantUserInvitationSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { TenantUserInvitationSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { TimezonesRequestsArrayWrapper } from '../../models';
+import type { TimezoneArrayWrapper } from '../../models';
 // @ts-ignore
-import type { WizardRequestsDto } from '../../models';
+import type { WizardRequestDto } from '../../models';
 // @ts-ignore
 import type { WizardSettingsWrapper } from '../../models';
 /**
@@ -76,7 +78,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
     
     return {
         /**
-         * Closes the administrator helper notification.
+         * Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
          * @summary Close the admin helper
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -128,15 +130,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Completes the Wizard settings.
+         * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
          * @summary Complete the Wizard settings
-         * @param {WizardRequestsDto} [wizardRequestsDto] 
+         * @param {WizardRequestDto} [wizardRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for completeWizard operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          */
-        completeWizard: async (wizardRequestsDto?: WizardRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        completeWizard: async (wizardRequestDto?: WizardRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/wizard/complete`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -176,7 +178,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(wizardRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(wizardRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -184,15 +186,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Saves the deep link configuration settings for the portal.
+         * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
          * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {DeepLinkConfigurationRequestDto} [deepLinkConfigurationRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for configureDeepLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          */
-        configureDeepLink: async (deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        configureDeepLink: async (deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/deeplink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -232,7 +234,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(deepLinkConfigurationRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -240,9 +242,9 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Deletes the portal color theme with the ID specified in the request.
+         * Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
          * @summary Delete a color theme
-         * @param {number} id The ID of the portal theme to delete.
+         * @param {number} id The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deletePortalColorTheme operation
@@ -299,7 +301,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the deep link settings.
+         * Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
          * @summary Get the deep link settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -320,6 +322,25 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -332,7 +353,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the portal payment settings.
+         * Returns the portal\'s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license\'s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal\'s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
          * @summary Get the payment settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -384,7 +405,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the portal color theme.
+         * Returns the portal\'s color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
          * @summary Get a color theme
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -405,6 +426,25 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -417,8 +457,8 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the portal hostname.
-         * @summary Get hostname
+         * Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy\'s public name, and is not  necessarily the tenant\'s configured alias or mapped domain.
+         * @summary Get the portal hostname
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPortalHostname operation
@@ -469,7 +509,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the portal logo image URL.
+         * Returns the absolute URL of the portal\'s current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
          * @summary Get a portal logo
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -521,9 +561,9 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of all the available portal settings with the current values for each parameter.
+         * Returns the current portal\'s general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller\'s identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet\'s low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
          * @summary Get the portal settings
-         * @param {boolean} [withpassword] Specifies whether to include the password hashing configuration in the response.
+         * @param {boolean} [withpassword] Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPortalSettings operation
@@ -543,6 +583,25 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (withpassword !== undefined) {
                 localVarQueryParameter['withpassword'] = withpassword;
             }
@@ -559,7 +618,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the socket settings.
+         * Returns the base URL of the portal\'s real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
          * @summary Get the socket settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -611,7 +670,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+         * Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -632,6 +691,25 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -644,8 +722,8 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
-         * @summary Get the AI access settings for the portal
+         * Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller\'s own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
+         * @summary Get the AI access settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantAiAccessSettings operation
@@ -696,7 +774,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns the portal user invitation settings.
+         * Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -717,6 +795,25 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -729,7 +826,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of all the available portal time zones.
+         * Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
          * @summary Get time zones
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -781,7 +878,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Sets the default folder.
+         * Sets which folder the current user\'s account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
          * @summary Set the default folder
          * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
          * @param {*} [options] Override http request option.
@@ -837,15 +934,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Saves the DNS settings specified in the request to the current portal.
+         * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
          * @summary Save the DNS settings
-         * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+         * @param {DnsSettingsRequestDto} [dnsSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveDnsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          */
-        saveDnsSettings: async (dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveDnsSettings: async (dnsSettingsRequestDto?: DnsSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/dns`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -885,7 +982,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(dnsSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(dnsSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -893,15 +990,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Saves the mail domain settings specified in the request to the portal.
+         * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
          * @summary Save the mail domain settings
-         * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+         * @param {MailDomainSettingsRequestDto} [mailDomainSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveMailDomainSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          */
-        saveMailDomainSettings: async (mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveMailDomainSettings: async (mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/maildomainsettings`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -941,7 +1038,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(mailDomainSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(mailDomainSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -949,15 +1046,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Saves the portal color theme specified in the request.
+         * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
          * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {CustomColorThemesSettingsRequestDto} [customColorThemesSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for savePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          */
-        savePortalColorTheme: async (customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        savePortalColorTheme: async (customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/colortheme`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -997,7 +1094,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customColorThemesSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1005,15 +1102,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
-         * @summary Set the AI access for the portal
-         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
+         * @summary Set the AI access settings
+         * @param {TenantAiAccessSettingsRequestDto} [tenantAiAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantAiAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
          */
-        setTenantAiAccessSettings: async (tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setTenantAiAccessSettings: async (tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/ai-access`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1053,7 +1150,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(tenantAiAccessSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1061,15 +1158,15 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Updates the email activation settings.
+         * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
          * @summary Update the email activation settings
-         * @param {EmailActivationSettings} [emailActivationSettings] 
+         * @param {EmailActivationSettingsRequestDto} [emailActivationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateEmailActivationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          */
-        updateEmailActivationSettings: async (emailActivationSettings?: EmailActivationSettings, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateEmailActivationSettings: async (emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/emailactivation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1109,7 +1206,7 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(emailActivationSettings, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(emailActivationSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1117,8 +1214,8 @@ export const CommonSettingsApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Updates the portal user invitation settings.
-         * @summary Update user invitation settings
+         * Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
+         * @summary Update the user invitation settings
          * @param {TenantUserInvitationSettingsRequestDto} [tenantUserInvitationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1183,7 +1280,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CommonSettingsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Closes the administrator helper notification.
+         * Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
          * @summary Close the admin helper
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1197,39 +1294,39 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Completes the Wizard settings.
+         * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
          * @summary Complete the Wizard settings
-         * @param {WizardRequestsDto} [wizardRequestsDto] 
+         * @param {WizardRequestDto} [wizardRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for completeWizard operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/complete-wizard/
          */
-        async completeWizard(wizardRequestsDto?: WizardRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WizardSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.completeWizard(wizardRequestsDto, options);
+        async completeWizard(wizardRequestDto?: WizardRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WizardSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.completeWizard(wizardRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.completeWizard']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the deep link configuration settings for the portal.
+         * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
          * @summary Configure the deep link settings
-         * @param {DeepLinkConfigurationRequestsDto} [deepLinkConfigurationRequestsDto] 
+         * @param {DeepLinkConfigurationRequestDto} [deepLinkConfigurationRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for configureDeepLink operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/configure-deep-link/
          */
-        async configureDeepLink(deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestsDto, options);
+        async configureDeepLink(deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantDeepLinkSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.configureDeepLink(deepLinkConfigurationRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.configureDeepLink']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes the portal color theme with the ID specified in the request.
+         * Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
          * @summary Delete a color theme
-         * @param {number} id The ID of the portal theme to delete.
+         * @param {number} id The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deletePortalColorTheme operation
@@ -1242,7 +1339,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the deep link settings.
+         * Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
          * @summary Get the deep link settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1256,7 +1353,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal payment settings.
+         * Returns the portal\'s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license\'s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal\'s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
          * @summary Get the payment settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1270,7 +1367,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal color theme.
+         * Returns the portal\'s color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
          * @summary Get a color theme
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1284,21 +1381,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal hostname.
-         * @summary Get hostname
+         * Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy\'s public name, and is not  necessarily the tenant\'s configured alias or mapped domain.
+         * @summary Get the portal hostname
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPortalHostname operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/
          */
-        async getPortalHostname(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async getPortalHostname(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPortalHostname(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getPortalHostname']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal logo image URL.
+         * Returns the absolute URL of the portal\'s current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
          * @summary Get a portal logo
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1312,9 +1409,9 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the available portal settings with the current values for each parameter.
+         * Returns the current portal\'s general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller\'s identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet\'s low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
          * @summary Get the portal settings
-         * @param {boolean} [withpassword] Specifies whether to include the password hashing configuration in the response.
+         * @param {boolean} [withpassword] Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPortalSettings operation
@@ -1327,36 +1424,36 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the socket settings.
+         * Returns the base URL of the portal\'s real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
          * @summary Get the socket settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSocketSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/
          */
-        async getSocketSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async getSocketSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SocketSettingsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSocketSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getSocketSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+         * Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getSupportedCultures operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
          */
-        async getSupportedCultures(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<STRINGArrayWrapper>> {
+        async getSupportedCultures(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getSupportedCultures(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getSupportedCultures']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
-         * @summary Get the AI access settings for the portal
+         * Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller\'s own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
+         * @summary Get the AI access settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTenantAiAccessSettings operation
@@ -1369,7 +1466,7 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal user invitation settings.
+         * Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1383,21 +1480,21 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the available portal time zones.
+         * Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
          * @summary Get time zones
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getTimeZones operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
          */
-        async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezonesRequestsArrayWrapper>> {
+        async getTimeZones(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimezoneArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeZones(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.getTimeZones']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the default folder.
+         * Sets which folder the current user\'s account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
          * @summary Set the default folder
          * @param {DefaultProductRequestDto} [defaultProductRequestDto] 
          * @param {*} [options] Override http request option.
@@ -1412,83 +1509,83 @@ export const CommonSettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the DNS settings specified in the request to the current portal.
+         * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
          * @summary Save the DNS settings
-         * @param {DnsSettingsRequestsDto} [dnsSettingsRequestsDto] 
+         * @param {DnsSettingsRequestDto} [dnsSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveDnsSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-dns-settings/
          */
-        async saveDnsSettings(dnsSettingsRequestsDto?: DnsSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDnsSettings(dnsSettingsRequestsDto, options);
+        async saveDnsSettings(dnsSettingsRequestDto?: DnsSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveDnsSettings(dnsSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveDnsSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the mail domain settings specified in the request to the portal.
+         * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
          * @summary Save the mail domain settings
-         * @param {MailDomainSettingsRequestsDto} [mailDomainSettingsRequestsDto] 
+         * @param {MailDomainSettingsRequestDto} [mailDomainSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveMailDomainSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-mail-domain-settings/
          */
-        async saveMailDomainSettings(mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestsDto, options);
+        async saveMailDomainSettings(mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveMailDomainSettings(mailDomainSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.saveMailDomainSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the portal color theme specified in the request.
+         * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
          * @summary Save a color theme
-         * @param {CustomColorThemesSettingsRequestsDto} [customColorThemesSettingsRequestsDto] 
+         * @param {CustomColorThemesSettingsRequestDto} [customColorThemesSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for savePortalColorTheme operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-portal-color-theme/
          */
-        async savePortalColorTheme(customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestsDto, options);
+        async savePortalColorTheme(customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomColorThemesSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.savePortalColorTheme(customColorThemesSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.savePortalColorTheme']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
-         * @summary Set the AI access for the portal
-         * @param {TenantAiAccessSettingsDto} [tenantAiAccessSettingsDto] 
+         * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
+         * @summary Set the AI access settings
+         * @param {TenantAiAccessSettingsRequestDto} [tenantAiAccessSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setTenantAiAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-ai-access-settings/
          */
-        async setTenantAiAccessSettings(tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsDto, options);
+        async setTenantAiAccessSettings(tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TenantAiAccessSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setTenantAiAccessSettings(tenantAiAccessSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.setTenantAiAccessSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the email activation settings.
+         * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
          * @summary Update the email activation settings
-         * @param {EmailActivationSettings} [emailActivationSettings] 
+         * @param {EmailActivationSettingsRequestDto} [emailActivationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updateEmailActivationSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-email-activation-settings/
          */
-        async updateEmailActivationSettings(emailActivationSettings?: EmailActivationSettings, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailActivationSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmailActivationSettings(emailActivationSettings, options);
+        async updateEmailActivationSettings(emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmailActivationSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateEmailActivationSettings(emailActivationSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CommonSettingsApi.updateEmailActivationSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Updates the portal user invitation settings.
-         * @summary Update user invitation settings
+         * Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
+         * @summary Update the user invitation settings
          * @param {TenantUserInvitationSettingsRequestDto} [tenantUserInvitationSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1512,7 +1609,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
     const localVarFp = CommonSettingsApiFp(configuration)
     return {
         /**
-         * Closes the administrator helper notification.
+         * Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
          * @summary Close the admin helper
          * @param {*} [options] Override http request option.
          * REST API Reference for closeAdminHelper operation
@@ -1523,7 +1620,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.closeAdminHelper(options).then((request) => request(axios, basePath));
         },
         /**
-         * Completes the Wizard settings.
+         * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
          * @summary Complete the Wizard settings
          * @param {CommonSettingsApiCompleteWizardRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1532,10 +1629,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<WizardSettingsWrapper> {
-            return localVarFp.completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.completeWizard(requestParameters.wizardRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the deep link configuration settings for the portal.
+         * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
          * @summary Configure the deep link settings
          * @param {CommonSettingsApiConfigureDeepLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1544,10 +1641,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantDeepLinkSettingsWrapper> {
-            return localVarFp.configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.configureDeepLink(requestParameters.deepLinkConfigurationRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes the portal color theme with the ID specified in the request.
+         * Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
          * @summary Delete a color theme
          * @param {CommonSettingsApiDeletePortalColorThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1559,7 +1656,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.deletePortalColorTheme(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the deep link settings.
+         * Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
          * @summary Get the deep link settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getDeepLinkSettings operation
@@ -1570,7 +1667,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getDeepLinkSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal payment settings.
+         * Returns the portal\'s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license\'s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal\'s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
          * @summary Get the payment settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getPaymentSettings operation
@@ -1581,7 +1678,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getPaymentSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal color theme.
+         * Returns the portal\'s color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
          * @summary Get a color theme
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalColorTheme operation
@@ -1592,18 +1689,18 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getPortalColorTheme(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal hostname.
-         * @summary Get hostname
+         * Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy\'s public name, and is not  necessarily the tenant\'s configured alias or mapped domain.
+         * @summary Get the portal hostname
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalHostname operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-portal-hostname/
          * @throws {RequiredError}
          */
-        getPortalHostname(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        getPortalHostname(options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
             return localVarFp.getPortalHostname(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal logo image URL.
+         * Returns the absolute URL of the portal\'s current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
          * @summary Get a portal logo
          * @param {*} [options] Override http request option.
          * REST API Reference for getPortalLogo operation
@@ -1614,7 +1711,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getPortalLogo(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the available portal settings with the current values for each parameter.
+         * Returns the current portal\'s general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller\'s identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet\'s low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
          * @summary Get the portal settings
          * @param {CommonSettingsApiGetPortalSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1626,30 +1723,30 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getPortalSettings(requestParameters.withpassword, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the socket settings.
+         * Returns the base URL of the portal\'s real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
          * @summary Get the socket settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getSocketSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-socket-settings/
          * @throws {RequiredError}
          */
-        getSocketSettings(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        getSocketSettings(options?: RawAxiosRequestConfig): AxiosPromise<SocketSettingsWrapper> {
             return localVarFp.getSocketSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+         * Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
          * @summary Get supported languages
          * @param {*} [options] Override http request option.
          * REST API Reference for getSupportedCultures operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-supported-cultures/
          * @throws {RequiredError}
          */
-        getSupportedCultures(options?: RawAxiosRequestConfig): AxiosPromise<STRINGArrayWrapper> {
+        getSupportedCultures(options?: RawAxiosRequestConfig): AxiosPromise<StringArrayWrapper> {
             return localVarFp.getSupportedCultures(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
-         * @summary Get the AI access settings for the portal
+         * Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller\'s own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
+         * @summary Get the AI access settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantAiAccessSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-tenant-ai-access-settings/
@@ -1659,7 +1756,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getTenantAiAccessSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal user invitation settings.
+         * Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
          * @summary Get the user invitation settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getTenantUserInvitationSettings operation
@@ -1670,18 +1767,18 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.getTenantUserInvitationSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the available portal time zones.
+         * Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
          * @summary Get time zones
          * @param {*} [options] Override http request option.
          * REST API Reference for getTimeZones operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-time-zones/
          * @throws {RequiredError}
          */
-        getTimeZones(options?: RawAxiosRequestConfig): AxiosPromise<TimezonesRequestsArrayWrapper> {
+        getTimeZones(options?: RawAxiosRequestConfig): AxiosPromise<TimezoneArrayWrapper> {
             return localVarFp.getTimeZones(options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the default folder.
+         * Sets which folder the current user\'s account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
          * @summary Set the default folder
          * @param {CommonSettingsApiSaveDefaultFolderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1693,7 +1790,7 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
             return localVarFp.saveDefaultFolder(requestParameters.defaultProductRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the DNS settings specified in the request to the current portal.
+         * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
          * @summary Save the DNS settings
          * @param {CommonSettingsApiSaveDnsSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1702,10 +1799,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveDnsSettings(requestParameters.dnsSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the mail domain settings specified in the request to the portal.
+         * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
          * @summary Save the mail domain settings
          * @param {CommonSettingsApiSaveMailDomainSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1714,10 +1811,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
-            return localVarFp.saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveMailDomainSettings(requestParameters.mailDomainSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the portal color theme specified in the request.
+         * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
          * @summary Save a color theme
          * @param {CommonSettingsApiSavePortalColorThemeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1726,11 +1823,11 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<CustomColorThemesSettingsWrapper> {
-            return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.savePortalColorTheme(requestParameters.customColorThemesSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
-         * @summary Set the AI access for the portal
+         * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
+         * @summary Set the AI access settings
          * @param {CommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setTenantAiAccessSettings operation
@@ -1738,10 +1835,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<TenantAiAccessSettingsWrapper> {
-            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the email activation settings.
+         * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
          * @summary Update the email activation settings
          * @param {CommonSettingsApiUpdateEmailActivationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1750,11 +1847,11 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
          * @throws {RequiredError}
          */
         updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<EmailActivationSettingsWrapper> {
-            return localVarFp.updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(axios, basePath));
+            return localVarFp.updateEmailActivationSettings(requestParameters.emailActivationSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Updates the portal user invitation settings.
-         * @summary Update user invitation settings
+         * Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
+         * @summary Update the user invitation settings
          * @param {CommonSettingsApiUpdateInvitationSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updateInvitationSettings operation
@@ -1775,10 +1872,10 @@ export const CommonSettingsApiFactory = function (configuration?: Configuration,
 export interface CommonSettingsApiCompleteWizardRequest {
     /**
      * 
-     * @type {WizardRequestsDto}
+     * @type {WizardRequestDto}
      * @memberof CommonSettingsApiCompleteWizard
      */
-    readonly wizardRequestsDto?: WizardRequestsDto
+    readonly wizardRequestDto?: WizardRequestDto
 }
 
 /**
@@ -1789,10 +1886,10 @@ export interface CommonSettingsApiCompleteWizardRequest {
 export interface CommonSettingsApiConfigureDeepLinkRequest {
     /**
      * 
-     * @type {DeepLinkConfigurationRequestsDto}
+     * @type {DeepLinkConfigurationRequestDto}
      * @memberof CommonSettingsApiConfigureDeepLink
      */
-    readonly deepLinkConfigurationRequestsDto?: DeepLinkConfigurationRequestsDto
+    readonly deepLinkConfigurationRequestDto?: DeepLinkConfigurationRequestDto
 }
 
 /**
@@ -1802,7 +1899,7 @@ export interface CommonSettingsApiConfigureDeepLinkRequest {
  */
 export interface CommonSettingsApiDeletePortalColorThemeRequest {
     /**
-     * The ID of the portal theme to delete.
+     * The theme to remove, by theme ID. An ID belonging to a built-in theme leaves the list untouched, and so does  one that is already gone - neither is reported as an error. Removing the theme currently in use moves the  portal to the remaining theme with the lowest ID.
      * @type {number}
      * @memberof CommonSettingsApiDeletePortalColorTheme
      */
@@ -1816,7 +1913,7 @@ export interface CommonSettingsApiDeletePortalColorThemeRequest {
  */
 export interface CommonSettingsApiGetPortalSettingsRequest {
     /**
-     * Specifies whether to include the password hashing configuration in the response.
+     * Whether the answer also carries the salt, iteration count and hash size a client needs to hash a password  before sending it to the authentication operations. They are included for an anonymous caller anyway; for a  signed-in one they are left out unless this is set.
      * @type {boolean}
      * @memberof CommonSettingsApiGetPortalSettings
      */
@@ -1845,10 +1942,10 @@ export interface CommonSettingsApiSaveDefaultFolderRequest {
 export interface CommonSettingsApiSaveDnsSettingsRequest {
     /**
      * 
-     * @type {DnsSettingsRequestsDto}
+     * @type {DnsSettingsRequestDto}
      * @memberof CommonSettingsApiSaveDnsSettings
      */
-    readonly dnsSettingsRequestsDto?: DnsSettingsRequestsDto
+    readonly dnsSettingsRequestDto?: DnsSettingsRequestDto
 }
 
 /**
@@ -1859,10 +1956,10 @@ export interface CommonSettingsApiSaveDnsSettingsRequest {
 export interface CommonSettingsApiSaveMailDomainSettingsRequest {
     /**
      * 
-     * @type {MailDomainSettingsRequestsDto}
+     * @type {MailDomainSettingsRequestDto}
      * @memberof CommonSettingsApiSaveMailDomainSettings
      */
-    readonly mailDomainSettingsRequestsDto?: MailDomainSettingsRequestsDto
+    readonly mailDomainSettingsRequestDto?: MailDomainSettingsRequestDto
 }
 
 /**
@@ -1873,10 +1970,10 @@ export interface CommonSettingsApiSaveMailDomainSettingsRequest {
 export interface CommonSettingsApiSavePortalColorThemeRequest {
     /**
      * 
-     * @type {CustomColorThemesSettingsRequestsDto}
+     * @type {CustomColorThemesSettingsRequestDto}
      * @memberof CommonSettingsApiSavePortalColorTheme
      */
-    readonly customColorThemesSettingsRequestsDto?: CustomColorThemesSettingsRequestsDto
+    readonly customColorThemesSettingsRequestDto?: CustomColorThemesSettingsRequestDto
 }
 
 /**
@@ -1887,10 +1984,10 @@ export interface CommonSettingsApiSavePortalColorThemeRequest {
 export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
     /**
      * 
-     * @type {TenantAiAccessSettingsDto}
+     * @type {TenantAiAccessSettingsRequestDto}
      * @memberof CommonSettingsApiSetTenantAiAccessSettings
      */
-    readonly tenantAiAccessSettingsDto?: TenantAiAccessSettingsDto
+    readonly tenantAiAccessSettingsRequestDto?: TenantAiAccessSettingsRequestDto
 }
 
 /**
@@ -1901,10 +1998,10 @@ export interface CommonSettingsApiSetTenantAiAccessSettingsRequest {
 export interface CommonSettingsApiUpdateEmailActivationSettingsRequest {
     /**
      * 
-     * @type {EmailActivationSettings}
+     * @type {EmailActivationSettingsRequestDto}
      * @memberof CommonSettingsApiUpdateEmailActivationSettings
      */
-    readonly emailActivationSettings?: EmailActivationSettings
+    readonly emailActivationSettingsRequestDto?: EmailActivationSettingsRequestDto
 }
 
 /**
@@ -1929,7 +2026,7 @@ export interface CommonSettingsApiUpdateInvitationSettingsRequest {
  */
 export class CommonSettingsApi extends BaseAPI {
     /**
-     * Closes the administrator helper notification.
+     * Dismisses the administrator helper tip for the caller, so it is not shown again on this account. Available  only to a DocSpace administrator, which includes the portal Owner, on a Standalone (self-hosted) installation  running outside white-label custom mode; every other caller is refused. This is a mutating, idempotent call  scoped to the calling account only; it never affects other administrators. It returns no data on success.
      * @summary Close the admin helper
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1940,7 +2037,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Completes the Wizard settings.
+     * Finishes the initial portal setup wizard: sets the owner\'s password and locale, applies the supplied license  if one is required, and marks the wizard as completed so it is not shown again. This call is not for a normal  logged-in session: it requires a confirmation link bearing the Wizard claim, of the kind issued when a new  portal is created, and the link is consumed as part of authenticating the request; the caller must also hold  the EditPortalSettings permission. An empty password or a malformed email address is rejected without  completing the wizard, and so is a missing, invalid, or expired license, or a license whose user quota does  not cover the portal. This call is meant to run once per portal; running it again is accepted but has no  further effect once the wizard is already completed. It returns the resulting wizard settings, including the  completed flag.
      * @summary Complete the Wizard settings
      * @param {SettingsCommonSettingsApiCompleteWizardRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1948,11 +2045,11 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public completeWizard(requestParameters: CommonSettingsApiCompleteWizardRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).completeWizard(requestParameters.wizardRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).completeWizard(requestParameters.wizardRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the deep link configuration settings for the portal.
+     * Sets how the portal responds when a client opens a DocSpace link on a mobile device: always in the browser,  always in the native app, or asking the user to choose each time. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The handling mode must be one of the documented enum values; anything else is  rejected without being saved. This is a mutating, idempotent call: sending the same mode again leaves the  setting unchanged. It returns the saved deep link settings, including the timestamp of the last change; read  the current value at any time, including anonymously, from `GET api/2.0/settings/deeplink`.
      * @summary Configure the deep link settings
      * @param {SettingsCommonSettingsApiConfigureDeepLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1960,11 +2057,11 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public configureDeepLink(requestParameters: CommonSettingsApiConfigureDeepLinkRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).configureDeepLink(requestParameters.deepLinkConfigurationRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).configureDeepLink(requestParameters.deepLinkConfigurationRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Deletes the portal color theme with the ID specified in the request.
+     * Removes a custom color theme from the portal by its ID. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). An ID belonging to one of the built-in default themes is not removable; the  call succeeds but leaves the theme list unchanged. If the deleted theme was the currently selected one, the  theme with the lowest remaining ID is selected automatically. This is a mutating, idempotent call: deleting an  ID that is already gone succeeds without error and again leaves nothing changed. It returns the full updated  theme configuration, including the (possibly new) selected theme.
      * @summary Delete a color theme
      * @param {SettingsCommonSettingsApiDeletePortalColorThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1976,7 +2073,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the deep link settings.
+     * Returns how the portal currently responds when a client opens a DocSpace link on a mobile device: always in  the browser, always in the native app, or asking the user to choose. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call. The response supports conditional requests:  send the standard If-Modified-Since header with the previous `lastModified` value, and an unchanged response  comes back empty instead of resending the settings. Change the mode with `POST api/2.0/settings/deeplink`,  which requires the EditPortalSettings permission.
      * @summary Get the deep link settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1987,7 +2084,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal payment settings.
+     * Returns the portal\'s payment-related configuration: the sales contact email, the URL to buy or extend a  subscription, whether the portal is Standalone, the current license\'s trial status and expiration date, and  the maximum quota quantity that can be purchased at once. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). This is a read-only, idempotent call. It remains reachable even while the  portal\'s own subscription payment is overdue, since this is how the caller finds the link to resolve it.
      * @summary Get the payment settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1998,7 +2095,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal color theme.
+     * Returns the portal\'s color theme configuration: every saved custom theme, which one is currently selected, and  how many custom themes the plan still allows. No permission is required; anonymous callers can read it too.  This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings. A `limit` of `0` means the plan does not cap the number of custom  themes.
      * @summary Get a color theme
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2009,8 +2106,8 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal hostname.
-     * @summary Get hostname
+     * Returns the hostname the current request arrived on, exactly as sent in the HTTP Host header, so a client  mid-setup can learn the address the portal is actually reachable at. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard claim, of the kind generated during initial portal  setup, and the link is consumed as part of authenticating the request. This is a read-only, idempotent call.  The value reflects whatever the caller connected through, including a reverse proxy\'s public name, and is not  necessarily the tenant\'s configured alias or mapped domain.
+     * @summary Get the portal hostname
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
@@ -2020,7 +2117,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal logo image URL.
+     * Returns the absolute URL of the portal\'s current logo image, already resolved against the active white-label  branding. Requires an authenticated session; every role, including Guest, can read it. This is a read-only,  idempotent call. The response supports conditional requests: send the standard If-Modified-Since header with  the previous `lastModified` value, and an unchanged response comes back empty instead of resending the same  URL. The URL points at whatever image is currently configured, including the default DocSpace logo when no  custom branding has been set.
      * @summary Get a portal logo
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2031,7 +2128,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the available portal settings with the current values for each parameter.
+     * Returns the current portal\'s general configuration: branding, culture, feature flags, and DocSpace/Standalone  mode, everything the client needs to render its shell before or after login. No permission is required, but  the response shape depends on the caller\'s identity. An anonymous caller receives only the public subset  (culture, branding, DocSpace/Standalone flags, deep link data, setup-wizard and join-by-domain hints); once  authenticated, the response also includes tenant-specific fields such as the owner ID, time zone, invitation  limit, AI/banner/dev-tools flags, and, for a DocSpace administrator, the tenant wallet\'s low-balance flag.  This is a read-only, idempotent call. Pass `withPassword=true` to also receive the parameters (`salt`,  iteration count, hash size) used to hash the password client-side before it is sent to the authentication  endpoints; these are only added for an anonymous caller or when explicitly requested, never as part of the  default authenticated response.
      * @summary Get the portal settings
      * @param {SettingsCommonSettingsApiGetPortalSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2043,7 +2140,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the socket settings.
+     * Returns the base URL of the portal\'s real-time notification hub (Socket.IO), which the client connects to for  live updates such as file changes, presence, or quota alerts. Requires an authenticated session; every role  can read it. This is a read-only, idempotent call. The value comes from server-side configuration and cannot  be changed through this API; an empty `url` means the portal has no notification hub configured and the client  should not attempt to connect.
      * @summary Get the socket settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2054,7 +2151,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the available portal languages in the format of a two-letter or four-letter language code (e.g. de, en-US, etc.).
+     * Returns the two- or four-letter language codes of every culture currently enabled on the portal (for example  `en-US`), used to populate a language picker before or after login. No permission is required; anonymous  callers can read it too. This is a read-only, idempotent call, and the list is not paginated. The response  supports conditional requests: an unchanged result is signaled instead of resending the same list. The set of  enabled cultures is a portal-wide configuration value, not a per-user preference.
      * @summary Get supported languages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2065,8 +2162,8 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the current portal-level AI access settings that control whether all AI functionality  (chat, agents, vectorization) is available for the portal. AI is enabled by default.
-     * @summary Get the AI access settings for the portal
+     * Returns whether AI functionality (chat, agents, vectorization) is currently available on the portal at all; AI  is enabled by default. Requires an authenticated session; every role can read it. This is a read-only,  idempotent call. When the setting is disabled, every AI-specific endpoint and folder is unavailable regardless  of the caller\'s own permissions; this call only reports the portal-wide switch, not any per-user entitlement.
+     * @summary Get the AI access settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
@@ -2076,7 +2173,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal user invitation settings.
+     * Returns whether the portal currently allows inviting new members and new guests at all. No permission is  required; anonymous callers can read it too, since the invitation flow itself may run before the caller has  signed in. This is a read-only, idempotent call. The response supports conditional requests: send the standard  If-Modified-Since header with the previous `lastModified` value, and an unchanged response comes back empty  instead of resending the same settings.
      * @summary Get the user invitation settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2087,7 +2184,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the available portal time zones.
+     * Returns every time zone known to the host machine, each with its IANA identifier and a human-readable display  name, ordered from the most negative to the most positive UTC offset. This call is not for a normal logged-in  session: it requires a confirmation link bearing the Wizard or Administrators claim, of the kind generated  during initial portal setup or issued by an administrator, and the link is consumed as part of authenticating  the request. This is a read-only, idempotent call, and the list is not paginated. Use the returned `id` values  wherever the portal expects a time zone identifier; an unrecognized value is rejected there, not here.
      * @summary Get time zones
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2098,7 +2195,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Sets the default folder.
+     * Sets which folder the current user\'s account opens into by default, such as My Documents, the rooms list, or  favorites. Requires an authenticated session; every role may set its own default, and the change never affects  any other user. Only folder types the client actually offers as a landing page are accepted; picking My  Documents (`USER`) as a Guest is rejected too, since guests have no personal storage. This is a mutating,  idempotent call. It returns the saved setting.
      * @summary Set the default folder
      * @param {SettingsCommonSettingsApiSaveDefaultFolderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2110,7 +2207,7 @@ export class CommonSettingsApi extends BaseAPI {
     }
 
     /**
-     * Saves the DNS settings specified in the request to the current portal.
+     * Maps a custom domain name onto the current tenant, or clears the mapping, so the portal becomes reachable  under the caller\'s own DNS name instead of only its default alias. Available only on a Standalone  (self-hosted) installation; on SaaS the call is always refused. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disable the mapping by passing `enable=false`, in which case the domain name  in the request is ignored. A domain that collides with the portal\'s reserved base domain, or otherwise fails  validation, is rejected without changing the current mapping. This is a mutating, idempotent call. On success  the previous domain also stops answering, and any CSP configuration referencing it is updated to the new one.
      * @summary Save the DNS settings
      * @param {SettingsCommonSettingsApiSaveDnsSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2118,11 +2215,11 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public saveDnsSettings(requestParameters: CommonSettingsApiSaveDnsSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveDnsSettings(requestParameters.dnsSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveDnsSettings(requestParameters.dnsSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the mail domain settings specified in the request to the portal.
+     * Overwrites the portal\'s trusted mail domain configuration, which controls which email domains are treated as  already verified when a user is invited or self-registers. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). When the requested mode is a custom domain list, every domain is normalized to  lowercase and checked against the expected hostname format; a domain that fails the check, or an empty custom  list, causes the whole call to be rejected without saving anything. For the other modes the domain list in the  request is ignored. The `inviteUsersAsVisitors` flag controls whether users who join through a trusted domain  are added as full members or as visitors, and takes effect on the next join rather than retroactively. This is  a mutating, idempotent call: repeating it with the same body leaves the portal in the same state. On success  it returns a confirmation message, not the saved settings themselves; read them back from  `GET api/2.0/settings`.
      * @summary Save the mail domain settings
      * @param {SettingsCommonSettingsApiSaveMailDomainSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2130,11 +2227,11 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public saveMailDomainSettings(requestParameters: CommonSettingsApiSaveMailDomainSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(requestParameters.mailDomainSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).saveMailDomainSettings(requestParameters.mailDomainSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the portal color theme specified in the request.
+     * Adds or updates a custom color theme, or changes which theme is selected, for the whole portal. Requires Owner  or DocSpaceAdmin (the EditPortalSettings permission). Pass `theme` to create or edit one: an existing theme is  matched and updated by its ID, a new one is appended, and an ID that collides with a built-in default theme is  treated as a request to create a new custom theme instead of overwriting the default. Once the plan\'s  custom-theme limit is reached, a new theme is silently not added rather than rejected with an error, so check  the returned `themes` count against `limit` before assuming it was saved. Pass `selected` to switch the active  theme; an ID that does not match any existing theme is ignored. This is a mutating call, not strictly  idempotent once the limit has been reached. It returns the full updated theme configuration.
      * @summary Save a color theme
      * @param {SettingsCommonSettingsApiSavePortalColorThemeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2142,23 +2239,23 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public savePortalColorTheme(requestParameters: CommonSettingsApiSavePortalColorThemeRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).savePortalColorTheme(requestParameters.customColorThemesSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Updates the portal-level AI access settings. When AI is disabled, all AI features are turned off:  the AI Agents folder is hidden from root folder listings, AI status checks immediately return disabled,  and AI chat endpoints become inaccessible. Only users with the DocSpaceAdmin role  (EditPortalSettings permission) can change this setting.
-     * @summary Set the AI access for the portal
+     * Turns AI functionality (chat, agents, vectorization) on or off for the whole portal; AI is enabled by default.  Requires Owner or DocSpaceAdmin (the EditPortalSettings permission); every other caller is refused. Disabling  it immediately hides the AI Agents folder from root folder listings, makes AI status checks report disabled,  and makes AI chat endpoints unreachable for every user on the tenant, not only the caller. This is a mutating,  idempotent, portal-wide call, and the change is pushed to already-connected clients over the real-time  notification hub rather than waiting for their next request. It returns the saved setting.
+     * @summary Set the AI access settings
      * @param {SettingsCommonSettingsApiSetTenantAiAccessSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CommonSettingsApi
      */
     public setTenantAiAccessSettings(requestParameters: CommonSettingsApiSetTenantAiAccessSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsDto, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).setTenantAiAccessSettings(requestParameters.tenantAiAccessSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Updates the email activation settings.
+     * Updates the current user\'s own preference for whether the email confirmation prompt is displayed on their  account. Requires an authenticated session; every role may change its own setting, and the change never  affects any other user. This is a mutating, idempotent call. It returns the settings exactly as submitted,  without validating them against the account\'s actual email confirmation state, so `show` can be set to `true`  even after the address is already confirmed.
      * @summary Update the email activation settings
      * @param {SettingsCommonSettingsApiUpdateEmailActivationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -2166,12 +2263,12 @@ export class CommonSettingsApi extends BaseAPI {
      * @memberof CommonSettingsApi
      */
     public updateEmailActivationSettings(requestParameters: CommonSettingsApiUpdateEmailActivationSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(requestParameters.emailActivationSettings, options).then((request) => request(this.axios, this.basePath));
+        return CommonSettingsApiFp(this.configuration).updateEmailActivationSettings(requestParameters.emailActivationSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Updates the portal user invitation settings.
-     * @summary Update user invitation settings
+     * Sets whether the portal allows inviting new members and new guests. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). Disabling member or guest invitations only blocks creating new invitations  going forward; it does not revoke links already issued or remove members already invited. This is a mutating,  idempotent, portal-wide call. It returns the saved setting; read the current value at any time, including  anonymously, from `GET api/2.0/settings/invitationsettings`.
+     * @summary Update the user invitation settings
      * @param {SettingsCommonSettingsApiUpdateInvitationSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

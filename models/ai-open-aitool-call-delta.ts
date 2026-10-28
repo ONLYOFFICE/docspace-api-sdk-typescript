@@ -22,9 +22,21 @@
 // @ts-ignore
 import type { AiOpenAIToolCallDeltaFunction } from './ai-open-aitool-call-delta-function';
 
+/**
+ * The incremental part of one tool call the model requested.
+ */
 export interface AiOpenAIToolCallDelta {
+    /**
+     * The zero-based position of the tool call within the message.
+     */
     'index': number;
+    /**
+     * The tool call identifier, quoted back when its result is submitted.
+     */
     'id'?: string;
+    /**
+     * Always `function` - the only tool kind the API defines.
+     */
     'type'?: AiOpenAIToolCallDeltaTypeEnum;
     'function'?: AiOpenAIToolCallDeltaFunction;
 }

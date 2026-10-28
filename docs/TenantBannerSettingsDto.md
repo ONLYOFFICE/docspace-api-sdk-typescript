@@ -1,12 +1,13 @@
 # TenantBannerSettingsDto
 
-The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+Whether the portal hides its promotional banners.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hidden** | **boolean** | The banners visibility flag. | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 
@@ -15,6 +16,7 @@ import { TenantBannerSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantBannerSettingsDto = {
     hidden,
+    lastModified,
 };
 ```
 

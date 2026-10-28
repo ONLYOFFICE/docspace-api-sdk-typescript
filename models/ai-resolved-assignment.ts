@@ -26,7 +26,13 @@ import type { AiProfile } from './ai-profile';
  * Resolved profile for an action — both the storage row and its ID.
  */
 export interface AiResolvedAssignment {
+    /**
+     * The identifier of the resolved profile.
+     */
     'profileId': string;
+    /**
+     * The resolved profile itself.
+     */
     'profile': AiProfile;
 }
 

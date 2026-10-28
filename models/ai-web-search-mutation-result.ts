@@ -20,17 +20,26 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiTErrorData } from './ai-terror-data';
+import type { AiErrorData } from './ai-error-data';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { AiWebSearchConfig } from './ai-web-search-config';
 
 /**
- * Outcome of  {@link  WebSearchEngine.configure }  — either the persisted config or a field-scoped error suitable for the settings form.
+ * Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
  */
 export interface AiWebSearchMutationResult {
+    /**
+     * True when the configuration was persisted.
+     */
     'success': boolean;
+    /**
+     * The persisted web-search configuration. Present on success.
+     */
     'config'?: AiWebSearchConfig;
-    'error'?: AiTErrorData;
+    /**
+     * Why the configuration was rejected. Present on failure.
+     */
+    'error'?: AiErrorData;
 }
 

@@ -24,23 +24,33 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { AdditionalResourcesWrapper } from '../../models';
+// @ts-ignore
+import type { AdditionalWhiteLabelSettingsRequestDto } from '../../models';
+// @ts-ignore
 import type { AdditionalWhiteLabelSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
-import type { CompanyWhiteLabelSettingsArrayWrapper } from '../../models';
+import type { CompanyWhiteLabelSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { CompanyWhiteLabelSettingsWrapper } from '../../models';
+// @ts-ignore
+import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { IsDefaultWhiteLabelLogosArrayWrapper } from '../../models';
 // @ts-ignore
 import type { IsDefaultWhiteLabelLogosWrapper } from '../../models';
 // @ts-ignore
+import type { LicensorDetailsArrayWrapper } from '../../models';
+// @ts-ignore
+import type { LicensorDetailsWrapper } from '../../models';
+// @ts-ignore
 import type { StringWrapper } from '../../models';
 // @ts-ignore
 import type { WhiteLabelItemArrayWrapper } from '../../models';
 // @ts-ignore
-import type { WhiteLabelRequestsDto } from '../../models';
+import type { WhiteLabelRequestDto } from '../../models';
 /**
  * RebrandingApi - axios parameter creator
  * @export
@@ -50,7 +60,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * Deletes the additional white label settings.
+         * Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
          * @summary Delete the additional white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -102,7 +112,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Deletes the company white label settings.
+         * Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  customization, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
          * @summary Delete the company white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -154,7 +164,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the additional white label settings.
+         * Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,  the Help Center link, the Feedback and Support link, the user forum, the video guides and the license  agreements - so a client can hide the entries that are switched off. Any authenticated user may call it; no  administrator permission is required, and a portal whose payment has lapsed is served as well. The call is  read-only and idempotent. Each flag is `true` when the entry may be shown and `false` when it must be hidden,  and `isDefault` tells whether the whole set is still the built-in one. The flags are installation-wide, so  every portal of a server installation reports the same ones. They say nothing about the caller\'s own  permissions, and the addresses behind the entries are not part of the answer. Change the flags with  `POST api/2.0/settings/rebranding/additional` and reset them with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Get the additional white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -206,7 +216,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the company white label settings.
+         * Returns the company details that the About page and the notification letters print as the vendor, in the form  the settings interface edits them. Any authenticated user may call it; no administrator permission is  required, and a portal whose payment has lapsed is served as well. The call is read-only and idempotent.  Alongside the stored fields the answer carries `isLicensor`, which tells whether these details belong to the  vendor of the product itself, and `isDefault`, which tells whether they are still the built-in ONLYOFFICE  ones. The values are installation-wide, so every portal of a server installation reports the same ones. The  response is revalidatable: it carries `Last-Modified`, and sending that value back in `If-Modified-Since`  yields an empty body while the details have not changed, which makes polling cheap. For the About page, where  the built-in vendor has to be shown next to a reseller, use `GET api/2.0/settings/companywhitelabel` instead.  Change the details with `POST api/2.0/settings/rebranding/company`.
          * @summary Get the company white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -258,7 +268,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Checks if the white label is enabled or not.
+         * Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal\'s  current plan includes customization. It comes back as `false` on a plan without customization, which is  exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
          * @summary Check the white label availability
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -310,10 +320,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Specifies if the white label logo text is default or not.
-         * @summary Check the default white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * Reports whether the current portal still uses the built-in wordmark or one that was stored for it, which is  what an interface needs to decide whether a Restore action applies to the text. Requires a DocSpace  administrator. The call is read-only and idempotent. The answer has the same shape as one entry of  `GET api/2.0/settings/whitelabel/logos/isdefault`, with `name` fixed to `logotext` and `default` set to `true`  while no text has been stored and to `false` once one has. Because `GET api/2.0/settings/whitelabel/logotext`  falls back to `ONLYOFFICE` when nothing is stored, this operation is the only way to tell a portal that  deliberately kept the built-in wordmark from one that saved the very same text. Pass `isDefault=true` to  inspect the installation-wide default branding instead of this portal\'s. The flag turns back to `true` after  `PUT api/2.0/settings/whitelabel/logotext/restore`, and to `false` after  `POST api/2.0/settings/whitelabel/logotext/save`. Saving the built-in wordmark itself counts as clearing the  setting, so the flag stays `true` in that case as well.
+         * @summary Check the default logo text
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsDefaultWhiteLabelLogoText operation
@@ -353,11 +363,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -372,10 +382,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Specifies if the white label logos are default or not.
+         * Reports, slot by slot, whether the current portal still shows the built-in image or a logo that was uploaded  for it, which is what an interface needs to decide where a Restore action makes sense. Requires a DocSpace  administrator; the URLs themselves are public and come from `GET api/2.0/settings/whitelabel/logos`, which  needs no authentication. The call is read-only and idempotent. Every logo slot is returned, including the  notification logo that the public list leaves out, so the result has one entry more than that list. An entry  gives the stable slot name in `name` and `default` set to `true` while the slot has never been written, and to  `false` once an image has been stored for it, whether for the light or for the dark theme. A slot goes back to  `true` after `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to inspect the  installation-wide default branding instead of this portal\'s. The logo text is reported separately by  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsDefaultWhiteLabelLogos operation
@@ -415,11 +425,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -434,7 +444,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the licensor data.
+         * Returns the licensor details - company name, site, support email, postal address and phone - that the About  page and the notification letters print as the vendor of the installation. Any authenticated user may call it,  as these details are shown in the interface to everyone; no administrator permission is required. The call is  read-only and idempotent. The list holds the details currently in effect as its first item; when they have  been replaced by a reseller and the replacement is not itself marked as the licensor, the built-in ONLYOFFICE  details are appended as a second item, so a caller can print both the reseller and the original vendor. A  single-item list therefore means that the current details are the only ones to show. The values are  installation-wide rather than per-portal, so every portal of a server installation reports the same ones. The  same data in the form the settings interface edits is served by `GET api/2.0/settings/rebranding/company`, and  it is written by `POST api/2.0/settings/rebranding/company`.
          * @summary Get the licensor data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -486,10 +496,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the white label logo text.
+         * Returns the wordmark the current portal prints next to or instead of a logo image, as a bare string rather  than an object. Requires a DocSpace administrator, because this is the settings view of the value; the  branding a login page needs is served by `GET api/2.0/settings/whitelabel/logos`, which needs no  authentication. The call is read-only and idempotent. When nothing has been stored for the portal, the  built-in `ONLYOFFICE` is returned, so the answer is never empty and cannot be used to tell a custom text from  the default one - `GET api/2.0/settings/whitelabel/logotext/isdefault` answers that question. Pass  `isDefault=true` to read the installation-wide default wordmark instead of this portal\'s; without it the  portal\'s own value is returned even when the installation carries a different default. Change the text with  `POST api/2.0/settings/whitelabel/logotext/save` and clear it with  `PUT api/2.0/settings/whitelabel/logotext/restore`. The value is stored as it was typed, at most 40 characters  long, and is not translated for the caller\'s language, so the same wordmark is returned for every user of the  portal.
          * @summary Get the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWhiteLabelLogoText operation
@@ -529,11 +539,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -548,10 +558,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Returns the white label logos.
+         * Lists the branding logo slots of the current portal together with the image URLs to render, which is what a  login page, an editor or a mail template needs before any user is known. No authentication is required, and  the portal is resolved from the address the request is made to. The call is read-only and idempotent. Each  item carries the slot as a number in `type`, its stable name in `name`, the size the image is fitted to in  `size` (`width` and `height` in pixels), and the URLs in `path`. When `isDark` is passed, only the matching  theme is filled in, `light` for `false` and `dark` for `true`; when it is omitted both are filled in and  `dark` comes back empty for the slots that have no separate dark image. The notification slot is not part of  this list, as it is derived from the login-page logo and used only in letters. Pass `isDefault=true` to read  the installation-wide default logos instead of this portal\'s. To learn which slots are still untouched use  `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Get the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWhiteLabelLogos operation
@@ -571,12 +581,31 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -591,10 +620,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Restores the white label logo text.
+         * Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a  portal whose subscription no longer covers customization can still be reset. The call is destructive for the  stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`  comes back both when a text was cleared and when there was none. Logo images are left untouched and have their  own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide  default wordmark instead of this portal\'s, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
          * @summary Restore the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for restoreWhiteLabelLogoText operation
@@ -634,11 +663,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -653,10 +682,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Restores the white label logos.
+         * Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Restore the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for restoreWhiteLabelLogos operation
@@ -696,11 +725,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -715,15 +744,15 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves the additional white label settings specified in the request.
+         * Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Save the additional white label settings
-         * @param {AdditionalWhiteLabelSettingsWrapper} [additionalWhiteLabelSettingsWrapper] 
+         * @param {AdditionalWhiteLabelSettingsRequestDto} [additionalWhiteLabelSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/
          */
-        saveAdditionalWhiteLabelSettings: async (additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveAdditionalWhiteLabelSettings: async (additionalWhiteLabelSettingsRequestDto?: AdditionalWhiteLabelSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/rebranding/additional`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -763,7 +792,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(additionalWhiteLabelSettingsWrapper, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(additionalWhiteLabelSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -771,15 +800,15 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves the company white label settings specified in the request.
+         * Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
          * @summary Save the company white label settings
-         * @param {CompanyWhiteLabelSettingsWrapper} [companyWhiteLabelSettingsWrapper] 
+         * @param {CompanyWhiteLabelSettingsRequestDto} [companyWhiteLabelSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/
          */
-        saveCompanyWhiteLabelSettings: async (companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveCompanyWhiteLabelSettings: async (companyWhiteLabelSettingsRequestDto?: CompanyWhiteLabelSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/rebranding/company`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -819,7 +848,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(companyWhiteLabelSettingsWrapper, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(companyWhiteLabelSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -827,17 +856,17 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves the white label logo text specified in the request.
-         * @summary Save the white label logo text settings
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal\'s, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
+         * @summary Save the white label logo text
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
+         * @param {WhiteLabelRequestDto} [whiteLabelRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/
          */
-        saveWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveWhiteLabelLogoText: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestDto?: WhiteLabelRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/whitelabel/logotext/save`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -871,11 +900,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -885,7 +914,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(whiteLabelRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(whiteLabelRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -893,17 +922,17 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves the white label logos specified in the request.
+         * Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
          * @summary Save the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
+         * @param {WhiteLabelRequestDto} [whiteLabelRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/
          */
-        saveWhiteLabelSettings: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveWhiteLabelSettings: async (isDark?: boolean, isDefault?: boolean, whiteLabelRequestDto?: WhiteLabelRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/whitelabel/logos/save`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -937,11 +966,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -951,7 +980,7 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(whiteLabelRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(whiteLabelRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -959,10 +988,10 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * Saves the white label logos from files.
-         * @summary Save the white label logos from files
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
+         * @summary Save the logos from files
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelSettingsFromFiles operation
@@ -1002,11 +1031,11 @@ export const RebrandingApiAxiosParamCreator = function (configuration?: Configur
             // authentication OpenId required
 
             if (isDark !== undefined) {
-                localVarQueryParameter['IsDark'] = isDark;
+                localVarQueryParameter['isDark'] = isDark;
             }
 
             if (isDefault !== undefined) {
-                localVarQueryParameter['IsDefault'] = isDefault;
+                localVarQueryParameter['isDefault'] = isDefault;
             }
 
 
@@ -1031,35 +1060,35 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = RebrandingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Deletes the additional white label settings.
+         * Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
          * @summary Delete the additional white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
          */
-        async deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalWhiteLabelSettingsWrapper>> {
+        async deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdditionalResourcesWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteAdditionalWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Deletes the company white label settings.
+         * Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  customization, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
          * @summary Delete the company white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for deleteCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
          */
-        async deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsWrapper>> {
+        async deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LicensorDetailsWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCompanyWhiteLabelSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.deleteCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the additional white label settings.
+         * Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,  the Help Center link, the Feedback and Support link, the user forum, the video guides and the license  agreements - so a client can hide the entries that are switched off. Any authenticated user may call it; no  administrator permission is required, and a portal whose payment has lapsed is served as well. The call is  read-only and idempotent. Each flag is `true` when the entry may be shown and `false` when it must be hidden,  and `isDefault` tells whether the whole set is still the built-in one. The flags are installation-wide, so  every portal of a server installation reports the same ones. They say nothing about the caller\'s own  permissions, and the addresses behind the entries are not part of the answer. Change the flags with  `POST api/2.0/settings/rebranding/additional` and reset them with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Get the additional white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1073,7 +1102,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the company white label settings.
+         * Returns the company details that the About page and the notification letters print as the vendor, in the form  the settings interface edits them. Any authenticated user may call it; no administrator permission is  required, and a portal whose payment has lapsed is served as well. The call is read-only and idempotent.  Alongside the stored fields the answer carries `isLicensor`, which tells whether these details belong to the  vendor of the product itself, and `isDefault`, which tells whether they are still the built-in ONLYOFFICE  ones. The values are installation-wide, so every portal of a server installation reports the same ones. The  response is revalidatable: it carries `Last-Modified`, and sending that value back in `If-Modified-Since`  yields an empty body while the details have not changed, which makes polling cheap. For the About page, where  the built-in vendor has to be shown next to a reseller, use `GET api/2.0/settings/companywhitelabel` instead.  Change the details with `POST api/2.0/settings/rebranding/company`.
          * @summary Get the company white label settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1087,7 +1116,7 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the white label is enabled or not.
+         * Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal\'s  current plan includes customization. It comes back as `false` on a plan without customization, which is  exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
          * @summary Check the white label availability
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1101,10 +1130,10 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies if the white label logo text is default or not.
-         * @summary Check the default white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * Reports whether the current portal still uses the built-in wordmark or one that was stored for it, which is  what an interface needs to decide whether a Restore action applies to the text. Requires a DocSpace  administrator. The call is read-only and idempotent. The answer has the same shape as one entry of  `GET api/2.0/settings/whitelabel/logos/isdefault`, with `name` fixed to `logotext` and `default` set to `true`  while no text has been stored and to `false` once one has. Because `GET api/2.0/settings/whitelabel/logotext`  falls back to `ONLYOFFICE` when nothing is stored, this operation is the only way to tell a portal that  deliberately kept the built-in wordmark from one that saved the very same text. Pass `isDefault=true` to  inspect the installation-wide default branding instead of this portal\'s. The flag turns back to `true` after  `PUT api/2.0/settings/whitelabel/logotext/restore`, and to `false` after  `POST api/2.0/settings/whitelabel/logotext/save`. Saving the built-in wordmark itself counts as clearing the  setting, so the flag stays `true` in that case as well.
+         * @summary Check the default logo text
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsDefaultWhiteLabelLogoText operation
@@ -1117,10 +1146,10 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Specifies if the white label logos are default or not.
+         * Reports, slot by slot, whether the current portal still shows the built-in image or a logo that was uploaded  for it, which is what an interface needs to decide where a Restore action makes sense. Requires a DocSpace  administrator; the URLs themselves are public and come from `GET api/2.0/settings/whitelabel/logos`, which  needs no authentication. The call is read-only and idempotent. Every logo slot is returned, including the  notification logo that the public list leaves out, so the result has one entry more than that list. An entry  gives the stable slot name in `name` and `default` set to `true` while the slot has never been written, and to  `false` once an image has been stored for it, whether for the light or for the dark theme. A slot goes back to  `true` after `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to inspect the  installation-wide default branding instead of this portal\'s. The logo text is reported separately by  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsDefaultWhiteLabelLogos operation
@@ -1133,24 +1162,24 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the licensor data.
+         * Returns the licensor details - company name, site, support email, postal address and phone - that the About  page and the notification letters print as the vendor of the installation. Any authenticated user may call it,  as these details are shown in the interface to everyone; no administrator permission is required. The call is  read-only and idempotent. The list holds the details currently in effect as its first item; when they have  been replaced by a reseller and the replacement is not itself marked as the licensor, the built-in ONLYOFFICE  details are appended as a second item, so a caller can print both the reseller and the original vendor. A  single-item list therefore means that the current details are the only ones to show. The values are  installation-wide rather than per-portal, so every portal of a server installation reports the same ones. The  same data in the form the settings interface edits is served by `GET api/2.0/settings/rebranding/company`, and  it is written by `POST api/2.0/settings/rebranding/company`.
          * @summary Get the licensor data
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getLicensorData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data/
          */
-        async getLicensorData(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CompanyWhiteLabelSettingsArrayWrapper>> {
+        async getLicensorData(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LicensorDetailsArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getLicensorData(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.getLicensorData']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the white label logo text.
+         * Returns the wordmark the current portal prints next to or instead of a logo image, as a bare string rather  than an object. Requires a DocSpace administrator, because this is the settings view of the value; the  branding a login page needs is served by `GET api/2.0/settings/whitelabel/logos`, which needs no  authentication. The call is read-only and idempotent. When nothing has been stored for the portal, the  built-in `ONLYOFFICE` is returned, so the answer is never empty and cannot be used to tell a custom text from  the default one - `GET api/2.0/settings/whitelabel/logotext/isdefault` answers that question. Pass  `isDefault=true` to read the installation-wide default wordmark instead of this portal\'s; without it the  portal\'s own value is returned even when the installation carries a different default. Change the text with  `POST api/2.0/settings/whitelabel/logotext/save` and clear it with  `PUT api/2.0/settings/whitelabel/logotext/restore`. The value is stored as it was typed, at most 40 characters  long, and is not translated for the caller\'s language, so the same wordmark is returned for every user of the  portal.
          * @summary Get the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWhiteLabelLogoText operation
@@ -1163,10 +1192,10 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the white label logos.
+         * Lists the branding logo slots of the current portal together with the image URLs to render, which is what a  login page, an editor or a mail template needs before any user is known. No authentication is required, and  the portal is resolved from the address the request is made to. The call is read-only and idempotent. Each  item carries the slot as a number in `type`, its stable name in `name`, the size the image is fitted to in  `size` (`width` and `height` in pixels), and the URLs in `path`. When `isDark` is passed, only the matching  theme is filled in, `light` for `false` and `dark` for `true`; when it is omitted both are filled in and  `dark` comes back empty for the slots that have no separate dark image. The notification slot is not part of  this list, as it is derived from the login-page logo and used only in letters. Pass `isDefault=true` to read  the installation-wide default logos instead of this portal\'s. To learn which slots are still untouched use  `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Get the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWhiteLabelLogos operation
@@ -1179,10 +1208,10 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Restores the white label logo text.
+         * Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a  portal whose subscription no longer covers customization can still be reset. The call is destructive for the  stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`  comes back both when a text was cleared and when there was none. Logo images are left untouched and have their  own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide  default wordmark instead of this portal\'s, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
          * @summary Restore the white label logo text
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for restoreWhiteLabelLogoText operation
@@ -1195,10 +1224,10 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Restores the white label logos.
+         * Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Restore the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for restoreWhiteLabelLogos operation
@@ -1211,74 +1240,74 @@ export const RebrandingApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the additional white label settings specified in the request.
+         * Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Save the additional white label settings
-         * @param {AdditionalWhiteLabelSettingsWrapper} [additionalWhiteLabelSettingsWrapper] 
+         * @param {AdditionalWhiteLabelSettingsRequestDto} [additionalWhiteLabelSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-additional-white-label-settings/
          */
-        async saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsWrapper, options);
+        async saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsRequestDto?: AdditionalWhiteLabelSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAdditionalWhiteLabelSettings(additionalWhiteLabelSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveAdditionalWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the company white label settings specified in the request.
+         * Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
          * @summary Save the company white label settings
-         * @param {CompanyWhiteLabelSettingsWrapper} [companyWhiteLabelSettingsWrapper] 
+         * @param {CompanyWhiteLabelSettingsRequestDto} [companyWhiteLabelSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-company-white-label-settings/
          */
-        async saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsWrapper, options);
+        async saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsRequestDto?: CompanyWhiteLabelSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveCompanyWhiteLabelSettings(companyWhiteLabelSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveCompanyWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the white label logo text specified in the request.
-         * @summary Save the white label logo text settings
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal\'s, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
+         * @summary Save the white label logo text
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
+         * @param {WhiteLabelRequestDto} [whiteLabelRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelLogoText operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-logo-text/
          */
-        async saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestsDto, options);
+        async saveWhiteLabelLogoText(isDark?: boolean, isDefault?: boolean, whiteLabelRequestDto?: WhiteLabelRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelLogoText(isDark, isDefault, whiteLabelRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveWhiteLabelLogoText']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the white label logos specified in the request.
+         * Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
          * @summary Save the white label logos
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
-         * @param {WhiteLabelRequestsDto} [whiteLabelRequestsDto] 
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
+         * @param {WhiteLabelRequestDto} [whiteLabelRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-white-label-settings/
          */
-        async saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestsDto?: WhiteLabelRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestsDto, options);
+        async saveWhiteLabelSettings(isDark?: boolean, isDefault?: boolean, whiteLabelRequestDto?: WhiteLabelRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveWhiteLabelSettings(isDark, isDefault, whiteLabelRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RebrandingApi.saveWhiteLabelSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the white label logos from files.
-         * @summary Save the white label logos from files
-         * @param {boolean} [isDark] Specifies if the white label logo is for the dark theme or not.
-         * @param {boolean} [isDefault] Specifies if the logo is for a default tenant or not.
+         * Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
+         * @summary Save the logos from files
+         * @param {boolean} [isDark] Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
+         * @param {boolean} [isDefault] Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveWhiteLabelSettingsFromFiles operation
@@ -1301,29 +1330,29 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
     const localVarFp = RebrandingApiFp(configuration)
     return {
         /**
-         * Deletes the additional white label settings.
+         * Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
          * @summary Delete the additional white label settings
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteAdditionalWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-additional-white-label-settings/
          * @throws {RequiredError}
          */
-        deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalWhiteLabelSettingsWrapper> {
+        deleteAdditionalWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<AdditionalResourcesWrapper> {
             return localVarFp.deleteAdditionalWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes the company white label settings.
+         * Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  customization, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
          * @summary Delete the company white label settings
          * @param {*} [options] Override http request option.
          * REST API Reference for deleteCompanyWhiteLabelSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-company-white-label-settings/
          * @throws {RequiredError}
          */
-        deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsWrapper> {
+        deleteCompanyWhiteLabelSettings(options?: RawAxiosRequestConfig): AxiosPromise<LicensorDetailsWrapper> {
             return localVarFp.deleteCompanyWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the additional white label settings.
+         * Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,  the Help Center link, the Feedback and Support link, the user forum, the video guides and the license  agreements - so a client can hide the entries that are switched off. Any authenticated user may call it; no  administrator permission is required, and a portal whose payment has lapsed is served as well. The call is  read-only and idempotent. Each flag is `true` when the entry may be shown and `false` when it must be hidden,  and `isDefault` tells whether the whole set is still the built-in one. The flags are installation-wide, so  every portal of a server installation reports the same ones. They say nothing about the caller\'s own  permissions, and the addresses behind the entries are not part of the answer. Change the flags with  `POST api/2.0/settings/rebranding/additional` and reset them with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Get the additional white label settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getAdditionalWhiteLabelSettings operation
@@ -1334,7 +1363,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getAdditionalWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the company white label settings.
+         * Returns the company details that the About page and the notification letters print as the vendor, in the form  the settings interface edits them. Any authenticated user may call it; no administrator permission is  required, and a portal whose payment has lapsed is served as well. The call is read-only and idempotent.  Alongside the stored fields the answer carries `isLicensor`, which tells whether these details belong to the  vendor of the product itself, and `isDefault`, which tells whether they are still the built-in ONLYOFFICE  ones. The values are installation-wide, so every portal of a server installation reports the same ones. The  response is revalidatable: it carries `Last-Modified`, and sending that value back in `If-Modified-Since`  yields an empty body while the details have not changed, which makes polling cheap. For the About page, where  the built-in vendor has to be shown next to a reseller, use `GET api/2.0/settings/companywhitelabel` instead.  Change the details with `POST api/2.0/settings/rebranding/company`.
          * @summary Get the company white label settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getCompanyWhiteLabelSettings operation
@@ -1345,7 +1374,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getCompanyWhiteLabelSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if the white label is enabled or not.
+         * Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal\'s  current plan includes customization. It comes back as `false` on a plan without customization, which is  exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
          * @summary Check the white label availability
          * @param {*} [options] Override http request option.
          * REST API Reference for getEnableWhitelabel operation
@@ -1356,8 +1385,8 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getEnableWhitelabel(options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies if the white label logo text is default or not.
-         * @summary Check the default white label logo text
+         * Reports whether the current portal still uses the built-in wordmark or one that was stored for it, which is  what an interface needs to decide whether a Restore action applies to the text. Requires a DocSpace  administrator. The call is read-only and idempotent. The answer has the same shape as one entry of  `GET api/2.0/settings/whitelabel/logos/isdefault`, with `name` fixed to `logotext` and `default` set to `true`  while no text has been stored and to `false` once one has. Because `GET api/2.0/settings/whitelabel/logotext`  falls back to `ONLYOFFICE` when nothing is stored, this operation is the only way to tell a portal that  deliberately kept the built-in wordmark from one that saved the very same text. Pass `isDefault=true` to  inspect the installation-wide default branding instead of this portal\'s. The flag turns back to `true` after  `PUT api/2.0/settings/whitelabel/logotext/restore`, and to `false` after  `POST api/2.0/settings/whitelabel/logotext/save`. Saving the built-in wordmark itself counts as clearing the  setting, so the flag stays `true` in that case as well.
+         * @summary Check the default logo text
          * @param {RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsDefaultWhiteLabelLogoText operation
@@ -1368,7 +1397,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getIsDefaultWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Specifies if the white label logos are default or not.
+         * Reports, slot by slot, whether the current portal still shows the built-in image or a logo that was uploaded  for it, which is what an interface needs to decide where a Restore action makes sense. Requires a DocSpace  administrator; the URLs themselves are public and come from `GET api/2.0/settings/whitelabel/logos`, which  needs no authentication. The call is read-only and idempotent. Every logo slot is returned, including the  notification logo that the public list leaves out, so the result has one entry more than that list. An entry  gives the stable slot name in `name` and `default` set to `true` while the slot has never been written, and to  `false` once an image has been stored for it, whether for the light or for the dark theme. A slot goes back to  `true` after `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to inspect the  installation-wide default branding instead of this portal\'s. The logo text is reported separately by  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
          * @summary Check the default white label logos
          * @param {RebrandingApiGetIsDefaultWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1380,18 +1409,18 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getIsDefaultWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the licensor data.
+         * Returns the licensor details - company name, site, support email, postal address and phone - that the About  page and the notification letters print as the vendor of the installation. Any authenticated user may call it,  as these details are shown in the interface to everyone; no administrator permission is required. The call is  read-only and idempotent. The list holds the details currently in effect as its first item; when they have  been replaced by a reseller and the replacement is not itself marked as the licensor, the built-in ONLYOFFICE  details are appended as a second item, so a caller can print both the reseller and the original vendor. A  single-item list therefore means that the current details are the only ones to show. The values are  installation-wide rather than per-portal, so every portal of a server installation reports the same ones. The  same data in the form the settings interface edits is served by `GET api/2.0/settings/rebranding/company`, and  it is written by `POST api/2.0/settings/rebranding/company`.
          * @summary Get the licensor data
          * @param {*} [options] Override http request option.
          * REST API Reference for getLicensorData operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-licensor-data/
          * @throws {RequiredError}
          */
-        getLicensorData(options?: RawAxiosRequestConfig): AxiosPromise<CompanyWhiteLabelSettingsArrayWrapper> {
+        getLicensorData(options?: RawAxiosRequestConfig): AxiosPromise<LicensorDetailsArrayWrapper> {
             return localVarFp.getLicensorData(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the white label logo text.
+         * Returns the wordmark the current portal prints next to or instead of a logo image, as a bare string rather  than an object. Requires a DocSpace administrator, because this is the settings view of the value; the  branding a login page needs is served by `GET api/2.0/settings/whitelabel/logos`, which needs no  authentication. The call is read-only and idempotent. When nothing has been stored for the portal, the  built-in `ONLYOFFICE` is returned, so the answer is never empty and cannot be used to tell a custom text from  the default one - `GET api/2.0/settings/whitelabel/logotext/isdefault` answers that question. Pass  `isDefault=true` to read the installation-wide default wordmark instead of this portal\'s; without it the  portal\'s own value is returned even when the installation carries a different default. Change the text with  `POST api/2.0/settings/whitelabel/logotext/save` and clear it with  `PUT api/2.0/settings/whitelabel/logotext/restore`. The value is stored as it was typed, at most 40 characters  long, and is not translated for the caller\'s language, so the same wordmark is returned for every user of the  portal.
          * @summary Get the white label logo text
          * @param {RebrandingApiGetWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1403,7 +1432,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the white label logos.
+         * Lists the branding logo slots of the current portal together with the image URLs to render, which is what a  login page, an editor or a mail template needs before any user is known. No authentication is required, and  the portal is resolved from the address the request is made to. The call is read-only and idempotent. Each  item carries the slot as a number in `type`, its stable name in `name`, the size the image is fitted to in  `size` (`width` and `height` in pixels), and the URLs in `path`. When `isDark` is passed, only the matching  theme is filled in, `light` for `false` and `dark` for `true`; when it is omitted both are filled in and  `dark` comes back empty for the slots that have no separate dark image. The notification slot is not part of  this list, as it is derived from the login-page logo and used only in letters. Pass `isDefault=true` to read  the installation-wide default logos instead of this portal\'s. To learn which slots are still untouched use  `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Get the white label logos
          * @param {RebrandingApiGetWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1415,7 +1444,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.getWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Restores the white label logo text.
+         * Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a  portal whose subscription no longer covers customization can still be reset. The call is destructive for the  stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`  comes back both when a text was cleared and when there was none. Logo images are left untouched and have their  own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide  default wordmark instead of this portal\'s, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
          * @summary Restore the white label logo text
          * @param {RebrandingApiRestoreWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1427,7 +1456,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.restoreWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Restores the white label logos.
+         * Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
          * @summary Restore the white label logos
          * @param {RebrandingApiRestoreWhiteLabelLogosRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1439,7 +1468,7 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
             return localVarFp.restoreWhiteLabelLogos(requestParameters.isDark, requestParameters.isDefault, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the additional white label settings specified in the request.
+         * Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
          * @summary Save the additional white label settings
          * @param {RebrandingApiSaveAdditionalWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1448,10 +1477,10 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         saveAdditionalWhiteLabelSettings(requestParameters: RebrandingApiSaveAdditionalWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
+            return localVarFp.saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the company white label settings specified in the request.
+         * Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
          * @summary Save the company white label settings
          * @param {RebrandingApiSaveCompanyWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1460,11 +1489,11 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         saveCompanyWhiteLabelSettings(requestParameters: RebrandingApiSaveCompanyWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsWrapper, options).then((request) => request(axios, basePath));
+            return localVarFp.saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the white label logo text specified in the request.
-         * @summary Save the white label logo text settings
+         * Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal\'s, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
+         * @summary Save the white label logo text
          * @param {RebrandingApiSaveWhiteLabelLogoTextRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveWhiteLabelLogoText operation
@@ -1472,10 +1501,10 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         saveWhiteLabelLogoText(requestParameters: RebrandingApiSaveWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the white label logos specified in the request.
+         * Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
          * @summary Save the white label logos
          * @param {RebrandingApiSaveWhiteLabelSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1484,11 +1513,11 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
          * @throws {RequiredError}
          */
         saveWhiteLabelSettings(requestParameters: RebrandingApiSaveWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the white label logos from files.
-         * @summary Save the white label logos from files
+         * Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
+         * @summary Save the logos from files
          * @param {RebrandingApiSaveWhiteLabelSettingsFromFilesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for saveWhiteLabelSettingsFromFiles operation
@@ -1508,14 +1537,14 @@ export const RebrandingApiFactory = function (configuration?: Configuration, bas
  */
 export interface RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiGetIsDefaultWhiteLabelLogoText
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiGetIsDefaultWhiteLabelLogoText
      */
@@ -1529,14 +1558,14 @@ export interface RebrandingApiGetIsDefaultWhiteLabelLogoTextRequest {
  */
 export interface RebrandingApiGetIsDefaultWhiteLabelLogosRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiGetIsDefaultWhiteLabelLogos
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiGetIsDefaultWhiteLabelLogos
      */
@@ -1550,14 +1579,14 @@ export interface RebrandingApiGetIsDefaultWhiteLabelLogosRequest {
  */
 export interface RebrandingApiGetWhiteLabelLogoTextRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiGetWhiteLabelLogoText
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiGetWhiteLabelLogoText
      */
@@ -1571,14 +1600,14 @@ export interface RebrandingApiGetWhiteLabelLogoTextRequest {
  */
 export interface RebrandingApiGetWhiteLabelLogosRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiGetWhiteLabelLogos
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiGetWhiteLabelLogos
      */
@@ -1592,14 +1621,14 @@ export interface RebrandingApiGetWhiteLabelLogosRequest {
  */
 export interface RebrandingApiRestoreWhiteLabelLogoTextRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiRestoreWhiteLabelLogoText
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiRestoreWhiteLabelLogoText
      */
@@ -1613,14 +1642,14 @@ export interface RebrandingApiRestoreWhiteLabelLogoTextRequest {
  */
 export interface RebrandingApiRestoreWhiteLabelLogosRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiRestoreWhiteLabelLogos
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiRestoreWhiteLabelLogos
      */
@@ -1635,10 +1664,10 @@ export interface RebrandingApiRestoreWhiteLabelLogosRequest {
 export interface RebrandingApiSaveAdditionalWhiteLabelSettingsRequest {
     /**
      * 
-     * @type {AdditionalWhiteLabelSettingsWrapper}
+     * @type {AdditionalWhiteLabelSettingsRequestDto}
      * @memberof RebrandingApiSaveAdditionalWhiteLabelSettings
      */
-    readonly additionalWhiteLabelSettingsWrapper?: AdditionalWhiteLabelSettingsWrapper
+    readonly additionalWhiteLabelSettingsRequestDto?: AdditionalWhiteLabelSettingsRequestDto
 }
 
 /**
@@ -1649,10 +1678,10 @@ export interface RebrandingApiSaveAdditionalWhiteLabelSettingsRequest {
 export interface RebrandingApiSaveCompanyWhiteLabelSettingsRequest {
     /**
      * 
-     * @type {CompanyWhiteLabelSettingsWrapper}
+     * @type {CompanyWhiteLabelSettingsRequestDto}
      * @memberof RebrandingApiSaveCompanyWhiteLabelSettings
      */
-    readonly companyWhiteLabelSettingsWrapper?: CompanyWhiteLabelSettingsWrapper
+    readonly companyWhiteLabelSettingsRequestDto?: CompanyWhiteLabelSettingsRequestDto
 }
 
 /**
@@ -1662,14 +1691,14 @@ export interface RebrandingApiSaveCompanyWhiteLabelSettingsRequest {
  */
 export interface RebrandingApiSaveWhiteLabelLogoTextRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelLogoText
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelLogoText
      */
@@ -1677,10 +1706,10 @@ export interface RebrandingApiSaveWhiteLabelLogoTextRequest {
 
     /**
      * 
-     * @type {WhiteLabelRequestsDto}
+     * @type {WhiteLabelRequestDto}
      * @memberof RebrandingApiSaveWhiteLabelLogoText
      */
-    readonly whiteLabelRequestsDto?: WhiteLabelRequestsDto
+    readonly whiteLabelRequestDto?: WhiteLabelRequestDto
 }
 
 /**
@@ -1690,14 +1719,14 @@ export interface RebrandingApiSaveWhiteLabelLogoTextRequest {
  */
 export interface RebrandingApiSaveWhiteLabelSettingsRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelSettings
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelSettings
      */
@@ -1705,10 +1734,10 @@ export interface RebrandingApiSaveWhiteLabelSettingsRequest {
 
     /**
      * 
-     * @type {WhiteLabelRequestsDto}
+     * @type {WhiteLabelRequestDto}
      * @memberof RebrandingApiSaveWhiteLabelSettings
      */
-    readonly whiteLabelRequestsDto?: WhiteLabelRequestsDto
+    readonly whiteLabelRequestDto?: WhiteLabelRequestDto
 }
 
 /**
@@ -1718,14 +1747,14 @@ export interface RebrandingApiSaveWhiteLabelSettingsRequest {
  */
 export interface RebrandingApiSaveWhiteLabelSettingsFromFilesRequest {
     /**
-     * Specifies if the white label logo is for the dark theme or not.
+     * Which theme the answer is filled in for: `true` fills the dark image only, `false` the light one only.  Omitting it fills both, leaving the dark one empty for the slots that have no separate dark image.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelSettingsFromFiles
      */
     readonly isDark?: boolean
 
     /**
-     * Specifies if the logo is for a default tenant or not.
+     * Whether the installation-wide default branding is addressed instead of this portal own. Writing the default  branding is only allowed on a self-hosted installation; elsewhere it is refused with 403.
      * @type {boolean}
      * @memberof RebrandingApiSaveWhiteLabelSettingsFromFiles
      */
@@ -1740,7 +1769,7 @@ export interface RebrandingApiSaveWhiteLabelSettingsFromFilesRequest {
  */
 export class RebrandingApi extends BaseAPI {
     /**
-     * Deletes the additional white label settings.
+     * Discards the resource flags stored for the installation and brings back the built-in set, so the sample  documents, the Help Center link, the Feedback and Support link, the user forum, the video guides and the  license agreements are offered as they are out of the box. Requires a DocSpace administrator and a server  installation with unrestricted space access; on a SaaS portal the call is refused. Unlike  `POST api/2.0/settings/rebranding/additional` it does not need a plan that includes customization, so an  installation whose subscription no longer covers it can still be reset. The call is destructive for the stored  flags, which have to be set again to come back, and it is idempotent. Instead of a flag it answers the set  that is now in effect, so no follow-up read is needed. The reset is installation-wide and reaches every  portal, and it leaves the visibility of the About page alone. The company details are reset separately by  `DELETE api/2.0/settings/rebranding/company`.
      * @summary Delete the additional white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1751,7 +1780,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Deletes the company white label settings.
+     * Discards the company details stored for the installation and brings back the built-in ONLYOFFICE name, site,  email, address and phone, so the About page and the notification letters print the original vendor again.  Requires a DocSpace administrator and a server installation with unrestricted space access; on a SaaS portal  the call is refused. Unlike `POST api/2.0/settings/rebranding/company` it does not need a plan that includes  customization, so an installation whose subscription no longer covers it can still be reset. The call is  destructive: the previous details are not kept anywhere and have to be entered again to come back. It is  idempotent, and instead of a flag it answers the details that are now in effect, so no follow-up read is  needed. The reset is installation-wide and reaches every portal. The help and support links are reset  separately by `DELETE api/2.0/settings/rebranding/additional`, and the logos and the wordmark of a single  portal by the restore operations under `api/2.0/settings/whitelabel`.
      * @summary Delete the company white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1762,7 +1791,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Returns the additional white label settings.
+     * Returns which of the ONLYOFFICE help and community resources the interface may offer - the sample documents,  the Help Center link, the Feedback and Support link, the user forum, the video guides and the license  agreements - so a client can hide the entries that are switched off. Any authenticated user may call it; no  administrator permission is required, and a portal whose payment has lapsed is served as well. The call is  read-only and idempotent. Each flag is `true` when the entry may be shown and `false` when it must be hidden,  and `isDefault` tells whether the whole set is still the built-in one. The flags are installation-wide, so  every portal of a server installation reports the same ones. They say nothing about the caller\'s own  permissions, and the addresses behind the entries are not part of the answer. Change the flags with  `POST api/2.0/settings/rebranding/additional` and reset them with  `DELETE api/2.0/settings/rebranding/additional`.
      * @summary Get the additional white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1773,7 +1802,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Returns the company white label settings.
+     * Returns the company details that the About page and the notification letters print as the vendor, in the form  the settings interface edits them. Any authenticated user may call it; no administrator permission is  required, and a portal whose payment has lapsed is served as well. The call is read-only and idempotent.  Alongside the stored fields the answer carries `isLicensor`, which tells whether these details belong to the  vendor of the product itself, and `isDefault`, which tells whether they are still the built-in ONLYOFFICE  ones. The values are installation-wide, so every portal of a server installation reports the same ones. The  response is revalidatable: it carries `Last-Modified`, and sending that value back in `If-Modified-Since`  yields an empty body while the details have not changed, which makes polling cheap. For the About page, where  the built-in vendor has to be shown next to a reseller, use `GET api/2.0/settings/companywhitelabel` instead.  Change the details with `POST api/2.0/settings/rebranding/company`.
      * @summary Get the company white label settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1784,7 +1813,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Checks if the white label is enabled or not.
+     * Reports whether branding may be configured for the current portal at all, which is the check to make before  offering the rebranding interface or calling any of the save operations under `api/2.0/settings/whitelabel`.  Requires a DocSpace administrator. The call is read-only and idempotent. The answer is `true` only when both  conditions hold: the branding section is not switched off in the installation configuration, and the portal\'s  current plan includes customization. It comes back as `false` on a plan without customization, which is  exactly the case in which `POST api/2.0/settings/whitelabel/logos/save`,  `POST api/2.0/settings/whitelabel/logos/savefromfiles` and `POST api/2.0/settings/whitelabel/logotext/save`  are refused as payment required. The restore operations do not depend on this flag and stay available, so a  portal that loses branding can still be reset to the built-in logos and wordmark. The flag says nothing about  the installation-wide default branding, which additionally needs a server installation with unrestricted space  access, and nothing about the company details and help links under `api/2.0/settings/rebranding`.
      * @summary Check the white label availability
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1795,8 +1824,8 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Specifies if the white label logo text is default or not.
-     * @summary Check the default white label logo text
+     * Reports whether the current portal still uses the built-in wordmark or one that was stored for it, which is  what an interface needs to decide whether a Restore action applies to the text. Requires a DocSpace  administrator. The call is read-only and idempotent. The answer has the same shape as one entry of  `GET api/2.0/settings/whitelabel/logos/isdefault`, with `name` fixed to `logotext` and `default` set to `true`  while no text has been stored and to `false` once one has. Because `GET api/2.0/settings/whitelabel/logotext`  falls back to `ONLYOFFICE` when nothing is stored, this operation is the only way to tell a portal that  deliberately kept the built-in wordmark from one that saved the very same text. Pass `isDefault=true` to  inspect the installation-wide default branding instead of this portal\'s. The flag turns back to `true` after  `PUT api/2.0/settings/whitelabel/logotext/restore`, and to `false` after  `POST api/2.0/settings/whitelabel/logotext/save`. Saving the built-in wordmark itself counts as clearing the  setting, so the flag stays `true` in that case as well.
+     * @summary Check the default logo text
      * @param {SettingsRebrandingApiGetIsDefaultWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1807,7 +1836,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Specifies if the white label logos are default or not.
+     * Reports, slot by slot, whether the current portal still shows the built-in image or a logo that was uploaded  for it, which is what an interface needs to decide where a Restore action makes sense. Requires a DocSpace  administrator; the URLs themselves are public and come from `GET api/2.0/settings/whitelabel/logos`, which  needs no authentication. The call is read-only and idempotent. Every logo slot is returned, including the  notification logo that the public list leaves out, so the result has one entry more than that list. An entry  gives the stable slot name in `name` and `default` set to `true` while the slot has never been written, and to  `false` once an image has been stored for it, whether for the light or for the dark theme. A slot goes back to  `true` after `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to inspect the  installation-wide default branding instead of this portal\'s. The logo text is reported separately by  `GET api/2.0/settings/whitelabel/logotext/isdefault`.
      * @summary Check the default white label logos
      * @param {SettingsRebrandingApiGetIsDefaultWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1819,7 +1848,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Returns the licensor data.
+     * Returns the licensor details - company name, site, support email, postal address and phone - that the About  page and the notification letters print as the vendor of the installation. Any authenticated user may call it,  as these details are shown in the interface to everyone; no administrator permission is required. The call is  read-only and idempotent. The list holds the details currently in effect as its first item; when they have  been replaced by a reseller and the replacement is not itself marked as the licensor, the built-in ONLYOFFICE  details are appended as a second item, so a caller can print both the reseller and the original vendor. A  single-item list therefore means that the current details are the only ones to show. The values are  installation-wide rather than per-portal, so every portal of a server installation reports the same ones. The  same data in the form the settings interface edits is served by `GET api/2.0/settings/rebranding/company`, and  it is written by `POST api/2.0/settings/rebranding/company`.
      * @summary Get the licensor data
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1830,7 +1859,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Returns the white label logo text.
+     * Returns the wordmark the current portal prints next to or instead of a logo image, as a bare string rather  than an object. Requires a DocSpace administrator, because this is the settings view of the value; the  branding a login page needs is served by `GET api/2.0/settings/whitelabel/logos`, which needs no  authentication. The call is read-only and idempotent. When nothing has been stored for the portal, the  built-in `ONLYOFFICE` is returned, so the answer is never empty and cannot be used to tell a custom text from  the default one - `GET api/2.0/settings/whitelabel/logotext/isdefault` answers that question. Pass  `isDefault=true` to read the installation-wide default wordmark instead of this portal\'s; without it the  portal\'s own value is returned even when the installation carries a different default. Change the text with  `POST api/2.0/settings/whitelabel/logotext/save` and clear it with  `PUT api/2.0/settings/whitelabel/logotext/restore`. The value is stored as it was typed, at most 40 characters  long, and is not translated for the caller\'s language, so the same wordmark is returned for every user of the  portal.
      * @summary Get the white label logo text
      * @param {SettingsRebrandingApiGetWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1842,7 +1871,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Returns the white label logos.
+     * Lists the branding logo slots of the current portal together with the image URLs to render, which is what a  login page, an editor or a mail template needs before any user is known. No authentication is required, and  the portal is resolved from the address the request is made to. The call is read-only and idempotent. Each  item carries the slot as a number in `type`, its stable name in `name`, the size the image is fitted to in  `size` (`width` and `height` in pixels), and the URLs in `path`. When `isDark` is passed, only the matching  theme is filled in, `light` for `false` and `dark` for `true`; when it is omitted both are filled in and  `dark` comes back empty for the slots that have no separate dark image. The notification slot is not part of  this list, as it is derived from the login-page logo and used only in letters. Pass `isDefault=true` to read  the installation-wide default logos instead of this portal\'s. To learn which slots are still untouched use  `GET api/2.0/settings/whitelabel/logos/isdefault`.
      * @summary Get the white label logos
      * @param {SettingsRebrandingApiGetWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1854,7 +1883,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Restores the white label logo text.
+     * Clears the wordmark stored for the current portal, so the built-in `ONLYOFFICE` is printed again next to or  instead of the logo images. Requires a DocSpace administrator. Unlike  `POST api/2.0/settings/whitelabel/logotext/save` it does not need a plan that includes customization, so a  portal whose subscription no longer covers customization can still be reset. The call is destructive for the  stored text, which is not kept anywhere and has to be typed again to come back, and it is idempotent: `true`  comes back both when a text was cleared and when there was none. Logo images are left untouched and have their  own `PUT api/2.0/settings/whitelabel/logos/restore`. Pass `isDefault=true` to reset the installation-wide  default wordmark instead of this portal\'s, which only a server installation allows. After the call  `GET api/2.0/settings/whitelabel/logotext` reports `ONLYOFFICE` and  `GET api/2.0/settings/whitelabel/logotext/isdefault` reports `default` as `true`. The wordmark is the only  setting this operation touches, so the company details and the help links of the installation are left as they  are.
      * @summary Restore the white label logo text
      * @param {SettingsRebrandingApiRestoreWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1866,7 +1895,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Restores the white label logos.
+     * Drops every logo uploaded for the current portal and brings back the built-in images, so the portal looks  unbranded again on the login page, in the left menu, in the editors and in letters. Requires a DocSpace  administrator. Unlike the two save operations it does not need a plan that includes customization, so a portal  whose subscription no longer covers it can still be reset. The call is destructive: the stored image files are  deleted and cannot be recovered from the portal, only re-uploaded with  `POST api/2.0/settings/whitelabel/logos/save`. It is idempotent and answers `true` both when logos were  removed and when there was nothing to remove. All slots are reset together; there is no way to restore a  single one. For this portal the picture kept for the older mail templates is reset along with the logos, while  the logo text is left as it is and has its own `PUT api/2.0/settings/whitelabel/logotext/restore`. Pass  `isDefault=true` to reset the installation-wide default branding instead, which only a server installation  allows. Confirm the result with `GET api/2.0/settings/whitelabel/logos/isdefault`.
      * @summary Restore the white label logos
      * @param {SettingsRebrandingApiRestoreWhiteLabelLogosRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1878,7 +1907,7 @@ export class RebrandingApi extends BaseAPI {
     }
 
     /**
-     * Saves the additional white label settings specified in the request.
+     * Stores which of the ONLYOFFICE help and community resources the interface offers: the sample documents, the  Help Center link, the Feedback and Support link, the user forum, the video guides and the license agreements.  The whole set is replaced by the `settings` object of the request, so send every flag, not only the changed  ones - a flag left out is stored as off. A request without that object is rejected as an invalid request.  Requires a DocSpace administrator, a server installation with unrestricted space access and a plan that  includes customization, which `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is  refused. The flags are installation-wide, so the change reaches every portal of that installation. The call is  mutating and idempotent, and answers `true`. Only the visibility of these entries is controlled here, not the  addresses behind them. Read the result back with `GET api/2.0/settings/rebranding/additional` and undo it with  `DELETE api/2.0/settings/rebranding/additional`.
      * @summary Save the additional white label settings
      * @param {SettingsRebrandingApiSaveAdditionalWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1886,11 +1915,11 @@ export class RebrandingApi extends BaseAPI {
      * @memberof RebrandingApi
      */
     public saveAdditionalWhiteLabelSettings(requestParameters: RebrandingApiSaveAdditionalWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveAdditionalWhiteLabelSettings(requestParameters.additionalWhiteLabelSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the company white label settings specified in the request.
+     * Stores the company details - name, site, support email, postal address and phone - that the About page and the  notification letters print as the vendor. The whole set is replaced by the `settings` object of the request,  so send every field, not only the changed ones; a request without that object, or with an email or a site that  is not a valid value, is rejected as an invalid request. Requires a DocSpace administrator, a server  installation with unrestricted space access and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; on a SaaS portal the call is refused. The values are  installation-wide, so the change reaches every portal of that installation. Two fields are not taken from the  request: the licensor flag is always stored as `false`, and hiding the About page is silently kept off unless  the plan allows it. The call is mutating and idempotent, and answers `true`. Read the result back with  `GET api/2.0/settings/rebranding/company` and undo it with `DELETE api/2.0/settings/rebranding/company`.
      * @summary Save the company white label settings
      * @param {SettingsRebrandingApiSaveCompanyWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1898,23 +1927,23 @@ export class RebrandingApi extends BaseAPI {
      * @memberof RebrandingApi
      */
     public saveCompanyWhiteLabelSettings(requestParameters: RebrandingApiSaveCompanyWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsWrapper, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveCompanyWhiteLabelSettings(requestParameters.companyWhiteLabelSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the white label logo text specified in the request.
-     * @summary Save the white label logo text settings
+     * Sets the wordmark that the portal prints next to or instead of a logo image, on the login page, in the editors  and in notification letters. Only `logoText` from the request body is used here, and it is limited to 40  characters; a longer value is rejected as an invalid request. Sending an empty or blank text, or exactly the  built-in `ONLYOFFICE`, clears the setting instead of storing it, which has the same effect as  `PUT api/2.0/settings/whitelabel/logotext/restore`. Requires a DocSpace administrator and a plan that includes  customization, which `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment  required. The call is mutating and idempotent: the previous text is overwritten and `true` comes back. Logo  images are not touched - they are saved by `POST api/2.0/settings/whitelabel/logos/save` - and the text is not  rendered into them. Pass `isDefault=true` to write the installation-wide default wordmark instead of this  portal\'s, which only a server installation allows. Read the stored value back with  `GET api/2.0/settings/whitelabel/logotext`.
+     * @summary Save the white label logo text
      * @param {SettingsRebrandingApiSaveWhiteLabelLogoTextRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof RebrandingApi
      */
     public saveWhiteLabelLogoText(requestParameters: RebrandingApiSaveWhiteLabelLogoTextRequest = {}, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveWhiteLabelLogoText(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the white label logos specified in the request.
+     * Replaces the branding images of the current portal with the ones sent in the request, so that the logos on the  login page, in the left menu, in the editors and in letters come from this portal. Every entry of `logo` names  a logo slot in its `key` - the numeric type published by `GET api/2.0/settings/whitelabel/logos` - and carries  the light-theme and the dark-theme image in `light` and `dark`. An image is either a  `data:image/png;base64,...` payload (`png`, `jpg` and `svg` are accepted) or the name of a file already  uploaded to the temporary store; a slot left out of the request keeps its image. The dark image is stored only  for the slots that have a dark variant, that is `1`, `2`, `6`, `7` and `8`, and is ignored for the favicon and  the editor logos; saving slot `2` also rebuilds the notification logo `8` from it. Requires a DocSpace  administrator and a plan that includes customization, which `GET api/2.0/settings/enablewhitelabel` reports;  otherwise the call is refused as payment required. It answers `true` and is undone by  `PUT api/2.0/settings/whitelabel/logos/restore`. With `isDefault=true` it writes the installation-wide default  branding instead, which only a server installation allows. Uploaded files go to  `POST api/2.0/settings/whitelabel/logos/savefromfiles`.
      * @summary Save the white label logos
      * @param {SettingsRebrandingApiSaveWhiteLabelSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1922,12 +1951,12 @@ export class RebrandingApi extends BaseAPI {
      * @memberof RebrandingApi
      */
     public saveWhiteLabelSettings(requestParameters: RebrandingApiSaveWhiteLabelSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return RebrandingApiFp(this.configuration).saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return RebrandingApiFp(this.configuration).saveWhiteLabelSettings(requestParameters.isDark, requestParameters.isDefault, requestParameters.whiteLabelRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Saves the white label logos from files.
-     * @summary Save the white label logos from files
+     * Replaces the branding images of the current portal with the files sent as `multipart/form-data`, which is the  way to upload image files directly instead of embedding them as base64 in  `POST api/2.0/settings/whitelabel/logos/save`. The form field names are not used: each file is routed by its  own name, which has to start with the numeric logo slot published by `GET api/2.0/settings/whitelabel/logos`  and end with the image extension, as in `2.png`; a name that also contains `dark`, as in `2.dark.png`, is  stored as the dark-theme image of that slot. Slots that get no file keep the image they have, and a dark file  is ignored for the favicon and the editor logos, which have no dark variant. A request that carries no file at  all is rejected. Requires a DocSpace administrator and a plan that includes customization, which  `GET api/2.0/settings/enablewhitelabel` reports; otherwise the call is refused as payment required. It answers  `true`, overwrites in place and is undone by `PUT api/2.0/settings/whitelabel/logos/restore`. With  `isDefault=true` it writes the installation-wide default branding, which only a server installation allows.
+     * @summary Save the logos from files
      * @param {SettingsRebrandingApiSaveWhiteLabelSettingsFromFilesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

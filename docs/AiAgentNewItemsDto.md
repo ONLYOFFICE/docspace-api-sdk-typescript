@@ -6,7 +6,7 @@ The agent new item\'s information.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**agent** | [**AiFileEntryBaseDto**](AiFileEntryBaseDto.md) |  | [default to undefined]
+**agent** | [**AiFileEntryBaseDto**](AiFileEntryBaseDto.md) | The agent file entry. | [default to undefined]
 **items** | [**Array&lt;AiFileEntryBaseDto&gt;**](AiFileEntryBaseDto.md) | The list of file entry items. | [default to undefined]
 
 ## Example

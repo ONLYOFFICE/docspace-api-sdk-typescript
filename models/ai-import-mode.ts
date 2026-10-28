@@ -20,7 +20,7 @@
 
 
 /**
- * Mode passed to  {@link  PromptsEngine.importBundle } .
+ * Mode passed to `PromptsEngine.importBundle`.
  */
 
 export const AiImportMode = {

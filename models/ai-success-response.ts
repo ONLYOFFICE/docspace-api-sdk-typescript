@@ -23,6 +23,9 @@
  * Generic success acknowledgement for mutations that return no data.
  */
 export interface AiSuccessResponse {
+    /**
+     * Always true — the mutation completed.
+     */
     'success': boolean;
 }
 

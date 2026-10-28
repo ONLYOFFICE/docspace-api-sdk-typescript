@@ -23,6 +23,9 @@
  * Error body — a single human-readable message.
  */
 export interface AiErrorResponse {
+    /**
+     * The error message, ready to be shown to the caller.
+     */
     'error': string;
 }
 

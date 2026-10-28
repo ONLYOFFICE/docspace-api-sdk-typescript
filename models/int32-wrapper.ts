@@ -22,7 +22,13 @@
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the int32 value.
+ */
 export interface Int32Wrapper {
+    /**
+     * The int32 value returned by the operation.
+     */
     'response'?: number;
     /**
      * The total number of items in the response

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WebhooksLogDto } from './webhooks-log-dto';
 
+/**
+ * The successful API response containing the list of WebhooksLogDto objects.
+ */
 export interface WebhooksLogArrayWrapper {
+    /**
+     * The list of WebhooksLogDto objects returned by the operation.
+     */
     'response'?: Array<WebhooksLogDto>;
     /**
      * The total number of items in the response

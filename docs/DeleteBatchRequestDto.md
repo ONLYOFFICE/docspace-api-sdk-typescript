@@ -1,16 +1,16 @@
 # DeleteBatchRequestDto
 
-The request parameters for deleting files.
+The files and folders to delete, and how final the deletion is.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**returnSingleOperation** | **boolean** | Specifies whether to return only the current operation | [optional] [default to undefined]
-**folderIds** | [**Array&lt;DeleteBatchRequestDtoAllOfFolderIds&gt;**](DeleteBatchRequestDtoAllOfFolderIds.md) | The list of folder IDs to be deleted. | [optional] [default to undefined]
-**fileIds** | [**Array&lt;DeleteBatchRequestDtoAllOfFileIds&gt;**](DeleteBatchRequestDtoAllOfFileIds.md) | The list of file IDs to be deleted. | [optional] [default to undefined]
-**deleteAfter** | **boolean** | Specifies whether to delete a file after the editing session is finished or not | [optional] [default to undefined]
-**immediately** | **boolean** | Specifies whether to move a file to the \\Trash\\ folder or delete it immediately. | [optional] [default to undefined]
+**returnSingleOperation** | **boolean** | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list. | [optional] [default to undefined]
+**folderIds** | [**Array&lt;DeleteBatchRequestDtoAllOfFolderIds&gt;**](DeleteBatchRequestDtoAllOfFolderIds.md) | The folders to delete, by id, each with everything it contains. A number addresses a folder stored in the  portal itself, a string addresses a folder on a connected third-party account, and both kinds may be sent in  one list. | [optional] [default to undefined]
+**fileIds** | [**Array&lt;DeleteBatchRequestDtoAllOfFileIds&gt;**](DeleteBatchRequestDtoAllOfFileIds.md) | The files to delete, by id. A number addresses a file stored in the portal itself, a string addresses a file  on a connected third-party account, and both kinds may be sent in one list. | [optional] [default to undefined]
+**deleteAfter** | **boolean** | Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It does not postpone the deletion and does not delete anything of its own. | [optional] [default to undefined]
+**immediately** | **boolean** | Where the deleted items go: `false` moves them to the Trash of the caller, from which they can be restored,  `true` removes them at once and for good. | [optional] [default to undefined]
 
 ## Example
 

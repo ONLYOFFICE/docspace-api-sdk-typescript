@@ -20,31 +20,31 @@
 
 
 /**
- * The logo config parameters.
+ * The logo the editor shows, resolved for the file type and the layout of this opening.
  */
 export interface LogoConfigDto {
     /**
-     * The image of the logo.
+     * The logo for the current layout and file type, as the portal branding defines it.
      */
     'image'?: string | null;
     /**
-     * The dark image of the logo.
+     * The variant for a dark interface theme.
      */
     'imageDark'?: string | null;
     /**
-     * The light image of the logo.
+     * The variant for a light interface theme.
      */
     'imageLight'?: string | null;
     /**
-     * The embedded image of the logo.
+     * The variant for the framed viewer. It is empty in every layout but the embedded one.
      */
     'imageEmbedded'?: string | null;
     /**
-     * The url link of the logo.
+     * Where clicking the logo takes the user.
      */
     'url'?: string | null;
     /**
-     * Specifies if the logo is visible.
+     * Whether the logo is shown at all; the mobile layout hides it.
      */
     'visible'?: boolean;
 }

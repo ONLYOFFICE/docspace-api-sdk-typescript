@@ -20,7 +20,7 @@
 
 
 /**
- * [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption]
+ * [0 - Active, 1 - Suspended, 2 - Remove pending, 3 - Transfering, 4 - Restoring, 5 - Migrating, 6 - Encryption, 7 - Blocked]
  */
 
 export const TenantStatus = {
@@ -31,6 +31,7 @@ export const TenantStatus = {
     Restoring: 4,
     Migrating: 5,
     Encryption: 6,
+    Blocked: 7,
 } as const;
 
 export type TenantStatus = typeof TenantStatus[keyof typeof TenantStatus];

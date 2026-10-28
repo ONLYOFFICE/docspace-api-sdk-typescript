@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actionType** | [**AiActionType**](AiActionType.md) |  | [default to undefined]
+**actionType** | [**AiActionType**](AiActionType.md) | Action the assignment applies to. | [default to undefined]
 **profileId** | **string** | Profile id to bind. | [default to undefined]
 
 ## Example

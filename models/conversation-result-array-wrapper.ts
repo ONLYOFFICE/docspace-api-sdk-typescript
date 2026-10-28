@@ -25,7 +25,13 @@ import type { ConversationResultDto } from './conversation-result-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of ConversationResultDto objects.
+ */
 export interface ConversationResultArrayWrapper {
+    /**
+     * The list of ConversationResultDto objects returned by the operation.
+     */
     'response'?: Array<ConversationResultDto>;
     /**
      * The total number of items in the response

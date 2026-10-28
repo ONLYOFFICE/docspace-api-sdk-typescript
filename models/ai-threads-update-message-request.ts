@@ -24,6 +24,9 @@ import type { AiThreadMessageLike } from './ai-thread-message-like';
 
 export interface AiThreadsUpdateMessageRequest {
     'messageId': string;
+    /**
+     * Replacement message content.
+     */
     'message': AiThreadMessageLike;
 }
 

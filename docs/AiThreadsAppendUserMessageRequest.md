@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **threadId** | **string** |  | [default to undefined]
-**message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) |  | [default to undefined]
+**message** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | Message to persist (id/createdAt are storage-assigned). | [default to undefined]
 **profileId** | **string** |  | [optional] [default to undefined]
 
 ## Example

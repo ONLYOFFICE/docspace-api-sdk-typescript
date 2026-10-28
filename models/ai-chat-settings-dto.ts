@@ -20,11 +20,11 @@
 
 
 /**
- * The chat settings parameters.
+ * The chat configuration of an AI room.
  */
 export interface AiChatSettingsDto {
     /**
-     * The system prompt for the chat.
+     * The instruction put in front of every conversation held in the room, which sets the role the assistant takes  and the way it answers. Empty when the room was left on the behaviour the portal provides by default.
      */
     'prompt'?: string | null;
 }

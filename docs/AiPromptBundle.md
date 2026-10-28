@@ -6,9 +6,9 @@ Versioned, self-contained bundle of every saved prompt and folder. Stable wire f
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **number** |  | [default to undefined]
-**folders** | [**Array&lt;AiPromptFolder&gt;**](AiPromptFolder.md) |  | [default to undefined]
-**prompts** | [**Array&lt;AiPrompt&gt;**](AiPrompt.md) |  | [default to undefined]
+**version** | **number** | The bundle format version, so an import can migrate an older export. | [default to undefined]
+**folders** | [**Array&lt;AiPromptFolder&gt;**](AiPromptFolder.md) | Every exported prompt folder. | [default to undefined]
+**prompts** | [**Array&lt;AiPrompt&gt;**](AiPrompt.md) | Every exported prompt. | [default to undefined]
 
 ## Example
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **serverType** | **string** |  | [default to undefined]
 **toolNames** | **Array&lt;string&gt;** | Tool names to disable. | [default to undefined]
 **entityId** | **string** |  | [optional] [default to undefined]
+**scope** | [**AiChatToolPrefsScope**](AiChatToolPrefsScope.md) | The list the write lands in; omitted means the caller\'s own. | [optional] [default to undefined]
 
 ## Example
 
@@ -18,6 +19,7 @@ const instance: AiToolsSetDisabledRequest = {
     serverType,
     toolNames,
     entityId,
+    scope,
 };
 ```
 

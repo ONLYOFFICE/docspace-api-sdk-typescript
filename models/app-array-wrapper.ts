@@ -25,7 +25,13 @@ import type { AppDto } from './app-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of AppDto objects.
+ */
 export interface AppArrayWrapper {
+    /**
+     * The list of AppDto objects returned by the operation.
+     */
     'response'?: Array<AppDto>;
     /**
      * The total number of items in the response

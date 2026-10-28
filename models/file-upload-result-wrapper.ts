@@ -25,7 +25,13 @@ import type { FileUploadResultDto } from './file-upload-result-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FileUploadResultDto object.
+ */
 export interface FileUploadResultWrapper {
+    /**
+     * The FileUploadResultDto object returned by the operation.
+     */
     'response'?: FileUploadResultDto;
     /**
      * The total number of items in the response

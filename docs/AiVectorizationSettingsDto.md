@@ -6,7 +6,7 @@ The vectorization settings.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | [**AiEmbeddingProviderType**](AiEmbeddingProviderType.md) |  | [optional] [default to undefined]
+**type** | [**AiEmbeddingProviderType**](AiEmbeddingProviderType.md) | The type of embedding provider configured for document vectorization. | [optional] [default to undefined]
 **needReset** | **boolean** | Indicates whether the embedding provider API key needs to be reconfigured. | [optional] [default to undefined]
 
 ## Example

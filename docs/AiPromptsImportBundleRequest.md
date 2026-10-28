@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bundle** | [**AiPromptBundle**](AiPromptBundle.md) |  | [default to undefined]
+**bundle** | [**AiPromptBundle**](AiPromptBundle.md) | Bundle to restore. | [default to undefined]
 **_options** | [**AiPromptsImportBundleRequestOptions**](AiPromptsImportBundleRequestOptions.md) |  | [optional] [default to undefined]
 
 ## Example

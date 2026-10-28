@@ -24,15 +24,17 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { AuthServiceRequestsArrayWrapper } from '../../models';
-// @ts-ignore
-import type { AuthServiceRequestsDto } from '../../models';
+import type { AuthServiceArrayWrapper } from '../../models';
 // @ts-ignore
 import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ConnectionTestResultWrapper } from '../../models';
 // @ts-ignore
-import type { ExternalDatabaseSettings } from '../../models';
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
+import type { ExternalDatabaseConnectionRequestDto } from '../../models';
+// @ts-ignore
+import type { SaveAuthKeysRequestDto } from '../../models';
 /**
  * SettingsAuthorizationApi - axios parameter creator
  * @export
@@ -42,7 +44,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
     
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -94,15 +96,15 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
-         * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
+         * @param {SaveAuthKeysRequestDto} [saveAuthKeysRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAuthKeys operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-auth-keys/
          */
-        saveAuthKeys: async (authServiceRequestsDto?: AuthServiceRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        saveAuthKeys: async (saveAuthKeysRequestDto?: SaveAuthKeysRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/authservice`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -142,7 +144,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(authServiceRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(saveAuthKeysRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -150,15 +152,15 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             };
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
-         * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
+         * @param {ExternalDatabaseConnectionRequestDto} [externalDatabaseConnectionRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for testExternalDatabaseConnection operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/
          */
-        testExternalDatabaseConnection: async (externalDatabaseSettings?: ExternalDatabaseSettings, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        testExternalDatabaseConnection: async (externalDatabaseConnectionRequestDto?: ExternalDatabaseConnectionRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/authservice/externaldb/test`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -198,7 +200,7 @@ export const SettingsAuthorizationApiAxiosParamCreator = function (configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(externalDatabaseSettings, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(externalDatabaseConnectionRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -216,45 +218,45 @@ export const SettingsAuthorizationApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = SettingsAuthorizationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getAuthServices operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-auth-services/
          */
-        async getAuthServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthServiceRequestsArrayWrapper>> {
+        async getAuthServices(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuthServiceArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuthServices(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.getAuthServices']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
-         * @param {AuthServiceRequestsDto} [authServiceRequestsDto] 
+         * @param {SaveAuthKeysRequestDto} [saveAuthKeysRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for saveAuthKeys operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/save-auth-keys/
          */
-        async saveAuthKeys(authServiceRequestsDto?: AuthServiceRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAuthKeys(authServiceRequestsDto, options);
+        async saveAuthKeys(saveAuthKeysRequestDto?: SaveAuthKeysRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BooleanWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.saveAuthKeys(saveAuthKeysRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.saveAuthKeys']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
-         * @param {ExternalDatabaseSettings} [externalDatabaseSettings] 
+         * @param {ExternalDatabaseConnectionRequestDto} [externalDatabaseConnectionRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for testExternalDatabaseConnection operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/test-external-database-connection/
          */
-        async testExternalDatabaseConnection(externalDatabaseSettings?: ExternalDatabaseSettings, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectionTestResultWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.testExternalDatabaseConnection(externalDatabaseSettings, options);
+        async testExternalDatabaseConnection(externalDatabaseConnectionRequestDto?: ExternalDatabaseConnectionRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ConnectionTestResultWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.testExternalDatabaseConnection(externalDatabaseConnectionRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsAuthorizationApi.testExternalDatabaseConnection']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -270,18 +272,18 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
     const localVarFp = SettingsAuthorizationApiFp(configuration)
     return {
         /**
-         * Returns the authorization services.
+         * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
          * @summary Get the authorization services
          * @param {*} [options] Override http request option.
          * REST API Reference for getAuthServices operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-auth-services/
          * @throws {RequiredError}
          */
-        getAuthServices(options?: RawAxiosRequestConfig): AxiosPromise<AuthServiceRequestsArrayWrapper> {
+        getAuthServices(options?: RawAxiosRequestConfig): AxiosPromise<AuthServiceArrayWrapper> {
             return localVarFp.getAuthServices(options).then((request) => request(axios, basePath));
         },
         /**
-         * Saves the authorization keys.
+         * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
          * @summary Save the authorization keys
          * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -290,10 +292,10 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
          * @throws {RequiredError}
          */
         saveAuthKeys(requestParameters: SettingsAuthorizationApiSaveAuthKeysRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
-            return localVarFp.saveAuthKeys(requestParameters.authServiceRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.saveAuthKeys(requestParameters.saveAuthKeysRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Tests an external database connection with the provided settings without saving them.
+         * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
          * @summary Test external database connection
          * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -302,7 +304,7 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
          * @throws {RequiredError}
          */
         testExternalDatabaseConnection(requestParameters: SettingsAuthorizationApiTestExternalDatabaseConnectionRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ConnectionTestResultWrapper> {
-            return localVarFp.testExternalDatabaseConnection(requestParameters.externalDatabaseSettings, options).then((request) => request(axios, basePath));
+            return localVarFp.testExternalDatabaseConnection(requestParameters.externalDatabaseConnectionRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -315,10 +317,10 @@ export const SettingsAuthorizationApiFactory = function (configuration?: Configu
 export interface SettingsAuthorizationApiSaveAuthKeysRequest {
     /**
      * 
-     * @type {AuthServiceRequestsDto}
+     * @type {SaveAuthKeysRequestDto}
      * @memberof SettingsAuthorizationApiSaveAuthKeys
      */
-    readonly authServiceRequestsDto?: AuthServiceRequestsDto
+    readonly saveAuthKeysRequestDto?: SaveAuthKeysRequestDto
 }
 
 /**
@@ -329,10 +331,10 @@ export interface SettingsAuthorizationApiSaveAuthKeysRequest {
 export interface SettingsAuthorizationApiTestExternalDatabaseConnectionRequest {
     /**
      * 
-     * @type {ExternalDatabaseSettings}
+     * @type {ExternalDatabaseConnectionRequestDto}
      * @memberof SettingsAuthorizationApiTestExternalDatabaseConnection
      */
-    readonly externalDatabaseSettings?: ExternalDatabaseSettings
+    readonly externalDatabaseConnectionRequestDto?: ExternalDatabaseConnectionRequestDto
 }
 
 /**
@@ -343,7 +345,7 @@ export interface SettingsAuthorizationApiTestExternalDatabaseConnectionRequest {
  */
 export class SettingsAuthorizationApi extends BaseAPI {
     /**
-     * Returns the authorization services.
+     * Returns the catalogue of third-party storage and authorization providers DocSpace can integrate with (for  example Amazon S3, Dropbox, Google, or Telegram), including whichever keys were last saved for each one that  currently has any configured. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission). This is a  read-only, idempotent call, and the list is not paginated; entries are ordered by the provider\'s configured  display order. Only providers that expose at least one manageable key are included, so a provider with nothing  to configure is omitted entirely. Save or change a provider\'s keys with `POST api/2.0/settings/authservice`.
      * @summary Get the authorization services
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -354,7 +356,7 @@ export class SettingsAuthorizationApi extends BaseAPI {
     }
 
     /**
-     * Saves the authorization keys.
+     * Saves the authorization keys for one third-party storage or authorization provider, identified by name, or  clears them when every submitted key is left empty. Requires Owner or DocSpaceAdmin (the EditPortalSettings  permission); a provider that does not allow its keys to be changed from the API rejects the call outright. A  provider that is only available on a paid plan additionally requires the portal\'s tariff to include  third-party storage, or Standalone licensing, before the call is accepted. Keys that fail the provider\'s own  validation are cleared and the call is rejected rather than left partially applied. This is a mutating,  idempotent call: resaving identical keys succeeds and reports no change. It returns whether the keys actually  changed, not the keys themselves; connecting Telegram or an external database through this call also triggers  the matching real-time connection update.
      * @summary Save the authorization keys
      * @param {SettingsAuthorizationApiSaveAuthKeysRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -362,11 +364,11 @@ export class SettingsAuthorizationApi extends BaseAPI {
      * @memberof SettingsAuthorizationApi
      */
     public saveAuthKeys(requestParameters: SettingsAuthorizationApiSaveAuthKeysRequest = {}, options?: RawAxiosRequestConfig) {
-        return SettingsAuthorizationApiFp(this.configuration).saveAuthKeys(requestParameters.authServiceRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SettingsAuthorizationApiFp(this.configuration).saveAuthKeys(requestParameters.saveAuthKeysRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Tests an external database connection with the provided settings without saving them.
+     * Probes connectivity to an external database using the settings supplied in the request, without saving them or  affecting the portal\'s own configuration. Requires Owner or DocSpaceAdmin (the EditPortalSettings permission).  SQLite is only accepted as a target on a Standalone (self-hosted) installation; requesting it on SaaS is  reported as a failed connection rather than an error. This is a read-only call, safe to retry. A failed  connection is not an HTTP error: the response always comes back as a normal success with `success=false` and  an `error` message describing what went wrong.
      * @summary Test external database connection
      * @param {SettingsAuthorizationApiTestExternalDatabaseConnectionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -374,7 +376,7 @@ export class SettingsAuthorizationApi extends BaseAPI {
      * @memberof SettingsAuthorizationApi
      */
     public testExternalDatabaseConnection(requestParameters: SettingsAuthorizationApiTestExternalDatabaseConnectionRequest = {}, options?: RawAxiosRequestConfig) {
-        return SettingsAuthorizationApiFp(this.configuration).testExternalDatabaseConnection(requestParameters.externalDatabaseSettings, options).then((request) => request(this.axios, this.basePath));
+        return SettingsAuthorizationApiFp(this.configuration).testExternalDatabaseConnection(requestParameters.externalDatabaseConnectionRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

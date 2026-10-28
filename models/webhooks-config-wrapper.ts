@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WebhooksConfigDto } from './webhooks-config-dto';
 
+/**
+ * The successful API response containing the WebhooksConfigDto object.
+ */
 export interface WebhooksConfigWrapper {
+    /**
+     * The WebhooksConfigDto object returned by the operation.
+     */
     'response'?: WebhooksConfigDto;
     /**
      * The total number of items in the response

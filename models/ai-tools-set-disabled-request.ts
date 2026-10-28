@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiChatToolPrefsScope } from './ai-chat-tool-prefs-scope';
 
 export interface AiToolsSetDisabledRequest {
     'serverType': string;
@@ -26,5 +29,11 @@ export interface AiToolsSetDisabledRequest {
      */
     'toolNames': Array<string>;
     'entityId'?: string;
+    /**
+     * The list the write lands in; omitted means the caller\'s own.
+     */
+    'scope'?: AiChatToolPrefsScope;
 }
+
+
 

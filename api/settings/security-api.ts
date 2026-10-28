@@ -28,9 +28,11 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { EmployeeArrayWrapper } from '../../models';
 // @ts-ignore
-import type { ObjectWrapper } from '../../models';
+import type { EnabledModuleArrayWrapper } from '../../models';
 // @ts-ignore
-import type { PasswordSettingsRequestsDto } from '../../models';
+import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
+import type { PasswordSettingsRequestDto } from '../../models';
 // @ts-ignore
 import type { PasswordSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -38,11 +40,11 @@ import type { ProductAdministratorWrapper } from '../../models';
 // @ts-ignore
 import type { SecurityArrayWrapper } from '../../models';
 // @ts-ignore
-import type { SecurityRequestsDto } from '../../models';
+import type { SecurityRequestDto } from '../../models';
 // @ts-ignore
-import type { WebItemSecurityRequestsDto } from '../../models';
+import type { WebItemSecurityRequestDto } from '../../models';
 // @ts-ignore
-import type { WebItemsSecurityRequestsDto } from '../../models';
+import type { WebItemsSecurityRequestDto } from '../../models';
 /**
  * SecurityApi - axios parameter creator
  * @export
@@ -52,8 +54,8 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
     
     return {
         /**
-         * Returns a list of all the enabled modules.
-         * @summary Get the enabled modules
+         * Lists the portal modules the calling user can currently open, each as an `id` holding the module\'s product  class name and a `title` holding its display name, both HTML-encoded. Any signed-in member may call this;  anonymous callers are not admitted. The operation is read-only and takes no parameters, and the list is  specific to the caller: modules hidden for this portal, and modules whose access rules exclude the caller, are  left out, and sub-modules nested under another module are never listed. Entries follow the portal\'s own module  order rather than an alphabetical one. An empty list means the installation registers no such modules at all -  the case on DocSpace, where the classic modules do not exist - and is not a failure. The identifiers here are  display-oriented class names, not the GUIDs the access-settings operations work with, so do not feed them to  `GET api/2.0/settings/security/{id}`, which expects a module GUID.
+         * @summary Get enabled modules
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEnabledModules operation
@@ -104,20 +106,20 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
-         * @param {string} productid The ID of the product extracted from the query parameters.
-         * @param {string} userid The user ID extracted from the query parameters.
+         * Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+         * @summary Check product administrator
+         * @param {string} productId The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+         * @param {string} userId The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          */
-        getIsProductAdministrator: async (productid: string, userid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'productid' is not null or undefined
-            assertParamExists('getIsProductAdministrator', 'productid', productid)
-            // verify required parameter 'userid' is not null or undefined
-            assertParamExists('getIsProductAdministrator', 'userid', userid)
+        getIsProductAdministrator: async (productId: string, userId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productId' is not null or undefined
+            assertParamExists('getIsProductAdministrator', 'productId', productId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getIsProductAdministrator', 'userId', userId)
 
             const localVarPath = `/api/2.0/settings/security/administrator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -150,12 +152,12 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
 
             // authentication OpenId required
 
-            if (productid !== undefined) {
-                localVarQueryParameter['productid'] = productid;
+            if (productId !== undefined) {
+                localVarQueryParameter['productId'] = productId;
             }
 
-            if (userid !== undefined) {
-                localVarQueryParameter['userid'] = userid;
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
             }
 
 
@@ -170,8 +172,8 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the portal password settings.
-         * @summary Get the password settings
+         * Returns the password policy of the current portal: the minimum length together with the flags that demand an  uppercase letter, a digit and a special symbol, plus the regular expressions a client can check a password  against before sending it anywhere. Any signed-in member may read it, and it is also reachable with the  parameters of a confirmation link, so an invited user or one resetting a password can validate the new  password before having a session; a portal whose payment has lapsed still answers. The operation is read-only  and honours `If-Modified-Since`: send back the `Last-Modified` value of an earlier answer and an unchanged  policy comes back as an empty not-modified response rather than a body. A portal nobody has configured  requires 8 characters with all three flags off. Whatever the policy says, the portal refuses a password longer  than 30 characters, a ceiling this answer does not carry. Change the policy with  `PUT api/2.0/settings/security/password`.
+         * @summary Get password settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPasswordSettings operation
@@ -222,20 +224,20 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns a list of all the administrators of a product with the ID specified in the request.
-         * @summary Get the product administrators
-         * @param {string} productid The ID of the product extracted from the route parameters.
+         * Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
+         * @summary Get product administrators
+         * @param {string} productId The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProductAdministrators operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators/
          */
-        getProductAdministrators: async (productid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'productid' is not null or undefined
-            assertParamExists('getProductAdministrators', 'productid', productid)
+        getProductAdministrators: async (productId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'productId' is not null or undefined
+            assertParamExists('getProductAdministrators', 'productId', productId)
 
-            const localVarPath = `/api/2.0/settings/security/administrator/{productid}`
-                .replace(`{${"productid"}}`, encodeURIComponent(String(productid)));
+            const localVarPath = `/api/2.0/settings/security/administrator/{productId}`
+                .replace(`{${"productId"}}`, encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -278,9 +280,9 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the availability of the module with the ID specified in the request.
-         * @summary Get the module availability
-         * @param {string} id The ID extracted from the route parameters.
+         * Answers whether the module with the given identifier is available to the calling user right now, as a single  boolean. `id` is the module GUID and travels in the path; a value that is not a GUID does not match the route  at all. Any signed-in member may call this; anonymous callers are not admitted. The operation is read-only and  its answer is specific to the caller: `true` means a module with that identifier is registered in this portal,  is visible, and the caller is allowed to read it, while `false` covers every other case - the module is not  registered here, it is hidden for this portal, or the caller is outside the users and groups allowed to open  it. A `false` therefore does not tell those apart, and an unknown identifier is reported as unavailable  instead of failing. Read the allow-list behind the decision with `GET api/2.0/settings/security`, list the  modules the caller can actually open with `GET api/2.0/settings/security/modules`, and change access with  `PUT api/2.0/settings/security`.
+         * @summary Check module availability
+         * @param {string} id The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebItemSecurityInfo operation
@@ -334,9 +336,9 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the security settings for the modules specified in the request.
-         * @summary Get the security settings
-         * @param {Array<string>} [ids] The list of module identifiers for which to retrieve the security settings.
+         * Reports how access to the portal\'s own modules is configured: for every module identifier sent in `ids`,  whether access is restricted at all and which users and groups are allowed to open the module. Send the  identifiers as repeated `ids` query values; each one has to be a GUID, and anything else is rejected as an  invalid request. Omitting `ids` asks about every module registered in the portal, which on a DocSpace  installation is none, so the answer is then an empty list rather than a failure. Any signed-in member may call  this; anonymous callers are not admitted. The operation is read-only and answers one entry per identifier, in  the order the identifiers were sent. `enabled` is `false` for a module nobody has ever configured, `groups`  and `users` name the subjects the rule was stored for, and `isSubItem` marks a module that hangs under another  one. Users the caller is not allowed to see are left out of `users`, so the same module can come back with  different lists for different callers. Change any of this with `PUT api/2.0/settings/security`.
+         * @summary Get module access settings
+         * @param {Array<string>} [ids] The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebItemSettingsSecurityInfo operation
@@ -391,15 +393,15 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sets the security settings to the modules with the IDs specified in the request.
-         * @summary Set the security settings to modules
-         * @param {WebItemsSecurityRequestsDto} [webItemsSecurityRequestsDto] 
+         * Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
+         * @summary Set access to modules in bulk
+         * @param {WebItemsSecurityRequestDto} [webItemsSecurityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setAccessToWebItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items/
          */
-        setAccessToWebItems: async (webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setAccessToWebItems: async (webItemsSecurityRequestDto?: WebItemsSecurityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/security/access`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -439,7 +441,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webItemsSecurityRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(webItemsSecurityRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -447,15 +449,15 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sets the selected user as an administrator of a product with the ID specified in the request.
-         * @summary Set a product administrator
-         * @param {SecurityRequestsDto} [securityRequestsDto] 
+         * Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
+         * @summary Set product administrator
+         * @param {SecurityRequestDto} [securityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator/
          */
-        setProductAdministrator: async (securityRequestsDto?: SecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setProductAdministrator: async (securityRequestDto?: SecurityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/security/administrator`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -495,7 +497,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(securityRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(securityRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -503,15 +505,15 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sets the security settings to the module with the ID specified in the request.
-         * @summary Set the module security settings
-         * @param {WebItemSecurityRequestsDto} [webItemSecurityRequestsDto] 
+         * Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module\'s resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
+         * @summary Set module access
+         * @param {WebItemSecurityRequestDto} [webItemSecurityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setWebItemSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security/
          */
-        setWebItemSecurity: async (webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        setWebItemSecurity: async (webItemSecurityRequestDto?: WebItemSecurityRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/security`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -551,7 +553,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(webItemSecurityRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(webItemSecurityRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -559,15 +561,15 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Sets the portal password settings.
-         * @summary Set the password settings
-         * @param {PasswordSettingsRequestsDto} [passwordSettingsRequestsDto] 
+         * Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
+         * @summary Update password settings
+         * @param {PasswordSettingsRequestDto} [passwordSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updatePasswordSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings/
          */
-        updatePasswordSettings: async (passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updatePasswordSettings: async (passwordSettingsRequestDto?: PasswordSettingsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/settings/security/password`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -607,7 +609,7 @@ export const SecurityApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(passwordSettingsRequestsDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(passwordSettingsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -625,38 +627,38 @@ export const SecurityApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = SecurityApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a list of all the enabled modules.
-         * @summary Get the enabled modules
+         * Lists the portal modules the calling user can currently open, each as an `id` holding the module\'s product  class name and a `title` holding its display name, both HTML-encoded. Any signed-in member may call this;  anonymous callers are not admitted. The operation is read-only and takes no parameters, and the list is  specific to the caller: modules hidden for this portal, and modules whose access rules exclude the caller, are  left out, and sub-modules nested under another module are never listed. Entries follow the portal\'s own module  order rather than an alphabetical one. An empty list means the installation registers no such modules at all -  the case on DocSpace, where the classic modules do not exist - and is not a failure. The identifiers here are  display-oriented class names, not the GUIDs the access-settings operations work with, so do not feed them to  `GET api/2.0/settings/security/{id}`, which expects a module GUID.
+         * @summary Get enabled modules
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getEnabledModules operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enabled-modules/
          */
-        async getEnabledModules(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ObjectWrapper>> {
+        async getEnabledModules(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EnabledModuleArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getEnabledModules(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.getEnabledModules']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
-         * @param {string} productid The ID of the product extracted from the query parameters.
-         * @param {string} userid The user ID extracted from the query parameters.
+         * Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+         * @summary Check product administrator
+         * @param {string} productId The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
+         * @param {string} userId The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getIsProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-is-product-administrator/
          */
-        async getIsProductAdministrator(productid: string, userid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getIsProductAdministrator(productid, userid, options);
+        async getIsProductAdministrator(productId: string, userId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIsProductAdministrator(productId, userId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.getIsProductAdministrator']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal password settings.
-         * @summary Get the password settings
+         * Returns the password policy of the current portal: the minimum length together with the flags that demand an  uppercase letter, a digit and a special symbol, plus the regular expressions a client can check a password  against before sending it anywhere. Any signed-in member may read it, and it is also reachable with the  parameters of a confirmation link, so an invited user or one resetting a password can validate the new  password before having a session; a portal whose payment has lapsed still answers. The operation is read-only  and honours `If-Modified-Since`: send back the `Last-Modified` value of an earlier answer and an unchanged  policy comes back as an empty not-modified response rather than a body. A portal nobody has configured  requires 8 characters with all three flags off. Whatever the policy says, the portal refuses a password longer  than 30 characters, a ceiling this answer does not carry. Change the policy with  `PUT api/2.0/settings/security/password`.
+         * @summary Get password settings
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getPasswordSettings operation
@@ -669,24 +671,24 @@ export const SecurityApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns a list of all the administrators of a product with the ID specified in the request.
-         * @summary Get the product administrators
-         * @param {string} productid The ID of the product extracted from the route parameters.
+         * Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
+         * @summary Get product administrators
+         * @param {string} productId The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getProductAdministrators operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-product-administrators/
          */
-        async getProductAdministrators(productid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProductAdministrators(productid, options);
+        async getProductAdministrators(productId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EmployeeArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProductAdministrators(productId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.getProductAdministrators']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the availability of the module with the ID specified in the request.
-         * @summary Get the module availability
-         * @param {string} id The ID extracted from the route parameters.
+         * Answers whether the module with the given identifier is available to the calling user right now, as a single  boolean. `id` is the module GUID and travels in the path; a value that is not a GUID does not match the route  at all. Any signed-in member may call this; anonymous callers are not admitted. The operation is read-only and  its answer is specific to the caller: `true` means a module with that identifier is registered in this portal,  is visible, and the caller is allowed to read it, while `false` covers every other case - the module is not  registered here, it is hidden for this portal, or the caller is outside the users and groups allowed to open  it. A `false` therefore does not tell those apart, and an unknown identifier is reported as unavailable  instead of failing. Read the allow-list behind the decision with `GET api/2.0/settings/security`, list the  modules the caller can actually open with `GET api/2.0/settings/security/modules`, and change access with  `PUT api/2.0/settings/security`.
+         * @summary Check module availability
+         * @param {string} id The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebItemSecurityInfo operation
@@ -699,9 +701,9 @@ export const SecurityApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the security settings for the modules specified in the request.
-         * @summary Get the security settings
-         * @param {Array<string>} [ids] The list of module identifiers for which to retrieve the security settings.
+         * Reports how access to the portal\'s own modules is configured: for every module identifier sent in `ids`,  whether access is restricted at all and which users and groups are allowed to open the module. Send the  identifiers as repeated `ids` query values; each one has to be a GUID, and anything else is rejected as an  invalid request. Omitting `ids` asks about every module registered in the portal, which on a DocSpace  installation is none, so the answer is then an empty list rather than a failure. Any signed-in member may call  this; anonymous callers are not admitted. The operation is read-only and answers one entry per identifier, in  the order the identifiers were sent. `enabled` is `false` for a module nobody has ever configured, `groups`  and `users` name the subjects the rule was stored for, and `isSubItem` marks a module that hangs under another  one. Users the caller is not allowed to see are left out of `users`, so the same module can come back with  different lists for different callers. Change any of this with `PUT api/2.0/settings/security`.
+         * @summary Get module access settings
+         * @param {Array<string>} [ids] The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for getWebItemSettingsSecurityInfo operation
@@ -714,61 +716,61 @@ export const SecurityApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the security settings to the modules with the IDs specified in the request.
-         * @summary Set the security settings to modules
-         * @param {WebItemsSecurityRequestsDto} [webItemsSecurityRequestsDto] 
+         * Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
+         * @summary Set access to modules in bulk
+         * @param {WebItemsSecurityRequestDto} [webItemsSecurityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setAccessToWebItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-access-to-web-items/
          */
-        async setAccessToWebItems(webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setAccessToWebItems(webItemsSecurityRequestsDto, options);
+        async setAccessToWebItems(webItemsSecurityRequestDto?: WebItemsSecurityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setAccessToWebItems(webItemsSecurityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.setAccessToWebItems']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the selected user as an administrator of a product with the ID specified in the request.
-         * @summary Set a product administrator
-         * @param {SecurityRequestsDto} [securityRequestsDto] 
+         * Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
+         * @summary Set product administrator
+         * @param {SecurityRequestDto} [securityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setProductAdministrator operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-product-administrator/
          */
-        async setProductAdministrator(securityRequestsDto?: SecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setProductAdministrator(securityRequestsDto, options);
+        async setProductAdministrator(securityRequestDto?: SecurityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProductAdministratorWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setProductAdministrator(securityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.setProductAdministrator']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the security settings to the module with the ID specified in the request.
-         * @summary Set the module security settings
-         * @param {WebItemSecurityRequestsDto} [webItemSecurityRequestsDto] 
+         * Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module\'s resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
+         * @summary Set module access
+         * @param {WebItemSecurityRequestDto} [webItemSecurityRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for setWebItemSecurity operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-web-item-security/
          */
-        async setWebItemSecurity(webItemSecurityRequestsDto?: WebItemSecurityRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.setWebItemSecurity(webItemSecurityRequestsDto, options);
+        async setWebItemSecurity(webItemSecurityRequestDto?: WebItemSecurityRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setWebItemSecurity(webItemSecurityRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.setWebItemSecurity']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Sets the portal password settings.
-         * @summary Set the password settings
-         * @param {PasswordSettingsRequestsDto} [passwordSettingsRequestsDto] 
+         * Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
+         * @summary Update password settings
+         * @param {PasswordSettingsRequestDto} [passwordSettingsRequestDto] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for updatePasswordSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-password-settings/
          */
-        async updatePasswordSettings(passwordSettingsRequestsDto?: PasswordSettingsRequestsDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PasswordSettingsWrapper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePasswordSettings(passwordSettingsRequestsDto, options);
+        async updatePasswordSettings(passwordSettingsRequestDto?: PasswordSettingsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PasswordSettingsWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updatePasswordSettings(passwordSettingsRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SecurityApi.updatePasswordSettings']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -784,19 +786,19 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = SecurityApiFp(configuration)
     return {
         /**
-         * Returns a list of all the enabled modules.
-         * @summary Get the enabled modules
+         * Lists the portal modules the calling user can currently open, each as an `id` holding the module\'s product  class name and a `title` holding its display name, both HTML-encoded. Any signed-in member may call this;  anonymous callers are not admitted. The operation is read-only and takes no parameters, and the list is  specific to the caller: modules hidden for this portal, and modules whose access rules exclude the caller, are  left out, and sub-modules nested under another module are never listed. Entries follow the portal\'s own module  order rather than an alphabetical one. An empty list means the installation registers no such modules at all -  the case on DocSpace, where the classic modules do not exist - and is not a failure. The identifiers here are  display-oriented class names, not the GUIDs the access-settings operations work with, so do not feed them to  `GET api/2.0/settings/security/{id}`, which expects a module GUID.
+         * @summary Get enabled modules
          * @param {*} [options] Override http request option.
          * REST API Reference for getEnabledModules operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-enabled-modules/
          * @throws {RequiredError}
          */
-        getEnabledModules(options?: RawAxiosRequestConfig): AxiosPromise<ObjectWrapper> {
+        getEnabledModules(options?: RawAxiosRequestConfig): AxiosPromise<EnabledModuleArrayWrapper> {
             return localVarFp.getEnabledModules(options).then((request) => request(axios, basePath));
         },
         /**
-         * Checks if the selected user is an administrator of a product with the ID specified in the request.
-         * @summary Check a product administrator
+         * Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+         * @summary Check product administrator
          * @param {SecurityApiGetIsProductAdministratorRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getIsProductAdministrator operation
@@ -804,11 +806,11 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         getIsProductAdministrator(requestParameters: SecurityApiGetIsProductAdministratorRequest, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
-            return localVarFp.getIsProductAdministrator(requestParameters.productid, requestParameters.userid, options).then((request) => request(axios, basePath));
+            return localVarFp.getIsProductAdministrator(requestParameters.productId, requestParameters.userId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal password settings.
-         * @summary Get the password settings
+         * Returns the password policy of the current portal: the minimum length together with the flags that demand an  uppercase letter, a digit and a special symbol, plus the regular expressions a client can check a password  against before sending it anywhere. Any signed-in member may read it, and it is also reachable with the  parameters of a confirmation link, so an invited user or one resetting a password can validate the new  password before having a session; a portal whose payment has lapsed still answers. The operation is read-only  and honours `If-Modified-Since`: send back the `Last-Modified` value of an earlier answer and an unchanged  policy comes back as an empty not-modified response rather than a body. A portal nobody has configured  requires 8 characters with all three flags off. Whatever the policy says, the portal refuses a password longer  than 30 characters, a ceiling this answer does not carry. Change the policy with  `PUT api/2.0/settings/security/password`.
+         * @summary Get password settings
          * @param {*} [options] Override http request option.
          * REST API Reference for getPasswordSettings operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-password-settings/
@@ -818,8 +820,8 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getPasswordSettings(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all the administrators of a product with the ID specified in the request.
-         * @summary Get the product administrators
+         * Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
+         * @summary Get product administrators
          * @param {SecurityApiGetProductAdministratorsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getProductAdministrators operation
@@ -827,11 +829,11 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         getProductAdministrators(requestParameters: SecurityApiGetProductAdministratorsRequest, options?: RawAxiosRequestConfig): AxiosPromise<EmployeeArrayWrapper> {
-            return localVarFp.getProductAdministrators(requestParameters.productid, options).then((request) => request(axios, basePath));
+            return localVarFp.getProductAdministrators(requestParameters.productId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the availability of the module with the ID specified in the request.
-         * @summary Get the module availability
+         * Answers whether the module with the given identifier is available to the calling user right now, as a single  boolean. `id` is the module GUID and travels in the path; a value that is not a GUID does not match the route  at all. Any signed-in member may call this; anonymous callers are not admitted. The operation is read-only and  its answer is specific to the caller: `true` means a module with that identifier is registered in this portal,  is visible, and the caller is allowed to read it, while `false` covers every other case - the module is not  registered here, it is hidden for this portal, or the caller is outside the users and groups allowed to open  it. A `false` therefore does not tell those apart, and an unknown identifier is reported as unavailable  instead of failing. Read the allow-list behind the decision with `GET api/2.0/settings/security`, list the  modules the caller can actually open with `GET api/2.0/settings/security/modules`, and change access with  `PUT api/2.0/settings/security`.
+         * @summary Check module availability
          * @param {SecurityApiGetWebItemSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebItemSecurityInfo operation
@@ -842,8 +844,8 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getWebItemSecurityInfo(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the security settings for the modules specified in the request.
-         * @summary Get the security settings
+         * Reports how access to the portal\'s own modules is configured: for every module identifier sent in `ids`,  whether access is restricted at all and which users and groups are allowed to open the module. Send the  identifiers as repeated `ids` query values; each one has to be a GUID, and anything else is rejected as an  invalid request. Omitting `ids` asks about every module registered in the portal, which on a DocSpace  installation is none, so the answer is then an empty list rather than a failure. Any signed-in member may call  this; anonymous callers are not admitted. The operation is read-only and answers one entry per identifier, in  the order the identifiers were sent. `enabled` is `false` for a module nobody has ever configured, `groups`  and `users` name the subjects the rule was stored for, and `isSubItem` marks a module that hangs under another  one. Users the caller is not allowed to see are left out of `users`, so the same module can come back with  different lists for different callers. Change any of this with `PUT api/2.0/settings/security`.
+         * @summary Get module access settings
          * @param {SecurityApiGetWebItemSettingsSecurityInfoRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for getWebItemSettingsSecurityInfo operation
@@ -854,8 +856,8 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getWebItemSettingsSecurityInfo(requestParameters.ids, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the security settings to the modules with the IDs specified in the request.
-         * @summary Set the security settings to modules
+         * Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
+         * @summary Set access to modules in bulk
          * @param {SecurityApiSetAccessToWebItemsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setAccessToWebItems operation
@@ -863,11 +865,11 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         setAccessToWebItems(requestParameters: SecurityApiSetAccessToWebItemsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
-            return localVarFp.setAccessToWebItems(requestParameters.webItemsSecurityRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setAccessToWebItems(requestParameters.webItemsSecurityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the selected user as an administrator of a product with the ID specified in the request.
-         * @summary Set a product administrator
+         * Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
+         * @summary Set product administrator
          * @param {SecurityApiSetProductAdministratorRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setProductAdministrator operation
@@ -875,11 +877,11 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         setProductAdministrator(requestParameters: SecurityApiSetProductAdministratorRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ProductAdministratorWrapper> {
-            return localVarFp.setProductAdministrator(requestParameters.securityRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setProductAdministrator(requestParameters.securityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the security settings to the module with the ID specified in the request.
-         * @summary Set the module security settings
+         * Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module\'s resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
+         * @summary Set module access
          * @param {SecurityApiSetWebItemSecurityRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for setWebItemSecurity operation
@@ -887,11 +889,11 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         setWebItemSecurity(requestParameters: SecurityApiSetWebItemSecurityRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<SecurityArrayWrapper> {
-            return localVarFp.setWebItemSecurity(requestParameters.webItemSecurityRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.setWebItemSecurity(requestParameters.webItemSecurityRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Sets the portal password settings.
-         * @summary Set the password settings
+         * Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
+         * @summary Update password settings
          * @param {SecurityApiUpdatePasswordSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * REST API Reference for updatePasswordSettings operation
@@ -899,7 +901,7 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
          * @throws {RequiredError}
          */
         updatePasswordSettings(requestParameters: SecurityApiUpdatePasswordSettingsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<PasswordSettingsWrapper> {
-            return localVarFp.updatePasswordSettings(requestParameters.passwordSettingsRequestsDto, options).then((request) => request(axios, basePath));
+            return localVarFp.updatePasswordSettings(requestParameters.passwordSettingsRequestDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -911,18 +913,18 @@ export const SecurityApiFactory = function (configuration?: Configuration, baseP
  */
 export interface SecurityApiGetIsProductAdministratorRequest {
     /**
-     * The ID of the product extracted from the query parameters.
+     * The module being asked about, by module GUID. The all-zero GUID asks about the portal itself rather than a  single module.
      * @type {string}
      * @memberof SecurityApiGetIsProductAdministrator
      */
-    readonly productid: string
+    readonly productId: string
 
     /**
-     * The user ID extracted from the query parameters.
+     * The account being asked about, by portal user ID. An ID that names no account is answered as a plain negative  rather than a failure, so a negative answer does not prove the account exists.
      * @type {string}
      * @memberof SecurityApiGetIsProductAdministrator
      */
-    readonly userid: string
+    readonly userId: string
 }
 
 /**
@@ -932,11 +934,11 @@ export interface SecurityApiGetIsProductAdministratorRequest {
  */
 export interface SecurityApiGetProductAdministratorsRequest {
     /**
-     * The ID of the product extracted from the route parameters.
+     * The module the operation acts on, by module GUID. The all-zero GUID stands for the portal itself rather than  for a single module, and a GUID that names no module group is answered with an empty result instead of a  failure.
      * @type {string}
      * @memberof SecurityApiGetProductAdministrators
      */
-    readonly productid: string
+    readonly productId: string
 }
 
 /**
@@ -946,7 +948,7 @@ export interface SecurityApiGetProductAdministratorsRequest {
  */
 export interface SecurityApiGetWebItemSecurityInfoRequest {
     /**
-     * The ID extracted from the route parameters.
+     * The identifier of the object the operation acts on, as the listing operation of that kind of object reports  it. It has to match the shape the route declares - a GUID where the route is typed as one - since a value of  another shape does not match the route at all and is answered as not found.
      * @type {string}
      * @memberof SecurityApiGetWebItemSecurityInfo
      */
@@ -960,7 +962,7 @@ export interface SecurityApiGetWebItemSecurityInfoRequest {
  */
 export interface SecurityApiGetWebItemSettingsSecurityInfoRequest {
     /**
-     * The list of module identifiers for which to retrieve the security settings.
+     * The modules to report on, each given as a GUID and sent as a repeated query value. An entry that is not a  GUID fails the whole request as invalid. Leaving the list out asks about every module registered in the  portal, which on a DocSpace installation is none, so the answer is then empty rather than complete.
      * @type {Array<string>}
      * @memberof SecurityApiGetWebItemSettingsSecurityInfo
      */
@@ -975,10 +977,10 @@ export interface SecurityApiGetWebItemSettingsSecurityInfoRequest {
 export interface SecurityApiSetAccessToWebItemsRequest {
     /**
      * 
-     * @type {WebItemsSecurityRequestsDto}
+     * @type {WebItemsSecurityRequestDto}
      * @memberof SecurityApiSetAccessToWebItems
      */
-    readonly webItemsSecurityRequestsDto?: WebItemsSecurityRequestsDto
+    readonly webItemsSecurityRequestDto?: WebItemsSecurityRequestDto
 }
 
 /**
@@ -989,10 +991,10 @@ export interface SecurityApiSetAccessToWebItemsRequest {
 export interface SecurityApiSetProductAdministratorRequest {
     /**
      * 
-     * @type {SecurityRequestsDto}
+     * @type {SecurityRequestDto}
      * @memberof SecurityApiSetProductAdministrator
      */
-    readonly securityRequestsDto?: SecurityRequestsDto
+    readonly securityRequestDto?: SecurityRequestDto
 }
 
 /**
@@ -1003,10 +1005,10 @@ export interface SecurityApiSetProductAdministratorRequest {
 export interface SecurityApiSetWebItemSecurityRequest {
     /**
      * 
-     * @type {WebItemSecurityRequestsDto}
+     * @type {WebItemSecurityRequestDto}
      * @memberof SecurityApiSetWebItemSecurity
      */
-    readonly webItemSecurityRequestsDto?: WebItemSecurityRequestsDto
+    readonly webItemSecurityRequestDto?: WebItemSecurityRequestDto
 }
 
 /**
@@ -1017,10 +1019,10 @@ export interface SecurityApiSetWebItemSecurityRequest {
 export interface SecurityApiUpdatePasswordSettingsRequest {
     /**
      * 
-     * @type {PasswordSettingsRequestsDto}
+     * @type {PasswordSettingsRequestDto}
      * @memberof SecurityApiUpdatePasswordSettings
      */
-    readonly passwordSettingsRequestsDto?: PasswordSettingsRequestsDto
+    readonly passwordSettingsRequestDto?: PasswordSettingsRequestDto
 }
 
 /**
@@ -1031,8 +1033,8 @@ export interface SecurityApiUpdatePasswordSettingsRequest {
  */
 export class SecurityApi extends BaseAPI {
     /**
-     * Returns a list of all the enabled modules.
-     * @summary Get the enabled modules
+     * Lists the portal modules the calling user can currently open, each as an `id` holding the module\'s product  class name and a `title` holding its display name, both HTML-encoded. Any signed-in member may call this;  anonymous callers are not admitted. The operation is read-only and takes no parameters, and the list is  specific to the caller: modules hidden for this portal, and modules whose access rules exclude the caller, are  left out, and sub-modules nested under another module are never listed. Entries follow the portal\'s own module  order rather than an alphabetical one. An empty list means the installation registers no such modules at all -  the case on DocSpace, where the classic modules do not exist - and is not a failure. The identifiers here are  display-oriented class names, not the GUIDs the access-settings operations work with, so do not feed them to  `GET api/2.0/settings/security/{id}`, which expects a module GUID.
+     * @summary Get enabled modules
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
@@ -1042,20 +1044,20 @@ export class SecurityApi extends BaseAPI {
     }
 
     /**
-     * Checks if the selected user is an administrator of a product with the ID specified in the request.
-     * @summary Check a product administrator
+     * Reports whether one user administers one portal module, as the identifiers asked about plus an `administrator`  flag. Both `productid` and `userid` are query parameters and both are required; the all-zero product GUID asks  about the portal itself rather than about a single module. The caller needs the portal-settings right of a  DocSpace administrator, otherwise the call is refused. The operation is read-only. The flag is `true` when the  user belongs to the DocSpace administrator group or to the module\'s own group, so a portal-wide administrator  is reported as an administrator of every module, whatever the module identifier says. Identifiers that name no  user and no group are answered with `false` instead of a failure, so a `false` does not prove the user exists.  The verdict is read out of group membership alone and says nothing about whether the module is enabled for  this portal, which `GET api/2.0/settings/security/{id}` reports. Use  `GET api/2.0/settings/security/administrator/{productId}` to list everyone who administers a module, and  `PUT api/2.0/settings/security/administrator` to change the membership.
+     * @summary Check product administrator
      * @param {SettingsSecurityApiGetIsProductAdministratorRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public getIsProductAdministrator(requestParameters: SecurityApiGetIsProductAdministratorRequest, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getIsProductAdministrator(requestParameters.productid, requestParameters.userid, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getIsProductAdministrator(requestParameters.productId, requestParameters.userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the portal password settings.
-     * @summary Get the password settings
+     * Returns the password policy of the current portal: the minimum length together with the flags that demand an  uppercase letter, a digit and a special symbol, plus the regular expressions a client can check a password  against before sending it anywhere. Any signed-in member may read it, and it is also reachable with the  parameters of a confirmation link, so an invited user or one resetting a password can validate the new  password before having a session; a portal whose payment has lapsed still answers. The operation is read-only  and honours `If-Modified-Since`: send back the `Last-Modified` value of an earlier answer and an unchanged  policy comes back as an empty not-modified response rather than a body. A portal nobody has configured  requires 8 characters with all three flags off. Whatever the policy says, the portal refuses a password longer  than 30 characters, a ceiling this answer does not carry. Change the policy with  `PUT api/2.0/settings/security/password`.
+     * @summary Get password settings
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
@@ -1065,20 +1067,20 @@ export class SecurityApi extends BaseAPI {
     }
 
     /**
-     * Returns a list of all the administrators of a product with the ID specified in the request.
-     * @summary Get the product administrators
+     * Lists the users who administer the portal module identified by `productid` in the path. The all-zero GUID  stands for the portal itself: the answer then covers the DocSpace administrator group together with every  product group, and includes the portal owner, who administers everything by default. The caller needs the  portal-settings right of a DocSpace administrator, otherwise the call is refused. `productid` has to be a  GUID, and one that names no group is answered with an empty list rather than a failure. The operation is  read-only and returns whole user profiles, a heavier answer than a membership check, and a user who belongs to  more than one of the groups asked about is listed once per group. Entries arrive in group order, the DocSpace  administrator group first, the list is neither paged nor filterable, and a promotion made through the sibling  `PUT` shows up here at once. Use `GET api/2.0/settings/security/administrator` to test a single user against a  single module, and `PUT api/2.0/settings/security/administrator` to promote or demote somebody.
+     * @summary Get product administrators
      * @param {SettingsSecurityApiGetProductAdministratorsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public getProductAdministrators(requestParameters: SecurityApiGetProductAdministratorsRequest, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).getProductAdministrators(requestParameters.productid, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).getProductAdministrators(requestParameters.productId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Returns the availability of the module with the ID specified in the request.
-     * @summary Get the module availability
+     * Answers whether the module with the given identifier is available to the calling user right now, as a single  boolean. `id` is the module GUID and travels in the path; a value that is not a GUID does not match the route  at all. Any signed-in member may call this; anonymous callers are not admitted. The operation is read-only and  its answer is specific to the caller: `true` means a module with that identifier is registered in this portal,  is visible, and the caller is allowed to read it, while `false` covers every other case - the module is not  registered here, it is hidden for this portal, or the caller is outside the users and groups allowed to open  it. A `false` therefore does not tell those apart, and an unknown identifier is reported as unavailable  instead of failing. Read the allow-list behind the decision with `GET api/2.0/settings/security`, list the  modules the caller can actually open with `GET api/2.0/settings/security/modules`, and change access with  `PUT api/2.0/settings/security`.
+     * @summary Check module availability
      * @param {SettingsSecurityApiGetWebItemSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1089,8 +1091,8 @@ export class SecurityApi extends BaseAPI {
     }
 
     /**
-     * Returns the security settings for the modules specified in the request.
-     * @summary Get the security settings
+     * Reports how access to the portal\'s own modules is configured: for every module identifier sent in `ids`,  whether access is restricted at all and which users and groups are allowed to open the module. Send the  identifiers as repeated `ids` query values; each one has to be a GUID, and anything else is rejected as an  invalid request. Omitting `ids` asks about every module registered in the portal, which on a DocSpace  installation is none, so the answer is then an empty list rather than a failure. Any signed-in member may call  this; anonymous callers are not admitted. The operation is read-only and answers one entry per identifier, in  the order the identifiers were sent. `enabled` is `false` for a module nobody has ever configured, `groups`  and `users` name the subjects the rule was stored for, and `isSubItem` marks a module that hangs under another  one. Users the caller is not allowed to see are left out of `users`, so the same module can come back with  different lists for different callers. Change any of this with `PUT api/2.0/settings/security`.
+     * @summary Get module access settings
      * @param {SettingsSecurityApiGetWebItemSettingsSecurityInfoRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1101,51 +1103,51 @@ export class SecurityApi extends BaseAPI {
     }
 
     /**
-     * Sets the security settings to the modules with the IDs specified in the request.
-     * @summary Set the security settings to modules
+     * Switches several portal modules on or off in one call: `items` carries an entry per module, its `key` the  module GUID and its `value` the new enabled flag. The caller needs the portal-settings right of a DocSpace  administrator, and the call is answered with 403 on an open portal, where everyone is admitted and per-module  rules would mean nothing. Every key has to be a GUID; anything else is rejected as an invalid request, and a  module listed twice is applied once, from its first entry. This operation carries no subject list of its own:  switching a product module on restores the users and groups it was last restricted to, while every other case  is stored as a plain allow or deny for everyone, so use `PUT api/2.0/settings/security` when the allow-list  itself has to change. The batch is recorded in the audit trail as one list update rather than module by  module. The answer is the resulting configuration of every module listed, in the shape  `GET api/2.0/settings/security` returns.
+     * @summary Set access to modules in bulk
      * @param {SettingsSecurityApiSetAccessToWebItemsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public setAccessToWebItems(requestParameters: SecurityApiSetAccessToWebItemsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setAccessToWebItems(requestParameters.webItemsSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setAccessToWebItems(requestParameters.webItemsSecurityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Sets the selected user as an administrator of a product with the ID specified in the request.
-     * @summary Set a product administrator
+     * Promotes a portal member to administrator of one module, or takes that role away, according to the  `administrator` flag; the all-zero product GUID targets the DocSpace administrator role, which covers the  whole portal. The caller needs the portal-settings right of a DocSpace administrator, and granting the  portal-wide role additionally requires being the portal owner - anyone else is refused with 403. A free cloud  plan does not offer the option at all and answers 402, as does a promotion for which no paid seat is left,  since promoting a guest or a plain member turns them into a paid one. Taking the portal-wide role away also  removes the member from every product group. The change is immediate, portal-wide, recorded in the audit  trail, and sending the same body twice changes nothing further; it never creates a user, so invite the member  first. The answer echoes the identifiers and the flag as stored - re-read membership with  `GET api/2.0/settings/security/administrator`.
+     * @summary Set product administrator
      * @param {SettingsSecurityApiSetProductAdministratorRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public setProductAdministrator(requestParameters: SecurityApiSetProductAdministratorRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setProductAdministrator(requestParameters.securityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setProductAdministrator(requestParameters.securityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Sets the security settings to the module with the ID specified in the request.
-     * @summary Set the module security settings
+     * Replaces the access rules of one portal module: `id` names the module, `enabled` says whether it may be  opened, and `subjects` lists the users and groups the rule is stored for. The caller needs the portal-settings  right of a DocSpace administrator, and the call is answered with 403 on an open portal, where everyone is  admitted and per-module rules would mean nothing. `id` has to be a GUID; anything else is rejected as an  invalid request. The rules stored before are dropped rather than extended, so send the full list of subjects  every time. Watch the empty cases: leaving `subjects` out applies `enabled` to everyone, while an empty  `subjects` array is stored as access for everyone whatever `enabled` says. The change is recorded in the audit  trail unless `subjects` was left out entirely. The answer is the module\'s resulting configuration as a  single-entry list, in the shape `GET api/2.0/settings/security` returns. To switch several modules at once use  `PUT api/2.0/settings/security/access`.
+     * @summary Set module access
      * @param {SettingsSecurityApiSetWebItemSecurityRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public setWebItemSecurity(requestParameters: SecurityApiSetWebItemSecurityRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).setWebItemSecurity(requestParameters.webItemSecurityRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).setWebItemSecurity(requestParameters.webItemSecurityRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * Sets the portal password settings.
-     * @summary Set the password settings
+     * Replaces the password policy of the whole portal with the four values sent: `minLength` and the three flags  that demand an uppercase letter, a digit and a special symbol. There is no partial update - a flag left out of  the body is stored as `false` - so read the current policy with `GET api/2.0/settings/security/password` and  send it back with your change applied. The caller needs the portal-settings right of a DocSpace administrator,  otherwise the call is refused. `minLength` has to sit between the floor the installation is configured with, 8  characters unless it was changed, and the ceiling of 30; anything outside is rejected as an invalid request.  The new policy applies to passwords set from now on: existing passwords keep working until their owners change  them, and nobody is asked to renew. The change is portal-wide, recorded in the audit trail, and sending the  same body twice changes nothing further. The answer is the stored policy with its regular expressions.
+     * @summary Update password settings
      * @param {SettingsSecurityApiUpdatePasswordSettingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SecurityApi
      */
     public updatePasswordSettings(requestParameters: SecurityApiUpdatePasswordSettingsRequest = {}, options?: RawAxiosRequestConfig) {
-        return SecurityApiFp(this.configuration).updatePasswordSettings(requestParameters.passwordSettingsRequestsDto, options).then((request) => request(this.axios, this.basePath));
+        return SecurityApiFp(this.configuration).updatePasswordSettings(requestParameters.passwordSettingsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

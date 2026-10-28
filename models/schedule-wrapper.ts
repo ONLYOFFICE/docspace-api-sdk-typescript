@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ScheduleDto } from './schedule-dto';
 
+/**
+ * The successful API response containing the ScheduleDto object.
+ */
 export interface ScheduleWrapper {
+    /**
+     * The ScheduleDto object returned by the operation.
+     */
     'response'?: ScheduleDto;
     /**
      * The total number of items in the response

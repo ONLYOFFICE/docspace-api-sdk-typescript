@@ -20,69 +20,84 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CoEditingConfig } from './co-editing-config';
+import type { CoEditingConfigDto } from './co-editing-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { CustomizationConfigDto } from './customization-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { EmbeddedConfig } from './embedded-config';
+import type { EmbeddedConfigDto } from './embedded-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { EncryptionKeyDto } from './encryption-key-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PluginsConfig } from './plugins-config';
+import type { PluginsConfigDto } from './plugins-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { RecentConfig } from './recent-config';
+import type { RecentConfigDto } from './recent-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TemplatesConfig } from './templates-config';
+import type { TemplatesConfigDto } from './templates-config-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UserConfig } from './user-config';
+import type { UserConfigDto } from './user-config-dto';
 
 /**
- * The editor configuration parameters.
+ * How the editors behave for this opening: the mode, the language, the interface, and who is editing.
  */
 export interface EditorConfigurationDto {
     /**
-     * The callback URL of the editor.
+     * Where the editors post the document back to when they save it. A client must not call it itself; it is the  address the document service uses.
      */
     'callbackUrl'?: string | null;
-    'coEditing'?: CoEditingConfig;
     /**
-     * The creation URL of the editor.
+     * How co-editing starts out for this session and whether the user may switch it in the interface.
+     */
+    'coEditing'?: CoEditingConfigDto;
+    /**
+     * Where the editor sends the user when they ask for a new document of the same type. It is empty when creating  one is not offered here.
      */
     'createUrl'?: string | null;
-    'customization'?: CustomizationConfigDto;
-    'embedded'?: EmbeddedConfig;
     /**
-     * The encryption keys of the editor configuration.
+     * How the editor interface is dressed for this portal, this document and this layout.
+     */
+    'customization'?: CustomizationConfigDto;
+    /**
+     * The addresses the framed viewer needs. It is filled in only for the embedded layout.
+     */
+    'embedded'?: EmbeddedConfigDto;
+    /**
+     * The caller\'s end-to-end encryption keys, added only when the document lies in a private room, so that the  editors can decrypt it in the browser. It is empty everywhere else.
      */
     'encryptionKeys'?: Array<EncryptionKeyDto> | null;
     /**
-     * The language of the editor configuration.
+     * The culture the editor interface is shown in, taken from the profile of the caller.
      */
     'lang': string | null;
     /**
-     * The mode of the editor configuration.
+     * `edit` when this session may write the document, `view` when it may only read it.
      */
     'mode': string | null;
     /**
-     * Specifies if the mode is write of the editor configuration.
+     * Whether this session may write; it is what the mode above says in one word.
      */
     'modeWrite'?: boolean;
-    'plugins'?: PluginsConfig;
     /**
-     * The recent configuration of the editor.
+     * Which editor plugins are offered. The portal currently offers none, so the list inside comes back empty.
      */
-    'recent'?: Array<RecentConfig> | null;
+    'plugins'?: PluginsConfigDto;
     /**
-     * The templates of the editor configuration.
+     * The documents offered in the editor\'s recent list. It is left out altogether when there is nothing to offer.
      */
-    'templates'?: Array<TemplatesConfig> | null;
-    'user'?: UserConfig;
+    'recent'?: Array<RecentConfigDto> | null;
+    /**
+     * Always empty: the portal no longer passes creation templates through the editor configuration.
+     */
+    'templates'?: Array<TemplatesConfigDto> | null;
+    /**
+     * The account the editors attribute changes to. It is empty for an anonymous session opened through an external  link, and the editors then ask for a name themselves.
+     */
+    'user'?: UserConfigDto;
 }
 

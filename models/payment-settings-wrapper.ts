@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { PaymentSettingsDto } from './payment-settings-dto';
 
+/**
+ * The successful API response containing the PaymentSettingsDto object.
+ */
 export interface PaymentSettingsWrapper {
+    /**
+     * The PaymentSettingsDto object returned by the operation.
+     */
     'response'?: PaymentSettingsDto;
     /**
      * The total number of items in the response

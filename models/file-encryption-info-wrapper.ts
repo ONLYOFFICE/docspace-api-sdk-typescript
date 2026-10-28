@@ -25,7 +25,13 @@ import type { FileEncryptionInfoDto } from './file-encryption-info-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the FileEncryptionInfoDto object.
+ */
 export interface FileEncryptionInfoWrapper {
+    /**
+     * The FileEncryptionInfoDto object returned by the operation.
+     */
     'response'?: FileEncryptionInfoDto;
     /**
      * The total number of items in the response

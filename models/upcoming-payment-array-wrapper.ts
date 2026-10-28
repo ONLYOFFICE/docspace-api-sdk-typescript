@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UpcomingPaymentDto } from './upcoming-payment-dto';
 
+/**
+ * The successful API response containing the list of UpcomingPaymentDto objects.
+ */
 export interface UpcomingPaymentArrayWrapper {
+    /**
+     * The list of UpcomingPaymentDto objects returned by the operation.
+     */
     'response'?: Array<UpcomingPaymentDto>;
     /**
      * The total number of items in the response

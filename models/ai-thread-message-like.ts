@@ -25,6 +25,9 @@ import type { AiThreadMessageLikeContent } from './ai-thread-message-like-conten
 // @ts-ignore
 import type { AiThreadMessageLikeStatus } from './ai-thread-message-like-status';
 
+/**
+ * A single chat message as it travels on the wire.
+ */
 export interface AiThreadMessageLike {
     /**
      * Storage-assigned message id (absent on inbound drafts).

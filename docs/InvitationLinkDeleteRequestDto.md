@@ -1,12 +1,12 @@
 # InvitationLinkDeleteRequestDto
 
-The request parameters for deleting an invitation link.
+Which invitation link is withdrawn.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The ID of the invitation link. | [default to undefined]
+**id** | **string** | The link to delete, by the `id` that creating or reading it returned. A link recreated for the same role  afterwards gets a new id, a new URL and a use count starting from zero. | [default to undefined]
 
 ## Example
 

@@ -25,7 +25,13 @@ import type { EncryptionKeyDto } from './encryption-key-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of EncryptionKeyDto objects.
+ */
 export interface EncryptionKeyArrayWrapper {
+    /**
+     * The list of EncryptionKeyDto objects returned by the operation.
+     */
     'response'?: Array<EncryptionKeyDto>;
     /**
      * The total number of items in the response

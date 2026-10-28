@@ -22,11 +22,29 @@
 // @ts-ignore
 import type { AiOpenAIChunkChoice } from './ai-open-aichunk-choice';
 
+/**
+ * One `chat.completion.chunk` of an OpenAI-compatible streaming response. Only the fields this service can populate are emitted - an OpenAI client tolerates the rest as absent.
+ */
 export interface AiOpenAIChatCompletionChunk {
+    /**
+     * The completion identifier, stable across every chunk of one response.
+     */
     'id': string;
+    /**
+     * Always `chat.completion.chunk`.
+     */
     'object': AiOpenAIChatCompletionChunkObjectEnum;
+    /**
+     * When the completion started, in Unix seconds.
+     */
     'created': number;
+    /**
+     * The model that produced the completion - the resolved profile\'s model.
+     */
     'model': string;
+    /**
+     * The choices carried by this chunk. This service emits exactly one.
+     */
     'choices': Array<AiOpenAIChunkChoice>;
 }
 

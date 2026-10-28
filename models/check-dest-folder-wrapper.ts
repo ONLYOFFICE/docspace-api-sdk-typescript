@@ -25,7 +25,13 @@ import type { CheckDestFolderDto } from './check-dest-folder-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CheckDestFolderDto object.
+ */
 export interface CheckDestFolderWrapper {
+    /**
+     * The CheckDestFolderDto object returned by the operation.
+     */
     'response'?: CheckDestFolderDto;
     /**
      * The total number of items in the response

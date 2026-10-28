@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * The call itself: the function name and its JSON-encoded arguments.
+ */
 export interface AiOpenAIToolCallDeltaFunction {
     'name'?: string;
     'arguments'?: string;

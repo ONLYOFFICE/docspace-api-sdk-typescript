@@ -23,6 +23,9 @@
 import type { AiActionType } from './ai-action-type';
 
 export interface AiAssignmentsAssignRequest {
+    /**
+     * Action the assignment applies to.
+     */
     'actionType': AiActionType;
     /**
      * Profile id to bind.

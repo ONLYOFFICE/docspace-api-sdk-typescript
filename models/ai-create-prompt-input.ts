@@ -23,8 +23,17 @@
  * Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
  */
 export interface AiCreatePromptInput {
+    /**
+     * The prompt name.
+     */
     'name': string;
+    /**
+     * The prompt body.
+     */
     'text': string;
+    /**
+     * The folder to file the prompt under. Omit or send null to leave it outside any folder.
+     */
     'folderId'?: string | null;
 }
 

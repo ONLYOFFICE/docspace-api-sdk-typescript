@@ -25,7 +25,13 @@ import type { AiNewItemsDtoAgentNewItemsDto } from './ai-new-items-dto-agent-new
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of NewItemsDtoAgentNewItemsDto objects.
+ */
 export interface AiNewItemsAgentNewItemsArrayWrapper {
+    /**
+     * The list of NewItemsDtoAgentNewItemsDto objects returned by the operation.
+     */
     'response'?: Array<AiNewItemsDtoAgentNewItemsDto>;
     /**
      * The total number of items in the response

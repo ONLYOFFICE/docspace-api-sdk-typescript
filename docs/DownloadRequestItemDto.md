@@ -1,14 +1,14 @@
 # DownloadRequestItemDto
 
-The download request item with conversion parameters and security settings.
+One file of a bulk download, together with the format it is converted to.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **key** | [**DownloadRequestItemDtoKey**](DownloadRequestItemDtoKey.md) |  | [default to undefined]
-**value** | **string** | The target format or conversion type for the file download. | [default to undefined]
-**password** | **string** | The optional password for accessing protected files. | [optional] [default to undefined]
+**value** | **string** | The format the file is converted to before it is packed, as a file extension without a leading dot. | [default to undefined]
+**password** | **string** | The password that opens the source file, for a file protected with one; a protected file cannot be converted  without it. | [optional] [default to undefined]
 
 ## Example
 

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { Module } from './module';
 
+/**
+ * The successful API response containing the Module object.
+ */
 export interface ModuleWrapper {
+    /**
+     * The Module object returned by the operation.
+     */
     'response'?: Module;
     /**
      * The total number of items in the response

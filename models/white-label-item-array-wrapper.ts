@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WhiteLabelItemDto } from './white-label-item-dto';
 
+/**
+ * The successful API response containing the list of WhiteLabelItemDto objects.
+ */
 export interface WhiteLabelItemArrayWrapper {
+    /**
+     * The list of WhiteLabelItemDto objects returned by the operation.
+     */
     'response'?: Array<WhiteLabelItemDto>;
     /**
      * The total number of items in the response

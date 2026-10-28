@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { UsageSpaceStatItemDto } from './usage-space-stat-item-dto';
 
+/**
+ * The successful API response containing the list of UsageSpaceStatItemDto objects.
+ */
 export interface UsageSpaceStatItemArrayWrapper {
+    /**
+     * The list of UsageSpaceStatItemDto objects returned by the operation.
+     */
     'response'?: Array<UsageSpaceStatItemDto>;
     /**
      * The total number of items in the response

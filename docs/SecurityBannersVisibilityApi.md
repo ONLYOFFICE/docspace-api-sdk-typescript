@@ -9,7 +9,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **setTenantBannerSettings**
 > TenantBannerSettingsWrapper setTenantBannerSettings()
 
-Sets the visibility settings of the promotional banners in the portal.
+Sets whether the portal\'s promotional banners are hidden for every user. Available only on an Enterprise  license; every other plan is refused regardless of the caller\'s role. Requires Owner or DocSpaceAdmin (the  EditPortalSettings permission). The flag only takes effect on a Standalone (self-hosted) installation; on  SaaS, banners are always shown no matter what is saved here. This is a mutating, idempotent, portal-wide call:  it applies to every user on the tenant immediately. It returns the saved setting; read the current value at  any time from `GET api/2.0/settings/banner`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-tenant-banner-settings/).
 
@@ -17,7 +17,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **tenantBannerSettingsDto** | **TenantBannerSettingsDto**|  | |
+| **tenantBannerSettingsRequestDto** | **TenantBannerSettingsRequestDto**|  | |
 
 
 ### Return type
@@ -34,16 +34,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     SecurityBannersVisibilityApi,
     Configuration,
-    TenantBannerSettingsDto
+    TenantBannerSettingsRequestDto
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new SecurityBannersVisibilityApi(configuration);
 
-let tenantBannerSettingsDto: TenantBannerSettingsDto; // (optional)
+let tenantBannerSettingsRequestDto: TenantBannerSettingsRequestDto; // (optional)
 
 const { status, data } = await apiInstance.setTenantBannerSettings(
-    tenantBannerSettingsDto
+    tenantBannerSettingsRequestDto
 );
 ```
 
@@ -56,9 +56,13 @@ const { status, data } = await apiInstance.setTenantBannerSettings(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Promotional banners visibility settings |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
+|**200** | Saved promotional banners visibility setting |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**402** | The portal is not an Enterprise installation |  -  |
+|**403** | The caller has no portal-settings right |  -  |
 |**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

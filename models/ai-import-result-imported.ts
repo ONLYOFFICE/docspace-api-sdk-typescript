@@ -19,6 +19,9 @@
  */
 
 
+/**
+ * How many folders and prompts were created. Present on success.
+ */
 export interface AiImportResultImported {
     'folders': number;
     'prompts': number;
