@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WebPluginDto } from './web-plugin-dto';
 
+/**
+ * The successful API response containing the list of WebPluginDto objects.
+ */
 export interface WebPluginArrayWrapper {
+    /**
+     * The list of WebPluginDto objects returned by the operation.
+     */
     'response'?: Array<WebPluginDto>;
     /**
      * The total number of items in the response

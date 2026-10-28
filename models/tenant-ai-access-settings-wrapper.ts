@@ -23,10 +23,16 @@
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TenantAiAccessSettings } from './tenant-ai-access-settings';
+import type { TenantAiAccessSettingsDto } from './tenant-ai-access-settings-dto';
 
+/**
+ * The successful API response containing the TenantAiAccessSettingsDto object.
+ */
 export interface TenantAiAccessSettingsWrapper {
-    'response'?: TenantAiAccessSettings;
+    /**
+     * The TenantAiAccessSettingsDto object returned by the operation.
+     */
+    'response'?: TenantAiAccessSettingsDto;
     /**
      * The total number of items in the response
      */

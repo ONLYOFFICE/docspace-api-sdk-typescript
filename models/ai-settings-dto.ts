@@ -18,19 +18,14 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiToolPermissionMode } from './ai-tool-permission-mode';
 
 /**
  * The AI module settings.
  */
 export interface AiSettingsDto {
-    /**
-     * Indicates whether web search is enabled for AI chat sessions.
-     */
-    'webSearchEnabled'?: boolean;
-    /**
-     * Indicates whether the web search API key needs to be reconfigured.
-     */
-    'webSearchNeedReset'?: boolean;
     /**
      * Indicates whether document vectorization is enabled.
      */
@@ -44,45 +39,9 @@ export interface AiSettingsDto {
      */
     'aiReady'?: boolean;
     /**
-     * Indicates whether the AI provider API key needs to be reconfigured.
-     */
-    'aiReadyNeedReset'?: boolean;
-    /**
-     * The unique identifier of the portal-level MCP server, if configured.
-     */
-    'portalMcpServerId'?: string | null;
-    /**
      * The name of the embedding model used for document vectorization.
      */
     'embeddingModel': string | null;
-    /**
-     * Mapping of model identifiers to human-readable aliases.
-     */
-    'modelAliases': { [key: string]: string; } | null;
-    /**
-     * The tool name used by the AI assistant for knowledge base search.
-     */
-    'knowledgeSearchToolName': string | null;
-    /**
-     * The tool name used by the AI assistant for web search.
-     */
-    'webSearchToolName': string | null;
-    /**
-     * The tool name used by the AI assistant for web page crawling.
-     */
-    'webCrawlingToolName': string | null;
-    /**
-     * The tool name used by the AI to launch docx creation in the editor.
-     */
-    'generateDocxToolName': string | null;
-    /**
-     * The tool name used by the AI assistant to launch form creation in the editor.
-     */
-    'generateFormToolName': string | null;
-    /**
-     * The tool name used by the AI assistant to launch presentation creation in the editor.
-     */
-    'generatePresentationToolName': string | null;
     /**
      * Indicates whether the system-level AI provider is enabled.
      */
@@ -91,5 +50,11 @@ export interface AiSettingsDto {
      * The identifier of the model recommended for form generation.
      */
     'recommendedModelForForms'?: string | null;
+    /**
+     * How tool calls made by the model are approved for the current user. The default applies while the user has stored nothing.
+     */
+    'toolPermissionMode'?: AiToolPermissionMode;
 }
+
+
 

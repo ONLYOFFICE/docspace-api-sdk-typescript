@@ -20,24 +20,33 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { IMagickGeometry } from './imagick-geometry';
+import type { WhiteLabelItemPathDto } from './white-label-item-path-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { WhiteLabelItemPathDto } from './white-label-item-path-dto';
+import type { WhiteLabelItemSizeDto } from './white-label-item-size-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { WhiteLabelLogoType } from './white-label-logo-type';
 
 /**
- * The white label item parameters.
+ * One branding logo slot of the portal: the size it is drawn at, and where its images are served from.
  */
 export interface WhiteLabelItemDto {
+    /**
+     * Which branding slot this entry describes. `Notification` is part of the type but never appears here: that  logo is derived from the login-page one and used only in letters.
+     */
     'type'?: WhiteLabelLogoType;
     /**
-     * The white label file name.
+     * The stable name of the same slot, which is what `GET api/2.0/settings/whitelabel/logos/isdefault` keys its  entries by. It is a name to match on, not a file name.
      */
     'name'?: string | null;
-    'size'?: IMagickGeometry;
+    /**
+     * The pixel box the slot is drawn in. Only `width` and `height` carry information here; the resize flags and  offsets alongside them are left at their defaults and say nothing about how an uploaded image is treated.
+     */
+    'size'?: WhiteLabelItemSizeDto;
+    /**
+     * The absolute URLs to render the slot from, one per theme.
+     */
     'path'?: WhiteLabelItemPathDto;
 }
 

@@ -18,6 +18,9 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiToolPermissionMode } from './ai-tool-permission-mode';
 
 /**
  * The per-user AI settings.
@@ -27,5 +30,11 @@ export interface AiUserSettingsDto {
      * Indicates whether the recommended model banner is visible in the AI chat for the current user.
      */
     'chatRecommendedModelVisible'?: boolean;
+    /**
+     * How tool calls made by the model are approved for the current user. The default applies while the user has stored nothing.
+     */
+    'toolPermissionMode'?: AiToolPermissionMode;
 }
+
+
 

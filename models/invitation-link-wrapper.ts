@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { InvitationLinkDto } from './invitation-link-dto';
 
+/**
+ * The successful API response containing the InvitationLinkDto object.
+ */
 export interface InvitationLinkWrapper {
+    /**
+     * The InvitationLinkDto object returned by the operation.
+     */
     'response'?: InvitationLinkDto;
     /**
      * The total number of items in the response

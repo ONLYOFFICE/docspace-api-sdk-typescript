@@ -25,7 +25,13 @@ import type { ApiKeyResponseDto } from './api-key-response-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of ApiKeyResponseDto objects.
+ */
 export interface ApiKeyResponseArrayWrapper {
+    /**
+     * The list of ApiKeyResponseDto objects returned by the operation.
+     */
     'response'?: Array<ApiKeyResponseDto>;
     /**
      * The total number of items in the response

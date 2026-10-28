@@ -20,13 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { DarkThemeSettings } from './dark-theme-settings';
+import type { DarkThemeSettingsDto } from './dark-theme-settings-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the DarkThemeSettingsDto object.
+ */
 export interface DarkThemeSettingsWrapper {
-    'response'?: DarkThemeSettings;
+    /**
+     * The DarkThemeSettingsDto object returned by the operation.
+     */
+    'response'?: DarkThemeSettingsDto;
     /**
      * The total number of items in the response
      */

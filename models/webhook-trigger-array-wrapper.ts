@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WebhookTriggerDto } from './webhook-trigger-dto';
 
+/**
+ * The successful API response containing the list of WebhookTriggerDto objects.
+ */
 export interface WebhookTriggerArrayWrapper {
+    /**
+     * The list of WebhookTriggerDto objects returned by the operation.
+     */
     'response'?: Array<WebhookTriggerDto>;
     /**
      * The total number of items in the response

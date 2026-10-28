@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { RoomSecurityDto } from './room-security-dto';
 
+/**
+ * The successful API response containing the RoomSecurityDto object.
+ */
 export interface RoomSecurityWrapper {
+    /**
+     * The RoomSecurityDto object returned by the operation.
+     */
     'response'?: RoomSecurityDto;
     /**
      * The total number of items in the response

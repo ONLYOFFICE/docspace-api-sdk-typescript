@@ -25,7 +25,13 @@ import type { DocServiceUrlDto } from './doc-service-url-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the DocServiceUrlDto object.
+ */
 export interface DocServiceUrlWrapper {
+    /**
+     * The DocServiceUrlDto object returned by the operation.
+     */
     'response'?: DocServiceUrlDto;
     /**
      * The total number of items in the response

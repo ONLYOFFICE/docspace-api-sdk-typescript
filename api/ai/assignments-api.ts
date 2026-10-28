@@ -1,0 +1,892 @@
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+import type { Configuration } from '../../configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+// Some imports not used depending on template conditions
+// @ts-ignore
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../../common';
+// @ts-ignore
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
+// @ts-ignore
+import type { AiActionType } from '../../models';
+// @ts-ignore
+import type { AiAssignmentMutationResult } from '../../models';
+// @ts-ignore
+import type { AiAssignmentsAssignRequest } from '../../models';
+// @ts-ignore
+import type { AiAssignmentsCascadeProfileDeleteRequest } from '../../models';
+// @ts-ignore
+import type { AiBulkAssignmentResult } from '../../models';
+// @ts-ignore
+import type { AiErrorResponse } from '../../models';
+// @ts-ignore
+import type { AiResolvedAssignment } from '../../models';
+// @ts-ignore
+import type { AiSuccessResponse } from '../../models';
+/**
+ * AssignmentsApi - axios parameter creator
+ * @export
+ */
+export const AssignmentsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
+    
+    return {
+        /**
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * @summary Bind a profile to an action
+         * @param {AiAssignmentsAssignRequest} aiAssignmentsAssignRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign/
+         */
+        aiAssignmentsAssign: async (aiAssignmentsAssignRequest: AiAssignmentsAssignRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAssignmentsAssignRequest' is not null or undefined
+            assertParamExists('aiAssignmentsAssign', 'aiAssignmentsAssignRequest', aiAssignmentsAssignRequest)
+
+            const localVarPath = `/api/2.0/ai/assignments/assign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAssignmentsAssignRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
+         * @summary Bulk assign
+         * @param {{ [key: string]: string; }} aiAssignmentsBulkAssignRequest A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsBulkAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign/
+         */
+        aiAssignmentsBulkAssign: async (aiAssignmentsBulkAssignRequest: { [key: string]: string; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAssignmentsBulkAssignRequest' is not null or undefined
+            assertParamExists('aiAssignmentsBulkAssign', 'aiAssignmentsBulkAssignRequest', aiAssignmentsBulkAssignRequest)
+
+            const localVarPath = `/api/2.0/ai/assignments/bulk-assign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAssignmentsBulkAssignRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
+         * @summary Cascade profile delete
+         * @param {AiAssignmentsCascadeProfileDeleteRequest} aiAssignmentsCascadeProfileDeleteRequest The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsCascadeProfileDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-cascade-profile-delete/
+         */
+        aiAssignmentsCascadeProfileDelete: async (aiAssignmentsCascadeProfileDeleteRequest: AiAssignmentsCascadeProfileDeleteRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAssignmentsCascadeProfileDeleteRequest' is not null or undefined
+            assertParamExists('aiAssignmentsCascadeProfileDelete', 'aiAssignmentsCascadeProfileDeleteRequest', aiAssignmentsCascadeProfileDeleteRequest)
+
+            const localVarPath = `/api/2.0/ai/assignments/cascade-profile-delete`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAssignmentsCascadeProfileDeleteRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * @summary Get all assignments
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsGetAllAssignments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
+         */
+        aiAssignmentsGetAllAssignments: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/assignments/get-all-assignments`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (entityId !== undefined) {
+                localVarQueryParameter['entityId'] = entityId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
+         * @summary Get assignment
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsGetAssignment operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-assignment/
+         */
+        aiAssignmentsGetAssignment: async (actionType: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'actionType' is not null or undefined
+            assertParamExists('aiAssignmentsGetAssignment', 'actionType', actionType)
+
+            const localVarPath = `/api/2.0/ai/assignments/get-assignment`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (actionType !== undefined) {
+                localVarQueryParameter['actionType'] = actionType;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+         * @summary Resolve for action
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
+         */
+        aiAssignmentsResolveForAction: async (actionType: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'actionType' is not null or undefined
+            assertParamExists('aiAssignmentsResolveForAction', 'actionType', actionType)
+
+            const localVarPath = `/api/2.0/ai/assignments/resolve-for-action`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (actionType !== undefined) {
+                localVarQueryParameter['actionType'] = actionType;
+            }
+
+            if (entityId !== undefined) {
+                localVarQueryParameter['entityId'] = entityId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+         * @summary Try resolve for action
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsTryResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
+         */
+        aiAssignmentsTryResolveForAction: async (actionType: string, entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'actionType' is not null or undefined
+            assertParamExists('aiAssignmentsTryResolveForAction', 'actionType', actionType)
+
+            const localVarPath = `/api/2.0/ai/assignments/try-resolve-for-action`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (actionType !== undefined) {
+                localVarQueryParameter['actionType'] = actionType;
+            }
+
+            if (entityId !== undefined) {
+                localVarQueryParameter['entityId'] = entityId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
+         * @summary Clear an action\'s profile
+         * @param {string} aiActionType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsUnassign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign/
+         */
+        aiAssignmentsUnassign: async (aiActionType: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiActionType' is not null or undefined
+            assertParamExists('aiAssignmentsUnassign', 'aiActionType', aiActionType)
+
+            const localVarPath = `/api/2.0/ai/assignments/unassign`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiActionType, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AssignmentsApi - functional programming interface
+ * @export
+ */
+export const AssignmentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AssignmentsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * @summary Bind a profile to an action
+         * @param {AiAssignmentsAssignRequest} aiAssignmentsAssignRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign/
+         */
+        async aiAssignmentsAssign(aiAssignmentsAssignRequest: AiAssignmentsAssignRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAssignmentMutationResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsAssign(aiAssignmentsAssignRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsAssign']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
+         * @summary Bulk assign
+         * @param {{ [key: string]: string; }} aiAssignmentsBulkAssignRequest A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsBulkAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign/
+         */
+        async aiAssignmentsBulkAssign(aiAssignmentsBulkAssignRequest: { [key: string]: string; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiBulkAssignmentResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsBulkAssign(aiAssignmentsBulkAssignRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsBulkAssign']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
+         * @summary Cascade profile delete
+         * @param {AiAssignmentsCascadeProfileDeleteRequest} aiAssignmentsCascadeProfileDeleteRequest The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsCascadeProfileDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-cascade-profile-delete/
+         */
+        async aiAssignmentsCascadeProfileDelete(aiAssignmentsCascadeProfileDeleteRequest: AiAssignmentsCascadeProfileDeleteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsCascadeProfileDelete(aiAssignmentsCascadeProfileDeleteRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsCascadeProfileDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * @summary Get all assignments
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsGetAllAssignments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
+         */
+        async aiAssignmentsGetAllAssignments(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: string; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsGetAllAssignments(entityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsGetAllAssignments']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
+         * @summary Get assignment
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsGetAssignment operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-assignment/
+         */
+        async aiAssignmentsGetAssignment(actionType: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsGetAssignment(actionType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsGetAssignment']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+         * @summary Resolve for action
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
+         */
+        async aiAssignmentsResolveForAction(actionType: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiResolvedAssignment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsResolveForAction(actionType, entityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsResolveForAction']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+         * @summary Try resolve for action
+         * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsTryResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
+         */
+        async aiAssignmentsTryResolveForAction(actionType: string, entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiResolvedAssignment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsTryResolveForAction(actionType, entityId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsTryResolveForAction']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
+         * @summary Clear an action\'s profile
+         * @param {string} aiActionType 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAssignmentsUnassign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign/
+         */
+        async aiAssignmentsUnassign(aiActionType: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsUnassign(aiActionType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsUnassign']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AssignmentsApi - factory interface
+ * @export
+ */
+export const AssignmentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AssignmentsApiFp(configuration)
+    return {
+        /**
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * @summary Bind a profile to an action
+         * @param {AssignmentsApiAiAssignmentsAssignRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-assign/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsAssign(requestParameters: AssignmentsApiAiAssignmentsAssignRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiAssignmentMutationResult> {
+            return localVarFp.aiAssignmentsAssign(requestParameters.aiAssignmentsAssignRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
+         * @summary Bulk assign
+         * @param {AssignmentsApiAiAssignmentsBulkAssignRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsBulkAssign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-bulk-assign/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsBulkAssign(requestParameters: AssignmentsApiAiAssignmentsBulkAssignRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiBulkAssignmentResult> {
+            return localVarFp.aiAssignmentsBulkAssign(requestParameters.aiAssignmentsBulkAssignRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
+         * @summary Cascade profile delete
+         * @param {AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsCascadeProfileDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-cascade-profile-delete/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsCascadeProfileDelete(requestParameters: AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAssignmentsCascadeProfileDelete(requestParameters.aiAssignmentsCascadeProfileDeleteRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * @summary Get all assignments
+         * @param {AssignmentsApiAiAssignmentsGetAllAssignmentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsGetAllAssignments operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: string; }> {
+            return localVarFp.aiAssignmentsGetAllAssignments(requestParameters.entityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
+         * @summary Get assignment
+         * @param {AssignmentsApiAiAssignmentsGetAssignmentRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsGetAssignment operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-assignment/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsGetAssignment(requestParameters: AssignmentsApiAiAssignmentsGetAssignmentRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+            return localVarFp.aiAssignmentsGetAssignment(requestParameters.actionType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+         * @summary Resolve for action
+         * @param {AssignmentsApiAiAssignmentsResolveForActionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-resolve-for-action/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsResolveForAction(requestParameters: AssignmentsApiAiAssignmentsResolveForActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiResolvedAssignment> {
+            return localVarFp.aiAssignmentsResolveForAction(requestParameters.actionType, requestParameters.entityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+         * @summary Try resolve for action
+         * @param {AssignmentsApiAiAssignmentsTryResolveForActionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsTryResolveForAction operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-try-resolve-for-action/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsTryResolveForAction(requestParameters: AssignmentsApiAiAssignmentsTryResolveForActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiResolvedAssignment> {
+            return localVarFp.aiAssignmentsTryResolveForAction(requestParameters.actionType, requestParameters.entityId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
+         * @summary Clear an action\'s profile
+         * @param {AssignmentsApiAiAssignmentsUnassignRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAssignmentsUnassign operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-unassign/
+         * @throws {RequiredError}
+         */
+        aiAssignmentsUnassign(requestParameters: AssignmentsApiAiAssignmentsUnassignRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAssignmentsUnassign(requestParameters.aiActionType, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for aiAssignmentsAssign operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsAssignRequest
+ */
+export interface AssignmentsApiAiAssignmentsAssignRequest {
+    /**
+     * 
+     * @type {AiAssignmentsAssignRequest}
+     * @memberof AssignmentsApiAiAssignmentsAssign
+     */
+    readonly aiAssignmentsAssignRequest: AiAssignmentsAssignRequest
+}
+
+/**
+ * Request parameters for aiAssignmentsBulkAssign operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsBulkAssignRequest
+ */
+export interface AssignmentsApiAiAssignmentsBulkAssignRequest {
+    /**
+     * A map of action type to profile ID. Every key has to be a known action type and every value a profile ID; one bad entry rejects the whole map.
+     * @type {{ [key: string]: string; }}
+     * @memberof AssignmentsApiAiAssignmentsBulkAssign
+     */
+    readonly aiAssignmentsBulkAssignRequest: { [key: string]: string; }
+}
+
+/**
+ * Request parameters for aiAssignmentsCascadeProfileDelete operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest
+ */
+export interface AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest {
+    /**
+     * The profile to detach from every assignment. May be sent as the `profileId` query parameter instead of in the body.
+     * @type {AiAssignmentsCascadeProfileDeleteRequest}
+     * @memberof AssignmentsApiAiAssignmentsCascadeProfileDelete
+     */
+    readonly aiAssignmentsCascadeProfileDeleteRequest: AiAssignmentsCascadeProfileDeleteRequest
+}
+
+/**
+ * Request parameters for aiAssignmentsGetAllAssignments operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsGetAllAssignmentsRequest
+ */
+export interface AssignmentsApiAiAssignmentsGetAllAssignmentsRequest {
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsGetAllAssignments
+     */
+    readonly entityId?: string
+}
+
+/**
+ * Request parameters for aiAssignmentsGetAssignment operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsGetAssignmentRequest
+ */
+export interface AssignmentsApiAiAssignmentsGetAssignmentRequest {
+    /**
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsGetAssignment
+     */
+    readonly actionType: string
+}
+
+/**
+ * Request parameters for aiAssignmentsResolveForAction operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsResolveForActionRequest
+ */
+export interface AssignmentsApiAiAssignmentsResolveForActionRequest {
+    /**
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsResolveForAction
+     */
+    readonly actionType: string
+
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsResolveForAction
+     */
+    readonly entityId?: string
+}
+
+/**
+ * Request parameters for aiAssignmentsTryResolveForAction operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsTryResolveForActionRequest
+ */
+export interface AssignmentsApiAiAssignmentsTryResolveForActionRequest {
+    /**
+     * The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsTryResolveForAction
+     */
+    readonly actionType: string
+
+    /**
+     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsTryResolveForAction
+     */
+    readonly entityId?: string
+}
+
+/**
+ * Request parameters for aiAssignmentsUnassign operation in AssignmentsApi.
+ * @export
+ * @interface AssignmentsApiAiAssignmentsUnassignRequest
+ */
+export interface AssignmentsApiAiAssignmentsUnassignRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsUnassign
+     */
+    readonly aiActionType: string
+}
+
+/**
+ * AssignmentsApi - object-oriented interface
+ * @export
+ * @class AssignmentsApi
+ * @extends {BaseAPI}
+ */
+export class AssignmentsApi extends BaseAPI {
+    /**
+     * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+     * @summary Bind a profile to an action
+     * @param {AIAssignmentsApiAiAssignmentsAssignRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsAssign(requestParameters: AssignmentsApiAiAssignmentsAssignRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsAssign(requestParameters.aiAssignmentsAssignRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Applies many action-to-profile bindings in one write, which is how a settings screen saves the whole set. The body is a plain map of action type to profile ID, and every entry is validated before anything is written: one unknown action or one non-string profile ID rejects the request whole, so the set is never left half-applied. Each entry behaves as the single assign operation does, capability checks included. The answer carries the resulting assignment set.
+     * @summary Bulk assign
+     * @param {AIAssignmentsApiAiAssignmentsBulkAssignRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsBulkAssign(requestParameters: AssignmentsApiAiAssignmentsBulkAssignRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsBulkAssign(requestParameters.aiAssignmentsBulkAssignRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Detaches a profile from every assignment that points at it, which is the cleanup step before the profile itself is removed. The `Default` slot is promoted to the first remaining profile, or dropped when none is left, and every other slot holding the profile is cleared. `profileId` is required and may be sent in the body or as a query parameter. `DELETE api/2.0/ai/profiles/delete` already does this, so call it directly only when the profile is being removed by some other means.
+     * @summary Cascade profile delete
+     * @param {AIAssignmentsApiAiAssignmentsCascadeProfileDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsCascadeProfileDelete(requestParameters: AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsCascadeProfileDelete(requestParameters.aiAssignmentsCascadeProfileDeleteRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+     * @summary Get all assignments
+     * @param {AIAssignmentsApiAiAssignmentsGetAllAssignmentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsGetAllAssignments(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
+     * @summary Get assignment
+     * @param {AIAssignmentsApiAiAssignmentsGetAssignmentRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsGetAssignment(requestParameters: AssignmentsApiAiAssignmentsGetAssignmentRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsGetAssignment(requestParameters.actionType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
+     * @summary Resolve for action
+     * @param {AIAssignmentsApiAiAssignmentsResolveForActionRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsResolveForAction(requestParameters: AssignmentsApiAiAssignmentsResolveForActionRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsResolveForAction(requestParameters.actionType, requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
+     * @summary Try resolve for action
+     * @param {AIAssignmentsApiAiAssignmentsTryResolveForActionRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsTryResolveForAction(requestParameters: AssignmentsApiAiAssignmentsTryResolveForActionRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsTryResolveForAction(requestParameters.actionType, requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Clears the portal-wide binding of one AI action, after which the action falls back to the `Default` slot. `actionType` is required and may be sent in the body or as a query parameter. An action whose slot is already empty is not reported as an error - the call answers success either way, so it is safe to repeat. Clearing `Default` itself leaves the actions that relied on it unresolvable.
+     * @summary Clear an action\'s profile
+     * @param {AIAssignmentsApiAiAssignmentsUnassignRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssignmentsApi
+     */
+    public aiAssignmentsUnassign(requestParameters: AssignmentsApiAiAssignmentsUnassignRequest, options?: RawAxiosRequestConfig) {
+        return AssignmentsApiFp(this.configuration).aiAssignmentsUnassign(requestParameters.aiActionType, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+

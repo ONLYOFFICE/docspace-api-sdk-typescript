@@ -1,12 +1,13 @@
 # TenantDevToolsAccessSettingsDto
 
-The request parameters for managing the Developer Tools access settings for the current tenant.
+Whether the developer tools are closed to the portal\'s users with the `User` role.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limitedAccessForUsers** | **boolean** | Determines if users have restricted access to the Developer Tools. | [optional] [default to undefined]
+**limitedAccessForUsers** | **boolean** | Specifies if the Developer Tools access are limited for users or not. | [optional] [default to undefined]
+**lastModified** | **string** | The timestamp indicating when the settings were last modified. | [optional] [default to undefined]
 
 ## Example
 
@@ -15,6 +16,7 @@ import { TenantDevToolsAccessSettingsDto } from '@onlyoffice/docspace-api-sdk';
 
 const instance: TenantDevToolsAccessSettingsDto = {
     limitedAccessForUsers,
+    lastModified,
 };
 ```
 

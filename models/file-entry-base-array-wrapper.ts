@@ -25,7 +25,13 @@ import type { FileEntryBaseDto } from './file-entry-base-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of FileEntryBaseDto objects.
+ */
 export interface FileEntryBaseArrayWrapper {
+    /**
+     * The list of FileEntryBaseDto objects returned by the operation.
+     */
     'response'?: Array<FileEntryBaseDto>;
     /**
      * The total number of items in the response

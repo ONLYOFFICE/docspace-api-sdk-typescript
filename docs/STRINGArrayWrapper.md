@@ -1,11 +1,12 @@
-# STRINGArrayWrapper
+# StringArrayWrapper
 
+The successful API response.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**response** | **Array&lt;string&gt;** | The response payload. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]
@@ -14,9 +15,9 @@ Name | Type | Description | Notes
 ## Example
 
 ```typescript
-import { STRINGArrayWrapper } from '@onlyoffice/docspace-api-sdk';
+import { StringArrayWrapper } from '@onlyoffice/docspace-api-sdk';
 
-const instance: STRINGArrayWrapper = {
+const instance: StringArrayWrapper = {
     response,
     count,
     links,

@@ -25,7 +25,13 @@ import type { ExternalShareDto } from './external-share-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the ExternalShareDto object.
+ */
 export interface ExternalShareWrapper {
+    /**
+     * The ExternalShareDto object returned by the operation.
+     */
     'response'?: ExternalShareDto;
     /**
      * The total number of items in the response

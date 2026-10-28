@@ -25,7 +25,13 @@ import type { AiUserSettingsDto } from './ai-user-settings-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the AiUserSettingsDto object.
+ */
 export interface AiUserSettingsWrapper {
+    /**
+     * The AiUserSettingsDto object returned by the operation.
+     */
     'response'?: AiUserSettingsDto;
     /**
      * The total number of items in the response

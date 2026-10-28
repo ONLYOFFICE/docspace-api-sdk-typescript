@@ -25,7 +25,13 @@ import type { BackupServiceStateDto } from './backup-service-state-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the BackupServiceStateDto object.
+ */
 export interface BackupServiceStateWrapper {
+    /**
+     * The BackupServiceStateDto object returned by the operation.
+     */
     'response'?: BackupServiceStateDto;
     /**
      * The total number of items in the response

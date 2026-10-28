@@ -20,12 +20,16 @@
 
 
 /**
- * The request parameters for managing the visibility settings of the promotional banners for the current tenant.
+ * Whether the portal hides its promotional banners.
  */
 export interface TenantBannerSettingsDto {
     /**
      * The banners visibility flag.
      */
     'hidden'?: boolean;
+    /**
+     * The timestamp indicating when the settings were last modified.
+     */
+    'lastModified'?: string;
 }
 

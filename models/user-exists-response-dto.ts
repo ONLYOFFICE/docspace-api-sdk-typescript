@@ -30,6 +30,9 @@ export interface UserExistsResponseDto {
      * Specifies whether the user exists or not.
      */
     'exists': boolean;
+    /**
+     * The user status, if the user exists.
+     */
     'status'?: EmployeeStatus;
 }
 

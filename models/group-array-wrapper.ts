@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { GroupDto } from './group-dto';
 
+/**
+ * The successful API response containing the list of GroupDto objects.
+ */
 export interface GroupArrayWrapper {
+    /**
+     * The list of GroupDto objects returned by the operation.
+     */
     'response'?: Array<GroupDto>;
     /**
      * The total number of items in the response

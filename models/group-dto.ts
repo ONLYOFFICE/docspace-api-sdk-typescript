@@ -50,6 +50,9 @@ export interface GroupDto {
      * Indicates whether the group is a system group.
      */
     'isSystem'?: boolean | null;
+    /**
+     * The group manager full information.
+     */
     'manager'?: EmployeeFullDto;
     /**
      * The list of group members.

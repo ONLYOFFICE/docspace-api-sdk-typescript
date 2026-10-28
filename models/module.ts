@@ -20,43 +20,43 @@
 
 
 /**
- * The module information.
+ * The descriptor of a portal module: what it is called, where it starts and how it is pictured.
  */
 export interface Module {
     /**
-     * The module ID.
+     * The identifier of the module. It is the same in every portal and in every language, so use it rather than the  title to tell modules apart.
      */
     'id'?: string;
     /**
-     * The module product class name.
+     * The short system name of the module, the one that appears in its addresses and in the portal configuration.  Unlike the title it is not translated.
      */
     'appName'?: string | null;
     /**
-     * The module product class name.
+     * The display name of the module, already translated for the calling account, so it changes with the language  and must not be compared against a fixed string.
      */
     'title'?: string | null;
     /**
-     * The URL to the module start page.
+     * The address of the start page of the module, to be opened in a browser rather than called as an API.
      */
     'link'?: string | null;
     /**
-     * The module icon URL.
+     * The address of the small icon of the module, meant for a menu entry.
      */
     'iconUrl'?: string | null;
     /**
-     * The module large image URL.
+     * The address of the large image of the module, meant for a tile or a start screen.
      */
     'imageUrl'?: string | null;
     /**
-     * The module help URL.
+     * The address of the help section of the module. It is empty when the portal publishes no help for it.
      */
     'helpUrl'?: string | null;
     /**
-     * The module description.
+     * The one-line description of the module shown next to its title, translated for the calling account.
      */
     'description'?: string | null;
     /**
-     * Specifies if the module is primary or not.
+     * Whether the portal opens this module first when no other destination is given.
      */
     'isPrimary'?: boolean;
 }

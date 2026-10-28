@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TenantDto } from './tenant-dto';
 
+/**
+ * The successful API response containing the TenantDto object.
+ */
 export interface TenantWrapper {
+    /**
+     * The TenantDto object returned by the operation.
+     */
     'response'?: TenantDto;
     /**
      * The total number of items in the response

@@ -20,19 +20,19 @@
 
 
 /**
- * The response containing the scope information.
+ * One scope from the tenant scope catalogue, as it may be requested by a client.
  */
 export interface ScopeResponse {
     /**
-     * The scope name.
+     * The scope exactly as it is written in an authorization request, for example files:read or openid.
      */
     'name'?: string;
     /**
-     * The group the scope belongs to.
+     * The area of the portal the scope belongs to, which is what groups the scopes on the consent screen: files, rooms, contacts, profiles or openid.
      */
     'group'?: string;
     /**
-     * The scope type.
+     * What the scope allows inside its group: read for read-only access, write for changes, and openid for the identity scope itself.
      */
     'type'?: string;
 }

@@ -20,15 +20,15 @@
 
 
 /**
- * The cookie settings.
+ * How long an authentication session of the portal stays valid, and whether that limit is applied.
  */
 export interface CookieSettingsDto {
     /**
-     * The cookie lifetime value in minutes.
+     * How long, in minutes, a session issued from now on remains valid. It is `1440` on a portal that has never  stored a limit, and that stored number is reported whether or not `enabled` puts it to use.
      */
     'lifeTime': number;
     /**
-     * Specifies if the cookie settings are enabled or not.
+     * Whether the stored lifetime is applied at all. While it is `false` the number above is ignored and an  issued session is honoured for a year.
      */
     'enabled': boolean;
 }

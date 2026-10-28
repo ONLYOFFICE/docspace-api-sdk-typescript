@@ -25,7 +25,13 @@ import type { CspDto } from './csp-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the CspDto object.
+ */
 export interface CspWrapper {
+    /**
+     * The CspDto object returned by the operation.
+     */
     'response'?: CspDto;
     /**
      * The total number of items in the response

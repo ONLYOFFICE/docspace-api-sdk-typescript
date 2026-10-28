@@ -4,36 +4,36 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**createAgent**](#createagent) | **POST** /api/2.0/ai/agents | Create an ai agent|
-|[**deleteAgent**](#deleteagent) | **DELETE** /api/2.0/ai/agents/{id} | Remove an ai agent|
-|[**getAgentInfo**](#getagentinfo) | **GET** /api/2.0/ai/agents/{id} | Return an ai agent|
-|[**getAgents**](#getagents) | **GET** /api/2.0/ai/agents | Get ai agents|
-|[**getAgentsNewItems**](#getagentsnewitems) | **GET** /api/2.0/ai/agents/news | Get the room new items|
-|[**resetAgentsQuota**](#resetagentsquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset the AI agents quota limit|
-|[**updateAgent**](#updateagent) | **PUT** /api/2.0/ai/agents/{id} | Update an ai agent|
-|[**updateAgentsQuota**](#updateagentsquota) | **PUT** /api/2.0/ai/agents/agentquota | Change the AI agent quota limit|
+|[**aiAgentsCreate**](#aiagentscreate) | **POST** /api/2.0/ai/agents | Create an agent|
+|[**aiAgentsDelete**](#aiagentsdelete) | **DELETE** /api/2.0/ai/agents/{id} | Delete an agent|
+|[**aiAgentsGet**](#aiagentsget) | **GET** /api/2.0/ai/agents/{id} | Get an agent|
+|[**aiAgentsList**](#aiagentslist) | **GET** /api/2.0/ai/agents | List agents|
+|[**aiAgentsNews**](#aiagentsnews) | **GET** /api/2.0/ai/agents/news | List agent news items|
+|[**aiAgentsResetQuota**](#aiagentsresetquota) | **PUT** /api/2.0/ai/agents/resetquota | Reset agents\' quota|
+|[**aiAgentsUpdate**](#aiagentsupdate) | **PUT** /api/2.0/ai/agents/{id} | Update an agent|
+|[**aiAgentsUpdateQuota**](#aiagentsupdatequota) | **PUT** /api/2.0/ai/agents/agentquota | Update agents\' quota|
 
-# **createAgent**
-> FolderIntegerWrapper createAgent()
+# **aiAgentsCreate**
+> AiFolderWrapper aiAgentsCreate(aiAgentsCreateRequest)
 
-Creates an ai agent.
+Creates an AI agent room and binds a model to it, in that order. `profileId` is required, has to be a UUID, has to name an existing profile, and that profile has to support chat - an image-only model is refused here rather than failing on every later request. `prompt` is required and is stored on the room as its standing instruction with any markup stripped, so it cannot round-trip HTML into another user\'s reply. The two steps are not atomic: when the room is created but the model binding fails, the call reports an error and the room is left behind, so re-bind it with `PUT api/2.0/ai/agents/{id}` rather than creating a second one.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-create/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createAgentRequestDto** | **CreateAgentRequestDto**|  | |
+| **aiAgentsCreateRequest** | **AiAgentsCreateRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiFolderWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -41,16 +41,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    CreateAgentRequestDto
+    AiAgentsCreateRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let createAgentRequestDto: CreateAgentRequestDto; // (optional)
+let aiAgentsCreateRequest: AiAgentsCreateRequest; //
 
-const { status, data } = await apiInstance.createAgent(
-    createAgentRequestDto
+const { status, data } = await apiInstance.aiAgentsCreate(
+    aiAgentsCreateRequest
 );
 ```
 
@@ -63,36 +63,37 @@ const { status, data } = await apiInstance.createAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The created agent room, with the model already bound to it. |  -  |
+|**400** | `profileId` is missing, is not a UUID, names no existing profile, or names one that does not support chat; or `prompt` is missing. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **deleteAgent**
-> FileOperationWrapper deleteAgent(deleteRoomRequest)
+# **aiAgentsDelete**
+> AiFileOperationWrapper aiAgentsDelete(aiAgentsDeleteRequest)
 
-Removes an ai agent.
+Deletes an AI agent room. The ID has to be the room\'s integer identifier, and the body is forwarded to the DocSpace AI service unchanged, so it accepts the same options as deleting an ordinary room - `deleteAfter` among them. Deletion is asynchronous there: the answer is a file-operation payload to poll, not a completed result. The agent\'s model binding is deliberately left behind, because the upstream assignment API has no per-entry delete, so an orphaned assignment row survives the room.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-delete/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **deleteRoomRequest** | **DeleteRoomRequest**| The parameters for deleting a room. | |
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **aiAgentsDeleteRequest** | **AiAgentsDeleteRequest**|  | |
+| **id** | [**string**] | The agent identifier. | defaults to undefined|
 
 
 ### Return type
 
-**FileOperationWrapper**
+**AiFileOperationWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -100,18 +101,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    DeleteRoomRequest
+    AiAgentsDeleteRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
-let deleteRoomRequest: DeleteRoomRequest; //The parameters for deleting a room.
+let id: string; //The agent identifier. (default to undefined)
+let aiAgentsDeleteRequest: AiAgentsDeleteRequest; //
 
-const { status, data } = await apiInstance.deleteAgent(
+const { status, data } = await apiInstance.aiAgentsDelete(
     id,
-    deleteRoomRequest
+    aiAgentsDeleteRequest
 );
 ```
 
@@ -124,35 +125,36 @@ const { status, data } = await apiInstance.deleteAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | File operation |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The queued file operation. Deletion runs asynchronously, so poll DocSpace for its outcome. |  -  |
+|**400** | The agent ID is not a positive integer. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAgentInfo**
-> FolderIntegerWrapper getAgentInfo()
+# **aiAgentsGet**
+> AiAgentsGet200Response aiAgentsGet()
 
-Returns an ai agent.
+Returns one AI agent room, enriched with the `profileId` currently bound to it so an edit form can prefill its model selector. The ID is the room\'s integer identifier, and a non-integer value is refused rather than passed on to fail opaquely upstream. The binding lives in an assignment rather than on the room, so it is looked up separately: a missing or unreadable assignment simply leaves `profileId` out of the answer instead of failing the call. The standing instruction comes back on the room as `chatSettings.prompt`.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agent-info/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-get/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **id** | [**string**] | The agent identifier. | defaults to undefined|
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiAgentsGet200Response**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -165,9 +167,9 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
+let id: string; //The agent identifier. (default to undefined)
 
-const { status, data } = await apiInstance.getAgentInfo(
+const { status, data } = await apiInstance.aiAgentsGet(
     id
 );
 ```
@@ -181,46 +183,45 @@ const { status, data } = await apiInstance.getAgentInfo(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The agent room, with `profileId` added when a model is bound to it. |  -  |
+|**400** | The agent ID is not a positive integer. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAgents**
-> FolderContentIntegerWrapper getAgents()
+# **aiAgentsList**
+> AiFolderContentWrapper aiAgentsList()
 
-Get ai agents
+Lists the portal\'s AI agent rooms. The query is forwarded unchanged to the DocSpace AI service, so it takes the same paging, sorting and filtering parameters as an ordinary room listing, and the answer is that service\'s folder-content payload rather than a shape of this API\'s own. Array and object query values are dropped rather than guessed at, so send flat strings. The profile bound to each agent is not included here - read one agent with `GET api/2.0/ai/agents/{id}` for that.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-list/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **subjectId** | [**string**] | The filter by user ID. | (optional) defaults to undefined|
-| **subjectOwnerId** | [**string**] | The filter by room owner ID. | (optional) defaults to undefined|
-| **withoutTags** | [**boolean**] | Specifies whether to search by tags or not. | (optional) defaults to undefined|
-| **tags** | [**string**] | The tags in the serialized format. | (optional) defaults to undefined|
-| **excludeSubject** | [**boolean**] | Specifies whether to exclude search by user or group ID. | (optional) defaults to undefined|
-| **subjectFilter** | **SubjectFilter** | The filter by user (Owner - 0, Member - 1). | (optional) defaults to undefined|
-| **quotaFilter** | **QuotaFilter** | The filter by quota (All - 0, Default - 1, Custom - 2). | (optional) defaults to undefined|
-| **count** | [**number**] | Specifies the maximum number of items to retrieve. | (optional) defaults to undefined|
-| **startIndex** | [**number**] | The index from which to start retrieving the room content. | (optional) defaults to undefined|
-| **sortBy** | [**string**] | Specifies the field by which the room content should be sorted. | (optional) defaults to undefined|
-| **sortOrder** | **SortOrder** | The order in which the results are sorted. | (optional) defaults to undefined|
-| **filterValue** | [**string**] | The text filter value used to refine search or query operations. | (optional) defaults to undefined|
+| **subjectId** | [**string**] | Show only the agent rooms this user takes part in. | (optional) defaults to undefined|
+| **subjectOwnerId** | [**string**] | Show only the agent rooms owned by this user. | (optional) defaults to undefined|
+| **excludeSubject** | [**boolean**] | Invert the user filter: leave out what `subjectId` selects instead of keeping it. | (optional) defaults to undefined|
+| **tags** | [**string**] | Show only the agent rooms carrying these tags, comma-separated. | (optional) defaults to undefined|
+| **withoutTags** | [**boolean**] | Show only the agent rooms that carry no tags at all. | (optional) defaults to undefined|
+| **quotaFilter** | [**number**] | Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | Show only the agent rooms whose title matches this text. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | Field to sort by, for example `DateAndTime`. | (optional) defaults to undefined|
+| **sortOrder** | [**string**] | Sort direction, `ascending` or `descending`. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | Index of the first entry to return; 0 starts at the beginning. | (optional) defaults to undefined|
+| **count** | [**number**] | How many entries to return. The internal service applies its own default. | (optional) defaults to undefined|
 
 
 ### Return type
 
-**FolderContentIntegerWrapper**
+**AiFolderContentWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -233,32 +234,30 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let subjectId: string; //The filter by user ID. (optional) (default to undefined)
-let subjectOwnerId: string; //The filter by room owner ID. (optional) (default to undefined)
-let withoutTags: boolean; //Specifies whether to search by tags or not. (optional) (default to undefined)
-let tags: string; //The tags in the serialized format. (optional) (default to undefined)
-let excludeSubject: boolean; //Specifies whether to exclude search by user or group ID. (optional) (default to undefined)
-let subjectFilter: SubjectFilter; //The filter by user (Owner - 0, Member - 1). (optional) (default to undefined)
-let quotaFilter: QuotaFilter; //The filter by quota (All - 0, Default - 1, Custom - 2). (optional) (default to undefined)
-let count: number; //Specifies the maximum number of items to retrieve. (optional) (default to undefined)
-let startIndex: number; //The index from which to start retrieving the room content. (optional) (default to undefined)
-let sortBy: string; //Specifies the field by which the room content should be sorted. (optional) (default to undefined)
-let sortOrder: SortOrder; //The order in which the results are sorted. (optional) (default to undefined)
-let filterValue: string; //The text filter value used to refine search or query operations. (optional) (default to undefined)
+let subjectId: string; //Show only the agent rooms this user takes part in. (optional) (default to undefined)
+let subjectOwnerId: string; //Show only the agent rooms owned by this user. (optional) (default to undefined)
+let excludeSubject: boolean; //Invert the user filter: leave out what `subjectId` selects instead of keeping it. (optional) (default to undefined)
+let tags: string; //Show only the agent rooms carrying these tags, comma-separated. (optional) (default to undefined)
+let withoutTags: boolean; //Show only the agent rooms that carry no tags at all. (optional) (default to undefined)
+let quotaFilter: number; //Filter by quota kind: 0 for all, 1 for the default quota, 2 for a custom one. (optional) (default to undefined)
+let filterValue: string; //Show only the agent rooms whose title matches this text. (optional) (default to undefined)
+let sortBy: string; //Field to sort by, for example `DateAndTime`. (optional) (default to undefined)
+let sortOrder: string; //Sort direction, `ascending` or `descending`. (optional) (default to undefined)
+let startIndex: number; //Index of the first entry to return; 0 starts at the beginning. (optional) (default to undefined)
+let count: number; //How many entries to return. The internal service applies its own default. (optional) (default to undefined)
 
-const { status, data } = await apiInstance.getAgents(
+const { status, data } = await apiInstance.aiAgentsList(
     subjectId,
     subjectOwnerId,
-    withoutTags,
-    tags,
     excludeSubject,
-    subjectFilter,
+    tags,
+    withoutTags,
     quotaFilter,
-    count,
-    startIndex,
+    filterValue,
     sortBy,
     sortOrder,
-    filterValue
+    startIndex,
+    count
 );
 ```
 
@@ -271,20 +270,19 @@ const { status, data } = await apiInstance.getAgents(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The agent rooms, in the DocSpace AI service\'s folder-content envelope. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAgentsNewItems**
-> NewItemsAgentNewItemsArrayWrapper getAgentsNewItems()
+# **aiAgentsNews**
+> AiNewItemsAgentNewItemsArrayWrapper aiAgentsNews()
 
-Returns the room new items.
+Lists the unread items across the caller\'s AI agent rooms, so a badge can be rendered without walking each room. It takes no parameters and is scoped to the caller by the DocSpace AI service. The answer is that service\'s new-items payload. This is a read-only operation and does not mark anything as seen.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-agents-new-items/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-news/).
 
 ### Parameters
 This endpoint does not have any parameters.
@@ -292,11 +290,11 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**NewItemsAgentNewItemsArrayWrapper**
+**AiNewItemsAgentNewItemsArrayWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -309,7 +307,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-const { status, data } = await apiInstance.getAgentsNewItems();
+const { status, data } = await apiInstance.aiAgentsNews();
 ```
 
 ### HTTP request headers
@@ -321,35 +319,34 @@ const { status, data } = await apiInstance.getAgentsNewItems();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of new items |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The unread items of the caller\'s agent rooms. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **resetAgentsQuota**
-> FolderIntegerArrayWrapper resetAgentsQuota()
+# **aiAgentsResetQuota**
+> AiFolderArrayWrapper aiAgentsResetQuota(aiAgentsResetQuotaRequest)
 
-Resets the quota limit for the AI agents with the IDs specified in the request.
+Returns the listed AI agent rooms to the portal\'s default storage quota, forwarding `roomIds` to the DocSpace AI service unchanged. The answer is that service\'s payload, one updated room per entry. This is the counterpart of `PUT api/2.0/ai/agents/agentquota` and takes no quota value of its own. Rooms already on the default are unaffected.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/reset-agents-quota/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-reset-quota/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomsRoomIdsRequestDtoInteger** | **UpdateRoomsRoomIdsRequestDtoInteger**|  | |
+| **aiAgentsResetQuotaRequest** | **AiAgentsResetQuotaRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerArrayWrapper**
+**AiFolderArrayWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -357,16 +354,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomsRoomIdsRequestDtoInteger
+    AiAgentsResetQuotaRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let updateRoomsRoomIdsRequestDtoInteger: UpdateRoomsRoomIdsRequestDtoInteger; // (optional)
+let aiAgentsResetQuotaRequest: AiAgentsResetQuotaRequest; //
 
-const { status, data } = await apiInstance.resetAgentsQuota(
-    updateRoomsRoomIdsRequestDtoInteger
+const { status, data } = await apiInstance.aiAgentsResetQuota(
+    aiAgentsResetQuotaRequest
 );
 ```
 
@@ -379,36 +376,36 @@ const { status, data } = await apiInstance.resetAgentsQuota(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The updated agent rooms, one entry each. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateAgent**
-> FolderIntegerWrapper updateAgent(updateRoomRequest)
+# **aiAgentsUpdate**
+> AiFolderWrapper aiAgentsUpdate(aiAgentsUpdateRequest)
 
-Updates an ai agent.
+Changes an AI agent room - its title, tags or standing instruction - and optionally rebinds its model. The ID has to be the room\'s integer identifier. `profileId` is not part of the room contract: it is taken out of the forwarded body and applied afterwards as the agent\'s assignment, and it has to be a UUID naming an existing chat-capable profile. An instruction sent as `chatSettings.prompt` has its markup stripped, as on create; note that when `chatSettings` is present the upstream service still requires the rest of that object to be valid, so send it whole.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agent/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomRequest** | **UpdateRoomRequest**| The request parameters for updating a room. | |
-| **id** | [**number**] | The room ID. | defaults to undefined|
+| **aiAgentsUpdateRequest** | **AiAgentsUpdateRequest**|  | |
+| **id** | [**string**] | The agent identifier. | defaults to undefined|
 
 
 ### Return type
 
-**FolderIntegerWrapper**
+**AiFolderWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -416,18 +413,18 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomRequest
+    AiAgentsUpdateRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let id: number; //The room ID. (default to undefined)
-let updateRoomRequest: UpdateRoomRequest; //The request parameters for updating a room.
+let id: string; //The agent identifier. (default to undefined)
+let aiAgentsUpdateRequest: AiAgentsUpdateRequest; //
 
-const { status, data } = await apiInstance.updateAgent(
+const { status, data } = await apiInstance.aiAgentsUpdate(
     id,
-    updateRoomRequest
+    aiAgentsUpdateRequest
 );
 ```
 
@@ -440,35 +437,36 @@ const { status, data } = await apiInstance.updateAgent(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | Updated agent information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The updated agent room. |  -  |
+|**400** | The agent ID is not a positive integer, or `profileId` is not a UUID, names no existing profile, or names one that does not support chat. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **updateAgentsQuota**
-> FolderIntegerArrayWrapper updateAgentsQuota()
+# **aiAgentsUpdateQuota**
+> AiFolderArrayWrapper aiAgentsUpdateQuota(aiAgentsUpdateQuotaRequest)
 
-Changes the quota limit for the AI agents with the IDs specified in the request.
+Sets the storage quota of the listed AI agent rooms in one call, forwarding `roomIds` and `quota` to the DocSpace AI service unchanged. The answer is that service\'s payload, one updated room per entry. A quota applies to the room\'s stored files, not to the model usage of its chats. Use `PUT api/2.0/ai/agents/resetquota` to return rooms to the portal default instead of naming a number.
 
-For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/update-agents-quota/).
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-agents-update-quota/).
 
 ### Parameters
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **updateRoomsQuotaRequestDtoInteger** | **UpdateRoomsQuotaRequestDtoInteger**|  | |
+| **aiAgentsUpdateQuotaRequest** | **AiAgentsUpdateQuotaRequest**|  | |
 
 
 ### Return type
 
-**FolderIntegerArrayWrapper**
+**AiFolderArrayWrapper**
 
 ### Authorization
 
-[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### Example
 
@@ -476,16 +474,16 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 import {
     AIAgentsApi,
     Configuration,
-    UpdateRoomsQuotaRequestDtoInteger
+    AiAgentsUpdateQuotaRequest
 } from '@onlyoffice/docspace-api-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new AIAgentsApi(configuration);
 
-let updateRoomsQuotaRequestDtoInteger: UpdateRoomsQuotaRequestDtoInteger; // (optional)
+let aiAgentsUpdateQuotaRequest: AiAgentsUpdateQuotaRequest; //
 
-const { status, data } = await apiInstance.updateAgentsQuota(
-    updateRoomsQuotaRequestDtoInteger
+const { status, data } = await apiInstance.aiAgentsUpdateQuota(
+    aiAgentsUpdateQuotaRequest
 );
 ```
 
@@ -498,11 +496,11 @@ const { status, data } = await apiInstance.updateAgentsQuota(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | List of AI agents with the detailed information |  * X-RateLimit-Limit - Sliding window rate limit: 1500 requests per minute per user/IP. <br>  * X-RateLimit-Remaining - Number of requests remaining in the current sliding window (1500 req/min). Concurrent limits also apply: 50 parallel GET requests, 15 parallel POST/PUT requests. <br>  * X-RateLimit-Reset - Unix timestamp (seconds) when the current sliding window rate limit resets. <br>  |
-|**401** | Unauthorized |  -  |
-|**429** | Too Many Requests. |  * Retry-After - Seconds to wait before retrying. Up to 60s for the sliding window (1500 req/min), up to 86400s for the daily POST/PUT limit (10000/day). <br>  |
-|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
-|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**200** | The updated agent rooms, one entry each. |  -  |
+|**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
+|**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
+|**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |
+|**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -24,7 +24,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
-import type { VectorizationStartRequestBody } from '../../models';
+import type { AiErrorResponse } from '../../models';
+// @ts-ignore
+import type { AiVectorizationStartTask200Response } from '../../models';
+// @ts-ignore
+import type { AiVectorizationStartTaskRequest } from '../../models';
 /**
  * VectorizationApi - axios parameter creator
  * @export
@@ -34,17 +38,17 @@ export const VectorizationApiAxiosParamCreator = function (configuration?: Confi
     
     return {
         /**
-         * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+         * Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
          * @summary Start a vectorization task
-         * @param {VectorizationStartRequestBody} vectorizationStartRequestBody The vectorization parameters including file identifiers.
+         * @param {AiVectorizationStartTaskRequest} aiVectorizationStartTaskRequest The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for startTask operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-task/
+         * REST API Reference for aiVectorizationStartTask operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/
          */
-        startTask: async (vectorizationStartRequestBody: VectorizationStartRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'vectorizationStartRequestBody' is not null or undefined
-            assertParamExists('startTask', 'vectorizationStartRequestBody', vectorizationStartRequestBody)
+        aiVectorizationStartTask: async (aiVectorizationStartTaskRequest: AiVectorizationStartTaskRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiVectorizationStartTaskRequest' is not null or undefined
+            assertParamExists('aiVectorizationStartTask', 'aiVectorizationStartTaskRequest', aiVectorizationStartTaskRequest)
 
             const localVarPath = `/api/2.0/ai/vectorization/tasks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -58,24 +62,11 @@ export const VectorizationApiAxiosParamCreator = function (configuration?: Confi
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            // authentication Basic required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
+            // authentication cookieAuth required
 
-            // authentication OAuth2 required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
-
-            // authentication ApiKeyBearer required
-            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
-
-            // authentication asc_auth_key required
-
-            // authentication Bearer required
+            // authentication bearerAuth required
             // http bearer authentication required
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication OpenId required
 
 
     
@@ -84,7 +75,7 @@ export const VectorizationApiAxiosParamCreator = function (configuration?: Confi
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(vectorizationStartRequestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(aiVectorizationStartTaskRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -102,18 +93,18 @@ export const VectorizationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = VectorizationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+         * Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
          * @summary Start a vectorization task
-         * @param {VectorizationStartRequestBody} vectorizationStartRequestBody The vectorization parameters including file identifiers.
+         * @param {AiVectorizationStartTaskRequest} aiVectorizationStartTaskRequest The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * REST API Reference for startTask operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-task/
+         * REST API Reference for aiVectorizationStartTask operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/
          */
-        async startTask(vectorizationStartRequestBody: VectorizationStartRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.startTask(vectorizationStartRequestBody, options);
+        async aiVectorizationStartTask(aiVectorizationStartTaskRequest: AiVectorizationStartTaskRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiVectorizationStartTask200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiVectorizationStartTask(aiVectorizationStartTaskRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['VectorizationApi.startTask']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['VectorizationApi.aiVectorizationStartTask']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -127,32 +118,32 @@ export const VectorizationApiFactory = function (configuration?: Configuration, 
     const localVarFp = VectorizationApiFp(configuration)
     return {
         /**
-         * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+         * Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
          * @summary Start a vectorization task
-         * @param {VectorizationApiStartTaskRequest} requestParameters Request parameters.
+         * @param {VectorizationApiAiVectorizationStartTaskRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
-         * REST API Reference for startTask operation
-         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/start-task/
+         * REST API Reference for aiVectorizationStartTask operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-vectorization-start-task/
          * @throws {RequiredError}
          */
-        startTask(requestParameters: VectorizationApiStartTaskRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.startTask(requestParameters.vectorizationStartRequestBody, options).then((request) => request(axios, basePath));
+        aiVectorizationStartTask(requestParameters: VectorizationApiAiVectorizationStartTaskRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiVectorizationStartTask200Response> {
+            return localVarFp.aiVectorizationStartTask(requestParameters.aiVectorizationStartTaskRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for startTask operation in VectorizationApi.
+ * Request parameters for aiVectorizationStartTask operation in VectorizationApi.
  * @export
- * @interface VectorizationApiStartTaskRequest
+ * @interface VectorizationApiAiVectorizationStartTaskRequest
  */
-export interface VectorizationApiStartTaskRequest {
+export interface VectorizationApiAiVectorizationStartTaskRequest {
     /**
-     * The vectorization parameters including file identifiers.
-     * @type {VectorizationStartRequestBody}
-     * @memberof VectorizationApiStartTask
+     * The files to index, proxied unchanged to the DocSpace AI service, which owns and validates the shape.
+     * @type {AiVectorizationStartTaskRequest}
+     * @memberof VectorizationApiAiVectorizationStartTask
      */
-    readonly vectorizationStartRequestBody: VectorizationStartRequestBody
+    readonly aiVectorizationStartTaskRequest: AiVectorizationStartTaskRequest
 }
 
 /**
@@ -163,15 +154,15 @@ export interface VectorizationApiStartTaskRequest {
  */
 export class VectorizationApi extends BaseAPI {
     /**
-     * Submits the specified files for vectorization. Each file is processed asynchronously by the configured embedding provider  and indexed for semantic search in AI chat sessions. Only files accessible to the current user can be vectorized.
+     * Queues the indexing of the portal files named in the body so their contents can be retrieved during a chat round. The body is proxied unchanged to the DocSpace AI service, which validates it and owns the job. Indexing is asynchronous and fire-and-forget: the answer acknowledges the request without carrying a job handle, so there is nothing to poll and progress is not reported here. The embedding provider used is the one in `GET api/2.0/ai/config/vectorization`, and changing that setting does not re-index anything already indexed - queue it again for that.
      * @summary Start a vectorization task
-     * @param {AIVectorizationApiStartTaskRequest} requestParameters Request parameters.
+     * @param {AIVectorizationApiAiVectorizationStartTaskRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof VectorizationApi
      */
-    public startTask(requestParameters: VectorizationApiStartTaskRequest, options?: RawAxiosRequestConfig) {
-        return VectorizationApiFp(this.configuration).startTask(requestParameters.vectorizationStartRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public aiVectorizationStartTask(requestParameters: VectorizationApiAiVectorizationStartTaskRequest, options?: RawAxiosRequestConfig) {
+        return VectorizationApiFp(this.configuration).aiVectorizationStartTask(requestParameters.aiVectorizationStartTaskRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

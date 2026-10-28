@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { WalletServiceDto } from './wallet-service-dto';
 
+/**
+ * The successful API response containing the WalletServiceDto object.
+ */
 export interface WalletServiceWrapper {
+    /**
+     * The WalletServiceDto object returned by the operation.
+     */
     'response'?: WalletServiceDto;
     /**
      * The total number of items in the response

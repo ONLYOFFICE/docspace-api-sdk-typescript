@@ -1,11 +1,12 @@
 # RoomSecurityWrapper
 
+The successful API response containing the RoomSecurityDto object.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**response** | [**RoomSecurityDto**](RoomSecurityDto.md) |  | [optional] [default to undefined]
+**response** | [**RoomSecurityDto**](RoomSecurityDto.md) | The RoomSecurityDto object returned by the operation. | [optional] [default to undefined]
 **count** | **number** | The total number of items in the response | [optional] [default to undefined]
 **links** | [**Array&lt;GetPortalPrices200ResponseLinksInner&gt;**](GetPortalPrices200ResponseLinksInner.md) | List of links related to the response | [optional] [default to undefined]
 **status** | **number** | HTTP status code of the response | [optional] [default to undefined]

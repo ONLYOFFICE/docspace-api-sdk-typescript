@@ -1,13 +1,13 @@
 # CspDto
 
-The CSP (Content Security Policy) parameters.
+The Content Security Policy of the portal: the domains an administrator allowed, and the header built from them.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**domains** | **Array&lt;string&gt;** | The list of CSP domains. | [default to undefined]
-**header** | **string** | The CSP header. | [default to undefined]
+**domains** | **Array&lt;string&gt;** | The external hosts an administrator has allowed, each in the form it was saved in - a bare host, a host  with a scheme, or a wildcard such as `*.example.com`. An empty list means nobody has added one, not that  the portal serves no policy. | [default to undefined]
+**header** | **string** | The complete policy value the portal sends to browsers, assembled from `domains` together with the  portal\'s own sources and the integrations it has switched on. It is therefore wider than `domains` alone,  and is filled in even while that list is empty. | [default to undefined]
 
 ## Example
 

@@ -1,0 +1,860 @@
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+import type { Configuration } from '../../configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
+// Some imports not used depending on template conditions
+// @ts-ignore
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../../common';
+// @ts-ignore
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
+// @ts-ignore
+import type { AiAttachment } from '../../models';
+// @ts-ignore
+import type { AiAttachmentsLinkToMessageRequest } from '../../models';
+// @ts-ignore
+import type { AiAttachmentsSaveFileRequest } from '../../models';
+// @ts-ignore
+import type { AiAttachmentsSaveFilesManyRequest } from '../../models';
+// @ts-ignore
+import type { AiErrorResponse } from '../../models';
+// @ts-ignore
+import type { AiSuccessResponse } from '../../models';
+/**
+ * AttachmentsApi - axios parameter creator
+ * @export
+ */
+export const AttachmentsApiAxiosParamCreator = function (configuration?: Configuration) {
+    
+    
+    return {
+        /**
+         * Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
+         * @summary Delete one attachment
+         * @param {string} aiAttachmentsDeleteRequest The ID of the attachment to delete, as a bare JSON string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete/
+         */
+        aiAttachmentsDelete: async (aiAttachmentsDeleteRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsDeleteRequest' is not null or undefined
+            assertParamExists('aiAttachmentsDelete', 'aiAttachmentsDeleteRequest', aiAttachmentsDeleteRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/delete`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsDeleteRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
+         * @summary Delete many
+         * @param {Array<string>} aiAttachmentsDeleteManyRequest The IDs of the attachments to delete, as a bare JSON array of strings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsDeleteMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many/
+         */
+        aiAttachmentsDeleteMany: async (aiAttachmentsDeleteManyRequest: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsDeleteManyRequest' is not null or undefined
+            assertParamExists('aiAttachmentsDeleteMany', 'aiAttachmentsDeleteManyRequest', aiAttachmentsDeleteManyRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/delete-many`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsDeleteManyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
+         * @summary Get one attachment
+         * @param {string} aiAttachmentsGetRequest The ID of the attachment to read, as a bare JSON string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get/
+         */
+        aiAttachmentsGet: async (aiAttachmentsGetRequest: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsGetRequest' is not null or undefined
+            assertParamExists('aiAttachmentsGet', 'aiAttachmentsGetRequest', aiAttachmentsGetRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/get`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsGetRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
+         * @summary Get many
+         * @param {Array<string>} aiAttachmentsGetManyRequest The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many/
+         */
+        aiAttachmentsGetMany: async (aiAttachmentsGetManyRequest: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsGetManyRequest' is not null or undefined
+            assertParamExists('aiAttachmentsGetMany', 'aiAttachmentsGetManyRequest', aiAttachmentsGetManyRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/get-many`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsGetManyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get suggested questions
+         * @param {{ [key: string]: any | null; }} aiAttachmentsGetSuggestedQuestionsRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         */
+        aiAttachmentsGetSuggestedQuestions: async (aiAttachmentsGetSuggestedQuestionsRequest: { [key: string]: any | null; }, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsGetSuggestedQuestionsRequest' is not null or undefined
+            assertParamExists('aiAttachmentsGetSuggestedQuestions', 'aiAttachmentsGetSuggestedQuestionsRequest', aiAttachmentsGetSuggestedQuestionsRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/suggested-questions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsGetSuggestedQuestionsRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
+         * @summary Link to message
+         * @param {AiAttachmentsLinkToMessageRequest} aiAttachmentsLinkToMessageRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsLinkToMessage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-link-to-message/
+         */
+        aiAttachmentsLinkToMessage: async (aiAttachmentsLinkToMessageRequest: AiAttachmentsLinkToMessageRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsLinkToMessageRequest' is not null or undefined
+            assertParamExists('aiAttachmentsLinkToMessage', 'aiAttachmentsLinkToMessageRequest', aiAttachmentsLinkToMessageRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/link-to-message`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsLinkToMessageRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
+         * @summary Save file
+         * @param {AiAttachmentsSaveFileRequest} aiAttachmentsSaveFileRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsSaveFile operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-file/
+         */
+        aiAttachmentsSaveFile: async (aiAttachmentsSaveFileRequest: AiAttachmentsSaveFileRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsSaveFileRequest' is not null or undefined
+            assertParamExists('aiAttachmentsSaveFile', 'aiAttachmentsSaveFileRequest', aiAttachmentsSaveFileRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/save-file`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsSaveFileRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
+         * @summary Save files many
+         * @param {AiAttachmentsSaveFilesManyRequest} aiAttachmentsSaveFilesManyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsSaveFilesMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-files-many/
+         */
+        aiAttachmentsSaveFilesMany: async (aiAttachmentsSaveFilesManyRequest: AiAttachmentsSaveFilesManyRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'aiAttachmentsSaveFilesManyRequest' is not null or undefined
+            assertParamExists('aiAttachmentsSaveFilesMany', 'aiAttachmentsSaveFilesManyRequest', aiAttachmentsSaveFilesManyRequest)
+
+            const localVarPath = `/api/2.0/ai/attachments/save-files-many`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(aiAttachmentsSaveFilesManyRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AttachmentsApi - functional programming interface
+ * @export
+ */
+export const AttachmentsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AttachmentsApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
+         * @summary Delete one attachment
+         * @param {string} aiAttachmentsDeleteRequest The ID of the attachment to delete, as a bare JSON string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete/
+         */
+        async aiAttachmentsDelete(aiAttachmentsDeleteRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsDelete(aiAttachmentsDeleteRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
+         * @summary Delete many
+         * @param {Array<string>} aiAttachmentsDeleteManyRequest The IDs of the attachments to delete, as a bare JSON array of strings.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsDeleteMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many/
+         */
+        async aiAttachmentsDeleteMany(aiAttachmentsDeleteManyRequest: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsDeleteMany(aiAttachmentsDeleteManyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsDeleteMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
+         * @summary Get one attachment
+         * @param {string} aiAttachmentsGetRequest The ID of the attachment to read, as a bare JSON string.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get/
+         */
+        async aiAttachmentsGet(aiAttachmentsGetRequest: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAttachment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsGet(aiAttachmentsGetRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
+         * @summary Get many
+         * @param {Array<string>} aiAttachmentsGetManyRequest The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many/
+         */
+        async aiAttachmentsGetMany(aiAttachmentsGetManyRequest: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiAttachment | null>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsGetMany(aiAttachmentsGetManyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsGetMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Get suggested questions
+         * @param {{ [key: string]: any | null; }} aiAttachmentsGetSuggestedQuestionsRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         */
+        async aiAttachmentsGetSuggestedQuestions(aiAttachmentsGetSuggestedQuestionsRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsGetSuggestedQuestions(aiAttachmentsGetSuggestedQuestionsRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsGetSuggestedQuestions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
+         * @summary Link to message
+         * @param {AiAttachmentsLinkToMessageRequest} aiAttachmentsLinkToMessageRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsLinkToMessage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-link-to-message/
+         */
+        async aiAttachmentsLinkToMessage(aiAttachmentsLinkToMessageRequest: AiAttachmentsLinkToMessageRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsLinkToMessage(aiAttachmentsLinkToMessageRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsLinkToMessage']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
+         * @summary Save file
+         * @param {AiAttachmentsSaveFileRequest} aiAttachmentsSaveFileRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsSaveFile operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-file/
+         */
+        async aiAttachmentsSaveFile(aiAttachmentsSaveFileRequest: AiAttachmentsSaveFileRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAttachment>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsSaveFile(aiAttachmentsSaveFileRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsSaveFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
+         * @summary Save files many
+         * @param {AiAttachmentsSaveFilesManyRequest} aiAttachmentsSaveFilesManyRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiAttachmentsSaveFilesMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-files-many/
+         */
+        async aiAttachmentsSaveFilesMany(aiAttachmentsSaveFilesManyRequest: AiAttachmentsSaveFilesManyRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiAttachment>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAttachmentsSaveFilesMany(aiAttachmentsSaveFilesManyRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AttachmentsApi.aiAttachmentsSaveFilesMany']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AttachmentsApi - factory interface
+ * @export
+ */
+export const AttachmentsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AttachmentsApiFp(configuration)
+    return {
+        /**
+         * Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
+         * @summary Delete one attachment
+         * @param {AttachmentsApiAiAttachmentsDeleteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsDelete operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsDelete(requestParameters: AttachmentsApiAiAttachmentsDeleteRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAttachmentsDelete(requestParameters.aiAttachmentsDeleteRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
+         * @summary Delete many
+         * @param {AttachmentsApiAiAttachmentsDeleteManyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsDeleteMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-delete-many/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsDeleteMany(requestParameters: AttachmentsApiAiAttachmentsDeleteManyRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAttachmentsDeleteMany(requestParameters.aiAttachmentsDeleteManyRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
+         * @summary Get one attachment
+         * @param {AttachmentsApiAiAttachmentsGetRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsGet operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsGet(requestParameters: AttachmentsApiAiAttachmentsGetRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiAttachment> {
+            return localVarFp.aiAttachmentsGet(requestParameters.aiAttachmentsGetRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
+         * @summary Get many
+         * @param {AttachmentsApiAiAttachmentsGetManyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsGetMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-many/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsGetMany(requestParameters: AttachmentsApiAiAttachmentsGetManyRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AiAttachment | null>> {
+            return localVarFp.aiAttachmentsGetMany(requestParameters.aiAttachmentsGetManyRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get suggested questions
+         * @param {AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsGetSuggestedQuestions operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-get-suggested-questions/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsGetSuggestedQuestions(requestParameters: AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAttachmentsGetSuggestedQuestions(requestParameters.aiAttachmentsGetSuggestedQuestionsRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
+         * @summary Link to message
+         * @param {AttachmentsApiAiAttachmentsLinkToMessageRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsLinkToMessage operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-link-to-message/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsLinkToMessage(requestParameters: AttachmentsApiAiAttachmentsLinkToMessageRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiAttachmentsLinkToMessage(requestParameters.aiAttachmentsLinkToMessageRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
+         * @summary Save file
+         * @param {AttachmentsApiAiAttachmentsSaveFileRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsSaveFile operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-file/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsSaveFile(requestParameters: AttachmentsApiAiAttachmentsSaveFileRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiAttachment> {
+            return localVarFp.aiAttachmentsSaveFile(requestParameters.aiAttachmentsSaveFileRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
+         * @summary Save files many
+         * @param {AttachmentsApiAiAttachmentsSaveFilesManyRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiAttachmentsSaveFilesMany operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-attachments-save-files-many/
+         * @throws {RequiredError}
+         */
+        aiAttachmentsSaveFilesMany(requestParameters: AttachmentsApiAiAttachmentsSaveFilesManyRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AiAttachment>> {
+            return localVarFp.aiAttachmentsSaveFilesMany(requestParameters.aiAttachmentsSaveFilesManyRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * Request parameters for aiAttachmentsDelete operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsDeleteRequest
+ */
+export interface AttachmentsApiAiAttachmentsDeleteRequest {
+    /**
+     * The ID of the attachment to delete, as a bare JSON string.
+     * @type {string}
+     * @memberof AttachmentsApiAiAttachmentsDelete
+     */
+    readonly aiAttachmentsDeleteRequest: string
+}
+
+/**
+ * Request parameters for aiAttachmentsDeleteMany operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsDeleteManyRequest
+ */
+export interface AttachmentsApiAiAttachmentsDeleteManyRequest {
+    /**
+     * The IDs of the attachments to delete, as a bare JSON array of strings.
+     * @type {Array<string>}
+     * @memberof AttachmentsApiAiAttachmentsDeleteMany
+     */
+    readonly aiAttachmentsDeleteManyRequest: Array<string>
+}
+
+/**
+ * Request parameters for aiAttachmentsGet operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsGetRequest
+ */
+export interface AttachmentsApiAiAttachmentsGetRequest {
+    /**
+     * The ID of the attachment to read, as a bare JSON string.
+     * @type {string}
+     * @memberof AttachmentsApiAiAttachmentsGet
+     */
+    readonly aiAttachmentsGetRequest: string
+}
+
+/**
+ * Request parameters for aiAttachmentsGetMany operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsGetManyRequest
+ */
+export interface AttachmentsApiAiAttachmentsGetManyRequest {
+    /**
+     * The IDs of the attachments to read, as a bare JSON array of strings. The answer is aligned with this array by position.
+     * @type {Array<string>}
+     * @memberof AttachmentsApiAiAttachmentsGetMany
+     */
+    readonly aiAttachmentsGetManyRequest: Array<string>
+}
+
+/**
+ * Request parameters for aiAttachmentsGetSuggestedQuestions operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest
+ */
+export interface AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest {
+    /**
+     * 
+     * @type {{ [key: string]: any | null; }}
+     * @memberof AttachmentsApiAiAttachmentsGetSuggestedQuestions
+     */
+    readonly aiAttachmentsGetSuggestedQuestionsRequest: { [key: string]: any | null; }
+}
+
+/**
+ * Request parameters for aiAttachmentsLinkToMessage operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsLinkToMessageRequest
+ */
+export interface AttachmentsApiAiAttachmentsLinkToMessageRequest {
+    /**
+     * 
+     * @type {AiAttachmentsLinkToMessageRequest}
+     * @memberof AttachmentsApiAiAttachmentsLinkToMessage
+     */
+    readonly aiAttachmentsLinkToMessageRequest: AiAttachmentsLinkToMessageRequest
+}
+
+/**
+ * Request parameters for aiAttachmentsSaveFile operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsSaveFileRequest
+ */
+export interface AttachmentsApiAiAttachmentsSaveFileRequest {
+    /**
+     * 
+     * @type {AiAttachmentsSaveFileRequest}
+     * @memberof AttachmentsApiAiAttachmentsSaveFile
+     */
+    readonly aiAttachmentsSaveFileRequest: AiAttachmentsSaveFileRequest
+}
+
+/**
+ * Request parameters for aiAttachmentsSaveFilesMany operation in AttachmentsApi.
+ * @export
+ * @interface AttachmentsApiAiAttachmentsSaveFilesManyRequest
+ */
+export interface AttachmentsApiAiAttachmentsSaveFilesManyRequest {
+    /**
+     * 
+     * @type {AiAttachmentsSaveFilesManyRequest}
+     * @memberof AttachmentsApiAiAttachmentsSaveFilesMany
+     */
+    readonly aiAttachmentsSaveFilesManyRequest: AiAttachmentsSaveFilesManyRequest
+}
+
+/**
+ * AttachmentsApi - object-oriented interface
+ * @export
+ * @class AttachmentsApi
+ * @extends {BaseAPI}
+ */
+export class AttachmentsApi extends BaseAPI {
+    /**
+     * Permanently deletes one attachment, whether it is still a draft or already bound to a message. The ID is not validated here, so a malformed one surfaces as an error relayed from storage rather than as a 400, and an ID that does not exist answers success without deleting anything. Deleting a bound attachment leaves the message in place without it. The deletion cannot be undone.
+     * @summary Delete one attachment
+     * @param {AIAttachmentsApiAiAttachmentsDeleteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsDelete(requestParameters: AttachmentsApiAiAttachmentsDeleteRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsDelete(requestParameters.aiAttachmentsDeleteRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Permanently deletes several attachments in one round trip. `ids` is optional and an absent value is treated as an empty list, so a malformed request quietly deletes nothing instead of failing. IDs that do not exist are skipped without being reported, so the answer confirms only that the call was accepted. The deletions cannot be undone.
+     * @summary Delete many
+     * @param {AIAttachmentsApiAiAttachmentsDeleteManyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsDeleteMany(requestParameters: AttachmentsApiAiAttachmentsDeleteManyRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsDeleteMany(requestParameters.aiAttachmentsDeleteManyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns one attachment by its ID, whether it is still a draft or already bound to a message. The ID is required and has to be a non-empty string. An ID that no longer exists is not reported as 404: the answer is a null body with status 200, so treat a missing payload as no such attachment. Use `POST api/2.0/ai/attachments/get-many` to read several at once.
+     * @summary Get one attachment
+     * @param {AIAttachmentsApiAiAttachmentsGetRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsGet(requestParameters: AttachmentsApiAiAttachmentsGetRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsGet(requestParameters.aiAttachmentsGetRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns several attachments in one call, aligned by position with the `ids` that were sent, so the answer can be zipped straight onto the request. An ID that no longer exists leaves its slot empty rather than shortening the list, which is how a caller tells which of them are gone. `ids` has to be present and non-empty - an empty batch is rejected rather than answered with an empty list. Nothing is changed by the call.
+     * @summary Get many
+     * @param {AIAttachmentsApiAiAttachmentsGetManyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsGetMany(requestParameters: AttachmentsApiAiAttachmentsGetManyRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsGetMany(requestParameters.aiAttachmentsGetManyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get suggested questions
+     * @param {AIAttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsGetSuggestedQuestions(requestParameters: AttachmentsApiAiAttachmentsGetSuggestedQuestionsRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsGetSuggestedQuestions(requestParameters.aiAttachmentsGetSuggestedQuestionsRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Binds draft attachments to the chat message that owns them, after that message has been persisted, so that deleting the message removes them too. All three of `ids`, `messageId` and `threadId` are required, and the references are verified rather than trusted: an unknown message answers 404, a message that belongs to a different thread answers 400, and attachments that no longer exist answer 404 naming each missing ID. That verification exists because the underlying binding call skips unknown IDs silently, which used to report success for a link that had not happened. Drafts stay unbound until this succeeds.
+     * @summary Link to message
+     * @param {AIAttachmentsApiAiAttachmentsLinkToMessageRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsLinkToMessage(requestParameters: AttachmentsApiAiAttachmentsLinkToMessageRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsLinkToMessage(requestParameters.aiAttachmentsLinkToMessageRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Stores one file attachment as a draft and returns it, so its ID can be attached to a message later. `input` carries the host `path` - the DocSpace entry ID the AI backend resolves server-side - the text `content` already extracted from that file, the ONLYOFFICE numeric file `type`, and optionally a `title`; the text is what the model reads, so this operation does not open the file itself. Archives are refused outright, whatever their declared name says. Drafts are not bound to a conversation until `POST api/2.0/ai/attachments/link-to-message` is called, so an unlinked draft outlives the round that created it.
+     * @summary Save file
+     * @param {AIAttachmentsApiAiAttachmentsSaveFileRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsSaveFile(requestParameters: AttachmentsApiAiAttachmentsSaveFileRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsSaveFile(requestParameters.aiAttachmentsSaveFileRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Stores several file attachments as drafts in one round trip and returns them in the order they were sent. Each entry is validated exactly as the single-file operation validates its `input`, and the first bad one rejects the whole batch with its index named in the message - nothing is stored. `inputs` has to be present and an array: an absent or null value is a malformed request rather than an empty batch, and only an explicit empty array means no files. Follow up with `POST api/2.0/ai/attachments/link-to-message` to bind the drafts to a message.
+     * @summary Save files many
+     * @param {AIAttachmentsApiAiAttachmentsSaveFilesManyRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AttachmentsApi
+     */
+    public aiAttachmentsSaveFilesMany(requestParameters: AttachmentsApiAiAttachmentsSaveFilesManyRequest, options?: RawAxiosRequestConfig) {
+        return AttachmentsApiFp(this.configuration).aiAttachmentsSaveFilesMany(requestParameters.aiAttachmentsSaveFilesManyRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+

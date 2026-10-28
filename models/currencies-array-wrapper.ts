@@ -25,7 +25,13 @@ import type { CurrenciesDto } from './currencies-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of CurrenciesDto objects.
+ */
 export interface CurrenciesArrayWrapper {
+    /**
+     * The list of CurrenciesDto objects returned by the operation.
+     */
     'response'?: Array<CurrenciesDto>;
     /**
      * The total number of items in the response

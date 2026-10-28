@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { ThumbnailsDataDto } from './thumbnails-data-dto';
 
+/**
+ * The successful API response containing the ThumbnailsDataDto object.
+ */
 export interface ThumbnailsDataWrapper {
+    /**
+     * The ThumbnailsDataDto object returned by the operation.
+     */
     'response'?: ThumbnailsDataDto;
     /**
      * The total number of items in the response

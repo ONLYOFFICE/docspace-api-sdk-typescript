@@ -20,13 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BackupHistoryRecord } from './backup-history-record';
+import type { BackupHistoryRecordDto } from './backup-history-record-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of BackupHistoryRecordDto objects.
+ */
 export interface BackupHistoryRecordArrayWrapper {
-    'response'?: Array<BackupHistoryRecord>;
+    /**
+     * The list of BackupHistoryRecordDto objects returned by the operation.
+     */
+    'response'?: Array<BackupHistoryRecordDto>;
     /**
      * The total number of items in the response
      */

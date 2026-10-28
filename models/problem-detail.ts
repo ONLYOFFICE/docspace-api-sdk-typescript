@@ -18,13 +18,41 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FieldError } from './field-error';
 
+/**
+ * RFC 7807 problem details returned by the registration API for failed requests.
+ */
 export interface ProblemDetail {
+    /**
+     * A URI reference that identifies the problem type. This service sets it to the DocSpace API getting-started page.
+     */
     'type'?: string;
+    /**
+     * A short, human-readable summary of the problem type, typically the HTTP status reason phrase.
+     */
     'title'?: string;
+    /**
+     * The HTTP status code for this occurrence of the problem.
+     */
     'status'?: number;
+    /**
+     * A human-readable explanation specific to this occurrence of the problem.
+     */
     'detail'?: string;
+    /**
+     * A URI reference that identifies the specific occurrence, set to the request path.
+     */
     'instance'?: string;
-    'properties'?: { [key: string]: object; };
+    /**
+     * Extension members carried on the problem. Usually empty; validation failures also surface as the top-level errors array.
+     */
+    'properties'?: { [key: string]: any | null; };
+    /**
+     * Field-specific validation errors. Present when the request body or parameters failed validation, or when a named scope is not in the tenant catalogue.
+     */
+    'errors'?: Array<FieldError>;
 }
 

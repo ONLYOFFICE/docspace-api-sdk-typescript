@@ -25,7 +25,13 @@ import type { AccountInfoDto } from './account-info-dto';
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the list of AccountInfoDto objects.
+ */
 export interface AccountInfoArrayWrapper {
+    /**
+     * The list of AccountInfoDto objects returned by the operation.
+     */
     'response'?: Array<AccountInfoDto>;
     /**
      * The total number of items in the response

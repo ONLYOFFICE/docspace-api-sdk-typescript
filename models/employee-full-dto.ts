@@ -80,19 +80,19 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'contacts'?: Array<Contact> | null;
     /**
-     * 
+     * The user status.
      * @type {EmployeeStatus}
      * @memberof EmployeeFullDto
      */
     'status'?: EmployeeStatus;
     /**
-     * 
+     * The user activation status.
      * @type {EmployeeActivationStatus}
      * @memberof EmployeeFullDto
      */
     'activationStatus'?: EmployeeActivationStatus;
     /**
-     * 
+     * The date when the user account was terminated.
      * @type {ApiDateTime}
      * @memberof EmployeeFullDto
      */
@@ -176,7 +176,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'mobilePhone'?: string | null;
     /**
-     * 
+     * The mobile phone activation status.
      * @type {MobilePhoneActivationStatus}
      * @memberof EmployeeFullDto
      */
@@ -188,7 +188,7 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'isSSO'?: boolean;
     /**
-     * 
+     * The user theme settings.
      * @type {DarkThemeSettingsType}
      * @memberof EmployeeFullDto
      */
@@ -230,13 +230,13 @@ export type EmployeeFullDto = EmployeeDto &  {
      */
     'authCookieLifetime'?: number | null;
     /**
-     * 
+     * The user who created the current user.
      * @type {EmployeeDto}
      * @memberof EmployeeFullDto
      */
     'createdBy'?: EmployeeDto;
     /**
-     * 
+     * The user registration date.
      * @type {ApiDateTime}
      * @memberof EmployeeFullDto
      */

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { SettingsDto } from './settings-dto';
 
+/**
+ * The successful API response containing the SettingsDto object.
+ */
 export interface SettingsWrapper {
+    /**
+     * The SettingsDto object returned by the operation.
+     */
     'response'?: SettingsDto;
     /**
      * The total number of items in the response

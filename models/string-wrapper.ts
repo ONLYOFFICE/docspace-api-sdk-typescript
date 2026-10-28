@@ -22,7 +22,13 @@
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the string value.
+ */
 export interface StringWrapper {
+    /**
+     * The string value returned by the operation.
+     */
     'response'?: string;
     /**
      * The total number of items in the response

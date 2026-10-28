@@ -24,23 +24,24 @@ import type { ImportableApiEntity } from './importable-api-entity';
 
 /**
  * @type MigratingApiGroup
+ * The migrating group parameters.
  * @export
  */
 export type MigratingApiGroup = ImportableApiEntity &  {
     /**
-     * 
+     * The group name.
      * @type {string}
      * @memberof MigratingApiGroup
      */
     'groupName'?: string | null;
     /**
-     * 
+     * The group module name.
      * @type {string}
      * @memberof MigratingApiGroup
      */
     'moduleName'?: string | null;
     /**
-     * 
+     * The list of group user UIDs.
      * @type {Array<string>}
      * @memberof MigratingApiGroup
      */

@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { TelegramStatusDto } from './telegram-status-dto';
 
+/**
+ * The successful API response containing the TelegramStatusDto object.
+ */
 export interface TelegramStatusWrapper {
+    /**
+     * The TelegramStatusDto object returned by the operation.
+     */
     'response'?: TelegramStatusDto;
     /**
      * The total number of items in the response

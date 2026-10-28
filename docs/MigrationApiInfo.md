@@ -1,27 +1,28 @@
 # MigrationApiInfo
 
+The migration API information.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**migratorName** | **string** |  | [optional] [default to undefined]
-**operation** | **string** |  | [optional] [default to undefined]
-**failedArchives** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**users** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) |  | [optional] [default to undefined]
-**withoutEmailUsers** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) |  | [optional] [default to undefined]
-**existUsers** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) |  | [optional] [default to undefined]
-**groups** | [**Array&lt;MigratingApiGroup&gt;**](MigratingApiGroup.md) |  | [optional] [default to undefined]
-**importPersonalFiles** | **boolean** |  | [optional] [default to undefined]
-**importSharedFiles** | **boolean** |  | [optional] [default to undefined]
-**importSharedFolders** | **boolean** |  | [optional] [default to undefined]
-**importCommonFiles** | **boolean** |  | [optional] [default to undefined]
-**importProjectFiles** | **boolean** |  | [optional] [default to undefined]
-**importGroups** | **boolean** |  | [optional] [default to undefined]
-**successedUsers** | **number** |  | [optional] [default to undefined]
-**failedUsers** | **number** |  | [optional] [default to undefined]
-**files** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
-**errors** | **Array&lt;string&gt;** |  | [optional] [default to undefined]
+**migratorName** | **string** | The migrator name. | [optional] [default to undefined]
+**operation** | **string** | The migration operation. | [optional] [default to undefined]
+**failedArchives** | **Array&lt;string&gt;** | The list of failed archives. | [optional] [default to undefined]
+**users** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) | The list of migrating users. | [optional] [default to undefined]
+**withoutEmailUsers** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) | The list of migrating users without email. | [optional] [default to undefined]
+**existUsers** | [**Array&lt;MigratingApiUser&gt;**](MigratingApiUser.md) | The list of existing migrating users. | [optional] [default to undefined]
+**groups** | [**Array&lt;MigratingApiGroup&gt;**](MigratingApiGroup.md) | The list of migrating groups. | [optional] [default to undefined]
+**importPersonalFiles** | **boolean** | Specifies whether to import personal files or not. | [optional] [default to undefined]
+**importSharedFiles** | **boolean** | Specifies whether to import shared files or not. | [optional] [default to undefined]
+**importSharedFolders** | **boolean** | Specifies whether to import shared folders or not. | [optional] [default to undefined]
+**importCommonFiles** | **boolean** | Specifies whether to import common files or not. | [optional] [default to undefined]
+**importProjectFiles** | **boolean** | Specifies whether to import project files or not. | [optional] [default to undefined]
+**importGroups** | **boolean** | Specifies whether to import groups or not. | [optional] [default to undefined]
+**successedUsers** | **number** | The number of successfully migrated users. | [optional] [default to undefined]
+**failedUsers** | **number** | The number of unsuccessfully migrated users. | [optional] [default to undefined]
+**files** | **Array&lt;string&gt;** | The list of migrated files. | [optional] [default to undefined]
+**errors** | **Array&lt;string&gt;** | The list of migration errors. | [optional] [default to undefined]
 
 ## Example
 

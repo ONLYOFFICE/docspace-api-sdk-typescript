@@ -25,7 +25,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 // @ts-ignore
 import type { IsDefaultWhiteLabelLogosDto } from './is-default-white-label-logos-dto';
 
+/**
+ * The successful API response containing the IsDefaultWhiteLabelLogosDto object.
+ */
 export interface IsDefaultWhiteLabelLogosWrapper {
+    /**
+     * The IsDefaultWhiteLabelLogosDto object returned by the operation.
+     */
     'response'?: IsDefaultWhiteLabelLogosDto;
     /**
      * The total number of items in the response

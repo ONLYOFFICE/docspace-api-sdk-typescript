@@ -20,13 +20,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BackupProgress } from './backup-progress';
+import type { BackupProgressDto } from './backup-progress-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
 
+/**
+ * The successful API response containing the BackupProgressDto object.
+ */
 export interface BackupProgressWrapper {
-    'response'?: BackupProgress;
+    /**
+     * The BackupProgressDto object returned by the operation.
+     */
+    'response'?: BackupProgressDto;
     /**
      * The total number of items in the response
      */
