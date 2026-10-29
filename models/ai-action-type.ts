@@ -34,6 +34,7 @@ export const AiActionType = {
     Ocr: 'OCR',
     Vision: 'Vision',
     FormAnalysis: 'FormAnalysis',
+    GenerateMeta: 'GenerateMeta',
 } as const;
 
 export type AiActionType = typeof AiActionType[keyof typeof AiActionType];

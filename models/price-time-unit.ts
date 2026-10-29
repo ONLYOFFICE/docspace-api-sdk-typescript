@@ -20,17 +20,18 @@
 
 
 /**
- * [0 - None, 1 - Hour, 2 - Day, 3 - Week, 4 - Month, 5 - Year, 6 - ThreeYears]
+ * [1 - None, 2 - Hour, 3 - Day, 4 - Week, 5 - Month, 6 - Year, 7 - ThreeYears, 8 - Minute]
  */
 
 export const PriceTimeUnit = {
-    None: 0,
-    Hour: 1,
-    Day: 2,
-    Week: 3,
-    Month: 4,
-    Year: 5,
-    ThreeYears: 6,
+    None: 1,
+    Hour: 2,
+    Day: 3,
+    Week: 4,
+    Month: 5,
+    Year: 6,
+    ThreeYears: 7,
+    Minute: 8,
 } as const;
 
 export type PriceTimeUnit = typeof PriceTimeUnit[keyof typeof PriceTimeUnit];

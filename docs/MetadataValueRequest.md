@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **fieldId** | **number** | The field ID. | [default to undefined]
 **stringValue** | **string** | The string value. | [optional] [default to undefined]
-**numberValue** | **number** | The number value. | [optional] [default to undefined]
+**numberValue** | **number** | The number value: a whole number of at most 2^53-1 (9007199254740991) in magnitude, the largest integer a JSON  client reads exactly. A larger one is refused rather than stored and returned rounded. | [optional] [default to undefined]
 **dateValue** | **string** | The date value. A value without a time zone offset is treated as UTC, the same way the metadata filters treat their date bounds. | [optional] [default to undefined]
 **optionIds** | **Array&lt;string&gt;** | The selected choice option IDs. | [optional] [default to undefined]
 

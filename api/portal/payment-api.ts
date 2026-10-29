@@ -34,6 +34,8 @@ import type { BooleanWrapper } from '../../models';
 // @ts-ignore
 import type { ChangeWalletServiceStateRequestDto } from '../../models';
 // @ts-ignore
+import type { CreateServiceLimitRequestDto } from '../../models';
+// @ts-ignore
 import type { CurrenciesArrayWrapper } from '../../models';
 // @ts-ignore
 import type { CustomerInfoWrapper } from '../../models';
@@ -48,11 +50,15 @@ import type { CustomerServiceUsageReportRequestDto } from '../../models';
 // @ts-ignore
 import type { CustomerServiceUsageReportWrapper } from '../../models';
 // @ts-ignore
+import type { DepositReportWrapper } from '../../models';
+// @ts-ignore
 import type { DocumentBuilderTaskWrapper } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
 // @ts-ignore
 import type { GetPortalPrices200Response } from '../../models';
+// @ts-ignore
+import type { Int32Wrapper } from '../../models';
 // @ts-ignore
 import type { OperationOrderType } from '../../models';
 // @ts-ignore
@@ -76,7 +82,15 @@ import type { RestrictedAiModelsWrapper } from '../../models';
 // @ts-ignore
 import type { SalesRequestDto } from '../../models';
 // @ts-ignore
+import type { ServiceLimitOrderBy } from '../../models';
+// @ts-ignore
+import type { ServiceLimitReportWrapper } from '../../models';
+// @ts-ignore
+import type { ServiceLimitWrapper } from '../../models';
+// @ts-ignore
 import type { ServicePriceArrayWrapper } from '../../models';
+// @ts-ignore
+import type { SetParticipantServiceLimitsRequestDto } from '../../models';
 // @ts-ignore
 import type { SetRestrictedAiModelsRequestDto } from '../../models';
 // @ts-ignore
@@ -93,6 +107,8 @@ import type { TenantWalletSettingsRequestDto } from '../../models';
 import type { TenantWalletSettingsWrapper } from '../../models';
 // @ts-ignore
 import type { TopUpDepositRequestDto } from '../../models';
+// @ts-ignore
+import type { UpdateServiceLimitRequestDto } from '../../models';
 // @ts-ignore
 import type { WalletQuantityRequestDto } from '../../models';
 // @ts-ignore
@@ -388,9 +404,173 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
+         * Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it  applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in  `userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,  and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs  the permission to edit the portal settings as well as DocSpace administrator rights. At least one of  `amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The  call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,  or for the same user, is refused with 409 - change the existing one with  `PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
+         * @summary Create a service limit
+         * @param {CreateServiceLimitRequestDto} [createServiceLimitRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-service-limit/
+         */
+        createServiceLimit: async (createServiceLimitRequestDto?: CreateServiceLimitRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createServiceLimitRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+         * @summary Delete a service limit
+         * @param {number} id The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-service-limit/
+         */
+        deleteServiceLimit: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteServiceLimit', 'id', id)
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+         * @summary Disable the user service limits
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for disableParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/disable-participant-service-limits/
+         */
+        disableParticipantServiceLimits: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/participants/disable`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the price list of one wallet service as the accounting service keeps it: every price record with its  time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take  the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must  be a DocSpace administrator, and the server must have the billing and accounting services configured;  otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list  also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service  with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do  not name. The list is cached for all portals for up to an hour, so a change in the accounting service can  take that long to appear. For the current price of every plan and wallet service as the customer sees it, use  `GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable  accounting service.
          * @summary Get the service prices from the accounting service
-         * @param {string} serviceName The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+         * @param {string} serviceName The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
          * @param {boolean} [active] Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -662,6 +842,87 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
 
             if (refresh !== undefined) {
                 localVarQueryParameter['refresh'] = refresh;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists the top-ups of the portal\'s wallet - the payments into it - one page at a time, which is what a list of  payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and  gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the  invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the  portal creation date and the present moment, a value without `Z` or an offset is read in the portal time  zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next  to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails  with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service  yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with  `hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.  For the full wallet history, charges and refunds included, use  `GET api/2.0/portal/payment/customer/operations`.
+         * @summary Get the wallet top-ups
+         * @param {string} [startDate] The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller\'s; defaults to the portal creation date.
+         * @param {string} [endDate] The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller\'s; defaults to the moment the call is made.
+         * @param {OperationStatus} [status] The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted.
+         * @param {number} [offset] The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted.
+         * @param {number} [limit] The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerDeposits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-deposits/
+         */
+        getCustomerDeposits: async (startDate?: string, endDate?: string, status?: OperationStatus, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/customer/deposits`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString() :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString() :
+                    endDate;
+            }
+
+            if (status !== undefined) {
+                localVarQueryParameter['status'] = status;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -1177,6 +1438,186 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal\'s wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the  call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+         * @summary Get the top-up invoice
+         * @param {number} id The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDepositInvoice operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deposit-invoice/
+         */
+        getDepositInvoice: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getDepositInvoice', 'id', id)
+
+            const localVarPath = `/api/2.0/portal/payment/customer/deposits/{id}/invoice`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the global service limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGlobalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-global-service-limit/
+         */
+        getGlobalServiceLimit: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/global`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the  user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an  installation without a billing service answers 403, a portal with no billing customer answers 404, and the call  is read-only; a portal with no limits gets an empty page. A user\'s own limit wins over the one for every user: an item with the scope `Custom` is a  personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.  Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`  and `limit` page through the result and default to 0 and 25, and the answer repeats them next to  `totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by  default.
+         * @summary Get the user service limits
+         * @param {number} [offset] The number of limits to skip before the first one returned, counted in the sort order of the list.
+         * @param {number} [limit] The largest number of limits one page holds.
+         * @param {ServiceLimitOrderBy} [orderBy] The field the list is sorted by: the user a limit applies to, or the moment it was created.
+         * @param {OperationOrderType} [orderType] The direction the field named in `orderBy` is sorted in.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-participant-service-limits/
+         */
+        getParticipantServiceLimits: async (offset?: number, limit?: number, orderBy?: ServiceLimitOrderBy, orderType?: OperationOrderType, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/participants`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (orderBy !== undefined) {
+                localVarQueryParameter['orderBy'] = orderBy;
+            }
+
+            if (orderType !== undefined) {
+                localVarQueryParameter['orderType'] = orderType;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (`payment.ashx`), and the optional `backUrl` is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with `PUT api/2.0/portal/payment/url` and a payment method is attached with  `GET api/2.0/portal/payment/checkoutsetupurl`.
          * @summary Get the billing account page
          * @param {string} [backUrl] The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page.
@@ -1456,7 +1897,7 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the  money side of the same portal - customer, wallet and balance - starts at  `GET api/2.0/portal/payment/customerinfo`.
+         * Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how  much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan  comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right  after a purchase. The answer is trimmed to the caller\'s user type: a DocSpace administrator or the owner gets  the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and  `statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and  `dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,  `tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are  `GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
          * @summary Get the current plan and limits
          * @param {boolean} [refresh] Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read.
          * @param {*} [options] Override http request option.
@@ -1523,6 +1964,62 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         getRestrictedAiModels: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/ai-model/restrictions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+         * @summary Get a service limit
+         * @param {number} id The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-service-limit/
+         */
+        getServiceLimit: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getServiceLimit', 'id', id)
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1679,6 +2176,58 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
         getTenantWalletSettings: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/portal/payment/topupsettings`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the portal service limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTotalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-total-service-limit/
+         */
+        getTotalServiceLimit: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/total`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1937,6 +2486,62 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(salesRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Sets the same personal spending limit on the AI services for each of the listed portal users in one call,  replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out  to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal  settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be  given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes  at most 1000 users; split a larger group into several calls. Unlike  `PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the  period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal  limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is  the number of personal limits that were set; the result is listed by  `GET api/2.0/portal/payment/servicelimit/participants`.
+         * @summary Set the user service limits
+         * @param {SetParticipantServiceLimitsRequestDto} [setParticipantServiceLimitsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-participant-service-limits/
+         */
+        setParticipantServiceLimits: async (setParticipantServiceLimitsRequestDto?: SetParticipantServiceLimitsRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit/participants`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(setParticipantServiceLimitsRequestDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2324,6 +2929,62 @@ export const PaymentApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with  `enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings  as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so  a threshold once set cannot be removed here - delete the limit with  `DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with  `POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A  switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written  to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was  already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal  or is not a limit on the AI services answers 404.
+         * @summary Update a service limit
+         * @param {UpdateServiceLimitRequestDto} [updateServiceLimitRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-service-limit/
+         */
+        updateServiceLimit: async (updateServiceLimitRequestDto?: UpdateServiceLimitRequestDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/portal/payment/servicelimit`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateServiceLimitRequestDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  Docs Connect - or writes down the quantity that service will have after the next renewal, depending on  `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with `Set` (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. `Renew` and `Sub` are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  Docs Connect Dev Pack at 10, and the administrators may not be fewer than the portal already has - and in  the `Add` form they are checked only while the portal does not hold that service yet. Asking for the Docs Connect  plan in the `Set` form while Docs Connect Dev Pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  `POST api/2.0/settings/docscloud/switchtodevpack`. The result is `true` when the change was accepted; the call  is mutating, spends money in its `Add` form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with `PUT api/2.0/portal/payment/calculatewallet`.
          * @summary Change a wallet service quantity
          * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
@@ -2465,9 +3126,53 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
+         * Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it  applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in  `userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,  and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs  the permission to edit the portal settings as well as DocSpace administrator rights. At least one of  `amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The  call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,  or for the same user, is refused with 409 - change the existing one with  `PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
+         * @summary Create a service limit
+         * @param {CreateServiceLimitRequestDto} [createServiceLimitRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for createServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-service-limit/
+         */
+        async createServiceLimit(createServiceLimitRequestDto?: CreateServiceLimitRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createServiceLimit(createServiceLimitRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.createServiceLimit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+         * @summary Delete a service limit
+         * @param {number} id The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for deleteServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-service-limit/
+         */
+        async deleteServiceLimit(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteServiceLimit(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.deleteServiceLimit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+         * @summary Disable the user service limits
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for disableParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/disable-participant-service-limits/
+         */
+        async disableParticipantServiceLimits(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int32Wrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.disableParticipantServiceLimits(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.disableParticipantServiceLimits']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the price list of one wallet service as the accounting service keeps it: every price record with its  time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take  the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must  be a DocSpace administrator, and the server must have the billing and accounting services configured;  otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list  also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service  with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do  not name. The list is cached for all portals for up to an hour, so a change in the accounting service can  take that long to appear. For the current price of every plan and wallet service as the customer sees it, use  `GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable  accounting service.
          * @summary Get the service prices from the accounting service
-         * @param {string} serviceName The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+         * @param {string} serviceName The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
          * @param {boolean} [active] Whether the answer is narrowed to the prices in force at the moment of the call. Leaving it false also  returns the retired and the not yet started ones, which is what pricing a movement recorded in the past  needs.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2537,6 +3242,25 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerBalance(refresh, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerBalance']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists the top-ups of the portal\'s wallet - the payments into it - one page at a time, which is what a list of  payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and  gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the  invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the  portal creation date and the present moment, a value without `Z` or an offset is read in the portal time  zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next  to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails  with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service  yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with  `hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.  For the full wallet history, charges and refunds included, use  `GET api/2.0/portal/payment/customer/operations`.
+         * @summary Get the wallet top-ups
+         * @param {string} [startDate] The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller\'s; defaults to the portal creation date.
+         * @param {string} [endDate] The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller\'s; defaults to the moment the call is made.
+         * @param {OperationStatus} [status] The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted.
+         * @param {number} [offset] The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted.
+         * @param {number} [limit] The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getCustomerDeposits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-deposits/
+         */
+        async getCustomerDeposits(startDate?: string, endDate?: string, status?: OperationStatus, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DepositReportWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerDeposits(startDate, endDate, status, offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getCustomerDeposits']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2663,6 +3387,53 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal\'s wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the  call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+         * @summary Get the top-up invoice
+         * @param {number} id The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getDepositInvoice operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deposit-invoice/
+         */
+        async getDepositInvoice(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<StringWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDepositInvoice(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getDepositInvoice']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the global service limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getGlobalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-global-service-limit/
+         */
+        async getGlobalServiceLimit(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getGlobalServiceLimit(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getGlobalServiceLimit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the  user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an  installation without a billing service answers 403, a portal with no billing customer answers 404, and the call  is read-only; a portal with no limits gets an empty page. A user\'s own limit wins over the one for every user: an item with the scope `Custom` is a  personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.  Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`  and `limit` page through the result and default to 0 and 25, and the answer repeats them next to  `totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by  default.
+         * @summary Get the user service limits
+         * @param {number} [offset] The number of limits to skip before the first one returned, counted in the sort order of the list.
+         * @param {number} [limit] The largest number of limits one page holds.
+         * @param {ServiceLimitOrderBy} [orderBy] The field the list is sorted by: the user a limit applies to, or the moment it was created.
+         * @param {OperationOrderType} [orderType] The direction the field named in `orderBy` is sorted in.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-participant-service-limits/
+         */
+        async getParticipantServiceLimits(offset?: number, limit?: number, orderBy?: ServiceLimitOrderBy, orderType?: OperationOrderType, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitReportWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getParticipantServiceLimits(offset, limit, orderBy, orderType, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getParticipantServiceLimits']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (`payment.ashx`), and the optional `backUrl` is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with `PUT api/2.0/portal/payment/url` and a payment method is attached with  `GET api/2.0/portal/payment/checkoutsetupurl`.
          * @summary Get the billing account page
          * @param {string} [backUrl] The absolute address the billing account page should offer as its way back. It is appended to the returned  portal-relative address as a query parameter rather than followed here, and omitting it yields the bare  address of the page.
@@ -2737,7 +3508,7 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the  money side of the same portal - customer, wallet and balance - starts at  `GET api/2.0/portal/payment/customerinfo`.
+         * Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how  much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan  comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right  after a purchase. The answer is trimmed to the caller\'s user type: a DocSpace administrator or the owner gets  the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and  `statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and  `dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,  `tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are  `GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
          * @summary Get the current plan and limits
          * @param {boolean} [refresh] Whether the answer is fetched from the billing service instead of the portal cache. The cached copy is what a  start-up needs and costs nothing; asking for a fresh one makes a remote call, so use it right after a  purchase or a top-up and not on every read.
          * @param {*} [options] Override http request option.
@@ -2763,6 +3534,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRestrictedAiModels(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getRestrictedAiModels']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+         * @summary Get a service limit
+         * @param {number} id The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-service-limit/
+         */
+        async getServiceLimit(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getServiceLimit(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getServiceLimit']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2805,6 +3591,20 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getTenantWalletSettings(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTenantWalletSettings']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the portal service limit
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getTotalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-total-service-limit/
+         */
+        async getTotalServiceLimit(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTotalServiceLimit(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.getTotalServiceLimit']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2864,6 +3664,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.sendPaymentRequest(salesRequestDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaymentApi.sendPaymentRequest']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Sets the same personal spending limit on the AI services for each of the listed portal users in one call,  replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out  to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal  settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be  given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes  at most 1000 users; split a larger group into several calls. Unlike  `PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the  period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal  limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is  the number of personal limits that were set; the result is listed by  `GET api/2.0/portal/payment/servicelimit/participants`.
+         * @summary Set the user service limits
+         * @param {SetParticipantServiceLimitsRequestDto} [setParticipantServiceLimitsRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for setParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-participant-service-limits/
+         */
+        async setParticipantServiceLimits(setParticipantServiceLimitsRequestDto?: SetParticipantServiceLimitsRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Int32Wrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.setParticipantServiceLimits(setParticipantServiceLimitsRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.setParticipantServiceLimits']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -2969,6 +3784,21 @@ export const PaymentApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with  `enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings  as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so  a threshold once set cannot be removed here - delete the limit with  `DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with  `POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A  switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written  to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was  already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal  or is not a limit on the AI services answers 404.
+         * @summary Update a service limit
+         * @param {UpdateServiceLimitRequestDto} [updateServiceLimitRequestDto] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for updateServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-service-limit/
+         */
+        async updateServiceLimit(updateServiceLimitRequestDto?: UpdateServiceLimitRequestDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceLimitWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateServiceLimit(updateServiceLimitRequestDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PaymentApi.updateServiceLimit']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  Docs Connect - or writes down the quantity that service will have after the next renewal, depending on  `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with `Set` (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. `Renew` and `Sub` are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  Docs Connect Dev Pack at 10, and the administrators may not be fewer than the portal already has - and in  the `Add` form they are checked only while the portal does not hold that service yet. Asking for the Docs Connect  plan in the `Set` form while Docs Connect Dev Pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  `POST api/2.0/settings/docscloud/switchtodevpack`. The result is `true` when the change was accepted; the call  is mutating, spends money in its `Add` form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with `PUT api/2.0/portal/payment/calculatewallet`.
          * @summary Change a wallet service quantity
          * @param {WalletQuantityRequestDto} [walletQuantityRequestDto] 
@@ -3054,7 +3884,42 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createCustomerServiceUsageReport(requestParameters.customerServiceUsageReportRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the portal\'s automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
+         * Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it  applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in  `userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,  and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs  the permission to edit the portal settings as well as DocSpace administrator rights. At least one of  `amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The  call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,  or for the same user, is refused with 409 - change the existing one with  `PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
+         * @summary Create a service limit
+         * @param {PaymentApiCreateServiceLimitRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for createServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/create-service-limit/
+         * @throws {RequiredError}
+         */
+        createServiceLimit(requestParameters: PaymentApiCreateServiceLimitRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitWrapper> {
+            return localVarFp.createServiceLimit(requestParameters.createServiceLimitRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+         * @summary Delete a service limit
+         * @param {PaymentApiDeleteServiceLimitRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for deleteServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/delete-service-limit/
+         * @throws {RequiredError}
+         */
+        deleteServiceLimit(requestParameters: PaymentApiDeleteServiceLimitRequest, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteServiceLimit(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+         * @summary Disable the user service limits
+         * @param {*} [options] Override http request option.
+         * REST API Reference for disableParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/disable-participant-service-limits/
+         * @throws {RequiredError}
+         */
+        disableParticipantServiceLimits(options?: RawAxiosRequestConfig): AxiosPromise<Int32Wrapper> {
+            return localVarFp.disableParticipantServiceLimits(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the price list of one wallet service as the accounting service keeps it: every price record with its  time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take  the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must  be a DocSpace administrator, and the server must have the billing and accounting services configured;  otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list  also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service  with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do  not name. The list is cached for all portals for up to an hour, so a change in the accounting service can  take that long to appear. For the current price of every plan and wallet service as the customer sees it, use  `GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable  accounting service.
          * @summary Get the service prices from the accounting service
          * @param {PaymentApiGetAccountingServicePricesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3110,6 +3975,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getCustomerBalance(requestParameters: PaymentApiGetCustomerBalanceRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BalanceWrapper> {
             return localVarFp.getCustomerBalance(requestParameters.refresh, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists the top-ups of the portal\'s wallet - the payments into it - one page at a time, which is what a list of  payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and  gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the  invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the  portal creation date and the present moment, a value without `Z` or an offset is read in the portal time  zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next  to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails  with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service  yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with  `hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.  For the full wallet history, charges and refunds included, use  `GET api/2.0/portal/payment/customer/operations`.
+         * @summary Get the wallet top-ups
+         * @param {PaymentApiGetCustomerDepositsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getCustomerDeposits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-customer-deposits/
+         * @throws {RequiredError}
+         */
+        getCustomerDeposits(requestParameters: PaymentApiGetCustomerDepositsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<DepositReportWrapper> {
+            return localVarFp.getCustomerDeposits(requestParameters.startDate, requestParameters.endDate, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the billing customer behind the portal: the e-mail its billing account is registered to, whether a  payment method is stored for it, and the portal user who is the payer of that account. Only a DocSpace  administrator may read it, and the call is read-only. The answer is empty in two ordinary cases - the  installation has no billing service configured at all, and the portal has never been a customer - so an empty  body is not an error. `payer` is filled in only when the billing e-mail belongs to a portal user; when it does  not, the e-mail is still shown but the field stays empty, and that is what makes every payer-only operation of  this group unreachable for everybody. `refresh=true` re-reads the customer from the billing provider instead  of the cache, which is worth doing right after a payment method has been attached.
@@ -3193,6 +4070,41 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCustomerServiceUsageReport(options).then((request) => request(axios, basePath));
         },
         /**
+         * Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal\'s wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the  call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+         * @summary Get the top-up invoice
+         * @param {PaymentApiGetDepositInvoiceRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getDepositInvoice operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-deposit-invoice/
+         * @throws {RequiredError}
+         */
+        getDepositInvoice(requestParameters: PaymentApiGetDepositInvoiceRequest, options?: RawAxiosRequestConfig): AxiosPromise<StringWrapper> {
+            return localVarFp.getDepositInvoice(requestParameters.id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the global service limit
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getGlobalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-global-service-limit/
+         * @throws {RequiredError}
+         */
+        getGlobalServiceLimit(options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitWrapper> {
+            return localVarFp.getGlobalServiceLimit(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the  user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an  installation without a billing service answers 403, a portal with no billing customer answers 404, and the call  is read-only; a portal with no limits gets an empty page. A user\'s own limit wins over the one for every user: an item with the scope `Custom` is a  personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.  Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`  and `limit` page through the result and default to 0 and 25, and the answer repeats them next to  `totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by  default.
+         * @summary Get the user service limits
+         * @param {PaymentApiGetParticipantServiceLimitsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-participant-service-limits/
+         * @throws {RequiredError}
+         */
+        getParticipantServiceLimits(requestParameters: PaymentApiGetParticipantServiceLimitsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitReportWrapper> {
+            return localVarFp.getParticipantServiceLimits(requestParameters.offset, requestParameters.limit, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (`payment.ashx`), and the optional `backUrl` is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with `PUT api/2.0/portal/payment/url` and a payment method is attached with  `GET api/2.0/portal/payment/checkoutsetupurl`.
          * @summary Get the billing account page
          * @param {PaymentApiGetPaymentAccountRequest} requestParameters Request parameters.
@@ -3251,7 +4163,7 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getPortalPrices(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the  money side of the same portal - customer, wallet and balance - starts at  `GET api/2.0/portal/payment/customerinfo`.
+         * Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how  much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan  comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right  after a purchase. The answer is trimmed to the caller\'s user type: a DocSpace administrator or the owner gets  the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and  `statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and  `dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,  `tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are  `GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
          * @summary Get the current plan and limits
          * @param {PaymentApiGetQuotaPaymentInformationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3272,6 +4184,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getRestrictedAiModels(options?: RawAxiosRequestConfig): AxiosPromise<RestrictedAiModelsWrapper> {
             return localVarFp.getRestrictedAiModels(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+         * @summary Get a service limit
+         * @param {PaymentApiGetServiceLimitRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-service-limit/
+         * @throws {RequiredError}
+         */
+        getServiceLimit(requestParameters: PaymentApiGetServiceLimitRequest, options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitWrapper> {
+            return localVarFp.getServiceLimit(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * Reports in money how much of the portal\'s paid subscription period is still unused - the credit that  `POST api/2.0/portal/payment/subscription/movetowallet` would carry over to the wallet if the subscription  were ended now. The portal must have a billing customer and a plan in the paid state; a plan that is not paid  answers 402, and a paid plan without a subscription row gives 404. Only the payer - the portal user whose  e-mail is the billing customer\'s e-mail - may read it, and the call is read-only. The answer states the total  cost of the current period with its currency, the start and the end of that period in UTC, the moment the  unused part is measured up to, the days already elapsed, and the remaining balance both in the subscription  currency and converted to the wallet currency. Every figure is computed for the instant of the request, so it  changes between calls.
@@ -3305,6 +4229,17 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         getTenantWalletSettings(options?: RawAxiosRequestConfig): AxiosPromise<TenantWalletSettingsWrapper> {
             return localVarFp.getTenantWalletSettings(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+         * @summary Get the portal service limit
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getTotalServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-total-service-limit/
+         * @throws {RequiredError}
+         */
+        getTotalServiceLimit(options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitWrapper> {
+            return localVarFp.getTotalServiceLimit(options).then((request) => request(axios, basePath));
         },
         /**
          * Returns one wallet service by name, for a client that already knows which service it needs and does not want  the whole catalogue. `service` is the name of the service - `Storage`, `Backup`, `AITools`, `Admin`,  `DocsCloud`, `DocsCloudDevPack` or `AISearch` - and a name this installation does not sell answers 404.  Nothing has to be called first, the caller needs the permission to edit the portal settings, and the call is  read-only. The answer has the same shape as one item of `GET api/2.0/portal/payment/walletservices` - the  price of a unit, the unit, the limits the service grants and its service name - except that the variants of a  service are not grouped into `innerServices` here, because a single service is looked up directly. The price  is in the currency resolved for the request.
@@ -3352,6 +4287,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.sendPaymentRequest(requestParameters.salesRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Sets the same personal spending limit on the AI services for each of the listed portal users in one call,  replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out  to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal  settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be  given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes  at most 1000 users; split a larger group into several calls. Unlike  `PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the  period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal  limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is  the number of personal limits that were set; the result is listed by  `GET api/2.0/portal/payment/servicelimit/participants`.
+         * @summary Set the user service limits
+         * @param {PaymentApiSetParticipantServiceLimitsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for setParticipantServiceLimits operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/set-participant-service-limits/
+         * @throws {RequiredError}
+         */
+        setParticipantServiceLimits(requestParameters: PaymentApiSetParticipantServiceLimitsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<Int32Wrapper> {
+            return localVarFp.setParticipantServiceLimits(requestParameters.setParticipantServiceLimitsRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Replaces the whole set of AI chat models barred on this portal: the body is the complete set that is to hold,  so adding one restriction means sending the new model together with the ones already restricted, lifting one  means leaving it out, and an empty set lifts them all. Read the current set from  `GET api/2.0/portal/payment/ai-model/restrictions` and the model identifiers from  `GET api/2.0/portal/payment/ai-prices` before calling. The installation needs a billing service and the AI  gateway configured, the portal needs a billing customer and the AI tools wallet service switched on with  `POST api/2.0/portal/payment/servicestate`, and the caller needs the permission to edit the portal settings as  well as DocSpace administrator rights. The call is mutating and idempotent - sending the same set twice leaves  the same state - and it is written to the portal audit trail. It takes effect on the next AI request, so a  conversation already open on a model that has just been barred cannot go on with it. The stored set comes  back in the answer. While AI tools is off the call is refused with 403 instead of being stored, because the  read reports an empty set then and nothing written could be read back.
@@ -3433,6 +4380,18 @@ export const PaymentApiFactory = function (configuration?: Configuration, basePa
          */
         updatePayment(requestParameters: PaymentApiUpdatePaymentRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<BooleanWrapper> {
             return localVarFp.updatePayment(requestParameters.quantityRequestDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with  `enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings  as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so  a threshold once set cannot be removed here - delete the limit with  `DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with  `POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A  switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written  to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was  already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal  or is not a limit on the AI services answers 404.
+         * @summary Update a service limit
+         * @param {PaymentApiUpdateServiceLimitRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for updateServiceLimit operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/update-service-limit/
+         * @throws {RequiredError}
+         */
+        updateServiceLimit(requestParameters: PaymentApiUpdateServiceLimitRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<ServiceLimitWrapper> {
+            return localVarFp.updateServiceLimit(requestParameters.updateServiceLimitRequestDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Buys more units of a wallet service - extra administrators, disk storage, backup, AI tools, AI search or  Docs Connect - or writes down the quantity that service will have after the next renewal, depending on  `productQuantityType`. With `Add` (1) the units are bought at once and paid out of the portal wallet, so the  wallet needs a sub-account in the accounting currency and enough money on it; with `Set` (0) nothing is  charged now and the quantity only takes effect in the next period, where an empty or zero quantity cancels a  change scheduled earlier. `Renew` and `Sub` are not accepted here. The portal needs a billing customer and the  caller has to be a DocSpace administrator; a service that is an add-on to the plan also needs the plan itself  to be paid, otherwise the answer is 402. Minimum quantities apply - disk storage starts at 100 units, the  Docs Connect Dev Pack at 10, and the administrators may not be fewer than the portal already has - and in  the `Add` form they are checked only while the portal does not hold that service yet. Asking for the Docs Connect  plan in the `Set` form while Docs Connect Dev Pack is active schedules the reversion to it at the next period,  while the upgrade in the other direction is not done here at all: use  `POST api/2.0/settings/docscloud/switchtodevpack`. The result is `true` when the change was accepted; the call  is mutating, spends money in its `Add` form and is limited to ten requests a minute per user by default. Price  the same purchase without paying for it with `PUT api/2.0/portal/payment/calculatewallet`.
@@ -3520,13 +4479,41 @@ export interface PaymentApiCreateCustomerServiceUsageReportRequest {
 }
 
 /**
+ * Request parameters for createServiceLimit operation in PaymentApi.
+ * @export
+ * @interface PaymentApiCreateServiceLimitRequest
+ */
+export interface PaymentApiCreateServiceLimitRequest {
+    /**
+     * 
+     * @type {CreateServiceLimitRequestDto}
+     * @memberof PaymentApiCreateServiceLimit
+     */
+    readonly createServiceLimitRequestDto?: CreateServiceLimitRequestDto
+}
+
+/**
+ * Request parameters for deleteServiceLimit operation in PaymentApi.
+ * @export
+ * @interface PaymentApiDeleteServiceLimitRequest
+ */
+export interface PaymentApiDeleteServiceLimitRequest {
+    /**
+     * The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+     * @type {number}
+     * @memberof PaymentApiDeleteServiceLimit
+     */
+    readonly id: number
+}
+
+/**
  * Request parameters for getAccountingServicePrices operation in PaymentApi.
  * @export
  * @interface PaymentApiGetAccountingServicePricesRequest
  */
 export interface PaymentApiGetAccountingServicePricesRequest {
     /**
-     * The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`; a name  the accounting service does not price yields an empty list rather than an error.
+     * The service whose price list is read, named the way the billing catalogue names it, such as `ai-tools` or  `backup`. Take the value from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`.
      * @type {string}
      * @memberof PaymentApiGetAccountingServicePrices
      */
@@ -3573,6 +4560,48 @@ export interface PaymentApiGetCustomerBalanceRequest {
      * @memberof PaymentApiGetCustomerBalance
      */
     readonly refresh?: boolean
+}
+
+/**
+ * Request parameters for getCustomerDeposits operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetCustomerDepositsRequest
+ */
+export interface PaymentApiGetCustomerDepositsRequest {
+    /**
+     * The beginning of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is  read in the portal time zone, not in the caller\'s; defaults to the portal creation date.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerDeposits
+     */
+    readonly startDate?: string
+
+    /**
+     * The end of the period, inclusive, as an ISO 8601 timestamp. A value with neither `Z` nor an offset is read in  the portal time zone, not in the caller\'s; defaults to the moment the call is made.
+     * @type {string}
+     * @memberof PaymentApiGetCustomerDeposits
+     */
+    readonly endDate?: string
+
+    /**
+     * The outcome to keep. A top-up that is still being settled is reported as pending and may change later, while  the other outcomes are final; every outcome is reported when this is omitted.
+     * @type {OperationStatus}
+     * @memberof PaymentApiGetCustomerDeposits
+     */
+    readonly status?: OperationStatus
+
+    /**
+     * The number of top-ups to skip before the first one returned, for walking through a long history page by page.  Counted after the filters are applied, and starts at 0 when omitted.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerDeposits
+     */
+    readonly offset?: number
+
+    /**
+     * The maximum number of top-ups returned in one page. Defaults to 25 when omitted; the answer echoes the window  back next to `totalQuantity`, `totalPage` and `currentPage`, so the next `offset` can be computed without  counting the items.
+     * @type {number}
+     * @memberof PaymentApiGetCustomerDeposits
+     */
+    readonly limit?: number
 }
 
 /**
@@ -3779,6 +4808,55 @@ export interface PaymentApiGetCustomerServiceUsageRequest {
 }
 
 /**
+ * Request parameters for getDepositInvoice operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetDepositInvoiceRequest
+ */
+export interface PaymentApiGetDepositInvoiceRequest {
+    /**
+     * The ID of the top-up, taken from the `id` field of `GET api/2.0/portal/payment/customer/deposits`.
+     * @type {number}
+     * @memberof PaymentApiGetDepositInvoice
+     */
+    readonly id: number
+}
+
+/**
+ * Request parameters for getParticipantServiceLimits operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetParticipantServiceLimitsRequest
+ */
+export interface PaymentApiGetParticipantServiceLimitsRequest {
+    /**
+     * The number of limits to skip before the first one returned, counted in the sort order of the list.
+     * @type {number}
+     * @memberof PaymentApiGetParticipantServiceLimits
+     */
+    readonly offset?: number
+
+    /**
+     * The largest number of limits one page holds.
+     * @type {number}
+     * @memberof PaymentApiGetParticipantServiceLimits
+     */
+    readonly limit?: number
+
+    /**
+     * The field the list is sorted by: the user a limit applies to, or the moment it was created.
+     * @type {ServiceLimitOrderBy}
+     * @memberof PaymentApiGetParticipantServiceLimits
+     */
+    readonly orderBy?: ServiceLimitOrderBy
+
+    /**
+     * The direction the field named in `orderBy` is sorted in.
+     * @type {OperationOrderType}
+     * @memberof PaymentApiGetParticipantServiceLimits
+     */
+    readonly orderType?: OperationOrderType
+}
+
+/**
  * Request parameters for getPaymentAccount operation in PaymentApi.
  * @export
  * @interface PaymentApiGetPaymentAccountRequest
@@ -3842,6 +4920,20 @@ export interface PaymentApiGetQuotaPaymentInformationRequest {
 }
 
 /**
+ * Request parameters for getServiceLimit operation in PaymentApi.
+ * @export
+ * @interface PaymentApiGetServiceLimitRequest
+ */
+export interface PaymentApiGetServiceLimitRequest {
+    /**
+     * The ID of the service limit, as returned in `id` by the operation that created it or by the reads of limits.
+     * @type {number}
+     * @memberof PaymentApiGetServiceLimit
+     */
+    readonly id: number
+}
+
+/**
  * Request parameters for getWalletService operation in PaymentApi.
  * @export
  * @interface PaymentApiGetWalletServiceRequest
@@ -3881,6 +4973,20 @@ export interface PaymentApiSendPaymentRequestRequest {
      * @memberof PaymentApiSendPaymentRequest
      */
     readonly salesRequestDto?: SalesRequestDto
+}
+
+/**
+ * Request parameters for setParticipantServiceLimits operation in PaymentApi.
+ * @export
+ * @interface PaymentApiSetParticipantServiceLimitsRequest
+ */
+export interface PaymentApiSetParticipantServiceLimitsRequest {
+    /**
+     * 
+     * @type {SetParticipantServiceLimitsRequestDto}
+     * @memberof PaymentApiSetParticipantServiceLimits
+     */
+    readonly setParticipantServiceLimitsRequestDto?: SetParticipantServiceLimitsRequestDto
 }
 
 /**
@@ -3937,6 +5043,20 @@ export interface PaymentApiUpdatePaymentRequest {
      * @memberof PaymentApiUpdatePayment
      */
     readonly quantityRequestDto?: QuantityRequestDto
+}
+
+/**
+ * Request parameters for updateServiceLimit operation in PaymentApi.
+ * @export
+ * @interface PaymentApiUpdateServiceLimitRequest
+ */
+export interface PaymentApiUpdateServiceLimitRequest {
+    /**
+     * 
+     * @type {UpdateServiceLimitRequestDto}
+     * @memberof PaymentApiUpdateServiceLimit
+     */
+    readonly updateServiceLimitRequestDto?: UpdateServiceLimitRequestDto
 }
 
 /**
@@ -4021,7 +5141,42 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the portal\'s automatic wallet top-up settings: whether it is switched on, the balance that triggers  it, the balance it tops the wallet up to and the currency it charges in. Only a DocSpace administrator may  read it, no billing customer is needed, and the call is read-only. A portal that has never configured it gets  the defaults rather than an empty result, so `enabled` is the field that says whether anything happens at all.  Two of the values are kept by the portal itself and cannot be set through this API: `lowBalanceThreshold` is  the balance below which the portal warns its administrators by mail, and `lowBalanceNotified` says whether  that warning has already gone out for the current dip. Change the rest with  `POST api/2.0/portal/payment/topupsettings`.
+     * Creates a spending limit on the AI services - AI tools and AI search together - with `scope` saying whom it  applies to: `Total` for the portal as a whole, `Global` for every user separately, `Custom` for the user in  `userId`, which only this scope takes. A personal limit applies to its user instead of the one for every user,  and the limit of the portal is checked on top of both. The portal needs a billing customer, and the caller needs  the permission to edit the portal settings as well as DocSpace administrator rights. At least one of  `amountValue` and `quantityValue` must be given; with both, the services stop as soon as either is reached. The  call is mutating and written to the portal audit trail. It is not idempotent: a second limit of the same scope,  or for the same user, is refused with 409 - change the existing one with  `PUT api/2.0/portal/payment/servicelimit` instead. The scope, the user and the period cannot be changed later.
+     * @summary Create a service limit
+     * @param {PortalPaymentApiCreateServiceLimitRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public createServiceLimit(requestParameters: PaymentApiCreateServiceLimitRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).createServiceLimit(requestParameters.createServiceLimitRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Removes one spending limit on the AI services completely - the limit of the portal as a whole, the one for  every user, or a personal one - so it no longer restricts anyone. The portal needs a billing customer, and the  caller needs the permission to edit the portal settings as well as DocSpace administrator rights. The call is  destructive and cannot be undone: unlike switching a limit off with `PUT api/2.0/portal/payment/servicelimit`,  which keeps its settings, a deleted limit is gone, and a new one has to be created with  `POST api/2.0/portal/payment/servicelimit`. Deleting a personal limit lets the limit for every user apply to  that user. It is written to the portal audit trail. An ID that does not exist, belongs to another portal or is  not a limit on the AI services answers 404, which is also what a repeated deletion of the same limit gets.
+     * @summary Delete a service limit
+     * @param {PortalPaymentApiDeleteServiceLimitRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public deleteServiceLimit(requestParameters: PaymentApiDeleteServiceLimitRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).deleteServiceLimit(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Switches off every personal spending limit on the AI services in one call, so each user falls back to the limit  for every user, if one is set. The limit of the portal as a whole and the one for every user stay as they are.  The portal needs a billing customer, and the caller needs the permission to edit the portal settings as well as  DocSpace administrator rights. The switched-off limits stop restricting their users at once and are kept, so  each can be switched back on with `PUT api/2.0/portal/payment/servicelimit`. The call is mutating and  idempotent - repeating it switches off nothing more - and it is written to the portal audit trail. The answer is  the number of personal limits that were switched off, zero when none was in force. To switch off the limit of a  single user, use `PUT api/2.0/portal/payment/servicelimit` with `enabled` set to false.
+     * @summary Disable the user service limits
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public disableParticipantServiceLimits(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).disableParticipantServiceLimits(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the price list of one wallet service as the accounting service keeps it: every price record with its  time unit, cost and resulting price, volume threshold, validity period, status and discount category. Take  the service name from the `serviceName` field of `GET api/2.0/portal/payment/walletservices`. The caller must  be a DocSpace administrator, and the server must have the billing and accounting services configured;  otherwise the call fails with 403. The call is read-only and can be repeated safely. By default the list  also holds retired and not yet started records; `active=true` keeps only the prices in force now. A service  with no prices comes back as an empty list. Amounts are in the currency of the service, which the records do  not name. The list is cached for all portals for up to an hour, so a change in the accounting service can  take that long to appear. For the current price of every plan and wallet service as the customer sees it, use  `GET api/2.0/portal/payment/quotas`. An unknown service name fails with 500, as does an unreachable  accounting service.
      * @summary Get the service prices from the accounting service
      * @param {PortalPaymentApiGetAccountingServicePricesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4076,6 +5231,18 @@ export class PaymentApi extends BaseAPI {
      */
     public getCustomerBalance(requestParameters: PaymentApiGetCustomerBalanceRequest = {}, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getCustomerBalance(requestParameters.refresh, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists the top-ups of the portal\'s wallet - the payments into it - one page at a time, which is what a list of  payments with their invoices is built from. A portal that is not a billing customer yet has no top-ups and  gets an empty result rather than an error. Only the payer or the portal owner may read it, as with the  invoices, and the call is read-only. Every filter is optional: `startDate` and `endDate` default to the  portal creation date and the present moment, a value without `Z` or an offset is read in the portal time  zone, and `status` narrows to how a top-up ended. `offset` and `limit` default to 0 and 25 and are echoed next  to `totalQuantity`, `totalPage` and `currentPage`; a negative `offset` or a `limit` outside 1 to 100 fails  with 400. An empty result means the portal is not a billing customer, has no wallet at the accounting service  yet, or that service could not be read; a period without top-ups gives an empty `collection`. A top-up with  `hasInvoice` true has an invoice, opened with `GET api/2.0/portal/payment/customer/deposits/{id}/invoice`.  For the full wallet history, charges and refunds included, use  `GET api/2.0/portal/payment/customer/operations`.
+     * @summary Get the wallet top-ups
+     * @param {PortalPaymentApiGetCustomerDepositsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getCustomerDeposits(requestParameters: PaymentApiGetCustomerDepositsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getCustomerDeposits(requestParameters.startDate, requestParameters.endDate, requestParameters.status, requestParameters.offset, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4160,6 +5327,41 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
+     * Hands back the address of the page on which the billing provider shows the invoice for one top-up of the  portal\'s wallet, so a client can open or download it. The top-up is named by the `id` that  `GET api/2.0/portal/payment/customer/deposits` returns, and only one listed there with `hasInvoice` true has an  invoice to show. Only the payer or the portal owner may read it, as with the billing account page, and the  call changes nothing. The address is absolute and points to the billing provider rather than to the portal;  it is asked for anew on every call, so request it when the user is about to open the invoice instead of  storing it. A top-up this portal does not have, one without an invoice, or a portal that is not a billing  customer answers 404, and an `id` that is not a number fails with 400. An installation without a billing  service answers 403, and 402 means the billing or the accounting service rejected the request or did not  answer, which a later retry may get past.
+     * @summary Get the top-up invoice
+     * @param {PortalPaymentApiGetDepositInvoiceRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getDepositInvoice(requestParameters: PaymentApiGetDepositInvoiceRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getDepositInvoice(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the spending limit on the AI services for every user - the same ceiling applied to each user separately,  for any user without a personal limit in force. Only a DocSpace administrator may read it, an installation  without a billing service answers 403, and the call is read-only. It comes without spending, since that is  counted per user: read it for each user from `GET api/2.0/portal/payment/servicelimit/participants`; `periodEnd`  still says when the current period ends for everyone. When no  such limit has been set, or it was deleted, the answer is 200 with a null `response`; create the limit with  `POST api/2.0/portal/payment/servicelimit` and the scope `Global`. A switched-off limit is still returned, with  `enabled` false. A portal with no billing customer answers 404.
+     * @summary Get the global service limit
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getGlobalServiceLimit(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getGlobalServiceLimit(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Lists, one page at a time, the spending limit on the AI services in force for each portal user, with what the  user spent against it in the current period and what is left. Only a DocSpace administrator may read it, an  installation without a billing service answers 403, a portal with no billing customer answers 404, and the call  is read-only; a portal with no limits gets an empty page. A user\'s own limit wins over the one for every user: an item with the scope `Custom` is a  personal limit, one with `Global` the limit for every user, its ID repeated for each user it applies to.  Switched-off limits are not listed, and a user who has not used the AI services yet may be missing. `offset`  and `limit` page through the result and default to 0 and 25, and the answer repeats them next to  `totalQuantity`, `totalPage` and `currentPage`; `orderBy` and `orderType` sort it, the newest limits first by  default.
+     * @summary Get the user service limits
+     * @param {PortalPaymentApiGetParticipantServiceLimitsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getParticipantServiceLimits(requestParameters: PaymentApiGetParticipantServiceLimitsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getParticipantServiceLimits(requestParameters.offset, requestParameters.limit, requestParameters.orderBy, requestParameters.orderType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Hands back the address of the portal page on which the billing account is managed - the payment method on  file, the invoices and the receipts - so a client can link to it instead of assembling the address itself. The  portal must already have a billing customer: one that has never had it gets an empty result, and an  installation without a billing service answers 403. Only the payer or the portal owner may read it, and the  call changes nothing. The value is relative to the portal root (`payment.ashx`), and the optional `backUrl` is  appended to it as a query parameter so the page can send the user back where they came from. It is not a  checkout page: a plan is bought with `PUT api/2.0/portal/payment/url` and a payment method is attached with  `GET api/2.0/portal/payment/checkoutsetupurl`.
      * @summary Get the billing account page
      * @param {PortalPaymentApiGetPaymentAccountRequest} requestParameters Request parameters.
@@ -4218,7 +5420,7 @@ export class PaymentApi extends BaseAPI {
     }
 
     /**
-     * Returns the quota the portal is on right now - its paid plan or the free one - with everything a client needs  to render itself: the price, the features that are switched on, the limits they grant (rooms, storage in  bytes, users, administrators, AI) and how much of each is already used. Every signed-in member of the portal  reads it, so it is not restricted to administrators; only guests are refused with 403. The call is read-only.  The plan is served from the cache by default, which is what a start-up needs; `refresh=true` fetches it from  the billing service instead, so use that right after a purchase and not routinely, because it is a remote  call. The catalogue of the quotas that could be bought instead is `GET api/2.0/portal/payment/quotas`, and the  money side of the same portal - customer, wallet and balance - starts at  `GET api/2.0/portal/payment/customerinfo`.
+     * Returns the quota the portal is on - its paid plan or the free one - with the limits its features grant and how  much of each is already used. Any signed-in member except a guest may call it. The call is read-only; the plan  comes from the cache, and `refresh=true` re-reads it from the billing service, a remote call meant for right  after a purchase. The answer is trimmed to the caller\'s user type: a DocSpace administrator or the owner gets  the price, the due date and all features, a room administrator only the `manager`, `room`, `total_size` and  `statistic` features, and a user only `total_size`. For both of the latter `price` is an empty object and  `dueDate` is omitted, while the storage quota settings (`usersQuota`, `roomsQuota`, `aiAgentsQuota`,  `tenantCustomQuota`) come back as for an administrator. The quotas that could be bought instead are  `GET api/2.0/portal/payment/quotas`. A guest is refused with 403.
      * @summary Get the current plan and limits
      * @param {PortalPaymentApiGetQuotaPaymentInformationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -4238,6 +5440,18 @@ export class PaymentApi extends BaseAPI {
      */
     public getRestrictedAiModels(options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getRestrictedAiModels(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns one spending limit on the AI services of the portal by its ID - the limit of the portal as a whole, the  one for every user, or a personal one. Only a DocSpace administrator may read it, an installation without a  billing service answers 403, and the call is read-only. The limit comes back with its scope, thresholds, their  currency and unit, the period and whether it is in force, but without its spending: that comes with  `GET api/2.0/portal/payment/servicelimit/total` for the portal and with  `GET api/2.0/portal/payment/servicelimit/participants` for each user. A portal with no billing customer, and an  ID that does not exist, belongs to another portal or is not a limit on the AI services, answer 404.
+     * @summary Get a service limit
+     * @param {PortalPaymentApiGetServiceLimitRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getServiceLimit(requestParameters: PaymentApiGetServiceLimitRequest, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getServiceLimit(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4271,6 +5485,17 @@ export class PaymentApi extends BaseAPI {
      */
     public getTenantWalletSettings(options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).getTenantWalletSettings(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the spending limit on the AI services for the portal as a whole - the ceiling the spending of every user  counts towards - together with what was spent against it in the current period and what is left. Only a  DocSpace administrator may read it, an installation without a billing service answers 403, and the call is  read-only. The limit is checked in addition to the limits  of the users, so a user can be stopped by it before reaching their own. The spending includes the expected cost  of AI operations still in progress. When no such limit has been set, or it was deleted, the answer is 200 with a  null `response`; create the limit with `POST api/2.0/portal/payment/servicelimit` and the scope `Total`. A  switched-off limit is still returned, with `enabled` false. A portal with no billing customer answers 404.
+     * @summary Get the portal service limit
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public getTotalServiceLimit(options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).getTotalServiceLimit(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4318,6 +5543,18 @@ export class PaymentApi extends BaseAPI {
      */
     public sendPaymentRequest(requestParameters: PaymentApiSendPaymentRequestRequest = {}, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).sendPaymentRequest(requestParameters.salesRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Sets the same personal spending limit on the AI services for each of the listed portal users in one call,  replacing the personal limit any of them already has and switching it on, so it is how a ceiling is rolled out  to a group of users. The portal needs a billing customer, and the caller needs the permission to edit the portal  settings as well as DocSpace administrator rights. At least one of `amountValue` and `quantityValue` must be  given, every user in `userIds` must exist on the portal, and a user listed twice is limited once. One call takes  at most 1000 users; split a larger group into several calls. Unlike  `PUT api/2.0/portal/payment/servicelimit`, this sets the whole limit: a threshold left out is removed, and the  period may change, though a lifetime limit set to lifetime again keeps counting from where it was. Each personal  limit applies instead of the one for every user, and the limit of the portal is checked on top. The call is mutating and idempotent, and it is written to the portal audit trail. The answer is  the number of personal limits that were set; the result is listed by  `GET api/2.0/portal/payment/servicelimit/participants`.
+     * @summary Set the user service limits
+     * @param {PortalPaymentApiSetParticipantServiceLimitsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public setParticipantServiceLimits(requestParameters: PaymentApiSetParticipantServiceLimitsRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).setParticipantServiceLimits(requestParameters.setParticipantServiceLimitsRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4399,6 +5636,18 @@ export class PaymentApi extends BaseAPI {
      */
     public updatePayment(requestParameters: PaymentApiUpdatePaymentRequest = {}, options?: RawAxiosRequestConfig) {
         return PaymentApiFp(this.configuration).updatePayment(requestParameters.quantityRequestDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Changes the thresholds of an existing spending limit on the AI services, or switches it off and back on with  `enabled`. The portal needs a billing customer, and the caller needs the permission to edit the portal settings  as well as DocSpace administrator rights. Only the given fields change: an omitted threshold keeps its value, so  a threshold once set cannot be removed here - delete the limit with  `DELETE api/2.0/portal/payment/servicelimit/{id}` and create it anew with  `POST api/2.0/portal/payment/servicelimit`, which is also the way to change its scope, user or period. A  switched-off limit stops restricting the AI services at once. The call is mutating and idempotent, it is written  to the portal audit trail, and a new threshold applies from the very next operation; lowering it below what was  already spent blocks the AI services until the period ends. An ID that does not exist, belongs to another portal  or is not a limit on the AI services answers 404.
+     * @summary Update a service limit
+     * @param {PortalPaymentApiUpdateServiceLimitRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PaymentApi
+     */
+    public updateServiceLimit(requestParameters: PaymentApiUpdateServiceLimitRequest = {}, options?: RawAxiosRequestConfig) {
+        return PaymentApiFp(this.configuration).updateServiceLimit(requestParameters.updateServiceLimitRequestDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

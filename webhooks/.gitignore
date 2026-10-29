@@ -1,0 +1,4 @@
+# Per-run logs the generate-webhook-sdk skill writes into generated/; node_modules/ and dist/ are covered by
+# the repository .gitignore. package-lock.json IS committed: the verification installs with npm ci.
+.generate.log
+.verify.log

@@ -44,9 +44,9 @@ export interface AiApproveToolCallRequest {
      */
     'idx': number;
     /**
-     * Snapshot of the assistant message at the time the tool call surfaced.
+     * Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
      */
-    'message': AiThreadMessageLike;
+    'message'?: AiThreadMessageLike;
     /**
      * Per-request engine options: extra tools, reasoning, prompt override.
      */
