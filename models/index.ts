@@ -292,8 +292,6 @@ export * from './check-dest-folder-result';
 export * from './check-dest-folder-wrapper';
 export * from './check-doc-service-url-request-dto';
 export * from './check-fill-form-draft-request';
-export * from './check-move-or-copy-batch-items-dest-folder-id-parameter';
-export * from './check-move-or-copy-batch-items-folder-ids-parameter-inner';
 export * from './check-upload-request';
 export * from './chunked-upload-session-dto';
 export * from './chunked-upload-session-result-dto';

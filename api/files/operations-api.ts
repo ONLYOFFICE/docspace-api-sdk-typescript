@@ -34,10 +34,6 @@ import type { CheckConversionRequestDto } from '../../models';
 // @ts-ignore
 import type { CheckDestFolderWrapper } from '../../models';
 // @ts-ignore
-import type { CheckMoveOrCopyBatchItemsDestFolderIdParameter } from '../../models';
-// @ts-ignore
-import type { CheckMoveOrCopyBatchItemsFolderIdsParameterInner } from '../../models';
-// @ts-ignore
 import type { ChunkedUploadSessionResultWrapper } from '../../models';
 // @ts-ignore
 import type { ChunkedUploadSessionWrapper } from '../../models';
@@ -322,9 +318,9 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
          * @summary Check move or copy conflicts
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {Array<string> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<string> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {string} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
          * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
          * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
          * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
@@ -334,7 +330,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * REST API Reference for checkMoveOrCopyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          */
-        checkMoveOrCopyBatchItems: async (returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkMoveOrCopyBatchItems: async (returnSingleOperation?: boolean, folderIds?: Array<string> | null, fileIds?: Array<string> | null, destFolderId?: string, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/fileops/move`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -380,9 +376,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             }
 
             if (destFolderId !== undefined) {
-                for (const [key, value] of Object.entries(destFolderId)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['destFolderId'] = destFolderId;
             }
 
             if (conflictResolveType !== undefined) {
@@ -416,9 +410,9 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
          * @summary Check the destination folder
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {Array<string> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<string> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {string} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
          * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
          * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
          * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
@@ -428,7 +422,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
          * REST API Reference for checkMoveOrCopyDestFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          */
-        checkMoveOrCopyDestFolder: async (returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkMoveOrCopyDestFolder: async (returnSingleOperation?: boolean, folderIds?: Array<string> | null, fileIds?: Array<string> | null, destFolderId?: string, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/files/fileops/checkdestfolder`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -474,9 +468,7 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
             }
 
             if (destFolderId !== undefined) {
-                for (const [key, value] of Object.entries(destFolderId)) {
-                    localVarQueryParameter[key] = value;
-                }
+                localVarQueryParameter['destFolderId'] = destFolderId;
             }
 
             if (conflictResolveType !== undefined) {
@@ -1660,9 +1652,9 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * Reports which of the requested files and folders already have a same-named entry in `destFolderId`, so that  the clash can be settled before the move or the copy is started. Nothing is moved, copied or changed by the  call, although the address is shared with `PUT api/2.0/files/fileops/move`: the answer is the part of the  request that clashes, and an empty array means the batch would go through without one. The  `conflictResolveType` of the request is not taken into account — clashing items are reported whatever it says  — and encrypted files are left out of the report. A source id that resolves to nothing is not an error and is  passed over. The caller needs create access to the destination: an archived room and a room the caller cannot  write to are refused with 403, a destination that does not exist is answered as missing, and a request without  `destFolderId` is rejected as an invalid request. To learn whether the destination accepts the files at all  use `GET api/2.0/files/fileops/checkdestfolder`.
          * @summary Check move or copy conflicts
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {Array<string> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<string> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {string} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
          * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
          * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
          * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
@@ -1672,7 +1664,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for checkMoveOrCopyBatchItems operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-batch-items/
          */
-        async checkMoveOrCopyBatchItems(returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
+        async checkMoveOrCopyBatchItems(returnSingleOperation?: boolean, folderIds?: Array<string> | null, fileIds?: Array<string> | null, destFolderId?: string, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileEntryBaseArrayWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyBatchItems(returnSingleOperation, folderIds, fileIds, destFolderId, conflictResolveType, deleteAfter, content, toFillOut, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.checkMoveOrCopyBatchItems']?.[localVarOperationServerIndex]?.url;
@@ -1682,9 +1674,9 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * Reports whether the destination folder accepts the listed files, before a move or a copy is started. Only  `fileIds` and `destFolderId` are read from the request: `result` says whether all of the files are accepted,  only some of them or none, and `files` names the ones that are. The check is about what the destination allows  to be stored in it rather than about name clashes — everywhere except a form-filling room every file is  accepted, while a form-filling room accepts only PDF forms, so a text document offered to one comes back as  none accepted. The caller needs create access to the destination, so a room the caller cannot write to and an  archived room are refused with 403, a destination that does not exist is answered as missing, and a request  without `destFolderId` is rejected as an invalid request. Folder ids and the copying options of the request  play no part here. The call changes nothing; for same-named entries at the destination use  `GET api/2.0/files/fileops/move`.
          * @summary Check the destination folder
          * @param {boolean} [returnSingleOperation] Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every operation of the same kind that the caller has running or unread. When nothing was queued, which  happens for an empty selection, `true` falls back to the full list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-         * @param {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-         * @param {CheckMoveOrCopyBatchItemsDestFolderIdParameter} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
+         * @param {Array<string> | null} [folderIds] The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
+         * @param {Array<string> | null} [fileIds] The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
+         * @param {string} [destFolderId] The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
          * @param {FileConflictResolveType} [conflictResolveType] What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
          * @param {boolean} [deleteAfter] Whether the finished operation is still reported: `false` keeps its final record readable through  `GET api/2.0/files/fileops` until it has been read once, `true` drops the record as soon as the work is done.  It deletes nothing: a move takes the sources away in any case, and a copy always leaves them.
          * @param {boolean} [content] What is taken from a listed folder: `false` moves or copies the folder itself, `true` takes only what it  contains, so its files and subfolders land in the destination and the folder is not recreated there.
@@ -1694,7 +1686,7 @@ export const OperationsApiFp = function(configuration?: Configuration) {
          * REST API Reference for checkMoveOrCopyDestFolder operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/check-move-or-copy-dest-folder/
          */
-        async checkMoveOrCopyDestFolder(returnSingleOperation?: boolean, folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null, destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
+        async checkMoveOrCopyDestFolder(returnSingleOperation?: boolean, folderIds?: Array<string> | null, fileIds?: Array<string> | null, destFolderId?: string, conflictResolveType?: FileConflictResolveType, deleteAfter?: boolean, content?: boolean, toFillOut?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CheckDestFolderWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkMoveOrCopyDestFolder(returnSingleOperation, folderIds, fileIds, destFolderId, conflictResolveType, deleteAfter, content, toFillOut, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OperationsApi.checkMoveOrCopyDestFolder']?.[localVarOperationServerIndex]?.url;
@@ -2370,24 +2362,24 @@ export interface OperationsApiCheckMoveOrCopyBatchItemsRequest {
 
     /**
      * The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @type {Array<string>}
      * @memberof OperationsApiCheckMoveOrCopyBatchItems
      */
-    readonly folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+    readonly folderIds?: Array<string> | null
 
     /**
      * The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @type {Array<string>}
      * @memberof OperationsApiCheckMoveOrCopyBatchItems
      */
-    readonly fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+    readonly fileIds?: Array<string> | null
 
     /**
      * The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
-     * @type {CheckMoveOrCopyBatchItemsDestFolderIdParameter}
+     * @type {string}
      * @memberof OperationsApiCheckMoveOrCopyBatchItems
      */
-    readonly destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+    readonly destFolderId?: string
 
     /**
      * What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
@@ -2433,24 +2425,24 @@ export interface OperationsApiCheckMoveOrCopyDestFolderRequest {
 
     /**
      * The folders to move or copy, by id. A number addresses a folder stored in the portal itself, a string  addresses a folder on a connected third-party account, and both kinds may be sent in one list.
-     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @type {Array<string>}
      * @memberof OperationsApiCheckMoveOrCopyDestFolder
      */
-    readonly folderIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+    readonly folderIds?: Array<string> | null
 
     /**
      * The files to move or copy, by id. A number addresses a file stored in the portal itself, a string addresses a  file on a connected third-party account, and both kinds may be sent in one list.
-     * @type {Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner>}
+     * @type {Array<string>}
      * @memberof OperationsApiCheckMoveOrCopyDestFolder
      */
-    readonly fileIds?: Array<CheckMoveOrCopyBatchItemsFolderIdsParameterInner> | null
+    readonly fileIds?: Array<string> | null
 
     /**
      * The folder the items go to, by id — a number for a folder stored in the portal itself, a string for a folder  on a connected third-party account. Take it from a folder listing such as `GET api/2.0/files/@root`; the  caller has to be allowed to create items in it, and the id of a room addresses the root of that room.
-     * @type {CheckMoveOrCopyBatchItemsDestFolderIdParameter}
+     * @type {string}
      * @memberof OperationsApiCheckMoveOrCopyDestFolder
      */
-    readonly destFolderId?: CheckMoveOrCopyBatchItemsDestFolderIdParameter
+    readonly destFolderId?: string
 
     /**
      * What happens to an item whose name is already taken in the destination folder: `skip` leaves it where it is,  `overwrite` replaces the entry at the destination, and `duplicate` places it beside that entry under a name  with a numeric suffix. `GET api/2.0/files/fileops/move` reports which items would clash.
