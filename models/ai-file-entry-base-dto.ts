@@ -126,6 +126,10 @@ export interface AiFileEntryBaseDto {
      * Tells a folder from a file, and so which of the two shapes the rest of the object has. A room is reported as a  folder here.
      */
     'fileEntryType'?: AiFileEntryType;
+    /**
+     * Which concrete type the object is: `file`, `thirdPartyFile`, `folder`, `thirdPartyFolder`. It is what tells the types apart in a list that mixes several of them; a response limited by `fields` may leave it out.
+     */
+    'entryKind'?: string;
 }
 
 
