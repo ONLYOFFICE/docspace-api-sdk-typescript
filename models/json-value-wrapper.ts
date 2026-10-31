@@ -28,9 +28,13 @@ import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices20
 export interface JsonValueWrapper {
     'response'?: any;
     /**
-     * The total number of items in the response
+     * How many items this response carries: the length of the page for a list, 1 for a single object
      */
     'count'?: number;
+    /**
+     * How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+     */
+    'total'?: number;
     /**
      * List of links related to the response
      */
