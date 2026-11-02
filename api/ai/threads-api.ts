@@ -153,7 +153,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project\'s model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
          * @summary Create a chat thread
          * @param {AiThreadsCreateRequest} aiThreadsCreateRequest 
          * @param {*} [options] Override http request option.
@@ -382,7 +382,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
          * @summary List chat threads
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [query] The full-text query the thread list is filtered by.
@@ -442,7 +442,7 @@ export const ThreadsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
          * @summary Open or create
          * @param {AiThreadsOpenOrCreateRequest} aiThreadsOpenOrCreateRequest 
          * @param {*} [options] Override http request option.
@@ -771,7 +771,7 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project\'s model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
          * @summary Create a chat thread
          * @param {AiThreadsCreateRequest} aiThreadsCreateRequest 
          * @param {*} [options] Override http request option.
@@ -848,7 +848,7 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
         /**
          * Lists the threads of a scope, most recently edited first, and searches their titles case-insensitively when `query` is given. Every parameter is optional: omitting `entityId` lists the global scope, and omitting `count` lets the engine apply its own page size. Pagination is by cursor, and the cursor is a JSON object passed as a string in the query - `{id: <last thread id>, lastEditDate: <its date>}` - taken from the last entry of the previous page. A cursor that is not valid JSON, or that lacks an `id`, is ignored rather than rejected, and the read silently starts from the first page again.
          * @summary List chat threads
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {number} [count] The maximum number of items to return in one page.
          * @param {string} [cursor] The keyset pagination cursor: the JSON-encoded sort key of the last item already received. Omit for the first page.
          * @param {string} [query] The full-text query the thread list is filtered by.
@@ -864,7 +864,7 @@ export const ThreadsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
          * @summary Open or create
          * @param {AiThreadsOpenOrCreateRequest} aiThreadsOpenOrCreateRequest 
          * @param {*} [options] Override http request option.
@@ -991,7 +991,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsClearMessages(requestParameters.aiThreadsClearMessagesRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+         * Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project\'s model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
          * @summary Create a chat thread
          * @param {ThreadsApiAiThreadsCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1063,7 +1063,7 @@ export const ThreadsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.aiThreadsList(requestParameters.entityId, requestParameters.count, requestParameters.cursor, requestParameters.query, options).then((request) => request(axios, basePath));
         },
         /**
-         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+         * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
          * @summary Open or create
          * @param {ThreadsApiAiThreadsOpenOrCreateRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1242,7 +1242,7 @@ export interface ThreadsApiAiThreadsGetMessageByIdRequest {
  */
 export interface ThreadsApiAiThreadsListRequest {
     /**
-     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
      * @type {string}
      * @memberof ThreadsApiAiThreadsList
      */
@@ -1407,7 +1407,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Creates a chat thread with a title supplied by the caller and returns it. A scoped thread requires that `entityId` names a room the caller can open, and a model has to resolve for the scope - an explicit `profileId`, or the room\'s `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. In an agent room the agent\'s own assignment overrides any `profileId` sent with the request, so a thread there always starts on the agent\'s model. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
+     * Creates a chat thread with a title supplied by the caller and returns it. `entityId`, when sent, is the AI project the chat runs in and has to name one the caller can chat in; threads themselves are one list per user. A model has to resolve - an explicit `profileId`, the project\'s model, or the `Chat` assignment - otherwise there is nothing to run the thread against and the call answers 404. Use `POST api/2.0/ai/threads/open-or-create` instead when the title should be generated from the first user message.
      * @summary Create a chat thread
      * @param {AIThreadsApiAiThreadsCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1479,7 +1479,7 @@ export class ThreadsApi extends BaseAPI {
     }
 
     /**
-     * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; anything that is not an agent room folds to the global scope instead of being rejected.
+     * Opens a chat thread and returns it with its history, or creates one whose title is generated from the first message supplied in the request. That first message is not persisted: follow up with `POST api/2.0/ai/threads/append-user-message` to store it, or start the round directly with `POST api/2.0/ai/ai/send-with-stream`. Unlike `create` this takes a whole resolved `profile` object rather than an ID, and a request without one answers 404 because no model could be bound. A supplied `entityId` has to be a room the caller can open; threads are one list per user whatever it names.
      * @summary Open or create
      * @param {AIThreadsApiAiThreadsOpenOrCreateRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

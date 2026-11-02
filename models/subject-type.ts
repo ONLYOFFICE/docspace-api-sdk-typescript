@@ -20,7 +20,7 @@
 
 
 /**
- * [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link]
+ * [0 - User, 1 - External link, 2 - Group, 3 - Invitation link, 4 - Primary external link, 5 - Read access to a room linked to an AI project the user is a member of]
  */
 
 export const SubjectType = {
@@ -29,6 +29,7 @@ export const SubjectType = {
     Group: 2,
     InvitationLink: 3,
     PrimaryExternalLink: 4,
+    AiProject: 5,
 } as const;
 
 export type SubjectType = typeof SubjectType[keyof typeof SubjectType];

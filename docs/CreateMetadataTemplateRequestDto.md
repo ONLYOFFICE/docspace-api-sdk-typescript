@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** | The template name. | [default to undefined]
 **visible** | **boolean** | Specifies if the template is visible in the UI pickers. | [optional] [default to undefined]
-**fields** | [**Array&lt;MetadataFieldRequest&gt;**](MetadataFieldRequest.md) | The template metadata fields. | [optional] [default to undefined]
+**fields** | [**Array&lt;MetadataFieldRequest&gt;**](MetadataFieldRequest.md) | The template metadata fields. At least one field is required: a template without fields is not created. | [optional] [default to undefined]
 
 ## Example
 

@@ -76,6 +76,45 @@ export const ContextApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary Get knowledge folders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiContextGetKnowledgeFolders operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
+         */
+        aiContextGetKnowledgeFolders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/ai/context/get-knowledge-folders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication cookieAuth required
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Get room skill
          * @param {string} cloud 
          * @param {string} roomId 
@@ -213,6 +252,20 @@ export const ContextApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Get knowledge folders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for aiContextGetKnowledgeFolders operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
+         */
+        async aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetKnowledgeFolders(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ContextApi.aiContextGetKnowledgeFolders']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary Get room skill
          * @param {string} cloud 
          * @param {string} roomId 
@@ -264,6 +317,17 @@ export const ContextApiFactory = function (configuration?: Configuration, basePa
          */
         aiContextGetContextFolders(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
             return localVarFp.aiContextGetContextFolders(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get knowledge folders
+         * @param {*} [options] Override http request option.
+         * REST API Reference for aiContextGetKnowledgeFolders operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
+         * @throws {RequiredError}
+         */
+        aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+            return localVarFp.aiContextGetKnowledgeFolders(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -357,6 +421,17 @@ export class ContextApi extends BaseAPI {
      */
     public aiContextGetContextFolders(options?: RawAxiosRequestConfig) {
         return ContextApiFp(this.configuration).aiContextGetContextFolders(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Get knowledge folders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ContextApi
+     */
+    public aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig) {
+        return ContextApiFp(this.configuration).aiContextGetKnowledgeFolders(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -20,15 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiFileEntryDtoAllOfAvailableShareRights } from './ai-file-entry-dto-all-of-available-share-rights';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AiFileEntryDtoAllOfSecurity } from './ai-file-entry-dto-all-of-security';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AiFileEntryDtoAllOfShareSettings } from './ai-file-entry-dto-all-of-share-settings';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -42,6 +33,15 @@ import type { FileDtoAllOfViewAccessibility } from './file-dto-all-of-view-acces
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryDto } from './file-entry-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfAvailableShareRights } from './file-entry-dto-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfSecurity } from './file-entry-dto-all-of-security';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfShareSettings } from './file-entry-dto-all-of-share-settings';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryType } from './file-entry-type';

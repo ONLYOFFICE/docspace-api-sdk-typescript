@@ -38,14 +38,15 @@ Name | Type | Description | Notes
 **originTitle** | **string** | The name of the folder the entry was deleted from, for showing where it would be restored to. It is null for  an entry that is not in the trash. | [optional] [default to undefined]
 **originRoomTitle** | **string** | The name of the room the entry was deleted from, null for anything that was not deleted out of a room. | [optional] [default to undefined]
 **canShare** | **boolean** | Whether the calling account may change who has access to the entry, and so whether offering a sharing dialog  for it makes sense. It is false in rooms whose access is fixed by the room itself, such as a private one, even  for its manager. | [optional] [default to undefined]
-**shareSettings** | [**AiFileEntryDtoAllOfShareSettings**](AiFileEntryDtoAllOfShareSettings.md) |  | [optional] [default to undefined]
-**security** | [**AiFileEntryDtoAllOfSecurity**](AiFileEntryDtoAllOfSecurity.md) |  | [optional] [default to undefined]
-**availableShareRights** | [**AiFileEntryDtoAllOfAvailableShareRights**](AiFileEntryDtoAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
+**shareSettings** | [**FileEntryDtoAllOfShareSettings**](FileEntryDtoAllOfShareSettings.md) |  | [optional] [default to undefined]
+**security** | [**FileEntryDtoAllOfSecurity**](FileEntryDtoAllOfSecurity.md) |  | [optional] [default to undefined]
+**availableShareRights** | [**FileEntryDtoAllOfAvailableShareRights**](FileEntryDtoAllOfAvailableShareRights.md) |  | [optional] [default to undefined]
 **requestToken** | **string** | The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link. | [optional] [default to undefined]
 **external** | **boolean** | Set when the link being used was made for this very entry, and false when the entry is reached through a link  to the room around it. It is null when no link is involved. | [optional] [default to undefined]
 **expirationDate** | [**ApiDateTime**](ApiDateTime.md) | When the link being used stops working, written with the offset of the portal\'s time zone. It is null for a  link that never expires and whenever no link is involved. | [optional] [default to undefined]
 **isLinkExpired** | **boolean** | Set when the link being used has already passed its expiration date, which is why the entry cannot be opened  even though it is described here. It is null when no link is involved. | [optional] [default to undefined]
 **assignedMetadataTemplates** | **Array&lt;number&gt;** | The IDs of the metadata templates assigned to the file entry. | [optional] [default to undefined]
+**hasMetadataFields** | **boolean** | Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller\'s rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`. | [optional] [default to undefined]
 **metadataMatches** | [**Array&lt;MetadataMatchDto&gt;**](MetadataMatchDto.md) | Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here. | [optional] [default to undefined]
 
 ## Example
@@ -92,6 +93,7 @@ const instance: FileEntryDto = {
     expirationDate,
     isLinkExpired,
     assignedMetadataTemplates,
+    hasMetadataFields,
     metadataMatches,
 };
 ```

@@ -48,7 +48,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
     
     return {
         /**
-         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
          * @summary Bind a profile to an action
          * @param {AiAssignmentsAssignRequest} aiAssignmentsAssignRequest 
          * @param {*} [options] Override http request option.
@@ -183,15 +183,16 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
          * @summary Get all assignments
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
+         * @param {string} [expand] Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsGetAllAssignments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
          */
-        aiAssignmentsGetAllAssignments: async (entityId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        aiAssignmentsGetAllAssignments: async (entityId?: string, expand?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
 
             const localVarPath = `/api/2.0/ai/assignments/get-all-assignments`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -213,6 +214,10 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
 
             if (entityId !== undefined) {
                 localVarQueryParameter['entityId'] = entityId;
+            }
+
+            if (expand !== undefined) {
+                localVarQueryParameter['expand'] = expand;
             }
 
 
@@ -276,7 +281,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
          * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
          * @summary Resolve for action
          * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsResolveForAction operation
@@ -327,7 +332,7 @@ export const AssignmentsApiAxiosParamCreator = function (configuration?: Configu
          * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
          * @summary Try resolve for action
          * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsTryResolveForAction operation
@@ -430,7 +435,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AssignmentsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
          * @summary Bind a profile to an action
          * @param {AiAssignmentsAssignRequest} aiAssignmentsAssignRequest 
          * @param {*} [options] Override http request option.
@@ -475,16 +480,17 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
          * @summary Get all assignments
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
+         * @param {string} [expand] Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsGetAllAssignments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
          */
-        async aiAssignmentsGetAllAssignments(entityId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: string; }>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsGetAllAssignments(entityId, options);
+        async aiAssignmentsGetAllAssignments(entityId?: string, expand?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: string; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsGetAllAssignments(entityId, expand, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsGetAllAssignments']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -508,7 +514,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
          * Returns the profile that will serve one AI action, falling back to the `Default` slot when the action has no profile of its own. `actionType` is required and has to be one of the known actions - an unknown or misspelled value is rejected rather than resolved to the default. `entityId` narrows the lookup to a room and has to name one the caller can open - an unknown room answers 404 rather than quietly resolving portal-wide - while an accessible room with no assignment of its own degrades to the portal-wide one. When neither slot is set, the slot names a profile that no longer exists, or the `Default` profile cannot serve the action, the call answers 404, so use `GET api/2.0/ai/assignments/try-resolve-for-action` when an unconfigured portal should answer empty instead.
          * @summary Resolve for action
          * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsResolveForAction operation
@@ -524,7 +530,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
          * Returns the profile that will serve one AI action, exactly as `GET api/2.0/ai/assignments/resolve-for-action` does, but answers with an empty result rather than failing when nothing is configured. `actionType` is required and is validated the same way, and `entityId` narrows the lookup to a room the caller can open - an unknown one answers 404 here as well. This is the operation to call when the absence of a profile is a normal state to render - a settings screen, or a feature that hides itself. Both operations are read-only.
          * @summary Try resolve for action
          * @param {string} actionType The AI action the request applies to - one of Default, Chat, Code, Summarization, Translation, TextAnalyze, ImageGeneration, OCR, Vision, FormAnalysis.
-         * @param {string} [entityId] The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+         * @param {string} [entityId] The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiAssignmentsTryResolveForAction operation
@@ -562,7 +568,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = AssignmentsApiFp(configuration)
     return {
         /**
-         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+         * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
          * @summary Bind a profile to an action
          * @param {AssignmentsApiAiAssignmentsAssignRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -598,7 +604,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.aiAssignmentsCascadeProfileDelete(requestParameters.aiAssignmentsCascadeProfileDeleteRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+         * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
          * @summary Get all assignments
          * @param {AssignmentsApiAiAssignmentsGetAllAssignmentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -607,7 +613,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
          * @throws {RequiredError}
          */
         aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: string; }> {
-            return localVarFp.aiAssignmentsGetAllAssignments(requestParameters.entityId, options).then((request) => request(axios, basePath));
+            return localVarFp.aiAssignmentsGetAllAssignments(requestParameters.entityId, requestParameters.expand, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the profile bound to one AI action, without applying the `Default` fallback - an empty answer means this action has no profile of its own, not that nothing is configured. `actionType` is required and is read from the query. Use `GET api/2.0/ai/assignments/resolve-for-action` to learn which profile would actually serve the action. This reads the portal-wide binding and accepts no `entityId`.
@@ -709,11 +715,18 @@ export interface AssignmentsApiAiAssignmentsCascadeProfileDeleteRequest {
  */
 export interface AssignmentsApiAiAssignmentsGetAllAssignmentsRequest {
     /**
-     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsGetAllAssignments
      */
     readonly entityId?: string
+
+    /**
+     * Set to profile to answer the assigned profiles themselves instead of their IDs: `{ assignments, profilesTotal, chatProfilesTotal }`. Omit for the plain ID map.
+     * @type {string}
+     * @memberof AssignmentsApiAiAssignmentsGetAllAssignments
+     */
+    readonly expand?: string
 }
 
 /**
@@ -744,7 +757,7 @@ export interface AssignmentsApiAiAssignmentsResolveForActionRequest {
     readonly actionType: string
 
     /**
-     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsResolveForAction
      */
@@ -765,7 +778,7 @@ export interface AssignmentsApiAiAssignmentsTryResolveForActionRequest {
     readonly actionType: string
 
     /**
-     * The DocSpace entity the request is scoped to - the room, folder or agent workspace the chat is invoked from. Omit for the portal-wide scope.
+     * The DocSpace folder the request names. For a chat it is the AI project the chat runs in, and is omitted outside a project; the settings operations accept it for the room the client is in, which has to be one the caller can open, but their data is kept per user and portal, not per room.
      * @type {string}
      * @memberof AssignmentsApiAiAssignmentsTryResolveForAction
      */
@@ -794,7 +807,7 @@ export interface AssignmentsApiAiAssignmentsUnassignRequest {
  */
 export class AssignmentsApi extends BaseAPI {
     /**
-     * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write: a room\'s own binding is created by the agent that owns it, while reads accept an `entityId`.
+     * Binds a profile to one AI action portal-wide, creating the assignment or replacing it in place, and returns the result. Both `actionType` and `profileId` are required. The profile\'s declared capabilities are checked against the action, so a model that cannot generate images cannot be bound to `ImageGeneration` - the `Default` slot is exempt, because it stands in for every action. There is no room-scoped form of this write; the reads accept an `entityId` for compatibility and answer the same portal-wide bindings.
      * @summary Bind a profile to an action
      * @param {AIAssignmentsApiAiAssignmentsAssignRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -830,7 +843,7 @@ export class AssignmentsApi extends BaseAPI {
     }
 
     /**
-     * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId` narrows it to a room and has to name one the caller can open; a room that is not an agent room degrades to the portal-wide set rather than answering empty, and omitting the parameter reads the portal-wide set directly. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others.
+     * Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
      * @summary Get all assignments
      * @param {AIAssignmentsApiAiAssignmentsGetAllAssignmentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -838,7 +851,7 @@ export class AssignmentsApi extends BaseAPI {
      * @memberof AssignmentsApi
      */
     public aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig) {
-        return AssignmentsApiFp(this.configuration).aiAssignmentsGetAllAssignments(requestParameters.entityId, options).then((request) => request(this.axios, this.basePath));
+        return AssignmentsApiFp(this.configuration).aiAssignmentsGetAllAssignments(requestParameters.entityId, requestParameters.expand, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

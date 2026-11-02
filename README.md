@@ -188,49 +188,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Stream a chat in OpenAI format</td>
       </tr>
     <tr>
-        <td colspan="3" style="text-align: center;"><strong>AgentsApi</strong></td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentscreate"><strong>aiAgentsCreate</strong></a></td>
-        <td><strong>POST</strong> /api/2.0/ai/agents</td>
-        <td>Create an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsdelete"><strong>aiAgentsDelete</strong></a></td>
-        <td><strong>DELETE</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Delete an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsget"><strong>aiAgentsGet</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Get an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentslist"><strong>aiAgentsList</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents</td>
-        <td>List agents</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsnews"><strong>aiAgentsNews</strong></a></td>
-        <td><strong>GET</strong> /api/2.0/ai/agents/news</td>
-        <td>List agent news items</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsresetquota"><strong>aiAgentsResetQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/resetquota</td>
-        <td>Reset agents\' quota</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsupdate"><strong>aiAgentsUpdate</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/{id}</td>
-        <td>Update an agent</td>
-      </tr>
-      <tr>
-        <td><a href="docs/AIAgentsApi.md#aiagentsupdatequota"><strong>aiAgentsUpdateQuota</strong></a></td>
-        <td><strong>PUT</strong> /api/2.0/ai/agents/agentquota</td>
-        <td>Update agents\' quota</td>
-      </tr>
-    <tr>
         <td colspan="3" style="text-align: center;"><strong>AssignmentsApi</strong></td>
       </tr>
       <tr>
@@ -323,6 +280,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/AIContextApi.md#aicontextgetcontextfolders"><strong>aiContextGetContextFolders</strong></a></td>
         <td><strong>GET</strong> /api/2.0/ai/context/get-context-folders</td>
         <td>Get context folders</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIContextApi.md#aicontextgetknowledgefolders"><strong>aiContextGetKnowledgeFolders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/context/get-knowledge-folders</td>
+        <td>Get knowledge folders</td>
       </tr>
       <tr>
         <td><a href="docs/AIContextApi.md#aicontextgetroomskill"><strong>aiContextGetRoomSkill</strong></a></td>
@@ -3123,7 +3085,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
       <tr>
         <td><a href="docs/RoomsApi.md#getroomaifolder"><strong>getRoomAiFolder</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/rooms/{id}/ai</td>
-        <td>Get the .ai folder of a room</td>
+        <td>Get the skills folder of an Instructions room</td>
       </tr>
       <tr>
         <td><a href="docs/RoomsApi.md#getroomcovers"><strong>getRoomCovers</strong></a></td>
@@ -3259,6 +3221,44 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/RoomsApi.md#uploadroomlogo"><strong>uploadRoomLogo</strong></a></td>
         <td><strong>POST</strong> /api/2.0/files/logos</td>
         <td>Upload a room logo image</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>RoomsAIApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#getprojectmodel"><strong>getProjectModel</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/model</td>
+        <td>Get the AI project model</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#getprojectsources"><strong>getProjectSources</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/sources</td>
+        <td>Get the AI project sources</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#getroomskills"><strong>getRoomSkills</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/{id}/skills</td>
+        <td>Get the skills of an AI room</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#getroomsskills"><strong>getRoomsSkills</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/rooms/skills</td>
+        <td>Get the skills of Instructions rooms</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#linkprojectsources"><strong>linkProjectSources</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/files/rooms/{id}/sources</td>
+        <td>Link sources to an AI project</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#setprojectmodel"><strong>setProjectModel</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/files/rooms/{id}/model</td>
+        <td>Set the AI project model</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsAIApi.md#unlinkprojectsources"><strong>unlinkProjectSources</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/files/rooms/{id}/sources</td>
+        <td>Unlink sources from an AI project</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>GroupsApi</strong></td>
@@ -4371,16 +4371,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiActionArgs](docs/AiActionArgs.md)
  - [AiActionArgsPrompt](docs/AiActionArgsPrompt.md)
  - [AiActionType](docs/AiActionType.md)
- - [AiAgentNewItemsDto](docs/AiAgentNewItemsDto.md)
- - [AiAgentsCreateRequest](docs/AiAgentsCreateRequest.md)
- - [AiAgentsDeleteRequest](docs/AiAgentsDeleteRequest.md)
- - [AiAgentsGet200Response](docs/AiAgentsGet200Response.md)
- - [AiAgentsGet200ResponseAllOfResponse](docs/AiAgentsGet200ResponseAllOfResponse.md)
- - [AiAgentsResetQuotaRequest](docs/AiAgentsResetQuotaRequest.md)
- - [AiAgentsUpdateQuotaRequest](docs/AiAgentsUpdateQuotaRequest.md)
- - [AiAgentsUpdateQuotaRequestRoomIdsInner](docs/AiAgentsUpdateQuotaRequestRoomIdsInner.md)
- - [AiAgentsUpdateRequest](docs/AiAgentsUpdateRequest.md)
- - [AiApiDateTime](docs/AiApiDateTime.md)
  - [AiApproveToolCallRequest](docs/AiApproveToolCallRequest.md)
  - [AiAssignmentMutationResult](docs/AiAssignmentMutationResult.md)
  - [AiAssignmentsAssignRequest](docs/AiAssignmentsAssignRequest.md)
@@ -4396,20 +4386,17 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiBulkAssignmentResultErrorsInner](docs/AiBulkAssignmentResultErrorsInner.md)
  - [AiChatEvent](docs/AiChatEvent.md)
  - [AiChatPriceDto](docs/AiChatPriceDto.md)
- - [AiChatSettingsDto](docs/AiChatSettingsDto.md)
  - [AiChatToolPermissionMode](docs/AiChatToolPermissionMode.md)
  - [AiChatToolPrefsScope](docs/AiChatToolPrefsScope.md)
  - [AiConfigDto](docs/AiConfigDto.md)
  - [AiCreateProfileInput](docs/AiCreateProfileInput.md)
  - [AiCreatePromptInput](docs/AiCreatePromptInput.md)
- - [AiDistributedTaskStatus](docs/AiDistributedTaskStatus.md)
  - [AiEditorToolsCall200Response](docs/AiEditorToolsCall200Response.md)
  - [AiEditorToolsCallRequest](docs/AiEditorToolsCallRequest.md)
  - [AiEditorToolsList200Response](docs/AiEditorToolsList200Response.md)
  - [AiEditorToolsList200ResponseToolsInner](docs/AiEditorToolsList200ResponseToolsInner.md)
  - [AiEmbeddingPriceDto](docs/AiEmbeddingPriceDto.md)
  - [AiEmbeddingProviderType](docs/AiEmbeddingProviderType.md)
- - [AiEmployeeDto](docs/AiEmployeeDto.md)
  - [AiEntryMetadata](docs/AiEntryMetadata.md)
  - [AiEntryMetadataCustomFieldsInner](docs/AiEntryMetadataCustomFieldsInner.md)
  - [AiEntryMetadataField](docs/AiEntryMetadataField.md)
@@ -4425,30 +4412,12 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiExportTextToDocx202Response](docs/AiExportTextToDocx202Response.md)
  - [AiExportTextToDocxRequest](docs/AiExportTextToDocxRequest.md)
  - [AiExportTextToDocxRequestFolderId](docs/AiExportTextToDocxRequestFolderId.md)
- - [AiFileEntryBaseDto](docs/AiFileEntryBaseDto.md)
- - [AiFileEntryDto](docs/AiFileEntryDto.md)
- - [AiFileEntryDtoAllOfAvailableShareRights](docs/AiFileEntryDtoAllOfAvailableShareRights.md)
- - [AiFileEntryDtoAllOfSecurity](docs/AiFileEntryDtoAllOfSecurity.md)
- - [AiFileEntryDtoAllOfShareSettings](docs/AiFileEntryDtoAllOfShareSettings.md)
- - [AiFileEntryType](docs/AiFileEntryType.md)
- - [AiFileOperationDto](docs/AiFileOperationDto.md)
- - [AiFileOperationType](docs/AiFileOperationType.md)
- - [AiFileOperationWrapper](docs/AiFileOperationWrapper.md)
- - [AiFileShare](docs/AiFileShare.md)
- - [AiFolderArrayWrapper](docs/AiFolderArrayWrapper.md)
- - [AiFolderContentDto](docs/AiFolderContentDto.md)
- - [AiFolderContentWrapper](docs/AiFolderContentWrapper.md)
- - [AiFolderDto](docs/AiFolderDto.md)
  - [AiFolderMutationResult](docs/AiFolderMutationResult.md)
- - [AiFolderType](docs/AiFolderType.md)
- - [AiFolderWrapper](docs/AiFolderWrapper.md)
  - [AiImagePriceDto](docs/AiImagePriceDto.md)
  - [AiImportError](docs/AiImportError.md)
  - [AiImportMode](docs/AiImportMode.md)
  - [AiImportResult](docs/AiImportResult.md)
  - [AiImportResultImported](docs/AiImportResultImported.md)
- - [AiLogoCoverDto](docs/AiLogoCoverDto.md)
- - [AiLogoDto](docs/AiLogoDto.md)
  - [AiMCPItem](docs/AiMCPItem.md)
  - [AiMetaFill200Response](docs/AiMetaFill200Response.md)
  - [AiMetaFill200ResponseFilledInner](docs/AiMetaFill200ResponseFilledInner.md)
@@ -4463,11 +4432,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiMetaGenerate402Response](docs/AiMetaGenerate402Response.md)
  - [AiMetaGenerateRequest](docs/AiMetaGenerateRequest.md)
  - [AiMetaGenerateRequestId](docs/AiMetaGenerateRequestId.md)
- - [AiMetadataMatchDto](docs/AiMetadataMatchDto.md)
  - [AiMetadataValue](docs/AiMetadataValue.md)
  - [AiModel](docs/AiModel.md)
- - [AiNewItemsAgentNewItemsArrayWrapper](docs/AiNewItemsAgentNewItemsArrayWrapper.md)
- - [AiNewItemsDtoAgentNewItemsDto](docs/AiNewItemsDtoAgentNewItemsDto.md)
  - [AiOpenAIChatCompletionChunk](docs/AiOpenAIChatCompletionChunk.md)
  - [AiOpenAIChoiceDelta](docs/AiOpenAIChoiceDelta.md)
  - [AiOpenAIChunkChoice](docs/AiOpenAIChunkChoice.md)
@@ -4497,6 +4463,13 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiProfilesListProviderModelsRequest](docs/AiProfilesListProviderModelsRequest.md)
  - [AiProfilesTestConnection200Response](docs/AiProfilesTestConnection200Response.md)
  - [AiProfilesTestConnection200ResponseAnyOf](docs/AiProfilesTestConnection200ResponseAnyOf.md)
+ - [AiProjectModel](docs/AiProjectModel.md)
+ - [AiProjectModelDto](docs/AiProjectModelDto.md)
+ - [AiProjectModelProfile](docs/AiProjectModelProfile.md)
+ - [AiProjectModelWrapper](docs/AiProjectModelWrapper.md)
+ - [AiProjectSourceDto](docs/AiProjectSourceDto.md)
+ - [AiProjectSourcesDto](docs/AiProjectSourcesDto.md)
+ - [AiProjectSourcesWrapper](docs/AiProjectSourcesWrapper.md)
  - [AiPrompt](docs/AiPrompt.md)
  - [AiPromptBundle](docs/AiPromptBundle.md)
  - [AiPromptFolder](docs/AiPromptFolder.md)
@@ -4514,14 +4487,15 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiReasoningSupport](docs/AiReasoningSupport.md)
  - [AiRegenerateStreamRequest](docs/AiRegenerateStreamRequest.md)
  - [AiResolvedAssignment](docs/AiResolvedAssignment.md)
- - [AiRoomDataLifetimeDto](docs/AiRoomDataLifetimeDto.md)
- - [AiRoomDataLifetimePeriod](docs/AiRoomDataLifetimePeriod.md)
- - [AiRoomType](docs/AiRoomType.md)
  - [AiSendCustomRequest](docs/AiSendCustomRequest.md)
  - [AiSendRequest](docs/AiSendRequest.md)
  - [AiSendStreamBody](docs/AiSendStreamBody.md)
  - [AiSettingsDto](docs/AiSettingsDto.md)
  - [AiSettingsWrapper](docs/AiSettingsWrapper.md)
+ - [AiSkillDto](docs/AiSkillDto.md)
+ - [AiSkillsDto](docs/AiSkillsDto.md)
+ - [AiSkillsRoomDto](docs/AiSkillsRoomDto.md)
+ - [AiSkillsWrapper](docs/AiSkillsWrapper.md)
  - [AiSuccessResponse](docs/AiSuccessResponse.md)
  - [AiThread](docs/AiThread.md)
  - [AiThreadMessageLike](docs/AiThreadMessageLike.md)
@@ -4557,8 +4531,6 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiVectorizationSettingsWrapper](docs/AiVectorizationSettingsWrapper.md)
  - [AiVectorizationStartTask200Response](docs/AiVectorizationStartTask200Response.md)
  - [AiVectorizationStartTaskRequest](docs/AiVectorizationStartTaskRequest.md)
- - [AiWatermarkAdditions](docs/AiWatermarkAdditions.md)
- - [AiWatermarkDto](docs/AiWatermarkDto.md)
  - [AiWebSearchConfig](docs/AiWebSearchConfig.md)
  - [AiWebSearchConfigure400Response](docs/AiWebSearchConfigure400Response.md)
  - [AiWebSearchConfigureRequest](docs/AiWebSearchConfigureRequest.md)
@@ -4872,6 +4844,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileEntryBaseDto](docs/FileEntryBaseDto.md)
  - [FileEntryBaseWrapper](docs/FileEntryBaseWrapper.md)
  - [FileEntryDto](docs/FileEntryDto.md)
+ - [FileEntryDtoAllOfAvailableShareRights](docs/FileEntryDtoAllOfAvailableShareRights.md)
+ - [FileEntryDtoAllOfSecurity](docs/FileEntryDtoAllOfSecurity.md)
+ - [FileEntryDtoAllOfShareSettings](docs/FileEntryDtoAllOfShareSettings.md)
  - [FileEntryType](docs/FileEntryType.md)
  - [FileKeysDto](docs/FileKeysDto.md)
  - [FileLinkDto](docs/FileLinkDto.md)
@@ -4988,6 +4963,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [LicensorDetailsDto](docs/LicensorDetailsDto.md)
  - [LicensorDetailsWrapper](docs/LicensorDetailsWrapper.md)
  - [LinkAccountRequestDto](docs/LinkAccountRequestDto.md)
+ - [LinkAiProjectSourcesRequest](docs/LinkAiProjectSourcesRequest.md)
  - [LinkType](docs/LinkType.md)
  - [LocationType](docs/LocationType.md)
  - [LockFileRequest](docs/LockFileRequest.md)
@@ -5318,8 +5294,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [TopUpDepositRequestDto](docs/TopUpDepositRequestDto.md)
  - [TransactionInfoDto](docs/TransactionInfoDto.md)
  - [TurnOnAdminMessageSettingsRequestDto](docs/TurnOnAdminMessageSettingsRequestDto.md)
+ - [UnlinkAiProjectSourcesRequest](docs/UnlinkAiProjectSourcesRequest.md)
  - [UpcomingPaymentArrayWrapper](docs/UpcomingPaymentArrayWrapper.md)
  - [UpcomingPaymentDto](docs/UpcomingPaymentDto.md)
+ - [UpdateAiProjectModelRequest](docs/UpdateAiProjectModelRequest.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
  - [UpdateClientRequest](docs/UpdateClientRequest.md)
  - [UpdateCommentRequest](docs/UpdateCommentRequest.md)

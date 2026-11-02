@@ -20,7 +20,6 @@
 
 
 export * from './api/ai/aiapi';
-export * from './api/ai/agents-api';
 export * from './api/ai/assignments-api';
 export * from './api/ai/attachments-api';
 export * from './api/ai/context-api';
@@ -77,6 +76,7 @@ export * from './api/portal/portal-quota-api';
 export * from './api/portal/portal-settings-api';
 export * from './api/portal/users-api';
 export * from './api/rooms/rooms-api';
+export * from './api/rooms/rooms-aiapi';
 export * from './api/rooms/groups-api';
 export * from './api/rooms/privacy-room-api';
 export * from './api/security/security-access-to-dev-tools-api';

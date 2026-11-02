@@ -20,7 +20,7 @@
 
 
 /**
- * [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates]
+ * [Active - Active, Archive - Archive, Any - Any, RecentByLinks - Recent by links, Templates - Template, Knowledge - Knowledge, ResultStorage - Result storage, AiAgents - AiAgents, Forms - Forms, FormTemplates - Form templates, AiHub - AiHub]
  */
 
 export const SearchArea = {
@@ -34,6 +34,7 @@ export const SearchArea = {
     AiAgents: 'AiAgents',
     Forms: 'Forms',
     FormTemplates: 'FormTemplates',
+    AiHub: 'AiHub',
 } as const;
 
 export type SearchArea = typeof SearchArea[keyof typeof SearchArea];

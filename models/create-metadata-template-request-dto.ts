@@ -35,7 +35,7 @@ export interface CreateMetadataTemplateRequestDto {
      */
     'visible'?: boolean;
     /**
-     * The template metadata fields.
+     * The template metadata fields. At least one field is required: a template without fields is not created.
      */
     'fields'?: Array<MetadataFieldRequest> | null;
 }

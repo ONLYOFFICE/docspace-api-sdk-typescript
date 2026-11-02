@@ -1,0 +1,57 @@
+/* tslint:disable */
+/* eslint-disable */
+/**
+ *
+ * (c) Copyright Ascensio System SIA 2026
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiProjectSourcesDto } from './ai-project-sources-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GetPortalPrices200ResponseLinksInner } from './get-portal-prices200-response-links-inner';
+
+/**
+ * The successful API response containing the AiProjectSourcesDto object.
+ */
+export interface AiProjectSourcesWrapper {
+    /**
+     * The AiProjectSourcesDto object returned by the operation.
+     */
+    'response'?: AiProjectSourcesDto;
+    /**
+     * How many items this response carries: the length of the page for a list, 1 for a single object
+     */
+    'count'?: number;
+    /**
+     * How many items the whole list holds across all pages, for working out how many pages to request. Sent only by the operations that page their results, and left out of every other response
+     */
+    'total'?: number;
+    /**
+     * List of links related to the response
+     */
+    'links'?: Array<GetPortalPrices200ResponseLinksInner>;
+    /**
+     * HTTP status code of the response
+     */
+    'status'?: number;
+    /**
+     * HTTP status code of the response (duplicate of status)
+     */
+    'statusCode'?: number;
+}
+

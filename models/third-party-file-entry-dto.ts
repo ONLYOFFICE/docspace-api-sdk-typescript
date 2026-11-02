@@ -20,15 +20,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AiFileEntryDtoAllOfAvailableShareRights } from './ai-file-entry-dto-all-of-available-share-rights';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AiFileEntryDtoAllOfSecurity } from './ai-file-entry-dto-all-of-security';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { AiFileEntryDtoAllOfShareSettings } from './ai-file-entry-dto-all-of-share-settings';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { ApiDateTime } from './api-date-time';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -36,6 +27,15 @@ import type { EmployeeDto } from './employee-dto';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryBaseDto } from './file-entry-base-dto';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfAvailableShareRights } from './file-entry-dto-all-of-available-share-rights';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfSecurity } from './file-entry-dto-all-of-security';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { FileEntryDtoAllOfShareSettings } from './file-entry-dto-all-of-share-settings';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { FileEntryType } from './file-entry-type';
@@ -99,22 +99,22 @@ export type ThirdPartyFileEntryDto = FileEntryBaseDto &  {
     'canShare'?: boolean;
     /**
      * 
-     * @type {AiFileEntryDtoAllOfShareSettings}
+     * @type {FileEntryDtoAllOfShareSettings}
      * @memberof ThirdPartyFileEntryDto
      */
-    'shareSettings'?: AiFileEntryDtoAllOfShareSettings | null;
+    'shareSettings'?: FileEntryDtoAllOfShareSettings | null;
     /**
      * 
-     * @type {AiFileEntryDtoAllOfSecurity}
+     * @type {FileEntryDtoAllOfSecurity}
      * @memberof ThirdPartyFileEntryDto
      */
-    'security'?: AiFileEntryDtoAllOfSecurity | null;
+    'security'?: FileEntryDtoAllOfSecurity | null;
     /**
      * 
-     * @type {AiFileEntryDtoAllOfAvailableShareRights}
+     * @type {FileEntryDtoAllOfAvailableShareRights}
      * @memberof ThirdPartyFileEntryDto
      */
-    'availableShareRights'?: AiFileEntryDtoAllOfAvailableShareRights | null;
+    'availableShareRights'?: FileEntryDtoAllOfAvailableShareRights | null;
     /**
      * The token of the link the entry is being read through, which is the value the external-share operations expect  and which also has to be carried by the download and preview addresses. It is null whenever the entry is not  being read through a link.
      * @type {string}
@@ -145,6 +145,12 @@ export type ThirdPartyFileEntryDto = FileEntryBaseDto &  {
      * @memberof ThirdPartyFileEntryDto
      */
     'assignedMetadataTemplates'?: Array<number> | null;
+    /**
+     * Whether the entry has a metadata field a user can see and fill, by hand or with the AI filling: a field of a  visible assigned template, or a custom field. False when the entry has no metadata, when its assigned templates  are all hidden, or when they have no fields. It says nothing about the values: it stays true once every field is  filled, and nothing about the caller\'s rights: writing the values still needs the right to edit the entry  (`security.Edit`). It cannot be derived from `assignedMetadataTemplates`, which lists hidden templates too and  never lists the custom fields. Present, with a value, in the folder listing and in the file and folder info  responses; absent in the other responses that carry an entry (the answer to a creation, an upload or a rename),  which do not compute it, and for an entry of a third-party storage, which has no metadata. The same flag is  answered by `GET api/2.0/files/metadata/file/{fileId}` and `GET api/2.0/files/metadata/folder/{folderId}`.
+     * @type {boolean}
+     * @memberof ThirdPartyFileEntryDto
+     */
+    'hasMetadataFields'?: boolean | null;
     /**
      * Where the search text of the listing was met in the metadata of the entry: one item per string value holding  the text, in the order of the fields. Present only in a listing filtered by text, and only for the entries whose  metadata contain it; an entry found by its title alone carries nothing here.
      * @type {Array<MetadataMatchDto>}

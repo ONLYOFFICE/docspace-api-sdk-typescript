@@ -3854,7 +3854,7 @@ export interface FoldersApiGetFolderByFolderIdRequest {
 
     /**
      * Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
-     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37>}
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41>}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly folderType?: Array<GetFolderByFolderIdFolderTypeEnum>
@@ -5416,6 +5416,10 @@ export const GetFolderByFolderIdFolderTypeEnum = {
     AiAgents: 34,
     DefaultTemplates: 35,
     Forms: 36,
-    Ai: 37
+    Ai: 37,
+    InstructionsRoom: 38,
+    KnowledgeRoom: 39,
+    AiProjectRoom: 40,
+    AiHub: 41
 } as const;
 export type GetFolderByFolderIdFolderTypeEnum = typeof GetFolderByFolderIdFolderTypeEnum[keyof typeof GetFolderByFolderIdFolderTypeEnum];

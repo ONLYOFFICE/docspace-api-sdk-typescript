@@ -20,7 +20,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getExternalDbSyncStatus**](#getexternaldbsyncstatus) | **GET** /api/2.0/files/rooms/{id}/externaldbsync | Get external DB sync status|
 |[**getNewRoomItems**](#getnewroomitems) | **GET** /api/2.0/files/rooms/{id}/news | Get new items in a room|
 |[**getPublicSettings**](#getpublicsettings) | **GET** /api/2.0/files/roomtemplate/{id}/public | Get room template public access|
-|[**getRoomAiFolder**](#getroomaifolder) | **GET** /api/2.0/files/rooms/{id}/ai | Get the .ai folder of a room|
+|[**getRoomAiFolder**](#getroomaifolder) | **GET** /api/2.0/files/rooms/{id}/ai | Get the skills folder of an Instructions room|
 |[**getRoomCovers**](#getroomcovers) | **GET** /api/2.0/files/rooms/covers | Get room cover gallery|
 |[**getRoomCreatingStatus**](#getroomcreatingstatus) | **GET** /api/2.0/files/rooms/fromtemplate/status | Get the room creation progress|
 |[**getRoomIndexExport**](#getroomindexexport) | **GET** /api/2.0/files/rooms/indexexport | Get the room index export|
@@ -121,7 +121,7 @@ const { status, data } = await apiInstance.addRoomTags(
 # **archiveRoom**
 > FileOperationWrapper archiveRoom()
 
-Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.  Raises the `room.archived` webhook once the queued operation moves the room to the archive, for an AI agent as well.
+Queues a background job that moves one room from the Rooms section to the Archive section, and returns the  operation record of that job. An archived room stays readable to its members and becomes read only: files  cannot be created, renamed or edited in it, and its settings, tags, logo and links can no longer be changed,  which is why many other room operations answer an archived room with a refusal. The caller must be a manager  of the room; administrators of the portal cannot archive a room they were not invited to, and a room template  cannot be archived at all and is answered as missing. Instructions and Knowledge rooms are never archived and  are refused with 403: delete them with `DELETE api/2.0/files/rooms/{id}` instead. The room is not archived when the response arrives: poll  `GET api/2.0/files/fileops` until `finished` is true. Archiving an already archived room is harmless.  `deleteAfter` decides only how long the finished record survives, not what happens to the room. Use  `PUT api/2.0/files/rooms/{id}/unarchive` to bring the room back.  Raises the `room.archived` webhook once the queued operation moves the room to the archive, for an AI agent as well.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/archive-room/).
 
@@ -177,7 +177,7 @@ const { status, data } = await apiInstance.archiveRoom(
 |-------------|-------------|------------------|
 |**200** | The queued archive operation to poll |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | A third-party identifier refers to a storage account that is not connected |  -  |
-|**403** | The caller may not read or archive this room, the id names a folder that is not a room, or a file in the room is locked or being edited |  -  |
+|**403** | The caller may not read or archive this room, the id names a folder that is not a room, the room is an Instructions or Knowledge room, which is never archived, or a file in the room is locked or being edited |  -  |
 |**404** | The room does not exist or is a room template, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
 |**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
@@ -1094,7 +1094,7 @@ const { status, data } = await apiInstance.getPublicSettings(
 # **getRoomAiFolder**
 > FolderContentWrapper getRoomAiFolder()
 
-Returns one page of the contents of the .ai folder that lies in the root of a room, in the same shape as  `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that hold such a folder are listed with  `GET api/2.0/files/rooms?withAiFolder=true`. Any member who can read the room may call it; somebody who cannot  is refused, and a room that does not exist is answered as not found. A room that holds no .ai folder is  answered with an empty page: no files and folders, a zero `total`, no `current` folder and empty `pathParts`.
+Returns one page of the root contents of an Instructions room, whose Markdown files are the skills of the AI  chat, in the same shape as `GET api/2.0/files/{folderId}` returns for any other folder. The rooms that provide  skills are listed with `GET api/2.0/files/rooms?withAiFolder=true` (or `type=10`). Any member who can read the  room may call it; somebody who cannot is refused, and a room that does not exist or is not an Instructions room  is answered as not found.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-ai-folder/).
 
@@ -1102,7 +1102,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **id** | [**number**] | The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. | defaults to undefined|
+| **id** | [**number**] | The Instructions room whose skills are listed, named by the identifier that `GET api/2.0/files/rooms` reports  for it. | defaults to undefined|
 | **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. | (optional) defaults to undefined|
 | **count** | [**number**] | The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | (optional) defaults to undefined|
@@ -1130,7 +1130,7 @@ import {
 const configuration = new Configuration();
 const apiInstance = new RoomsApi(configuration);
 
-let id: number; //The room whose .ai folder is listed, named by the identifier that `GET api/2.0/files/rooms` reports for it. (default to undefined)
+let id: number; //The Instructions room whose skills are listed, named by the identifier that `GET api/2.0/files/rooms` reports  for it. (default to undefined)
 let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, spreadsheets or images. Omit it to list every  kind the folder holds. (optional) (default to undefined)
 let count: number; //The size of one page of the listing. Pair it with `startIndex` to walk through the result, and compare the two  with `total` in the response to see when the last page has been read. (optional) (default to undefined)
 let startIndex: number; //The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional) (default to undefined)
@@ -1158,10 +1158,10 @@ const { status, data } = await apiInstance.getRoomAiFolder(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | One page of the .ai folder contents, with the folder itself and the chain of its parents, or an empty page without `current` when the room holds no .ai folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**200** | One page of the Instructions room root, with the room itself and the chain of its parents |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | A parameter has the wrong type, the `count` is outside its allowed range, or the `startIndex` is negative |  -  |
 |**403** | The caller may not read this room |  -  |
-|**404** | The room does not exist |  -  |
+|**404** | The room does not exist or is not an Instructions room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -1672,7 +1672,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **quotaFilter** | **QuotaFilter** | Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. | (optional) defaults to undefined|
 | **storageFilter** | **StorageFilter** | Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. | (optional) defaults to undefined|
 | **privacyFilter** | **RoomPrivacyFilter** | Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. | (optional) defaults to undefined|
-| **withAiFolder** | [**boolean**] | Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. | (optional) defaults to undefined|
+| **withAiFolder** | [**boolean**] | Keeps only the rooms that provide skills to the AI chat: Instructions rooms, whose Markdown files are read  with `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms of every type. | (optional) defaults to undefined|
 | **count** | [**number**] | How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. | (optional) defaults to undefined|
 | **startIndex** | [**number**] | How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. | (optional) defaults to undefined|
 | **sortBy** | [**string**] | The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account\'s stored order. | (optional) defaults to undefined|
@@ -1714,7 +1714,7 @@ let provider: ProviderFilter; //Keeps only the rooms whose content lives in the 
 let quotaFilter: QuotaFilter; //Splits the rooms by whether a storage quota was set on the room itself or it follows the portal default, which  is how rooms with a custom limit are found. (optional) (default to undefined)
 let storageFilter: StorageFilter; //Splits the rooms by where their content is stored, in the portal itself or in a connected third-party account.  It is the coarse form of the provider filter. (optional) (default to undefined)
 let privacyFilter: RoomPrivacyFilter; //Splits the rooms by whether they are private, that is encrypted rooms whose content the portal cannot read.  Omitting it returns both kinds. (optional) (default to undefined)
-let withAiFolder: boolean; //Keeps only the rooms that hold a .ai folder in their root. The content of that folder is read with  `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms with and without the folder. (optional) (default to undefined)
+let withAiFolder: boolean; //Keeps only the rooms that provide skills to the AI chat: Instructions rooms, whose Markdown files are read  with `GET api/2.0/files/rooms/{id}/ai`. Omitting it returns rooms of every type. (optional) (default to undefined)
 let count: number; //How many rooms one page may carry. Ask for the next page by raising the start index by the number of rooms  already received. (optional) (default to undefined)
 let startIndex: number; //How many matching rooms to skip before the page begins. Page through the answer until the skip plus the rooms  received reaches the total it reports. (optional) (default to undefined)
 let sortBy: string; //The field to order the rooms by, named as in the file listings: `AZ` for the title, `DateAndTime` for the last  change, `DateAndTimeCreation`, `Author`, `Size`, `Type`, `RoomType`, `Tags`, `UsedSpace`, `LastOpened`. The  name is matched ignoring case, an unknown one is rejected rather than ignored, and the accepted one also  becomes this account\'s stored order. (optional) (default to undefined)
@@ -1953,7 +1953,7 @@ const { status, data } = await apiInstance.hasTagLinks(
 # **pinRoom**
 > FolderWrapper pinRoom()
 
-Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI rooms are counted separately against their own allowance; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
+Pins a room to the top of the room list of the calling account and returns the room with the pinned flag set.  Pinning is personal: it changes the order only for the caller, is invisible to the other members of the room,  and does not survive a trip through the Archive section, so an unarchived room has to be pinned again. Pinned  rooms stay above the unpinned ones whatever sorting or filter the listing uses, and their own order between  each other is stable. An account may keep only a limited number of pinned rooms at a time, ten on a portal  with the default configuration, and AI agents and AI rooms are counted separately; a request  over the limit is refused until something is unpinned with `PUT api/2.0/files/rooms/{id}/unpin`. Pinning a  room that is already pinned changes nothing and is safe to repeat. Anybody who can read the room may pin it,  including guests and portal administrators who were never invited, while somebody who is not in the room is  refused, an archived room is rejected and an unknown room is answered as missing.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/pin-room/).
 
@@ -2005,7 +2005,7 @@ const { status, data } = await apiInstance.pinRoom(
 |-------------|-------------|------------------|
 |**200** | The room with its pinned flag set for the caller |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | A third-party identifier refers to a storage account that is not connected |  -  |
-|**403** | The caller cannot read this room, the room is archived or is not a room, or the caller already has the maximum number of pinned rooms (AI agents are counted separately) |  -  |
+|**403** | The caller cannot read this room, the room is archived or is not a room, or the caller already has the maximum number of pinned rooms (AI agents and AI rooms are counted separately) |  -  |
 |**404** | No room with this ID exists, or the id is neither a 32-bit number nor a third-party identifier of a known storage type |  -  |
 |**500** | A third-party identifier carries a storage account number beyond the 32-bit range |  -  |
 |**401** | Unauthorized |  -  |
