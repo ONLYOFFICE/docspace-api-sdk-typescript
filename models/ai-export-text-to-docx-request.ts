@@ -32,5 +32,18 @@ export interface AiExportTextToDocxRequest {
      */
     'content': string;
     'folderId': AiExportTextToDocxRequestFolderId;
+    /**
+     * Output format: `Docx` (the default when omitted), `Pdf`, or `Md`, which stores the markdown verbatim instead of converting it.
+     */
+    'format'?: AiExportTextToDocxRequestFormatEnum;
 }
+
+export const AiExportTextToDocxRequestFormatEnum = {
+    Docx: 'Docx',
+    Pdf: 'Pdf',
+    Md: 'Md',
+} as const;
+
+export type AiExportTextToDocxRequestFormatEnum = typeof AiExportTextToDocxRequestFormatEnum[keyof typeof AiExportTextToDocxRequestFormatEnum];
+
 

@@ -32,6 +32,8 @@ import type { AiAssignmentsAssignRequest } from '../../models';
 // @ts-ignore
 import type { AiAssignmentsCascadeProfileDeleteRequest } from '../../models';
 // @ts-ignore
+import type { AiAssignmentsGetAllAssignments200Response } from '../../models';
+// @ts-ignore
 import type { AiBulkAssignmentResult } from '../../models';
 // @ts-ignore
 import type { AiErrorResponse } from '../../models';
@@ -489,7 +491,7 @@ export const AssignmentsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiAssignmentsGetAllAssignments operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
          */
-        async aiAssignmentsGetAllAssignments(entityId?: string, expand?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: string; }>> {
+        async aiAssignmentsGetAllAssignments(entityId?: string, expand?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiAssignmentsGetAllAssignments200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiAssignmentsGetAllAssignments(entityId, expand, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AssignmentsApi.aiAssignmentsGetAllAssignments']?.[localVarOperationServerIndex]?.url;
@@ -612,7 +614,7 @@ export const AssignmentsApiFactory = function (configuration?: Configuration, ba
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-assignments-get-all-assignments/
          * @throws {RequiredError}
          */
-        aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: string; }> {
+        aiAssignmentsGetAllAssignments(requestParameters: AssignmentsApiAiAssignmentsGetAllAssignmentsRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<AiAssignmentsGetAllAssignments200Response> {
             return localVarFp.aiAssignmentsGetAllAssignments(requestParameters.entityId, requestParameters.expand, options).then((request) => request(axios, basePath));
         },
         /**

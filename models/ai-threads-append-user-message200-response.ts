@@ -18,11 +18,14 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiThreadMessageLike } from './ai-thread-message-like';
 
 export interface AiThreadsAppendUserMessage200Response {
     /**
-     * Identifier of the message that was appended to the thread.
+     * The stored message itself - with its storage-assigned `id` and `createdAt` - despite the field name, which is kept for the clients that already read it. The message ID is `messageId.id`.
      */
-    'messageId': string;
+    'messageId': AiThreadMessageLike;
 }
 

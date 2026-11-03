@@ -62,9 +62,9 @@ const { status, data } = await apiInstance.aiSettingsGet();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiSettingsGetToolMode**
-> AiSuccessResponse aiSettingsGetToolMode()
+> AiToolPermissionModeWrapper aiSettingsGetToolMode()
 
-Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service\'s `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/).
 
@@ -74,7 +74,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**AiSuccessResponse**
+**AiToolPermissionModeWrapper**
 
 ### Authorization
 
@@ -103,7 +103,7 @@ const { status, data } = await apiInstance.aiSettingsGetToolMode();
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The calling user\'s tool permission mode, as `{ mode }`. |  -  |
+|**200** | The calling user\'s tool permission mode, `{ mode }` under `response`. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 |**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**500** | Unhandled failure. The reason is logged server-side and never echoed back. |  -  |
@@ -209,9 +209,9 @@ const { status, data } = await apiInstance.aiSettingsGetVectorization();
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiSettingsSetToolMode**
-> AiSuccessResponse aiSettingsSetToolMode(aiSettingsSetToolModeRequest)
+> AiToolPermissionModeWrapper aiSettingsSetToolMode(aiSettingsSetToolModeRequest)
 
-Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service\'s `response` envelope. The mode applies to every chat of the user in the portal.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/).
 
@@ -224,7 +224,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**AiSuccessResponse**
+**AiToolPermissionModeWrapper**
 
 ### Authorization
 
@@ -257,7 +257,8 @@ const { status, data } = await apiInstance.aiSettingsSetToolMode(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The calling user\'s stored tool permission mode, as `{ mode }`. |  -  |
+|**200** | The calling user\'s stored tool permission mode, `{ mode }` under `response`. |  -  |
+|**400** | `mode` is not one of the `ToolPermissionMode` members. |  -  |
 |**401** | Missing `asc_auth_key` cookie or `Authorization` header. |  -  |
 |**403** | AI is disabled for this portal, the caller is a guest, or the room named by `entityId` is one the caller cannot open. Relayed from the DocSpace AI service or the Files API. |  -  |
 |**413** | The request body is larger than 100 KB, the JSON parser\'s limit on this route. |  -  |

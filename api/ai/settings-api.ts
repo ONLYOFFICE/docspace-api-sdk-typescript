@@ -28,7 +28,7 @@ import type { AiErrorResponse } from '../../models';
 // @ts-ignore
 import type { AiSettingsWrapper } from '../../models';
 // @ts-ignore
-import type { AiSuccessResponse } from '../../models';
+import type { AiToolPermissionModeWrapper } from '../../models';
 // @ts-ignore
 import type { AiUserSettingsWrapper } from '../../models';
 // @ts-ignore
@@ -81,7 +81,7 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service\'s `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
          * @summary Get the tool permission mode
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -198,7 +198,7 @@ export const SettingsApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service\'s `response` envelope. The mode applies to every chat of the user in the portal.
          * @summary Set the tool permission mode
          * @param {{ [key: string]: any | null; }} aiSettingsSetToolModeRequest `{ mode }` with the AI service\'s `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
          * @param {*} [options] Override http request option.
@@ -357,14 +357,14 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service\'s `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
          * @summary Get the tool permission mode
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiSettingsGetToolMode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
          */
-        async aiSettingsGetToolMode(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+        async aiSettingsGetToolMode(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiToolPermissionModeWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsGetToolMode(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsGetToolMode']?.[localVarOperationServerIndex]?.url;
@@ -399,7 +399,7 @@ export const SettingsApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service\'s `response` envelope. The mode applies to every chat of the user in the portal.
          * @summary Set the tool permission mode
          * @param {{ [key: string]: any | null; }} aiSettingsSetToolModeRequest `{ mode }` with the AI service\'s `ToolPermissionMode` enum, proxied unchanged; the service rejects anything outside the enum.
          * @param {*} [options] Override http request option.
@@ -407,7 +407,7 @@ export const SettingsApiFp = function(configuration?: Configuration) {
          * REST API Reference for aiSettingsSetToolMode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
          */
-        async aiSettingsSetToolMode(aiSettingsSetToolModeRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+        async aiSettingsSetToolMode(aiSettingsSetToolModeRequest: { [key: string]: any | null; }, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiToolPermissionModeWrapper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiSettingsSetToolMode(aiSettingsSetToolModeRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SettingsApi.aiSettingsSetToolMode']?.[localVarOperationServerIndex]?.url;
@@ -465,14 +465,14 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiSettingsGet(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+         * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service\'s `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
          * @summary Get the tool permission mode
          * @param {*} [options] Override http request option.
          * REST API Reference for aiSettingsGetToolMode operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-get-tool-mode/
          * @throws {RequiredError}
          */
-        aiSettingsGetToolMode(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+        aiSettingsGetToolMode(options?: RawAxiosRequestConfig): AxiosPromise<AiToolPermissionModeWrapper> {
             return localVarFp.aiSettingsGetToolMode(options).then((request) => request(axios, basePath));
         },
         /**
@@ -498,7 +498,7 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.aiSettingsGetVectorization(options).then((request) => request(axios, basePath));
         },
         /**
-         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+         * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service\'s `response` envelope. The mode applies to every chat of the user in the portal.
          * @summary Set the tool permission mode
          * @param {SettingsApiAiSettingsSetToolModeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -506,7 +506,7 @@ export const SettingsApiFactory = function (configuration?: Configuration, baseP
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-settings-set-tool-mode/
          * @throws {RequiredError}
          */
-        aiSettingsSetToolMode(requestParameters: SettingsApiAiSettingsSetToolModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+        aiSettingsSetToolMode(requestParameters: SettingsApiAiSettingsSetToolModeRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiToolPermissionModeWrapper> {
             return localVarFp.aiSettingsSetToolMode(requestParameters.aiSettingsSetToolModeRequest, options).then((request) => request(axios, basePath));
         },
         /**
@@ -597,7 +597,7 @@ export class SettingsApi extends BaseAPI {
     }
 
     /**
-     * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
+     * Returns the calling user\'s tool permission mode as the DocSpace AI service spells it - `{ mode }` with the service\'s `ToolPermissionMode` enum (`Ask`, `Auto`, `Allow`), inside the service\'s `response` envelope, proxied unchanged. The chat reads the same value in its own spelling through `GET api/2.0/ai/preferences/get-tool-permission-mode`. This is a read-only operation.
      * @summary Get the tool permission mode
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -630,7 +630,7 @@ export class SettingsApi extends BaseAPI {
     }
 
     /**
-     * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum. The mode applies to every chat of the user in the portal.
+     * Stores the calling user\'s tool permission mode and returns the stored result. The body (`{ mode }`) is proxied unchanged to the DocSpace AI service, which rejects a value outside its `ToolPermissionMode` enum with 400; the answer is the stored mode inside the service\'s `response` envelope. The mode applies to every chat of the user in the portal.
      * @summary Set the tool permission mode
      * @param {AISettingsApiAiSettingsSetToolModeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

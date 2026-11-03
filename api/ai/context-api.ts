@@ -24,9 +24,11 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../../base';
 // @ts-ignore
+import type { AiContextFolder } from '../../models';
+// @ts-ignore
 import type { AiErrorResponse } from '../../models';
 // @ts-ignore
-import type { AiSuccessResponse } from '../../models';
+import type { AiRoomSkill } from '../../models';
 /**
  * ContextApi - axios parameter creator
  * @export
@@ -36,7 +38,7 @@ export const ContextApiAxiosParamCreator = function (configuration?: Configurati
     
     return {
         /**
-         * 
+         * Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
          * @summary Get context folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -75,7 +77,7 @@ export const ContextApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
          * @summary Get knowledge folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -114,19 +116,17 @@ export const ContextApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room\'s skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
          * @summary Get room skill
-         * @param {string} cloud 
-         * @param {string} roomId 
-         * @param {string} skillId 
+         * @param {string} roomId The Instructions room identifier.
+         * @param {string} skillId The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
+         * @param {string} [cloud] The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetRoomSkill operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skill/
          */
-        aiContextGetRoomSkill: async (cloud: string, roomId: string, skillId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'cloud' is not null or undefined
-            assertParamExists('aiContextGetRoomSkill', 'cloud', cloud)
+        aiContextGetRoomSkill: async (roomId: string, skillId: string, cloud?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'roomId' is not null or undefined
             assertParamExists('aiContextGetRoomSkill', 'roomId', roomId)
             // verify required parameter 'skillId' is not null or undefined
@@ -174,18 +174,16 @@ export const ContextApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
          * @summary Get room skills
-         * @param {string} cloud 
-         * @param {string} roomId 
+         * @param {string} roomId The Instructions room identifier.
+         * @param {string} [cloud] The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetRoomSkills operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skills/
          */
-        aiContextGetRoomSkills: async (cloud: string, roomId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'cloud' is not null or undefined
-            assertParamExists('aiContextGetRoomSkills', 'cloud', cloud)
+        aiContextGetRoomSkills: async (roomId: string, cloud?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'roomId' is not null or undefined
             assertParamExists('aiContextGetRoomSkills', 'roomId', roomId)
 
@@ -237,62 +235,62 @@ export const ContextApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ContextApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
          * @summary Get context folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetContextFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-context-folders/
          */
-        async aiContextGetContextFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+        async aiContextGetContextFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiContextFolder>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetContextFolders(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ContextApi.aiContextGetContextFolders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
          * @summary Get knowledge folders
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetKnowledgeFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
          */
-        async aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
+        async aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiContextFolder>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetKnowledgeFolders(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ContextApi.aiContextGetKnowledgeFolders']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room\'s skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
          * @summary Get room skill
-         * @param {string} cloud 
-         * @param {string} roomId 
-         * @param {string} skillId 
+         * @param {string} roomId The Instructions room identifier.
+         * @param {string} skillId The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
+         * @param {string} [cloud] The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetRoomSkill operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skill/
          */
-        async aiContextGetRoomSkill(cloud: string, roomId: string, skillId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetRoomSkill(cloud, roomId, skillId, options);
+        async aiContextGetRoomSkill(roomId: string, skillId: string, cloud?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetRoomSkill(roomId, skillId, cloud, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ContextApi.aiContextGetRoomSkill']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
          * @summary Get room skills
-         * @param {string} cloud 
-         * @param {string} roomId 
+         * @param {string} roomId The Instructions room identifier.
+         * @param {string} [cloud] The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for aiContextGetRoomSkills operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skills/
          */
-        async aiContextGetRoomSkills(cloud: string, roomId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AiSuccessResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetRoomSkills(cloud, roomId, options);
+        async aiContextGetRoomSkills(roomId: string, cloud?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AiRoomSkill>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.aiContextGetRoomSkills(roomId, cloud, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ContextApi.aiContextGetRoomSkills']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -308,29 +306,29 @@ export const ContextApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = ContextApiFp(configuration)
     return {
         /**
-         * 
+         * Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
          * @summary Get context folders
          * @param {*} [options] Override http request option.
          * REST API Reference for aiContextGetContextFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-context-folders/
          * @throws {RequiredError}
          */
-        aiContextGetContextFolders(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+        aiContextGetContextFolders(options?: RawAxiosRequestConfig): AxiosPromise<Array<AiContextFolder>> {
             return localVarFp.aiContextGetContextFolders(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
          * @summary Get knowledge folders
          * @param {*} [options] Override http request option.
          * REST API Reference for aiContextGetKnowledgeFolders operation
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-knowledge-folders/
          * @throws {RequiredError}
          */
-        aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
+        aiContextGetKnowledgeFolders(options?: RawAxiosRequestConfig): AxiosPromise<Array<AiContextFolder>> {
             return localVarFp.aiContextGetKnowledgeFolders(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room\'s skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
          * @summary Get room skill
          * @param {ContextApiAiContextGetRoomSkillRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -338,11 +336,11 @@ export const ContextApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skill/
          * @throws {RequiredError}
          */
-        aiContextGetRoomSkill(requestParameters: ContextApiAiContextGetRoomSkillRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiContextGetRoomSkill(requestParameters.cloud, requestParameters.roomId, requestParameters.skillId, options).then((request) => request(axios, basePath));
+        aiContextGetRoomSkill(requestParameters: ContextApiAiContextGetRoomSkillRequest, options?: RawAxiosRequestConfig): AxiosPromise<string> {
+            return localVarFp.aiContextGetRoomSkill(requestParameters.roomId, requestParameters.skillId, requestParameters.cloud, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
          * @summary Get room skills
          * @param {ContextApiAiContextGetRoomSkillsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -350,8 +348,8 @@ export const ContextApiFactory = function (configuration?: Configuration, basePa
          * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/ai-context-get-room-skills/
          * @throws {RequiredError}
          */
-        aiContextGetRoomSkills(requestParameters: ContextApiAiContextGetRoomSkillsRequest, options?: RawAxiosRequestConfig): AxiosPromise<AiSuccessResponse> {
-            return localVarFp.aiContextGetRoomSkills(requestParameters.cloud, requestParameters.roomId, options).then((request) => request(axios, basePath));
+        aiContextGetRoomSkills(requestParameters: ContextApiAiContextGetRoomSkillsRequest, options?: RawAxiosRequestConfig): AxiosPromise<Array<AiRoomSkill>> {
+            return localVarFp.aiContextGetRoomSkills(requestParameters.roomId, requestParameters.cloud, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -363,25 +361,25 @@ export const ContextApiFactory = function (configuration?: Configuration, basePa
  */
 export interface ContextApiAiContextGetRoomSkillRequest {
     /**
-     * 
-     * @type {string}
-     * @memberof ContextApiAiContextGetRoomSkill
-     */
-    readonly cloud: string
-
-    /**
-     * 
+     * The Instructions room identifier.
      * @type {string}
      * @memberof ContextApiAiContextGetRoomSkill
      */
     readonly roomId: string
 
     /**
-     * 
+     * The skill identifier, as `GET api/2.0/ai/context/get-room-skills` lists it.
      * @type {string}
      * @memberof ContextApiAiContextGetRoomSkill
      */
     readonly skillId: string
+
+    /**
+     * The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+     * @type {string}
+     * @memberof ContextApiAiContextGetRoomSkill
+     */
+    readonly cloud?: string
 }
 
 /**
@@ -391,18 +389,18 @@ export interface ContextApiAiContextGetRoomSkillRequest {
  */
 export interface ContextApiAiContextGetRoomSkillsRequest {
     /**
-     * 
-     * @type {string}
-     * @memberof ContextApiAiContextGetRoomSkills
-     */
-    readonly cloud: string
-
-    /**
-     * 
+     * The Instructions room identifier.
      * @type {string}
      * @memberof ContextApiAiContextGetRoomSkills
      */
     readonly roomId: string
+
+    /**
+     * The account the room belongs to. Only `docspace`, this portal, exists, and the value is not read; omit it.
+     * @type {string}
+     * @memberof ContextApiAiContextGetRoomSkills
+     */
+    readonly cloud?: string
 }
 
 /**
@@ -413,7 +411,7 @@ export interface ContextApiAiContextGetRoomSkillsRequest {
  */
 export class ContextApi extends BaseAPI {
     /**
-     * 
+     * Lists the Instructions rooms the caller can connect to a chat as context, grouped under the account they belong to (`docspace` for this portal). Only a room the caller can read that holds at least one skill is listed: one without skills would connect nothing. An empty list means there is nothing to connect. At most 1000 Instructions rooms are read; any beyond them are left out without a signal. Read the skills of one room with `GET api/2.0/ai/context/get-room-skills`. This is a read-only operation.
      * @summary Get context folders
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -424,7 +422,7 @@ export class ContextApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Lists the Knowledge rooms the caller can connect to a chat as its knowledge base, grouped under the account they belong to (`docspace` for this portal). A connected Knowledge room limits the knowledge search of a round to it (`actionArgs.knowledgeRooms`). An empty list means there is none the caller can read. At most 1000 Knowledge rooms are listed; any beyond them are left out without a signal. This is a read-only operation.
      * @summary Get knowledge folders
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -435,7 +433,7 @@ export class ContextApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns the Markdown file of one skill of an Instructions room as a JSON string. `roomId` and `skillId` are required, and the skill has to be one of that room\'s skills: the ID of any other file, readable or not, answers 404, as does a room that is not an Instructions room the caller can read. Only the first 256 KiB of the file are read, which covers the 64 K characters a chat passes to the model; a longer file comes back cut there without a signal. This is a read-only operation.
      * @summary Get room skill
      * @param {AIContextApiAiContextGetRoomSkillRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -443,11 +441,11 @@ export class ContextApi extends BaseAPI {
      * @memberof ContextApi
      */
     public aiContextGetRoomSkill(requestParameters: ContextApiAiContextGetRoomSkillRequest, options?: RawAxiosRequestConfig) {
-        return ContextApiFp(this.configuration).aiContextGetRoomSkill(requestParameters.cloud, requestParameters.roomId, requestParameters.skillId, options).then((request) => request(this.axios, this.basePath));
+        return ContextApiFp(this.configuration).aiContextGetRoomSkill(requestParameters.roomId, requestParameters.skillId, requestParameters.cloud, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
+     * Lists the skills of one Instructions room: the ID, name and description from the frontmatter of each skill file, not its body. `roomId` is required; `cloud` is accepted and not read. A room that is not an Instructions room the caller can read answers 404. Read the body of one skill with `GET api/2.0/ai/context/get-room-skill`. This is a read-only operation.
      * @summary Get room skills
      * @param {AIContextApiAiContextGetRoomSkillsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -455,7 +453,7 @@ export class ContextApi extends BaseAPI {
      * @memberof ContextApi
      */
     public aiContextGetRoomSkills(requestParameters: ContextApiAiContextGetRoomSkillsRequest, options?: RawAxiosRequestConfig) {
-        return ContextApiFp(this.configuration).aiContextGetRoomSkills(requestParameters.cloud, requestParameters.roomId, options).then((request) => request(this.axios, this.basePath));
+        return ContextApiFp(this.configuration).aiContextGetRoomSkills(requestParameters.roomId, requestParameters.cloud, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

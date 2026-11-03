@@ -18,11 +18,25 @@
  *
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { AiChatErrorPayload } from './ai-chat-error-payload';
 
 /**
  * Delivery/generation status of the message.
  */
 export interface AiThreadMessageLikeStatus {
+    /**
+     * `running`, `requires-action`, `complete` or `incomplete`.
+     */
     'type': string;
+    /**
+     * Why the message is in that state: `tool-calls` or `interrupt` for `requires-action`; `stop` or `unknown` for `complete`; `cancelled`, `tool-calls`, `length`, `content-filter`, `other` or `error` for `incomplete`. An `incomplete` message the chat stored carries `cancelled` (the round was stopped) or `error`.
+     */
+    'reason'?: string;
+    /**
+     * What failed, on an `incomplete` message whose `reason` is `error`.
+     */
+    'error'?: AiChatErrorPayload;
 }
 

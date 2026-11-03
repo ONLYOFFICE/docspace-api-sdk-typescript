@@ -1,6 +1,6 @@
 # AiWebSearchMutationResult
 
-Outcome of `WebSearchEngine.configure` — either the persisted config or a field-scoped error suitable for the settings form.
+The outcome of storing a web-search configuration: the stored configuration, or an error naming the field that was refused.
 
 ## Properties
 

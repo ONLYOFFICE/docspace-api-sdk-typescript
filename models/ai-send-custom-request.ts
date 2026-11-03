@@ -36,8 +36,12 @@ export interface AiSendCustomRequest {
     'systemPrompt': string;
     'userMessage': AiThreadMessageLike;
     /**
-     * Per-request engine options: extra tools, reasoning, prompt override.
+     * Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
      */
     'actionArgs'?: AiActionArgs;
+    /**
+     * Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used.
+     */
+    'profileId'?: string;
 }
 

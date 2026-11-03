@@ -1,6 +1,6 @@
 # AiCreatePromptInput
 
-Input for creating a prompt — the engine generates `id`/`createdAt`/`updatedAt`.
+Input for creating a prompt; the service fills in `id`, `createdAt` and `updatedAt`.
 
 ## Properties
 

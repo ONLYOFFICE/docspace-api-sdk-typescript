@@ -1,6 +1,6 @@
 # AiImportError
 
-Per-entry error reported by `PromptsEngine.importBundle`.
+One refused entry of a prompt bundle import.
 
 ## Properties
 

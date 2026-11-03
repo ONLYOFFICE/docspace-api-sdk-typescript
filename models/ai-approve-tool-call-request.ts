@@ -44,17 +44,21 @@ export interface AiApproveToolCallRequest {
      */
     'idx': number;
     /**
-     * Snapshot of the assistant message at the time the tool call surfaced. Optional and ignored: the engine resumes from the stored message, and the copy inflated the body past the parser limit (Bug 84608).
+     * A copy of the assistant message as it was when the tool call surfaced. Optional and ignored: the round resumes from the stored message. Leave it out - a long conversation\'s copy can push the body past the size limit.
      */
     'message'?: AiThreadMessageLike;
     /**
-     * Per-request engine options: extra tools, reasoning, prompt override.
+     * Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
      */
     'actionArgs'?: AiActionArgs;
     /**
      * Optional entity (room) scope for profile resolution.
      */
     'entityId'?: string;
+    /**
+     * The folder or room the user is in. Tools run against it and the model is told it is the user\'s location; falls back to `entityId` when omitted.
+     */
+    'contextEntityId'?: string;
     /**
      * Session-level profile override for this request only.
      */

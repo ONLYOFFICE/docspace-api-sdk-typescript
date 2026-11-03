@@ -29,7 +29,7 @@ import type { AiProviderType } from './ai-provider-type';
 import type { AiReasoningSupport } from './ai-reasoning-support';
 
 /**
- * Input for creating a new profile — the same shape as `Profile` without the engine-generated fields (`id`, `createdAt`).
+ * Input for creating a new profile: the shape of a profile without the fields the service fills in (`id`, `createdAt`).
  */
 export interface AiCreateProfileInput {
     /**
@@ -37,7 +37,7 @@ export interface AiCreateProfileInput {
      */
     'name': string;
     /**
-     * Provider type for this profile. Use `external` to delegate all HTTP transport to `PlatformAdapter.externalFetch` while reusing an existing provider\'s response parser — see `Profile.basedOn` for the format selector.
+     * The provider type of the profile. `external` sends every request through a transport the embedding application supplies while parsing the answers with the provider named in `basedOn`.
      */
     'providerType': AiProviderType;
     /**
@@ -65,7 +65,7 @@ export interface AiCreateProfileInput {
      */
     'reasoning'?: boolean;
     /**
-     * Extended-thinking capabilities of the selected model as reported by the provider\'s catalogue at save time (see `Model.reasoningSupport`). When present the composer\'s Effort row follows it exactly; when absent the provider\'s id-based table answers. Hosts persist it with the rest of the profile.
+     * What the model can do with extended thinking, as the provider\'s catalogue reported it when the profile was saved; the effort choices in the chat follow it. When absent, the abilities are taken from the model ID.
      */
     'reasoningSupport'?: AiReasoningSupport;
     /**
@@ -85,7 +85,7 @@ export interface AiCreateProfileInput {
      */
     'isCloudProvider'?: boolean;
     /**
-     * Route every provider request through the host\'s `fetchProxy` instead of the global `fetch`. Useful when the host runs the widget in a sandbox without direct network access (CORS, custom auth, etc.). Has no effect when the `PlatformAdapter.fetchProxy` is not configured.
+     * Whether the chat client sends this profile\'s provider requests through the portal\'s proxy instead of directly. Has no effect when no proxy is configured.
      */
     'useProxy'?: boolean;
 }

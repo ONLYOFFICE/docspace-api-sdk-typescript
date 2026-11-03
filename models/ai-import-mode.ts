@@ -20,7 +20,7 @@
 
 
 /**
- * Mode passed to `PromptsEngine.importBundle`.
+ * How an imported prompt bundle meets the library: `merge` adds to it, `replace` replaces it.
  */
 
 export const AiImportMode = {

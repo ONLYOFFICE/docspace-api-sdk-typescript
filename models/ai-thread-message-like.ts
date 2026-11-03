@@ -44,11 +44,11 @@ export interface AiThreadMessageLike {
     'createdAt'?: string;
     'status'?: AiThreadMessageLikeStatus;
     /**
-     * Arbitrary per-message metadata.
+     * Per-message metadata. The chat library writes `custom` (with the round\'s `contextEntityId`) and `steps` (token usage per provider request); `unstable_state`, `unstable_annotations`, `unstable_data` and `submittedFeedback` may appear as well. Read it as an open map.
      */
     'metadata'?: object;
     /**
-     * Attachments linked to the message.
+     * Attachments linked to the message (`id`, `type`, `name`, `contentType`, `status`, `content`). Read them as open objects.
      */
     'attachments'?: Array<object>;
 }

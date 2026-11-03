@@ -190,7 +190,7 @@ const { status, data } = await apiInstance.aiAssignmentsCascadeProfileDelete(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **aiAssignmentsGetAllAssignments**
-> { [key: string]: string; } aiAssignmentsGetAllAssignments()
+> AiAssignmentsGetAllAssignments200Response aiAssignmentsGetAllAssignments()
 
 Returns every action-to-profile binding of a scope as one map, which is what a settings screen loads. `entityId`, when sent, has to name a room the caller can open; the bindings are portal-wide, so the answer is the same set with or without it. Actions with no binding are simply absent from the map. The `Default` slot is reported as an entry of its own rather than being folded into the others. With `expand=profile` the answer is `{ assignments, profilesTotal, chatProfilesTotal }`: the assigned profiles themselves (as `GET api/2.0/ai/profiles/list` describes them) keyed by action, a binding whose profile no longer exists left out, plus how many profiles the portal has and how many of them can chat; this is the one read a chat needs to start.
 
@@ -206,7 +206,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-**{ [key: string]: string; }**
+**AiAssignmentsGetAllAssignments200Response**
 
 ### Authorization
 

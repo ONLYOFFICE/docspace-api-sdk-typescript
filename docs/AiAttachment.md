@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** | Storage-assigned UUID. | [default to undefined]
 **kind** | **string** | file | image. | [default to undefined]
-**source** | **string** | Origin of the attachment. `user` — uploaded by the user in the composer (the default when unset, for backward compatibility). `tool` — produced by a tool call (e.g. `generate_image`). Lets the integrator\'s adapter route or apply policies (separate bucket, quotas, TTL, CDN) per source. | [optional] [default to undefined]
+**source** | **string** | Where the attachment came from: `user` - attached by the user (also when unset); `tool` - produced by a tool call (for example `generate_image`). | [optional] [default to undefined]
 **title** | **string** | Display label (filename or user-visible title). | [default to undefined]
 **content** | **string** | Extracted text for files. | [optional] [default to undefined]
 **base64** | **string** | Base64 data URL for images. | [optional] [default to undefined]
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **type** | **number** | ONLYOFFICE file type code (for files). | [optional] [default to undefined]
 **messageId** | **string** | Owning message id once linked. Unset while the attachment is a draft. | [optional] [default to undefined]
 **threadId** | **string** | Owning thread id once linked. Unset while the attachment is a draft. | [optional] [default to undefined]
-**entityId** | **string** | Opaque scope token (entity / room) the attachment was created in. Drafts carry it so an entity switch keeps in-flight composer state isolated; once linked to a message the field is redundant with the thread\'s own entity binding. | [optional] [default to undefined]
+**entityId** | **string** | The room or folder the attachment was created in, as an opaque token; once the attachment is bound to a message it repeats the thread\'s own scope. | [optional] [default to undefined]
 **createdAt** | **number** | Storage-assigned creation timestamp. | [default to undefined]
 **canAnalyze** | **boolean** | Whether the attached form can be analyzed. | [optional] [default to undefined]
 **formKeys** | [**Array&lt;AiAttachmentFormKeysInner&gt;**](AiAttachmentFormKeysInner.md) | Keys of the fields inside the form. `key` is the field identifier, `text` its human-readable label. | [optional] [default to undefined]

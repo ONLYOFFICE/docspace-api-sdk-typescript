@@ -32,7 +32,7 @@ export interface AiPromptBundle {
     /**
      * The bundle format version, so an import can migrate an older export.
      */
-    'version': AiPromptBundleVersionEnum;
+    'version': number;
     /**
      * Every exported prompt folder.
      */
@@ -42,11 +42,4 @@ export interface AiPromptBundle {
      */
     'prompts': Array<AiPrompt>;
 }
-
-export const AiPromptBundleVersionEnum = {
-    NUMBER_1: 1,
-} as const;
-
-export type AiPromptBundleVersionEnum = typeof AiPromptBundleVersionEnum[keyof typeof AiPromptBundleVersionEnum];
-
 

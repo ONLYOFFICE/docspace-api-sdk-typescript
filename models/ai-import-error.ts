@@ -23,7 +23,7 @@
 import type { AiErrorData } from './ai-error-data';
 
 /**
- * Per-entry error reported by `PromptsEngine.importBundle`.
+ * One refused entry of a prompt bundle import.
  */
 export interface AiImportError {
     /**

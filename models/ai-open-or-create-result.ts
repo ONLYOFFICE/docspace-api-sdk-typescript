@@ -23,7 +23,7 @@
 import type { AiThreadMessageLike } from './ai-thread-message-like';
 
 /**
- * Resolved thread state returned by `ThreadsEngine.openOrCreate`.
+ * The thread that was opened or created, with its stored messages.
  */
 export interface AiOpenOrCreateResult {
     /**
@@ -31,7 +31,7 @@ export interface AiOpenOrCreateResult {
      */
     'threadId': string;
     /**
-     * Empty string for existing threads — the engine doesn\'t re-fetch.
+     * The title generated for a thread this call created; an empty string when it opened an existing thread.
      */
     'title': string;
     /**

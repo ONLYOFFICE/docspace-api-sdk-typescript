@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **threadId** | **string** | Target thread; a new one is created (with an auto title) when omitted. | [optional] [default to undefined]
 **userMessage** | [**AiThreadMessageLike**](AiThreadMessageLike.md) | The user turn to send. | [default to undefined]
-**actionArgs** | [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [default to undefined]
+**actionArgs** | [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] [default to undefined]
 **entityId** | **string** | Optional entity (room) scope for profile resolution. | [optional] [default to undefined]
+**contextEntityId** | **string** | The folder or room the user is in. Tools run against it and the model is told it is the user\'s location; falls back to `entityId` when omitted. | [optional] [default to undefined]
 **profileId** | **string** | Session-level profile override for this request only. | [optional] [default to undefined]
 
 ## Example
@@ -22,6 +23,7 @@ const instance: AiSendStreamBody = {
     userMessage,
     actionArgs,
     entityId,
+    contextEntityId,
     profileId,
 };
 ```

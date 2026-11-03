@@ -38,13 +38,17 @@ export interface AiSendRequest {
      */
     'userMessage': AiThreadMessageLike;
     /**
-     * Per-request engine options: extra tools, reasoning, prompt override.
+     * Per-request options of the round: extra tools, reasoning, a prompt override and the connected context.
      */
     'actionArgs'?: AiActionArgs;
     /**
      * Optional entity (room) scope for profile resolution.
      */
     'entityId'?: string;
+    /**
+     * The folder or room the user is in. Tools run against it and the model is told it is the user\'s location; falls back to `entityId` when omitted.
+     */
+    'contextEntityId'?: string;
 }
 
 

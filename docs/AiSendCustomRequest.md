@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **isStream** | **boolean** | Stream the reply (ndjson) when true, else return a single message. | [default to undefined]
 **systemPrompt** | **string** | Caller-supplied system prompt for this one-turn call. | [default to undefined]
 **userMessage** | [**AiThreadMessageLike**](AiThreadMessageLike.md) |  | [default to undefined]
-**actionArgs** | [**AiActionArgs**](AiActionArgs.md) | Per-request engine options: extra tools, reasoning, prompt override. | [optional] [default to undefined]
+**actionArgs** | [**AiActionArgs**](AiActionArgs.md) | Per-request options of the round: extra tools, reasoning, a prompt override and the connected context. | [optional] [default to undefined]
+**profileId** | **string** | Profile to run this call on. When omitted, or when no profile has this id, the `Default` assignment is used. | [optional] [default to undefined]
 
 ## Example
 
@@ -20,6 +21,7 @@ const instance: AiSendCustomRequest = {
     systemPrompt,
     userMessage,
     actionArgs,
+    profileId,
 };
 ```
 
