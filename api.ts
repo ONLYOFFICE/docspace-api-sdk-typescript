@@ -22,6 +22,7 @@
 export * from './api/ai/aiapi';
 export * from './api/ai/assignments-api';
 export * from './api/ai/attachments-api';
+export * from './api/ai/byokapi';
 export * from './api/ai/context-api';
 export * from './api/ai/editor-tools-api';
 export * from './api/ai/export-api';
@@ -31,6 +32,7 @@ export * from './api/ai/preferences-api';
 export * from './api/ai/profiles-api';
 export * from './api/ai/prompts-api';
 export * from './api/ai/settings-api';
+export * from './api/ai/skills-api';
 export * from './api/ai/threads-api';
 export * from './api/ai/tools-api';
 export * from './api/ai/vectorization-api';

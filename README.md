@@ -274,6 +274,29 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Save files many</td>
       </tr>
     <tr>
+        <td colspan="3" style="text-align: center;"><strong>BYOKApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIBYOKApi.md#aibyokkeysdelete"><strong>aiByokKeysDelete</strong></a></td>
+        <td><strong>DELETE</strong> /api/2.0/ai/byok/{id}</td>
+        <td>Delete a BYOK key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIBYOKApi.md#aibyokkeyslist"><strong>aiByokKeysList</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/byok</td>
+        <td>List BYOK keys</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIBYOKApi.md#aibyokkeysset"><strong>aiByokKeysSet</strong></a></td>
+        <td><strong>PUT</strong> /api/2.0/ai/byok/{id}</td>
+        <td>Set a BYOK key</td>
+      </tr>
+      <tr>
+        <td><a href="docs/AIBYOKApi.md#aibyokproviders"><strong>aiByokProviders</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/ai/byok/providers</td>
+        <td>List BYOK providers</td>
+      </tr>
+    <tr>
         <td colspan="3" style="text-align: center;"><strong>ContextApi</strong></td>
       </tr>
       <tr>
@@ -534,6 +557,14 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/AISettingsApi.md#aisettingssetvectorization"><strong>aiSettingsSetVectorization</strong></a></td>
         <td><strong>PUT</strong> /api/2.0/ai/config/vectorization</td>
         <td>Update vectorization settings</td>
+      </tr>
+    <tr>
+        <td colspan="3" style="text-align: center;"><strong>SkillsApi</strong></td>
+      </tr>
+      <tr>
+        <td><a href="docs/AISkillsApi.md#aiskillsgenerate"><strong>aiSkillsGenerate</strong></a></td>
+        <td><strong>POST</strong> /api/2.0/ai/skills/generate</td>
+        <td>Generate a skill</td>
       </tr>
     <tr>
         <td colspan="3" style="text-align: center;"><strong>ThreadsApi</strong></td>
@@ -1378,6 +1409,11 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td><a href="docs/FilesFoldersApi.md#getnewfolderitems"><strong>getNewFolderItems</strong></a></td>
         <td><strong>GET</strong> /api/2.0/files/{folderId}/news</td>
         <td>Get new folder items</td>
+      </tr>
+      <tr>
+        <td><a href="docs/FilesFoldersApi.md#getprivateroomsfolder"><strong>getPrivateRoomsFolder</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/files/@private</td>
+        <td>Get the private rooms section</td>
       </tr>
       <tr>
         <td><a href="docs/FilesFoldersApi.md#getrecentfolder"><strong>getRecentFolder</strong></a></td>
@@ -3302,6 +3338,16 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
         <td>Delete an encryption key</td>
       </tr>
       <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#getroomcandidatekeys"><strong>getRoomCandidateKeys</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/privacyroom/{roomId}/access/candidates</td>
+        <td>Get public keys of room invitees</td>
+      </tr>
+      <tr>
+        <td><a href="docs/RoomsPrivacyRoomApi.md#getroommissingfilekeys"><strong>getRoomMissingFileKeys</strong></a></td>
+        <td><strong>GET</strong> /api/2.0/privacyroom/{roomId}/access/missing</td>
+        <td>Get missing file keys of a room</td>
+      </tr>
+      <tr>
         <td><a href="docs/RoomsPrivacyRoomApi.md#getuserkeys"><strong>getUserKeys</strong></a></td>
         <td><strong>GET</strong> /api/2.0/privacyroom/keys</td>
         <td>Get own encryption keys</td>
@@ -4386,6 +4432,10 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiBuiltinProviderType](docs/AiBuiltinProviderType.md)
  - [AiBulkAssignmentResult](docs/AiBulkAssignmentResult.md)
  - [AiBulkAssignmentResultErrorsInner](docs/AiBulkAssignmentResultErrorsInner.md)
+ - [AiByokKey](docs/AiByokKey.md)
+ - [AiByokKeyInput](docs/AiByokKeyInput.md)
+ - [AiByokModel](docs/AiByokModel.md)
+ - [AiByokProvider](docs/AiByokProvider.md)
  - [AiChatErrorPayload](docs/AiChatErrorPayload.md)
  - [AiChatEvent](docs/AiChatEvent.md)
  - [AiChatPriceDto](docs/AiChatPriceDto.md)
@@ -4503,6 +4553,9 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [AiSettingsWrapper](docs/AiSettingsWrapper.md)
  - [AiSkillDto](docs/AiSkillDto.md)
  - [AiSkillsDto](docs/AiSkillsDto.md)
+ - [AiSkillsGenerate200Response](docs/AiSkillsGenerate200Response.md)
+ - [AiSkillsGenerateRequest](docs/AiSkillsGenerateRequest.md)
+ - [AiSkillsGenerateRequestDestId](docs/AiSkillsGenerateRequestDestId.md)
  - [AiSkillsRoomDto](docs/AiSkillsRoomDto.md)
  - [AiSkillsWrapper](docs/AiSkillsWrapper.md)
  - [AiSuccessResponse](docs/AiSuccessResponse.md)
@@ -4864,6 +4917,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [FileEntryDtoAllOfShareSettings](docs/FileEntryDtoAllOfShareSettings.md)
  - [FileEntryType](docs/FileEntryType.md)
  - [FileKeysDto](docs/FileKeysDto.md)
+ - [FileKeysWrittenDto](docs/FileKeysWrittenDto.md)
+ - [FileKeysWrittenWrapper](docs/FileKeysWrittenWrapper.md)
  - [FileLinkDto](docs/FileLinkDto.md)
  - [FileLinkRequest](docs/FileLinkRequest.md)
  - [FileLinkWrapper](docs/FileLinkWrapper.md)
@@ -5112,6 +5167,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
  - [RoomInvitation](docs/RoomInvitation.md)
  - [RoomInvitationRequest](docs/RoomInvitationRequest.md)
  - [RoomLinkRequest](docs/RoomLinkRequest.md)
+ - [RoomMissingFileKeysArrayWrapper](docs/RoomMissingFileKeysArrayWrapper.md)
+ - [RoomMissingFileKeysDto](docs/RoomMissingFileKeysDto.md)
  - [RoomNewItemsDto](docs/RoomNewItemsDto.md)
  - [RoomPrivacyFilter](docs/RoomPrivacyFilter.md)
  - [RoomSecurityDto](docs/RoomSecurityDto.md)

@@ -59,5 +59,9 @@ export interface CustomerServiceUsageDto {
      * Whether the service is billed as a standing subscription rather than per unit consumed. It is derived  from today\'s price list, so it describes the service as it is sold now.
      */
     'subscription'?: boolean;
+    /**
+     * Whether the total is AI consumption paid with the portal\'s own provider keys rather than from the wallet. It  is `false` on a total into which that consumption was merged, which mixes the two.
+     */
+    'byok'?: boolean;
 }
 

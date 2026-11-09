@@ -32,7 +32,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 # **abortUploadSession**
 > abortUploadSession()
 
-Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/abort-upload-session/).
 
@@ -41,7 +41,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **sessionId** | [**string**] | The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. | defaults to undefined|
-| **folderId** | [**number**] | The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. | defaults to undefined|
+| **folderId** | [**number**] | The folder the session was opened against. Take it from the path the session was created on. | defaults to undefined|
 
 
 ### Return type
@@ -68,7 +68,7 @@ const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
 let sessionId: string; //The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own. (default to undefined)
-let folderId: number; //The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id. (default to undefined)
+let folderId: number; //The folder the session was opened against. Take it from the path the session was created on. (default to undefined)
 
 const { status, data } = await apiInstance.abortUploadSession(
     sessionId,
@@ -87,7 +87,7 @@ const { status, data } = await apiInstance.abortUploadSession(
 |-------------|-------------|------------------|
 |**200** | The session and the parts received so far have been discarded |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The session was opened by another account |  -  |
-|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
+|**404** | No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -574,9 +574,9 @@ const { status, data } = await apiInstance.createUploadSession(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created session, wrapped in the success envelope |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The request body cannot be read, has no `fileName`, or `fileSize` is negative |  -  |
+|**400** | The request body cannot be read, has no `fileName`, `fileSize` is negative, or the name of a file in a private room is not a lowercase UUID with an optional lowercase extension |  -  |
 |**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
-|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format, or the file going into a private room is not marked `encrypted` |  -  |
 |**404** | No folder with the specified ID |  -  |
 |**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
@@ -645,9 +645,9 @@ const { status, data } = await apiInstance.createUploadSessionInFolder(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The created upload session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**400** | The request body cannot be read, has no `fileName`, or `fileSize` is negative |  -  |
+|**400** | The request body cannot be read, has no `fileName`, `fileSize` is negative, or the name of a file in a private room is not a lowercase UUID with an optional lowercase extension |  -  |
 |**402** | The declared `fileSize` exceeds the portal limit for chunked uploads or the size allowed in a knowledge folder |  -  |
-|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format |  -  |
+|**403** | The caller cannot add content to the target folder, the folder is a section root, or a knowledge folder does not accept this format, or the file going into a private room is not marked `encrypted` |  -  |
 |**404** | No folder with the specified ID |  -  |
 |**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
 |**401** | Unauthorized |  -  |
@@ -918,7 +918,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
 | **single** | [**boolean**] | Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. | (optional) defaults to undefined|
-| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37 &#124; 38 &#124; 39 &#124; 40 &#124; 41>** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | (optional) defaults to undefined|
+| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37 &#124; 38 &#124; 39 &#124; 40 &#124; 41 &#124; 42>** | Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. | (optional) defaults to undefined|
 
 
 ### Return type
@@ -941,7 +941,7 @@ const configuration = new Configuration();
 const apiInstance = new FilesOperationsApi(configuration);
 
 let single: boolean; //Which operations the answer carries: `true` returns the operation this call started and nothing else, `false`  returns every delete operation that the caller has running or unread. (optional) (default to undefined)
-let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41>; //Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. (optional) (default to undefined)
+let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42>; //Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.emptyTrash(
     single,
@@ -1027,10 +1027,11 @@ const { status, data } = await apiInstance.finalizeSession(
 |**200** | The assembled file and the identifiers of the closed session |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The parts received so far do not add up to the size the session was opened for |  -  |
 |**402** | Storing the file would exceed a storage quota or size limit |  -  |
-|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
-|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
+|**403** | A file that is not a PDF is stored in a form-filling room |  -  |
+|**404** | No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1537,10 +1538,11 @@ const { status, data } = await apiInstance.uploadAsyncSession(
 |**200** | The session with its progress after the part was stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request has no `File` part, or `chunkNumber` is 0 or negative |  -  |
 |**402** | The part is larger than `chunkUploadSize`, or a session below that size would exceed a storage quota or size limit when storing the file |  -  |
-|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
-|**500** | A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room |  -  |
+|**403** | A session below `chunkUploadSize` stores a file that is not a PDF in a form-filling room |  -  |
+|**404** | No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 
@@ -1608,10 +1610,11 @@ const { status, data } = await apiInstance.uploadSession(
 |**200** | The progress of the session, or the stored file once the last part has arrived |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request has no `File` part |  -  |
 |**402** | The part is larger than `chunkUploadSize`, or storing the file would exceed a storage quota or size limit |  -  |
-|**404** | No open session with the specified ID: it never existed, was finalized or aborted, or has expired |  -  |
-|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
+|**403** | A file that is not a PDF is stored in a form-filling room |  -  |
+|**404** | No open session with the specified ID in this folder: it never existed, was finalized or aborted, has expired, or belongs to another folder |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

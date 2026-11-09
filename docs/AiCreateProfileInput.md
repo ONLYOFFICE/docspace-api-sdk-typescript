@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **modelId** | **string** | Selected model ID within this provider. | [default to undefined]
 **reasoning** | **boolean** | Whether extended thinking is enabled for this profile\'s model. | [optional] [default to undefined]
 **reasoningSupport** | [**AiReasoningSupport**](AiReasoningSupport.md) | What the model can do with extended thinking, as the provider\'s catalogue reported it when the profile was saved; the effort choices in the chat follow it. When absent, the abilities are taken from the model ID. | [optional] [default to undefined]
+**contextWindow** | **number** | Size of the selected model\'s context window in tokens, as the provider\'s catalogue reported it at save time (see `Model.contextWindow`). The engine\'s history compaction measures the thread against it; when absent the id-based table answers, and when that has no row either, `CompactionOptions.defaultContextWindow`. Hosts persist it with the rest of the profile. | [optional] [default to undefined]
 **capabilities** | **number** | Bitmask of capabilities supported by the selected model. | [optional] [default to undefined]
 **canUseTool** | **boolean** | Result of the live tool-capability probe performed at create time and on changes to `modelId` / `providerType` / `baseUrl`. `undefined` means the probe has never run for this profile (legacy record). | [optional] [default to undefined]
 **useResponsesApi** | **boolean** | Result of the live Responses-API probe (parallel to `canUseTool`). `true` means the model speaks `/v1/responses` and the OpenAI provider must route through `client.responses.create` — required for gpt-5+ reasoning models that reject `reasoning_effort` together with `tools` on `/v1/chat/completions`. Probed at create time and whenever `modelId` / `providerType` / `baseUrl` change. `undefined` means the probe never ran (legacy record) — readers treat that as `false`. | [optional] [default to undefined]
@@ -36,6 +37,7 @@ const instance: AiCreateProfileInput = {
     modelId,
     reasoning,
     reasoningSupport,
+    contextWindow,
     capabilities,
     canUseTool,
     useResponsesApi,

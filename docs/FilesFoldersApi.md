@@ -23,6 +23,7 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |[**getFormsFolder**](#getformsfolder) | **GET** /api/2.0/files/@forms | Get the Forms section|
 |[**getMyFolder**](#getmyfolder) | **GET** /api/2.0/files/@my | Get the My documents section|
 |[**getNewFolderItems**](#getnewfolderitems) | **GET** /api/2.0/files/{folderId}/news | Get new folder items|
+|[**getPrivateRoomsFolder**](#getprivateroomsfolder) | **GET** /api/2.0/files/@private | Get the private rooms section|
 |[**getRecentFolder**](#getrecentfolder) | **GET** /api/2.0/files/recent | Get the Recent section|
 |[**getReportFolderHistory**](#getreportfolderhistory) | **GET** /api/2.0/files/folder/{folderId}/log/report | Get the folder history report generation status|
 |[**getRootFolders**](#getrootfolders) | **GET** /api/2.0/files/@root | Get filtered sections|
@@ -178,7 +179,7 @@ const { status, data } = await apiInstance.createFolder(
 # **createFolderPrimaryExternalLink**
 > FileShareWrapper createFolderPrimaryExternalLink(folderLinkRequest)
 
-Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link  that was revoked is created anew by this call, with a new identifier, while  `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from  `sharedTo.shareLink`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-folder-primary-external-link/).
 
@@ -235,7 +236,7 @@ const { status, data } = await apiInstance.createFolderPrimaryExternalLink(
 |**200** | The primary external link of the folder |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
 |**403** | The caller may not manage the links of this folder, the access level is not available for links to this folder, the link limit is reached, or the admin restricts external links to public rooms |  -  |
-|**404** | The folder does not exist, or its primary link was revoked |  -  |
+|**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -659,7 +660,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **sharedBy** | [**string**] | Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. | (optional) defaults to undefined|
 | **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. | (optional) defaults to undefined|
 | **roomId** | [**number**] | Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. | (optional) defaults to undefined|
-| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37 &#124; 38 &#124; 39 &#124; 40 &#124; 41>** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | (optional) defaults to undefined|
+| **folderType** | **Array<0 &#124; 1 &#124; 2 &#124; 3 &#124; 5 &#124; 6 &#124; 8 &#124; 10 &#124; 11 &#124; 12 &#124; 13 &#124; 14 &#124; 15 &#124; 16 &#124; 19 &#124; 20 &#124; 21 &#124; 22 &#124; 25 &#124; 26 &#124; 27 &#124; 28 &#124; 29 &#124; 30 &#124; 31 &#124; 32 &#124; 33 &#124; 34 &#124; 35 &#124; 36 &#124; 37 &#124; 38 &#124; 39 &#124; 40 &#124; 41 &#124; 42>** | Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. | (optional) defaults to undefined|
 | **excludeSubject** | [**boolean**] | Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. | (optional) defaults to undefined|
 | **applyFilterOption** | **ApplyFilterOption** | Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. | (optional) defaults to undefined|
 | **withSubFolders** | [**boolean**] | Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. | (optional) defaults to undefined|
@@ -706,7 +707,7 @@ let userIdOrGroupId: string; //Restricts the listing to the entries authored by 
 let sharedBy: string; //Restricts the listing to the entries this member shared, which narrows a shared listing down to what one  person handed out. (optional) (default to undefined)
 let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, spreadsheets, images or one type of room.  Omit it to list every kind the folder holds. (optional) (default to undefined)
 let roomId: number; //Keeps only the entries that lie in this room, which matters when the listing being read gathers entries from  more than one of them. (optional) (default to undefined)
-let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41>; //Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. (optional) (default to undefined)
+let folderType: Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42>; //Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room. (optional) (default to undefined)
 let excludeSubject: boolean; //Turns `userIdOrGroupId` around: with true the entries of that member or group are the ones left out, with  false they are the only ones kept. (optional) (default to undefined)
 let applyFilterOption: ApplyFilterOption; //Chooses which half of the listing `filterType` and `filterValue` are applied to: with `Files` the folders come  back unfiltered, with `Folders` the files do, and with `All` both halves are filtered. (optional) (default to undefined)
 let withSubFolders: boolean; //Whether a narrowed request reaches into the subfolders: with true, which is what an omitted parameter means,  matching entries are gathered from the whole subtree, with false only the top level is read. It makes a  difference only once `filterType`, `userIdOrGroupId` or `filterValue` narrows the request, because an  unfiltered listing always shows the top level alone. (optional) (default to undefined)
@@ -1417,6 +1418,94 @@ const { status, data } = await apiInstance.getNewFolderItems(
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **getPrivateRoomsFolder**
+> FolderContentWrapper getPrivateRoomsFolder()
+
+Returns the private rooms section: the flat list of end-to-end encrypted rooms the caller is a member of. Such  rooms are stored under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of  the active area and lists them when `searchArea` names the private rooms area instead. An administrator who is not  a member does not see a private room here either. The section is not expanded into room content, so `folders`  carries the rooms while `files` comes back empty; to read what is inside one of them, call  `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy` saves the  requested order as the default order for this account. `filterType`, `filterValue`, `userIdOrGroupId` and the  sorting parameters narrow and order the room list, `metadataTemplateId` and `metadataFilters` keep only the rooms  carrying the template and matching the conditions, `count` and `startIndex` page through it, `total` reports how  many rooms match the request in full, and `current` describes the section folder itself. Archived private rooms  stay in the archive area; narrow it with `privacyFilter` of `GET api/2.0/files/rooms`.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-private-rooms-folder/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **userIdOrGroupId** | [**string**] | Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. | (optional) defaults to undefined|
+| **filterType** | **FilterType** | Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. | (optional) defaults to undefined|
+| **count** | [**number**] | The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. | (optional) defaults to undefined|
+| **startIndex** | [**number**] | The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. | (optional) defaults to undefined|
+| **sortBy** | [**string**] | The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. | (optional) defaults to undefined|
+| **sortOrder** | **SortOrder** | The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. | (optional) defaults to undefined|
+| **filterValue** | [**string**] | The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. | (optional) defaults to undefined|
+| **metadataTemplateId** | [**number**] | The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. | (optional) defaults to undefined|
+| **metadataFilters** | [**string**] | The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. | (optional) defaults to undefined|
+| **includeHiddenMetadata** | [**boolean**] | Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. | (optional) defaults to undefined|
+
+
+### Return type
+
+**FolderContentWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    FilesFoldersApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new FilesFoldersApi(configuration);
+
+let userIdOrGroupId: string; //Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read. (optional) (default to undefined)
+let filterType: FilterType; //Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds. (optional) (default to undefined)
+let count: number; //The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read. (optional) (default to undefined)
+let startIndex: number; //The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page. (optional) (default to undefined)
+let sortBy: string; //The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place. (optional) (default to undefined)
+let sortOrder: SortOrder; //The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account. (optional) (default to undefined)
+let filterValue: string; //The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered. (optional) (default to undefined)
+let metadataTemplateId: number; //The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set. (optional) (default to undefined)
+let metadataFilters: string; //The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}. (optional) (default to undefined)
+let includeHiddenMetadata: boolean; //Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getPrivateRoomsFolder(
+    userIdOrGroupId,
+    filterType,
+    count,
+    startIndex,
+    sortBy,
+    sortOrder,
+    filterValue,
+    metadataTemplateId,
+    metadataFilters,
+    includeHiddenMetadata
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The private rooms section with one page of the private rooms the caller is a member of |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | A parameter has the wrong type, the `count` is outside its allowed range, the `startIndex` is negative, or the metadata filter names an unknown template or field |  -  |
+|**403** | The caller is not allowed to read the private rooms section |  -  |
+|**404** | The end-to-end encrypted rooms app is turned off on this portal |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **getRecentFolder**
 > FolderContentWrapper getRecentFolder()
 
@@ -1843,12 +1932,12 @@ const { status, data } = await apiInstance.insertFile(
 |-------------|-------------|------------------|
 |**200** | The stored file with its id and the title it was actually saved under; a `version` above 1 means the content was added to a file that already carried this name instead of creating a new one |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
-|**403** | The caller cannot add content to this folder |  -  |
+|**403** | The caller cannot add content to this folder, or a file that is not a PDF is stored in a form-filling room |  -  |
 |**404** | No folder with the specified ID |  -  |
 |**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
-|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2357,12 +2446,12 @@ const { status, data } = await apiInstance.uploadFile(
 |**200** | The stored file, as a list with one element |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request has no file part |  -  |
 |**402** | The file exceeds the single-request upload limit, or storing it would exceed a storage quota or size limit |  -  |
-|**403** | The caller cannot add content to this folder |  -  |
+|**403** | The caller cannot add content to this folder, or a file that is not a PDF is stored in a form-filling room |  -  |
 |**404** | No folder with the specified ID |  -  |
 |**415** | The installation restricts uploadable formats and the file extension is not among them |  -  |
-|**500** | A file that is not a PDF is stored in a form-filling room |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 

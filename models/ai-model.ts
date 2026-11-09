@@ -54,6 +54,10 @@ export interface AiModel {
      */
     'capabilities'?: number;
     /**
+     * Size of the model\'s context window in tokens, when the provider\'s catalogue reports one (OpenRouter and the ONLYOFFICE route carry `context_length`). Copied onto the profile at save time; absent, the widget falls back to the id-based table in `core/providers/context-window`.
+     */
+    'contextWindow'?: number;
+    /**
      * Release date as a Unix timestamp in **seconds**, when the provider\'s catalogue reports one (OpenAI-shaped `/models` responses and OpenRouter carry `created`; Anthropic carries an ISO `created_at`). The model picker sorts on it so the newest releases come first; entries without it fall back to alphabetical order.
      */
     'created'?: number;

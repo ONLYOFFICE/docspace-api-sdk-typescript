@@ -53,6 +53,10 @@ export interface FilesSettingsDto {
      */
     'extsWebEncrypt'?: Array<string> | null;
     /**
+     * Whether the connected document server can edit end-to-end encrypted files. When false, an encrypted file cannot be  opened in the editors, whatever `extsWebEncrypt` lists.
+     */
+    'docServiceEncryptionSupported'?: boolean;
+    /**
      * Documents that support the reviewing mode, so that granting review access to them is meaningful.
      */
     'extsWebReviewed'?: Array<string> | null;

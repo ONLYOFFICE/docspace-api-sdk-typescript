@@ -32,7 +32,7 @@ export interface CreateServiceLimitRequestDto {
     /**
      * Whom the limit applies to.
      */
-    'scope'?: ServiceLimitScope;
+    'scope': ServiceLimitScope;
     /**
      * The ID of the portal user a personal limit is set for, as returned in `id` by the people operations.
      */

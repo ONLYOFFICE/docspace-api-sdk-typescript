@@ -226,7 +226,7 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link  that was revoked is created anew by this call, with a new identifier, while  `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from  `sharedTo.shareLink`.
          * @summary Create the folder primary external link
          * @param {number | string} id The folder or room the link belongs to.
          * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
@@ -1496,6 +1496,111 @@ export const FoldersApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Returns the private rooms section: the flat list of end-to-end encrypted rooms the caller is a member of. Such  rooms are stored under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of  the active area and lists them when `searchArea` names the private rooms area instead. An administrator who is not  a member does not see a private room here either. The section is not expanded into room content, so `folders`  carries the rooms while `files` comes back empty; to read what is inside one of them, call  `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy` saves the  requested order as the default order for this account. `filterType`, `filterValue`, `userIdOrGroupId` and the  sorting parameters narrow and order the room list, `metadataTemplateId` and `metadataFilters` keep only the rooms  carrying the template and matching the conditions, `count` and `startIndex` page through it, `total` reports how  many rooms match the request in full, and `current` describes the section folder itself. Archived private rooms  stay in the archive area; narrow it with `privacyFilter` of `GET api/2.0/files/rooms`.
+         * @summary Get the private rooms section
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+         * @param {number} [metadataTemplateId] The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+         * @param {string} [metadataFilters] The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+         * @param {boolean} [includeHiddenMetadata] Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getPrivateRoomsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-private-rooms-folder/
+         */
+        getPrivateRoomsFolder: async (userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, metadataTemplateId?: number, metadataFilters?: string, includeHiddenMetadata?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+
+            const localVarPath = `/api/2.0/files/@private`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (userIdOrGroupId !== undefined) {
+                localVarQueryParameter['userIdOrGroupId'] = userIdOrGroupId;
+            }
+
+            if (filterType !== undefined) {
+                localVarQueryParameter['filterType'] = filterType;
+            }
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+            if (startIndex !== undefined) {
+                localVarQueryParameter['startIndex'] = startIndex;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
+
+            if (sortOrder !== undefined) {
+                localVarQueryParameter['sortOrder'] = sortOrder;
+            }
+
+            if (filterValue !== undefined) {
+                localVarQueryParameter['filterValue'] = filterValue;
+            }
+
+            if (metadataTemplateId !== undefined) {
+                localVarQueryParameter['metadataTemplateId'] = metadataTemplateId;
+            }
+
+            if (metadataFilters !== undefined) {
+                localVarQueryParameter['metadataFilters'] = metadataFilters;
+            }
+
+            if (includeHiddenMetadata !== undefined) {
+                localVarQueryParameter['includeHiddenMetadata'] = includeHiddenMetadata;
+            }
+
+
+    
+            if(fields !== undefined) {
+                localVarHeaderParameter['fields'] = fields;
+            }
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
          * @summary Get the Recent section
          * @param {string} [userIdOrGroupId] Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
@@ -2619,7 +2724,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link  that was revoked is created anew by this call, with a new identifier, while  `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from  `sharedTo.shareLink`.
          * @summary Create the folder primary external link
          * @param {number | string} id The folder or room the link belongs to.
          * @param {FolderLinkRequest} folderLinkRequest The link and the way it is to be shaped.
@@ -2933,6 +3038,30 @@ export const FoldersApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the private rooms section: the flat list of end-to-end encrypted rooms the caller is a member of. Such  rooms are stored under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of  the active area and lists them when `searchArea` names the private rooms area instead. An administrator who is not  a member does not see a private room here either. The section is not expanded into room content, so `folders`  carries the rooms while `files` comes back empty; to read what is inside one of them, call  `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy` saves the  requested order as the default order for this account. `filterType`, `filterValue`, `userIdOrGroupId` and the  sorting parameters narrow and order the room list, `metadataTemplateId` and `metadataFilters` keep only the rooms  carrying the template and matching the conditions, `count` and `startIndex` page through it, `total` reports how  many rooms match the request in full, and `current` describes the section folder itself. Archived private rooms  stay in the archive area; narrow it with `privacyFilter` of `GET api/2.0/files/rooms`.
+         * @summary Get the private rooms section
+         * @param {string} [userIdOrGroupId] Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+         * @param {FilterType} [filterType] Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+         * @param {number} [count] The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+         * @param {number} [startIndex] The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+         * @param {string} [sortBy] The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+         * @param {SortOrder} [sortOrder] The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+         * @param {string} [filterValue] The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+         * @param {number} [metadataTemplateId] The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+         * @param {string} [metadataFilters] The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+         * @param {boolean} [includeHiddenMetadata] Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getPrivateRoomsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-private-rooms-folder/
+         */
+        async getPrivateRoomsFolder(userIdOrGroupId?: string, filterType?: FilterType, count?: number, startIndex?: number, sortBy?: string, sortOrder?: SortOrder, filterValue?: string, metadataTemplateId?: number, metadataFilters?: string, includeHiddenMetadata?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderContentWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPrivateRoomsFolder(userIdOrGroupId, filterType, count, startIndex, sortBy, sortOrder, filterValue, metadataTemplateId, metadataFilters, includeHiddenMetadata, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.getPrivateRoomsFolder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
          * @summary Get the Recent section
          * @param {string} [userIdOrGroupId] Restricts the listing to the files authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list the whole history.
@@ -3226,7 +3355,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.createFolder(requestParameters.folderId, requestParameters.createFolderRequest, options).then((request) => request(axios, basePath));
         },
         /**
-         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+         * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link  that was revoked is created anew by this call, with a new identifier, while  `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from  `sharedTo.shareLink`.
          * @summary Create the folder primary external link
          * @param {FoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -3427,6 +3556,18 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          */
         getNewFolderItems(requestParameters: FoldersApiGetNewFolderItemsRequest, options?: RawAxiosRequestConfig): AxiosPromise<FileEntryBaseArrayWrapper> {
             return localVarFp.getNewFolderItems(requestParameters.folderId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the private rooms section: the flat list of end-to-end encrypted rooms the caller is a member of. Such  rooms are stored under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of  the active area and lists them when `searchArea` names the private rooms area instead. An administrator who is not  a member does not see a private room here either. The section is not expanded into room content, so `folders`  carries the rooms while `files` comes back empty; to read what is inside one of them, call  `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy` saves the  requested order as the default order for this account. `filterType`, `filterValue`, `userIdOrGroupId` and the  sorting parameters narrow and order the room list, `metadataTemplateId` and `metadataFilters` keep only the rooms  carrying the template and matching the conditions, `count` and `startIndex` page through it, `total` reports how  many rooms match the request in full, and `current` describes the section folder itself. Archived private rooms  stay in the archive area; narrow it with `privacyFilter` of `GET api/2.0/files/rooms`.
+         * @summary Get the private rooms section
+         * @param {FoldersApiGetPrivateRoomsFolderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getPrivateRoomsFolder operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-private-rooms-folder/
+         * @throws {RequiredError}
+         */
+        getPrivateRoomsFolder(requestParameters: FoldersApiGetPrivateRoomsFolderRequest = {}, options?: RawAxiosRequestConfig): AxiosPromise<FolderContentWrapper> {
+            return localVarFp.getPrivateRoomsFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.metadataTemplateId, requestParameters.metadataFilters, requestParameters.includeHiddenMetadata, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the Recent section: the files the calling account has opened lately. The section holds files only,  so `folders` comes back empty, and it is personal, so another member\'s history is not visible here. A file is  added when it is opened and can also be added explicitly with `POST api/2.0/files/file/{fileId}/recent`;  `DELETE api/2.0/files/recent` clears the whole history, and `PUT api/2.0/files/displayrecent` switches the  section on and off for the account, which also decides whether `GET api/2.0/files/@root` includes it. Nothing  in the section is modified, though passing `sortBy` saves the requested order as the default order for this  account. The listing is ordered by the moment the caller last opened each file, newest first, and `sortBy` and  `sortOrder` do not change that order. `files` holds one page, `total` counts the files matching the request  before `count` and `startIndex` are applied, and `current` describes the section folder itself.
@@ -3854,7 +3995,7 @@ export interface FoldersApiGetFolderByFolderIdRequest {
 
     /**
      * Keeps only the folders of these kinds, each given as the number of a folder type; it is how a listing is  narrowed down to, say, the form-filling folders of a room.
-     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41>}
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42>}
      * @memberof FoldersApiGetFolderByFolderId
      */
     readonly folderType?: Array<GetFolderByFolderIdFolderTypeEnum>
@@ -4271,6 +4412,83 @@ export interface FoldersApiGetNewFolderItemsRequest {
      * @memberof FoldersApiGetNewFolderItems
      */
     readonly folderId: number | string
+}
+
+/**
+ * Request parameters for getPrivateRoomsFolder operation in FoldersApi.
+ * @export
+ * @interface FoldersApiGetPrivateRoomsFolderRequest
+ */
+export interface FoldersApiGetPrivateRoomsFolderRequest {
+    /**
+     * Restricts the listing to the entries authored by this portal member, or by the members of this group; the same  parameter accepts either kind of identifier. Omit it to list everything the caller can read.
+     * @type {string}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly userIdOrGroupId?: string
+
+    /**
+     * Narrows the listing to a single kind of entry, such as documents, images or one type of room. Omit it to list  every kind the section holds.
+     * @type {FilterType}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly filterType?: FilterType
+
+    /**
+     * The size of one page of section content. Pair it with `startIndex` to walk the listing, and compare the two  with `total` in the response to see when the last page has been read.
+     * @type {number}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly count?: number
+
+    /**
+     * The number of matching entries to skip before the returned page begins; add `count` to it to ask for the next  page.
+     * @type {number}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly startIndex?: number
+
+    /**
+     * The name of the field the entries are ordered by, matched case-insensitively against the file sort fields:  `DateAndTime`, `AZ`, `Size`, `Author`, `Type`, `New`, `DateAndTimeCreation`, `RoomType`, `Tags`, `Room`,  `CustomOrder`, `LastOpened` and `UsedSpace`. A recognized value is also saved as the default order of the  account and reused by later listings that omit the parameter, while a value matching none of the fields leaves  that saved order in place.
+     * @type {string}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly sortBy?: string
+
+    /**
+     * The direction in which the `sortBy` field is ordered. It is saved together with `sortBy` as the default order  of the account.
+     * @type {SortOrder}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly sortOrder?: SortOrder
+
+    /**
+     * The search string the section is filtered by: it is matched as a substring of entry titles and, for files,  against the indexed document content as well. Omit it to list the section unfiltered.
+     * @type {string}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly filterValue?: string
+
+    /**
+     * The ID of the metadata template the entries must be assigned to. On its own it narrows the listing to the entries  carrying the template; together with the metadata filters it also pins the template the filtered fields belong to.  The third-party entries never carry metadata and are left out when the filter is set.
+     * @type {number}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly metadataTemplateId?: number
+
+    /**
+     * The URL-encoded JSON array of the metadata filter conditions,  e.g. [{fieldId:1,op:contains,value:ACME},{fieldId:2,op:range,from:2026-01-01,to:2026-06-30},{fieldId:3,op:in,optionIds:[...]}].  A string field takes eq or contains; a number or a date field takes range with inclusive bounds, or gt, gte, lt, lte with the bound in value;  a date-only bound covers the whole day. A custom field is addressed by its name instead of the fieldId: {name:Client,op:eq,value:ACME}.
+     * @type {string}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly metadataFilters?: string
+
+    /**
+     * Whether the text search, and the metadataMatches it reports, also look at the values of the hidden metadata  templates (created with visible false for the metadata a service keeps for itself, which the web client never  shows). False, the default, leaves them out, so an entry is not found by such a value; true takes them in.  metadataTemplateId and metadataFilters are not concerned: a hidden template or field named there is searched  either way.
+     * @type {boolean}
+     * @memberof FoldersApiGetPrivateRoomsFolder
+     */
+    readonly includeHiddenMetadata?: boolean
 }
 
 /**
@@ -4946,7 +5164,7 @@ export class FoldersApi extends BaseAPI {
     }
 
     /**
-     * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. Read the address  from `sharedTo.shareLink`.
+     * Answers with the primary external link of a folder or a room, creating it on the first call and returning the  one that already exists afterwards, so the operation is idempotent in effect: a second call with other  parameters does not reconfigure the existing link, and changing one is the business of  `PUT api/2.0/files/folder/{id}/links`. The parameters therefore only shape the link at the moment it is born -  `access` its rights, `title` its name, `expirationDate` its lifetime, which is unlimited here unless one is  given, `internal` whether only signed-in members may follow it, `denyDownload` whether the contents may only  be viewed, and `password` a secret to be asked for. Sending `access` with the value that grants nothing  creates no link and answers with nothing. The caller needs the right to manage the links of the room the  folder belongs to, which its manager and a portal administrator acting as room manager have, and a member with  content-creator or read access is refused with 403; an unknown folder is answered with 404. A primary link  that was revoked is created anew by this call, with a new identifier, while  `GET api/2.0/files/folder/{id}/link` keeps answering such a link with 404. Read the address from  `sharedTo.shareLink`.
      * @summary Create the folder primary external link
      * @param {FilesFoldersApiCreateFolderPrimaryExternalLinkRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -5168,6 +5386,18 @@ export class FoldersApi extends BaseAPI {
      */
     public getNewFolderItems(requestParameters: FoldersApiGetNewFolderItemsRequest, options?: RawAxiosRequestConfig) {
         return FoldersApiFp(this.configuration).getNewFolderItems(requestParameters.folderId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the private rooms section: the flat list of end-to-end encrypted rooms the caller is a member of. Such  rooms are stored under the Rooms tree but are surfaced only here, so `GET api/2.0/files/rooms` leaves them out of  the active area and lists them when `searchArea` names the private rooms area instead. An administrator who is not  a member does not see a private room here either. The section is not expanded into room content, so `folders`  carries the rooms while `files` comes back empty; to read what is inside one of them, call  `GET api/2.0/files/{folderId}` with the room identifier. Nothing is modified, though passing `sortBy` saves the  requested order as the default order for this account. `filterType`, `filterValue`, `userIdOrGroupId` and the  sorting parameters narrow and order the room list, `metadataTemplateId` and `metadataFilters` keep only the rooms  carrying the template and matching the conditions, `count` and `startIndex` page through it, `total` reports how  many rooms match the request in full, and `current` describes the section folder itself. Archived private rooms  stay in the archive area; narrow it with `privacyFilter` of `GET api/2.0/files/rooms`.
+     * @summary Get the private rooms section
+     * @param {FilesFoldersApiGetPrivateRoomsFolderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public getPrivateRoomsFolder(requestParameters: FoldersApiGetPrivateRoomsFolderRequest = {}, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).getPrivateRoomsFolder(requestParameters.userIdOrGroupId, requestParameters.filterType, requestParameters.count, requestParameters.startIndex, requestParameters.sortBy, requestParameters.sortOrder, requestParameters.filterValue, requestParameters.metadataTemplateId, requestParameters.metadataFilters, requestParameters.includeHiddenMetadata, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5420,6 +5650,7 @@ export const GetFolderByFolderIdFolderTypeEnum = {
     InstructionsRoom: 38,
     KnowledgeRoom: 39,
     AiProjectRoom: 40,
-    AiHub: 41
+    AiHub: 41,
+    PrivateRooms: 42
 } as const;
 export type GetFolderByFolderIdFolderTypeEnum = typeof GetFolderByFolderIdFolderTypeEnum[keyof typeof GetFolderByFolderIdFolderTypeEnum];

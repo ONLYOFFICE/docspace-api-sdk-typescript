@@ -72,6 +72,7 @@ export const AiChatEventTypeEnum = {
     MessageIncomplete: 'message-incomplete',
     ToolCallPending: 'tool-call-pending',
     ThreadTitle: 'thread-title',
+    ContextCompacted: 'context-compacted',
 } as const;
 
 export type AiChatEventTypeEnum = typeof AiChatEventTypeEnum[keyof typeof AiChatEventTypeEnum];

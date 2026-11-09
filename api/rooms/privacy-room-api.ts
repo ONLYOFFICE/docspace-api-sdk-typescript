@@ -29,6 +29,8 @@ import type { EncryptionKeyArrayWrapper } from '../../models';
 import type { EncryptionKeyRequestDto } from '../../models';
 // @ts-ignore
 import type { ErrorApiResponse } from '../../models';
+// @ts-ignore
+import type { RoomMissingFileKeysArrayWrapper } from '../../models';
 /**
  * PrivacyRoomApi - axios parameter creator
  * @export
@@ -81,6 +83,128 @@ export const PrivacyRoomApiAxiosParamCreator = function (configuration?: Configu
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication OpenId required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the public encryption keys of people who are about to be invited to a private room, so that a client can  encrypt the room\'s file keys for them before it grants the access. `GET api/2.0/privacyroom/{roomId}/access`  covers members only, which makes this the call that comes first when inviting. The room has to be an active  private room: an archived one cannot change its access and is refused, and an unknown one is reported as missing.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused. The call is read-only and grants nothing, and  `PUT api/2.0/files/rooms/{id}/share` still does the inviting. The answer holds one entry per key, and no entry  ever carries `privateKeyEnc`, not even the caller\'s own. A listed user who is absent cannot be invited as they  are: they have no key yet and need to create one with `POST api/2.0/privacyroom/keys`, or they are a guest, a  terminated user, or nobody on this portal. A duplicate id counts once, and no ids answer an empty list. A  malformed id, a room that is not private, or a folder inside a room is rejected as invalid.
+         * @summary Get public keys of room invitees
+         * @param {number} roomId The private room the people are invited to. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`.
+         * @param {Array<string>} [userIds] The people to read the keys of, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of  a user returned by `GET api/2.0/people`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomCandidateKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-candidate-keys/
+         */
+        getRoomCandidateKeys: async (roomId: number, userIds?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'roomId' is not null or undefined
+            assertParamExists('getRoomCandidateKeys', 'roomId', roomId)
+
+            const localVarPath = `/api/2.0/privacyroom/{roomId}/access/candidates`
+                .replace(`{${"roomId"}}`, encodeURIComponent(String(roomId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (userIds) {
+                localVarQueryParameter['userIds'] = userIds;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Reports which encrypted files of a private room each user cannot open yet, across all its folders, so that a  client can write exactly the missing keys with `PUT api/2.0/files/{fileId}/access` instead of trying every file.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused, and an archived room, whose access cannot change,  is refused too. Listing `userIds` checks those people, members or not, which is what a client does before  `POST api/2.0/files/owner` answers 409 for a new owner; without it the members of the room are checked. The call  is read-only. The answer holds one entry per user who misses something and carries identifiers only, never a  key: an empty list means nothing is missing. A file stored in the clear needs no key and is never reported, and  an id that names nobody on this portal is ignored. A room that is not private, or a folder inside a room, is  rejected as invalid, as is a malformed id.
+         * @summary Get missing file keys of a room
+         * @param {number} roomId The private room to check. Take it from the `id` of the room returned by `POST api/2.0/files/rooms` or listed by  `GET api/2.0/files/rooms`.
+         * @param {Array<string>} [userIds] The people to check, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of a user  returned by `GET api/2.0/people`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomMissingFileKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-missing-file-keys/
+         */
+        getRoomMissingFileKeys: async (roomId: number, userIds?: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'roomId' is not null or undefined
+            assertParamExists('getRoomMissingFileKeys', 'roomId', roomId)
+
+            const localVarPath = `/api/2.0/privacyroom/{roomId}/access/missing`
+                .replace(`{${"roomId"}}`, encodeURIComponent(String(roomId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Basic required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            // authentication OAuth2 required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "OAuth2", ["read", "write"], configuration)
+
+            // authentication ApiKeyBearer required
+            await setApiKeyToObject(localVarHeaderParameter, "ApiKeyBearer", configuration)
+
+            // authentication asc_auth_key required
+
+            // authentication Bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication OpenId required
+
+            if (userIds) {
+                localVarQueryParameter['userIds'] = userIds;
+            }
 
 
     
@@ -339,6 +463,38 @@ export const PrivacyRoomApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
+         * Returns the public encryption keys of people who are about to be invited to a private room, so that a client can  encrypt the room\'s file keys for them before it grants the access. `GET api/2.0/privacyroom/{roomId}/access`  covers members only, which makes this the call that comes first when inviting. The room has to be an active  private room: an archived one cannot change its access and is refused, and an unknown one is reported as missing.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused. The call is read-only and grants nothing, and  `PUT api/2.0/files/rooms/{id}/share` still does the inviting. The answer holds one entry per key, and no entry  ever carries `privateKeyEnc`, not even the caller\'s own. A listed user who is absent cannot be invited as they  are: they have no key yet and need to create one with `POST api/2.0/privacyroom/keys`, or they are a guest, a  terminated user, or nobody on this portal. A duplicate id counts once, and no ids answer an empty list. A  malformed id, a room that is not private, or a folder inside a room is rejected as invalid.
+         * @summary Get public keys of room invitees
+         * @param {number} roomId The private room the people are invited to. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`.
+         * @param {Array<string>} [userIds] The people to read the keys of, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of  a user returned by `GET api/2.0/people`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomCandidateKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-candidate-keys/
+         */
+        async getRoomCandidateKeys(roomId: number, userIds?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptionKeyArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomCandidateKeys(roomId, userIds, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PrivacyRoomApi.getRoomCandidateKeys']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Reports which encrypted files of a private room each user cannot open yet, across all its folders, so that a  client can write exactly the missing keys with `PUT api/2.0/files/{fileId}/access` instead of trying every file.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused, and an archived room, whose access cannot change,  is refused too. Listing `userIds` checks those people, members or not, which is what a client does before  `POST api/2.0/files/owner` answers 409 for a new owner; without it the members of the room are checked. The call  is read-only. The answer holds one entry per user who misses something and carries identifiers only, never a  key: an empty list means nothing is missing. A file stored in the clear needs no key and is never reported, and  an id that names nobody on this portal is ignored. A room that is not private, or a folder inside a room, is  rejected as invalid, as is a malformed id.
+         * @summary Get missing file keys of a room
+         * @param {number} roomId The private room to check. Take it from the `id` of the room returned by `POST api/2.0/files/rooms` or listed by  `GET api/2.0/files/rooms`.
+         * @param {Array<string>} [userIds] The people to check, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of a user  returned by `GET api/2.0/people`.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         * REST API Reference for getRoomMissingFileKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-missing-file-keys/
+         */
+        async getRoomMissingFileKeys(roomId: number, userIds?: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RoomMissingFileKeysArrayWrapper>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRoomMissingFileKeys(roomId, userIds, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['PrivacyRoomApi.getRoomMissingFileKeys']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns every encryption key pair the calling user holds, the encrypted private half included, which is the  material a client needs in order to decrypt content in a private room. The set is personal and there is no  parameter for another user\'s keys: an authenticated caller reads only their own, and a guest, who cannot own  key material at all, always reads an empty set. The call is read-only. An empty answer, whether an empty list  or none at all, means no key has been created yet, and until `POST api/2.0/privacyroom/keys` creates one the  user cannot be invited to a private room. Each entry carries the pair\'s `id`, its owner in `userId`, the  moment the material was stored in `date`, the public half, the private half encrypted with the user\'s  password, and the portal-wide crypto engine in `cryptoEngineId`. For the keys that open a whole private room  use `GET api/2.0/privacyroom/{roomId}/access`, and for the keys a single file is shared with use  `GET api/2.0/files/file/{fileId}/publickeys`; this operation is about the caller alone.
          * @summary Get own encryption keys
          * @param {*} [options] Override http request option.
@@ -420,6 +576,30 @@ export const PrivacyRoomApiFactory = function (configuration?: Configuration, ba
             return localVarFp.deleteKeys(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns the public encryption keys of people who are about to be invited to a private room, so that a client can  encrypt the room\'s file keys for them before it grants the access. `GET api/2.0/privacyroom/{roomId}/access`  covers members only, which makes this the call that comes first when inviting. The room has to be an active  private room: an archived one cannot change its access and is refused, and an unknown one is reported as missing.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused. The call is read-only and grants nothing, and  `PUT api/2.0/files/rooms/{id}/share` still does the inviting. The answer holds one entry per key, and no entry  ever carries `privateKeyEnc`, not even the caller\'s own. A listed user who is absent cannot be invited as they  are: they have no key yet and need to create one with `POST api/2.0/privacyroom/keys`, or they are a guest, a  terminated user, or nobody on this portal. A duplicate id counts once, and no ids answer an empty list. A  malformed id, a room that is not private, or a folder inside a room is rejected as invalid.
+         * @summary Get public keys of room invitees
+         * @param {PrivacyRoomApiGetRoomCandidateKeysRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getRoomCandidateKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-candidate-keys/
+         * @throws {RequiredError}
+         */
+        getRoomCandidateKeys(requestParameters: PrivacyRoomApiGetRoomCandidateKeysRequest, options?: RawAxiosRequestConfig): AxiosPromise<EncryptionKeyArrayWrapper> {
+            return localVarFp.getRoomCandidateKeys(requestParameters.roomId, requestParameters.userIds, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Reports which encrypted files of a private room each user cannot open yet, across all its folders, so that a  client can write exactly the missing keys with `PUT api/2.0/files/{fileId}/access` instead of trying every file.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused, and an archived room, whose access cannot change,  is refused too. Listing `userIds` checks those people, members or not, which is what a client does before  `POST api/2.0/files/owner` answers 409 for a new owner; without it the members of the room are checked. The call  is read-only. The answer holds one entry per user who misses something and carries identifiers only, never a  key: an empty list means nothing is missing. A file stored in the clear needs no key and is never reported, and  an id that names nobody on this portal is ignored. A room that is not private, or a folder inside a room, is  rejected as invalid, as is a malformed id.
+         * @summary Get missing file keys of a room
+         * @param {PrivacyRoomApiGetRoomMissingFileKeysRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * REST API Reference for getRoomMissingFileKeys operation
+         * @see https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-missing-file-keys/
+         * @throws {RequiredError}
+         */
+        getRoomMissingFileKeys(requestParameters: PrivacyRoomApiGetRoomMissingFileKeysRequest, options?: RawAxiosRequestConfig): AxiosPromise<RoomMissingFileKeysArrayWrapper> {
+            return localVarFp.getRoomMissingFileKeys(requestParameters.roomId, requestParameters.userIds, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns every encryption key pair the calling user holds, the encrypted private half included, which is the  material a client needs in order to decrypt content in a private room. The set is personal and there is no  parameter for another user\'s keys: an authenticated caller reads only their own, and a guest, who cannot own  key material at all, always reads an empty set. The call is read-only. An empty answer, whether an empty list  or none at all, means no key has been created yet, and until `POST api/2.0/privacyroom/keys` creates one the  user cannot be invited to a private room. Each entry carries the pair\'s `id`, its owner in `userId`, the  moment the material was stored in `date`, the public half, the private half encrypted with the user\'s  password, and the portal-wide crypto engine in `cryptoEngineId`. For the keys that open a whole private room  use `GET api/2.0/privacyroom/{roomId}/access`, and for the keys a single file is shared with use  `GET api/2.0/files/file/{fileId}/publickeys`; this operation is about the caller alone.
          * @summary Get own encryption keys
          * @param {*} [options] Override http request option.
@@ -484,6 +664,48 @@ export interface PrivacyRoomApiDeleteKeysRequest {
 }
 
 /**
+ * Request parameters for getRoomCandidateKeys operation in PrivacyRoomApi.
+ * @export
+ * @interface PrivacyRoomApiGetRoomCandidateKeysRequest
+ */
+export interface PrivacyRoomApiGetRoomCandidateKeysRequest {
+    /**
+     * The private room the people are invited to. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`.
+     * @type {number}
+     * @memberof PrivacyRoomApiGetRoomCandidateKeys
+     */
+    readonly roomId: number
+
+    /**
+     * The people to read the keys of, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of  a user returned by `GET api/2.0/people`.
+     * @type {Array<string>}
+     * @memberof PrivacyRoomApiGetRoomCandidateKeys
+     */
+    readonly userIds?: Array<string>
+}
+
+/**
+ * Request parameters for getRoomMissingFileKeys operation in PrivacyRoomApi.
+ * @export
+ * @interface PrivacyRoomApiGetRoomMissingFileKeysRequest
+ */
+export interface PrivacyRoomApiGetRoomMissingFileKeysRequest {
+    /**
+     * The private room to check. Take it from the `id` of the room returned by `POST api/2.0/files/rooms` or listed by  `GET api/2.0/files/rooms`.
+     * @type {number}
+     * @memberof PrivacyRoomApiGetRoomMissingFileKeys
+     */
+    readonly roomId: number
+
+    /**
+     * The people to check, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of a user  returned by `GET api/2.0/people`.
+     * @type {Array<string>}
+     * @memberof PrivacyRoomApiGetRoomMissingFileKeys
+     */
+    readonly userIds?: Array<string>
+}
+
+/**
  * Request parameters for getUserKeysForRoom operation in PrivacyRoomApi.
  * @export
  * @interface PrivacyRoomApiGetUserKeysForRoomRequest
@@ -542,6 +764,30 @@ export class PrivacyRoomApi extends BaseAPI {
      */
     public deleteKeys(requestParameters: PrivacyRoomApiDeleteKeysRequest, options?: RawAxiosRequestConfig) {
         return PrivacyRoomApiFp(this.configuration).deleteKeys(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the public encryption keys of people who are about to be invited to a private room, so that a client can  encrypt the room\'s file keys for them before it grants the access. `GET api/2.0/privacyroom/{roomId}/access`  covers members only, which makes this the call that comes first when inviting. The room has to be an active  private room: an archived one cannot change its access and is refused, and an unknown one is reported as missing.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused. The call is read-only and grants nothing, and  `PUT api/2.0/files/rooms/{id}/share` still does the inviting. The answer holds one entry per key, and no entry  ever carries `privateKeyEnc`, not even the caller\'s own. A listed user who is absent cannot be invited as they  are: they have no key yet and need to create one with `POST api/2.0/privacyroom/keys`, or they are a guest, a  terminated user, or nobody on this portal. A duplicate id counts once, and no ids answer an empty list. A  malformed id, a room that is not private, or a folder inside a room is rejected as invalid.
+     * @summary Get public keys of room invitees
+     * @param {RoomsPrivacyRoomApiGetRoomCandidateKeysRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PrivacyRoomApi
+     */
+    public getRoomCandidateKeys(requestParameters: PrivacyRoomApiGetRoomCandidateKeysRequest, options?: RawAxiosRequestConfig) {
+        return PrivacyRoomApiFp(this.configuration).getRoomCandidateKeys(requestParameters.roomId, requestParameters.userIds, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Reports which encrypted files of a private room each user cannot open yet, across all its folders, so that a  client can write exactly the missing keys with `PUT api/2.0/files/{fileId}/access` instead of trying every file.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused, and an archived room, whose access cannot change,  is refused too. Listing `userIds` checks those people, members or not, which is what a client does before  `POST api/2.0/files/owner` answers 409 for a new owner; without it the members of the room are checked. The call  is read-only. The answer holds one entry per user who misses something and carries identifiers only, never a  key: an empty list means nothing is missing. A file stored in the clear needs no key and is never reported, and  an id that names nobody on this portal is ignored. A room that is not private, or a folder inside a room, is  rejected as invalid, as is a malformed id.
+     * @summary Get missing file keys of a room
+     * @param {RoomsPrivacyRoomApiGetRoomMissingFileKeysRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PrivacyRoomApi
+     */
+    public getRoomMissingFileKeys(requestParameters: PrivacyRoomApiGetRoomMissingFileKeysRequest, options?: RawAxiosRequestConfig) {
+        return PrivacyRoomApiFp(this.configuration).getRoomMissingFileKeys(requestParameters.roomId, requestParameters.userIds, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

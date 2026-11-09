@@ -6,7 +6,7 @@ The spending limit to create on the AI services: for the portal as a whole, for 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scope** | [**ServiceLimitScope**](ServiceLimitScope.md) | Whom the limit applies to. | [optional] [default to undefined]
+**scope** | [**ServiceLimitScope**](ServiceLimitScope.md) | Whom the limit applies to. | [default to undefined]
 **userId** | **string** | The ID of the portal user a personal limit is set for, as returned in `id` by the people operations. | [optional] [default to undefined]
 **amountValue** | **number** | The most money the AI services may cost per period, in their currency, which cannot be chosen. Zero blocks the  AI services completely. | [optional] [default to undefined]
 **quantityValue** | **number** | The largest quantity the AI services may consume per period, in their common unit. Zero blocks the AI services  completely. | [optional] [default to undefined]

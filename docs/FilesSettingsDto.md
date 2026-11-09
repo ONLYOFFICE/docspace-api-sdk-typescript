@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **extsWebPreviewed** | **Array&lt;string&gt;** | Documents the editor can open read-only. A format that is here but not in the edited list can be viewed and  not changed. | [optional] [default to undefined]
 **extsWebEdited** | **Array&lt;string&gt;** | Documents the editor can open for editing. Uploading a format outside this list and outside the convertible  list leaves a file that can only be downloaded. | [optional] [default to undefined]
 **extsWebEncrypt** | **Array&lt;string&gt;** | Documents that can be edited inside a private room, where the content is encrypted on the client. | [optional] [default to undefined]
+**docServiceEncryptionSupported** | **boolean** | Whether the connected document server can edit end-to-end encrypted files. When false, an encrypted file cannot be  opened in the editors, whatever `extsWebEncrypt` lists. | [optional] [default to undefined]
 **extsWebReviewed** | **Array&lt;string&gt;** | Documents that support the reviewing mode, so that granting review access to them is meaningful. | [optional] [default to undefined]
 **extsWebCustomFilterEditing** | **Array&lt;string&gt;** | Spreadsheets that support the custom filter mode, where a filter applied by one editor does not disturb the  others. | [optional] [default to undefined]
 **extsWebRestrictedEditing** | **Array&lt;string&gt;** | Documents that can only be filled in or commented on rather than edited freely, whatever access the caller  holds. | [optional] [default to undefined]
@@ -83,6 +84,7 @@ const instance: FilesSettingsDto = {
     extsWebPreviewed,
     extsWebEdited,
     extsWebEncrypt,
+    docServiceEncryptionSupported,
     extsWebReviewed,
     extsWebCustomFilterEditing,
     extsWebRestrictedEditing,

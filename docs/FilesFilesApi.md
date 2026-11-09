@@ -243,9 +243,9 @@ const { status, data } = await apiInstance.changeVersionHistory(
 |**200** | The versions of the file after the change |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `version` |  -  |
 |**402** | Completing the current version needs more space than the room or user storage quota leaves |  -  |
-|**403** | The caller may not change the version history of the file |  -  |
+|**403** | The caller may not change the version history of the file, or the file is locked by somebody else |  -  |
 |**404** | The file id, or the requested version of it, resolves to nothing |  -  |
-|**500** | The file is locked by somebody else, or, when the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails |  -  |
+|**500** | When the current version is completed, the file is encrypted, another update of it is in progress, or storing the new version fails |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -384,7 +384,7 @@ const { status, data } = await apiInstance.copyFileAs(
 |**200** | The copy that was created |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `destTitle` or `destFolderId`, or the new title is empty while the source file has no extension |  -  |
 |**402** | The copy does not fit into the storage quota of the portal, the room or the user, or the converted content exceeds the maximum upload size |  -  |
-|**403** | The caller may not read the file, the destination folder does not exist, or the caller may not create files in it |  -  |
+|**403** | The caller may not read the file, the destination folder does not exist, the caller may not create files in it, or the file or the destination lies in a private room |  -  |
 |**404** | The file or the destination folder does not exist |  -  |
 |**415** | The installation filters uploads and does not accept the format of the new title |  -  |
 |**500** | The document service fails to convert the content, `destFolderId` is a fraction or outside the 32-bit range, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
@@ -524,7 +524,7 @@ const { status, data } = await apiInstance.createFile(
 |**200** | The file created in the folder: its id and the title the portal actually stored, whose extension may differ from the requested one; `thumbnailStatus` says whether the preview is already built |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `title`, or the title is empty or longer than 165 characters |  -  |
 |**402** | The new file does not fit into the storage quota of the portal, the room or the user |  -  |
-|**403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, or the form gallery has no file of the title\'s format |  -  |
+|**403** | The caller may not create files in the folder, the folder does not exist or is a section where files cannot be created, the template does not exist or cannot be read, the form gallery has no file of the title\'s format, or the file is not a PDF and the folder lies in a form-filling room |  -  |
 |**404** | The folder id or `templateId` is a string that is not the id of an item in a known third-party storage |  -  |
 |**500** | `templateId` is a fraction, a number outside the 32-bit range or a numeric string, the form gallery does not know `formId` or cannot be reached, or the folder id is 0 and the caller is a guest without My documents |  -  |
 |**401** | Unauthorized |  -  |
@@ -600,7 +600,7 @@ const { status, data } = await apiInstance.createFileInMyDocuments(
 # **createFilePrimaryExternalLink**
 > FileShareWrapper createFilePrimaryExternalLink(fileLinkRequest)
 
-Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403; a link that was deliberately revoked is  not recreated but answered with 404. Read the address from `sharedTo.shareLink`.
+Answers with the primary external link of a file, creating it on the first call and returning the one that  already exists afterwards, so the operation is idempotent in effect: a second call with other parameters does  not reconfigure the existing link, and changing one is the business of `PUT api/2.0/files/file/{id}/links`.  The parameters therefore only shape the link at the moment it is born - `access` its rights, `expirationDate`  its lifetime, which for a file in a personal section is unlimited here rather than the default of a few days,  `internal` whether only signed-in members may follow it, `denyDownload` whether the content may only be  viewed, and `password` a secret to be asked for. A PDF form gets the rights it needs for filling out whatever  was asked for, and a form in a form-filling room is answered with the link of the room instead. The caller  needs the right to share the file and is otherwise refused with 403. A primary link that was revoked is  created anew by this call, with a new identifier, while `GET api/2.0/files/file/{id}/link` keeps answering  such a link with 404. Read the address from `sharedTo.shareLink`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/create-file-primary-external-link/).
 
@@ -657,7 +657,7 @@ const { status, data } = await apiInstance.createFilePrimaryExternalLink(
 |**200** | The primary external link of the file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The title or password is longer than 255 characters, the password does not meet the portal password policy, or `expirationDate` lies more than 10 years ahead |  -  |
 |**403** | The caller may not share the file, the access level is not available for links to this file, the link limit is reached, or the admin restricts external links to public rooms |  -  |
-|**404** | The file does not exist, or its primary link was revoked |  -  |
+|**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |
@@ -726,7 +726,7 @@ const { status, data } = await apiInstance.createHtmlFile(
 |**200** | The created or updated HTML file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
 |**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
-|**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+|**403** | The caller may not create files in this folder, the folder is a section where files cannot be created, or the folder lies in a form-filling room, which takes PDF files only |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -859,7 +859,7 @@ const { status, data } = await apiInstance.createTextFile(
 |**200** | The created or updated text file |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `title` or `content`, or the title is empty, blank or longer than 165 characters |  -  |
 |**402** | The content exceeds the maximum upload size, or the file does not fit into the storage quota of the portal, the room or the user |  -  |
-|**403** | The caller may not create files in this folder, or the folder is a section where files cannot be created |  -  |
+|**403** | The caller may not create files in this folder, the folder is a section where files cannot be created, or the folder lies in a form-filling room, which takes PDF files only |  -  |
 |**404** | The folder does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -2424,7 +2424,7 @@ const { status, data } = await apiInstance.lockFile(
 # **manageFormFilling**
 > manageFormFilling()
 
-Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. The call is mutating; the state that resulted is read  with `GET api/2.0/files/file/{fileId}/formroles`.  Raises the `form.stopped` webhook when `action` is `Stop`, and for `Edit` in a form-filling room where filling had started.
+Drives the filling of a PDF form through its states, the action deciding which way. Action 2 starts the  filling: in a form-filling room the form is opened for filling, the members whose rights are limited to  filling forms are let in, and a form that has been changed since it was last started has the drafts of its  previous round dropped. Action 0 stops it, which in a virtual data room records who interrupted it and at  which role and notifies the people who held the other roles, and in a form-filling room closes the form for  filling. Action 1 resumes a filling that was stopped, clearing that record. Action 3 puts the form back into  editing, closing it for filling and remembering the version it was edited from. The file has to be a PDF form  lying in a room. Starting needs the right to start the filling, which the room admin and a member with  content-creator rights have, while stopping a filling that somebody else started belongs to room managers  alone, so a content creator is refused with 403 there. In a form-filling room action 3 needs the right to  edit the form. The call is mutating; the state that resulted is read  with `GET api/2.0/files/file/{fileId}/formroles`.  Raises the `form.stopped` webhook when `action` is `Stop`, and for `Edit` in a form-filling room where filling had started.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/manage-form-filling/).
 
@@ -2476,7 +2476,7 @@ const { status, data } = await apiInstance.manageFormFilling(
 |-------------|-------------|------------------|
 |**200** | The action was applied to the form |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The request body cannot be read or has no `formId` |  -  |
-|**403** | The form does not exist, is not a PDF or lies outside a room, the caller may not start or stop its filling, or `action` is not one of the known values |  -  |
+|**403** | The form does not exist, is not a PDF or lies outside a room, the caller may not start or stop its filling or, in a form-filling room, put it back into editing, or `action` is not one of the known values |  -  |
 |**500** | The form has no filling properties yet, as when a filling that was never started is resumed, or the form lies in a third-party storage |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -2488,7 +2488,7 @@ const { status, data } = await apiInstance.manageFormFilling(
 # **openEditFile**
 > ConfigurationWrapper openEditFile()
 
-Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.  Raises the `form.stopped` webhook when a PDF form whose filling had started in a form-filling room is opened with `edit` true.
+Builds everything an editor client needs to open the file: the document descriptor with its download address,  title, type and document key, the editor configuration with the mode, the caller\'s permissions, the user and  the customization, the callback the editors report back to, and the signature token the document service  validates. `version` opens one entry of the file history and requires access to that history; left out, the  current revision is opened. `view`, `edit` and `fill` say what the client intends to do, and `editorType`  picks the desktop, mobile or embedded layout. For a PDF form the room decides the outcome and may overrule the  request: a form-filling room, a virtual data room, a public room and a user folder each produce their own  mode, and a form opened from the templates folder is read-only and, outside the mobile layout, framed as  embedded. In a form-filling room `edit=true` takes the form off filling only for a  caller who may edit it. When the portal is over its storage quota the configuration comes back read-only with the exceeded  scope named. In a private room the caller\'s encryption keys are added to the editor configuration. Payment is  not required and an anonymous caller opens through an external link.  Raises the `form.stopped` webhook when a PDF form whose filling had started in a form-filling room is opened with `edit` true.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/open-edit-file/).
 
@@ -2500,7 +2500,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 | **version** | [**number**] | Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. | (optional) defaults to undefined|
 | **view** | [**boolean**] | Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller\'s  rights and the room the file lies in allow. | (optional) defaults to undefined|
 | **editorType** | **EditorType** | Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. | (optional) defaults to undefined|
-| **edit** | [**boolean**] | Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. | (optional) defaults to undefined|
+| **edit** | [**boolean**] | Asks for editing rather than viewing; the room the file lies in may still turn the request into viewing or  into filling. | (optional) defaults to undefined|
 | **fill** | [**boolean**] | Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. | (optional) defaults to undefined|
 
 
@@ -2531,7 +2531,7 @@ let fileId: number; //The file the editor configuration is built for. Take the i
 let version: number; //Which entry of the file history to open, numbered the way the file versions are. Left out, the current  revision is opened; naming a version requires access to the history of the file. (optional) (default to undefined)
 let view: boolean; //Asks for a read-only configuration. Left off, the configuration is built for editing as far as the caller\'s  rights and the room the file lies in allow. (optional) (default to undefined)
 let editorType: EditorType; //Which editor layout the configuration is built for: the full desktop interface, the reduced mobile one, or the  embedded viewer meant to be framed inside another page. (optional) (default to undefined)
-let edit: boolean; //Asks for editing rather than viewing. On a form in a form-filling room this also records that the form is  being edited; the room may still turn the request into viewing or into filling. (optional) (default to undefined)
+let edit: boolean; //Asks for editing rather than viewing; the room the file lies in may still turn the request into viewing or  into filling. (optional) (default to undefined)
 let fill: boolean; //Asks for a PDF form to open for filling out rather than for editing. It has no effect on a file that is not a  form. (optional) (default to undefined)
 
 const { status, data } = await apiInstance.openEditFile(
@@ -2556,7 +2556,7 @@ const { status, data } = await apiInstance.openEditFile(
 |**200** | The editor configuration for the requested file and mode |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**403** | The caller cannot read the file, asked for a past version without access to the file history, or the file is in Trash |  -  |
 |**404** | The file id, or the requested version of it, resolves to nothing |  -  |
-|**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
+|**415** | The file is in a format the editors can neither edit nor open for viewing, or it is an encrypted file of a private room and the connected document server cannot work with encrypted files |  -  |
 |**500** | The file lies in a third-party storage that cannot deliver it |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**400** | Bad Request. |  -  |
@@ -2627,9 +2627,9 @@ const { status, data } = await apiInstance.restoreFileVersion(
 |**200** | The editing revisions of the file after the restore |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**400** | The version is missing or is already the current one |  -  |
 |**402** | The restored content does not fit into the storage quota |  -  |
-|**403** | The caller may not change the version history of the file, or, with `url`, may not edit the file or the file is locked by somebody else or being edited |  -  |
+|**403** | The caller may not change the version history of the file, the file is locked by somebody else, or, with `url`, may not edit the file or the file is being edited |  -  |
 |**404** | Without `url`, the file id or the requested version resolves to nothing |  -  |
-|**500** | The file is locked by somebody else or being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched |  -  |
+|**500** | The file is being edited, another restore of it is in progress, or storing the new version fails; with `url`, also when the file or the version does not exist or the address cannot be fetched |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -2918,9 +2918,9 @@ const { status, data } = await apiInstance.setCustomFilterTag(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **setEncryptionInfo**
-> setEncryptionInfo()
+> FileKeysWrittenWrapper setEncryptionInfo()
 
-Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room, and every account named in the request has to have read  access to it. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
+Issues the file keys that let the named people open one file of an end-to-end encrypted private room. Each  entry of the body names the account the key is for, the public key it was encrypted with and the encrypted key  itself, so the plain key never reaches the portal: the client encrypts it once per recipient with the public  key that `GET api/2.0/files/file/{fileId}/publickeys` reports for them. The keys of the accounts named in the  request are replaced, and the keys of everybody else are left as they are, which makes the call idempotent for  a given set of recipients while remaining a mutating one; sending no entry for a person does not revoke that  person\'s key. The file has to lie in a private room. An account named in the request that cannot read the file is skipped,  nothing is stored for it, and it comes back in `skippedUserIds`, while the keys of the others are stored. The caller needs read access to the file and the right to create content in that room, which its  members with editing rights and its admins have; a caller without those rights, a file outside a private room  and a file that does not exist are all refused with 403. Read the result back with  `GET api/2.0/files/{fileId}/access`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/set-encryption-info/).
 
@@ -2934,7 +2934,7 @@ For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspa
 
 ### Return type
 
-void (empty response body)
+**FileKeysWrittenWrapper**
 
 ### Third-party storage
 
@@ -2973,8 +2973,8 @@ const { status, data } = await apiInstance.setEncryptionInfo(
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | The file keys were stored |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The file does not exist, the caller may not issue keys for it, the file is not in a private room, or a recipient has no read access to it |  -  |
+|**200** | The file keys of the recipients who can read the file were stored; the others are listed in `skippedUserIds` |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**403** | The file does not exist, the caller may not issue keys for it, or the file is not in a private room |  -  |
 |**404** | The file does not exist |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -3247,7 +3247,7 @@ const { status, data } = await apiInstance.startEditFile(
 |**403** | The caller cannot edit the file, the file is locked or in Trash, somebody is already editing it and the session was claimed alone, or the document service did not accept the tracking request |  -  |
 |**404** | The file id resolves to nothing |  -  |
 |**415** | The file is in a format the editors can neither edit nor open for viewing |  -  |
-|**500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file is locked by somebody else or lies in Trash |  -  |
+|**500** | The file lies in a third-party storage that cannot deliver it, or, with `editingAlone=true`, the file lies in Trash |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3258,7 +3258,7 @@ const { status, data } = await apiInstance.startEditFile(
 # **startFillingFile**
 > FileWrapper startFillingFile()
 
-Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Access follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
+Marks a PDF form in a form-filling room as open for filling out and answers with the form file. The portal  stores the filling properties on it - the room it belongs to, its title, the account that started it and the  id it keeps as the original form - so that later submissions are collected against this form. The file has to  be a PDF whose parent folder is a form-filling room; anything else is answered unchanged and nothing is  stored. Whatever the file, a caller who cannot read it is refused with 403. Inside a form-filling room access  follows room membership rather than portal role: a member holding only form-filling access on  the room may not start filling, and a caller with no access to the room at all is refused with 403 unless they  can manage it, which the room owner, a room administrator and a DocSpace administrator can. The call is  mutating and safe to repeat, since a repeat rewrites the same properties. Once a form is started, the answers  submitted for it can be collected into a spreadsheet with `POST api/2.0/files/file/{fileId}/xlsx`.
 
 For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/start-filling-file/).
 
@@ -3309,7 +3309,7 @@ const { status, data } = await apiInstance.startFillingFile(
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 |**200** | The form file, with the filling properties now stored on it |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
-|**403** | The caller holds only form-filling access on the room, or no access to it at all |  -  |
+|**403** | The caller cannot read the file, or holds only form-filling access on the room, or no access to it at all |  -  |
 |**404** | The file id resolves to nothing |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
@@ -3452,9 +3452,9 @@ const { status, data } = await apiInstance.trackEditFile(
 |-------------|-------------|------------------|
 |**200** | The session was refreshed or closed |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
 |**401** | An anonymous caller has no external link, or refreshes the session through a link that does not grant editing |  -  |
-|**403** | The document key does not match the revision being edited, or the caller has none of the editing rights on the file |  -  |
+|**403** | The document key does not match the revision being edited, the caller has none of the editing rights on the file, or the session is refreshed while the file is locked by somebody else |  -  |
 |**404** | The file id resolves to nothing |  -  |
-|**500** | The session is refreshed while the file is locked by somebody else or lies in Trash |  -  |
+|**500** | The session is refreshed while the file lies in Trash |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**400** | Bad Request. |  -  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
@@ -3523,9 +3523,9 @@ const { status, data } = await apiInstance.updateFile(
 |**400** | The title is longer than 165 characters, or `lastVersion` is the current version |  -  |
 |**401** | An anonymous caller has no external link |  -  |
 |**402** | Restoring `lastVersion` needs more space than the room or user storage quota leaves |  -  |
-|**403** | The caller may not read or rename the file or change its version |  -  |
+|**403** | The caller may not read or rename the file or change its version, or the file is locked by somebody else |  -  |
 |**404** | The file id, or `lastVersion` of it, resolves to nothing, or the file is a PDF form in a form-filling room whose filling has not started and the caller may only fill forms there |  -  |
-|**500** | The file is locked by somebody else, a third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored |  -  |
+|**500** | A third-party file is renamed while it is being edited, or restoring `lastVersion` fails because the file is being edited, another update of it is in progress or the new version cannot be stored |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
 |**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |

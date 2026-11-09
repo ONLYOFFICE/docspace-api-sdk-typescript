@@ -69,6 +69,14 @@ export interface OperationDto {
      */
     'debit'?: number;
     /**
+     * Whether the AI operation ran on the portal\'s own provider key.
+     */
+    'byok'?: boolean;
+    /**
+     * The AI provider that ran the operation; `null` when it was not recorded.
+     */
+    'provider'?: string | null;
+    /**
      * What the AI provider charged for the whole `quantity` of an AI tools or AI search charge, as the billing  service recorded it - the provider\'s side of the same operation `debit` bills the portal for. It is `null`  on any other movement, and on an AI charge recorded without a provider cost.
      */
     'cost'?: number | null;

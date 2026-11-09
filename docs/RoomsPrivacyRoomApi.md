@@ -5,6 +5,8 @@ All URIs are relative to *https://your-docspace.onlyoffice.com*
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
 |[**deleteKeys**](#deletekeys) | **DELETE** /api/2.0/privacyroom/keys/{id} | Delete an encryption key|
+|[**getRoomCandidateKeys**](#getroomcandidatekeys) | **GET** /api/2.0/privacyroom/{roomId}/access/candidates | Get public keys of room invitees|
+|[**getRoomMissingFileKeys**](#getroommissingfilekeys) | **GET** /api/2.0/privacyroom/{roomId}/access/missing | Get missing file keys of a room|
 |[**getUserKeys**](#getuserkeys) | **GET** /api/2.0/privacyroom/keys | Get own encryption keys|
 |[**getUserKeysForRoom**](#getuserkeysforroom) | **GET** /api/2.0/privacyroom/{roomId}/access | Get private room access keys|
 |[**replaceKey**](#replacekey) | **PUT** /api/2.0/privacyroom/keys | Rotate an encryption key|
@@ -63,6 +65,134 @@ const { status, data } = await apiInstance.deleteKeys(
 |**400** | The key identifier is not a valid GUID |  -  |
 |**403** | The caller is a guest, who cannot own encryption keys |  -  |
 |**404** | The encryption key is not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRoomCandidateKeys**
+> EncryptionKeyArrayWrapper getRoomCandidateKeys()
+
+Returns the public encryption keys of people who are about to be invited to a private room, so that a client can  encrypt the room\'s file keys for them before it grants the access. `GET api/2.0/privacyroom/{roomId}/access`  covers members only, which makes this the call that comes first when inviting. The room has to be an active  private room: an archived one cannot change its access and is refused, and an unknown one is reported as missing.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused. The call is read-only and grants nothing, and  `PUT api/2.0/files/rooms/{id}/share` still does the inviting. The answer holds one entry per key, and no entry  ever carries `privateKeyEnc`, not even the caller\'s own. A listed user who is absent cannot be invited as they  are: they have no key yet and need to create one with `POST api/2.0/privacyroom/keys`, or they are a guest, a  terminated user, or nobody on this portal. A duplicate id counts once, and no ids answer an empty list. A  malformed id, a room that is not private, or a folder inside a room is rejected as invalid.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-candidate-keys/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **roomId** | [**number**] | The private room the people are invited to. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`. | defaults to undefined|
+| **userIds** | **Array&lt;string&gt;** | The people to read the keys of, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of  a user returned by `GET api/2.0/people`. | (optional) defaults to undefined|
+
+
+### Return type
+
+**EncryptionKeyArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    RoomsPrivacyRoomApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsPrivacyRoomApi(configuration);
+
+let roomId: number; //The private room the people are invited to. Take it from the `id` of the room returned by  `POST api/2.0/files/rooms` or listed by `GET api/2.0/files/rooms`. (default to undefined)
+let userIds: Array<string>; //The people to read the keys of, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of  a user returned by `GET api/2.0/people`. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getRoomCandidateKeys(
+    roomId,
+    userIds
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The public encryption keys of the listed users who can be invited |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The room is not a private room, or a user ID is malformed |  -  |
+|**403** | The caller has no read access to the room or cannot change its access |  -  |
+|**404** | The room is not found |  -  |
+|**401** | Unauthorized |  -  |
+|**429** | Too Many Requests. |  * Retry-After -  <br>  |
+|**500** | Internal Server Error. |  -  |
+|**502** | Bad Gateway. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+|**503** | Service Unavailable. Returned by the reverse proxy, response body may be HTML and not JSON. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **getRoomMissingFileKeys**
+> RoomMissingFileKeysArrayWrapper getRoomMissingFileKeys()
+
+Reports which encrypted files of a private room each user cannot open yet, across all its folders, so that a  client can write exactly the missing keys with `PUT api/2.0/files/{fileId}/access` instead of trying every file.  The caller needs the right to change the room\'s access, which means its owner or a room manager; other members  and a DocSpace administrator who is not a member are refused, and an archived room, whose access cannot change,  is refused too. Listing `userIds` checks those people, members or not, which is what a client does before  `POST api/2.0/files/owner` answers 409 for a new owner; without it the members of the room are checked. The call  is read-only. The answer holds one entry per user who misses something and carries identifiers only, never a  key: an empty list means nothing is missing. A file stored in the clear needs no key and is never reported, and  an id that names nobody on this portal is ignored. A room that is not private, or a folder inside a room, is  rejected as invalid, as is a malformed id.
+
+For more information, see [api.onlyoffice.com](https://api.onlyoffice.com/docspace/api-backend/usage-api/get-room-missing-file-keys/).
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **roomId** | [**number**] | The private room to check. Take it from the `id` of the room returned by `POST api/2.0/files/rooms` or listed by  `GET api/2.0/files/rooms`. | defaults to undefined|
+| **userIds** | **Array&lt;string&gt;** | The people to check, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of a user  returned by `GET api/2.0/people`. | (optional) defaults to undefined|
+
+
+### Return type
+
+**RoomMissingFileKeysArrayWrapper**
+
+### Authorization
+
+[Basic](../README.md#Basic), [OAuth2](../README.md#OAuth2), [ApiKeyBearer](../README.md#ApiKeyBearer), [asc_auth_key](../README.md#asc_auth_key), [Bearer](../README.md#Bearer), [OpenId](../README.md#OpenId)
+
+### Example
+
+```typescript
+import {
+    RoomsPrivacyRoomApi,
+    Configuration
+} from '@onlyoffice/docspace-api-sdk';
+
+const configuration = new Configuration();
+const apiInstance = new RoomsPrivacyRoomApi(configuration);
+
+let roomId: number; //The private room to check. Take it from the `id` of the room returned by `POST api/2.0/files/rooms` or listed by  `GET api/2.0/files/rooms`. (default to undefined)
+let userIds: Array<string>; //The people to check, repeated once per user (`userIds=...&userIds=...`). Take each from the `id` of a user  returned by `GET api/2.0/people`. (optional) (default to undefined)
+
+const { status, data } = await apiInstance.getRoomMissingFileKeys(
+    roomId,
+    userIds
+);
+```
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | The users who miss a file key and the files concerned |  * X-RateLimit-Limit -  <br>  * X-RateLimit-Remaining -  <br>  * X-RateLimit-Reset -  <br>  |
+|**400** | The room is not a private room, or a user ID is malformed |  -  |
+|**403** | The caller has no read access to the room or cannot change its access |  -  |
+|**404** | The room is not found |  -  |
 |**401** | Unauthorized |  -  |
 |**429** | Too Many Requests. |  * Retry-After -  <br>  |
 |**500** | Internal Server Error. |  -  |

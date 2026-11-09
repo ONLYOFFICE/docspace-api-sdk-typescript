@@ -62,6 +62,10 @@ export interface AiProfilesGetById200Response {
      */
     'reasoningSupport'?: AiReasoningSupport;
     /**
+     * Size of the selected model\'s context window in tokens, as the provider\'s catalogue reported it at save time (see `Model.contextWindow`). The engine\'s history compaction measures the thread against it; when absent the id-based table answers, and when that has no row either, `CompactionOptions.defaultContextWindow`. Hosts persist it with the rest of the profile.
+     */
+    'contextWindow'?: number;
+    /**
      * Bitmask of capabilities supported by the selected model.
      */
     'capabilities'?: number;

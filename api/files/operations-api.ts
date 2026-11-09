@@ -82,10 +82,10 @@ export const OperationsApiAxiosParamCreator = function (configuration?: Configur
     
     return {
         /**
-         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
          * @summary Abort an upload session
          * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-         * @param {number | string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {number | string} folderId The folder the session was opened against. Take it from the path the session was created on.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -1587,10 +1587,10 @@ export const OperationsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OperationsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
          * @summary Abort an upload session
          * @param {string} sessionId The session to cancel, as returned in `id` when it was created: a 32-character hexadecimal string that  identifies the session on its own.
-         * @param {number | string} folderId The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+         * @param {number | string} folderId The folder the session was opened against. Take it from the path the session was created on.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * REST API Reference for abortUploadSession operation
@@ -1986,7 +1986,7 @@ export const OperationsApiFactory = function (configuration?: Configuration, bas
     const localVarFp = OperationsApiFp(configuration)
     return {
         /**
-         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+         * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
          * @summary Abort an upload session
          * @param {OperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2291,7 +2291,7 @@ export interface OperationsApiAbortUploadSessionRequest {
     readonly sessionId: string
 
     /**
-     * The folder the session was opened against. It is part of the route only and is not matched against the  session, which is found by its own id.
+     * The folder the session was opened against. Take it from the path the session was created on.
      * @type {number | string}
      * @memberof OperationsApiAbortUploadSession
      */
@@ -2600,7 +2600,7 @@ export interface OperationsApiEmptyTrashRequest {
 
     /**
      * Limits the sweep to the items whose original location was inside a section or a room of one of the named  types, leaving the rest of the Trash untouched; without the parameter the whole Trash is emptied. `5` covers  what was deleted from personal documents, `14` what was deleted from rooms.
-     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41>}
+     * @type {Array<0 | 1 | 2 | 3 | 5 | 6 | 8 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 19 | 20 | 21 | 22 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42>}
      * @memberof OperationsApiEmptyTrash
      */
     readonly folderType?: Array<EmptyTrashFolderTypeEnum>
@@ -2817,7 +2817,7 @@ export interface OperationsApiUploadSessionRequest {
  */
 export class OperationsApi extends BaseAPI {
     /**
-     * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. The session is found by the id in the path alone: the folder  segment is not matched against it, and neither is the account that opened it, which makes the id the only  secret protecting the transfer. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
+     * Cancels a chunked upload opened with `POST api/2.0/files/{folderId}/session` and discards the parts already  received, so nothing of it reaches the folder. Only the account that opened the session may cancel it, and the  folder in the path has to be the one it was opened against. The call is destructive and is not safe to repeat, because the record is gone  afterwards: a second attempt, a session already closed by  `PUT api/2.0/files/{folderId}/session/{sessionId}/finalize` and a session that expired after twelve hours of  silence all fail rather than answer as missing. Finalizing removes the session too, so there is nothing left  to abort once the file exists. The answer carries no body. An upload that is simply abandoned needs no call at  all, since the session and its buffered parts are dropped when it expires.
      * @summary Abort an upload session
      * @param {FilesOperationsApiAbortUploadSessionRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -3199,6 +3199,7 @@ export const EmptyTrashFolderTypeEnum = {
     InstructionsRoom: 38,
     KnowledgeRoom: 39,
     AiProjectRoom: 40,
-    AiHub: 41
+    AiHub: 41,
+    PrivateRooms: 42
 } as const;
 export type EmptyTrashFolderTypeEnum = typeof EmptyTrashFolderTypeEnum[keyof typeof EmptyTrashFolderTypeEnum];
